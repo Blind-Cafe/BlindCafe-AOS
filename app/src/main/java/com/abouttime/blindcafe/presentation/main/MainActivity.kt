@@ -1,7 +1,8 @@
-package com.abouttime.blindcafe
+package com.abouttime.blindcafe.presentation.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.abouttime.blindcafe.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
