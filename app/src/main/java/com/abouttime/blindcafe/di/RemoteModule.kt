@@ -2,7 +2,8 @@ package com.abouttime.blindcafe.di
 
 
 import com.abouttime.blindcafe.common.constants.Url.BASE_URL
-import com.google.gson.GsonBuilder
+import com.abouttime.blindcafe.data.remote.AuthenticationInterceptor
+import com.abouttime.blindcafe.data.remote.KakaoLoginApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.BuildConfig
@@ -15,29 +16,37 @@ internal val remoteModule = module {
 
 
     single { provideMovieRetrofit() }
+    factory { provideKakaoLoginApi(get()) }
 
 }
 
 internal fun provideMovieRetrofit(): Retrofit =
     Retrofit.Builder()
         .baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
+        .addConverterFactory(GsonConverterFactory.create())
         .client(buildOkHttpClient())
         .build()
 
-//internal fun provideMovieApi(retrofit: Retrofit): MovieApi =
-//    retrofit.create(MovieApi::class.java)
 
 
 internal fun buildOkHttpClient(): OkHttpClient {
     val interceptor = HttpLoggingInterceptor()
+
     if(BuildConfig.DEBUG) {
         interceptor.level = HttpLoggingInterceptor.Level.BODY
     } else {
         interceptor.level = HttpLoggingInterceptor.Level.NONE
     }
+
     return OkHttpClient.Builder()
         .connectTimeout(5, TimeUnit.SECONDS)
+        .connectTimeout(5, TimeUnit.SECONDS)
         .addInterceptor(interceptor)
+        .addNetworkInterceptor(AuthenticationInterceptor()) // JWT 자동 헤더 전송
         .build()
 }
+
+
+internal fun provideKakaoLoginApi(retrofit: Retrofit): KakaoLoginApi =
+    retrofit.create(KakaoLoginApi::class.java)
+
