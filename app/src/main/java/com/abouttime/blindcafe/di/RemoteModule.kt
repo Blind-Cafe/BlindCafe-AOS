@@ -3,7 +3,7 @@ package com.abouttime.blindcafe.di
 
 import com.abouttime.blindcafe.common.constants.Url.BASE_URL
 import com.abouttime.blindcafe.data.remote.AuthenticationInterceptor
-import com.abouttime.blindcafe.data.remote.KakaoLoginApi
+import com.abouttime.blindcafe.data.remote.LoginApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.BuildConfig
@@ -47,6 +47,6 @@ internal fun buildOkHttpClient(): OkHttpClient {
 }
 
 
-internal fun provideKakaoLoginApi(retrofit: Retrofit): KakaoLoginApi =
-    retrofit.create(KakaoLoginApi::class.java)
+internal fun provideKakaoLoginApi(retrofit: Retrofit): LoginApi =
+    retrofit.create(LoginApi::class.java)
 

@@ -9,6 +9,7 @@
     <color name="main">#bbd2b6</color>
     <color name="white">#fafafa</color>
     <color name="black">#2d2d2d</color>
+    <color name="transparent">#00000000</color>
     <color name="light_gray">#bdbdbd</color>
     <color name="icon_disabled">#454545</color>
     <color name="button_disabled">#616161</color>

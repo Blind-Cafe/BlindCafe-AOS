@@ -10,6 +10,6 @@ import org.koin.android.viewmodel.dsl.viewModel
 internal val viewModelModule = module {
     viewModel { MainViewModel() }
     viewModel { SplashViewModel() }
-    viewModel { LoginViewModel(androidContext()) }
+    viewModel { LoginViewModel(get()) }
 
 }

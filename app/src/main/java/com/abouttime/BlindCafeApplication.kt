@@ -3,6 +3,8 @@ package com.abouttime
 import android.app.Application
 import com.abouttime.blindcafe.BuildConfig
 import com.abouttime.blindcafe.di.remoteModule
+import com.abouttime.blindcafe.di.repositoryModule
+import com.abouttime.blindcafe.di.useCaseModule
 import com.abouttime.blindcafe.di.viewModelModule
 import com.kakao.sdk.common.KakaoSdk
 import org.koin.android.ext.koin.androidContext
@@ -20,6 +22,8 @@ class BlindCafeApplication: Application() {
             androidContext((this@BlindCafeApplication))
             modules(remoteModule)
             modules(viewModelModule)
+            modules(repositoryModule)
+            modules(useCaseModule)
         }
 
 

@@ -100,4 +100,14 @@ dependencies {
     implementation "com.kakao.sdk:v2-user:2.8.2"
 
 
+
+    def nav_version = "2.3.5"
+    // Jetpack Navigation Kotlin
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+
+    // Feature module Support
+    implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
+
+
 }

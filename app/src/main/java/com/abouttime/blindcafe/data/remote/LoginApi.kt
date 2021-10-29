@@ -7,7 +7,7 @@ import com.abouttime.blindcafe.data.remote.dto.KakaoTokenResponse
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-interface KakaoLoginApi {
+interface LoginApi {
 
     @POST(Url.KAKAO_LOGIN)
     suspend fun postKakaoAccessToken(
