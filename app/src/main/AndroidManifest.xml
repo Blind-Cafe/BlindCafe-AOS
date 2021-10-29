@@ -24,9 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".presentation.onboarding.login.LoginActivity"
-            android:exported="true" />
+
 
         <activity
             android:name=".presentation.main.MainActivity"
