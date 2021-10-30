@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     //id 'com.google.gms.google-services'
     id 'kotlin-parcelize'
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -109,6 +110,10 @@ dependencies {
 
     // Feature module Support
     implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
+
+    // dots indicator with viewpager2
+    implementation 'com.tbuonomo:dotsindicator:4.2'
+
 
 
 }
