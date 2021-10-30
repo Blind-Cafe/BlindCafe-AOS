@@ -9,9 +9,14 @@
         android:id="@+id/loginFragment"
         android:name="com.abouttime.blindcafe.presentation.onboarding.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_agreementFragment"
+            app:destination="@id/agreementFragment" />
+    </fragment>
     <fragment
         android:id="@+id/splashFragment"
+        tools:layout="@layout/fragment_splash"
         android:name="com.abouttime.blindcafe.presentation.onboarding.splash.SplashFragment"
         android:label="SplashFragment">
         <action
@@ -28,10 +33,25 @@
         tools:layout="@layout/fragment_main" />
     <fragment
         android:id="@+id/ruleFragment"
+        tools:layout="@layout/fragment_rule"
         android:name="com.abouttime.blindcafe.presentation.onboarding.rule.RuleFragment"
         android:label="RuleFragment">
         <action
             android:id="@+id/action_ruleFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/agreementFragment"
+        tools:layout="@layout/fragment_agreement"
+        android:name="com.abouttime.blindcafe.presentation.onboarding.agreement.AgreementFragment"
+        android:label="AgreementFragment" >
+        <action
+            android:id="@+id/action_agreementFragment_to_profileSettingFragment"
+            app:destination="@id/profileSettingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileSettingFragment"
+        tools:layout="@layout/fragment_profile_setting"
+        android:name="com.abouttime.blindcafe.presentation.onboarding.profile_input.ProfileSettingFragment"
+        android:label="ProfileSettingFragment" />
 </navigation>

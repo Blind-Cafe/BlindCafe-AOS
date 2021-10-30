@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/black"
+    android:layout_height="match_parent">
+
+
+    <ImageButton
+        android:id="@+id/ib_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="27dp"
+        android:background="@color/transparent"
+        android:src="@drawable/bt_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/tv_cafe_rule_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="7sp"
+        android:text="@string/profile_setting_title"
+        android:textColor="#fafafa"
+        android:textSize="@dimen/font_size_large"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/ib_back"
+        app:layout_constraintStart_toEndOf="@id/ib_back"
+        app:layout_constraintTop_toTopOf="@id/ib_back" />
+
+
+    <ImageView
+        android:id="@+id/iv_barista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bg_barista"
+        app:layout_constraintTop_toBottomOf="@id/ib_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/cl_essential_profile_input"
+        app:layout_constraintTop_toBottomOf="@id/iv_barista"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/gray_900"
+        android:paddingHorizontal="20dp"
+        android:layout_marginHorizontal="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/profile_setting_step_1"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/tv_step1"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_step1"
+            android:layout_marginTop="16dp"
+            android:text="@string/profile_setting_age"
+            android:textSize="@dimen/font_size_regular"
+            android:textColor="@color/white"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:id="@+id/tv_age"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/profile_setting_age_hint"
+            app:layout_constraintTop_toBottomOf="@id/tv_age"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="7dp"
+            android:id="@+id/tv_sub_age"/>
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            app:layout_constraintDimensionRatio="3:1"
+            android:inputType="number"
+            android:padding="8dp"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_sub_age"
+            android:layout_marginTop="2dp"
+            android:id="@+id/et_age"
+            android:background="@drawable/et_bg_rounding_with_no_stroke"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/et_age"
+            android:id="@+id/tv_alert_age"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:visibility="gone"
+            android:textSize="@dimen/font_size_super_small"
+            android:textColor="@color/et_bg_stroke_red"
+            android:text="@string/profile_setting_alert_age"
+            android:layout_marginTop="2dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:text="@string/profile_setting_sex"
+            app:layout_constraintTop_toBottomOf="@id/tv_alert_age"
+            android:layout_marginTop="45dp"
+            android:id="@+id/tv_sex"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="@dimen/font_size_regular"
+            android:textColor="@color/white"/>
+
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:scaleType="fitXY"
+            app:layout_constraintTop_toBottomOf="@id/tv_sex"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iv_male"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            android:layout_marginEnd="24dp"
+            android:src="@drawable/bt_female"
+            app:layout_constraintVertical_bias="0"
+
+            app:layout_constraintBottom_toTopOf="@id/tv_alert_age_sex"
+            android:id="@+id/iv_female"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_male"
+            android:scaleType="fitXY"
+            app:layout_constraintTop_toTopOf="@id/iv_female"
+            android:src="@drawable/bt_male"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_female"
+            app:layout_constraintStart_toEndOf="@+id/iv_female"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/profile_setting_alert_age_sex"
+            android:textColor="@color/alert_red"
+            app:layout_constraintBottom_toTopOf="@id/tv_next"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/tv_alert_age_sex"
+            android:layout_marginBottom="15dp"
+            android:textSize="@dimen/font_size_super_small"
+            />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/profile_setting_next"
+            android:id="@+id/tv_next"
+            android:gravity="center"
+            android:background="@drawable/bg_rounding_3dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintDimensionRatio="288:48"
+            android:backgroundTint="@color/gray_700"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

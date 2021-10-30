@@ -13,6 +13,15 @@
     <color name="light_gray">#bdbdbd</color>
     <color name="icon_disabled">#454545</color>
     <color name="button_disabled">#616161</color>
-    <color name="dark4">#373737</color>
-    <color name="dark1">#8e8e93</color>
+    <color name="gray_900">#373737</color>
+    <color name="gray_700">#8e8e93</color>
+    <color name="bar_color">#636366</color>
+    <color name="checked_color">#bbd2b6</color>
+    <color name="check_color">#bdbdbd</color>
+    <color name="button_enabled">#bbd2b6</color>
+    <color name="et_bg">#80757575</color>
+    <color name="et_stroke_default">#757575</color>
+    <color name="et_bg_stroke_red">#ff453a</color>
+    <color name="alert_red">#ff453a</color>
+    <color name="et_bg_stroke_green">#bbd2b6</color>
 </resources>

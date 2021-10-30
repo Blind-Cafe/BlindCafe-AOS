@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil.setContentView
 import com.abouttime.blindcafe.R
+import com.abouttime.blindcafe.common.base.fragment.BaseFragment
 import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.data.remote.dto.KakaoToken
 import com.abouttime.blindcafe.databinding.ActivityLoginBinding
@@ -18,7 +20,7 @@ import com.kakao.sdk.user.UserApiClient
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
-class LoginFragment : Fragment(R.layout.fragment_login) {
+class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
     private var binding: FragmentLoginBinding? = null
     private val viewModel: LoginViewModel by viewModel()
@@ -31,20 +33,37 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         val fragmentLoginBinding = FragmentLoginBinding.bind(view)
         binding = fragmentLoginBinding
 
-            Log.d("asdf", "asdf1")
-        initKakaoLoginButton(fragmentLoginBinding)
+        observeData(fragmentLoginBinding)
+    }
+
+    private fun observeData(fragmentLoginBinding: FragmentLoginBinding) {
+        viewModel.loginStateEvent.observe(viewLifecycleOwner) { state ->
+            when(state) {
+                LoginState.Uninitialized -> {
+                    initKakaoLoginButton(fragmentLoginBinding)
+                }
+                LoginState.Loading -> {
+
+                }
+                LoginState.Success -> {
+                    moveToAgreementFragment()
+                }
+                LoginState.Error -> {
+                    showToast(R.string.login_toast_error)
+                }
+            }
+
+        }
     }
 
     private fun initKakaoLoginButton(fragmentLoginBinding: FragmentLoginBinding) {
         fragmentLoginBinding.btKakaoLogin.setOnClickListener {
-            Log.d("asdf", "asdf2")
             loginWithKakao()
         }
 
     }
 
     private fun loginWithKakao() {
-        Log.d("asdf", "asdf2");
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
                 val keyHash: String = Utility.getKeyHash(requireActivity() /* context */)
@@ -52,17 +71,13 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             } else if (token != null) {
                 Log.i(LogTag.LOGIN_TAG, "로그인 성공 ${token.accessToken}")
                 viewModel.postKakaoToken(KakaoToken(token.accessToken))
-
             }
         }
+        viewModel.loginWithKakao(context = requireActivity(),callback = callback)
+    }
 
-        if (UserApiClient.instance.isKakaoTalkLoginAvailable(requireActivity())) {
-            UserApiClient.instance.loginWithKakaoTalk(requireActivity(), callback = callback)
-        } else {
-            UserApiClient.instance.loginWithKakaoAccount(requireActivity(), callback = callback)
-        }
-
-
+    private fun moveToAgreementFragment() {
+        moveToDirections(LoginFragmentDirections.actionLoginFragmentToAgreementFragment())
     }
 
 
