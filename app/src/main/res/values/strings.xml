@@ -1,13 +1,23 @@
 <resources>
     <string name="app_name">BlindCafe</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
     <string name="rule_title">블라인드 카페 규칙</string>
     <string name="rule_skip">Skip</string>
     <string name="rule_next">다음</string>
-    <string name="rule_1">한번에 한 사람과 대화가 가능합니다.\n언제든지 새로운 상대를 만날 수 있습니다.\n\n\n미지의 상대와 3일간 대화를 해보세요</string>
+    <string name="rule_1">한번에 한 사람과 대화가 가능합니다.\n언제든지 새로운 상대를 만날 수 있습니다.\n\n미지의 상대와 3일간 대화를 해보세요</string>
     <string name="rule_2">첫째날이 지나면 사진을\n둘째날이 지나면 음성을 전송할 수 있습니다.</string>
     <string name="rule_3">첫째날이 지나면 사진을\n둘째날이 지나면 음성을 전송할 수 있습니다.</string>
     <string name="rule_4">프로필을 교환한 그 분과 밝은 곳에서 대화하세요</string>
+    
+    <string name="agreement_title">안전한 대화를 위해\n저희와 약속해주세요</string>
+    <string name="agreement_1">상대방의 비밀을 지켜주세요!</string>
+    <string name="agreement_sub_1">대화 상대에게 개인정보 및 만남 강요는 안됩니다.</string>
+    <string name="agreement_2">모두가 성적 농담을 즐기는 건 아닙니다!</string>
+    <string name="agreement_sub_2">성추행 및 성희롱 등의 발언은 삼가해주세요.</string>
+    <string name="agreement_3">화내기 전 한번만 더 생각해주세요!</string>
+    <string name="agreement_sub_3">대화 상대에게 개인정보 및 만남 강요는 안됩니다.</string>
+    <string name="agreement_4">부드럽게, 매너있는 대회해주세요!</string>
+    <string name="agreement_next">동의 후 계속하기</string>
+
 </resources>
