@@ -53,6 +53,8 @@ class AgreementFragment : BaseFragment(R.layout.fragment_agreement) {
                                     null
                                 )
                             )
+                            tvNext.setBackgroundResource(R.color.button_enabled)
+
                             tvNext.isEnabled = true
                         }
 

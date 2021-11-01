@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/essentialFirstFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -47,11 +47,43 @@
         android:label="AgreementFragment" >
         <action
             android:id="@+id/action_agreementFragment_to_profileSettingFragment"
-            app:destination="@id/profileSettingFragment" />
+            app:destination="@id/essentialFirstFragment" />
     </fragment>
     <fragment
-        android:id="@+id/profileSettingFragment"
-        tools:layout="@layout/fragment_profile_setting"
-        android:name="com.abouttime.blindcafe.presentation.onboarding.profile_input.ProfileSettingFragment"
-        android:label="ProfileSettingFragment" />
+        android:id="@+id/essentialFirstFragment"
+        tools:layout="@layout/fragment_essential_first"
+        android:name="com.abouttime.blindcafe.presentation.onboarding.profile_setting.essential_first.EssentialFirstFragment"
+        android:label="ProfileSettingFragment" >
+        <action
+            android:id="@+id/action_profileSettingFragment_to_essentialSecondFragment"
+            app:destination="@id/essentialSecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/essentialSecondFragment"
+        tools:layout="@layout/fragment_essential_second"
+        android:name="com.abouttime.blindcafe.presentation.onboarding.profile_setting.essential_second.EssentialSecondFragment"
+        android:label="EssentialSecondFragment" >
+        <action
+            android:id="@+id/action_essentialSecondFragment_to_interestFragment"
+            app:destination="@id/interestFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/interestFragment"
+        android:name="com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest.InterestFragment"
+        tools:layout="@layout/fragment_interest"
+        android:label="InterestFragment" >
+        <action
+            android:id="@+id/action_interestFragment_to_interestDetailFragment"
+            app:destination="@id/interestDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/interestDetailFragment"
+        tools:layout="@layout/fragment_interest_detail"
+        android:name="com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest_detail.InterestDetailFragment"
+        android:label="InterestDetailFragment" >
+        <action
+            android:id="@+id/action_interestDetailFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>

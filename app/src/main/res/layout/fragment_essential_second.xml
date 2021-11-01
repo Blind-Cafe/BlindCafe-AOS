@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <ImageButton
+        android:id="@+id/ib_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="27dp"
+        android:background="@color/transparent"
+        android:src="@drawable/bt_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/tv_cafe_rule_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="7sp"
+        android:text="@string/profile_setting_title"
+        android:textColor="#fafafa"
+        android:textSize="@dimen/font_size_large"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/ib_back"
+        app:layout_constraintStart_toEndOf="@id/ib_back"
+        app:layout_constraintTop_toTopOf="@id/ib_back" />
+
+
+    <ImageView
+        android:id="@+id/iv_barista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bg_barista"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ib_back" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_essential_profile_input"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="16dp"
+        android:background="@color/gray_900"
+        android:paddingHorizontal="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_barista">
+
+        <TextView
+            android:id="@+id/tv_step1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:text="@string/profile_setting_step_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:text="@string/profile_setting_nickname"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_regular"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_step1" />
+
+
+        <EditText
+            android:id="@+id/et_age"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/et_bg_rounding_with_default_stroke"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:inputType="number"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_age" />
+
+        <TextView
+            android:id="@+id/tv_alert_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:text="@string/profile_setting_nickname_rule"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_super_small"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_age"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:text="@string/profile_setting_matching_sex"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_regular"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_alert_age" />
+
+
+        <ImageView
+            android:id="@+id/iv_female"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="10dp"
+            android:scaleType="fitXY"
+            android:background="@drawable/bt_female_small"
+            app:layout_constraintBottom_toTopOf="@id/tv_alert_age_sex"
+            app:layout_constraintEnd_toStartOf="@id/iv_male"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_sex"
+            app:layout_constraintVertical_bias="0" />
+
+
+        <ImageView
+            android:id="@+id/iv_male"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/bt_male_small"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_female"
+            app:layout_constraintEnd_toStartOf="@id/iv_bisexual"
+            app:layout_constraintStart_toEndOf="@+id/iv_female"
+            app:layout_constraintTop_toTopOf="@id/iv_female" />
+
+
+        <ImageView
+            android:id="@+id/iv_bisexual"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/bt_bisexual_small"
+            app:layout_constraintBottom_toBottomOf="@id/iv_male"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_male"
+            app:layout_constraintTop_toTopOf="@id/iv_male" />
+
+
+        <TextView
+            android:id="@+id/tv_alert_age_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="@string/profile_setting_alert_age_sex"
+            android:textColor="@color/alert_red"
+            android:textSize="@dimen/font_size_super_small"
+            app:layout_constraintBottom_toTopOf="@id/tv_next"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <TextView
+            android:id="@+id/tv_next"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/bg_rounding_3dp"
+            android:backgroundTint="@color/gray_700"
+            android:gravity="center"
+            android:text="@string/profile_setting_next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="288:48"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

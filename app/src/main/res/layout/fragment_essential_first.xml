@@ -100,7 +100,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_sub_age"
             android:layout_marginTop="2dp"
             android:id="@+id/et_age"
-            android:background="@drawable/et_bg_rounding_with_no_stroke"/>
+            android:background="@drawable/et_bg_rounding_with_default_stroke"/>
 
         <TextView
             android:layout_width="wrap_content"

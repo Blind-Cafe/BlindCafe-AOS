@@ -34,17 +34,17 @@
     <string name="profile_setting_alert_age">미성년자는 사용이 불가능합니다.</string>
     <string name="profile_setting_alert_age_sex">나이와 성별은 수정이 불가능하니 신중하게 입력해주세요.</string>
     <string name="profile_setting_next">다음</string>
+    <string name="profile_setting_nickname">이제부터 손님을 어떻게 불러드릴까요?</string>
+    <string name="profile_setting_nickname_rule">1자~9자로 구성해주세요.</string>
+    <string name="profile_setting_matching_sex">원하시는 합석 손님이 있을까요?</string>
+    <string name="profile_setting_interest_title">3개의 관심사를 골라주세요</string>
+    <string name="profile_setting_interest_sub_title">꼼꼼하게 체크할 수록 나와 잘 맞는 상대를 만날 수 있습니다.</string>
 
     <string name="profile_setting_toast_input_age">미성년자는 사용이 불가능합니다.</string>
     <string name="profile_setting_toast_input_sex">성별을 먼저 선택해주세요</string>
-
-    <string name="profile_setting_nickname">이제부터 손님을 어떻게 불러드릴까요?</string>
-    <string name="profile_setting_nickname_rule">1자~9자로 구성해주세요.</string>
-
-    <string name="profile_setting_matching_sex">원하시는 합석 손님이 있을까요?</string>
-
     <string name="profile_setting_toast_input_nickname">닉네임을 먼저 작성해주세요</string>
     <string name="profile_setting_toast_input_again_nickname">닉네임을 다시 작성해주세요</string>
+    <string name="profile_setting_toast_select_interest">관심사를 먼저 선택해주세요.</string>
 
 
 
