@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View.OnClickListener" />
+        <import type="android.view.View"/>
+        <import type="androidx.core.content.ContextCompat" />
+        <variable
+            name="viewModel"
+            type="com.abouttime.blindcafe.presentation.onboarding.profile_setting.essential_second.EssentialSecondViewModel" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black">
@@ -77,10 +88,12 @@
 
 
         <EditText
-            android:id="@+id/et_age"
+            android:id="@+id/et_nickname"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginTop="7dp"
+            android:maxLength="9"
+            android:text="@={viewModel.nickNameText}"
             android:background="@drawable/et_bg_rounding_with_default_stroke"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:inputType="number"
@@ -90,7 +103,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_age" />
 
         <TextView
-            android:id="@+id/tv_alert_age"
+            android:id="@+id/tv_alert_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -100,7 +113,7 @@
             android:textSize="@dimen/font_size_super_small"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_age"
+            app:layout_constraintTop_toBottomOf="@id/et_nickname"
             tools:visibility="visible" />
 
         <TextView
@@ -113,7 +126,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/font_size_regular"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_alert_age" />
+            app:layout_constraintTop_toBottomOf="@id/tv_alert_nickname" />
 
 
         <ImageView
@@ -123,13 +136,14 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="10dp"
             android:scaleType="fitXY"
-            android:background="@drawable/bt_female_small"
-            app:layout_constraintBottom_toTopOf="@id/tv_alert_age_sex"
+            android:onClick="@{()->viewModel.onClickFemaleButton()}"
+            android:src="@{viewModel.selectedSex == 1 ? @drawable/bt_female_small_selected : @drawable/bt_female_small }"
             app:layout_constraintEnd_toStartOf="@id/iv_male"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_sex"
-            app:layout_constraintVertical_bias="0" />
+            app:layout_constraintVertical_bias="0"
+            />
 
 
         <ImageView
@@ -138,7 +152,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:scaleType="fitXY"
-            android:src="@drawable/bt_male_small"
+            android:onClick="@{()->viewModel.onClickMaleButton()}"
+            android:src="@{viewModel.selectedSex == 2 ? @drawable/bt_male_small_selected : @drawable/bt_male_small}"
             app:layout_constraintBottom_toBottomOf="@+id/iv_female"
             app:layout_constraintEnd_toStartOf="@id/iv_bisexual"
             app:layout_constraintStart_toEndOf="@+id/iv_female"
@@ -150,24 +165,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
-            android:src="@drawable/bt_bisexual_small"
+            android:onClick="@{()->viewModel.onClickBisexualButton()}"
+            android:src="@{viewModel.selectedSex == 3 ? @drawable/bt_bisexual_small_selected : @drawable/bt_bisexual_small}"
             app:layout_constraintBottom_toBottomOf="@id/iv_male"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_male"
             app:layout_constraintTop_toTopOf="@id/iv_male" />
 
-
-        <TextView
-            android:id="@+id/tv_alert_age_sex"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:text="@string/profile_setting_alert_age_sex"
-            android:textColor="@color/alert_red"
-            android:textSize="@dimen/font_size_super_small"
-            app:layout_constraintBottom_toTopOf="@id/tv_next"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
 
         <TextView
@@ -176,8 +180,9 @@
             android:layout_height="0dp"
             android:layout_marginBottom="32dp"
             android:background="@drawable/bg_rounding_3dp"
-            android:backgroundTint="@color/gray_700"
+            android:backgroundTint="@{viewModel.enableNextButton ? @color/button_enabled : @color/gray_700}"
             android:gravity="center"
+            android:onClick="@{()->viewModel.onClickNextButton()}"
             android:text="@string/profile_setting_next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="288:48"
@@ -187,3 +192,5 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

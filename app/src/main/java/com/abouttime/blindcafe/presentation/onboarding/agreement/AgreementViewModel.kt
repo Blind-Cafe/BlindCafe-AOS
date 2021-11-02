@@ -1,8 +1,9 @@
 package com.abouttime.blindcafe.presentation.onboarding.agreement
 
 import com.abouttime.blindcafe.common.base.view_model.BaseOnBoardingViewModel
+import com.abouttime.blindcafe.common.base.view_model.BaseViewModel
 
-class AgreementViewModel: BaseOnBoardingViewModel() {
+class AgreementViewModel: BaseViewModel() {
 
 
     val checks = mutableListOf(false, false, false, false)

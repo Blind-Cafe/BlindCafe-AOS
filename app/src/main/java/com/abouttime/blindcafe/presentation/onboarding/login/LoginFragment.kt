@@ -20,10 +20,10 @@ import com.kakao.sdk.user.UserApiClient
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
-class LoginFragment : BaseFragment(R.layout.fragment_login) {
+class LoginFragment : BaseFragment<LoginViewModel>(R.layout.fragment_login) {
 
     private var binding: FragmentLoginBinding? = null
-    private val viewModel: LoginViewModel by viewModel()
+    override val viewModel: LoginViewModel by viewModel()
 
 
 

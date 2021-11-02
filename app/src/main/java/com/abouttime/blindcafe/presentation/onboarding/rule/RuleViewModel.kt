@@ -2,8 +2,9 @@ package com.abouttime.blindcafe.presentation.onboarding.rule
 
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.view_model.BaseOnBoardingViewModel
+import com.abouttime.blindcafe.common.base.view_model.BaseViewModel
 
-class RuleViewModel: BaseOnBoardingViewModel() {
+class RuleViewModel: BaseViewModel() {
     val rules = listOf(
         R.string.rule_1,
         R.string.rule_2,

@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.View
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.fragment.BaseFragment
+import org.koin.android.viewmodel.ext.android.viewModel
 
-class SplashFragment: BaseFragment(R.layout.fragment_splash) {
-
-
+class SplashFragment: BaseFragment<SplashViewModel>(R.layout.fragment_splash) {
+    override val viewModel: SplashViewModel by viewModel()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

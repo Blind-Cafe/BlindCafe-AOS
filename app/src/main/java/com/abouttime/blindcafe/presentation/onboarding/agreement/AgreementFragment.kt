@@ -8,9 +8,9 @@ import com.abouttime.blindcafe.common.base.fragment.BaseFragment
 import com.abouttime.blindcafe.databinding.FragmentAgreementBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class AgreementFragment : BaseFragment(R.layout.fragment_agreement) {
+class AgreementFragment : BaseFragment<AgreementViewModel>(R.layout.fragment_agreement) {
     private var binding: FragmentAgreementBinding? = null
-    private val viewModel: AgreementViewModel by viewModel()
+    override val viewModel: AgreementViewModel by viewModel()
 
     private lateinit var checkImageViews: List<ImageView>
 
@@ -53,7 +53,7 @@ class AgreementFragment : BaseFragment(R.layout.fragment_agreement) {
                                     null
                                 )
                             )
-                            tvNext.setBackgroundResource(R.color.button_enabled)
+                            tvNext.setBackgroundColor(resources.getColor(R.color.button_enabled))
 
                             tvNext.isEnabled = true
                         }

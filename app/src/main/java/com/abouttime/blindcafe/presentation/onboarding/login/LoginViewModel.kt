@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.view_model.BaseOnBoardingViewModel
+import com.abouttime.blindcafe.common.base.view_model.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.LOGIN_TAG
 import com.abouttime.blindcafe.data.remote.dto.KakaoToken
 import com.abouttime.blindcafe.domain.use_case.PostKakaoTokenUseCase
@@ -19,7 +20,7 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel(
     private val postKakaoTokenUseCase: PostKakaoTokenUseCase
-) : BaseOnBoardingViewModel() {
+) : BaseViewModel() {
 
 
     private val _loginStateEvent = MutableLiveData<LoginState>(LoginState.Uninitialized)

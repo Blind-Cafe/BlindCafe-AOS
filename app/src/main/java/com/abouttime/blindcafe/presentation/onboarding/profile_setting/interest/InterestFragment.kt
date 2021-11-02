@@ -7,10 +7,14 @@ import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.RvGridDecoration
 import com.abouttime.blindcafe.common.base.fragment.BaseFragment
 import com.abouttime.blindcafe.databinding.FragmentInterestBinding
+import org.koin.android.viewmodel.ext.android.viewModel
 
-class InterestFragment: BaseFragment(R.layout.fragment_interest) {
+class InterestFragment: BaseFragment<InterestViewModel>(R.layout.fragment_interest) {
     private var binding: FragmentInterestBinding? = null
-    private lateinit var interestRvAapter: InterestRvAdapter
+    private lateinit var interestRvAdapter: InterestRvAdapter
+    override val viewModel: InterestViewModel by viewModel()
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val fragmentInterestBinding = FragmentInterestBinding.bind(view)
@@ -20,13 +24,15 @@ class InterestFragment: BaseFragment(R.layout.fragment_interest) {
         initNextButton(fragmentInterestBinding)
     }
     private fun initRecyclerView(fragmentInterestBinding: FragmentInterestBinding) {
-        interestRvAapter = InterestRvAdapter(
+        interestRvAdapter = InterestRvAdapter(
+            requireContext(),
+            viewModel = viewModel,
             isClickedThreeItem = { isClickedThreeItem ->
                 setNextTextViewBackgroundColor(isClickedThreeItem, fragmentInterestBinding)
             }
         )
         fragmentInterestBinding.rvInterest.apply {
-            adapter = interestRvAapter
+            adapter = interestRvAdapter
             layoutManager = GridLayoutManager(requireContext(), 3)
             addItemDecoration(RvGridDecoration(30, 30))
         }
@@ -34,7 +40,7 @@ class InterestFragment: BaseFragment(R.layout.fragment_interest) {
 
     private fun initNextButton(fragmentInterestBinding: FragmentInterestBinding) {
         fragmentInterestBinding.tvNext.setOnClickListener {
-            if (interestRvAapter.isSelectedThreeItems()) {
+            if (viewModel.getSelectedItemCount() >= 3) {
                 moveToInterestDetailFragment() // TODO 인자로 3개 리스트 넘기기!
             } else {
                 showToast(R.string.profile_setting_toast_select_interest)
@@ -47,7 +53,7 @@ class InterestFragment: BaseFragment(R.layout.fragment_interest) {
 
     private fun setNextTextViewBackgroundColor(isClickedThreeItem: Boolean, fragmentInterestBinding: FragmentInterestBinding) {
         if (isClickedThreeItem) {
-            fragmentInterestBinding.tvNext.setBackgroundColor(resources.getColor(R.color.main, null))
+            fragmentInterestBinding.tvNext.setBackgroundColor(resources.getColor(R.color.button_enabled, null))
         } else {
             fragmentInterestBinding.tvNext.setBackgroundColor(resources.getColor(R.color.button_disabled, null))
         }

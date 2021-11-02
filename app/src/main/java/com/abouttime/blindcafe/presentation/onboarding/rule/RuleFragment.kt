@@ -8,9 +8,9 @@ import com.abouttime.blindcafe.common.base.fragment.BaseFragment
 import com.abouttime.blindcafe.databinding.FragmentRuleBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class RuleFragment : BaseFragment(R.layout.fragment_rule) {
+class RuleFragment : BaseFragment<RuleViewModel>(R.layout.fragment_rule) {
     private var binding: FragmentRuleBinding? = null
-    private val viewModel: RuleViewModel by viewModel()
+    override val viewModel: RuleViewModel by viewModel()
 
     private val viewPagerCallback = object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
