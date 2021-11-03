@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import com.abouttime.blindcafe.R
-import com.abouttime.blindcafe.common.base.fragment.BaseFragment
+import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.databinding.FragmentAgreementBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 

@@ -27,8 +27,6 @@ class InterestRvAdapter(
 
     private val isSelected = Array(9) { false }
 
-    var SelectedItemCount = 0
-
 
     inner class ViewHolder(private val binding: RvItemInterestBinding): RecyclerView.ViewHolder(binding.root) {
         fun bindResource(position: Int) {

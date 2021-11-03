@@ -2,21 +2,14 @@ package com.abouttime.blindcafe.presentation.onboarding.login
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.databinding.DataBindingUtil.setContentView
 import com.abouttime.blindcafe.R
-import com.abouttime.blindcafe.common.base.fragment.BaseFragment
+import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.data.remote.dto.KakaoToken
-import com.abouttime.blindcafe.databinding.ActivityLoginBinding
 import com.abouttime.blindcafe.databinding.FragmentLoginBinding
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.util.Utility
-import com.kakao.sdk.user.UserApiClient
 import org.koin.android.viewmodel.ext.android.viewModel
 
 

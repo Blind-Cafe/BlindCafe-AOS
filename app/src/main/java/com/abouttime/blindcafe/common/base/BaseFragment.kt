@@ -1,29 +1,20 @@
-package com.abouttime.blindcafe.common.base.fragment
+package com.abouttime.blindcafe.common.base
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.databinding.ViewDataBinding
-import androidx.datastore.core.DataStore
+
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
-import com.abouttime.blindcafe.common.base.view_model.BaseViewModel
-import com.abouttime.blindcafe.presentation.NavHostActivity
-import com.abouttime.blindcafe.presentation.NavHostViewModel
-import com.abouttime.blindcafe.presentation.onboarding.rule.RuleFragmentDirections
-import org.koin.android.viewmodel.ext.android.viewModel
-import java.util.prefs.Preferences
+
 
 abstract class BaseFragment<VM: BaseViewModel>(layoutId: Int) : Fragment(layoutId) {
 
     // View Model
     abstract val viewModel: VM
-
-    private lateinit var dataStore: DataStore<Preferences>
 
 
 
@@ -31,6 +22,7 @@ abstract class BaseFragment<VM: BaseViewModel>(layoutId: Int) : Fragment(layoutI
         super.onViewCreated(view, savedInstanceState)
         observeToastEvent()
         observeNavigationEvent()
+
 
     }
 
@@ -58,9 +50,6 @@ abstract class BaseFragment<VM: BaseViewModel>(layoutId: Int) : Fragment(layoutI
 
 
     fun moveToDirections(directions: NavDirections) {
-        Log.d("asdf", "BaseFragment 의 moveToDriections")
-        //parentActivity.moveToDirections(directions)
-
         findNavController().navigate(directions)
     }
 

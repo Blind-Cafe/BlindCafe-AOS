@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_home"
+        android:icon="@drawable/bt_back"
+        android:title="홈" />
+
+    <item
+        android:id="@+id/menu_matching"
+        android:icon="@drawable/bt_back"
+        android:title="매칭" />
+    <item
+        android:id="@+id/menu_chat"
+        android:icon="@drawable/bt_back"
+        android:title="채팅방" />
+    <item
+        android:id="@+id/menu_my_page"
+        android:icon="@drawable/bt_back"
+        android:title="마이페이지" />
+
+</menu>

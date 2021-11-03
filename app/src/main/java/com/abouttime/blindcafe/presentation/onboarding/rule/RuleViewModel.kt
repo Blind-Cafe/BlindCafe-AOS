@@ -1,8 +1,7 @@
 package com.abouttime.blindcafe.presentation.onboarding.rule
 
 import com.abouttime.blindcafe.R
-import com.abouttime.blindcafe.common.base.view_model.BaseOnBoardingViewModel
-import com.abouttime.blindcafe.common.base.view_model.BaseViewModel
+import com.abouttime.blindcafe.common.base.BaseViewModel
 
 class RuleViewModel: BaseViewModel() {
     val rules = listOf(

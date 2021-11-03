@@ -24,6 +24,7 @@ class NavHostActivity : AppCompatActivity() {
         binding = ActivityNavHostBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         initNavController()
         observeData()
 

@@ -1,14 +1,11 @@
 package com.abouttime.blindcafe.presentation.onboarding.profile_setting.essential_first
 
-import android.util.Log
-import android.view.View
-import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import com.abouttime.blindcafe.R
-import com.abouttime.blindcafe.common.base.view_model.BaseOnBoardingViewModel
-import com.abouttime.blindcafe.common.base.view_model.BaseViewModel
+import com.abouttime.blindcafe.common.base.BaseViewModel
+import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.AGE
+import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.SEX
 import java.lang.Exception
 
 class EssentialFirstViewModel: BaseViewModel() {
@@ -57,6 +54,8 @@ class EssentialFirstViewModel: BaseViewModel() {
             showToast(R.string.profile_setting_toast_input_sex)
             return
         }
+        saveStringData(Pair(AGE, _ageText.value ?: ""))
+        saveStringData(Pair(SEX, _selectedSex.value.toString()))
 
         moveToDirections(EssentialFirstFragmentDirections.actionProfileSettingFragmentToEssentialSecondFragment())
 

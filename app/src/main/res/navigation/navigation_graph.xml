@@ -30,7 +30,11 @@
         android:id="@+id/mainFragment"
         android:name="com.abouttime.blindcafe.presentation.main.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_matchingFragment"
+            app:destination="@id/matchingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/ruleFragment"
         tools:layout="@layout/fragment_rule"
@@ -86,4 +90,8 @@
             android:id="@+id/action_interestDetailFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/matchingFragment"
+        android:name="com.abouttime.blindcafe.presentation.main.matching.MatchingFragment"
+        android:label="MatchingFragment" />
 </navigation>

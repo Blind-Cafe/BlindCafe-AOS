@@ -1,7 +1,6 @@
 package com.abouttime.blindcafe.presentation.onboarding.agreement
 
-import com.abouttime.blindcafe.common.base.view_model.BaseOnBoardingViewModel
-import com.abouttime.blindcafe.common.base.view_model.BaseViewModel
+import com.abouttime.blindcafe.common.base.BaseViewModel
 
 class AgreementViewModel: BaseViewModel() {
 

@@ -3,7 +3,9 @@ package com.abouttime.blindcafe.presentation.onboarding.profile_setting.essentia
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.abouttime.blindcafe.R
-import com.abouttime.blindcafe.common.base.view_model.BaseViewModel
+import com.abouttime.blindcafe.common.base.BaseViewModel
+import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.MATCHING_SEX
+import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.NICKNAME
 
 class EssentialSecondViewModel: BaseViewModel() {
 
@@ -46,6 +48,10 @@ class EssentialSecondViewModel: BaseViewModel() {
             showToast(R.string.profile_setting_toast_input_sex)
             return
         }
+
+        saveStringData(Pair(NICKNAME, _nickNameText.value ?: ""))
+        saveStringData(Pair(MATCHING_SEX, _selectedSex.toString()))
+
 
         moveToDirections(EssentialSecondFragmentDirections.actionEssentialSecondFragmentToInterestFragment())
 

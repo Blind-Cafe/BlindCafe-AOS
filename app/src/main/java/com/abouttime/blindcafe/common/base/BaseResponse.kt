@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.common.base.response
+package com.abouttime.blindcafe.common.base
 
 import com.google.gson.annotations.SerializedName
 

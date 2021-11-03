@@ -96,7 +96,7 @@
             android:text="@={viewModel.nickNameText}"
             android:background="@drawable/et_bg_rounding_with_default_stroke"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
-            android:inputType="number"
+            android:inputType="text"
             android:padding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -1,6 +1,5 @@
 package com.abouttime.blindcafe.data.remote
 
-import com.abouttime.blindcafe.common.base.response.BaseResponse
 import com.abouttime.blindcafe.common.constants.Url
 import com.abouttime.blindcafe.data.remote.dto.KakaoToken
 import com.abouttime.blindcafe.data.remote.dto.KakaoTokenResponse

@@ -5,7 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.RvGridDecoration
-import com.abouttime.blindcafe.common.base.fragment.BaseFragment
+import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.databinding.FragmentInterestBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
