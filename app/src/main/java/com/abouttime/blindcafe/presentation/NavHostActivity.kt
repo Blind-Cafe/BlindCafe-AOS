@@ -2,13 +2,17 @@ package com.abouttime.blindcafe.presentation
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.NavHostFragment
 import com.abouttime.blindcafe.R
+import com.abouttime.blindcafe.common.constants.LogTag.FCM
+import com.abouttime.blindcafe.common.constants.Url
 import com.abouttime.blindcafe.databinding.ActivityNavHostBinding
+import com.google.firebase.messaging.FirebaseMessaging
 import org.koin.android.scope.lifecycleScope
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -23,6 +27,8 @@ class NavHostActivity : AppCompatActivity() {
         setTheme(R.style.Theme_BlindCafe)
         binding = ActivityNavHostBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
 
         initNavController()

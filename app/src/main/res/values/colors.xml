@@ -24,4 +24,5 @@
     <color name="et_bg_stroke_red">#ff453a</color>
     <color name="alert_red">#ff453a</color>
     <color name="et_bg_stroke_green">#bbd2b6</color>
+    <color name="white_2">#f3f3f3</color>
 </resources>

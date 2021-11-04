@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.data.remote
+package com.abouttime.blindcafe.data.remote.api
 
 import com.abouttime.blindcafe.common.constants.Url
 import com.abouttime.blindcafe.data.remote.dto.KakaoToken

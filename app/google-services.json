@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "473083446679",
+    "project_id": "blind-cafe",
+    "storage_bucket": "blind-cafe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473083446679:android:9ee24c6577a3112dc2f0d2",
+        "android_client_info": {
+          "package_name": "com.abouttime.blindcafe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "473083446679-b7lji6tj8lc1q5ccnevcacn2o131rmhm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5RbNPaZrlIJzsu9JUlqmBlXWhRTfVQD0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "473083446679-b7lji6tj8lc1q5ccnevcacn2o131rmhm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "473083446679-pa4dobj7ui1tkp9hg2409akhg50dir2q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.abouttime.blindcafe.ios"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

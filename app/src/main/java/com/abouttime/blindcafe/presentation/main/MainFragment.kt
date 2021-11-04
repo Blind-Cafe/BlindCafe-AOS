@@ -35,7 +35,10 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
         fragmentMainBinding.bnTab.setOnItemSelectedListener { menuItem ->
             when(menuItem.itemId) {
                 R.id.menu_home -> setCurrentFragment(homeFragment)
-                R.id.menu_matching -> viewModel.moveToMatchingFragment()
+                R.id.menu_matching -> {
+                    viewModel.moveToMatchingFragment()
+                    setCurrentFragment(homeFragment)
+                }
                 R.id.menu_chat -> setCurrentFragment(chatFragment)
                 R.id.menu_my_page -> setCurrentFragment(myPageFragment)
             }

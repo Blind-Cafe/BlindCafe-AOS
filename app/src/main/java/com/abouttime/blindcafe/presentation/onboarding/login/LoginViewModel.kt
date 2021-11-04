@@ -8,12 +8,14 @@ import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.data.remote.dto.KakaoToken
 import com.abouttime.blindcafe.domain.use_case.PostKakaoTokenUseCase
+import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 class LoginViewModel(
     private val postKakaoTokenUseCase: PostKakaoTokenUseCase
@@ -36,6 +38,10 @@ class LoginViewModel(
 
 
     fun postKakaoToken(kakaoToken: KakaoToken) = viewModelScope.launch(Dispatchers.IO) {
+
+        val firebaseToken = FirebaseMessaging.getInstance().token.await()
+
+
 
 
         postKakaoTokenUseCase(

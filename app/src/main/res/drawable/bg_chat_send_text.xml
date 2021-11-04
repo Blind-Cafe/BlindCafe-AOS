@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners
+        android:topLeftRadius="@dimen/chat_text_rounding"
+        android:bottomRightRadius="@dimen/chat_text_rounding"
+        android:bottomLeftRadius="@dimen/chat_text_rounding"/>
+
+    <solid
+        android:color="@color/main" />
+</shape>

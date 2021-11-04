@@ -3,6 +3,7 @@
     package="com.abouttime.blindcafe">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -15,6 +16,18 @@
         android:supportsRtl="true"
         android:theme="@style/SplashScreenTheme"
         android:usesCleartextTraffic="true">
+
+        <service android:name=".common.background.service.FirebaseService"
+            android:permission="com.google.android.c2dm.permission.SEND"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+
+        </service>
+
+
         <activity
             android:name=".presentation.NavHostActivity"
             android:exported="true">

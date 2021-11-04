@@ -32,7 +32,7 @@ internal val viewModelModule = module {
 
     /** Main **/
     viewModel { MainViewModel() }
-    viewModel { HomeViewModel() }
+    viewModel { HomeViewModel(get()) }
     viewModel { MatchingViewModel() }
     viewModel { ChatViewModel() }
     viewModel { MyPageViewModel() }
