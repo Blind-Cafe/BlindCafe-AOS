@@ -65,6 +65,7 @@ abstract class BaseFragment<VM: BaseViewModel>(layoutId: Int) : Fragment(layoutI
             )
         }
     }
+    fun getInputManager(): InputMethodManager =  requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
 
 

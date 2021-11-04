@@ -49,6 +49,8 @@
     <string name="profile_setting_toast_select_interest">관심사를 먼저 선택해주세요.</string>
 
 
+    <string name="chat_room_menu_report">report</string>
+    <string name="chat_room_menu_quit">quit</string>
 
 
 </resources>

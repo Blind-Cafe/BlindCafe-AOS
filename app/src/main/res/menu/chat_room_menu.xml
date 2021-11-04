@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/menu_time_remaining"
+        android:icon="@drawable/bt_bell"
+        android:title="item1"/>
+
+    <item android:id="@+id/menu_report"
+        android:icon="@drawable/bt_bell"
+        android:title="@string/chat_room_menu_report"
+        />
+    <item android:id="@+id/menu_quit"
+        android:icon="@drawable/bt_bell"
+        android:title="@string/chat_room_menu_quit"/>
+
+</menu>

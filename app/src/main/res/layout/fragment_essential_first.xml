@@ -107,6 +107,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:inputType="number"
             android:maxLength="2"
+            android:textCursorDrawable="@drawable/ic_cursor"
             android:padding="8dp"
             android:text="@={viewModel.ageText}"
             app:layout_constraintDimensionRatio="3:1"

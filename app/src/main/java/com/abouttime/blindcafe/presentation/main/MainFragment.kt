@@ -36,8 +36,8 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
             when(menuItem.itemId) {
                 R.id.menu_home -> setCurrentFragment(homeFragment)
                 R.id.menu_matching -> {
-                    viewModel.moveToMatchingFragment()
                     setCurrentFragment(homeFragment)
+                    viewModel.moveToMatchingFragment()
                 }
                 R.id.menu_chat -> setCurrentFragment(chatFragment)
                 R.id.menu_my_page -> setCurrentFragment(myPageFragment)
