@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
-import com.abouttime.blindcafe.data.remote.dto.KakaoToken
+import com.abouttime.blindcafe.data.server.dto.KakaoToken
 import com.abouttime.blindcafe.domain.use_case.PostKakaoTokenUseCase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.auth.model.OAuthToken

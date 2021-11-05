@@ -55,6 +55,7 @@
             motion:layout_constraintBottom_toBottomOf="@id/et_message_input"
             motion:layout_constraintEnd_toEndOf="@id/et_message_input"
             motion:layout_constraintTop_toTopOf="@id/et_message_input" />
+
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
@@ -96,5 +97,6 @@
             motion:layout_constraintBottom_toBottomOf="@id/et_message_input"
             motion:layout_constraintEnd_toEndOf="@id/et_message_input"
             motion:layout_constraintTop_toTopOf="@id/et_message_input" />
+
     </ConstraintSet>
 </MotionScene>

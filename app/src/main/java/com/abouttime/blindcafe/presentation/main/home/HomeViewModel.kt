@@ -2,13 +2,12 @@ package com.abouttime.blindcafe.presentation.main.home
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.FCM
 import com.abouttime.blindcafe.common.constants.Url.FCM_MESSAGE_TOPIC
-import com.abouttime.blindcafe.data.remote.dto.NotificationData
-import com.abouttime.blindcafe.data.remote.dto.PushNotification
+import com.abouttime.blindcafe.data.server.dto.NotificationData
+import com.abouttime.blindcafe.data.server.dto.PushNotification
 import com.abouttime.blindcafe.domain.use_case.PostNotificationUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn

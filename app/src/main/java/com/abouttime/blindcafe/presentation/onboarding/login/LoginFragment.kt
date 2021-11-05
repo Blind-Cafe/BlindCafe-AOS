@@ -6,7 +6,7 @@ import android.view.View
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.common.constants.LogTag
-import com.abouttime.blindcafe.data.remote.dto.KakaoToken
+import com.abouttime.blindcafe.data.server.dto.KakaoToken
 import com.abouttime.blindcafe.databinding.FragmentLoginBinding
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.util.Utility

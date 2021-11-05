@@ -1,6 +1,7 @@
 package com.abouttime.blindcafe.presentation.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,32 +23,29 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
     val chatFragment = ChatFragment()
     val myPageFragment = MyPageFragment()
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val fragmentMainBinding = FragmentMainBinding.bind(view)
         binding = fragmentMainBinding
-
+        Log.d("qwer", "onViewCreated")
         setCurrentFragment(homeFragment)
         initBottomNavigationView(fragmentMainBinding)
     }
 
     private fun initBottomNavigationView(fragmentMainBinding: FragmentMainBinding) {
+
         fragmentMainBinding.bnTab.setOnItemSelectedListener { menuItem ->
             when(menuItem.itemId) {
                 R.id.menu_home -> setCurrentFragment(homeFragment)
-                R.id.menu_matching -> {
-                    setCurrentFragment(homeFragment)
-                    viewModel.moveToMatchingFragment()
-                }
+                R.id.menu_matching -> viewModel.moveToMatchingFragment()
                 R.id.menu_chat -> setCurrentFragment(chatFragment)
                 R.id.menu_my_page -> setCurrentFragment(myPageFragment)
             }
             true
         }
-        fragmentMainBinding.bnTab.getOrCreateBadge(R.id.menu_matching).apply {
-            number = 1
-            isVisible = true
-        }
+
 
     }
 
@@ -56,4 +54,14 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
             replace(R.id.fl_container, fragment)
             commit()
         }
+
+
+    private fun createBadgeToBottomNavigationItem(fragmentMainBinding: FragmentMainBinding, num: Int) {
+        fragmentMainBinding.bnTab.getOrCreateBadge(R.id.menu_matching).apply {
+            number = num
+            isVisible = true
+        }
+    }
+
+
 }

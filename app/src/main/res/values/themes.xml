@@ -12,13 +12,13 @@
 
 
         <item name="popupTheme">@style/PopupMenuTheme</item>
-
+        <item name="statusBarBackground">@color/transparent</item>
+        <item name="statusBarForeground">@color/transparent</item>
         <item name="android:statusBarColor">@color/transparent</item>
 
-        <item name="android:windowLightStatusBar">true</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
-        <item name="android:windowFullscreen">true</item>
+
 
     </style>
 

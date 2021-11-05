@@ -33,7 +33,11 @@
         tools:layout="@layout/fragment_main" >
         <action
             android:id="@+id/action_mainFragment_to_matchingFragment"
-            app:destination="@id/matchingFragment" />
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/mainFragment"
+            app:destination="@id/matchingFragment" >
+
+        </action>
     </fragment>
     <fragment
         android:id="@+id/ruleFragment"
@@ -93,5 +97,11 @@
     <fragment
         android:id="@+id/matchingFragment"
         android:name="com.abouttime.blindcafe.presentation.main.matching.MatchingFragment"
-        android:label="MatchingFragment" />
+        android:label="MatchingFragment" >
+        <action
+            android:id="@+id/action_matchingFragment_to_mainFragment"
+            app:popUpTo="@id/matchingFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>

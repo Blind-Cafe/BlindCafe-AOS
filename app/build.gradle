@@ -104,11 +104,13 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.0.0')//    // cloud firestore
     implementation 'com.google.firebase:firebase-analytics'
     // firestore
+    implementation 'com.google.firebase:firebase-core'
     implementation 'com.google.firebase:firebase-firestore-ktx'
     // storage
     implementation 'com.google.firebase:firebase-storage-ktx'
     // cloud message
     implementation 'com.google.firebase:firebase-messaging'
+
     // authentification
 //    implementation 'com.google.firebase:firebase-auth'
     // realtime database

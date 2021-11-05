@@ -3,9 +3,8 @@ package com.abouttime.blindcafe.di
 
 import com.abouttime.blindcafe.common.constants.Url.BASE_URL
 import com.abouttime.blindcafe.common.constants.Url.FIREBASE_BASE_URL
-import com.abouttime.blindcafe.data.remote.AuthenticationInterceptor
-import com.abouttime.blindcafe.data.remote.api.LoginApi
-import com.abouttime.blindcafe.data.remote.api.NotificationApi
+import com.abouttime.blindcafe.data.server.api.LoginApi
+import com.abouttime.blindcafe.data.server.api.NotificationApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.BuildConfig

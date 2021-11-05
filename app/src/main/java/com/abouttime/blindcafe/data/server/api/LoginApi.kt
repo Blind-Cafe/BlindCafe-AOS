@@ -1,8 +1,8 @@
-package com.abouttime.blindcafe.data.remote.api
+package com.abouttime.blindcafe.data.server.api
 
 import com.abouttime.blindcafe.common.constants.Url
-import com.abouttime.blindcafe.data.remote.dto.KakaoToken
-import com.abouttime.blindcafe.data.remote.dto.KakaoTokenResponse
+import com.abouttime.blindcafe.data.server.dto.KakaoToken
+import com.abouttime.blindcafe.data.server.dto.KakaoTokenResponse
 import retrofit2.http.Body
 import retrofit2.http.POST
 

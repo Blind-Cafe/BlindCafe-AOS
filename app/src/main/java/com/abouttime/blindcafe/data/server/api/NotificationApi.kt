@@ -1,9 +1,9 @@
-package com.abouttime.blindcafe.data.remote.api
+package com.abouttime.blindcafe.data.server.api
 
 import com.abouttime.blindcafe.common.constants.Url.CONTENT_TYPE
 import com.abouttime.blindcafe.common.constants.Url.FCM_SEND
 import com.abouttime.blindcafe.common.constants.Url.FIREBASE_SERVER_KEY
-import com.abouttime.blindcafe.data.remote.dto.PushNotification
+import com.abouttime.blindcafe.data.server.dto.PushNotification
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.Body

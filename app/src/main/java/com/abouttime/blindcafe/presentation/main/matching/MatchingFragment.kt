@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.activity.addCallback
 import androidx.appcompat.widget.PopupMenu
 import androidx.constraintlayout.motion.widget.MotionLayout
@@ -40,6 +41,53 @@ class MatchingFragment: BaseFragment<MatchingViewModel>(R.layout.fragment_matchi
         binding?.viewModel = viewModel
 
 
+        //requireActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
+
+        initSendButton(fragmentMatchingBinding)
+        initInputEditText(fragmentMatchingBinding)
+        initChatRecyclerView(fragmentMatchingBinding)
+        initMenuPopup(fragmentMatchingBinding)
+        initBackPressButton(fragmentMatchingBinding)
+
+
+    }
+
+    private fun initSendButton(fragmentMatchingBinding: FragmentMatchingBinding) = with(fragmentMatchingBinding) {
+        btSend.setOnClickListener {
+            btSend.requestFocus()
+            etMessageInput.text.clear()
+        }
+    }
+
+    private fun initInputEditText(fragmentMatchingBinding: FragmentMatchingBinding) = with(fragmentMatchingBinding) {
+
+        etMessageInput.setOnFocusChangeListener { view, isFocused ->
+            if (isFocused) {
+                etMessageInput.isCursorVisible = true
+                mlInputContainer.transitionToEnd()
+            } else {
+                etMessageInput.isCursorVisible = false
+                val imm: InputMethodManager = getInputManager()
+                imm.hideSoftInputFromWindow(etMessageInput.windowToken, 0)
+                mlInputContainer.transitionToStart()
+            }
+        }
+//        etMessageInput.setOnTouchListener { view, motionEvent ->
+//            requireActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_UNSPECIFIED)
+//            false
+//        }
+
+    }
+
+
+    private fun initChatRecyclerView(fragmentMatchingBinding: FragmentMatchingBinding) = with(fragmentMatchingBinding) {
+        rvChatContainer.adapter = chatAdapter
+        rvChatContainer.layoutManager = LinearLayoutManager(requireContext())
+
+    }
+
+    private fun initMenuPopup(fragmentMatchingBinding: FragmentMatchingBinding) {
         fragmentMatchingBinding.ivMenu.setOnClickListener { v ->
             val popup = PopupMenu(requireContext(), v)
             popup.apply {
@@ -85,49 +133,18 @@ class MatchingFragment: BaseFragment<MatchingViewModel>(R.layout.fragment_matchi
 //            inflater.inflate(R.menu.chat_room_menu, popup.menu)
             popup.show()
         }
-
-
-
-
-        initSendButton(fragmentMatchingBinding)
-        initInputEditText(fragmentMatchingBinding)
-        initChatRecyclerView(fragmentMatchingBinding)
-
-
-
     }
 
-    private fun initSendButton(fragmentMatchingBinding: FragmentMatchingBinding) = with(fragmentMatchingBinding) {
-        btSend.setOnClickListener {
-            btSend.requestFocus()
-            etMessageInput.text.clear()
-        }
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    private fun initInputEditText(fragmentMatchingBinding: FragmentMatchingBinding) = with(fragmentMatchingBinding) {
-
-        etMessageInput.setOnFocusChangeListener { view, isFocused ->
-            if (isFocused) {
-                etMessageInput.isCursorVisible = true
-                mlInputContainer.transitionToEnd()
+    private fun initBackPressButton(fragmentMatchingBinding: FragmentMatchingBinding) {
+        requireActivity().onBackPressedDispatcher.addCallback {
+            if (requireActivity().currentFocus?.id == R.id.et_message_input) {
+                requireActivity().currentFocus?.clearFocus()
+                handleOnBackPressed()
             } else {
-                etMessageInput.isCursorVisible = false
-                mlInputContainer.transitionToStart()
+                this.remove()
+                viewModel.moveToMainFragment()
             }
         }
-//        etMessageInput.setOnTouchListener { view, motionEvent ->
-//            requireActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_UNSPECIFIED)
-//            false
-//        }
-
-    }
-
-
-    private fun initChatRecyclerView(fragmentMatchingBinding: FragmentMatchingBinding) = with(fragmentMatchingBinding) {
-        rvChatContainer.adapter = chatAdapter
-        rvChatContainer.layoutManager = LinearLayoutManager(requireContext())
-
     }
 
 

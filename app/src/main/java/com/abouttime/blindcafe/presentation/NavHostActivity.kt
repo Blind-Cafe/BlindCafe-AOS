@@ -22,6 +22,7 @@ import android.widget.EditText
 
 import android.view.MotionEvent
 import android.view.View
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import androidx.recyclerview.widget.ItemTouchHelper.UP
@@ -69,20 +70,23 @@ class NavHostActivity : AppCompatActivity() {
     }
 
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
-        Log.d("asdf", "before ${event.action}  ")
 
-        if (event.action == MotionEvent.ACTION_UP && event.downTime > 5000) {
-            Log.d("asdf", "after ${event.action}  downTime ${event.downTime}")
-
+        if (event.action == MotionEvent.ACTION_UP) {
             val v: View? = currentFocus
+
+            //Log.d("asdf", " ->\nView\n top : ${v?.top}, bottom : ${v?.bottom}, height : ${v?.height}\n left : ${v?.left}, right : ${v?.right}, width : ${v?.width}")
+            //Log.d("asdf", " ->\nView\n x : ${v?.x}, y : ${v?.y}\n pivotX : ${v?.pivotX}, pivotY : ${v?.pivotY}")
+            //Log.d("asdf", " ->\nEvent\n x : ${event.x}, y : ${event.y}\n rawX : ${event.rawX}, rawY : ${event.rawY}\n xPrecision : ${event.xPrecision}, yPrecision : ${event.yPrecision}")
+
             if (v is EditText) {
                 val outRect = Rect()
                 v.getGlobalVisibleRect(outRect)
-                if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt()) ) {
+                //v.getFocusedRect(outRect)
+
+                Log.e("asdf", "->\noutRect.top ${outRect.top}\nevent.rawY ${event.rawY}\noutRect.bottom ${outRect.bottom}\nevent.rawX ${event.rawX}")
+                if (outRect.top > event.rawY.toInt()) {
+                //if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt()) ) {
                     v.clearFocus()
-                    val imm: InputMethodManager =
-                        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0)
                 }
             }
         }
