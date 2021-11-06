@@ -13,9 +13,8 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.abouttime.blindcafe.R
-import com.abouttime.blindcafe.common.constants.LogTag.FCM
+import com.abouttime.blindcafe.common.constants.LogTag.FCM_TAG
 import com.abouttime.blindcafe.presentation.NavHostActivity
-import com.google.firebase.iid.FirebaseInstanceIdReceiver
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import kotlin.random.Random
@@ -41,7 +40,7 @@ class FirebaseService: FirebaseMessagingService() {
     // 메세지 받을 때마다 호출됨
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
-        Log.e(FCM, "onMessageReceived 호출")
+        Log.e(FCM_TAG, "onMessageReceived 호출")
 
         val intent = Intent(this, NavHostActivity::class.java)
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

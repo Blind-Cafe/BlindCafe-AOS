@@ -9,99 +9,132 @@
         android:id="@+id/loginFragment"
         android:name="com.abouttime.blindcafe.presentation.onboarding.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_agreementFragment"
-            app:destination="@id/agreementFragment" />
+            app:destination="@id/agreementFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
-        tools:layout="@layout/fragment_splash"
         android:name="com.abouttime.blindcafe.presentation.onboarding.splash.SplashFragment"
-        android:label="SplashFragment">
+        android:label="SplashFragment"
+        tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/action_splashFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/mainFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_splashFragment_to_ruleFragment"
-            app:destination="@id/ruleFragment" />
+            app:destination="@id/ruleFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.abouttime.blindcafe.presentation.main.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_matchingFragment"
-            app:popUpToInclusive="true"
+            app:destination="@id/matchingFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
             app:popUpTo="@id/mainFragment"
-            app:destination="@id/matchingFragment" >
+            app:popUpToInclusive="true">
 
         </action>
     </fragment>
     <fragment
         android:id="@+id/ruleFragment"
-        tools:layout="@layout/fragment_rule"
         android:name="com.abouttime.blindcafe.presentation.onboarding.rule.RuleFragment"
-        android:label="RuleFragment">
+        android:label="RuleFragment"
+        tools:layout="@layout/fragment_rule">
         <action
             android:id="@+id/action_ruleFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/agreementFragment"
-        tools:layout="@layout/fragment_agreement"
         android:name="com.abouttime.blindcafe.presentation.onboarding.agreement.AgreementFragment"
-        android:label="AgreementFragment" >
+        android:label="AgreementFragment"
+        tools:layout="@layout/fragment_agreement">
         <action
             android:id="@+id/action_agreementFragment_to_profileSettingFragment"
-            app:destination="@id/essentialFirstFragment" />
+            app:destination="@id/essentialFirstFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/essentialFirstFragment"
-        tools:layout="@layout/fragment_essential_first"
         android:name="com.abouttime.blindcafe.presentation.onboarding.profile_setting.essential_first.EssentialFirstFragment"
-        android:label="ProfileSettingFragment" >
+        android:label="ProfileSettingFragment"
+        tools:layout="@layout/fragment_essential_first">
         <action
             android:id="@+id/action_profileSettingFragment_to_essentialSecondFragment"
-            app:destination="@id/essentialSecondFragment" />
+            app:destination="@id/essentialSecondFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/essentialSecondFragment"
-        tools:layout="@layout/fragment_essential_second"
         android:name="com.abouttime.blindcafe.presentation.onboarding.profile_setting.essential_second.EssentialSecondFragment"
-        android:label="EssentialSecondFragment" >
+        android:label="EssentialSecondFragment"
+        tools:layout="@layout/fragment_essential_second">
         <action
             android:id="@+id/action_essentialSecondFragment_to_interestFragment"
-            app:destination="@id/interestFragment" />
+            app:destination="@id/interestFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
         android:id="@+id/interestFragment"
         android:name="com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest.InterestFragment"
-        tools:layout="@layout/fragment_interest"
-        android:label="InterestFragment" >
+        android:label="InterestFragment"
+        tools:layout="@layout/fragment_interest">
         <action
-            android:id="@+id/action_interestFragment_to_interestDetailFragment"
-            app:destination="@id/interestDetailFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/interestDetailFragment"
-        tools:layout="@layout/fragment_interest_detail"
-        android:name="com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest_detail.InterestDetailFragment"
-        android:label="InterestDetailFragment" >
-        <action
-            android:id="@+id/action_interestDetailFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            android:id="@+id/action_interestFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/ruleFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/matchingFragment"
         android:name="com.abouttime.blindcafe.presentation.main.matching.MatchingFragment"
-        android:label="MatchingFragment" >
+        android:label="MatchingFragment">
         <action
             android:id="@+id/action_matchingFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
             app:popUpTo="@id/matchingFragment"
-            app:popUpToInclusive="true"
-            app:destination="@id/mainFragment" />
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

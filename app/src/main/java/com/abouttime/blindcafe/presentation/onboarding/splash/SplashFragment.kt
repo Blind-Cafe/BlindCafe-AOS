@@ -12,14 +12,12 @@ class SplashFragment: BaseFragment<SplashViewModel>(R.layout.fragment_splash) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         // TODO 여기서 jwt 여부 확인해서 main 화면으로 갈지, 온보딩 화면으로 갈지 결정
-        moveToRuleFragment()
+        viewModel.moveToRuleFragment()
+
     }
 
-    private fun moveToRuleFragment() {
-        moveToDirections(SplashFragmentDirections.actionSplashFragmentToRuleFragment())
-    }
+
 
 
 }

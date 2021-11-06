@@ -6,9 +6,10 @@ import com.abouttime.blindcafe.databinding.RvChatItemReceiveTextBinding
 import com.abouttime.blindcafe.domain.model.Message
 import com.xwray.groupie.viewbinding.BindableItem
 
-class MessageReceiveItem(private val message: Message): BindableItem<RvChatItemReceiveTextBinding>() {
+class TextReceiveItem(private val message: Message): BindableItem<RvChatItemReceiveTextBinding>() {
     override fun bind(viewBinding: RvChatItemReceiveTextBinding, position: Int) {
         viewBinding.message = message
+        viewBinding.messageReceiveTime.text = message.timestamp?.seconds.toString()
     }
 
     override fun getLayout(): Int = R.layout.rv_chat_item_receive_text

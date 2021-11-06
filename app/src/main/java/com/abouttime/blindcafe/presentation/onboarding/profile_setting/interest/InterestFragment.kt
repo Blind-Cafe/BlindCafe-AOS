@@ -48,7 +48,7 @@ class InterestFragment: BaseFragment<InterestViewModel>(R.layout.fragment_intere
         }
     }
     private fun moveToInterestDetailFragment() {
-        moveToDirections(InterestFragmentDirections.actionInterestFragmentToInterestDetailFragment())
+        viewModel.moveToDirections(InterestFragmentDirections.actionInterestFragmentToMainFragment())
     }
 
     private fun setNextTextViewBackgroundColor(isClickedThreeItem: Boolean, fragmentInterestBinding: FragmentInterestBinding) {

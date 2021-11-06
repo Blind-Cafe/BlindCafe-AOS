@@ -28,6 +28,7 @@
             app:cpb_background_progressbar_width="4dp"
             app:cpb_progress="30"
             app:cpb_progressbar_color="@color/main"
+            android:onClick="@{()->viewModel.onClickCircleImageView()}"
             app:cpb_progressbar_width="4dp"
             app:layout_constraintBottom_toTopOf="@id/tv_state_title"
             app:layout_constraintEnd_toEndOf="parent"

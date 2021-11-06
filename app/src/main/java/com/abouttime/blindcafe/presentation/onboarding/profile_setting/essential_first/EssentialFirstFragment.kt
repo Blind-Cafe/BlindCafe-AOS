@@ -43,6 +43,7 @@ class EssentialFirstFragment :
             if (viewModel.isCorrectAge()) {
                 ageEditText.setBackgroundResource(R.drawable.et_bg_rouding_with_green_stroke)
                 hideKeyboard()
+                ageEditText.clearFocus()
                 alertAgeTextView.isGone = true
             } else {
                 showToast(R.string.profile_setting_toast_input_correct_age)

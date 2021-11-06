@@ -19,6 +19,9 @@ class AgreementFragment : BaseFragment<AgreementViewModel>(R.layout.fragment_agr
         super.onViewCreated(view, savedInstanceState)
         val fragmentAgreementBinding = FragmentAgreementBinding.bind(view)
         binding = fragmentAgreementBinding
+        binding?.viewModel = viewModel
+        binding?.lifecycleOwner = this
+
 
 
         initCheckButtons(fragmentAgreementBinding)
@@ -35,31 +38,14 @@ class AgreementFragment : BaseFragment<AgreementViewModel>(R.layout.fragment_agr
             )
             checkImageViews.forEachIndexed { i, ivCheck ->
                 ivCheck.setOnClickListener {
-                    if (viewModel.checks[i]) {
-                        viewModel.checks[i] = false
-
-                        tvNext.setBackgroundColor(resources.getColor(R.color.button_disabled, null))
-                        tvNext.isEnabled = false
-
+                    if (viewModel!!.checks[i]) {
+                        viewModel!!.checks[i] = false
                         ivCheck.setColorFilter(resources.getColor(R.color.check_color, null))
                     } else {
-                        viewModel.checks[i] = true
-
-                        if (viewModel.isAllChecked()) {
-
-                            tvNext.setBackgroundColor(
-                                resources.getColor(
-                                    R.color.button_enabled,
-                                    null
-                                )
-                            )
-                            tvNext.setBackgroundColor(resources.getColor(R.color.button_enabled))
-
-                            tvNext.isEnabled = true
-                        }
-
+                        viewModel!!.checks[i] = true
                         ivCheck.setColorFilter(resources.getColor(R.color.checked_color, null))
                     }
+                    viewModel?.isAllChecked()
                 }
             }
         }

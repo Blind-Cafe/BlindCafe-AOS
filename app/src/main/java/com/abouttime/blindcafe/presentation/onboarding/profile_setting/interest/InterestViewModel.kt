@@ -16,7 +16,7 @@ class InterestViewModel: BaseViewModel() {
             saveStringData(Pair(INTERESTS, interests))
 
             // TODO 인자로 3개 리스트 넘기기!
-            moveToDirections(InterestFragmentDirections.actionInterestFragmentToInterestDetailFragment())
+            moveToDirections(InterestFragmentDirections.actionInterestFragmentToMainFragment())
         } else {
             showToast(R.string.profile_setting_toast_select_interest)
         }

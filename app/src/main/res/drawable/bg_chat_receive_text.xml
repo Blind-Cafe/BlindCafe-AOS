@@ -6,5 +6,5 @@
         android:bottomLeftRadius="@dimen/chat_text_rounding"/>
 
     <solid
-        android:color="@color/gray_700" />
+        android:color="@color/gray_600" />
 </shape>

@@ -2,6 +2,10 @@
     <string name="app_name">BlindCafe</string>
 
 
+    <string name="temp_error">에러</string>
+
+
+
     <string name="rule_title">블라인드 카페 규칙</string>
     <string name="rule_skip">Skip</string>
     <string name="rule_next">다음</string>
@@ -51,6 +55,8 @@
 
     <string name="chat_room_menu_report">report</string>
     <string name="chat_room_menu_quit">quit</string>
+
+    <string name="chat_et_hint">메시지 작성하기</string>
 
 
 </resources>

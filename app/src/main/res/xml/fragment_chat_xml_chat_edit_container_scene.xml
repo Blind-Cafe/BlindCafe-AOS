@@ -13,14 +13,7 @@
     <ConstraintSet android:id="@+id/start">
 
 
-        <Constraint
-            android:id="@+id/bt_gallery"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            motion:layout_constraintBottom_toBottomOf="@id/et_message_input"
-            motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toTopOf="@id/et_message_input"
-            motion:layout_constraintVertical_bias="0.0" />
+
         <Constraint
             android:id="@+id/bt_gallery"
             android:layout_width="wrap_content"
@@ -50,11 +43,15 @@
             motion:layout_constraintTop_toTopOf="parent" />
         <Constraint
             android:id="@+id/bt_send"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            motion:layout_constraintBottom_toBottomOf="@id/et_message_input"
             motion:layout_constraintEnd_toEndOf="@id/et_message_input"
-            motion:layout_constraintTop_toTopOf="@id/et_message_input" />
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            android:scaleType="fitCenter"
+            motion:layout_constraintTop_toTopOf="@id/et_message_input"
+            motion:layout_constraintBottom_toBottomOf="@id/et_message_input"
+            motion:layout_constraintDimensionRatio="1.5:1" />
+
 
     </ConstraintSet>
 
@@ -92,11 +89,15 @@
             motion:layout_constraintTop_toTopOf="parent" />
         <Constraint
             android:id="@+id/bt_send"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            motion:layout_constraintBottom_toBottomOf="@id/et_message_input"
             motion:layout_constraintEnd_toEndOf="@id/et_message_input"
-            motion:layout_constraintTop_toTopOf="@id/et_message_input" />
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="visible"
+            android:scaleType="fitCenter"
+            motion:layout_constraintTop_toTopOf="@id/et_message_input"
+            motion:layout_constraintBottom_toBottomOf="@id/et_message_input"
+            motion:layout_constraintDimensionRatio="1.5:1" />
+
 
     </ConstraintSet>
 </MotionScene>

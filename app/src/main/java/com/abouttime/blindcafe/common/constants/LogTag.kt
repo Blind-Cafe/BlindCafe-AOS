@@ -1,8 +1,10 @@
 package com.abouttime.blindcafe.common.constants
 
 object LogTag {
-    const val LOGIN_TAG = "login tag"
-    const val ON_BOARDING_TAG = "on-boarding tag"
-    const val MAIN_TAG = "main tag"
-    const val FCM = "firebase cloud messaging"
+    const val LOGIN_TAG = "login_tag"
+    const val ON_BOARDING_TAG = "on_boarding_tag"
+    const val MAIN_TAG = "main_tag"
+    const val FCM_TAG = "firebase_cloud_messaging"
+    const val FIRESTORE_TAG = "fire_store"
+    const val CHATTING_TAG = "chatting tag"
 }

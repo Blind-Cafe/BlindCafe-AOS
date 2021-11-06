@@ -5,10 +5,10 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import android.widget.Toast
-import androidx.datastore.core.DataStore
 import com.abouttime.blindcafe.BuildConfig
 import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.constants.Url
+import com.abouttime.blindcafe.di.*
 import com.abouttime.blindcafe.di.remoteModule
 import com.abouttime.blindcafe.di.repositoryModule
 import com.abouttime.blindcafe.di.useCaseModule
@@ -17,7 +17,6 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.common.KakaoSdk
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-import java.util.prefs.Preferences
 
 class BlindCafeApplication: Application() {
 
@@ -34,7 +33,7 @@ class BlindCafeApplication: Application() {
             if (!task.isSuccessful) {
                 msg = "구독 실패"
             }
-            Log.d(LogTag.FCM, msg)
+            Log.d(LogTag.FCM_TAG, msg)
             Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
         }
 
@@ -44,6 +43,9 @@ class BlindCafeApplication: Application() {
             modules(viewModelModule)
             modules(repositoryModule)
             modules(useCaseModule)
+            modules(sharedPreferencesModule)
+            modules(firebaseModule)
+
         }
 
 

@@ -29,7 +29,8 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
         super.onViewCreated(view, savedInstanceState)
         val fragmentMainBinding = FragmentMainBinding.bind(view)
         binding = fragmentMainBinding
-        Log.d("qwer", "onViewCreated")
+
+
         setCurrentFragment(homeFragment)
         initBottomNavigationView(fragmentMainBinding)
     }
@@ -39,7 +40,6 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
         fragmentMainBinding.bnTab.setOnItemSelectedListener { menuItem ->
             when(menuItem.itemId) {
                 R.id.menu_home -> setCurrentFragment(homeFragment)
-                R.id.menu_matching -> viewModel.moveToMatchingFragment()
                 R.id.menu_chat -> setCurrentFragment(chatFragment)
                 R.id.menu_my_page -> setCurrentFragment(myPageFragment)
             }
@@ -56,8 +56,8 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
         }
 
 
-    private fun createBadgeToBottomNavigationItem(fragmentMainBinding: FragmentMainBinding, num: Int) {
-        fragmentMainBinding.bnTab.getOrCreateBadge(R.id.menu_matching).apply {
+    private fun createBadgeToBottomNavigationItem(menuId: Int, num: Int) {
+        binding?.bnTab?.getOrCreateBadge(menuId)?.apply {
             number = num
             isVisible = true
         }

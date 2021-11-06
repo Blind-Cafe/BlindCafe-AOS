@@ -3,20 +3,16 @@
 
     <item
         android:id="@+id/menu_home"
-        android:icon="@drawable/bt_back"
-        android:title="홈" />
+        android:icon="@drawable/bt_tab_home"
+        android:title="" />
 
     <item
-        android:id="@+id/menu_matching"
-        android:icon="@drawable/bt_back"
-        android:title="매칭" />
-    <item
         android:id="@+id/menu_chat"
-        android:icon="@drawable/bt_back"
-        android:title="채팅방" />
+        android:icon="@drawable/bt_tab_chat"
+        android:title="" />
     <item
         android:id="@+id/menu_my_page"
-        android:icon="@drawable/bt_back"
-        android:title="마이페이지" />
+        android:icon="@drawable/bt_tab_my_page"
+        android:title="" />
 
 </menu>

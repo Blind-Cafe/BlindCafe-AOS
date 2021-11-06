@@ -30,7 +30,6 @@
 
         <activity
             android:name=".presentation.NavHostActivity"
-            android:windowSoftInputMode="adjustResize"
             android:fitsSystemWindows="true"
             android:exported="true">
             <intent-filter>

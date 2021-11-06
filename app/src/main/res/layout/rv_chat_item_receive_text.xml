@@ -47,6 +47,20 @@
             app:layout_constraintTop_toBottomOf="@id/message_sender"
             tools:text="테스트 메세지 내용" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/message_receive_time"
+            android:textSize="@dimen/font_size_super_small"
+            app:layout_constraintStart_toEndOf="@id/message_receive_content"
+            app:layout_constraintBottom_toBottomOf="@id/message_receive_content"
+            android:text="@{message.timestamp.toString()}"
+            tools:text="오후 1:00"
+            android:lineSpacingExtra="6sp"
+            android:textColorHint="@color/chat_time_color"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"/>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

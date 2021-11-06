@@ -9,7 +9,7 @@
     <View
         android:layout_width="0dp"
         android:layout_height="0.8dp"
-        android:background="@color/gray_700"
+        android:background="@color/gray_600"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,7 @@
         tools:text="아메리카노를 주문한 로즈님이세요.\n간단한 인사로 반갑게 맞아주세요."
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textColor="@color/light_gray"
+        android:textColor="@color/gray_300"
         android:textSize="@dimen/font_size_super_small"
         android:lineSpacingExtra="6sp"
         app:layout_constraintTop_toTopOf="parent"

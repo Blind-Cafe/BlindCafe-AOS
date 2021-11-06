@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.data.server
+package com.abouttime.blindcafe.common
 
 import okhttp3.Interceptor
 import okhttp3.Request

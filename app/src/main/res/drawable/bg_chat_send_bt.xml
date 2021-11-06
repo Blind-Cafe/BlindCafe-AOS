@@ -4,6 +4,4 @@
         android:topRightRadius="@dimen/chat_text_rounding"
         android:bottomRightRadius="@dimen/chat_text_rounding"/>
 
-    <solid
-        android:color="@color/main" />
 </shape>

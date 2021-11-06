@@ -39,9 +39,6 @@ class LoginViewModel(
 
     fun postKakaoToken(kakaoToken: KakaoToken) = viewModelScope.launch(Dispatchers.IO) {
 
-        val firebaseToken = FirebaseMessaging.getInstance().token.await()
-
-
 
 
         postKakaoTokenUseCase(

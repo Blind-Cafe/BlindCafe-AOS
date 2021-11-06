@@ -13,13 +13,14 @@ import com.abouttime.blindcafe.presentation.onboarding.profile_setting.essential
 import com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest.InterestViewModel
 import com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest_detail.InterestDetailViewModel
 import com.abouttime.blindcafe.presentation.onboarding.rule.RuleViewModel
+import com.abouttime.blindcafe.presentation.onboarding.splash.SplashViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 internal val viewModelModule = module {
     /** Single Activity **/
     viewModel { NavHostViewModel() }
-
+    viewModel { SplashViewModel() }
 
     /** On-Boarding **/
     viewModel { LoginViewModel(get()) }
@@ -33,7 +34,7 @@ internal val viewModelModule = module {
     /** Main **/
     viewModel { MainViewModel() }
     viewModel { HomeViewModel(get()) }
-    viewModel { MatchingViewModel() }
+    viewModel { MatchingViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { ChatViewModel() }
     viewModel { MyPageViewModel() }
 

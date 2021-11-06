@@ -4,5 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class KakaoToken(
     @SerializedName("token")
-    val token: String
+    val token: String,
+    @SerializedName("deviceId")
+    val deviceId: String
 )
