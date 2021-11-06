@@ -26,7 +26,7 @@ class DownloadAudioUrlUseCase(
             }
 
         } catch (e: Exception) {
-            emit(Resource.Error(message = e.toString()))
+            //emit(Resource.Error(message = e.toString()))
         }
 
     }

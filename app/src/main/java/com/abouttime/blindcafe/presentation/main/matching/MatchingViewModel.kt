@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MatchingViewModel(
     private val receiveMessageUseCase: ReceiveMessageUseCase,
@@ -107,13 +108,16 @@ class MatchingViewModel(
             downloadImageUrlUseCase(message).collect { result ->
                 when (result) {
                     is Resource.Loading -> {
-
+                        Log.e(CHATTING_TAG, "uri 오는중")
                     }
                     is Resource.Success -> {
-                        callback(result.data)
+                        Log.e(CHATTING_TAG, "uri 도착")
+                        withContext(Dispatchers.Main) {
+                            callback(result.data)
+                        }
                     }
                     is Resource.Error -> {
-                        Log.e(CHATTING_TAG, result.message ?: "error")
+                        Log.e(CHATTING_TAG, "uri 에러")
                     }
                 }
             }
@@ -128,7 +132,9 @@ class MatchingViewModel(
 
                     }
                     is Resource.Success -> {
-                        callback(result.data)
+                        withContext(Dispatchers.Main) {
+                            callback(result.data)
+                        }
                     }
                     is Resource.Error -> {
                         Log.e(CHATTING_TAG, result.message ?: "error")

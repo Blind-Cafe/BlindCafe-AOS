@@ -19,10 +19,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
-        android:clickable="true"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
+        android:background="@color/black">
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -34,15 +31,13 @@
             app:layout_constraintBottom_toTopOf="@id/ml_input_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cl_top_container"
-            app:layout_constraintVertical_bias="0" />
+            app:layout_constraintTop_toBottomOf="@id/cl_top_container" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_top_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -135,7 +130,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="18dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="18dp"
                 android:background="@drawable/bg_chat_et"
                 android:inputType="textMultiLine"
                 android:paddingHorizontal="18dp"
@@ -174,16 +169,7 @@
         </androidx.constraintlayout.motion.widget.MotionLayout>
 
 
-        <View
-            android:id="@+id/dummy"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="gone"
-            android:background="@color/gray_900"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ml_input_container" />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

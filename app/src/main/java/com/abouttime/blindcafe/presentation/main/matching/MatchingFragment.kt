@@ -11,6 +11,8 @@ import android.view.inputmethod.InputMethodManager
 import androidx.activity.addCallback
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.databinding.FragmentMatchingBinding
@@ -42,13 +44,15 @@ class MatchingFragment : BaseFragment<MatchingViewModel>(R.layout.fragment_match
         initSendButton(fragmentMatchingBinding)
         initInputEditText(fragmentMatchingBinding)
         initChatRecyclerView(fragmentMatchingBinding)
-        observeMessagesData()
+        observeMessagesData(fragmentMatchingBinding)
         initMenuPopup(fragmentMatchingBinding)
         initBackPressButton(fragmentMatchingBinding)
         initGalleryButton(fragmentMatchingBinding)
     }
 
-    private fun observeMessagesData() {
+    private fun observeMessagesData(fragmentMatchingBinding: FragmentMatchingBinding) {
+        var isFirstMessages = true
+
         viewModel.receivedMessage.observe(viewLifecycleOwner) { messages ->
             messages.forEach { message ->
                 Log.e("asdf", message.toString())
@@ -57,6 +61,12 @@ class MatchingFragment : BaseFragment<MatchingViewModel>(R.layout.fragment_match
                 } else {
                     addMessageToPartner(message)
                 }
+            }
+
+
+            if (isFirstMessages) {
+                scrollRvToLastPosition(fragmentMatchingBinding)
+                isFirstMessages = false
             }
 
         }
@@ -122,16 +132,30 @@ class MatchingFragment : BaseFragment<MatchingViewModel>(R.layout.fragment_match
             rvChatContainer.adapter = chatAdapter
             rvChatContainer.layoutManager = LinearLayoutManager(requireContext())
 
+
+
             root.viewTreeObserver.addOnGlobalLayoutListener {
-                val heigtDiff = root.rootView.height - root.height
-                if (heigtDiff > 100) {
-                    if (chatAdapter.itemCount - 1 > 0) {
-                        rvChatContainer.scrollToPosition(chatAdapter.itemCount - 1)
-                    }
+                val heightDiff = root.rootView.height - root.height
+                Log.e("asdf", heightDiff.toString())
+                if (heightDiff > 100) {
+                    scrollRvToLastPosition(fragmentMatchingBinding)
                 }
             }
+            rvChatContainer.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    Log.e("asdf", newState.toString())
+
+                }
+            })
 
         }
+
+    private fun scrollRvToLastPosition(fragmentMatchingBinding: FragmentMatchingBinding) = with(fragmentMatchingBinding) {
+        if (chatAdapter.itemCount - 1 > 0) {
+            rvChatContainer.scrollToPosition(chatAdapter.itemCount - 1)
+        }
+    }
 
     private fun initMenuPopup(fragmentMatchingBinding: FragmentMatchingBinding) {
         fragmentMatchingBinding.ivMenu.setOnClickListener { v ->

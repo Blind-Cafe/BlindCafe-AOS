@@ -21,7 +21,7 @@ class DownloadImageUrlUseCase(
         if (response != null) {
             emit(Resource.Success(data = response))
         } else {
-            emit(Resource.Error(message = "response is null!"))
+            //emit(Resource.Error(message = "response is null!"))
         }
 
     }

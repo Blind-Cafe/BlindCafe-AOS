@@ -13,7 +13,6 @@
     <ConstraintSet android:id="@+id/start">
 
 
-
         <Constraint
             android:id="@+id/bt_gallery"
             android:layout_width="wrap_content"
@@ -36,21 +35,21 @@
             android:layout_marginStart="18dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="18dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="18dp"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toEndOf="@id/bt_record"
             motion:layout_constraintTop_toTopOf="parent" />
         <Constraint
             android:id="@+id/bt_send"
-            motion:layout_constraintEnd_toEndOf="@id/et_message_input"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:visibility="invisible"
             android:scaleType="fitCenter"
-            motion:layout_constraintTop_toTopOf="@id/et_message_input"
+            android:visibility="invisible"
             motion:layout_constraintBottom_toBottomOf="@id/et_message_input"
-            motion:layout_constraintDimensionRatio="1.5:1" />
+            motion:layout_constraintDimensionRatio="1.5:1"
+            motion:layout_constraintEnd_toEndOf="@id/et_message_input"
+            motion:layout_constraintTop_toTopOf="@id/et_message_input" />
 
 
     </ConstraintSet>
@@ -82,21 +81,21 @@
             android:layout_marginStart="18dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="18dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="18dp"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent" />
         <Constraint
             android:id="@+id/bt_send"
-            motion:layout_constraintEnd_toEndOf="@id/et_message_input"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:visibility="visible"
             android:scaleType="fitCenter"
-            motion:layout_constraintTop_toTopOf="@id/et_message_input"
+            android:visibility="visible"
             motion:layout_constraintBottom_toBottomOf="@id/et_message_input"
-            motion:layout_constraintDimensionRatio="1.5:1" />
+            motion:layout_constraintDimensionRatio="1.5:1"
+            motion:layout_constraintEnd_toEndOf="@id/et_message_input"
+            motion:layout_constraintTop_toTopOf="@id/et_message_input" />
 
 
     </ConstraintSet>
