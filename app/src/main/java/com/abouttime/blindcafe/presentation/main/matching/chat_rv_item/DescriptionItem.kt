@@ -1,9 +1,8 @@
-package com.abouttime.blindcafe.presentation.main.matching.rv_item
+package com.abouttime.blindcafe.presentation.main.matching.chat_rv_item
 
 import android.view.View
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.databinding.RvChatItemDescriptionBinding
-import com.abouttime.blindcafe.databinding.RvChatItemReceiveTextBinding
 import com.abouttime.blindcafe.domain.model.Message
 import com.xwray.groupie.viewbinding.BindableItem
 

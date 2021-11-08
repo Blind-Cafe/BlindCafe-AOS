@@ -134,48 +134,84 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_alert_nickname" />
 
-
-            <ImageView
-                android:id="@+id/iv_female"
+            <FrameLayout
+                android:id="@+id/fl_female_container"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="10dp"
                 android:onClick="@{()->viewModel.onClickFemaleButton()}"
-                android:scaleType="fitXY"
-                android:src="@{viewModel.selectedSex == 1 ? @drawable/bt_female_small_selected : @drawable/bt_female_small }"
-                app:layout_constraintEnd_toStartOf="@id/iv_male"
+                android:background="@drawable/bg_rounding_3dp"
+                android:backgroundTint="@{viewModel.selectedSex == 1 ? @color/sex_container_enabled : @color/sex_container_disabled}"
+                tools:backgroundTint="@color/sex_container_disabled"
+                app:layout_constraintBottom_toTopOf="@id/tv_next"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@id/fl_male_container"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_sex"
-                app:layout_constraintVertical_bias="0" />
+                app:layout_constraintVertical_bias="0">
 
+                <ImageView
+                    android:id="@+id/iv_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/bt_female_small"
+                    app:tint="@color/sex_disabled" />
 
-            <ImageView
-                android:id="@+id/iv_male"
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_male_container"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginEnd="10dp"
                 android:onClick="@{()->viewModel.onClickMaleButton()}"
-                android:scaleType="fitXY"
-                android:src="@{viewModel.selectedSex == 2 ? @drawable/bt_male_small_selected : @drawable/bt_male_small}"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_female"
-                app:layout_constraintEnd_toStartOf="@id/iv_bisexual"
-                app:layout_constraintStart_toEndOf="@+id/iv_female"
-                app:layout_constraintTop_toTopOf="@id/iv_female" />
+                android:background="@drawable/bg_rounding_3dp"
+                android:backgroundTint="@{viewModel.selectedSex == 2 ? @color/sex_container_enabled : @color/sex_container_disabled}"
+                tools:backgroundTint="@color/sex_container_disabled"
+                app:layout_constraintBottom_toBottomOf="@+id/fl_female_container"
+                app:layout_constraintEnd_toStartOf="@id/fl_bisexual_container"
+                app:layout_constraintStart_toEndOf="@+id/fl_female_container"
+                app:layout_constraintTop_toTopOf="@id/fl_female_container">
+
+                <ImageView
+                    android:id="@+id/iv_male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/bt_male_small"
+                    app:tint="@color/sex_disabled"
+                    />
+
+            </FrameLayout>
 
 
-            <ImageView
-                android:id="@+id/iv_bisexual"
+            <FrameLayout
+                android:id="@+id/fl_bisexual_container"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:onClick="@{()->viewModel.onClickBisexualButton()}"
-                android:scaleType="fitXY"
-                android:src="@{viewModel.selectedSex == 3 ? @drawable/bt_bisexual_small_selected : @drawable/bt_bisexual_small}"
-                app:layout_constraintBottom_toBottomOf="@id/iv_male"
+                android:background="@drawable/bg_rounding_3dp"
+                android:backgroundTint="@{viewModel.selectedSex == 3 ? @color/sex_container_enabled : @color/sex_container_disabled}"
+                tools:backgroundTint="@color/sex_container_disabled"
+                app:layout_constraintBottom_toBottomOf="@id/fl_male_container"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/iv_male"
-                app:layout_constraintTop_toTopOf="@id/iv_male" />
+                app:layout_constraintStart_toEndOf="@id/fl_male_container"
+                app:layout_constraintTop_toTopOf="@id/fl_male_container">
+
+                <ImageView
+                    android:id="@+id/iv_bisexual"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/bt_female_small"
+                    app:tint="@color/sex_disabled"
+                     />
+
+
+            </FrameLayout>
 
 
             <TextView

@@ -2,6 +2,7 @@ package com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.children
 import androidx.recyclerview.widget.GridLayoutManager
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.RvGridDecoration
@@ -23,7 +24,7 @@ class InterestFragment: BaseFragment<InterestViewModel>(R.layout.fragment_intere
         initRecyclerView(fragmentInterestBinding)
         initNextButton(fragmentInterestBinding)
     }
-    private fun initRecyclerView(fragmentInterestBinding: FragmentInterestBinding) {
+    private fun initRecyclerView(fragmentInterestBinding: FragmentInterestBinding) = with(fragmentInterestBinding) {
         interestRvAdapter = InterestRvAdapter(
             requireContext(),
             viewModel = viewModel,
@@ -34,7 +35,8 @@ class InterestFragment: BaseFragment<InterestViewModel>(R.layout.fragment_intere
         fragmentInterestBinding.rvInterest.apply {
             adapter = interestRvAdapter
             layoutManager = GridLayoutManager(requireContext(), 3)
-            addItemDecoration(RvGridDecoration(30, 30))
+
+            addItemDecoration(RvGridDecoration(3, 30, true))
         }
     }
 

@@ -6,7 +6,7 @@ import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.FCM_TAG
 import com.abouttime.blindcafe.data.server.dto.NotificationData
-import com.abouttime.blindcafe.data.server.dto.PushNotification
+import com.abouttime.blindcafe.data.server.dto.PushNotificationDto
 import com.abouttime.blindcafe.domain.use_case.PostNotificationUseCase
 import com.abouttime.blindcafe.presentation.main.MainFragmentDirections
 import com.google.firebase.messaging.FirebaseMessaging
@@ -24,14 +24,14 @@ class HomeViewModel(
     fun onClickTemporaryButton() = viewModelScope.launch(Dispatchers.IO) {
         val firebaseToken = FirebaseMessaging.getInstance().token.await()
         val notificationData = NotificationData("임시 title", "임시 message")
-        PushNotification(notificationData, firebaseToken).also {
+        PushNotificationDto(notificationData, firebaseToken).also {
             postNotification(it)
         }
     }
 
-    private suspend fun postNotification(notification: PushNotification) {
+    private suspend fun postNotification(notificationDto: PushNotificationDto) {
         postNotificationUseCase(
-            notification
+            notificationDto
         ).onEach { result ->
             when(result) {
                 is Resource.Loading -> {

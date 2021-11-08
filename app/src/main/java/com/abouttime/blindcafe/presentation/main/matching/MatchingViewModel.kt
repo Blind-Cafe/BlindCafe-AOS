@@ -152,4 +152,8 @@ class MatchingViewModel(
     fun moveToMainFragment() {
         moveToDirections(MatchingFragmentDirections.actionMatchingFragmentToMainFragment())
     }
+
+    fun moveToGalleryDialogFragment() {
+        moveToDirections(MatchingFragmentDirections.actionMatchingFragmentToGalleryDialogFragment())
+    }
 }

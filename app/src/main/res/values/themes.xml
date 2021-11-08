@@ -19,6 +19,8 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
 
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+
 
     </style>
 
@@ -37,5 +39,18 @@
         <item name="android:windowFullscreen">true</item>
 <!--        <item name="android:windowContentOverlay">@null</item>-->
     </style>
+
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="behavior_peekHeight">@dimen/gallery_behavior_peek_height</item>
+        <item name="behavior_draggable">true</item>
+
+    </style>
+
 
 </resources>

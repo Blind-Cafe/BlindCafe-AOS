@@ -53,12 +53,15 @@ abstract class BaseFragment<VM: BaseViewModel>(layoutId: Int) : Fragment(layoutI
         findNavController().navigate(directions)
     }
 
+    fun popDirections() {
+        findNavController().popBackStack()
+    }
+
 
     /** Hide Keyboard **/
     fun hideKeyboard() {
         if (activity?.currentFocus != null) {
-            val inputMethodManager =
-                requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val inputMethodManager = getInputManager()
             inputMethodManager.hideSoftInputFromWindow(
                 requireActivity().currentFocus!!.windowToken,
                 0

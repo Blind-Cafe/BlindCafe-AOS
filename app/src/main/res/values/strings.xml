@@ -59,4 +59,8 @@
     <string name="chat_et_hint">메시지 작성하기</string>
 
 
+    <string name="gallery_title">갤러리</string>
+    <string name="gallery_send">보내기</string>
+
+
 </resources>

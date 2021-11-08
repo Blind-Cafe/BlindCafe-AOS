@@ -1,13 +1,7 @@
 package com.abouttime.blindcafe.di
 
-import com.abouttime.blindcafe.data.repository.FirestorageRepositoryImpl
-import com.abouttime.blindcafe.data.repository.FirestoreRepositoryImpl
-import com.abouttime.blindcafe.data.repository.LoginRepositoryImpl
-import com.abouttime.blindcafe.data.repository.NotificationRepositoryImpl
-import com.abouttime.blindcafe.domain.repository.FirestorageRepository
-import com.abouttime.blindcafe.domain.repository.FirestoreRepository
-import com.abouttime.blindcafe.domain.repository.LoginRepository
-import com.abouttime.blindcafe.domain.repository.NotificationRepository
+import com.abouttime.blindcafe.data.repository.*
+import com.abouttime.blindcafe.domain.repository.*
 import org.koin.dsl.module
 
 
@@ -16,4 +10,5 @@ internal val repositoryModule = module {
     single<NotificationRepository> { NotificationRepositoryImpl(get()) }
     single<FirestoreRepository> { FirestoreRepositoryImpl(get()) }
     single<FirestorageRepository> { FirestorageRepositoryImpl(get())}
+    single<UserInfoRepository> { UserInfoRepositoryImpl(get()) }
 }

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
@@ -12,12 +13,12 @@ import androidx.activity.addCallback
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.databinding.FragmentMatchingBinding
 import com.abouttime.blindcafe.domain.model.Message
-import com.abouttime.blindcafe.presentation.main.matching.rv_item.DescriptionItem
+import com.abouttime.blindcafe.presentation.main.matching.chat_rv_item.DescriptionItem
+import com.abouttime.blindcafe.presentation.main.matching.gallery.GalleryDialogFragment
 import com.example.chatexample.presentation.ui.chat.rv_item.*
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -44,15 +45,13 @@ class MatchingFragment : BaseFragment<MatchingViewModel>(R.layout.fragment_match
         initSendButton(fragmentMatchingBinding)
         initInputEditText(fragmentMatchingBinding)
         initChatRecyclerView(fragmentMatchingBinding)
-        observeMessagesData(fragmentMatchingBinding)
+        observeMessagesData()
+        addBackPressButtonListener()
         initMenuPopup(fragmentMatchingBinding)
-        initBackPressButton(fragmentMatchingBinding)
         initGalleryButton(fragmentMatchingBinding)
     }
 
-    private fun observeMessagesData(fragmentMatchingBinding: FragmentMatchingBinding) {
-        var isFirstMessages = true
-
+    private fun observeMessagesData() {
         viewModel.receivedMessage.observe(viewLifecycleOwner) { messages ->
             messages.forEach { message ->
                 Log.e("asdf", message.toString())
@@ -62,13 +61,6 @@ class MatchingFragment : BaseFragment<MatchingViewModel>(R.layout.fragment_match
                     addMessageToPartner(message)
                 }
             }
-
-
-            if (isFirstMessages) {
-                scrollRvToLastPosition(fragmentMatchingBinding)
-                isFirstMessages = false
-            }
-
         }
     }
 
@@ -132,30 +124,37 @@ class MatchingFragment : BaseFragment<MatchingViewModel>(R.layout.fragment_match
             rvChatContainer.adapter = chatAdapter
             rvChatContainer.layoutManager = LinearLayoutManager(requireContext())
 
-
+            var isScrolling = false
 
             root.viewTreeObserver.addOnGlobalLayoutListener {
                 val heightDiff = root.rootView.height - root.height
                 Log.e("asdf", heightDiff.toString())
-                if (heightDiff > 100) {
+                if (heightDiff > 100 && !isScrolling) {
                     scrollRvToLastPosition(fragmentMatchingBinding)
                 }
             }
-            rvChatContainer.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+            rvChatContainer.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
-                    Log.e("asdf", newState.toString())
-
+                    Log.e("asdf", "newState $newState")
+                    if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
+                        isScrolling = true
+                    } else if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        isScrolling = false
+                    }
                 }
-            })
+            }
+            )
+
 
         }
 
-    private fun scrollRvToLastPosition(fragmentMatchingBinding: FragmentMatchingBinding) = with(fragmentMatchingBinding) {
-        if (chatAdapter.itemCount - 1 > 0) {
-            rvChatContainer.scrollToPosition(chatAdapter.itemCount - 1)
+    private fun scrollRvToLastPosition(fragmentMatchingBinding: FragmentMatchingBinding) =
+        with(fragmentMatchingBinding) {
+            if (chatAdapter.itemCount - 1 > 0) {
+                rvChatContainer.smoothScrollToPosition(chatAdapter.itemCount - 1)
+            }
         }
-    }
 
     private fun initMenuPopup(fragmentMatchingBinding: FragmentMatchingBinding) {
         fragmentMatchingBinding.ivMenu.setOnClickListener { v ->
@@ -212,24 +211,32 @@ class MatchingFragment : BaseFragment<MatchingViewModel>(R.layout.fragment_match
 
     }
 
-    private fun initBackPressButton(fragmentMatchingBinding: FragmentMatchingBinding) {
-        requireActivity().onBackPressedDispatcher.addCallback {
-            if (requireActivity().currentFocus?.id == R.id.et_message_input) {
-                requireActivity().currentFocus?.clearFocus()
+    private fun addBackPressButtonListener() {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            val focusedView = requireActivity().currentFocus
+            if (focusedView?.id == R.id.et_message_input) {
+                focusedView.clearFocus()
             } else {
-                this.remove()
-                viewModel.moveToMainFragment()
+                remove()
+                popDirections()
             }
+
         }
     }
 
     private fun initGalleryButton(fragmentMatchingBinding: FragmentMatchingBinding) =
         with(fragmentMatchingBinding) {
             btGallery.setOnClickListener {
+                GalleryDialogFragment().show(requireActivity().supportFragmentManager, null)
+                //viewModel!!.moveToGalleryDialogFragment()
+
+                /*
                 Intent(Intent.ACTION_GET_CONTENT).also {
                     it.type = "image/*"
                     startActivityForResult(it, 1)
                 }
+                */
+                 */
             }
         }
 
@@ -250,5 +257,12 @@ class MatchingFragment : BaseFragment<MatchingViewModel>(R.layout.fragment_match
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+
+    }
+
+
 
 }

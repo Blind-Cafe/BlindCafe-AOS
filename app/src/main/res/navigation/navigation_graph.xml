@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/interestFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -52,8 +52,8 @@
             app:destination="@id/matchingFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
-            app:popUpTo="@id/mainFragment"
-            app:popUpToInclusive="true">
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
 
         </action>
     </fragment>
@@ -128,6 +128,7 @@
     <fragment
         android:id="@+id/matchingFragment"
         android:name="com.abouttime.blindcafe.presentation.main.matching.MatchingFragment"
+        tools:layout="@layout/fragment_matching"
         android:label="MatchingFragment">
         <action
             android:id="@+id/action_matchingFragment_to_mainFragment"
@@ -136,5 +137,13 @@
             app:exitAnim="@anim/slide_out_right"
             app:popUpTo="@id/matchingFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_matchingFragment_to_galleryDialogFragment"
+            app:destination="@id/galleryDialogFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/galleryDialogFragment"
+        tools:layout="@layout/dialog_fragment_gallery"
+        android:name="com.abouttime.blindcafe.presentation.main.matching.gallery.GalleryDialogFragment"
+        android:label="GalleryDialogFragment" />
 </navigation>

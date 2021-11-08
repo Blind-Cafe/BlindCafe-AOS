@@ -1,7 +1,6 @@
 package com.abouttime.blindcafe.domain.use_case
 
 import com.abouttime.blindcafe.common.Resource
-import com.abouttime.blindcafe.data.server.dto.KakaoToken
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.repository.FirestoreRepository
 import kotlinx.coroutines.flow.Flow

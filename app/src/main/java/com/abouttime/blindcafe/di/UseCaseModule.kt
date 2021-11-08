@@ -12,5 +12,7 @@ internal val useCaseModule = module {
     factory { UploadImageUseCase(get()) }
     factory { DownloadAudioUrlUseCase(get()) }
     factory { DownloadImageUrlUseCase(get()) }
+    factory { GetUserInfoUseCase(get()) }
+    factory { PostUserInfoUseCase(get()) }
 
 }

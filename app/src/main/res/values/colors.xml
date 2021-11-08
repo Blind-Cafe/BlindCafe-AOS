@@ -27,4 +27,15 @@
     <color name="et_bg_stroke_green">#bbd2b6</color>
     <color name="white_2">#f3f3f3</color>
     <color name="chat_time_color">#48484a</color>
+
+    <color name="sex_disabled">#616161</color>
+    <color name="sex_enabled">#373737</color>
+    <color name="sex_container_disabled">#454545</color>
+    <color name="sex_container_enabled">#bbd2b6</color>
+
+
+    <color name="gallery_image_unselect_boarder">#f3f3f3</color>
+    <color name="gallery_image_unselect_solid">#96f3f3f3</color>
+
+
 </resources>

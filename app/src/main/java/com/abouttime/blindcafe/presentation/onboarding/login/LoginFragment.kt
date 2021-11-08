@@ -7,7 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.common.constants.LogTag
-import com.abouttime.blindcafe.data.server.dto.KakaoToken
+import com.abouttime.blindcafe.data.server.dto.KakaoTokenDto
 import com.abouttime.blindcafe.databinding.FragmentLoginBinding
 import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.auth.model.OAuthToken
@@ -44,7 +44,6 @@ class LoginFragment : BaseFragment<LoginViewModel>(R.layout.fragment_login) {
 
                 }
                 LoginState.Success -> {
-                    moveToAgreementFragment()
                 }
                 LoginState.Error -> {
                     showToast(R.string.login_toast_error)
@@ -70,7 +69,7 @@ class LoginFragment : BaseFragment<LoginViewModel>(R.layout.fragment_login) {
             } else if (token != null) {
                 Log.i(LogTag.LOGIN_TAG, "로그인 성공 ${token.accessToken}")
                 viewModel.postKakaoToken(
-                    KakaoToken(
+                    KakaoTokenDto(
                         token.accessToken,
                         deviceId
                     )

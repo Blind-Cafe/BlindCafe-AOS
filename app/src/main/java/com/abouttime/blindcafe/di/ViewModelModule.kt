@@ -36,6 +36,6 @@ internal val viewModelModule = module {
     viewModel { HomeViewModel(get()) }
     viewModel { MatchingViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { ChatViewModel() }
-    viewModel { MyPageViewModel() }
+    viewModel { MyPageViewModel(get()) }
 
 }

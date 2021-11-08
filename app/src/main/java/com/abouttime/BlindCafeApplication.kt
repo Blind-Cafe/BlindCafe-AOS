@@ -7,7 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import com.abouttime.blindcafe.BuildConfig
 import com.abouttime.blindcafe.common.constants.LogTag
-import com.abouttime.blindcafe.common.constants.Url
+import com.abouttime.blindcafe.common.constants.Retrofit
 import com.abouttime.blindcafe.di.*
 import com.abouttime.blindcafe.di.remoteModule
 import com.abouttime.blindcafe.di.repositoryModule
@@ -28,13 +28,13 @@ class BlindCafeApplication: Application() {
 
         sharedPreferences = getSharedPreferences("BLIND_CAFE", Context.MODE_PRIVATE)
 
-        FirebaseMessaging.getInstance().subscribeToTopic(Url.FCM_MESSAGE_TOPIC).addOnCompleteListener { task ->
+        FirebaseMessaging.getInstance().subscribeToTopic(Retrofit.FCM_MESSAGE_TOPIC).addOnCompleteListener { task ->
             var msg = "구독 성공"
             if (!task.isSuccessful) {
                 msg = "구독 실패"
             }
             Log.d(LogTag.FCM_TAG, msg)
-            Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+            //Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
         }
 
         startKoin {

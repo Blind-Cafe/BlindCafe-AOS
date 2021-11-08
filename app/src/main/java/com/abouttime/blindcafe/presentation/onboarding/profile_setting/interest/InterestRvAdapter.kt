@@ -29,6 +29,7 @@ class InterestRvAdapter(
 
 
     inner class ViewHolder(private val binding: RvItemInterestBinding): RecyclerView.ViewHolder(binding.root) {
+
         fun bindResource(position: Int) {
             binding.ivItem.setImageResource(interests[position])
 
@@ -38,6 +39,7 @@ class InterestRvAdapter(
                 binding.ivItem.setColorFilter(context.resources.getColor(R.color.button_enabled, null))
             }
         }
+
         fun bindView(position: Int) {
             binding.ivItem.setOnClickListener {
                 with(viewModel) {

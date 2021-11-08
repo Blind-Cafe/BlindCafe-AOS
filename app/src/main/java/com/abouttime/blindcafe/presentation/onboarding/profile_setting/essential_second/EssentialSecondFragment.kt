@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
+import com.abouttime.blindcafe.databinding.FragmentEssentialFirstBinding
 import com.abouttime.blindcafe.databinding.FragmentEssentialSecondBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -20,9 +21,42 @@ class EssentialSecondFragment :
         binding?.lifecycleOwner = this
         binding?.viewModel = viewModel
 
+
+        observeData(fragmentEssentialSecondBinding)
         initAgeEditText(fragmentEssentialSecondBinding)
 
     }
+
+    private fun observeData(fragmentEssentialSecondBinding: FragmentEssentialSecondBinding) = with(fragmentEssentialSecondBinding) {
+        val sexDisabledColor = getColor(R.color.sex_disabled)
+        val sexEnabledColor = getColor(R.color.sex_enabled)
+        viewModel?.selectedSex?.observe(viewLifecycleOwner) { selectedSex ->
+            when(selectedSex) {
+                1 -> {
+                    ivFemale.setColorFilter(sexEnabledColor)
+                    ivMale.setColorFilter(sexDisabledColor)
+                    ivBisexual.setColorFilter(sexDisabledColor)
+                }
+                2 -> {
+                    ivFemale.setColorFilter(sexDisabledColor)
+                    ivMale.setColorFilter(sexEnabledColor)
+                    ivBisexual.setColorFilter(sexDisabledColor)
+                }
+                3 -> {
+                    ivFemale.setColorFilter(sexDisabledColor)
+                    ivMale.setColorFilter(sexDisabledColor)
+                    ivBisexual.setColorFilter(sexEnabledColor)
+                }
+                else -> {
+                    ivFemale.setColorFilter(sexDisabledColor)
+                    ivMale.setColorFilter(sexDisabledColor)
+                    ivBisexual.setColorFilter(sexDisabledColor)
+                }
+            }
+
+        }
+    }
+
 
     private fun initAgeEditText(fragmentEssentialSecondBinding: FragmentEssentialSecondBinding) {
         val nicknameEditText = fragmentEssentialSecondBinding.etNickname

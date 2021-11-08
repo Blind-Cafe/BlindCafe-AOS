@@ -22,6 +22,29 @@ class EssentialFirstFragment :
         binding?.lifecycleOwner = this
 
         initAgeEditText(fragmentEssentialFirstBinding)
+        observeData(fragmentEssentialFirstBinding)
+    }
+
+    private fun observeData(fragmentEssentialFirstBinding: FragmentEssentialFirstBinding) = with(fragmentEssentialFirstBinding) {
+        val sexDisabledColor = getColor(R.color.sex_disabled)
+        val sexEnabledColor = getColor(R.color.sex_enabled)
+        viewModel?.selectedSex?.observe(viewLifecycleOwner) { selectedSex ->
+            when(selectedSex) {
+                1 -> {
+                    ivFemale.setColorFilter(sexEnabledColor)
+                    ivMale.setColorFilter(sexDisabledColor)
+                }
+                2 -> {
+                    ivFemale.setColorFilter(sexDisabledColor)
+                    ivMale.setColorFilter(sexEnabledColor)
+                }
+                else -> {
+                    ivFemale.setColorFilter(sexDisabledColor)
+                    ivMale.setColorFilter(sexDisabledColor)
+                }
+            }
+
+        }
     }
 
 

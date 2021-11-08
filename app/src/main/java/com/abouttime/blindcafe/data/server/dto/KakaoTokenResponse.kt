@@ -5,5 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class KakaoTokenResponse(
     @SerializedName("jwt")
-    val jwt: String? = null
+    val jwt: String? = null,
+    @SerializedName("id")
+    val id: Int? = null
 ): BaseResponse()
