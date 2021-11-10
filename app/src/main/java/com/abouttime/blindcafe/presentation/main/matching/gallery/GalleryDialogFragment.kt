@@ -1,5 +1,6 @@
 package com.abouttime.blindcafe.presentation.main.matching.gallery
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
@@ -8,23 +9,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.marginBottom
 import androidx.recyclerview.widget.GridLayoutManager
+import com.abouttime.blindcafe.common.GridSpaceDecoration
 import com.abouttime.blindcafe.common.RvGridDecoration
+import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.constants.LogTag.BOTTOM_SHEET
 import com.abouttime.blindcafe.databinding.DialogFragmentGalleryBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.coroutines.newSingleThreadContext
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class GalleryDialogFragment: BottomSheetDialogFragment() {
     private var binding: DialogFragmentGalleryBinding? = null
     private val rvAdapter: GalleryRvAdapter = GalleryRvAdapter()
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-
-        return super.onCreateDialog(savedInstanceState)
-    }
+    private val viewModel: GalleryViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,6 +40,7 @@ class GalleryDialogFragment: BottomSheetDialogFragment() {
 
         initImageRecyclerView()
         initBottomSheetDialog()
+        observeImageItems()
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -49,21 +48,35 @@ class GalleryDialogFragment: BottomSheetDialogFragment() {
         binding?.rvPictureContainer?.let {
             it.adapter = rvAdapter
             it.layoutManager = GridLayoutManager(context, 3)
-            it.addItemDecoration(RvGridDecoration(3, 4, false))
+            it.addItemDecoration(RvGridDecoration(3, 6, false))
         }
     }
+
+    @SuppressLint("Range")
+    private fun observeImageItems() {
+       viewModel.images.observe(viewLifecycleOwner) {
+           Log.d(LogTag.PAGING_TAG, "$it")
+           rvAdapter.submitImageList(it)
+       }
+
+    }
+
 
 
     private fun initBottomSheetDialog() {
 
-        val bottomSheet = binding?.clGalleryContainer
+        val bottomSheet = binding?.nsGalleryContainer
         val behavior = BottomSheetBehavior.from<View>(bottomSheet!!)
         behavior.state = BottomSheetBehavior.STATE_EXPANDED
+
+//        binding?.rvPictureContainer?.setOnTouchListener { view, motionEvent ->
+//            view.parent.requestDisallowInterceptTouchEvent(true)
+//            view.onTouchEvent(motionEvent)
+//            true
+//        }
+
+
         behavior.isDraggable = false
-        bottomSheet.addOnLayoutChangeListener(View.OnLayoutChangeListener { p0, p1, p2, p3, p4, p5, p6, p7, p8 ->
-
-        })
-
 
         behavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -76,15 +89,17 @@ class GalleryDialogFragment: BottomSheetDialogFragment() {
             }
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
                 Log.e(BOTTOM_SHEET, slideOffset.toString())
+                //behavior.state = BottomSheetBehavior.STATE_EXPANDED
                 binding?.tvSend?.let {
-                    val density = resources.displayMetrics.density
-
-                    val currentMargin = it.marginBottom
-                    val value = (slideOffset.toInt() / density).toInt()
-                    val margin = currentMargin + value
-
-                    setMargins(it, 16, margin, 16, margin)
+                    if (slideOffset <= 0) {
+                        val value = bottomSheet.y + behavior.peekHeight - it.height
+                        it.animate()?.y(value)?.setDuration(0)?.start()
+                    } else {
+                        val value = bottomSheet.height - it.height
+                        it.animate()?.y(value.toFloat())?.setDuration(0)?.start()
+                    }
                 }
+
 
             }
         })
@@ -112,6 +127,8 @@ class GalleryDialogFragment: BottomSheetDialogFragment() {
             v.requestLayout()
         }
     }
+
+
 
 
 

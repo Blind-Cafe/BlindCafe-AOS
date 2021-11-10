@@ -5,6 +5,7 @@ import com.abouttime.blindcafe.presentation.main.MainViewModel
 import com.abouttime.blindcafe.presentation.main.chat.ChatViewModel
 import com.abouttime.blindcafe.presentation.main.home.HomeViewModel
 import com.abouttime.blindcafe.presentation.main.matching.MatchingViewModel
+import com.abouttime.blindcafe.presentation.main.matching.gallery.GalleryViewModel
 import com.abouttime.blindcafe.presentation.main.my_page.MyPageViewModel
 import com.abouttime.blindcafe.presentation.onboarding.agreement.AgreementViewModel
 import com.abouttime.blindcafe.presentation.onboarding.login.LoginViewModel
@@ -28,7 +29,7 @@ internal val viewModelModule = module {
     viewModel { AgreementViewModel() }
     viewModel { EssentialFirstViewModel() }
     viewModel { EssentialSecondViewModel() }
-    viewModel { InterestViewModel() }
+    viewModel { InterestViewModel(get()) }
     viewModel { InterestDetailViewModel() }
 
     /** Main **/
@@ -37,5 +38,6 @@ internal val viewModelModule = module {
     viewModel { MatchingViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { ChatViewModel() }
     viewModel { MyPageViewModel(get()) }
+    viewModel { GalleryViewModel(get()) }
 
 }

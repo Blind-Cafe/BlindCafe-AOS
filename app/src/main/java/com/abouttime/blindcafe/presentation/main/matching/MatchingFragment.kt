@@ -1,19 +1,22 @@
 package com.abouttime.blindcafe.presentation.main.matching
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.addCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.abouttime.blindcafe.R
+import com.abouttime.blindcafe.common.DeviceUtil
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.databinding.FragmentMatchingBinding
 import com.abouttime.blindcafe.domain.model.Message
@@ -32,6 +35,8 @@ class MatchingFragment : BaseFragment<MatchingViewModel>(R.layout.fragment_match
     private val chatAdapter = GroupAdapter<GroupieViewHolder>()
 
     private val tempUserId = "-"
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -227,7 +232,9 @@ class MatchingFragment : BaseFragment<MatchingViewModel>(R.layout.fragment_match
     private fun initGalleryButton(fragmentMatchingBinding: FragmentMatchingBinding) =
         with(fragmentMatchingBinding) {
             btGallery.setOnClickListener {
-                GalleryDialogFragment().show(requireActivity().supportFragmentManager, null)
+                requestReadExternalStoragePermission()
+
+
                 //viewModel!!.moveToGalleryDialogFragment()
 
                 /*
@@ -240,10 +247,10 @@ class MatchingFragment : BaseFragment<MatchingViewModel>(R.layout.fragment_match
             }
         }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-            data?.data?.let { uri ->
+
+    val getContent = registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uris ->
+        uris.forEach { uri ->
+            uri?.let {
                 val id = System.currentTimeMillis().toString()
                 viewModel.uploadImage(
                     message = Message(
@@ -252,9 +259,28 @@ class MatchingFragment : BaseFragment<MatchingViewModel>(R.layout.fragment_match
                         roomUid = tempUserId,
                         type = 2
                     ),
-                    uri = uri
+                    uri = it
                 )
             }
+        }
+
+    }
+
+    private val callback =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                GalleryDialogFragment().show(requireActivity().supportFragmentManager, null)
+            } else {
+
+            }
+        }
+
+    private fun requestReadExternalStoragePermission() {
+        if (DeviceUtil.hasPermission(requireContext())) {
+            //GalleryDialogFragment().show(requireActivity().supportFragmentManager, null)
+            getContent.launch("image/*")
+        } else {
+            callback.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
         }
     }
 
@@ -262,7 +288,6 @@ class MatchingFragment : BaseFragment<MatchingViewModel>(R.layout.fragment_match
         super.onResume()
 
     }
-
 
 
 }

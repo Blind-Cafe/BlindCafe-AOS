@@ -9,4 +9,5 @@ object LogTag {
     const val CHATTING_TAG = "chatting_tag"
     const val RETROFIT_TAG = "retrofit_tag"
     const val BOTTOM_SHEET = "bottom_sheet"
+    const val PAGING_TAG = "paging_tag"
 }

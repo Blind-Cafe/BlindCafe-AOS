@@ -1,80 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="24dp"
-    android:background="@color/white"
-    android:backgroundTint="@color/white"
-    >
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:backgroundTint="@color/transparent">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_gallery_container"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray_900"
-        android:animateLayoutChanges="true"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-        app:behavior_hideable="false"
-        app:behavior_peekHeight="480dp"
-        >
+        android:background="@color/transparent"
+        android:backgroundTint="@color/transparent">
 
-
-        <View
-            android:id="@+id/v_top_bar"
-            android:layout_width="37dp"
-            android:layout_height="6dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/bg_rounding_16dp"
-            android:backgroundTint="@color/bar_color"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/iv_gallery_button"
-            android:layout_width="wrap_content"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/ns_gallery_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/bt_gallery_pictures"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/v_top_bar" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_picture_container"
-            tools:listitem="@layout/rv_gallery_item"
-            android:layout_width="0dp"
-            android:layout_height="700dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_gallery_button" />
+            app:behavior_peekHeight="480dp"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            android:overScrollMode="never">
 
 
+            <LinearLayout
+                android:id="@+id/ll_gallery_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/gray_900"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <View
+                    android:id="@+id/v_top_bar"
+                    android:layout_width="37dp"
+                    android:layout_height="6dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/bg_rounding_16dp"
+                    android:backgroundTint="@color/bar_color" />
+
+                <ImageView
+                    android:id="@+id/iv_gallery_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bt_gallery_pictures" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_picture_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="700dp"
+                    tools:listitem="@layout/rv_gallery_item" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_send"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="32dp"
-        android:layout_gravity="bottom"
-        android:background="@drawable/bg_rounding_3dp"
-        android:backgroundTint="@color/button_enabled"
-        android:fontFamily="@font/spoqa_han_sans_neo_regular"
-        android:gravity="center"
-        android:lineSpacingExtra="7sp"
-        android:paddingVertical="13dp"
-        android:text="@string/gallery_send"
-        android:textColor="@color/white"
-        android:textSize="@dimen/font_size_regular"
-        android:visibility="visible"
-        tools:visibility="visible" />
+        </androidx.core.widget.NestedScrollView>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <TextView
+            android:id="@+id/tv_send"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/bg_rounding_3dp"
+            android:backgroundTint="@color/button_enabled"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:gravity="center"
+            android:lineSpacingExtra="7sp"
+            android:paddingVertical="13dp"
+            android:text="@string/gallery_send"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_regular"
+            android:visibility="visible"
+            tools:visibility="visible" />
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+</FrameLayout>

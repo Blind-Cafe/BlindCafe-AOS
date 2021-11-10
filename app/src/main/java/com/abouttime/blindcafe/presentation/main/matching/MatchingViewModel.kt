@@ -1,5 +1,7 @@
 package com.abouttime.blindcafe.presentation.main.matching
 
+import android.content.Context
+import android.database.Cursor
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -9,6 +11,7 @@ import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.CHATTING_TAG
 import com.abouttime.blindcafe.common.constants.LogTag.FIRESTORE_TAG
+import com.abouttime.blindcafe.data.gallery.MediaStoreAdapter
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.use_case.*
 import kotlinx.coroutines.Dispatchers
@@ -36,6 +39,8 @@ class MatchingViewModel(
 
     private val _receivedMessage = MutableLiveData<List<Message>>()
     val receivedMessage: LiveData<List<Message>> get() = _receivedMessage
+
+
 
     init {
         receiveMessages("-")
@@ -156,4 +161,6 @@ class MatchingViewModel(
     fun moveToGalleryDialogFragment() {
         moveToDirections(MatchingFragmentDirections.actionMatchingFragmentToGalleryDialogFragment())
     }
+
+
 }

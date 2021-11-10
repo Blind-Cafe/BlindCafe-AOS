@@ -1,35 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingBottom="6dp"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
+
     <ImageView
         android:id="@+id/iv_gallery_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintDimensionRatio="1:1"
+        android:layout_width="126dp"
+        android:layout_height="126dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/bg_barista"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_gallery_select"
         android:layout_width="24dp"
         android:layout_height="24dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="11dp"
         android:background="@drawable/bg_gallery_select_button"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="11dp"
-        android:layout_marginStart="11dp"/>
-
-
-
-
-
-
+        tools:text="1" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
