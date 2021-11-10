@@ -54,6 +54,7 @@ class HomeViewModel(
 
     private fun postFcm(postFcmDto: PostFcmDto?) = viewModelScope.launch(Dispatchers.IO) {
         val targetToken = FirebaseMessaging.getInstance().token.await()
+        Log.e(FCM_TAG, "$targetToken")
         postFcmUseCase(
             PostFcmDto(
                 targetToken = targetToken,

@@ -50,11 +50,16 @@ class FirebaseService: FirebaseMessagingService() {
             createNotificationChannel(notificationManager) // 채널 만들기
         }
 
+        val title = message.notification?.title
+        val body = message.notification?.body
+        val path = message.notification?.channelId
+        Log.e(FCM_TAG, "->\ntitle: $title,\nbody: $body\n???: $path")
+
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, FLAG_ONE_SHOT)
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle(message.data["title"])
-            .setContentText(message.data["message"])
+            .setContentTitle(title)
+            .setContentText(body)
             .setSmallIcon(R.drawable.ic_logo)
             .setAutoCancel(true)
             .setContentIntent(pendingIntent)
