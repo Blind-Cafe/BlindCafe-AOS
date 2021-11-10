@@ -4,7 +4,6 @@ import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.INTERESTS
-import com.abouttime.blindcafe.data.server.dto.PostUserInfoDto
 import com.abouttime.blindcafe.domain.use_case.PostUserInfoUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

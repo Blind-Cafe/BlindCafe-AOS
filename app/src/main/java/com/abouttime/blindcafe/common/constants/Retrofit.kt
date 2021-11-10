@@ -7,6 +7,7 @@ object Retrofit {
 
     const val POST_KAKAO_LOGIN_URL = "api/kakao"
     const val USER_INFO_URL = "api/user"
+    const val POST_FCM_URL = "fcm"
 
 
     const val FIREBASE_BASE_URL = "https://fcm.googleapis.com"

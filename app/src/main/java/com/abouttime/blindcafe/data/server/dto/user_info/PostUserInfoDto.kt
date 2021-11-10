@@ -1,6 +1,7 @@
-package com.abouttime.blindcafe.data.server.dto
+package com.abouttime.blindcafe.data.server.dto.user_info
 
 
+import com.abouttime.blindcafe.data.server.dto.user_info.Interest
 import com.google.gson.annotations.SerializedName
 
 data class PostUserInfoDto(

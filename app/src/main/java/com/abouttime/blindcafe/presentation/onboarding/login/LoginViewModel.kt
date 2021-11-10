@@ -10,7 +10,7 @@ import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.constants.Retrofit.JWT
 import com.abouttime.blindcafe.common.constants.Retrofit.USER_ID
-import com.abouttime.blindcafe.data.server.dto.KakaoTokenDto
+import com.abouttime.blindcafe.data.server.dto.login.KakaoTokenDto
 import com.abouttime.blindcafe.domain.use_case.PostKakaoTokenUseCase
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient

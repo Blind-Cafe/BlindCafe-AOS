@@ -1,6 +1,7 @@
 package com.abouttime.blindcafe.presentation.onboarding.splash
 
 import com.abouttime.blindcafe.common.base.BaseViewModel
+import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.INFO_INPUT
 import com.abouttime.blindcafe.common.constants.Retrofit.JWT
 
 class SplashViewModel: BaseViewModel() {
@@ -12,6 +13,7 @@ class SplashViewModel: BaseViewModel() {
 
     private fun checkJwt() {
         val jwt = getStringData(JWT)
+        val infoInput = getStringData(INFO_INPUT)
         if (jwt == null) {
             moveToRuleFragment()
         } else {

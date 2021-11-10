@@ -1,11 +1,11 @@
 package com.abouttime.blindcafe.di
 
 import com.abouttime.blindcafe.presentation.NavHostViewModel
+import com.abouttime.blindcafe.presentation.chat.ChatViewModel
 import com.abouttime.blindcafe.presentation.main.MainViewModel
-import com.abouttime.blindcafe.presentation.main.chat.ChatViewModel
 import com.abouttime.blindcafe.presentation.main.home.HomeViewModel
-import com.abouttime.blindcafe.presentation.main.matching.MatchingViewModel
-import com.abouttime.blindcafe.presentation.main.matching.gallery.GalleryViewModel
+import com.abouttime.blindcafe.presentation.chat.gallery.GalleryViewModel
+import com.abouttime.blindcafe.presentation.main.chat_list.ChatListViewModel
 import com.abouttime.blindcafe.presentation.main.my_page.MyPageViewModel
 import com.abouttime.blindcafe.presentation.onboarding.agreement.AgreementViewModel
 import com.abouttime.blindcafe.presentation.onboarding.login.LoginViewModel
@@ -34,9 +34,9 @@ internal val viewModelModule = module {
 
     /** Main **/
     viewModel { MainViewModel() }
-    viewModel { HomeViewModel(get()) }
-    viewModel { MatchingViewModel(get(), get(), get(), get(), get(), get()) }
-    viewModel { ChatViewModel() }
+    viewModel { HomeViewModel(get(), get()) }
+    viewModel { ChatViewModel(get(), get(), get(), get(), get(), get()) }
+    viewModel { ChatListViewModel() }
     viewModel { MyPageViewModel(get()) }
     viewModel { GalleryViewModel(get()) }
 

@@ -1,7 +1,6 @@
-package com.abouttime.blindcafe.presentation.main.matching.gallery
+package com.abouttime.blindcafe.presentation.chat.gallery
 
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,7 +9,6 @@ import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.GridLayoutManager
-import com.abouttime.blindcafe.common.GridSpaceDecoration
 import com.abouttime.blindcafe.common.RvGridDecoration
 import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.constants.LogTag.BOTTOM_SHEET

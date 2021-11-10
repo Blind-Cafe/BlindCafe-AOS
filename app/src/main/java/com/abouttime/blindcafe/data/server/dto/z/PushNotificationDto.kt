@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.data.server.dto
+package com.abouttime.blindcafe.data.server.dto.z
 
 data class PushNotificationDto(
     val data: NotificationData,

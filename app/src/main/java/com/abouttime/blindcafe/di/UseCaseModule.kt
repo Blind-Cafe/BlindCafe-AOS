@@ -6,7 +6,7 @@ import org.koin.dsl.module
 internal val useCaseModule = module {
     /** login **/
     factory { PostKakaoTokenUseCase(get()) }
-    factory { PostNotificationUseCase(get()) }
+
 
     /** user info **/
     factory { GetUserInfoUseCase(get()) }
@@ -24,5 +24,9 @@ internal val useCaseModule = module {
     factory { UploadImageUseCase(get()) }
     factory { DownloadAudioUrlUseCase(get()) }
     factory { DownloadImageUrlUseCase(get()) }
+
+    /** fcm **/
+    factory { PostNotificationUseCase(get()) } // firebase api
+    factory { PostFcmUseCase(get()) }
 
 }

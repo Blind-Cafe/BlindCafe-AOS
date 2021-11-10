@@ -1,10 +1,9 @@
-package com.abouttime.blindcafe.presentation.main.matching.gallery
+package com.abouttime.blindcafe.presentation.chat.gallery
 
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.data.gallery.Image
 import com.abouttime.blindcafe.databinding.RvGalleryItemBinding
 import com.bumptech.glide.Glide

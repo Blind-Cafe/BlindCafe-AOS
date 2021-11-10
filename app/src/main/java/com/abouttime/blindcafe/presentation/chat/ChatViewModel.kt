@@ -1,7 +1,5 @@
-package com.abouttime.blindcafe.presentation.main.matching
+package com.abouttime.blindcafe.presentation.chat
 
-import android.content.Context
-import android.database.Cursor
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -11,7 +9,6 @@ import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.CHATTING_TAG
 import com.abouttime.blindcafe.common.constants.LogTag.FIRESTORE_TAG
-import com.abouttime.blindcafe.data.gallery.MediaStoreAdapter
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.use_case.*
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +18,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MatchingViewModel(
+class ChatViewModel(
     private val receiveMessageUseCase: ReceiveMessageUseCase,
     private val sendMessageUseCase: SendMessageUseCase,
     private val uploadImageUseCase: UploadImageUseCase,
@@ -155,11 +152,11 @@ class MatchingViewModel(
 
 
     fun moveToMainFragment() {
-        moveToDirections(MatchingFragmentDirections.actionMatchingFragmentToMainFragment())
+        moveToDirections(ChatFragmentDirections.actionMatchingFragmentToMainFragment())
     }
 
     fun moveToGalleryDialogFragment() {
-        moveToDirections(MatchingFragmentDirections.actionMatchingFragmentToGalleryDialogFragment())
+        moveToDirections(ChatFragmentDirections.actionMatchingFragmentToGalleryDialogFragment())
     }
 
 

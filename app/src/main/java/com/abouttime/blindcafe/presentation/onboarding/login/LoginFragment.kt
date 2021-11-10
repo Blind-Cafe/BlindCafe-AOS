@@ -7,7 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.common.constants.LogTag
-import com.abouttime.blindcafe.data.server.dto.KakaoTokenDto
+import com.abouttime.blindcafe.data.server.dto.login.KakaoTokenDto
 import com.abouttime.blindcafe.databinding.FragmentLoginBinding
 import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.auth.model.OAuthToken

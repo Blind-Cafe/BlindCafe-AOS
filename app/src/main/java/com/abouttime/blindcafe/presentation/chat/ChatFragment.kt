@@ -1,9 +1,6 @@
-package com.abouttime.blindcafe.presentation.main.matching
+package com.abouttime.blindcafe.presentation.chat
 
 import android.Manifest
-import android.app.Activity
-import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -18,19 +15,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.DeviceUtil
 import com.abouttime.blindcafe.common.base.BaseFragment
-import com.abouttime.blindcafe.databinding.FragmentMatchingBinding
+import com.abouttime.blindcafe.databinding.FragmentChatBinding
 import com.abouttime.blindcafe.domain.model.Message
-import com.abouttime.blindcafe.presentation.main.matching.chat_rv_item.DescriptionItem
-import com.abouttime.blindcafe.presentation.main.matching.gallery.GalleryDialogFragment
+import com.abouttime.blindcafe.presentation.chat.rv_item.DescriptionItem
+import com.abouttime.blindcafe.presentation.chat.gallery.GalleryDialogFragment
 import com.example.chatexample.presentation.ui.chat.rv_item.*
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.lang.reflect.Method
 
-class MatchingFragment : BaseFragment<MatchingViewModel>(R.layout.fragment_matching) {
-    private var binding: FragmentMatchingBinding? = null
-    override val viewModel: MatchingViewModel by viewModel()
+class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
+    private var binding: FragmentChatBinding? = null
+    override val viewModel: ChatViewModel by viewModel()
 
     private val chatAdapter = GroupAdapter<GroupieViewHolder>()
 
@@ -40,20 +37,27 @@ class MatchingFragment : BaseFragment<MatchingViewModel>(R.layout.fragment_match
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val fragmentMatchingBinding = FragmentMatchingBinding.bind(view)
-        binding = fragmentMatchingBinding
+        val fragmentChatBinding
+        = FragmentChatBinding.bind(view)
+        binding = fragmentChatBinding
+
         binding?.lifecycleOwner = this
         binding?.viewModel = viewModel
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
 
-        initSendButton(fragmentMatchingBinding)
-        initInputEditText(fragmentMatchingBinding)
-        initChatRecyclerView(fragmentMatchingBinding)
+        initSendButton(fragmentChatBinding
+        )
+        initInputEditText(fragmentChatBinding
+        )
+        initChatRecyclerView(fragmentChatBinding
+        )
         observeMessagesData()
         addBackPressButtonListener()
-        initMenuPopup(fragmentMatchingBinding)
-        initGalleryButton(fragmentMatchingBinding)
+        initMenuPopup(fragmentChatBinding
+        )
+        initGalleryButton(fragmentChatBinding
+        )
     }
 
     private fun observeMessagesData() {
@@ -88,8 +92,10 @@ class MatchingFragment : BaseFragment<MatchingViewModel>(R.layout.fragment_match
     }
 
 
-    private fun initSendButton(fragmentMatchingBinding: FragmentMatchingBinding) =
-        with(fragmentMatchingBinding) {
+    private fun initSendButton(fragmentChatBinding
+                               : FragmentChatBinding) =
+        with(fragmentChatBinding
+        ) {
             btSend.setOnClickListener {
                 viewModel?.sendMessage(Message(
                     contents = etMessageInput.text.toString(),
@@ -102,8 +108,10 @@ class MatchingFragment : BaseFragment<MatchingViewModel>(R.layout.fragment_match
             }
         }
 
-    private fun initInputEditText(fragmentMatchingBinding: FragmentMatchingBinding) =
-        with(fragmentMatchingBinding) {
+    private fun initInputEditText(fragmentChatBinding
+                                  : FragmentChatBinding) =
+        with(fragmentChatBinding
+        ) {
 
             etMessageInput.setOnFocusChangeListener { view, isFocused ->
                 if (isFocused) {
@@ -124,8 +132,10 @@ class MatchingFragment : BaseFragment<MatchingViewModel>(R.layout.fragment_match
         }
 
 
-    private fun initChatRecyclerView(fragmentMatchingBinding: FragmentMatchingBinding) =
-        with(fragmentMatchingBinding) {
+    private fun initChatRecyclerView(fragmentChatBinding
+                                     : FragmentChatBinding) =
+        with(fragmentChatBinding
+        ) {
             rvChatContainer.adapter = chatAdapter
             rvChatContainer.layoutManager = LinearLayoutManager(requireContext())
 
@@ -135,7 +145,8 @@ class MatchingFragment : BaseFragment<MatchingViewModel>(R.layout.fragment_match
                 val heightDiff = root.rootView.height - root.height
                 Log.e("asdf", heightDiff.toString())
                 if (heightDiff > 100 && !isScrolling) {
-                    scrollRvToLastPosition(fragmentMatchingBinding)
+                    scrollRvToLastPosition(fragmentChatBinding
+                    )
                 }
             }
             rvChatContainer.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -154,15 +165,19 @@ class MatchingFragment : BaseFragment<MatchingViewModel>(R.layout.fragment_match
 
         }
 
-    private fun scrollRvToLastPosition(fragmentMatchingBinding: FragmentMatchingBinding) =
-        with(fragmentMatchingBinding) {
+    private fun scrollRvToLastPosition(fragmentChatBinding
+                                       : FragmentChatBinding) =
+        with(fragmentChatBinding
+        ) {
             if (chatAdapter.itemCount - 1 > 0) {
                 rvChatContainer.smoothScrollToPosition(chatAdapter.itemCount - 1)
             }
         }
 
-    private fun initMenuPopup(fragmentMatchingBinding: FragmentMatchingBinding) {
-        fragmentMatchingBinding.ivMenu.setOnClickListener { v ->
+    private fun initMenuPopup(fragmentChatBinding
+                              : FragmentChatBinding) {
+        fragmentChatBinding
+            .ivMenu.setOnClickListener { v ->
             val popup = PopupMenu(requireContext(), v)
             popup.apply {
                 menuInflater.inflate(R.menu.chat_room_menu, popup.menu)
@@ -229,8 +244,10 @@ class MatchingFragment : BaseFragment<MatchingViewModel>(R.layout.fragment_match
         }
     }
 
-    private fun initGalleryButton(fragmentMatchingBinding: FragmentMatchingBinding) =
-        with(fragmentMatchingBinding) {
+    private fun initGalleryButton(fragmentChatBinding
+                                  : FragmentChatBinding) =
+        with(fragmentChatBinding
+        ) {
             btGallery.setOnClickListener {
                 requestReadExternalStoragePermission()
 

@@ -4,6 +4,7 @@ package com.abouttime.blindcafe.di
 import com.abouttime.blindcafe.common.AuthenticationInterceptor
 import com.abouttime.blindcafe.common.constants.Retrofit.BASE_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.FIREBASE_BASE_URL
+import com.abouttime.blindcafe.data.server.api.FcmApi
 import com.abouttime.blindcafe.data.server.api.LoginApi
 import com.abouttime.blindcafe.data.server.api.NotificationApi
 import com.abouttime.blindcafe.data.server.api.UserInfoApi
@@ -20,8 +21,13 @@ internal val remoteModule = module {
 
     factory { provideKakaoLoginApi(provideRetrofit()) }
     factory { provideUserInfoApi(provideRetrofit()) }
+    factory { provideFcmApi(provideRetrofit()) }
+
+
+
 
     factory { provideNotificationApi(provideFirebaseRetrofit()) }
+
 
 
 }
@@ -87,4 +93,7 @@ internal fun provideKakaoLoginApi(retrofit: Retrofit): LoginApi =
 
 internal fun provideUserInfoApi(retrofit: Retrofit): UserInfoApi =
     retrofit.create(UserInfoApi::class.java)
+
+internal fun provideFcmApi(retrofit: Retrofit): FcmApi =
+        retrofit.create(FcmApi::class.java)
 

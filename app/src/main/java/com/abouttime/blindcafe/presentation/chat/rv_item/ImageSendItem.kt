@@ -6,16 +6,14 @@ import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.databinding.RvChatItemSendImageBinding
 import com.abouttime.blindcafe.domain.model.Message
-import com.abouttime.blindcafe.presentation.main.matching.MatchingViewModel
+import com.abouttime.blindcafe.presentation.chat.ChatViewModel
 import com.bumptech.glide.Glide
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 import com.xwray.groupie.viewbinding.BindableItem
 
 
 class ImageSendItem(
     private val message: Message,
-    private val viewModel: MatchingViewModel,
+    private val viewModel: ChatViewModel,
 ) : BindableItem<RvChatItemSendImageBinding>() {
     override fun bind(viewBinding: RvChatItemSendImageBinding, position: Int) {
         viewModel.downloadImageUrl(

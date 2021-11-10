@@ -2,18 +2,19 @@ package com.example.chatexample.presentation.ui.chat.rv_item
 
 import android.view.View
 import com.abouttime.blindcafe.R
-import com.abouttime.blindcafe.databinding.RvChatItemSendAudioBinding
+import com.abouttime.blindcafe.databinding.RvChatItemReceiveAudioBinding
 import com.abouttime.blindcafe.domain.model.Message
-import com.abouttime.blindcafe.presentation.main.matching.MatchingViewModel
+import com.abouttime.blindcafe.presentation.chat.ChatViewModel
 import com.xwray.groupie.viewbinding.BindableItem
 
-class AudioSendItem(
+
+class AudioReceiveItem(
     private val message: Message,
     private val onClickAudioMessage: (Message) -> Unit = {},
-    private val viewModel: MatchingViewModel
-): BindableItem<RvChatItemSendAudioBinding>() {
+    private val viewModel: ChatViewModel
+): BindableItem<RvChatItemReceiveAudioBinding>() {
 
-    override fun bind(viewBinding: RvChatItemSendAudioBinding, position: Int) {
+    override fun bind(viewBinding: RvChatItemReceiveAudioBinding, position: Int) {
         viewBinding.root.setOnClickListener {
 //            Firebase.storage.reference.child("audio").child(message.contents).downloadUrl.addOnSuccessListener {
 //                val mediaPlayer = MediaPlayer()
@@ -29,18 +30,12 @@ class AudioSendItem(
 //                mediaPlayer.prepareAsync()
 //            }
         }
-
-
     }
 
-    override fun getLayout(): Int = R.layout.rv_chat_item_send_audio
+    override fun getLayout(): Int = R.layout.rv_chat_item_receive_audio
 
-    override fun initializeViewBinding(view: View): RvChatItemSendAudioBinding =
-        RvChatItemSendAudioBinding.bind(view)
-
-    private fun startPlaying(child: String) {
+    override fun initializeViewBinding(view: View): RvChatItemReceiveAudioBinding =
+        RvChatItemReceiveAudioBinding.bind(view)
 
 
-
-    }
 }

@@ -3,7 +3,7 @@ package com.abouttime.blindcafe.domain.use_case
 import android.util.Log
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.constants.LogTag.FCM_TAG
-import com.abouttime.blindcafe.data.server.dto.PushNotificationDto
+import com.abouttime.blindcafe.data.server.dto.z.PushNotificationDto
 import com.abouttime.blindcafe.domain.repository.NotificationRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

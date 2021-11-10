@@ -1,8 +1,8 @@
 package com.abouttime.blindcafe.domain.repository
 
 import com.abouttime.blindcafe.common.base.BaseResponse
-import com.abouttime.blindcafe.data.server.dto.GetUserInfoDto
-import com.abouttime.blindcafe.data.server.dto.PostUserInfoDto
+import com.abouttime.blindcafe.data.server.dto.user_info.GetUserInfoDto
+import com.abouttime.blindcafe.data.server.dto.user_info.PostUserInfoDto
 
 interface UserInfoRepository {
     suspend fun postUserInfo(postUserInfoDto: PostUserInfoDto): BaseResponse?

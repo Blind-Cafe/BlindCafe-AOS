@@ -36,6 +36,7 @@
 
     <color name="gallery_image_unselect_boarder">#f3f3f3</color>
     <color name="gallery_image_unselect_solid">#96f3f3f3</color>
+    <color name="main_bottom_bar">#707070</color>
 
 
 </resources>

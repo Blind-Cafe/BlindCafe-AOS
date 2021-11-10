@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.presentation.main.matching.chat_rv_item
+package com.abouttime.blindcafe.presentation.chat.rv_item
 
 import android.view.View
 import com.abouttime.blindcafe.R

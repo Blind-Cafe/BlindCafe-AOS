@@ -1,8 +1,8 @@
 package com.abouttime.blindcafe.domain.use_case
 
 import com.abouttime.blindcafe.common.Resource
-import com.abouttime.blindcafe.data.server.dto.KakaoTokenDto
-import com.abouttime.blindcafe.data.server.dto.KakaoTokenResponse
+import com.abouttime.blindcafe.data.server.dto.login.KakaoTokenDto
+import com.abouttime.blindcafe.data.server.dto.login.KakaoTokenResponse
 import com.abouttime.blindcafe.domain.repository.LoginRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

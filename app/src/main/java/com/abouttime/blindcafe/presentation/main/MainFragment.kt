@@ -1,18 +1,14 @@
 package com.abouttime.blindcafe.presentation.main
 
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.databinding.FragmentMainBinding
-import com.abouttime.blindcafe.presentation.main.chat.ChatFragment
+import com.abouttime.blindcafe.presentation.main.chat_list.ChatListFragment
 import com.abouttime.blindcafe.presentation.main.home.HomeFragment
 import com.abouttime.blindcafe.presentation.main.my_page.MyPageFragment
-import com.abouttime.blindcafe.presentation.main.my_page.MyPageViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -20,7 +16,7 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
     private var binding: FragmentMainBinding? = null
     override val viewModel: MainViewModel by viewModel()
     val homeFragment = HomeFragment()
-    val chatFragment = ChatFragment()
+    val chatFragment = ChatListFragment()
     val myPageFragment = MyPageFragment()
 
 
