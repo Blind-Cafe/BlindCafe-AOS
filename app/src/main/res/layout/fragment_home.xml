@@ -173,7 +173,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:onClick="@{()->viewModel.onClickTemporaryButton()}"
             android:text="@string/home_subtitle_none"
-            android:textColor="@color/gray_600"
+            android:textColor="@color/steel"
             android:textSize="@dimen/font_size_super_small"
             app:layout_constraintEnd_toEndOf="@id/tv_state_title"
             app:layout_constraintStart_toStartOf="@id/tv_state_title"

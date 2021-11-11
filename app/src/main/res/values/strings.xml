@@ -72,4 +72,9 @@
     <string name="home_subtitle_found">버튼을 눌러 매칭상대를 만나보세요</string>
 
 
+    <string name="chat_list_title">내 테이블</string>
+    <string name="chat_list_title_none">아직 매칭 대화 상대가 없어요</string>
+    <string name="chat_list_subtitle_none">프로필 교환을 완료한 상대방과 대화를 할 수 있는 공간입니다</string>
+
+
 </resources>

@@ -9,7 +9,7 @@
     <View
         android:layout_width="0dp"
         android:layout_height="0.8dp"
-        android:background="@color/gray_600"
+        android:background="@color/steel"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -16,7 +16,7 @@
     <color name="icon_disabled">#454545</color>
     <color name="button_disabled">#48484a</color>
     <color name="gray_900">#373737</color>
-    <color name="gray_600">#8e8e93</color>
+    <color name="steel">#8e8e93</color>
     <color name="gray_300">#bdbdbd</color>
     <color name="bar_color">#636366</color>
     <color name="checked_color">#bbd2b6</color>
