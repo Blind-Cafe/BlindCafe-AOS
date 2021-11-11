@@ -1,10 +1,14 @@
 package com.abouttime.blindcafe.presentation.main
 
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
+import com.abouttime.blindcafe.common.constants.LogTag.LIFECYCLE_TAG
 import com.abouttime.blindcafe.databinding.FragmentMainBinding
 import com.abouttime.blindcafe.presentation.main.chat_list.ChatListFragment
 import com.abouttime.blindcafe.presentation.main.home.HomeFragment
@@ -15,9 +19,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
     private var binding: FragmentMainBinding? = null
     override val viewModel: MainViewModel by viewModel()
-    val homeFragment = HomeFragment()
-    val chatFragment = ChatListFragment()
-    val myPageFragment = MyPageFragment()
+
 
 
 
@@ -27,7 +29,7 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
         binding = fragmentMainBinding
 
 
-        setCurrentFragment(homeFragment)
+        setCurrentFragment(HomeFragment())
         initBottomNavigationView(fragmentMainBinding)
     }
 
@@ -35,9 +37,9 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
 
         fragmentMainBinding.bnTab.setOnItemSelectedListener { menuItem ->
             when(menuItem.itemId) {
-                R.id.menu_home -> setCurrentFragment(homeFragment)
-                R.id.menu_chat -> setCurrentFragment(chatFragment)
-                R.id.menu_my_page -> setCurrentFragment(myPageFragment)
+                R.id.menu_home -> setCurrentFragment(HomeFragment())
+                R.id.menu_chat -> setCurrentFragment(ChatListFragment())
+                R.id.menu_my_page -> setCurrentFragment(MyPageFragment())
             }
             true
         }
@@ -58,6 +60,65 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
             isVisible = true
         }
     }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        Log.d(LIFECYCLE_TAG, "onCreate")
+    }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        Log.d(LIFECYCLE_TAG, "onCreateView")
+        return super.onCreateView(inflater, container, savedInstanceState)
+
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        Log.d(LIFECYCLE_TAG, "onViewStateRestored")
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(LIFECYCLE_TAG, "onStart")
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(LIFECYCLE_TAG, "onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(LIFECYCLE_TAG, "onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(LIFECYCLE_TAG, "onStop")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        Log.d(LIFECYCLE_TAG, "onSaveInstanceState")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d(LIFECYCLE_TAG, "onDestroyView")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(LIFECYCLE_TAG, "onDestroy")
+    }
+
+
+
 
 
 }

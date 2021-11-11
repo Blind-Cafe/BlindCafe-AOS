@@ -34,7 +34,7 @@ internal val viewModelModule = module {
 
     /** Main **/
     viewModel { MainViewModel() }
-    viewModel { HomeViewModel(get(), get()) }
+    viewModel { HomeViewModel(get(), get(), get()) }
     viewModel { ChatViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { ChatListViewModel() }
     viewModel { MyPageViewModel(get()) }

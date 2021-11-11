@@ -1,7 +1,9 @@
 package com.abouttime.blindcafe.domain.use_case
 
+import android.util.Log
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseResponse
+import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.data.server.dto.user_info.PostUserInfoDto
 import com.abouttime.blindcafe.domain.repository.UserInfoRepository
 import kotlinx.coroutines.flow.Flow
@@ -19,7 +21,8 @@ class PostUserInfoUseCase(
             } else {
                 emit(Resource.Error("response is null"))
             }
-        } catch (e: Exception) {
+        } catch(e: Exception) {
+            Log.e(LogTag.USER_INFO_TAG, e.toString())
             emit(Resource.Error(e.toString()))
         }
     }

@@ -16,6 +16,8 @@ class SplashViewModel: BaseViewModel() {
         val infoInput = getStringData(INFO_INPUT)
         if (jwt == null) {
             moveToRuleFragment()
+        } else if (infoInput == null) {
+            moveToAgreementFragment()
         } else {
             moveToMainFragment()
         }
@@ -25,6 +27,9 @@ class SplashViewModel: BaseViewModel() {
 
     fun moveToRuleFragment() {
         moveToDirections(SplashFragmentDirections.actionSplashFragmentToRuleFragment())
+    }
+    fun moveToAgreementFragment() {
+        moveToDirections(SplashFragmentDirections.actionSplashFragmentToAgreementFragment())
     }
     fun moveToMainFragment() {
         moveToDirections(SplashFragmentDirections.actionSplashFragmentToMainFragment())

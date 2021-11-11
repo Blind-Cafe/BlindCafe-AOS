@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
-import com.abouttime.blindcafe.databinding.FragmentEssentialFirstBinding
 import com.abouttime.blindcafe.databinding.FragmentEssentialSecondBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -28,7 +27,7 @@ class EssentialSecondFragment :
     }
 
     private fun observeData(fragmentEssentialSecondBinding: FragmentEssentialSecondBinding) = with(fragmentEssentialSecondBinding) {
-        val sexDisabledColor = getColor(R.color.sex_disabled)
+        val sexDisabledColor = getColor(R.color.disabled)
         val sexEnabledColor = getColor(R.color.sex_enabled)
         viewModel?.selectedSex?.observe(viewLifecycleOwner) { selectedSex ->
             when(selectedSex) {

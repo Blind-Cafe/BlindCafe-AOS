@@ -11,4 +11,5 @@ object PREFERENCES_KEY {
     const val DETAIL_INTERESTS = "detail_interests"
     const val INFO_INPUT = "info_input"
 
+
 }

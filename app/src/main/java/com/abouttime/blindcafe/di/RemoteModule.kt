@@ -4,10 +4,7 @@ package com.abouttime.blindcafe.di
 import com.abouttime.blindcafe.common.AuthenticationInterceptor
 import com.abouttime.blindcafe.common.constants.Retrofit.BASE_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.FIREBASE_BASE_URL
-import com.abouttime.blindcafe.data.server.api.FcmApi
-import com.abouttime.blindcafe.data.server.api.LoginApi
-import com.abouttime.blindcafe.data.server.api.NotificationApi
-import com.abouttime.blindcafe.data.server.api.UserInfoApi
+import com.abouttime.blindcafe.data.server.api.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.BuildConfig
@@ -22,6 +19,7 @@ internal val remoteModule = module {
     factory { provideKakaoLoginApi(provideRetrofit()) }
     factory { provideUserInfoApi(provideRetrofit()) }
     factory { provideFcmApi(provideRetrofit()) }
+    factory { provideHomeApi(provideRetrofit()) }
 
 
 
@@ -96,4 +94,7 @@ internal fun provideUserInfoApi(retrofit: Retrofit): UserInfoApi =
 
 internal fun provideFcmApi(retrofit: Retrofit): FcmApi =
         retrofit.create(FcmApi::class.java)
+
+internal fun provideHomeApi(retrofit: Retrofit): HomeApi =
+    retrofit.create(HomeApi::class.java)
 

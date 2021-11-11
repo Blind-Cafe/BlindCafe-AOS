@@ -43,7 +43,7 @@ class InterestFragment: BaseFragment<InterestViewModel>(R.layout.fragment_intere
     private fun initNextButton(fragmentInterestBinding: FragmentInterestBinding) {
         fragmentInterestBinding.tvNext.setOnClickListener {
             if (viewModel.getSelectedItemCount() >= 3) {
-                moveToInterestDetailFragment() // TODO 인자로 3개 리스트 넘기기!
+                viewModel.postUserInfo()
             } else {
                 showToast(R.string.profile_setting_toast_select_interest)
             }

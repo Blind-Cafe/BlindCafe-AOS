@@ -7,5 +7,5 @@ data class Interest(
     @SerializedName("main")
     val main: Int?,
     @SerializedName("sub")
-    val sub: List<String>?
+    val sub: List<Int>?
 )

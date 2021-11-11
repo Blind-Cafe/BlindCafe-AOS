@@ -8,6 +8,7 @@ import com.abouttime.blindcafe.common.constants.LogTag.FCM_TAG
 import com.abouttime.blindcafe.data.server.dto.notification.PostFcmDto
 import com.abouttime.blindcafe.data.server.dto.z.NotificationData
 import com.abouttime.blindcafe.data.server.dto.z.PushNotificationDto
+import com.abouttime.blindcafe.domain.use_case.GetHomeInfoUseCase
 import com.abouttime.blindcafe.domain.use_case.PostFcmUseCase
 import com.abouttime.blindcafe.domain.use_case.PostNotificationUseCase
 import com.abouttime.blindcafe.presentation.main.MainFragmentDirections
@@ -20,7 +21,8 @@ import kotlinx.coroutines.tasks.await
 
 class HomeViewModel(
     private val postNotificationUseCase: PostNotificationUseCase,
-    private val postFcmUseCase: PostFcmUseCase
+    private val postFcmUseCase: PostFcmUseCase,
+    private val getHomeInfoUseCase: GetHomeInfoUseCase
 ): BaseViewModel() {
 
 

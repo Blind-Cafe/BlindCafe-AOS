@@ -10,4 +10,6 @@ object LogTag {
     const val RETROFIT_TAG = "retrofit_tag"
     const val BOTTOM_SHEET = "bottom_sheet"
     const val PAGING_TAG = "paging_tag"
+    const val LIFECYCLE_TAG = "lifecylce_tag"
+    const val USER_INFO_TAG = "user_info_tag"
 }

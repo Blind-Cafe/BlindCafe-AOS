@@ -171,7 +171,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:src="@drawable/bt_female"
-                    app:tint="@color/sex_disabled" />
+                    app:tint="@color/disabled" />
             </FrameLayout>
 
 
@@ -196,7 +196,7 @@
                     android:layout_gravity="center"
                     android:scaleType="fitXY"
                     android:src="@drawable/bt_male"
-                    app:tint="@color/sex_disabled" />
+                    app:tint="@color/disabled" />
 
 
             </FrameLayout>

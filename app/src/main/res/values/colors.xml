@@ -11,6 +11,8 @@
     <color name="black">#2d2d2d</color>
     <color name="transparent">#00000000</color>
 
+
+
     <color name="icon_disabled">#454545</color>
     <color name="button_disabled">#48484a</color>
     <color name="gray_900">#373737</color>
@@ -28,7 +30,8 @@
     <color name="white_2">#f3f3f3</color>
     <color name="chat_time_color">#48484a</color>
 
-    <color name="sex_disabled">#616161</color>
+
+    <color name="disabled">#616161</color>
     <color name="sex_enabled">#373737</color>
     <color name="sex_container_disabled">#454545</color>
     <color name="sex_container_enabled">#bbd2b6</color>

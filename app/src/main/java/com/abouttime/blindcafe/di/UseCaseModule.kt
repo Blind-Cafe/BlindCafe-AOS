@@ -29,4 +29,8 @@ internal val useCaseModule = module {
     factory { PostNotificationUseCase(get()) } // firebase api
     factory { PostFcmUseCase(get()) }
 
+
+    /** home **/
+    factory { GetHomeInfoUseCase(get()) }
+
 }
