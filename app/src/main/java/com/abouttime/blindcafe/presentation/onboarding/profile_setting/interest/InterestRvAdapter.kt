@@ -35,13 +35,15 @@ class InterestRvAdapter(
 
             if (isSelected[position].not()) {
                 binding.ivItem.setColorFilter(context.resources.getColor(R.color.button_disabled, null))
+                binding.clContainer.setBackgroundColor(context.resources.getColor(R.color.button_disabled, null))
             } else {
                 binding.ivItem.setColorFilter(context.resources.getColor(R.color.button_enabled, null))
+                binding.clContainer.setBackgroundColor(context.resources.getColor(R.color.button_enabled, null))
             }
         }
 
         fun bindView(position: Int) {
-            binding.ivItem.setOnClickListener {
+            binding.clContainer.setOnClickListener {
                 with(viewModel) {
                     if (isSelected[position]) {
                         if (getSelectedItemCount() < 0) return@setOnClickListener

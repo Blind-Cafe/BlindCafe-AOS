@@ -52,12 +52,17 @@ class LoginViewModel(
                 is Resource.Success -> {
                     val jwt = result.data?.jwt
                     val id = result.data?.id
+                    val nick = result.data?.nickname
                     Log.d(RETROFIT_TAG, "->jwt $jwt\nid $id")
                     Log.d(RETROFIT_TAG, "-> \n${result.data?.message}\n ${result.data?.code}" )
                     if (jwt != null && id != null) {
                         saveStringData(Pair(JWT, jwt))
                         saveStringData(Pair(USER_ID, id.toString()))
-                        moveToAgreementFragment()
+                        if (nick == null) {
+                            moveToAgreementFragment()
+                        } else {
+                            moveToMainFragment()
+                        }
                         _loginStateEvent.postValue(LoginState.Success)
                     }
                 }
@@ -73,6 +78,9 @@ class LoginViewModel(
 
     private fun moveToAgreementFragment() {
         moveToDirections(LoginFragmentDirections.actionLoginFragmentToAgreementFragment())
+    }
+    private fun moveToMainFragment() {
+        moveToDirections(LoginFragmentDirections.actionLoginFragmentToMainFragment())
     }
 
 

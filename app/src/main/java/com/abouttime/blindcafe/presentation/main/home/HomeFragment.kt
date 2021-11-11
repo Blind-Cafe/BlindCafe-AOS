@@ -18,7 +18,30 @@ class HomeFragment: BaseFragment<HomeViewModel>(R.layout.fragment_home) {
         binding?.viewModel = viewModel
         binding?.lifecycleOwner = this
 
+        observeHomeStatus()
 
+    }
+
+    private fun observeHomeStatus() {
+        viewModel.homeStatusCode.observe(viewLifecycleOwner) { statusCode ->
+            when(statusCode) {
+                0 -> handleStatusNone()
+                1 -> handleStatusWait()
+                2 -> handleStatusMatching()
+                3 -> handleStatusFound()
+            }
+        }
+    }
+    private fun handleStatusNone() {
+
+    }
+    private fun handleStatusWait() {
+
+    }
+    private fun handleStatusMatching() {
+
+    }
+    private fun handleStatusFound() {
 
     }
 

@@ -7,5 +7,7 @@ data class KakaoTokenResponse(
     @SerializedName("jwt")
     val jwt: String? = null,
     @SerializedName("id")
-    val id: Int? = null
+    val id: Int? = null,
+    @SerializedName("nickname")
+    val nickname: String? = null
 ): BaseResponse()

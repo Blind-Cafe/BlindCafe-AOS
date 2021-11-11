@@ -7,6 +7,7 @@ import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.USER_INFO_TAG
 import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.AGE
+import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.INFO_INPUT
 import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.INTERESTS
 import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.MATCHING_SEX
 import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.NICKNAME
@@ -76,6 +77,7 @@ class InterestViewModel(
                 }
                 is Resource.Success -> {
                     Log.d(USER_INFO_TAG, "Success ${response.data?.code} ${response.data?.message}")
+                    saveStringData(Pair(INFO_INPUT, response.data?.message ?: ""))
                     moveToDirections(InterestFragmentDirections.actionInterestFragmentToMainFragment())
                 }
                 is Resource.Error -> {

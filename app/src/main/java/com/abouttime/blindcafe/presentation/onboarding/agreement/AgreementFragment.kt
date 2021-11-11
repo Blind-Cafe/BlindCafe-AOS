@@ -54,12 +54,10 @@ class AgreementFragment : BaseFragment<AgreementViewModel>(R.layout.fragment_agr
     private fun initNextButton(fragmentAgreementBinding: FragmentAgreementBinding) =
         with(fragmentAgreementBinding) {
             tvNext.setOnClickListener {
-                moveToProfileInput()
+                viewModel?.onClickNextButton()
             }
 
         }
 
-    private fun moveToProfileInput() {
-        moveToDirections(AgreementFragmentDirections.actionAgreementFragmentToProfileSettingFragment())
-    }
+
 }

@@ -16,6 +16,7 @@ import com.abouttime.blindcafe.domain.use_case.PostNotificationUseCase
 import com.abouttime.blindcafe.presentation.main.MainFragmentDirections
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -26,12 +27,13 @@ class HomeViewModel(
     private val postFcmUseCase: PostFcmUseCase,
     private val getHomeInfoUseCase: GetHomeInfoUseCase
 ): BaseViewModel() {
-    private val _homeState: MutableLiveData<Int> = MutableLiveData<Int>(0)
-    val homeState: LiveData<Int> get() = _homeState
+    private val _homeStatusCode: MutableLiveData<Int> = MutableLiveData<Int>(-1)
+    val homeStatusCode: LiveData<Int> get() = _homeStatusCode
 
 
     init {
         Log.d(HOME_TAG, "getHomeInfo() 호출")
+        //testHomeState()
         getHomeInfo()
     }
 
@@ -59,12 +61,23 @@ class HomeViewModel(
 
     private fun updateHomeState(status: String) {
         when(status) {
-            "NONE" -> _homeState.postValue(0)
-            "WAIT" -> _homeState.postValue(1)
-            "FOUND" -> _homeState.postValue(2)
-            "MATCHING" -> _homeState.postValue(3)
+            "NONE" -> _homeStatusCode.postValue(0)
+            "WAIT" -> _homeStatusCode.postValue(1)
+            "FOUND" -> _homeStatusCode.postValue(2)
+            "MATCHING" -> _homeStatusCode.postValue(3)
         }
 
+    }
+
+    private fun testHomeState() = viewModelScope.launch {
+        delay(5000)
+        _homeStatusCode.postValue(0)
+        delay(5000)
+        _homeStatusCode.postValue(1)
+        delay(5000)
+        _homeStatusCode.postValue(2)
+        delay(5000)
+        _homeStatusCode.postValue(3)
     }
 
 

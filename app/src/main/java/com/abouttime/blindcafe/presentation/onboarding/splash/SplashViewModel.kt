@@ -14,9 +14,9 @@ class SplashViewModel: BaseViewModel() {
     private fun checkJwt() {
         val jwt = getStringData(JWT)
         val infoInput = getStringData(INFO_INPUT)
-        if (jwt == null) {
+        if (jwt.isNullOrEmpty()) {
             moveToRuleFragment()
-        } else if (infoInput == null) {
+        } else if (infoInput.isNullOrEmpty()) {
             moveToAgreementFragment()
         } else {
             moveToMainFragment()
