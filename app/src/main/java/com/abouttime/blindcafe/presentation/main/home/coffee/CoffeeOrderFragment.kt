@@ -32,16 +32,9 @@ class CoffeeOrderFragment: BaseFragment<CoffeeOrderViewModel>(R.layout.fragment_
         vpImageContainer.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         vpImageContainer.offscreenPageLimit = 1
         vpImageContainer.setPadding(40, 0, 40, 0)
-        /* 여백, 너비에 대한 정의 */
-        val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.coffee_page_margin) // dimen 파일 안에 크기를 정의해두었다.
-        val pagerWidth = resources.getDimensionPixelOffset(R.dimen.coffee_page_width) // dimen 파일이 없으면 생성해야함
-        val screenWidth = resources.displayMetrics.widthPixels // 스마트폰의 너비 길이를 가져옴
-        val offsetPx = screenWidth - pageMarginPx - pagerWidth
+
         vpImageContainer.setPageTransformer(ZoomOutPageTransformer())
 
-        vpImageContainer.setPageTransformer { page, position ->
-            page.translationX = position * -offsetPx
-        }
     }
 
     fun dpToPx(dp: Float, context: Context): Float {

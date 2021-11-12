@@ -1,47 +1,30 @@
 package com.abouttime.blindcafe.presentation.main.home.coffee
 
+import android.util.Log
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2
+import com.abouttime.blindcafe.R
 
 class ZoomOutPageTransformer : ViewPager2.PageTransformer {
+
     override fun transformPage(view: View, position: Float) {
+
         view.apply {
-            val pageWidth = width
-            val pageHeight = height
-            when {
-                position < -1 -> { // [-Infinity,-1)
-                    // This page is way off-screen to the left.
-                    alpha = 0f
-                }
-                position <= 1 -> { // [-1,1]
-                    // Modify the default slide transition to shrink the page as well
-                    val scaleFactor = Math.max(MIN_SCALE, 1 - Math.abs(position))
-                    val vertMargin = pageHeight * (1 - scaleFactor) / 2
-                    val horzMargin = pageWidth * (1 - scaleFactor) / 2
-                    translationX = if (position < 0) {
-                        horzMargin - vertMargin / 2
-                    } else {
-                        horzMargin + vertMargin / 2
-                    }
+            val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.coffee_page_margin) // dimen 파일 안에 크기를 정의해두었다.
+            val pagerWidth = resources.getDimensionPixelOffset(R.dimen.coffee_page_width) // dimen 파일이 없으면 생성해야함
+            val screenWidth = resources.displayMetrics.widthPixels // 스마트폰의 너비 길이를 가져옴
+            val offsetPx = screenWidth - pageMarginPx - pagerWidth
+            view.translationX = position * -offsetPx
 
-                    // Scale the page down (between MIN_SCALE and 1)
-                    scaleX = scaleFactor
-                    scaleY = scaleFactor
+            val scaleFactor = Math.max(MIN_SCALE, 1 - Math.abs(position))
+            scaleX = scaleFactor
+            scaleY = scaleFactor
 
-                    // Fade the page relative to its size.
-                    alpha = (MIN_ALPHA +
-                            (((scaleFactor - MIN_SCALE) / (1 - MIN_SCALE)) * (1 - MIN_ALPHA)))
-                }
-                else -> { // (1,+Infinity]
-                    // This page is way off-screen to the right.
-                    alpha = 0f
-                }
-            }
         }
     }
 
     companion object {
-        const val MIN_SCALE = 0.5f
+        const val MIN_SCALE = 0.9f
         const val MIN_ALPHA = 0.5f
     }
 }

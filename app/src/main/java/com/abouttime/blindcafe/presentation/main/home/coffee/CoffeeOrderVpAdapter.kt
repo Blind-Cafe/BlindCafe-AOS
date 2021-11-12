@@ -49,8 +49,10 @@ class CoffeeOrderVpAdapter(
 
         fun bindView(position: Int) {
             binding.ivItem.setOnClickListener {
-                for (i in isSelected.indices) {
-                    isSelected[i] = false
+                if (!isSelected[position]) {
+                    for (i in isSelected.indices) {
+                        isSelected[i] = false
+                    }
                 }
                 isSelected[position] = !isSelected[position]
                 notifyDataSetChanged()
@@ -72,8 +74,6 @@ class CoffeeOrderVpAdapter(
 
     // 몇개의 뷰를 보여줄 것인가
     override fun getItemCount(): Int = resIds.size
-
-
 
 
 }

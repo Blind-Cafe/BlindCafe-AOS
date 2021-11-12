@@ -9,7 +9,7 @@
 
     <dimen name="gallery_behavior_peek_height">480dp</dimen>
 
-    <dimen name="coffee_page_margin">32dp</dimen>
+    <dimen name="coffee_page_margin">92dp</dimen>
     <dimen name="coffee_page_width">157dp</dimen>
 
 </resources>
