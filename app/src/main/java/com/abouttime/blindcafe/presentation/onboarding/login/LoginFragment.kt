@@ -49,7 +49,6 @@ class LoginFragment : BaseFragment<LoginViewModel>(R.layout.fragment_login) {
                     showToast(R.string.login_toast_error)
                 }
             }
-
         }
     }
 

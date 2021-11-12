@@ -33,10 +33,8 @@ class RuleFragment : BaseFragment<RuleViewModel>(R.layout.fragment_rule) {
     private fun initViewPager(fragmentRuleBinding: FragmentRuleBinding) =
         with(fragmentRuleBinding) {
             val adapter = RuleVpAdapter(viewModel.ruleImages)
-
             vpImageContainer.adapter = adapter
             diIndicator.setViewPager2(vpImageContainer)
-
         }
 
 

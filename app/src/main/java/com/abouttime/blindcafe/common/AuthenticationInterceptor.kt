@@ -14,7 +14,7 @@ class AuthenticationInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val builder: Request.Builder = chain.request().newBuilder()
         val jwtToken: String? = sharedPreferences.getString(JWT, null)
-        Log.d(JWT, jwtToken ?: "jwt is null")
+        Log.d("AuthenticationInterceptor $JWT", jwtToken ?: "jwt is null")
         if (jwtToken != null) {
             builder.addHeader(HEADER, jwtToken)
         }

@@ -8,6 +8,7 @@ import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.FCM_TAG
 import com.abouttime.blindcafe.common.constants.LogTag.HOME_TAG
+import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.data.server.dto.notification.PostFcmDto
 import com.abouttime.blindcafe.data.server.dto.z.PushNotificationDto
 import com.abouttime.blindcafe.domain.use_case.GetHomeInfoUseCase
@@ -41,18 +42,16 @@ class HomeViewModel(
         getHomeInfoUseCase().onEach { resource ->
             when(resource) {
                 is Resource.Loading -> {
-                    Log.d(HOME_TAG, "Loading")
+                    Log.d(RETROFIT_TAG, "Loading")
                 }
                 is Resource.Success -> {
-                    Log.d(HOME_TAG, resource.data.toString())
+                    Log.d(RETROFIT_TAG, resource.data.toString())
                     resource.data?.matchingStatus?.let {
                         updateHomeState(it)
                     }
-
-
                 }
                 is Resource.Error -> {
-                    Log.d(HOME_TAG, resource.message.toString())
+                    Log.d(RETROFIT_TAG, resource.message.toString())
                 }
             }
 
@@ -82,23 +81,19 @@ class HomeViewModel(
 
 
 
-
-
-
-
-    private suspend fun postNotification(notificationDto: PushNotificationDto) {
+    private fun postNotification(notificationDto: PushNotificationDto) {
         postNotificationUseCase(
             notificationDto
         ).onEach { result ->
             when(result) {
                 is Resource.Loading -> {
-                    Log.d(FCM_TAG, "loading")
+                    Log.d(RETROFIT_TAG, "loading")
                 }
                 is Resource.Success -> {
-                    Log.d(FCM_TAG, "success ${result.data.toString()}  ")
+                    Log.d(RETROFIT_TAG, "success ${result.data.toString()}  ")
                 }
                 is Resource.Error -> {
-                    Log.d(FCM_TAG, "error")
+                    Log.d(RETROFIT_TAG, "error")
                 }
             }
         }.launchIn(viewModelScope)
@@ -106,7 +101,7 @@ class HomeViewModel(
 
     private fun postFcm(postFcmDto: PostFcmDto?) = viewModelScope.launch(Dispatchers.IO) {
         val targetToken = FirebaseMessaging.getInstance().token.await()
-        Log.e(FCM_TAG, "$targetToken")
+        Log.e(RETROFIT_TAG, "$targetToken")
         postFcmUseCase(
             PostFcmDto(
                 targetToken = targetToken,
@@ -131,7 +126,7 @@ class HomeViewModel(
     }
 
     fun onClickCircleImageView() {
-        moveToMatchingFragment()
+        moveToCoffeeOrderFragment()
     }
 
 
@@ -139,6 +134,9 @@ class HomeViewModel(
     /** navigation **/
     fun moveToMatchingFragment() {
         moveToDirections(MainFragmentDirections.actionMainFragmentToMatchingFragment())
+    }
+    fun moveToCoffeeOrderFragment() {
+        moveToDirections(MainFragmentDirections.actionMainFragmentToCoffeeOrderFragment())
     }
 
 

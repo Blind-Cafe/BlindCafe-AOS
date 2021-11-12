@@ -48,9 +48,16 @@ class EssentialSecondViewModel: BaseViewModel() {
             showToast(R.string.profile_setting_toast_input_sex)
             return
         }
+        val sex = if (_selectedSex.value == 1) {
+            "F"
+        } else if (_selectedSex.value == 2) {
+            "M"
+        } else {
+            "N"
+        }
 
-        saveStringData(Pair(NICKNAME, _nickNameText.value ?: ""))
-        saveStringData(Pair(MATCHING_SEX, _selectedSex.toString()))
+        saveStringData(Pair(NICKNAME, _nickNameText.value ?: " "))
+        saveStringData(Pair(MATCHING_SEX, sex))
 
 
         moveToDirections(EssentialSecondFragmentDirections.actionEssentialSecondFragmentToInterestFragment())

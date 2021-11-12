@@ -76,5 +76,10 @@
     <string name="chat_list_title_none">아직 매칭 대화 상대가 없어요</string>
     <string name="chat_list_subtitle_none">프로필 교환을 완료한 상대방과 대화를 할 수 있는 공간입니다</string>
 
+    <string name="coffee_order_title">메뉴 주문하기</string>
+    <string name="coffee_order_subtitle">Blind Cafe menu</string>
+    <string name="coffee_order_description">누군가 당님과 함석하고 싶어해요 음료수를 고르시면 테이블로 안내해드릴게요</string>
+
+
 
 </resources>

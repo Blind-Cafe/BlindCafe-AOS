@@ -43,7 +43,7 @@ class ChatViewModel(
         receiveMessages("-")
     }
 
-    fun receiveMessages(roomId: String) = viewModelScope.launch(Dispatchers.IO) {
+    private fun receiveMessages(roomId: String) = viewModelScope.launch(Dispatchers.IO) {
         receiveMessageUseCase(roomId).collect { result ->
             when (result) {
                 is Resource.Loading -> {

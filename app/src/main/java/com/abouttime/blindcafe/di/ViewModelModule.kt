@@ -6,6 +6,7 @@ import com.abouttime.blindcafe.presentation.main.MainViewModel
 import com.abouttime.blindcafe.presentation.main.home.HomeViewModel
 import com.abouttime.blindcafe.presentation.chat.gallery.GalleryViewModel
 import com.abouttime.blindcafe.presentation.main.chat_list.ChatListViewModel
+import com.abouttime.blindcafe.presentation.main.home.coffee.CoffeeOrderViewModel
 import com.abouttime.blindcafe.presentation.main.my_page.MyPageViewModel
 import com.abouttime.blindcafe.presentation.onboarding.agreement.AgreementViewModel
 import com.abouttime.blindcafe.presentation.onboarding.login.LoginViewModel
@@ -39,5 +40,6 @@ internal val viewModelModule = module {
     viewModel { ChatListViewModel() }
     viewModel { MyPageViewModel(get()) }
     viewModel { GalleryViewModel(get()) }
+    viewModel { CoffeeOrderViewModel() }
 
 }

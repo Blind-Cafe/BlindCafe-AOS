@@ -54,8 +54,13 @@ class EssentialFirstViewModel: BaseViewModel() {
             showToast(R.string.profile_setting_toast_input_sex)
             return
         }
+        val sex = if (_selectedSex.value == 1) {
+            "F"
+        } else {
+            "M"
+        }
         saveStringData(Pair(AGE, _ageText.value ?: ""))
-        saveStringData(Pair(SEX, _selectedSex.value.toString()))
+        saveStringData(Pair(SEX, sex))
 
         moveToDirections(EssentialFirstFragmentDirections.actionProfileSettingFragmentToEssentialSecondFragment())
 

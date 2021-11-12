@@ -76,6 +76,13 @@
             app:popExitAnim="@anim/slide_out_right">
 
         </action>
+        <action
+            android:id="@+id/action_mainFragment_to_coffeeOrderFragment"
+            app:destination="@id/coffeeOrderFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/ruleFragment"
@@ -169,4 +176,9 @@
         android:name="com.abouttime.blindcafe.presentation.chat.gallery.GalleryDialogFragment"
         android:label="GalleryDialogFragment"
         tools:layout="@layout/dialog_fragment_gallery" />
+    <fragment
+        android:id="@+id/coffeeOrderFragment"
+        tools:layout="@layout/fragment_coffee_order"
+        android:name="com.abouttime.blindcafe.presentation.main.home.coffee.CoffeeOrderFragment"
+        android:label="CoffeeOrderFragment" />
 </navigation>

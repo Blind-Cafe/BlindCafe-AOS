@@ -37,5 +37,4 @@ class AudioReceiveItem(
     override fun initializeViewBinding(view: View): RvChatItemReceiveAudioBinding =
         RvChatItemReceiveAudioBinding.bind(view)
 
-
 }
