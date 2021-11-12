@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -14,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/black"
+        android:background="@color/gray_900"
         android:paddingBottom="16dp">
 
         <TextView
@@ -26,7 +25,7 @@
             android:textSize="@dimen/font_size_regular"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="연예인" />
+            android:text="연예인" />
 
         <TextView
             android:id="@+id/tv_sub_title"
@@ -38,7 +37,7 @@
             android:textSize="@dimen/font_size_super_small"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
-            tools:text="좋아하는 키워드를 선택하세요" />
+            android:text="좋아하는 키워드를 선택하세요" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -68,7 +67,7 @@
                 app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="SM" />
+                android:text="SM" />
 
 
             <TextView
@@ -87,7 +86,7 @@
                 app:layout_constraintEnd_toStartOf="@id/tv_sub_interest_3"
                 app:layout_constraintStart_toEndOf="@id/tv_sub_interest_1"
                 app:layout_constraintTop_toTopOf="@id/tv_sub_interest_1"
-                tools:text="SM" />
+                android:text="SM" />
 
 
             <TextView
@@ -105,7 +104,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tv_sub_interest_2"
                 app:layout_constraintTop_toTopOf="@id/tv_sub_interest_1"
-                tools:text="SM" />
+                android:text="SM" />
 
 
             <TextView
@@ -126,7 +125,7 @@
                 app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_sub_interest_1"
-                tools:text="SM" />
+                android:text="SM" />
 
 
             <TextView
@@ -145,7 +144,7 @@
                 app:layout_constraintEnd_toStartOf="@id/tv_sub_interest_6"
                 app:layout_constraintStart_toEndOf="@id/tv_sub_interest_4"
                 app:layout_constraintTop_toTopOf="@id/tv_sub_interest_4"
-                tools:text="SM" />
+                android:text="SM" />
 
 
             <TextView
@@ -163,7 +162,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tv_sub_interest_5"
                 app:layout_constraintTop_toTopOf="@id/tv_sub_interest_4"
-                tools:text="SM" />
+                android:text="SM" />
 
 
             <TextView
@@ -183,7 +182,7 @@
                 app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_sub_interest_4"
-                tools:text="SM" />
+                android:text="SM" />
 
 
             <TextView
@@ -202,7 +201,7 @@
                 app:layout_constraintEnd_toStartOf="@id/tv_sub_interest_9"
                 app:layout_constraintStart_toEndOf="@id/tv_sub_interest_7"
                 app:layout_constraintTop_toTopOf="@id/tv_sub_interest_7"
-                tools:text="SM" />
+                android:text="SM" />
 
 
             <TextView
@@ -220,7 +219,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tv_sub_interest_8"
                 app:layout_constraintTop_toTopOf="@id/tv_sub_interest_7"
-                tools:text="SM" />
+                android:text="SM" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

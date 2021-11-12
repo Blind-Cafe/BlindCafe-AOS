@@ -17,8 +17,8 @@ import com.abouttime.blindcafe.common.DeviceUtil
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.databinding.FragmentChatBinding
 import com.abouttime.blindcafe.domain.model.Message
-import com.abouttime.blindcafe.presentation.chat.rv_item.DescriptionItem
 import com.abouttime.blindcafe.presentation.chat.gallery.GalleryDialogFragment
+import com.abouttime.blindcafe.presentation.chat.rv_item.DescriptionItem
 import com.example.chatexample.presentation.ui.chat.rv_item.*
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -34,11 +34,9 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     private val tempUserId = "-"
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val fragmentChatBinding
-        = FragmentChatBinding.bind(view)
+        val fragmentChatBinding = FragmentChatBinding.bind(view)
         binding = fragmentChatBinding
 
         binding?.lifecycleOwner = this
@@ -46,18 +44,13 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
 
-        initSendButton(fragmentChatBinding
-        )
-        initInputEditText(fragmentChatBinding
-        )
-        initChatRecyclerView(fragmentChatBinding
-        )
+        initSendButton(fragmentChatBinding)
+        initInputEditText(fragmentChatBinding)
+        initChatRecyclerView(fragmentChatBinding)
         observeMessagesData()
         addBackPressButtonListener()
-        initMenuPopup(fragmentChatBinding
-        )
-        initGalleryButton(fragmentChatBinding
-        )
+        initMenuPopup(fragmentChatBinding)
+        initGalleryButton(fragmentChatBinding)
     }
 
     private fun observeMessagesData() {
@@ -92,8 +85,10 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     }
 
 
-    private fun initSendButton(fragmentChatBinding
-                               : FragmentChatBinding) =
+    private fun initSendButton(
+        fragmentChatBinding
+        : FragmentChatBinding,
+    ) =
         with(fragmentChatBinding
         ) {
             btSend.setOnClickListener {
@@ -108,8 +103,10 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             }
         }
 
-    private fun initInputEditText(fragmentChatBinding
-                                  : FragmentChatBinding) =
+    private fun initInputEditText(
+        fragmentChatBinding
+        : FragmentChatBinding,
+    ) =
         with(fragmentChatBinding
         ) {
 
@@ -132,8 +129,10 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         }
 
 
-    private fun initChatRecyclerView(fragmentChatBinding
-                                     : FragmentChatBinding) =
+    private fun initChatRecyclerView(
+        fragmentChatBinding
+        : FragmentChatBinding,
+    ) =
         with(fragmentChatBinding
         ) {
             rvChatContainer.adapter = chatAdapter
@@ -165,8 +164,10 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
         }
 
-    private fun scrollRvToLastPosition(fragmentChatBinding
-                                       : FragmentChatBinding) =
+    private fun scrollRvToLastPosition(
+        fragmentChatBinding
+        : FragmentChatBinding,
+    ) =
         with(fragmentChatBinding
         ) {
             if (chatAdapter.itemCount - 1 > 0) {
@@ -174,59 +175,61 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             }
         }
 
-    private fun initMenuPopup(fragmentChatBinding
-                              : FragmentChatBinding) {
+    private fun initMenuPopup(
+        fragmentChatBinding
+        : FragmentChatBinding,
+    ) {
         fragmentChatBinding
             .ivMenu.setOnClickListener { v ->
-            val popup = PopupMenu(requireContext(), v)
-            popup.apply {
-                menuInflater.inflate(R.menu.chat_room_menu, popup.menu)
+                val popup = PopupMenu(requireContext(), v)
+                popup.apply {
+                    menuInflater.inflate(R.menu.chat_room_menu, popup.menu)
 
-                setOnMenuItemClickListener { item ->
-                    when (item.itemId) {
-                        R.id.menu_report -> {
-                            showToast(R.string.chat_room_menu_report)
-                        }
-                        R.id.menu_quit -> {
-                            showToast(R.string.chat_room_menu_quit)
-                        }
-                        else -> {
+                    setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
+                            R.id.menu_report -> {
+                                showToast(R.string.chat_room_menu_report)
+                            }
+                            R.id.menu_quit -> {
+                                showToast(R.string.chat_room_menu_quit)
+                            }
+                            else -> {
 
+                            }
                         }
+                        false
                     }
-                    false
+
+
                 }
 
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 
-            }
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-
-            } else {
-                try {
-                    val fields = popup.javaClass.declaredFields
-                    for (field in fields) {
-                        if ("mPopup" == field.name) {
-                            field.isAccessible = true
-                            val menuPopupHelper = field[popup]
-                            val classPopupHelper =
-                                Class.forName(menuPopupHelper.javaClass.name)
-                            val setForceIcons: Method = classPopupHelper.getMethod(
-                                "setForceShowIcon",
-                                Boolean::class.javaPrimitiveType
-                            )
-                            setForceIcons.invoke(menuPopupHelper, true)
-                            break
+                } else {
+                    try {
+                        val fields = popup.javaClass.declaredFields
+                        for (field in fields) {
+                            if ("mPopup" == field.name) {
+                                field.isAccessible = true
+                                val menuPopupHelper = field[popup]
+                                val classPopupHelper =
+                                    Class.forName(menuPopupHelper.javaClass.name)
+                                val setForceIcons: Method = classPopupHelper.getMethod(
+                                    "setForceShowIcon",
+                                    Boolean::class.javaPrimitiveType
+                                )
+                                setForceIcons.invoke(menuPopupHelper, true)
+                                break
+                            }
                         }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
-                } catch (e: Exception) {
-                    e.printStackTrace()
                 }
-            }
 //            val inflater: MenuInflater = popup.menuInflater
 //            inflater.inflate(R.menu.chat_room_menu, popup.menu)
-            popup.show()
-        }
+                popup.show()
+            }
 
 
     }
@@ -244,8 +247,10 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         }
     }
 
-    private fun initGalleryButton(fragmentChatBinding
-                                  : FragmentChatBinding) =
+    private fun initGalleryButton(
+        fragmentChatBinding
+        : FragmentChatBinding,
+    ) =
         with(fragmentChatBinding
         ) {
             btGallery.setOnClickListener {
@@ -265,23 +270,24 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         }
 
 
-    val getContent = registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uris ->
-        uris.forEach { uri ->
-            uri?.let {
-                val id = System.currentTimeMillis().toString()
-                viewModel.uploadImage(
-                    message = Message(
-                        senderUid = tempUserId,
-                        contents = id,
-                        roomUid = tempUserId,
-                        type = 2
-                    ),
-                    uri = it
-                )
+    val getContent =
+        registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uris ->
+            uris.forEach { uri ->
+                uri?.let {
+                    val id = System.currentTimeMillis().toString()
+                    viewModel.uploadImage(
+                        message = Message(
+                            senderUid = tempUserId,
+                            contents = id,
+                            roomUid = tempUserId,
+                            type = 2
+                        ),
+                        uri = it
+                    )
+                }
             }
-        }
 
-    }
+        }
 
     private val callback =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->

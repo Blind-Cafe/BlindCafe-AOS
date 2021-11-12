@@ -51,6 +51,7 @@
     <string name="profile_setting_toast_input_nickname">닉네임을 먼저 작성해주세요</string>
     <string name="profile_setting_toast_input_again_nickname">닉네임을 다시 작성해주세요</string>
     <string name="profile_setting_toast_select_interest">관심사를 먼저 선택해주세요.</string>
+    <string name="profile_setting_toast_select_sub_interest">관심사 당 세부관심사 하나 이상을 선택해주세요</string>
 
 
     <string name="chat_room_menu_report">유저 신고하기</string>
