@@ -6,8 +6,8 @@ import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class InterestDetailFragment: BaseFragment<InterestDetailViewModel>(R.layout.fragment_interest_detail) {
-    override val viewModel: InterestDetailViewModel by viewModel()
+class InterestSubFragment: BaseFragment<InterestSubViewModel>(R.layout.fragment_interest_sub) {
+    override val viewModel: InterestSubViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

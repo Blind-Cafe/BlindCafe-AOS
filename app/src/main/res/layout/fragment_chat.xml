@@ -154,7 +154,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/bg_chat_send_bt"
-                android:backgroundTint="@{viewModel.isSendButtonEnabled ? @color/button_enabled : @color/button_disabled}"
+                android:backgroundTint="@{viewModel.isSendButtonEnabled ? @color/enabled : @color/button_disabled}"
                 android:clickable="@{viewModel.isSendButtonEnabled ? true : false}"
                 android:focusable="true"
                 android:paddingHorizontal="24dp"

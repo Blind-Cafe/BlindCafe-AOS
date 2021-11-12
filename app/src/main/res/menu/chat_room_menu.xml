@@ -9,6 +9,12 @@
         android:icon="@drawable/bt_bell"
         android:title="@string/chat_room_menu_report"
         />
+
+    <item android:id="@+id/menu_alarm"
+        android:icon="@drawable/ic_notification_off"
+        android:title="@string/chat_room_menu_notification"/>
+
+
     <item android:id="@+id/menu_quit"
         android:icon="@drawable/bt_bell"
         android:title="@string/chat_room_menu_quit"/>

@@ -12,34 +12,11 @@ class CoffeeOrderVpAdapter(
 ) : RecyclerView.Adapter<CoffeeOrderVpAdapter.ViewHolder>() {
 
 
-    private val resIds: List<Int> = mutableListOf(
-        R.drawable.bt_coffee_americano,
-        R.drawable.bt_coffee_cafe_latte,
-        R.drawable.bt_coffee_cafe_mocha,
-        R.drawable.bt_coffee_bubble_tea,
-        R.drawable.bt_coffee_mint_chocolate,
-        R.drawable.bt_coffee_strawberry_smoothie,
-        R.drawable.bt_coffee_blue_lemonade,
-        R.drawable.bt_coffee_green_tea,
-        R.drawable.bt_coffee_grapefruit_tea,
-    )
 
-    private val selectedResId: List<Int> = mutableListOf(
-        R.drawable.bt_coffee_americano_selected,
-        R.drawable.bt_coffee_cafe_latte_selected,
-        R.drawable.bt_coffee_cafe_mocha_selected,
-        R.drawable.bt_coffee_bubble_tea_selected,
-        R.drawable.bt_coffee_mint_chocolate_selected,
-        R.drawable.bt_coffee_strawberry_smoothie_selected,
-        R.drawable.bt_coffee_blue_lemonade_selected,
-        R.drawable.bt_coffee_green_tea_selected,
-        R.drawable.bt_coffee_grapefruit_tea_selected,
-    )
-    private val isSelected = Array(9) { false }
 
     inner class ViewHolder(private val binding: VpItemCoffeeBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bindData(position: Int) {
+        fun bindData(position: Int) = with(viewModel)  {
             if (isSelected[position]) {
                 binding.ivItem.setImageResource(selectedResId[position])
             } else {
@@ -47,7 +24,7 @@ class CoffeeOrderVpAdapter(
             }
         }
 
-        fun bindView(position: Int) {
+        fun bindView(position: Int) = with(viewModel) {
             binding.ivItem.setOnClickListener {
                 if (!isSelected[position]) {
                     for (i in isSelected.indices) {
@@ -55,6 +32,7 @@ class CoffeeOrderVpAdapter(
                     }
                 }
                 isSelected[position] = !isSelected[position]
+                updateNextButton()
                 notifyDataSetChanged()
             }
         }
@@ -73,7 +51,7 @@ class CoffeeOrderVpAdapter(
     }
 
     // 몇개의 뷰를 보여줄 것인가
-    override fun getItemCount(): Int = resIds.size
+    override fun getItemCount(): Int = viewModel.resIds.size
 
 
 }

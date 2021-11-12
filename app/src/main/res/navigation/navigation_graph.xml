@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/interestFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -153,24 +153,19 @@
         android:label="InterestFragment"
         tools:layout="@layout/fragment_interest">
         <action
-            android:id="@+id/action_interestFragment_to_mainFragment"
-            app:destination="@id/mainFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/agreementFragment"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_interestFragment_to_interestSubFragment"
+            app:destination="@id/interestSubFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"/>
     </fragment>
     <fragment
         android:id="@+id/matchingFragment"
         android:name="com.abouttime.blindcafe.presentation.chat.ChatFragment"
         android:label="MatchingFragment"
-        tools:layout="@layout/fragment_chat">
-        <action
-            android:id="@+id/action_matchingFragment_to_galleryDialogFragment"
-            app:destination="@id/galleryDialogFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_chat"
+        />
     <fragment
         android:id="@+id/galleryDialogFragment"
         android:name="com.abouttime.blindcafe.presentation.chat.gallery.GalleryDialogFragment"
@@ -180,5 +175,43 @@
         android:id="@+id/coffeeOrderFragment"
         tools:layout="@layout/fragment_coffee_order"
         android:name="com.abouttime.blindcafe.presentation.main.home.coffee.CoffeeOrderFragment"
-        android:label="CoffeeOrderFragment" />
+        android:label="CoffeeOrderFragment" >
+        <action
+            android:id="@+id/action_coffeeOrderFragment_to_matchingFragment"
+            app:destination="@id/matchingFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/coffeeOrderFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/signinFragment"
+        android:name="com.abouttime.blindcafe.presentation.onboarding.signin.SigninFragment"
+        tools:layout="@layout/fragment_signin"
+        android:label="SigninFragment" >
+        <action
+            android:id="@+id/action_signinFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/agreementFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/interestSubFragment"
+        tools:layout="@layout/fragment_interest_sub"
+        android:name="com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest_detail.InterestSubFragment"
+        android:label="InterestSubFragment" >
+        <action
+            android:id="@+id/action_interestSubFragment_to_signinFragment"
+            app:destination="@id/signinFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 </navigation>

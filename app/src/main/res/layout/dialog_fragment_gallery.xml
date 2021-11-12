@@ -64,7 +64,7 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="32dp"
             android:background="@drawable/bg_rounding_3dp"
-            android:backgroundTint="@color/button_enabled"
+            android:backgroundTint="@color/enabled"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:gravity="center"
             android:lineSpacingExtra="7sp"

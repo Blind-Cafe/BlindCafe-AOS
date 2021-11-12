@@ -53,8 +53,10 @@
     <string name="profile_setting_toast_select_interest">관심사를 먼저 선택해주세요.</string>
 
 
-    <string name="chat_room_menu_report">report</string>
-    <string name="chat_room_menu_quit">quit</string>
+    <string name="chat_room_menu_report">유저 신고하기</string>
+    <string name="chat_room_menu_notification">알람 끄기</string>
+    <string name="chat_room_menu_quit">채팅방 나가기</string>
+
 
     <string name="chat_et_hint">메시지 작성하기</string>
 
@@ -79,6 +81,10 @@
     <string name="coffee_order_title">메뉴 주문하기</string>
     <string name="coffee_order_subtitle">Blind Cafe menu</string>
     <string name="coffee_order_description">누군가 당님과 함석하고 싶어해요 음료수를 고르시면 테이블로 안내해드릴게요</string>
+
+    <string name="signin_title">회원가입 완료</string>
+    <string name="signin_subtitle">축하합니다 블라인드 카페 입장이 완료되었습니다.</string>
+    <string name="signin_next">홈으로 가기</string>
 
 
 

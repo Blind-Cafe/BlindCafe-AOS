@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest_detail.InterestSubViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:paddingBottom="16dp">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_regular"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="연예인" />
+
+        <TextView
+            android:id="@+id/tv_sub_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:textColor="@color/gray_300"
+            android:textSize="@dimen/font_size_super_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            tools:text="좋아하는 키워드를 선택하세요" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_sub_title">
+
+            <TextView
+                android:id="@+id/tv_sub_interest_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/sub_interest_horizontal_margin"
+                android:layout_marginBottom="@dimen/sub_interest_vertical_margin"
+                android:background="@drawable/bg_rounding_16dp"
+                android:backgroundTint="@color/gray_900"
+                android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                android:gravity="center"
+                android:paddingVertical="@dimen/sub_interest_vertical_padding"
+                android:textColor="@color/gray_300"
+                android:textSize="@dimen/font_size_regular"
+                app:layout_constraintBottom_toTopOf="@id/tv_sub_interest_4"
+                app:layout_constraintEnd_toStartOf="@id/tv_sub_interest_2"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="SM" />
+
+
+            <TextView
+                android:id="@+id/tv_sub_interest_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/sub_interest_horizontal_margin"
+                android:background="@drawable/bg_rounding_16dp"
+                android:backgroundTint="@color/gray_900"
+                android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                android:gravity="center"
+                android:paddingVertical="@dimen/sub_interest_vertical_padding"
+                android:textColor="@color/gray_300"
+                android:textSize="@dimen/font_size_regular"
+                app:layout_constraintBottom_toBottomOf="@id/tv_sub_interest_1"
+                app:layout_constraintEnd_toStartOf="@id/tv_sub_interest_3"
+                app:layout_constraintStart_toEndOf="@id/tv_sub_interest_1"
+                app:layout_constraintTop_toTopOf="@id/tv_sub_interest_1"
+                tools:text="SM" />
+
+
+            <TextView
+                android:id="@+id/tv_sub_interest_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounding_16dp"
+                android:backgroundTint="@color/gray_900"
+                android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                android:gravity="center"
+                android:paddingVertical="@dimen/sub_interest_vertical_padding"
+                android:textColor="@color/gray_300"
+                android:textSize="@dimen/font_size_regular"
+                app:layout_constraintBottom_toBottomOf="@id/tv_sub_interest_1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_sub_interest_2"
+                app:layout_constraintTop_toTopOf="@id/tv_sub_interest_1"
+                tools:text="SM" />
+
+
+            <TextView
+                android:id="@+id/tv_sub_interest_4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/sub_interest_horizontal_margin"
+                android:layout_marginBottom="@dimen/sub_interest_vertical_margin"
+                android:background="@drawable/bg_rounding_16dp"
+                android:backgroundTint="@color/gray_900"
+                android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                android:gravity="center"
+                android:paddingVertical="@dimen/sub_interest_vertical_padding"
+                android:textColor="@color/gray_300"
+                android:textSize="@dimen/font_size_regular"
+                app:layout_constraintBottom_toTopOf="@id/tv_sub_interest_7"
+                app:layout_constraintEnd_toStartOf="@id/tv_sub_interest_5"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_sub_interest_1"
+                tools:text="SM" />
+
+
+            <TextView
+                android:id="@+id/tv_sub_interest_5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/sub_interest_horizontal_margin"
+                android:background="@drawable/bg_rounding_16dp"
+                android:backgroundTint="@color/gray_900"
+                android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                android:gravity="center"
+                android:paddingVertical="@dimen/sub_interest_vertical_padding"
+                android:textColor="@color/gray_300"
+                android:textSize="@dimen/font_size_regular"
+                app:layout_constraintBottom_toBottomOf="@id/tv_sub_interest_4"
+                app:layout_constraintEnd_toStartOf="@id/tv_sub_interest_6"
+                app:layout_constraintStart_toEndOf="@id/tv_sub_interest_4"
+                app:layout_constraintTop_toTopOf="@id/tv_sub_interest_4"
+                tools:text="SM" />
+
+
+            <TextView
+                android:id="@+id/tv_sub_interest_6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounding_16dp"
+                android:backgroundTint="@color/gray_900"
+                android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                android:gravity="center"
+                android:paddingVertical="@dimen/sub_interest_vertical_padding"
+                android:textColor="@color/gray_300"
+                android:textSize="@dimen/font_size_regular"
+                app:layout_constraintBottom_toBottomOf="@id/tv_sub_interest_4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_sub_interest_5"
+                app:layout_constraintTop_toTopOf="@id/tv_sub_interest_4"
+                tools:text="SM" />
+
+
+            <TextView
+                android:id="@+id/tv_sub_interest_7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/sub_interest_horizontal_margin"
+                android:background="@drawable/bg_rounding_16dp"
+                android:backgroundTint="@color/gray_900"
+                android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                android:gravity="center"
+                android:paddingVertical="@dimen/sub_interest_vertical_padding"
+                android:textColor="@color/gray_300"
+                android:textSize="@dimen/font_size_regular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_sub_interest_8"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_sub_interest_4"
+                tools:text="SM" />
+
+
+            <TextView
+                android:id="@+id/tv_sub_interest_8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/sub_interest_horizontal_margin"
+                android:background="@drawable/bg_rounding_16dp"
+                android:backgroundTint="@color/gray_900"
+                android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                android:gravity="center"
+                android:paddingVertical="@dimen/sub_interest_vertical_padding"
+                android:textColor="@color/gray_300"
+                android:textSize="@dimen/font_size_regular"
+                app:layout_constraintBottom_toBottomOf="@id/tv_sub_interest_7"
+                app:layout_constraintEnd_toStartOf="@id/tv_sub_interest_9"
+                app:layout_constraintStart_toEndOf="@id/tv_sub_interest_7"
+                app:layout_constraintTop_toTopOf="@id/tv_sub_interest_7"
+                tools:text="SM" />
+
+
+            <TextView
+                android:id="@+id/tv_sub_interest_9"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounding_16dp"
+                android:backgroundTint="@color/gray_900"
+                android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                android:gravity="center"
+                android:paddingVertical="@dimen/sub_interest_vertical_padding"
+                android:textColor="@color/gray_300"
+                android:textSize="@dimen/font_size_regular"
+                app:layout_constraintBottom_toBottomOf="@id/tv_sub_interest_7"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_sub_interest_8"
+                app:layout_constraintTop_toTopOf="@id/tv_sub_interest_7"
+                tools:text="SM" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

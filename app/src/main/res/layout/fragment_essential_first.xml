@@ -221,7 +221,7 @@
                 android:layout_height="0dp"
                 android:layout_marginBottom="32dp"
                 android:background="@drawable/bg_rounding_3dp"
-                android:backgroundTint="@{viewModel.enableNextButton ? @color/button_enabled : @color/steel}"
+                android:backgroundTint="@{viewModel.enableNextButton ? @color/enabled : @color/steel}"
                 android:gravity="center"
                 android:onClick="@{()->viewModel.onClickNextButton()}"
                 android:text="@string/profile_setting_next"

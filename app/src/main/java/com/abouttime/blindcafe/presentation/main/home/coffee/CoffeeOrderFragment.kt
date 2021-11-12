@@ -27,13 +27,16 @@ class CoffeeOrderFragment: BaseFragment<CoffeeOrderViewModel>(R.layout.fragment_
     }
 
     private fun initVpAdapter(fragmentCoffeeOrderBinding: FragmentCoffeeOrderBinding) = with(fragmentCoffeeOrderBinding) {
-        vpAdapter = CoffeeOrderVpAdapter(viewModel)
-        vpImageContainer.adapter = vpAdapter
-        vpImageContainer.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-        vpImageContainer.offscreenPageLimit = 1
-        vpImageContainer.setPadding(40, 0, 40, 0)
+        viewModel?.let {
+            vpAdapter = CoffeeOrderVpAdapter(viewModel!!)
+            vpImageContainer.adapter = vpAdapter
+            vpImageContainer.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+            vpImageContainer.offscreenPageLimit = 1
+            vpImageContainer.setPadding(40, 0, 40, 0)
 
-        vpImageContainer.setPageTransformer(ZoomOutPageTransformer())
+            vpImageContainer.setPageTransformer(ZoomOutPageTransformer())
+        }
+
 
     }
 

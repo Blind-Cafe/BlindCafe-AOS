@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View.OnClickListener" />
+
+        <import type="android.view.View" />
+
+        <import type="androidx.core.content.ContextCompat" />
+
+        <variable
+            name="viewModel"
+            type="com.abouttime.blindcafe.presentation.main.home.coffee.CoffeeOrderViewModel" />
+    </data>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black">
@@ -86,7 +104,7 @@
         android:layout_height="0dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/bg_rounding_3dp"
-        android:backgroundTint="@color/button_disabled"
+        android:backgroundTint="@{viewModel.nextButton ? @color/enabled : @color/disabled}"
         android:gravity="center"
         android:layout_marginHorizontal="36dp"
         android:text="@string/profile_setting_next"
@@ -97,3 +115,5 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

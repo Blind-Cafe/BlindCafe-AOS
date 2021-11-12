@@ -21,7 +21,7 @@
     <color name="bar_color">#636366</color>
     <color name="checked_color">#bbd2b6</color>
     <color name="check_color">#bdbdbd</color>
-    <color name="button_enabled">#bbd2b6</color>
+
     <color name="et_bg">#80757575</color>
     <color name="et_stroke_default">#757575</color>
     <color name="et_bg_stroke_red">#ff453a</color>
@@ -29,9 +29,10 @@
     <color name="et_bg_stroke_green">#bbd2b6</color>
     <color name="white_2">#f3f3f3</color>
     <color name="chat_time_color">#48484a</color>
-
-
+    <color name="enabled">#bbd2b6</color>
     <color name="disabled">#616161</color>
+    <color name="interest_icon_disabled">#616161</color>
+    <color name="interest_icon_enabled">#373737</color>
     <color name="sex_enabled">#373737</color>
     <color name="sex_container_disabled">#454545</color>
     <color name="sex_container_enabled">#bbd2b6</color>
