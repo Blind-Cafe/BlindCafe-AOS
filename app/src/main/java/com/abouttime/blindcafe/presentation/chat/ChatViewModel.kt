@@ -151,9 +151,7 @@ class ChatViewModel(
     }
 
 
-    fun moveToMainFragment() {
-        moveToDirections(ChatFragmentDirections.actionMatchingFragmentToMainFragment())
-    }
+
 
     fun moveToGalleryDialogFragment() {
         moveToDirections(ChatFragmentDirections.actionMatchingFragmentToGalleryDialogFragment())

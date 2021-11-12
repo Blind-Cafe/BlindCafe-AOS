@@ -16,25 +16,24 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/ruleFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_loginFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/mainFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/ruleFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.abouttime.blindcafe.presentation.onboarding.splash.SplashFragment"
         android:label="SplashFragment"
         tools:layout="@layout/fragment_splash">
-        <action
-            android:id="@+id/action_splashFragment_to_mainFragment"
-            app:destination="@id/mainFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/splashFragment"
-            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_splashFragment_to_ruleFragment"
             app:destination="@id/ruleFragment"
@@ -52,7 +51,16 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/splashFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
@@ -96,7 +104,14 @@
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_agreementFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/mainFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/agreementFragment"
+            app:popUpToInclusive="true" />
+
     </fragment>
     <fragment
         android:id="@+id/essentialFirstFragment"
@@ -137,28 +152,21 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/ruleFragment"
+            app:popUpTo="@id/agreementFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/matchingFragment"
         android:name="com.abouttime.blindcafe.presentation.chat.ChatFragment"
-        tools:layout="@layout/fragment_chat"
-        android:label="MatchingFragment">
-        <action
-            android:id="@+id/action_matchingFragment_to_mainFragment"
-            app:destination="@id/mainFragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/matchingFragment"
-            app:popUpToInclusive="true" />
+        android:label="MatchingFragment"
+        tools:layout="@layout/fragment_chat">
         <action
             android:id="@+id/action_matchingFragment_to_galleryDialogFragment"
             app:destination="@id/galleryDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/galleryDialogFragment"
-        tools:layout="@layout/dialog_fragment_gallery"
         android:name="com.abouttime.blindcafe.presentation.chat.gallery.GalleryDialogFragment"
-        android:label="GalleryDialogFragment" />
+        android:label="GalleryDialogFragment"
+        tools:layout="@layout/dialog_fragment_gallery" />
 </navigation>

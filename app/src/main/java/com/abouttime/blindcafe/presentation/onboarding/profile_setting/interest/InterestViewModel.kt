@@ -58,15 +58,15 @@ class InterestViewModel(
                 interests = listOf(
                     Interest(
                         main = interests?.get(0)?.toInt(),
-                        sub = listOf(1, 2, 3)
+                        sub = listOf("1", "2", "3")
                     ),
                     Interest(
                         main = interests?.get(1)?.toInt(),
-                        sub = listOf(1, 2, 3)
+                        sub = listOf("1", "2", "3")
                     ),
                     Interest(
                         main = interests?.get(2)?.toInt(),
-                        sub = listOf(1, 2, 3)
+                        sub = listOf("1", "2", "3")
                     )
                 )
             )
