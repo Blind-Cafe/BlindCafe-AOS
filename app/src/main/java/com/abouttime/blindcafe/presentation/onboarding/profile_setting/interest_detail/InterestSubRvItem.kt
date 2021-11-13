@@ -1,6 +1,7 @@
 package com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest_detail
 
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.databinding.RvItemInterestSubBinding
 import com.xwray.groupie.viewbinding.BindableItem
@@ -33,15 +34,17 @@ class InterestSubRvItem(
                             if (selected.contains(i)) {
                                 subInterests[i].setTextColor(v.resources.getColor(R.color.gray_300,
                                     null))
-                                subInterests[i].setBackgroundColor(v.resources.getColor(R.color.sub_interest_disabled,
-                                    null))
+//                                subInterests[i].setBackgroundColor(v.resources.getColor(R.color.sub_interest_disabled,
+//                                    null))
+                                subInterests[i].background.setTint(ContextCompat.getColor(v.context, R.color.sub_interest_disabled))
                                 selected.remove(i)
 
                             } else {
                                 subInterests[i].setTextColor(v.resources.getColor(R.color.white,
                                     null))
-                                subInterests[i].setBackgroundColor(v.resources.getColor(R.color.main,
-                                    null))
+//                                subInterests[i].setBackgroundColor(v.resources.getColor(R.color.main,
+//                                    null))
+                                subInterests[i].background.setTint(ContextCompat.getColor(v.context, R.color.main))
                                 selected.add(i)
                             }
                             updateNextButton()
