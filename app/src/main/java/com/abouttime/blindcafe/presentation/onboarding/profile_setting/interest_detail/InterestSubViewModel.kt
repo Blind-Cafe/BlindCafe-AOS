@@ -27,15 +27,26 @@ class InterestSubViewModel(
 
     val selectedSubInterests = Array(3) { mutableListOf<Int>() }
 
+    val interestMap = mapOf(
+        0 to "음식",
+        1 to "여행",
+        2 to "게임",
+        3 to "연예",
+        4 to "스포츠",
+        5 to "제테크",
+        6 to "취업",
+        7 to "만화/애니",
+        8 to "동물"
+    )
+
 
     fun updateNextButton() {
       _nextButton.value = canEnableNextButton()
     }
+
     private fun canEnableNextButton(): Boolean {
-        for (i in selectedSubInterests.indices) {
-            if (selectedSubInterests[i].isEmpty().not()) {
-                return true
-            }
+        if (selectedSubInterests[0].isNotEmpty() && selectedSubInterests[1].isNotEmpty() && selectedSubInterests[2].isNotEmpty()) {
+            return true
         }
         return false
     }
@@ -49,7 +60,13 @@ class InterestSubViewModel(
         val nickname = getStringData(PREFERENCES_KEY.NICKNAME)
         val partnerGender = getStringData(PREFERENCES_KEY.MATCHING_SEX)
         val interests = getStringData(PREFERENCES_KEY.INTERESTS)?.split(",")
-        // TODO 세부관심사 저장! +  val infoInput = getStringData(INFO_INPUT) 을 위한 INFO_INPUT 여부 저장!
+        val interest1 = interests?.get(0)?.let { interestMap[it.toInt()] }
+        val interest2 = interests?.get(1)?.let { interestMap[it.toInt()] }
+        val interest3 = interests?.get(2)?.let { interestMap[it.toInt()] }
+        val subInterests1 = selectedSubInterests[0].map { interest1+it }
+        val subInterests2 = selectedSubInterests[1].map { interest2+it }
+        val subInterests3 = selectedSubInterests[2].map { interest3+it }
+
         val dto =  PostUserInfoDto(
             age = age,
             myGender = myGender,
@@ -57,16 +74,16 @@ class InterestSubViewModel(
             partnerGender = partnerGender,
             interests = listOf(
                 Interest(
-                    main = interests?.get(0)?.toInt()?.plus(1) ?: 1,
-                    sub = listOf("음식1", "음식2", "음식3")
+                    main = interests?.get(0)?.toInt()?.plus(1) ?: 0,
+                    sub = subInterests1
                 ),
                 Interest(
-                    main = interests?.get(1)?.toInt()?.plus(1) ?: 2,
-                    sub = listOf("여행1", "여행2", "여행3")
+                    main = interests?.get(1)?.toInt()?.plus(1) ?: 0,
+                    sub = subInterests2
                 ),
                 Interest(
-                    main = interests?.get(2)?.toInt()?.plus(1) ?: 3,
-                    sub = listOf("게임1", "게임2", "게임3")
+                    main = interests?.get(2)?.toInt()?.plus(1) ?: 0,
+                    sub = subInterests3
                 )
             )
         )
@@ -85,7 +102,7 @@ class InterestSubViewModel(
                     val code = response.data?.code?.toInt()
                     if (code == 1000) {
                         saveStringData(Pair(PREFERENCES_KEY.INFO_INPUT, response.data.code ?: ""))
-                        moveToDirections(InterestSubFragmentDirections.actionInterestSubFragmentToSigninFragment())
+                        moveToSigninFragment()
                     }
 
                 }
@@ -100,7 +117,7 @@ class InterestSubViewModel(
 
     fun onClickNextButton() {
         if (canEnableNextButton()) {
-            moveToSigninFragment()
+            postUserInfo()
         } else {
             showToast(R.string.profile_setting_toast_select_sub_interest)
         }

@@ -20,6 +20,8 @@ class InterestSubFragment: BaseFragment<InterestSubViewModel>(R.layout.fragment_
         super.onViewCreated(view, savedInstanceState)
         val fragmentInterestSubBinding = FragmentInterestSubBinding.bind(view)
         binding = fragmentInterestSubBinding
+        binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
 
         initRecyclerView(fragmentInterestSubBinding)
     }
