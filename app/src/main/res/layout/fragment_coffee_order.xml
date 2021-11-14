@@ -105,6 +105,7 @@
         android:layout_marginBottom="32dp"
         android:background="@drawable/bg_rounding_3dp"
         android:backgroundTint="@{viewModel.nextButton ? @color/enabled : @color/disabled}"
+        android:onClick="@{() -> viewModel.onClickNextButton()}"
         android:gravity="center"
         android:layout_marginHorizontal="36dp"
         android:text="@string/profile_setting_next"

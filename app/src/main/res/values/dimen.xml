@@ -19,5 +19,8 @@
     <dimen name="sub_interest_horizontal_margin">10dp</dimen>
     <dimen name="sub_interest_vertical_margin">10dp</dimen>
 
+    <dimen name="my_page_container_padding">18dp</dimen>
+    <dimen name="my_page_badge_horizontal_padding">8dp</dimen>
+
 
 </resources>

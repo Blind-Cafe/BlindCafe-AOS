@@ -50,4 +50,18 @@ class CoffeeOrderViewModel: BaseViewModel() {
     }
 
 
+    fun onClickNextButton() {
+        if (canClickNextButton()) {
+            moveToChatFragment()
+        } else {
+            showToast(R.string.coffee_order_next_alert)
+        }
+    }
+
+
+    private fun moveToChatFragment() {
+        moveToDirections(CoffeeOrderFragmentDirections.actionCoffeeOrderFragmentToMatchingFragment())
+    }
+
+
 }
