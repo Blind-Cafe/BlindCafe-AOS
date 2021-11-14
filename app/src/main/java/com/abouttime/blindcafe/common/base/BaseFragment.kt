@@ -80,5 +80,7 @@ abstract class BaseFragment<VM: BaseViewModel>(layoutId: Int) : Fragment(layoutI
         Toast.makeText(requireContext(), getString(resId), Toast.LENGTH_SHORT).show()
     }
 
-    fun getColor(resId: Int) = resources.getColor(resId, null)
+    fun getColorByResId(resId: Int) = resources.getColor(resId, null)
+
+    fun getStringByResId(resId: Int): String = resources.getString(resId)
 }

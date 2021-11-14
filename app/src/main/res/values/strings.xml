@@ -2,10 +2,10 @@
 
 
 
-    <!-- -->
+    <!-- common -->
     <string name="app_name">BlindCafe</string>
     <string name="temp_error">에러</string>
-
+    <string name="no_value">-</string>
 
 
     <!-- rule -->
@@ -107,10 +107,11 @@
     <string name="my_page_title">마이페이지</string>
     <string name="my_page_profile_message">사진 도용은 엄격히 금합니다.</string>
     <string name="my_page_sex">성별</string>
-    <string name="my_page_age">나이</string>
-    <string name="my_page_location">지역</string>
     <string name="my_page_male">남자</string>
     <string name="my_page_female">여자</string>
+    <string name="my_page_age">나이</string>
+    <string name="my_page_age_unit">세</string>
+    <string name="my_page_location">지역</string>
     <string name="my_page_profile_edit">프로필 수정</string>
     <string name="my_page_interest">관심사</string>
     <string name="my_page_interest_edit">수정</string>
@@ -118,11 +119,15 @@
     <string name="my_page_badge_subtitle">9가지의 뱃지를 모은 후 선물을 받아가세요</string>
 
 
+
     <!-- coffee order-->
     <string name="coffee_order_title">메뉴 주문하기</string>
     <string name="coffee_order_subtitle">Blind Cafe menu</string>
     <string name="coffee_order_description">누군가 당님과 함석하고 싶어해요 음료수를 고르시면 테이블로 안내해드릴게요</string>
     <string name="coffee_order_next_alert">음료를 먼저 선택해주세요</string>
+
+
+
 
 
 

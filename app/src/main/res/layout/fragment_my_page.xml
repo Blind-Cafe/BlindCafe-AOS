@@ -1,426 +1,450 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/black"
-    android:orientation="vertical">
+    <data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+        <import type="android.view.View.OnClickListener" />
+
+        <import type="android.view.View" />
+
+        <import type="androidx.core.content.ContextCompat" />
+
+        <variable
+            name="viewModel"
+            type="com.abouttime.blindcafe.presentation.main.my_page.MyPageViewModel" />
+    </data>
+
+    <LinearLayout
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/black"
-        android:paddingHorizontal="@dimen/my_page_container_padding">
+        android:orientation="vertical">
 
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:fontFamily="@font/spoqa_han_sans_neo_bold"
-            android:text="@string/my_page_title"
-            android:textColor="@color/white"
-            android:textSize="@dimen/font_size_regular"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/bt_setting"
-            app:layout_constraintBottom_toBottomOf="@id/tv_title"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_title" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:background="@color/gray_900">
-
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:background="@color/black"
+            android:paddingHorizontal="@dimen/my_page_container_padding">
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/spoqa_han_sans_neo_bold"
+                android:text="@string/my_page_title"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_regular"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bt_setting"
+                app:layout_constraintBottom_toBottomOf="@id/tv_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_title" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:background="@color/gray_900">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/black"
-                android:paddingHorizontal="@dimen/my_page_container_padding">
+                android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/iv_profile_image"
-                    android:layout_width="74dp"
-                    android:layout_height="74dp"
-                    app:layout_constraintBottom_toTopOf="@id/tv_sex"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/bg_barista" />
 
-                <TextView
-                    android:id="@+id/tv_nickname"
-                    android:layout_width="wrap_content"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="13dp"
-                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                    android:textColor="@color/white_2"
-                    android:textSize="@dimen/font_size_regular"
-                    app:layout_constraintBottom_toTopOf="@id/tv_profile_message"
-                    app:layout_constraintStart_toEndOf="@id/iv_profile_image"
-                    app:layout_constraintTop_toTopOf="@+id/iv_profile_image"
-                    app:layout_constraintVertical_chainStyle="packed"
-                    android:text="당이" />
+                    android:background="@color/black"
+                    android:paddingHorizontal="@dimen/my_page_container_padding">
 
-                <TextView
-                    android:id="@+id/tv_profile_message"
-                    android:layout_width="wrap_content"
+                    <ImageView
+                        android:id="@+id/iv_profile_image"
+                        android:layout_width="74dp"
+                        android:layout_height="74dp"
+                        android:src="@drawable/bg_barista"
+                        app:layout_constraintBottom_toTopOf="@id/tv_sex"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_nickname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                        android:text="@{viewModel.nickname}"
+                        tools:text="당이"
+                        android:textColor="@color/white_2"
+                        android:textSize="@dimen/font_size_regular"
+                        app:layout_constraintBottom_toTopOf="@id/tv_profile_message"
+                        app:layout_constraintStart_toEndOf="@id/iv_profile_image"
+                        app:layout_constraintTop_toTopOf="@+id/iv_profile_image"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <TextView
+                        android:id="@+id/tv_profile_message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                        android:text="@string/my_page_profile_message"
+                        android:textColor="@color/steel"
+                        android:textSize="@dimen/font_size_super_small"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_profile_image"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toStartOf="@id/tv_nickname"
+                        app:layout_constraintTop_toBottomOf="@id/tv_nickname" />
+
+
+                    <TextView
+                        android:id="@+id/tv_sex"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                        android:text="@string/my_page_sex"
+                        android:textColor="@color/gray_300"
+                        android:textSize="@dimen/font_size_small"
+                        app:layout_constraintBottom_toTopOf="@id/tv_sex_value"
+                        app:layout_constraintStart_toStartOf="@id/tv_sex_value"
+                        app:layout_constraintTop_toBottomOf="@id/iv_profile_image" />
+
+                    <TextView
+                        android:id="@+id/tv_age"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                        android:text="@string/my_page_age"
+                        android:textColor="@color/gray_300"
+                        android:textSize="@dimen/font_size_small"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_sex"
+                        app:layout_constraintStart_toStartOf="@id/tv_age_value"
+                        app:layout_constraintTop_toTopOf="@id/tv_sex" />
+
+
+                    <TextView
+                        android:id="@+id/tv_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                        android:text="@string/my_page_location"
+                        android:textColor="@color/gray_300"
+                        android:textSize="@dimen/font_size_small"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_sex"
+                        app:layout_constraintStart_toStartOf="@id/tv_location_value"
+                        app:layout_constraintTop_toTopOf="@id/tv_sex" />
+
+
+                    <TextView
+                        android:id="@+id/tv_sex_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                        tools:text="남자"
+                        android:textColor="@color/white_2"
+                        android:textSize="@dimen/font_size_regular"
+                        android:text="@string/no_value"
+                        app:layout_constraintBottom_toTopOf="@id/tv_edit_profile"
+                        app:layout_constraintEnd_toStartOf="@id/tv_age_value"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_sex" />
+
+                    <TextView
+                        android:id="@+id/tv_age_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                        android:text="@string/no_value"
+                        tools:text="29세"
+                        android:textColor="@color/white_2"
+                        android:textSize="@dimen/font_size_regular"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_sex_value"
+                        app:layout_constraintEnd_toStartOf="@id/tv_location_value"
+                        app:layout_constraintStart_toEndOf="@id/tv_sex_value"
+                        app:layout_constraintTop_toTopOf="@id/tv_sex_value" />
+
+                    <TextView
+                        android:id="@+id/tv_location_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                        android:text="@{viewModel.location}"
+                        tools:text="부산 광역시 해운대구"
+                        android:textColor="@color/white_2"
+                        android:textSize="@dimen/font_size_regular"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_sex_value"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_age_value"
+                        app:layout_constraintTop_toTopOf="@id/tv_sex_value" />
+
+
+                    <TextView
+                        android:id="@+id/tv_edit_profile"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/bg_profile_edit"
+                        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                        android:gravity="center"
+                        android:paddingVertical="12dp"
+                        android:text="@string/my_page_profile_edit"
+                        android:textColor="@color/white_2"
+                        android:textSize="@dimen/font_size_small"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_sex_value" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                    android:text="@string/my_page_profile_message"
-                    android:textColor="@color/steel"
-                    android:textSize="@dimen/font_size_super_small"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_profile_image"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0"
-                    app:layout_constraintStart_toStartOf="@id/tv_nickname"
-                    app:layout_constraintTop_toBottomOf="@id/tv_nickname" />
-
-
-                <TextView
-                    android:id="@+id/tv_sex"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                    android:text="@string/my_page_sex"
-                    android:textColor="@color/gray_300"
-                    android:textSize="@dimen/font_size_small"
-                    app:layout_constraintBottom_toTopOf="@id/tv_sex_value"
-                    app:layout_constraintStart_toStartOf="@id/tv_sex_value"
-                    app:layout_constraintTop_toBottomOf="@id/iv_profile_image" />
-
-                <TextView
-                    android:id="@+id/tv_age"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                    android:text="@string/my_page_age"
-                    android:textColor="@color/gray_300"
-                    android:textSize="@dimen/font_size_small"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_sex"
-                    app:layout_constraintStart_toStartOf="@id/tv_age_value"
-                    app:layout_constraintTop_toTopOf="@id/tv_sex" />
-
-
-                <TextView
-                    android:id="@+id/tv_location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                    android:text="@string/my_page_location"
-                    android:textColor="@color/gray_300"
-                    android:textSize="@dimen/font_size_small"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_sex"
-                    app:layout_constraintStart_toStartOf="@id/tv_location_value"
-                    app:layout_constraintTop_toTopOf="@id/tv_sex" />
-
-
-                <TextView
-                    android:id="@+id/tv_sex_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="13dp"
                     android:layout_marginTop="8dp"
-                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                    android:textColor="@color/white_2"
-                    android:textSize="@dimen/font_size_regular"
-                    app:layout_constraintBottom_toTopOf="@id/tv_edit_profile"
-                    app:layout_constraintEnd_toStartOf="@id/tv_age_value"
-                    app:layout_constraintHorizontal_chainStyle="spread_inside"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_sex"
-                    android:text="남자" />
+                    android:background="@color/black"
+                    android:paddingHorizontal="@dimen/my_page_container_padding">
 
-                <TextView
-                    android:id="@+id/tv_age_value"
-                    android:layout_width="wrap_content"
+
+                    <TextView
+                        android:id="@+id/tv_interest_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="13dp"
+                        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                        android:text="@string/my_page_interest"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_size_regular"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_interest_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                        android:text="@string/my_page_interest_edit"
+                        android:textColor="@color/gray_300"
+                        android:textSize="@dimen/font_size_super_small"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_interest_title"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_interest_title" />
+
+
+                    <ImageView
+                        android:id="@+id/iv_interest_1"
+                        android:layout_width="104dp"
+                        android:layout_height="84dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginBottom="32dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="8dp"
+                        android:src="@drawable/bt_interest_2"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/iv_interest_2"
+                        app:layout_constraintHorizontal_chainStyle="spread"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_interest_title"
+                        app:tint="@color/gray_300" />
+
+                    <ImageView
+                        android:id="@+id/iv_interest_2"
+                        android:layout_width="104dp"
+                        android:layout_height="84dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="8dp"
+                        android:src="@drawable/bt_interest_2"
+                        app:layout_constraintEnd_toStartOf="@id/iv_interest_3"
+                        app:layout_constraintStart_toEndOf="@id/iv_interest_1"
+                        app:layout_constraintTop_toTopOf="@id/iv_interest_1"
+                        app:tint="@color/gray_300" />
+
+
+                    <ImageView
+                        android:id="@+id/iv_interest_3"
+                        android:layout_width="104dp"
+                        android:layout_height="84dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="8dp"
+                        android:src="@drawable/bt_interest_2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/iv_interest_2"
+                        app:layout_constraintTop_toTopOf="@id/iv_interest_1"
+                        app:tint="@color/gray_300" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                    android:textColor="@color/white_2"
-                    android:textSize="@dimen/font_size_regular"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_sex_value"
-                    app:layout_constraintEnd_toStartOf="@id/tv_location_value"
-                    app:layout_constraintStart_toEndOf="@id/tv_sex_value"
-                    app:layout_constraintTop_toTopOf="@id/tv_sex_value"
-                    android:text="29세" />
-
-                <TextView
-                    android:id="@+id/tv_location_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                    android:textColor="@color/white_2"
-                    android:textSize="@dimen/font_size_regular"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_sex_value"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/tv_age_value"
-                    app:layout_constraintTop_toTopOf="@id/tv_sex_value"
-                    android:text="부산 광역시 해운대구" />
+                    android:layout_marginTop="10dp"
+                    android:background="@color/black"
+                    android:paddingHorizontal="@dimen/my_page_container_padding">
 
 
-                <TextView
-                    android:id="@+id/tv_edit_profile"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/bg_profile_edit"
-                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                    android:gravity="center"
-                    android:paddingVertical="12dp"
-                    android:text="@string/my_page_profile_edit"
-                    android:textColor="@color/white_2"
-                    android:textSize="@dimen/font_size_small"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_sex_value" />
+                    <TextView
+                        android:id="@+id/tv_badge_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="13dp"
+                        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                        android:text="@string/my_page_badge_title"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_size_regular"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_badge_sub_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                        android:text="@string/my_page_badge_subtitle"
+                        android:textColor="@color/gray_300"
+                        android:textSize="@dimen/font_size_small"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_badge_title" />
+
+                    <ImageView
+                        android:id="@+id/iv_coffee_badge_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/my_page_badge_horizontal_padding"
+                        android:layout_marginTop="48dp"
+                        android:src="@drawable/ic_coffee_badge_none"
+                        app:layout_constraintBottom_toTopOf="@id/iv_coffee_badge_4"
+                        app:layout_constraintEnd_toStartOf="@id/iv_coffee_badge_2"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_badge_sub_title" />
+
+                    <ImageView
+                        android:id="@+id/iv_coffee_badge_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_coffee_badge_none"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_coffee_badge_1"
+                        app:layout_constraintEnd_toStartOf="@id/iv_coffee_badge_3"
+                        app:layout_constraintStart_toEndOf="@id/iv_coffee_badge_1"
+                        app:layout_constraintTop_toTopOf="@id/iv_coffee_badge_1" />
+
+                    <ImageView
+                        android:id="@+id/iv_coffee_badge_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/my_page_badge_horizontal_padding"
+                        android:src="@drawable/ic_coffee_badge_none"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_coffee_badge_1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/iv_coffee_badge_2"
+                        app:layout_constraintTop_toTopOf="@id/iv_coffee_badge_1" />
+
+                    <ImageView
+                        android:id="@+id/iv_coffee_badge_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/my_page_badge_horizontal_padding"
+                        android:layout_marginTop="45dp"
+                        android:src="@drawable/ic_coffee_badge_none"
+                        app:layout_constraintBottom_toTopOf="@id/iv_coffee_badge_7"
+                        app:layout_constraintEnd_toStartOf="@id/iv_coffee_badge_5"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/iv_coffee_badge_1" />
+
+                    <ImageView
+                        android:id="@+id/iv_coffee_badge_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_coffee_badge_none"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_coffee_badge_4"
+                        app:layout_constraintEnd_toStartOf="@id/iv_coffee_badge_6"
+                        app:layout_constraintStart_toEndOf="@id/iv_coffee_badge_4"
+                        app:layout_constraintTop_toTopOf="@id/iv_coffee_badge_4" />
+
+                    <ImageView
+                        android:id="@+id/iv_coffee_badge_6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/my_page_badge_horizontal_padding"
+                        android:src="@drawable/ic_coffee_badge_none"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_coffee_badge_4"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/iv_coffee_badge_5"
+                        app:layout_constraintTop_toTopOf="@id/iv_coffee_badge_4" />
+
+                    <ImageView
+                        android:id="@+id/iv_coffee_badge_7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/my_page_badge_horizontal_padding"
+                        android:layout_marginTop="45dp"
+                        android:layout_marginBottom="118dp"
+                        android:src="@drawable/ic_coffee_badge_none"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/iv_coffee_badge_8"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/iv_coffee_badge_4" />
+
+                    <ImageView
+                        android:id="@+id/iv_coffee_badge_8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_coffee_badge_none"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_coffee_badge_7"
+                        app:layout_constraintEnd_toStartOf="@id/iv_coffee_badge_9"
+                        app:layout_constraintStart_toEndOf="@id/iv_coffee_badge_7"
+                        app:layout_constraintTop_toTopOf="@id/iv_coffee_badge_7" />
+
+                    <ImageView
+                        android:id="@+id/iv_coffee_badge_9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/my_page_badge_horizontal_padding"
+                        android:src="@drawable/ic_coffee_badge_none"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_coffee_badge_7"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/iv_coffee_badge_8"
+                        app:layout_constraintTop_toTopOf="@id/iv_coffee_badge_7" />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@color/black"
-                android:paddingHorizontal="@dimen/my_page_container_padding">
+            </LinearLayout>
 
 
-                <TextView
-                    android:id="@+id/tv_interest_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="13dp"
-                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                    android:text="@string/my_page_interest"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/font_size_regular"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_interest_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                    android:text="@string/my_page_interest_edit"
-                    android:textColor="@color/gray_300"
-                    android:textSize="@dimen/font_size_super_small"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_interest_title"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tv_interest_title" />
+        </ScrollView>
 
 
-                <ImageView
-                    android:id="@+id/iv_interest_1"
-                    android:layout_width="104dp"
-                    android:layout_height="84dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginBottom="32dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="8dp"
-                    android:src="@drawable/bt_interest_2"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/iv_interest_2"
-                    app:layout_constraintHorizontal_chainStyle="spread"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_interest_title"
-                    app:tint="@color/gray_300" />
-
-                <ImageView
-                    android:id="@+id/iv_interest_2"
-                    android:layout_width="104dp"
-                    android:layout_height="84dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="8dp"
-                    android:src="@drawable/bt_interest_2"
-                    app:layout_constraintEnd_toStartOf="@id/iv_interest_3"
-                    app:layout_constraintStart_toEndOf="@id/iv_interest_1"
-                    app:layout_constraintTop_toTopOf="@id/iv_interest_1"
-                    app:tint="@color/gray_300" />
+    </LinearLayout>
 
 
-                <ImageView
-                    android:id="@+id/iv_interest_3"
-                    android:layout_width="104dp"
-                    android:layout_height="84dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="8dp"
-                    android:src="@drawable/bt_interest_2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/iv_interest_2"
-                    app:layout_constraintTop_toTopOf="@id/iv_interest_1"
-                    app:tint="@color/gray_300" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@color/black"
-                android:paddingHorizontal="@dimen/my_page_container_padding">
-
-
-                <TextView
-                    android:id="@+id/tv_badge_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="13dp"
-                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                    android:text="@string/my_page_badge_title"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/font_size_regular"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_badge_sub_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                    android:text="@string/my_page_badge_subtitle"
-                    android:textColor="@color/gray_300"
-                    android:textSize="@dimen/font_size_small"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_badge_title" />
-
-                <ImageView
-                    android:id="@+id/iv_coffee_badge_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="48dp"
-                    app:layout_constraintHorizontal_chainStyle="spread_inside"
-                    android:src="@drawable/ic_coffee_badge_none"
-                    app:layout_constraintEnd_toStartOf="@id/iv_coffee_badge_2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/iv_coffee_badge_4"
-                    android:layout_marginStart="@dimen/my_page_badge_horizontal_padding"
-                    app:layout_constraintTop_toBottomOf="@id/tv_badge_sub_title" />
-
-                <ImageView
-                    android:id="@+id/iv_coffee_badge_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@id/iv_coffee_badge_1"
-                    app:layout_constraintTop_toTopOf="@id/iv_coffee_badge_1"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_coffee_badge_1"
-                    app:layout_constraintEnd_toStartOf="@id/iv_coffee_badge_3"
-                    android:src="@drawable/ic_coffee_badge_none" />
-
-                <ImageView
-                    android:id="@+id/iv_coffee_badge_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/my_page_badge_horizontal_padding"
-                    app:layout_constraintStart_toEndOf="@id/iv_coffee_badge_2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/iv_coffee_badge_1"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_coffee_badge_1"
-                    android:src="@drawable/ic_coffee_badge_none" />
-
-                <ImageView
-                    android:id="@+id/iv_coffee_badge_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="45dp"
-                    android:layout_marginStart="@dimen/my_page_badge_horizontal_padding"
-                    app:layout_constraintHorizontal_chainStyle="spread_inside"
-                    app:layout_constraintTop_toBottomOf="@id/iv_coffee_badge_1"
-                    app:layout_constraintEnd_toStartOf="@id/iv_coffee_badge_5"
-                    app:layout_constraintBottom_toTopOf="@id/iv_coffee_badge_7"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:src="@drawable/ic_coffee_badge_none" />
-
-                <ImageView
-                    android:id="@+id/iv_coffee_badge_5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@id/iv_coffee_badge_4"
-                    app:layout_constraintTop_toTopOf="@id/iv_coffee_badge_4"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_coffee_badge_4"
-                    app:layout_constraintEnd_toStartOf="@id/iv_coffee_badge_6"
-                    android:src="@drawable/ic_coffee_badge_none" />
-
-                <ImageView
-                    android:id="@+id/iv_coffee_badge_6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/my_page_badge_horizontal_padding"
-                    app:layout_constraintStart_toEndOf="@id/iv_coffee_badge_5"
-                    app:layout_constraintTop_toTopOf="@id/iv_coffee_badge_4"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_coffee_badge_4"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:src="@drawable/ic_coffee_badge_none" />
-
-                <ImageView
-                    android:id="@+id/iv_coffee_badge_7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/my_page_badge_horizontal_padding"
-                    app:layout_constraintHorizontal_chainStyle="spread_inside"
-                    app:layout_constraintTop_toBottomOf="@id/iv_coffee_badge_4"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="118dp"
-                    android:layout_marginTop="45dp"
-                    app:layout_constraintEnd_toStartOf="@id/iv_coffee_badge_8"
-                    android:src="@drawable/ic_coffee_badge_none" />
-
-                <ImageView
-                    android:id="@+id/iv_coffee_badge_8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@id/iv_coffee_badge_7"
-                    app:layout_constraintTop_toTopOf="@id/iv_coffee_badge_7"
-                    app:layout_constraintEnd_toStartOf="@id/iv_coffee_badge_9"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_coffee_badge_7"
-                    android:src="@drawable/ic_coffee_badge_none" />
-
-                <ImageView
-                    android:id="@+id/iv_coffee_badge_9"
-                    android:layout_width="wrap_content"
-                    android:layout_marginEnd="@dimen/my_page_badge_horizontal_padding"
-                    app:layout_constraintStart_toEndOf="@id/iv_coffee_badge_8"
-                    app:layout_constraintTop_toTopOf="@id/iv_coffee_badge_7"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_coffee_badge_7"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_coffee_badge_none" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </LinearLayout>
-
-
-    </ScrollView>
-
-
-</LinearLayout>
+</layout>

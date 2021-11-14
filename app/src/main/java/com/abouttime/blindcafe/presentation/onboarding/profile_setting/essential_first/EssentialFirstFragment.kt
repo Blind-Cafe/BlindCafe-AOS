@@ -26,8 +26,8 @@ class EssentialFirstFragment :
     }
 
     private fun observeData(fragmentEssentialFirstBinding: FragmentEssentialFirstBinding) = with(fragmentEssentialFirstBinding) {
-        val sexDisabledColor = getColor(R.color.disabled)
-        val sexEnabledColor = getColor(R.color.sex_enabled)
+        val sexDisabledColor = getColorByResId(R.color.disabled)
+        val sexEnabledColor = getColorByResId(R.color.sex_enabled)
         viewModel?.selectedSex?.observe(viewLifecycleOwner) { selectedSex ->
             when(selectedSex) {
                 1 -> {

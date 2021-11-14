@@ -9,7 +9,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="157:225"
-        android:src="@drawable/bt_coffee_americano"
+        android:src="@drawable/bt_drink_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

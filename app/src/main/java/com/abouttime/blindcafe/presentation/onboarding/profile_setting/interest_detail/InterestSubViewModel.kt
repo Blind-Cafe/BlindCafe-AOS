@@ -63,9 +63,9 @@ class InterestSubViewModel(
         val interest1 = interests?.get(0)?.let { interestMap[it.toInt()] }
         val interest2 = interests?.get(1)?.let { interestMap[it.toInt()] }
         val interest3 = interests?.get(2)?.let { interestMap[it.toInt()] }
-        val subInterests1 = selectedSubInterests[0].map { interest1+it }
-        val subInterests2 = selectedSubInterests[1].map { interest2+it }
-        val subInterests3 = selectedSubInterests[2].map { interest3+it }
+        val subInterests1 = selectedSubInterests[0].map { interest1+(it + 1) }
+        val subInterests2 = selectedSubInterests[1].map { interest2+(it + 1) }
+        val subInterests3 = selectedSubInterests[2].map { interest3+(it + 1) }
 
         val dto =  PostUserInfoDto(
             age = age,
