@@ -2,7 +2,8 @@ package com.abouttime.blindcafe.common.constants
 
 object Retrofit {
     const val TEST_BASE_URL = "https://www.blindcafe.me/"
-    const val BASE_URL = "http://dev.blindcafe.me/"
+    const val TEMP = "http://dev.blindcafe.me/"
+    const val BASE_URL = "https://www.blindcafe.me/"
 
 
     const val POST_KAKAO_LOGIN_URL = "api/kakao"

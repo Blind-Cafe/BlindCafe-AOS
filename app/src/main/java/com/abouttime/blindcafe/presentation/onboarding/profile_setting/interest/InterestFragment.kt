@@ -78,12 +78,12 @@ class InterestFragment : BaseFragment<InterestViewModel>(R.layout.fragment_inter
                         if (selectedItemIdx.contains(i)) {
                             selectedItemIdx.remove(i)
                             containers[i].setBackgroundResource(R.drawable.bg_interest_disabled)
-                            icons[i].setColorFilter(getColor(R.color.interest_icon_disabled))
+                            icons[i].setColorFilter(getColorByResId(R.color.interest_icon_disabled))
                         } else {
                             if (selectedItemIdx.size < 3) {
                                 selectedItemIdx.add(i)
                                 containers[i].setBackgroundResource(R.drawable.bg_interest_enabled)
-                                icons[i].setColorFilter(getColor(R.color.interest_icon_enabled))
+                                icons[i].setColorFilter(getColorByResId(R.color.interest_icon_enabled))
                             }
                         }
 

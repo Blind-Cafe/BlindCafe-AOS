@@ -1,13 +1,14 @@
 package com.abouttime.blindcafe.data.server.dto.user_info
 
 
+import com.abouttime.blindcafe.common.base.BaseResponse
 import com.google.gson.annotations.SerializedName
 
 data class GetUserInfoDto(
     @SerializedName("age")
     val age: Int?,
     @SerializedName("drinks")
-    val drinks: List<Any>?,
+    val drinks: List<Int>?,
     @SerializedName("interests")
     val interests: List<Int>?,
     @SerializedName("myGender")
@@ -15,7 +16,7 @@ data class GetUserInfoDto(
     @SerializedName("nickname")
     val nickname: String?,
     @SerializedName("profileImage")
-    val profileImage: Any?,
+    val profileImage: String?,
     @SerializedName("region")
-    val region: Any?
-)
+    val region: String?
+): BaseResponse()
