@@ -22,5 +22,7 @@
     <dimen name="my_page_container_padding">18dp</dimen>
     <dimen name="my_page_badge_horizontal_padding">8dp</dimen>
 
+    <dimen name="chat_content_padding">16dp</dimen>
+
 
 </resources>
