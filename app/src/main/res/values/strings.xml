@@ -127,6 +127,36 @@
     <string name="coffee_order_description">누군가 당님과 함석하고 싶어해요 음료수를 고르시면 테이블로 안내해드릴게요</string>
     <string name="coffee_order_next_alert">음료를 먼저 선택해주세요</string>
 
+    <!-- quit -->
+    <string name="quit_reason_title">매칭 방을 나가시는 이유를 하나 이상 선택해주세요</string>
+    <string name="quit_reason_subtitle">의 선택 사항은 해당 유저에게 전달됩니다.</string>
+    <string name="quit_reason_1">상대방과 연락이 잘 안돼요</string>
+    <string name="quit_reason_2">대화가 불쾌했어요 (성적, 종교적 등)</string>
+    <string name="quit_reason_3">대화가 재미없어요</string>
+    <string name="quit_reason_4">제가 대화를 지속하기 어려워요</string>
+    <string name="quit_reason_no">안나갈래요</string>
+    <string name="quit_reason_yes">이젠 안녕!</string>
+    <string name="quit_title">정말 매칭 방을 나가시겠습니까?</string>
+    <string name="quit_subtitle">지금 나가시면 로즈님과 다시 매칭 될 수 없어요</string>
+    <string name="quit_no">취소</string>
+    <string name="quit_yes">나가기</string>
+
+    <!-- report -->
+    <string name="report_reason_title">신고</string>
+    <string name="report_reason_subtitle">신고사유를 체크해주시면 확인 후 운영진에서해당유저에게 제제하겠습니다. 회원님의 신고는 익명으로 처리됩니다.</string>
+    <string name="report_reason_1">욕설, 모욕등의 불쾌한 발언</string>
+    <string name="report_reason_2">과도한 성적 발언</string>
+    <string name="report_reason_3">개인정보 요구 및 만남 강요</string>
+    <string name="report_reason_4">미성년자</string>
+    <string name="report_reason_5">도배성 메시지</string>
+    <string name="report_reason_email">적절한 신고 선택지가 없으실 땐 저희에게 언제든지 연락주세요 (blindcafeapp@gmail.com)</string>
+    <string name="report_reason_no">취소</string>
+    <string name="report_reason_yes">신고하기</string>
+    <string name="report_title">신고가 접수 되었습니다.\n대화 방을 바로 나가시겠습니까?</string>
+    <string name="report_subtitle">불쾌한 경험을 알겨드려 죄송합니다.\n보내주신 피드백으로 안전한 대화공간을 만들 수 있도록 노력하겠습니다.</string>
+    <string name="report_no">취소</string>
+    <string name="report_yes">나가기</string>
+
 
 
 

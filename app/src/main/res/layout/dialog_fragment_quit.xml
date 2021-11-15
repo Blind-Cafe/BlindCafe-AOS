@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginHorizontal="16dp"
+    android:orientation="vertical"
+    android:paddingHorizontal="18dp"
+    android:background="@color/gray_900"
+    android:paddingTop="30dp"
+    android:layout_height="175dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/quit_title"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size_regular"
+        android:fontFamily="@font/spoqa_han_sans_neo_bold"
+        android:id="@+id/tv_title"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/quit_subtitle"
+        android:textSize="@dimen/font_size_small"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+        android:textColor="@color/gray_300"
+        />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/steel"
+        android:layout_marginTop="30dp"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="13dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:gravity="center"
+            android:paddingVertical="11dp"
+            android:text="@string/quit_no"
+            android:textColor="@color/gray_300"
+            android:textSize="@dimen/font_size_regular" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:gravity="center"
+            android:paddingVertical="11dp"
+            android:text="@string/quit_yes"
+            android:textColor="@color/main"
+            android:textSize="@dimen/font_size_regular"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>
