@@ -5,14 +5,11 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.DialogFragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 
-
-abstract class BaseFragment<VM: BaseViewModel>(layoutId: Int) : Fragment(layoutId) {
-
+abstract class BaseDialogFragment<VM: BaseViewModel>(layoutId: Int): DialogFragment(layoutId) {
     // View Model
     abstract val viewModel: VM
 
