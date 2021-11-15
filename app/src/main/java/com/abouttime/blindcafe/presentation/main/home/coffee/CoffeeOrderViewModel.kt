@@ -76,8 +76,23 @@ class CoffeeOrderViewModel(
                     }
                 }
             }.launchIn(viewModelScope)
+        } ?: kotlin.run {
+            postDrinkUseCase(1).onEach { response ->
+                when(response) {
+                    is Resource.Loading -> {
+                        Log.d(RETROFIT_TAG, "Loading")
+                    }
+                    is Resource.Success -> {
+                        Log.d(RETROFIT_TAG, response.data.toString())
+                        moveToChatFragment()
+                    }
+                    is Resource.Error -> {
+                        Log.d(RETROFIT_TAG, response.message.toString())
+                        showToast(R.string.toast_check_internet)
+                    }
+                }
+            }.launchIn(viewModelScope)
         }
-
     }
 
 

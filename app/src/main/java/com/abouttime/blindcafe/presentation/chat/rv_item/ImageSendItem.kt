@@ -20,12 +20,12 @@ class ImageSendItem(
             message = message,
             callback = { uri ->
                 Log.e(LogTag.CHATTING_TAG, uri.toString())
-                Glide.with(viewBinding.imageIvSend)
+                Glide.with(viewBinding.ivContent)
                     .load(uri)
-                    .into(viewBinding.imageIvSend)
+                    .into(viewBinding.ivContent)
             }
         )
-        viewBinding.messageSendTime.text = message.timestamp?.seconds.toString()
+        viewBinding.tvTime.text = message.timestamp?.seconds.toString()
 
     }
 

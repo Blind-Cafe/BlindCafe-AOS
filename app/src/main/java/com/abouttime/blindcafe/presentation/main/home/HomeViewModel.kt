@@ -82,7 +82,7 @@ class HomeViewModel(
     }
 
 
-
+    /*
     private fun postNotification(notificationDto: PushNotificationDto) {
         postNotificationUseCase(
             notificationDto
@@ -100,6 +100,7 @@ class HomeViewModel(
             }
         }.launchIn(viewModelScope)
     }
+    */
 
     private fun postFcm(postFcmDto: PostFcmDto?) = viewModelScope.launch(Dispatchers.IO) {
         val targetToken = FirebaseMessaging.getInstance().token.await()
@@ -128,7 +129,7 @@ class HomeViewModel(
                     Log.d(RETROFIT_TAG, response.message.toString())
                 }
             }
-        }
+        }.launchIn(viewModelScope)
     }
 
 
@@ -147,6 +148,7 @@ class HomeViewModel(
     fun onClickCircleImageView() {
         val statusCode = _homeStatusCode.value
         // TODO statusCode 각각에 맞는 리스너 전환
+        Log.d(RETROFIT_TAG, "onClickCircleImageView")
         when (statusCode) {
             0 -> {
                 postMatchingRequest()
@@ -158,6 +160,9 @@ class HomeViewModel(
                 postMatchingRequest()
             }
             3 -> {
+                postMatchingRequest()
+            }
+            else -> {
                 postMatchingRequest()
             }
         }

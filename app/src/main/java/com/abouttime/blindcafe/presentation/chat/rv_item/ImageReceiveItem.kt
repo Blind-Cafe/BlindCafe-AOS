@@ -19,12 +19,12 @@ class ImageReceiveItem(
             message = message,
             callback = { uri ->
                 Log.e(CHATTING_TAG, uri.toString())
-                Glide.with(viewBinding.imageIvReceive)
+                Glide.with(viewBinding.ivContent)
                     .load(uri)
-                    .into(viewBinding.imageIvReceive)
+                    .into(viewBinding.ivContent)
             }
         )
-        viewBinding.messageReceiveTime.text = message.timestamp?.seconds.toString()
+        viewBinding.tvTime.text = message.timestamp?.seconds.toString()
 
     }
 
