@@ -10,6 +10,8 @@ object Retrofit {
     const val USER_INFO_URL = "api/user"
     const val FCM_URL = "fcm"
     const val HOME_INFO_URL = "api/user/home"
+    const val POST_MATCHING_REQUEST_URL = "api/matching"
+    const val POST_DRINK_URL = "api/matching/{matchingId}/drink"
 
 
     const val FIREBASE_BASE_URL = "https://fcm.googleapis.com"

@@ -43,92 +43,21 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         binding?.viewModel = viewModel
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
+        initChatRecyclerView(fragmentChatBinding)
+        observeMessagesData()
+
 
         initSendButton(fragmentChatBinding)
         initInputEditText(fragmentChatBinding)
-        initChatRecyclerView(fragmentChatBinding)
-        observeMessagesData()
-        addBackPressButtonListener()
+
         initMenuPopup(fragmentChatBinding)
+
+        addBackPressButtonListener()
+
         initGalleryButton(fragmentChatBinding)
     }
 
-    private fun observeMessagesData() {
-        viewModel.receivedMessage.observe(viewLifecycleOwner) { messages ->
-            messages.forEach { message ->
-                Log.e("asdf", message.toString())
-                if (message.senderUid == tempUserId) {
-                    addMessageToMe(message)
-                } else {
-                    addMessageToPartner(message)
-                }
-            }
-        }
-    }
-
-    private fun addMessageToMe(message: Message) {
-        when (message.type) {
-            1 -> chatAdapter.add(TextSendItem(message))
-            2 -> chatAdapter.add(ImageSendItem(message, viewModel = viewModel))
-            3 -> chatAdapter.add(AudioSendItem(message, viewModel = viewModel))
-            4 -> chatAdapter.add(DescriptionItem(message))
-        }
-    }
-
-    private fun addMessageToPartner(message: Message) {
-        when (message.type) {
-            1 -> chatAdapter.add(TextReceiveItem(message))
-            2 -> chatAdapter.add(ImageReceiveItem(message, viewModel = viewModel))
-            3 -> chatAdapter.add(AudioReceiveItem(message, viewModel = viewModel))
-            4 -> chatAdapter.add(DescriptionItem(message))
-        }
-    }
-
-
-    private fun initSendButton(
-        fragmentChatBinding
-        : FragmentChatBinding,
-    ) =
-        with(fragmentChatBinding
-        ) {
-            btSend.setOnClickListener {
-                viewModel?.sendMessage(Message(
-                    contents = etMessageInput.text.toString(),
-                    type = 1,
-                    senderUid = tempUserId,
-                    roomUid = tempUserId
-                ))
-                btSend.requestFocus()
-                etMessageInput.text.clear()
-            }
-        }
-
-    private fun initInputEditText(
-        fragmentChatBinding
-        : FragmentChatBinding,
-    ) =
-        with(fragmentChatBinding
-        ) {
-
-            etMessageInput.setOnFocusChangeListener { view, isFocused ->
-                if (isFocused) {
-                    etMessageInput.isCursorVisible = true
-                    mlInputContainer.transitionToEnd()
-                } else {
-                    etMessageInput.isCursorVisible = false
-                    val imm: InputMethodManager = getInputManager()
-                    imm.hideSoftInputFromWindow(etMessageInput.windowToken, 0)
-                    mlInputContainer.transitionToStart()
-                }
-            }
-
-            viewModel!!.messageEditText.observe(viewLifecycleOwner) {
-                viewModel!!.updateSendButton()
-            }
-
-        }
-
-
+    /** recycler view **/
     private fun initChatRecyclerView(
         fragmentChatBinding
         : FragmentChatBinding,
@@ -175,6 +104,88 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             }
         }
 
+    /** message **/
+    private fun observeMessagesData() {
+        viewModel.receivedMessage.observe(viewLifecycleOwner) { messages ->
+            messages.forEach { message ->
+                Log.e("asdf", message.toString())
+                if (message.senderUid == tempUserId) {
+                    addMessageToMe(message)
+                } else {
+                    addMessageToPartner(message)
+                }
+            }
+        }
+    }
+
+    private fun addMessageToMe(message: Message) {
+        when (message.type) {
+            1 -> chatAdapter.add(TextSendItem(message))
+            2 -> chatAdapter.add(ImageSendItem(message, viewModel = viewModel))
+            3 -> chatAdapter.add(AudioSendItem(message, viewModel = viewModel))
+            4 -> chatAdapter.add(DescriptionItem(message))
+        }
+    }
+
+    private fun addMessageToPartner(message: Message) {
+        when (message.type) {
+            1 -> chatAdapter.add(TextReceiveItem(message))
+            2 -> chatAdapter.add(ImageReceiveItem(message, viewModel = viewModel))
+            3 -> chatAdapter.add(AudioReceiveItem(message, viewModel = viewModel))
+            4 -> chatAdapter.add(DescriptionItem(message))
+        }
+    }
+
+
+    /** send button **/
+    private fun initSendButton(
+        fragmentChatBinding
+        : FragmentChatBinding,
+    ) =
+        with(fragmentChatBinding
+        ) {
+            btSend.setOnClickListener {
+                viewModel?.sendMessage(Message(
+                    contents = etMessageInput.text.toString(),
+                    type = 1,
+                    senderUid = tempUserId,
+                    roomUid = tempUserId
+                ))
+                btSend.requestFocus()
+                etMessageInput.text.clear()
+            }
+        }
+
+    /** edit text **/
+    private fun initInputEditText(
+        fragmentChatBinding
+        : FragmentChatBinding,
+    ) =
+        with(fragmentChatBinding
+        ) {
+
+            etMessageInput.setOnFocusChangeListener { view, isFocused ->
+                if (isFocused) {
+                    etMessageInput.isCursorVisible = true
+                    mlInputContainer.transitionToEnd()
+                } else {
+                    etMessageInput.isCursorVisible = false
+                    val imm: InputMethodManager = getInputManager()
+                    imm.hideSoftInputFromWindow(etMessageInput.windowToken, 0)
+                    mlInputContainer.transitionToStart()
+                }
+            }
+
+            viewModel!!.messageEditText.observe(viewLifecycleOwner) {
+                viewModel!!.updateSendButton()
+            }
+
+        }
+
+
+
+
+    /** menu **/
     private fun initMenuPopup(
         fragmentChatBinding
         : FragmentChatBinding,

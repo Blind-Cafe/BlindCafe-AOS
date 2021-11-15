@@ -6,13 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
-import com.abouttime.blindcafe.common.constants.LogTag.FCM_TAG
 import com.abouttime.blindcafe.common.constants.LogTag.HOME_TAG
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.data.server.dto.notification.PostFcmDto
 import com.abouttime.blindcafe.data.server.dto.z.PushNotificationDto
 import com.abouttime.blindcafe.domain.use_case.GetHomeInfoUseCase
 import com.abouttime.blindcafe.domain.use_case.PostFcmUseCase
+import com.abouttime.blindcafe.domain.use_case.PostMatchingRequestUseCase
 import com.abouttime.blindcafe.domain.use_case.PostNotificationUseCase
 import com.abouttime.blindcafe.presentation.main.MainFragmentDirections
 import com.google.firebase.messaging.FirebaseMessaging
@@ -26,7 +26,8 @@ import kotlinx.coroutines.tasks.await
 class HomeViewModel(
     private val postNotificationUseCase: PostNotificationUseCase,
     private val postFcmUseCase: PostFcmUseCase,
-    private val getHomeInfoUseCase: GetHomeInfoUseCase
+    private val getHomeInfoUseCase: GetHomeInfoUseCase,
+    private val postMatchingRequestUseCase: PostMatchingRequestUseCase
 ): BaseViewModel() {
     private val _homeStatusCode: MutableLiveData<Int> = MutableLiveData<Int>(-1)
     val homeStatusCode: LiveData<Int> get() = _homeStatusCode
@@ -47,7 +48,7 @@ class HomeViewModel(
                 is Resource.Success -> {
                     Log.d(RETROFIT_TAG, resource.data.toString())
                     resource.data?.matchingStatus?.let {
-                        updateHomeState(it)
+                        _homeStatusCode.postValue(getHomeSatusCode(it))
                     }
                 }
                 is Resource.Error -> {
@@ -58,12 +59,13 @@ class HomeViewModel(
         }.launchIn(viewModelScope)
     }
 
-    private fun updateHomeState(status: String) {
+    private fun getHomeSatusCode(status: String): Int {
         when(status) {
-            "NONE" -> _homeStatusCode.postValue(0)
-            "WAIT" -> _homeStatusCode.postValue(1)
-            "FOUND" -> _homeStatusCode.postValue(2)
-            "MATCHING" -> _homeStatusCode.postValue(3)
+            "NONE" -> return 0
+            "WAIT" -> return 1
+            "FOUND" -> return 2
+            "MATCHING" -> return 3
+            else -> return 0
         }
 
     }
@@ -112,6 +114,23 @@ class HomeViewModel(
         )
     }
 
+    private fun postMatchingRequest() {
+        postMatchingRequestUseCase().onEach { response ->
+            when(response) {
+                is Resource.Loading -> {
+                    Log.d(RETROFIT_TAG, "Loading")
+                }
+                is Resource.Success -> {
+                    Log.d(RETROFIT_TAG, response.data.toString())
+                    moveToCoffeeOrderFragment()
+                }
+                is Resource.Error -> {
+                    Log.d(RETROFIT_TAG, response.message.toString())
+                }
+            }
+        }
+    }
+
 
 
     /** onClick **/
@@ -126,7 +145,22 @@ class HomeViewModel(
     }
 
     fun onClickCircleImageView() {
-        moveToCoffeeOrderFragment()
+        val statusCode = _homeStatusCode.value
+        // TODO statusCode 각각에 맞는 리스너 전환
+        when (statusCode) {
+            0 -> {
+                postMatchingRequest()
+            }
+            1 -> {
+                postMatchingRequest()
+            }
+            2 -> {
+                postMatchingRequest()
+            }
+            3 -> {
+                postMatchingRequest()
+            }
+        }
     }
 
 

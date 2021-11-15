@@ -18,5 +18,6 @@ internal val repositoryModule = module {
     factory<ImageRepository> { ImageRepositoryImpl(androidContext()) }
     single<FcmRepository> { FcmRepositoryImpl(get()) }
     single<HomeRepository> { HomeRepositoryImpl(get())}
+    single<MatchingRepository> { MatchingRepositoryImpl(get()) }
 
 }

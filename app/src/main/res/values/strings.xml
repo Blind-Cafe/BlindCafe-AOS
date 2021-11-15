@@ -6,6 +6,7 @@
     <string name="app_name">BlindCafe</string>
     <string name="temp_error">에러</string>
     <string name="no_value">-</string>
+    <string name="toast_check_internet">인터넷 연결을 확인해주세요</string>
 
 
     <!-- rule -->

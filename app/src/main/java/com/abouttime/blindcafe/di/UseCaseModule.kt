@@ -32,5 +32,8 @@ internal val useCaseModule = module {
 
     /** home **/
     factory { GetHomeInfoUseCase(get()) }
+    /** matching **/
+    factory { PostMatchingRequestUseCase(get()) }
+    factory { PostDrinkUseCase(get()) }
 
 }
