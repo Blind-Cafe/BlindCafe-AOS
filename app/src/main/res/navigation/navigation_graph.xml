@@ -233,6 +233,8 @@
         android:label="QuitReasonDialogFragment" >
         <action
             android:id="@+id/action_quitReasonDialogFragment_to_quitDialogFragment"
+            app:popUpTo="@id/quitReasonDialogFragment"
+            app:popUpToInclusive="true"
             app:destination="@id/quitDialogFragment" />
     </dialog>
     <dialog
@@ -247,6 +249,8 @@
         android:label="ReportReasonDialogFragment" >
         <action
             android:id="@+id/action_reportReasonDialogFragment_to_reportDialogFragment"
+            app:popUpTo="@id/reportReasonDialogFragment"
+            app:popUpToInclusive="true"
             app:destination="@id/reportDialogFragment" />
     </dialog>
 </navigation>

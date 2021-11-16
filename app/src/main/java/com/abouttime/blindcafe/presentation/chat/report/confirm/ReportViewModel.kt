@@ -6,8 +6,6 @@ class ReportViewModel: BaseViewModel() {
 
     fun onClickYesButton() {
         popDirections()
-        popDirections()
-        popDirections()
     }
     fun onClickNoButton() {
         popDirections()
