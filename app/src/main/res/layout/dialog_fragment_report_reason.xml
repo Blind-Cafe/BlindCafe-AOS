@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <import type="android.view.View.OnClickListener" />
+        <import type="android.view.View"/>
+        <import type="androidx.core.content.ContextCompat" />
+        <import type="java.util.List"/>
+        <variable
+            name="viewModel"
+            type="com.abouttime.blindcafe.presentation.chat.report.reason.ReportReasonViewModel" />
+    </data>
+<LinearLayout
+    android:layout_width="wrap_content"
     android:layout_marginHorizontal="16dp"
     android:layout_height="wrap_content"
     android:background="@color/gray_900"
@@ -10,12 +20,12 @@
 
     <TextView
         android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/spoqa_han_sans_neo_bold"
         android:text="@string/report_reason_title"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_size_regular" />
+        android:textSize="@dimen/dialog_title" />
 
     <TextView
         android:id="@+id/tv_subtitle"
@@ -45,7 +55,7 @@
             android:gravity="center_vertical"
             android:text="@string/report_reason_1"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size_regular" />
+            android:textSize="@dimen/dialog_reason" />
 
         <ImageView
             android:id="@+id/iv_check_1"
@@ -71,7 +81,7 @@
             android:gravity="center_vertical"
             android:text="@string/report_reason_2"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size_regular" />
+            android:textSize="@dimen/dialog_reason" />
 
         <ImageView
             android:id="@+id/iv_check_2"
@@ -97,7 +107,7 @@
             android:gravity="center_vertical"
             android:text="@string/report_reason_3"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size_regular" />
+            android:textSize="@dimen/dialog_reason" />
 
         <ImageView
             android:id="@+id/iv_check_3"
@@ -124,7 +134,7 @@
             android:gravity="center_vertical"
             android:text="@string/report_reason_4"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size_regular" />
+            android:textSize="@dimen/dialog_reason" />
 
         <ImageView
             android:id="@+id/iv_check_4"
@@ -150,7 +160,7 @@
             android:gravity="center_vertical"
             android:text="@string/report_reason_5"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size_regular" />
+            android:textSize="@dimen/dialog_reason" />
 
         <ImageView
             android:id="@+id/iv_check_5"
@@ -196,23 +206,27 @@
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:gravity="center"
             android:paddingVertical="12dp"
+            android:onClick="@{() -> viewModel.onClickNoButton()}"
             android:text="@string/report_reason_no"
             android:textColor="@color/gray_300"
-            android:textSize="@dimen/font_size_regular" />
+            android:textSize="@dimen/dialog_title" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="@{() -> viewModel.onClickYesButton()}"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:gravity="center"
             android:paddingVertical="12dp"
             android:text="@string/report_reason_yes"
             android:textColor="@color/main"
-            android:textSize="@dimen/font_size_regular"/>
+            android:textSize="@dimen/dialog_title"/>
 
 
     </LinearLayout>
 
 
 </LinearLayout>
+
+</layout>

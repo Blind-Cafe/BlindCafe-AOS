@@ -152,6 +152,16 @@ class ChatViewModel(
 
 
 
+    /** move **/
+    fun moveToQuitDialogFragment() {
+        moveToDirections(ChatFragmentDirections.actionMatchingFragmentToQuitReasonDialogFragment())
+    }
+    fun moveToReportDialogFragment() {
+        moveToDirections(ChatFragmentDirections.actionMatchingFragmentToReportReasonDialogFragment())
+    }
+
+
+
 
 
 

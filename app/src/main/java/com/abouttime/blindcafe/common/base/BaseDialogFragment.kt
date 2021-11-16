@@ -31,7 +31,11 @@ abstract class BaseDialogFragment<VM: BaseViewModel>(layoutId: Int): DialogFragm
 
     private fun observeNavigationEvent() {
         viewModel.navigationEvent.observe(viewLifecycleOwner) { directions ->
-            moveToDirections(directions)
+            directions?.let {
+                moveToDirections(directions)
+            } ?: kotlin.run {
+                popDirections()
+            }
         }
     }
 

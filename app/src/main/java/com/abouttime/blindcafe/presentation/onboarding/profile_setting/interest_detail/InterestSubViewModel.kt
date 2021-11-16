@@ -101,7 +101,7 @@ class InterestSubViewModel(
                     Log.d(LogTag.RETROFIT_TAG, "Success ${response.data?.code} ${response.data?.message}")
                     val code = response.data?.code?.toInt()
                     if (code == 1000) {
-                        saveStringData(Pair(PREFERENCES_KEY.INFO_INPUT, response.data.code ?: ""))
+                        saveStringData(Pair(PREFERENCES_KEY.INFO_INPUT, response.data.code))
                         moveToSigninFragment()
                     }
 

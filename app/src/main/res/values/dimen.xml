@@ -4,6 +4,9 @@
     <dimen name="font_size_small">15sp</dimen>
     <dimen name="font_size_regular">18sp</dimen>
     <dimen name="font_size_large">23sp</dimen>
+    
+    <dimen name="dialog_title">16sp</dimen>
+    <dimen name="dialog_reason">17sp</dimen>
 
     <dimen name="chat_text_rounding">32dp</dimen>
 

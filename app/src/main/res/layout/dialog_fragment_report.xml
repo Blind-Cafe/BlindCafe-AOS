@@ -1,73 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_marginHorizontal="16dp"
-    android:orientation="vertical"
-    android:paddingHorizontal="18dp"
-    android:background="@color/gray_900"
-    android:paddingTop="30dp"
-    android:layout_height="235dp">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/report_title"
-        android:textColor="@color/white"
-        android:textSize="@dimen/font_size_regular"
-        android:fontFamily="@font/spoqa_han_sans_neo_bold"
-        android:id="@+id/tv_title"
-        />
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/report_subtitle"
-        android:textSize="@dimen/font_size_small"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/spoqa_han_sans_neo_regular"
-        android:textColor="@color/gray_300"
-        />
+    <data>
 
+        <import type="android.view.View.OnClickListener" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/steel"
-        android:layout_marginTop="30dp"
-        />
+        <import type="android.view.View" />
 
+        <import type="androidx.core.content.ContextCompat" />
+
+        <import type="java.util.List" />
+
+        <variable
+            name="viewModel"
+            type="com.abouttime.blindcafe.presentation.chat.report.confirm.ReportViewModel" />
+    </data>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="13dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:weightSum="2">
+        android:layout_marginHorizontal="16dp"
+        android:background="@color/gray_900"
+        android:orientation="vertical"
+        android:paddingHorizontal="18dp"
+        android:paddingTop="30dp">
 
         <TextView
-            android:layout_width="0dp"
+            android:id="@+id/tv_title"
+            android:layout_width="340dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:fontFamily="@font/spoqa_han_sans_neo_bold"
+            android:text="@string/report_title"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dialog_reason" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
-            android:gravity="center"
-            android:paddingVertical="11dp"
-            android:text="@string/report_no"
+            android:text="@string/report_subtitle"
             android:textColor="@color/gray_300"
-            android:textSize="@dimen/font_size_regular" />
+            android:textSize="@dimen/font_size_small" />
 
-        <TextView
-            android:layout_width="0dp"
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/steel" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="13dp"
             android:gravity="center"
-            android:paddingVertical="11dp"
-            android:text="@string/report_yes"
-            android:textColor="@color/main"
-            android:textSize="@dimen/font_size_regular"/>
+            android:orientation="horizontal"
+            android:weightSum="2">
 
+            <TextView
+                android:id="@+id/tv_no"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="@{() -> viewModel.onClickNoButton()}"
+                android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                android:gravity="center"
+                android:paddingVertical="11dp"
+                android:text="@string/report_no"
+                android:textColor="@color/gray_300"
+                android:textSize="@dimen/dialog_reason" />
+
+            <TextView
+                android:id="@+id/tv_yes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="@{() -> viewModel.onClickYesButton()}"
+                android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                android:gravity="center"
+                android:paddingVertical="11dp"
+                android:text="@string/report_yes"
+                android:textColor="@color/main"
+                android:textSize="@dimen/dialog_reason" />
+
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</layout>

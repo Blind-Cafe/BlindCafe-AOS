@@ -34,7 +34,11 @@ abstract class BaseFragment<VM: BaseViewModel>(layoutId: Int) : Fragment(layoutI
 
     private fun observeNavigationEvent() {
         viewModel.navigationEvent.observe(viewLifecycleOwner) { directions ->
-            moveToDirections(directions)
+            directions?.let {
+                moveToDirections(directions)
+            } ?: kotlin.run {
+                popDirections()
+            }
         }
     }
 

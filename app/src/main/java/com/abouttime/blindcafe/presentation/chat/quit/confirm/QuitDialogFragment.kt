@@ -16,7 +16,12 @@ class QuitDialogFragment: BaseDialogFragment<QuitViewModel>(R.layout.dialog_frag
         super.onViewCreated(view, savedInstanceState)
         val dialogFragmentQuitBinding = DialogFragmentQuitBinding.bind(view)
         binding = dialogFragmentQuitBinding
+        binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
 
+
+    }
+    private fun initButtons(fragmentQuitBinding: DialogFragmentQuitBinding) = with(fragmentQuitBinding) {
 
     }
 }

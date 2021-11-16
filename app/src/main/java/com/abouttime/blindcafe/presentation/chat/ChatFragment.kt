@@ -199,10 +199,10 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                     setOnMenuItemClickListener { item ->
                         when (item.itemId) {
                             R.id.menu_report -> {
-                                showToast(R.string.chat_room_menu_report)
+                                viewModel?.moveToReportDialogFragment()
                             }
                             R.id.menu_quit -> {
-                                showToast(R.string.chat_room_menu_quit)
+                                viewModel?.moveToQuitDialogFragment()
                             }
                             R.id.menu_alarm -> {
 
