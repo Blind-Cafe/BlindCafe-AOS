@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/matchingFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -165,7 +165,14 @@
         android:name="com.abouttime.blindcafe.presentation.chat.ChatFragment"
         android:label="MatchingFragment"
         tools:layout="@layout/fragment_chat"
-        />
+        >
+        <action
+            android:id="@+id/action_matchingFragment_to_quitDialogFragment"
+            app:destination="@id/quitDialogFragment" />
+        <action
+            android:id="@+id/action_matchingFragment_to_reportDialogFragment"
+            app:destination="@id/reportDialogFragment" />
+    </fragment>
     <fragment
         android:id="@+id/galleryDialogFragment"
         android:name="com.abouttime.blindcafe.presentation.chat.gallery.GalleryDialogFragment"
@@ -214,4 +221,28 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
+    <dialog
+        android:id="@+id/quitDialogFragment"
+        android:name="com.abouttime.blindcafe.presentation.chat.quit.confirm.QuitDialogFragment"
+        android:label="QuitDialogFragment" >
+        <action
+            android:id="@+id/action_quitDialogFragment_to_quitReasonDialogFragment"
+            app:destination="@id/quitReasonDialogFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/quitReasonDialogFragment"
+        android:name="com.abouttime.blindcafe.presentation.chat.quit.reason.QuitReasonDialogFragment"
+        android:label="QuitReasonDialogFragment" />
+    <dialog
+        android:id="@+id/reportDialogFragment"
+        android:name="com.abouttime.blindcafe.presentation.chat.report.confirm.ReportDialogFragment"
+        android:label="ReportDialogFragment" >
+        <action
+            android:id="@+id/action_reportDialogFragment_to_reportReasonDialogFragment"
+            app:destination="@id/reportReasonDialogFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/reportReasonDialogFragment"
+        android:name="com.abouttime.blindcafe.presentation.chat.report.reason.ReportReasonDialogFragment"
+        android:label="ReportReasonDialogFragment" />
 </navigation>

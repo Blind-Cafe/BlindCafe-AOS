@@ -5,6 +5,10 @@ import com.abouttime.blindcafe.presentation.chat.ChatViewModel
 import com.abouttime.blindcafe.presentation.main.MainViewModel
 import com.abouttime.blindcafe.presentation.main.home.HomeViewModel
 import com.abouttime.blindcafe.presentation.chat.gallery.GalleryViewModel
+import com.abouttime.blindcafe.presentation.chat.quit.confirm.QuitViewModel
+import com.abouttime.blindcafe.presentation.chat.quit.reason.QuitReasonViewModel
+import com.abouttime.blindcafe.presentation.chat.report.confirm.ReportViewModel
+import com.abouttime.blindcafe.presentation.chat.report.reason.ReportReasonViewModel
 import com.abouttime.blindcafe.presentation.main.chat_list.ChatListViewModel
 import com.abouttime.blindcafe.presentation.main.home.coffee.CoffeeOrderViewModel
 import com.abouttime.blindcafe.presentation.main.my_page.MyPageViewModel
@@ -40,10 +44,16 @@ internal val viewModelModule = module {
     /** Main **/
     viewModel { MainViewModel() }
     viewModel { HomeViewModel(get(), get(), get(), get()) }
-    viewModel { ChatViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { ChatListViewModel() }
     viewModel { MyPageViewModel(get()) }
-    viewModel { GalleryViewModel(get()) }
     viewModel { CoffeeOrderViewModel(get()) }
+
+    /** Chat **/
+    viewModel { ChatViewModel(get(), get(), get(), get(), get(), get()) }
+    viewModel { GalleryViewModel(get()) }
+    viewModel { QuitViewModel() }
+    viewModel { QuitReasonViewModel() }
+    viewModel { ReportViewModel() }
+    viewModel { ReportReasonViewModel() }
 
 }

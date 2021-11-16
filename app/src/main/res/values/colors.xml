@@ -47,5 +47,7 @@
 
     <color name="home_cpb_end">#f8ede3</color>
 
+    <color name="chat_menu_popup">#595959</color>
+
 
 </resources>

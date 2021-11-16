@@ -204,6 +204,9 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                             R.id.menu_quit -> {
                                 showToast(R.string.chat_room_menu_quit)
                             }
+                            R.id.menu_alarm -> {
+
+                            }
                             else -> {
 
                             }

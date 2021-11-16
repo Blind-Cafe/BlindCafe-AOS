@@ -10,10 +10,13 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class QuitDialogFragment: BaseDialogFragment<QuitViewModel>(R.layout.dialog_fragment_quit) {
     override val viewModel: QuitViewModel by viewModel()
-    private val binding: DialogFragmentQuitBinding? = null
+    private var binding: DialogFragmentQuitBinding? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val dialogFragmentQuitBinding = DialogFragmentQuitBinding.bind(view)
+        binding = dialogFragmentQuitBinding
+
 
     }
 }
