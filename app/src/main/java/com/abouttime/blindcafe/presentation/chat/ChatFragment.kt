@@ -1,20 +1,26 @@
 package com.abouttime.blindcafe.presentation.chat
 
 import android.Manifest
-import android.os.Build
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.LinearLayout
+import android.widget.PopupWindow
+import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.DeviceUtil
 import com.abouttime.blindcafe.common.base.BaseFragment
+import com.abouttime.blindcafe.common.ext.setMarginRight
+import com.abouttime.blindcafe.common.ext.setMarginTop
 import com.abouttime.blindcafe.databinding.FragmentChatBinding
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.presentation.chat.gallery.GalleryDialogFragment
@@ -23,13 +29,14 @@ import com.example.chatexample.presentation.ui.chat.rv_item.*
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.lang.reflect.Method
 
 class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     private var binding: FragmentChatBinding? = null
     override val viewModel: ChatViewModel by viewModel()
 
+
     private val chatAdapter = GroupAdapter<GroupieViewHolder>()
+    private var popupWindow: PopupWindow? = null
 
     private val tempUserId = "-"
 
@@ -50,7 +57,8 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         initSendButton(fragmentChatBinding)
         initInputEditText(fragmentChatBinding)
 
-        initMenuPopup(fragmentChatBinding)
+        initMenuButton(fragmentChatBinding)
+        //initMenuPopup(fragmentChatBinding)
 
         addBackPressButtonListener()
 
@@ -183,70 +191,75 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         }
 
 
-
-
     /** menu **/
-    private fun initMenuPopup(
-        fragmentChatBinding
-        : FragmentChatBinding,
-    ) {
-        fragmentChatBinding
-            .ivMenu.setOnClickListener { v ->
-                val popup = PopupMenu(requireContext(), v)
-                popup.apply {
-                    menuInflater.inflate(R.menu.chat_room_menu, popup.menu)
-
-                    setOnMenuItemClickListener { item ->
-                        when (item.itemId) {
-                            R.id.menu_report -> {
-                                viewModel?.moveToReportDialogFragment()
-                            }
-                            R.id.menu_quit -> {
-                                viewModel?.moveToQuitDialogFragment()
-                            }
-                            R.id.menu_alarm -> {
-
-                            }
-                            else -> {
-
-                            }
-                        }
-                        false
-                    }
-
-
-                }
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-
-                } else {
-                    try {
-                        val fields = popup.javaClass.declaredFields
-                        for (field in fields) {
-                            if ("mPopup" == field.name) {
-                                field.isAccessible = true
-                                val menuPopupHelper = field[popup]
-                                val classPopupHelper =
-                                    Class.forName(menuPopupHelper.javaClass.name)
-                                val setForceIcons: Method = classPopupHelper.getMethod(
-                                    "setForceShowIcon",
-                                    Boolean::class.javaPrimitiveType
-                                )
-                                setForceIcons.invoke(menuPopupHelper, true)
-                                break
-                            }
-                        }
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
-                }
-//            val inflater: MenuInflater = popup.menuInflater
-//            inflater.inflate(R.menu.chat_room_menu, popup.menu)
-                popup.show()
+    private fun initMenuButton(fragmentChatBinding: FragmentChatBinding) =
+        with(fragmentChatBinding) {
+            ivMenu.setOnClickListener {
+                showMenuPopupWindow(fragmentChatBinding)
             }
+        }
+
+    private fun showMenuPopupWindow(fragmentChatBinding: FragmentChatBinding) {
+        val inflater =
+            requireActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.pw_chat_menu, null)
+
+
+        val time = view.findViewById<TextView>(R.id.tv_time)
+        val report = view.findViewById<LinearLayout>(R.id.ll_report_container)
+        val notification = view.findViewById<LinearLayout>(R.id.ll_notification_container)
+        val quit = view.findViewById<LinearLayout>(R.id.ll_quit_container)
+        initTimeContainer(time)
+        initReportContainer(report)
+        initNotificationContainer(notification)
+        initQuitContainer(quit)
+
+        popupWindow = PopupWindow(view, WRAP_CONTENT, WRAP_CONTENT)
+
+        popupWindow?.let { pw ->
+            pw.isOutsideTouchable = true
+            pw.isFocusable = true
+            pw.showAsDropDown(fragmentChatBinding.ivBell)
+            pw.contentView?.setMarginRight(20)
+            pw.contentView?.setMarginTop(20)
+        }
 
 
     }
+
+    private fun dismissPopupWindow() {
+        popupWindow?.let {
+            if (it.isShowing) {
+                it.dismiss()
+            }
+        }
+        popupWindow = null
+    }
+
+    private fun initTimeContainer(view: TextView) {
+
+    }
+
+    private fun initReportContainer(view: View) {
+        view.setOnClickListener {
+            viewModel?.moveToReportDialogFragment()
+            dismissPopupWindow()
+        }
+    }
+
+    private fun initNotificationContainer(view: View) {
+        view.setOnClickListener {
+            showToast(R.string.toast_check_internet)
+        }
+    }
+
+    private fun initQuitContainer(view: View) {
+        view.setOnClickListener {
+            viewModel?.moveToQuitDialogFragment()
+            dismissPopupWindow()
+        }
+    }
+
 
     private fun addBackPressButtonListener() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {

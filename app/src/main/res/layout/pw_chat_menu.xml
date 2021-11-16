@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingVertical="12dp"
+    android:paddingHorizontal="10dp"
+    android:background="@drawable/bg_rounding_3dp"
+    android:backgroundTint="@color/chat_menu_popup"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="@dimen/chat_popup_window_width"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:id="@+id/ll_time_container">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_time"
+            android:src="@drawable/ic_time"
+            />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_small"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:textColor="@color/main"
+            tools:text="148시간 05분"
+            android:layout_marginStart="@dimen/chat_popup_window_text_margin_start"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="@dimen/chat_popup_window_width"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/ll_report_container">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_report"
+            android:src="@drawable/ic_report"
+            />
+
+        <TextView
+            android:id="@+id/tv_report"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_small"
+            android:textColor="@color/white"
+            android:text="@string/chat_room_menu_report"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:layout_marginStart="@dimen/chat_popup_window_text_margin_start"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="@dimen/chat_popup_window_width"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/ll_notification_container">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_notification"
+            android:src="@drawable/ic_notification_off"
+            />
+
+        <TextView
+            android:id="@+id/tv_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_small"
+            android:textColor="@color/white"
+            android:text="@string/chat_room_menu_notification"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:layout_marginStart="@dimen/chat_popup_window_text_margin_start"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="@dimen/chat_popup_window_width"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/ll_quit_container">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_quit"
+            android:src="@drawable/ic_time"
+            />
+
+        <TextView
+            android:id="@+id/tv_quit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_small"
+            android:textColor="@color/white"
+            android:text="@string/chat_room_menu_quit"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:layout_marginStart="@dimen/chat_popup_window_text_margin_start"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

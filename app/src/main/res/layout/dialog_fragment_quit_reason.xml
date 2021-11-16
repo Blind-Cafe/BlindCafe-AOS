@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -19,7 +20,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/gray_900"
+        android:background="@drawable/bg_rounding_3dp"
+        android:backgroundTint="@color/gray_900"
         android:orientation="vertical"
         android:paddingHorizontal="18dp"
         android:paddingTop="30dp">
@@ -67,7 +69,9 @@
                 android:id="@+id/iv_check_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/bt_agreement_check" />
+                android:src="@{viewModel.reason == 1 ? @drawable/bt_checked : @drawable/bt_check}"
+                android:onClick="@{viewModel::onClickCheckButton}"
+                />
 
         </LinearLayout>
 
@@ -93,7 +97,8 @@
                 android:id="@+id/iv_check_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/bt_agreement_check" />
+                android:onClick="@{viewModel::onClickCheckButton}"
+                android:src="@{viewModel.reason == 2 ? @drawable/bt_checked : @drawable/bt_check}" />
 
         </LinearLayout>
 
@@ -119,7 +124,8 @@
                 android:id="@+id/iv_check_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/bt_agreement_check" />
+                android:onClick="@{viewModel::onClickCheckButton}"
+                android:src="@{viewModel.reason == 3 ? @drawable/bt_checked : @drawable/bt_check}" />
 
         </LinearLayout>
 
@@ -146,7 +152,8 @@
                 android:id="@+id/iv_check_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/bt_agreement_check" />
+                android:onClick="@{viewModel::onClickCheckButton}"
+                android:src="@{viewModel.reason == 4 ? @drawable/bt_checked : @drawable/bt_check}" />
 
         </LinearLayout>
 

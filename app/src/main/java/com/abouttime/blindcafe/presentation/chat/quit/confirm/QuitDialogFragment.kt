@@ -21,7 +21,4 @@ class QuitDialogFragment: BaseDialogFragment<QuitViewModel>(R.layout.dialog_frag
 
 
     }
-    private fun initButtons(fragmentQuitBinding: DialogFragmentQuitBinding) = with(fragmentQuitBinding) {
-
-    }
 }

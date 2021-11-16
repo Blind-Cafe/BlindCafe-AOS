@@ -2,21 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/menu_time_remaining"
-        android:icon="@drawable/ic_clock"
+        android:icon="@drawable/ic_time"
         android:title="item1"/>
 
     <item android:id="@+id/menu_report"
-        android:icon="@drawable/ic_alert"
+        android:icon="@drawable/ic_report"
         android:title="@string/chat_room_menu_report"
         />
 
-    <item android:id="@+id/menu_alarm"
+    <item android:id="@+id/menu_notification"
         android:icon="@drawable/ic_notification_off"
         android:title="@string/chat_room_menu_notification"/>
 
 
     <item android:id="@+id/menu_quit"
-        android:icon="@drawable/ic_leave"
+        android:icon="@drawable/ic_quit"
         android:title="@string/chat_room_menu_quit"/>
 
 </menu>

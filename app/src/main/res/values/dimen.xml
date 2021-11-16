@@ -27,5 +27,8 @@
 
     <dimen name="chat_content_padding">16dp</dimen>
 
+    <dimen name="chat_popup_window_text_margin_start">8dp</dimen>
+    <dimen name="chat_popup_window_width">150dp</dimen>
+
 
 </resources>

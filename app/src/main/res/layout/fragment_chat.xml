@@ -19,6 +19,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/cl_chat_root"
         android:background="@color/black">
 
 
@@ -26,6 +27,7 @@
             android:id="@+id/rv_chat_container"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="8dp"
             tools:listitem="@layout/rv_chat_item_receive_text"
             android:clickable="true"
             android:focusable="true"
@@ -33,59 +35,51 @@
             app:layout_constraintBottom_toTopOf="@id/ml_input_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cl_top_container" />
+            app:layout_constraintTop_toBottomOf="@id/iv_back" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_top_container"
-            android:layout_width="0dp"
+
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="28dp"
+            android:src="@drawable/bt_back"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/iv_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="28dp"
-                android:src="@drawable/bt_back"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tv_other_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/spoqa_han_sans_neo_bold"
+            android:text="Erick"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_regular"
+            app:layout_constraintBottom_toBottomOf="@id/iv_back"
+            app:layout_constraintStart_toEndOf="@id/iv_back"
+            app:layout_constraintTop_toTopOf="@id/iv_back" />
 
-            <TextView
-                android:id="@+id/tv_other_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/spoqa_han_sans_neo_bold"
-                android:text="Erick"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_size_regular"
-                app:layout_constraintBottom_toBottomOf="@id/iv_back"
-                app:layout_constraintStart_toEndOf="@id/iv_back"
-                app:layout_constraintTop_toTopOf="@id/iv_back" />
+        <ImageView
+            android:id="@+id/iv_bell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bt_bell"
+            app:layout_constraintBottom_toBottomOf="@id/iv_back"
+            app:layout_constraintEnd_toStartOf="@+id/iv_menu"
+            app:layout_constraintTop_toTopOf="@id/iv_back" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/bt_bell"
-                app:layout_constraintBottom_toBottomOf="@id/iv_back"
-                app:layout_constraintEnd_toStartOf="@+id/iv_menu"
-                app:layout_constraintTop_toTopOf="@id/iv_back" />
+        <ImageView
+            android:id="@+id/iv_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/bt_menu"
+            app:layout_constraintBottom_toBottomOf="@id/iv_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_back" />
 
-            <ImageView
-                android:id="@+id/iv_menu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/bt_menu"
-                app:layout_constraintBottom_toBottomOf="@id/iv_back"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/iv_back" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.motion.widget.MotionLayout
             android:id="@+id/ml_input_container"

@@ -20,7 +20,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:background="@color/gray_900"
+        android:background="@drawable/bg_rounding_3dp"
+        android:backgroundTint="@color/gray_900"
         android:orientation="vertical"
         android:paddingHorizontal="18dp"
         android:paddingTop="30dp">
