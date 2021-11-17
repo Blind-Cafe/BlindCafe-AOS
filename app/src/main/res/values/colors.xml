@@ -49,5 +49,7 @@
 
     <color name="chat_menu_popup">#595959</color>
 
+    <color name="profile_image_edit_bg">#80757575</color>
+
 
 </resources>

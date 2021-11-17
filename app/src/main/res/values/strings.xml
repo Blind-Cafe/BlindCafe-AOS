@@ -141,6 +141,10 @@
     <string name="quit_no">취소</string>
     <string name="quit_yes">나가기</string>
 
+
+    <!-- quit complete -->
+    <string name="quit_complete_title">님과 3일간의 추억은 즐거우셨나요?\n이제 더 좋은 추억을 쌓으러 가보죠!</string>
+
     <!-- report -->
     <string name="report_reason_title">신고</string>
     <string name="report_reason_subtitle">신고사유를 체크해주시면 확인 후 운영진에서해당유저에게 제제하겠습니다. 회원님의 신고는 익명으로 처리됩니다.</string>
@@ -156,6 +160,15 @@
     <string name="report_subtitle">불쾌한 경험을 알겨드려 죄송합니다.\n보내주신 피드백으로 안전한 대화공간을 만들 수 있도록 노력하겠습니다.</string>
     <string name="report_no">취소</string>
     <string name="report_yes">나가기</string>
+
+    <!-- profile edit -->
+    <string name="profile_edit_title">프로필 수정</string>
+    <string name="profile_edit_image_title">프로필 등록하기</string>
+    <string name="profile_edit_age_title">나이</string>
+    <string name="profile_edit_sex_title">성별</string>
+    <string name="profile_edit_location_title">지역</string>
+    <string name="profile_edit_impossible">수정이 불가능합니다.</string>
+    <string name="profile_edit_complete">수정하기</string>
 
 
 
