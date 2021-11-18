@@ -114,16 +114,16 @@ class ChatViewModel(
             downloadImageUrlUseCase(message).collect { result ->
                 when (result) {
                     is Resource.Loading -> {
-                        Log.e(CHATTING_TAG, "uri 오는중")
+
                     }
                     is Resource.Success -> {
-                        Log.e(CHATTING_TAG, "uri 도착")
+
                         withContext(Dispatchers.Main) {
                             callback(result.data)
                         }
                     }
                     is Resource.Error -> {
-                        Log.e(CHATTING_TAG, "uri 에러")
+
                     }
                 }
             }
@@ -135,14 +135,16 @@ class ChatViewModel(
             downloadAudioUrlUseCase(message).collect { result ->
                 when (result) {
                     is Resource.Loading -> {
-
+                        Log.e(CHATTING_TAG, "uri 오는중")
                     }
                     is Resource.Success -> {
+                        Log.e(CHATTING_TAG, "uri 도착")
                         withContext(Dispatchers.Main) {
                             callback(result.data)
                         }
                     }
                     is Resource.Error -> {
+                        Log.e(CHATTING_TAG, "uri 에러")
                         Log.e(CHATTING_TAG, result.message ?: "error")
                     }
                 }

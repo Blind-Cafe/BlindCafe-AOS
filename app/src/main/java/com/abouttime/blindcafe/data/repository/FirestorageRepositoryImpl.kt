@@ -22,7 +22,7 @@ class FirestorageRepositoryImpl(
     override suspend fun uploadAudio(message: Message, uri: Uri): UploadTask.TaskSnapshot? {
         val id = message.contents
         return firebaseStorage
-            .imageRef
+            .audioRef
             .child(id)
             .putFile(uri)
             .await()

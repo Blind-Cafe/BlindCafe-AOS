@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Context
 import android.media.MediaPlayer
 import android.media.MediaRecorder
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -31,6 +32,7 @@ import com.example.chatexample.presentation.ui.chat.rv_item.*
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.io.File
 
 class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     private var binding: FragmentChatBinding? = null
@@ -346,14 +348,17 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         viewModel?.recorderState?.observe(viewLifecycleOwner) { state ->
             when (state) {
                 RecorderState.BEFORE_RECORDING -> {
-                    llRecorderContainer.visibility = View.INVISIBLE
+                    Log.e("record", "BEFORE_RECORDING")
                     initSoundVisualizerView(fragmentChatBinding)
                 }
                 RecorderState.START_RECORDING -> {
+                    Log.e("record", "START_RECORDING")
                     recordIfPermissionGranted()
                 }
                 RecorderState.STOP_RECORDING -> {
+                    Log.e("record", "STOP_RECORDING")
                     stopRecording()
+                    sendAudioMessage()
                 }
             }
         }
@@ -367,41 +372,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         }
 
     }
-
-    private fun startRecording()  {
-        recorder = MediaRecorder().apply {
-            setAudioSource(MediaRecorder.AudioSource.MIC)
-            setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
-            setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
-            // 따로 저장하지 않을거라서 캐시에 저장
-            // 나중에 다른 곳에 저장할 때는 내부 저장소는 녹음 파일이 얼마나 커질지 모르니 충분한 공간을 제공하지 못할 수 있음에 주의
-            // 그러니 여기서도 외부 저장소의 캐시 디렉토리에 접근해서 임시적으로 녹음파일을 저장하되 이 앱이 지워지거나
-            // 안드로이드 기기 내에서 용량 확보할 때쯤에는 캐시 디렉토리에 있는 파일은 쉽게 날라갈 수 있기때문에 일단 거기에 쓰는 걸로 진행한다.
-            setOutputFile(recordingFilePath)
-            prepare()
-        }
-        recorder?.start()
-        binding?.let {
-            it.soundVisualizer.startVisualizing(false)
-            it.tvCountUp.startCountUp()
-        }
-    }
-
-    private fun stopRecording(){
-        recorder?.run {
-            stop()
-            release()
-        }
-        recorder = null
-
-        binding?.let {
-            it.soundVisualizer.stopVisualizing()
-            it.tvCountUp.stopCountUp()
-        }
-    }
-
-
-
     private fun recordIfPermissionGranted() {
         if (DeviceUtil.hasRecordPermission(requireContext())) {
             startRecording()
@@ -418,6 +388,67 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                 showToast(R.string.chat_toast_permission)
             }
         }
+
+    private fun startRecording()  {
+        recorder = MediaRecorder().apply {
+            setAudioSource(MediaRecorder.AudioSource.MIC)
+            setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+            setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+            // 따로 저장하지 않을거라서 캐시에 저장
+            // 나중에 다른 곳에 저장할 때는 내부 저장소는 녹음 파일이 얼마나 커질지 모르니 충분한 공간을 제공하지 못할 수 있음에 주의
+            // 그러니 여기서도 외부 저장소의 캐시 디렉토리에 접근해서 임시적으로 녹음파일을 저장하되 이 앱이 지워지거나
+            // 안드로이드 기기 내에서 용량 확보할 때쯤에는 캐시 디렉토리에 있는 파일은 쉽게 날라갈 수 있기때문에 일단 거기에 쓰는 걸로 진행한다.
+            setOutputFile(recordingFilePath)
+            prepare()
+        }
+        recorder?.start()
+        binding?.let {
+            Log.e("record", "Start 에서 binding 이 null 인가?")
+            it.ivRecord.isClickable = false
+            it.llRecorderContainer.visibility = View.VISIBLE
+            it.soundVisualizer.startVisualizing(false)
+            it.tvCountUp.startCountUp()
+        }
+    }
+
+    private fun stopRecording() {
+        recorder?.run {
+            stop()
+            release()
+        }
+        recorder = null
+
+        binding?.let {
+            it.ivRecord.isClickable = true
+            it.llRecorderContainer.visibility = View.GONE
+            it.soundVisualizer.stopVisualizing()
+            it.tvCountUp.stopCountUp()
+        }
+
+    }
+
+    private fun sendAudioMessage() {
+        val uri = Uri.fromFile(File(recordingFilePath))
+        val id = System.currentTimeMillis().toString()
+
+        uri?.let {
+            val id = System.currentTimeMillis().toString()
+            viewModel.uploadAudio(
+                message = Message(
+                    senderUid = tempUserId,
+                    contents = id,
+                    roomUid = tempUserId,
+                    type = 3
+                ),
+                uri = it
+            )
+        }
+    }
+
+
+
+
+
 
 
 

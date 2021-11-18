@@ -13,7 +13,7 @@ class SoundVisualizerView(context : Context, attrs: AttributeSet? = null) : View
 
     // ANTI_ALIAS 는 계단화 방지 도트이미지 같이 보이는 거 방지, 더 부드럽게 보여준다는 느낌
     private val amplitudePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = context.getColor(R.color.purple_500)
+        color = context.getColor(R.color.white)
         strokeWidth = LINE_WIDTH
         strokeCap = Paint.Cap.ROUND
     }
