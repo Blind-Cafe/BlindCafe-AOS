@@ -29,6 +29,7 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
         binding = fragmentMainBinding
 
 
+
         setCurrentFragment(HomeFragment())
         initBottomNavigationView(fragmentMainBinding)
     }
