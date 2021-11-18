@@ -28,7 +28,7 @@
     <View
         android:layout_width="0dp"
         android:layout_height="0.5dp"
-        android:background="@color/main_bottom_bar"
+        android:background="@color/divider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bn_tab"/>

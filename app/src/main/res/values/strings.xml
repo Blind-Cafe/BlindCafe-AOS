@@ -201,10 +201,12 @@
     <string name="profile_exchange_dismiss">거절하기</string>
     <string name="profile_exchange_accept">수락하기</string>
 
-
-
-
-
-
+    <string name="profile_dismiss_title">거절하신 이유를 알려주시겠어요?</string>
+    <string name="profile_dismiss_subtitle">회원님의 선택 사항은 해당유저에게 전달됩니다.</string>
+    <string name="profile_dismiss_reason_1">상대방과 연락이 잘 안돼요</string>
+    <string name="profile_dismiss_reason_2">대화가 불쾌했어요(성적, 종교적 등)</string>
+    <string name="profile_dismiss_reason_3">대화가 재미 없어요</string>
+    <string name="profile_dismiss_reason_4">제가 대화를 지속하기 어려워요</string>
+    <string name="profile_dismiss_next">거절하기</string>
 
 </resources>
