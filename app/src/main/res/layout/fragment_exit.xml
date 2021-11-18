@@ -71,6 +71,7 @@
         android:paddingHorizontal="13dp"
         android:text="@string/exit_complete_next"
         android:textColor="@color/white"
+        android:id="@+id/tv_next"
         android:textSize="@dimen/font_size_regular"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="328:48"

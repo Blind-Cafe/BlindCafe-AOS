@@ -51,5 +51,7 @@
 
     <color name="profile_image_edit_bg">#80757575</color>
 
+    <color name="profile_exchange_edit_button">#454545</color>
+
 
 </resources>

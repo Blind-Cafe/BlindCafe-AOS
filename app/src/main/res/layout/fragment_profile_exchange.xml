@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="28dp"
+        android:src="@drawable/bt_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/spoqa_han_sans_neo_bold"
+        android:text="@string/profile_exchange_title"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size_regular"
+        app:layout_constraintBottom_toBottomOf="@id/iv_back"
+        app:layout_constraintStart_toEndOf="@id/iv_back"
+        app:layout_constraintTop_toTopOf="@id/iv_back" />
+
+    <TextView
+        android:id="@+id/tv_subtitle_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginTop="24dp"
+        android:lineSpacingExtra="6sp"
+        android:text="@string/profile_exchange_subtitle_1"
+        android:textSize="@dimen/font_size_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_back" />
+
+    <TextView
+        android:id="@+id/tv_subtitle_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+        android:text="@string/profile_exchange_subtitle_2"
+        android:textColor="@color/main"
+        android:textSize="@dimen/font_size_small"
+        app:layout_constraintStart_toStartOf="@id/tv_subtitle_1"
+        app:layout_constraintTop_toBottomOf="@id/tv_subtitle_1" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_profile_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/bg_rounding_3dp"
+        android:backgroundTint="@color/gray_900"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_subtitle_2">
+
+        <ImageView
+            android:id="@+id/iv_add_image"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/bt_profile_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_profile_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/profile_exchange_make_profile"
+            android:textColor="@color/gray_300"
+            android:textSize="@dimen/font_size_regular"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_add_image" />
+
+
+        <ImageView
+            android:id="@+id/iv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:src="@drawable/ic_location"
+            app:layout_constraintEnd_toStartOf="@id/tv_location"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_profile_edit" />
+
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/profile_exchange_location"
+            app:layout_constraintBottom_toBottomOf="@id/iv_location"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_location"
+            app:layout_constraintTop_toTopOf="@id/iv_location" />
+
+
+        <View
+            android:id="@+id/v_divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/main_bottom_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_location" />
+
+        <TextView
+            android:id="@id/tv_sex_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/spoqa_han_sans_neo_bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_regular"
+            app:layout_constraintBottom_toTopOf="@id/tv_sex"
+            app:layout_constraintEnd_toStartOf="@id/tv_age_value"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v_divider"
+            tools:text="@string/male" />
+
+        <TextView
+            android:id="@+id/tv_age_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/spoqa_han_sans_neo_bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_regular"
+            app:layout_constraintBottom_toBottomOf="@id/tv_sex_value"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_sex_value"
+            app:layout_constraintTop_toTopOf="@id/tv_sex_value"
+            tools:text="29세" />
+
+        <TextView
+            android:id="@+id/tv_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="18dp"
+            android:text="@string/sex"
+            android:textColor="@color/steel"
+            android:textSize="@dimen/font_size_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/tv_sex_value"
+            app:layout_constraintStart_toStartOf="@id/tv_sex_value"
+            app:layout_constraintTop_toBottomOf="@id/tv_sex_value" />
+
+
+        <TextView
+            android:id="@+id/tv_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="18dp"
+            android:text="@string/age"
+            android:textColor="@color/steel"
+            android:textSize="@dimen/font_size_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/tv_age_value"
+            app:layout_constraintStart_toStartOf="@id/tv_age_value"
+            app:layout_constraintTop_toBottomOf="@id/tv_age_value" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+        android:lineSpacingExtra="9sp"
+        android:text="@string/profile_exchange_bottom_description"
+        android:textColor="@color/gray_300"
+        android:textSize="@dimen/font_size_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_profile_container" />
+
+
+    <TextView
+        android:id="@+id/tv_next"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/bg_rounding_3dp"
+        android:backgroundTint="@color/main"
+        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+        android:gravity="center"
+        android:paddingHorizontal="13dp"
+        android:text="@string/profile_exchange_next"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size_regular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="328:48"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_dismiss"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/bg_rounding_3dp"
+        android:backgroundTint="@color/profile_exchange_edit_button"
+        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+        android:gravity="center"
+        android:paddingVertical="13dp"
+        android:visibility="gone"
+        android:text="@string/profile_exchange_dismiss"
+        android:textColor="@color/gray_300"
+        android:textSize="@dimen/font_size_regular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tv_accept"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_accept"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="18dp"
+        android:background="@drawable/bg_rounding_3dp"
+        android:backgroundTint="@color/main"
+        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+        android:gravity="center"
+        android:paddingVertical="13dp"
+        android:visibility="gone"
+        android:text="@string/profile_exchange_accept"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size_regular"
+        app:layout_constraintBottom_toBottomOf="@id/tv_dismiss"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_dismiss"
+        app:layout_constraintTop_toTopOf="@id/tv_dismiss"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
