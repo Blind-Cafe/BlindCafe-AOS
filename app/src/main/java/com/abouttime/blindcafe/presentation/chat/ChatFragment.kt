@@ -2,6 +2,8 @@ package com.abouttime.blindcafe.presentation.chat
 
 import android.Manifest
 import android.content.Context
+import android.media.MediaPlayer
+import android.media.MediaRecorder
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -23,7 +25,7 @@ import com.abouttime.blindcafe.common.ext.setMarginRight
 import com.abouttime.blindcafe.common.ext.setMarginTop
 import com.abouttime.blindcafe.databinding.FragmentChatBinding
 import com.abouttime.blindcafe.domain.model.Message
-import com.abouttime.blindcafe.presentation.chat.gallery.GalleryDialogFragment
+import com.abouttime.blindcafe.presentation.chat.recorder.RecorderState
 import com.abouttime.blindcafe.presentation.chat.rv_item.DescriptionItem
 import com.example.chatexample.presentation.ui.chat.rv_item.*
 import com.xwray.groupie.GroupAdapter
@@ -38,6 +40,15 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     private val chatAdapter = GroupAdapter<GroupieViewHolder>()
     private var popupWindow: PopupWindow? = null
 
+
+
+    private var recorder: MediaRecorder? = null
+    private var player: MediaPlayer? = null
+    private val recordingFilePath: String by lazy {
+        "${requireActivity().externalCacheDir?.absolutePath}/recording.3gp"
+    }
+
+
     private val tempUserId = "-"
 
 
@@ -45,9 +56,10 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         super.onViewCreated(view, savedInstanceState)
         val fragmentChatBinding = FragmentChatBinding.bind(view)
         binding = fragmentChatBinding
-
         binding?.lifecycleOwner = this
         binding?.viewModel = viewModel
+
+
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
         initChatRecyclerView(fragmentChatBinding)
@@ -58,11 +70,12 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         initInputEditText(fragmentChatBinding)
 
         initMenuButton(fragmentChatBinding)
-        //initMenuPopup(fragmentChatBinding)
 
         addBackPressButtonListener()
 
         initGalleryButton(fragmentChatBinding)
+
+        observeRecorderState(fragmentChatBinding)
     }
 
     /** recycler view **/
@@ -261,6 +274,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     }
 
 
+    /** BackPressButton **/
     private fun addBackPressButtonListener() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             val focusedView = requireActivity().currentFocus
@@ -274,30 +288,30 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         }
     }
 
+
+    /** Gallery **/
     private fun initGalleryButton(
         fragmentChatBinding
         : FragmentChatBinding,
     ) =
         with(fragmentChatBinding
         ) {
-            btGallery.setOnClickListener {
-                requestReadExternalStoragePermission()
+            ivGallery.setOnClickListener {
+                openGalleryIfPermissionGranted()
 
-
-                //viewModel!!.moveToGalleryDialogFragment()
-
-                /*
-                Intent(Intent.ACTION_GET_CONTENT).also {
-                    it.type = "image/*"
-                    startActivityForResult(it, 1)
-                }
-                */
-                 */
             }
         }
 
 
-    val getContent =
+    private fun openGalleryIfPermissionGranted() {
+        if (DeviceUtil.hasExtrernalStoragePermission(requireContext())) {
+            galleryCallback.launch("image/*")
+        } else {
+            galleryPermissionCallback.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+        }
+    }
+
+    val galleryCallback =
         registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uris ->
             uris.forEach { uri ->
                 uri?.let {
@@ -316,28 +330,97 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
         }
 
-    private val callback =
+    private val galleryPermissionCallback =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
-                GalleryDialogFragment().show(requireActivity().supportFragmentManager, null)
+                //GalleryDialogFragment().show(requireActivity().supportFragmentManager, null)
+                galleryCallback.launch("image/*")
             } else {
-
+                showToast(R.string.chat_toast_permission)
             }
         }
 
-    private fun requestReadExternalStoragePermission() {
-        if (DeviceUtil.hasPermission(requireContext())) {
-            //GalleryDialogFragment().show(requireActivity().supportFragmentManager, null)
-            getContent.launch("image/*")
-        } else {
-            callback.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+
+    /** Audio **/
+    private fun observeRecorderState(fragmentChatBinding: FragmentChatBinding) = with(fragmentChatBinding) {
+        viewModel?.recorderState?.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                RecorderState.BEFORE_RECORDING -> {
+                    llRecorderContainer.visibility = View.INVISIBLE
+                    initSoundVisualizerView(fragmentChatBinding)
+                }
+                RecorderState.START_RECORDING -> {
+                    recordIfPermissionGranted()
+                }
+                RecorderState.STOP_RECORDING -> {
+                    stopRecording()
+                }
+            }
         }
     }
 
-    override fun onResume() {
-        super.onResume()
+
+    private fun initSoundVisualizerView(fragmentChatBinding: FragmentChatBinding) = with(fragmentChatBinding) {
+        // 여기서 maxAmplitude 를 전달해준다.
+        soundVisualizer.onRequestCurrentAmplitude = {
+            recorder?.maxAmplitude ?: 0
+        }
 
     }
+
+    private fun startRecording()  {
+        recorder = MediaRecorder().apply {
+            setAudioSource(MediaRecorder.AudioSource.MIC)
+            setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+            setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+            // 따로 저장하지 않을거라서 캐시에 저장
+            // 나중에 다른 곳에 저장할 때는 내부 저장소는 녹음 파일이 얼마나 커질지 모르니 충분한 공간을 제공하지 못할 수 있음에 주의
+            // 그러니 여기서도 외부 저장소의 캐시 디렉토리에 접근해서 임시적으로 녹음파일을 저장하되 이 앱이 지워지거나
+            // 안드로이드 기기 내에서 용량 확보할 때쯤에는 캐시 디렉토리에 있는 파일은 쉽게 날라갈 수 있기때문에 일단 거기에 쓰는 걸로 진행한다.
+            setOutputFile(recordingFilePath)
+            prepare()
+        }
+        recorder?.start()
+        binding?.let {
+            it.soundVisualizer.startVisualizing(false)
+            it.tvCountUp.startCountUp()
+        }
+    }
+
+    private fun stopRecording(){
+        recorder?.run {
+            stop()
+            release()
+        }
+        recorder = null
+
+        binding?.let {
+            it.soundVisualizer.stopVisualizing()
+            it.tvCountUp.stopCountUp()
+        }
+    }
+
+
+
+    private fun recordIfPermissionGranted() {
+        if (DeviceUtil.hasRecordPermission(requireContext())) {
+            startRecording()
+        } else {
+            recordPermissionsCallback.launch(Manifest.permission.RECORD_AUDIO)
+        }
+    }
+
+    private val recordPermissionsCallback =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                startRecording()
+            } else {
+                showToast(R.string.chat_toast_permission)
+            }
+        }
+
+
+
 
 
 }

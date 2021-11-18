@@ -82,6 +82,8 @@
 
     <!-- matching (chat room) -->
     <string name="chat_et_hint">메시지 작성하기</string>
+    <string name="chat_toast_permission">권한을 허용해주셔야 사용하실 수 있습니다</string>
+    <string name="chat_recorder_initial_time">00:00</string>
 
     <!-- gallery -->
     <string name="gallery_title">갤러리</string>

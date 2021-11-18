@@ -10,11 +10,13 @@
         <KeyFrameSet></KeyFrameSet>
     </Transition>
 
+
+
     <ConstraintSet android:id="@+id/start">
 
 
         <Constraint
-            android:id="@+id/bt_gallery"
+            android:id="@+id/iv_gallery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -22,11 +24,11 @@
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="@id/et_message_input" />
         <Constraint
-            android:id="@+id/bt_record"
+            android:id="@+id/iv_record"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             motion:layout_constraintBottom_toBottomOf="@id/et_message_input"
-            motion:layout_constraintStart_toEndOf="@id/bt_gallery"
+            motion:layout_constraintStart_toEndOf="@id/iv_gallery"
             motion:layout_constraintTop_toTopOf="@id/et_message_input" />
         <Constraint
             android:id="@+id/et_message_input"
@@ -38,7 +40,7 @@
             android:layout_marginBottom="18dp"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toEndOf="@id/bt_record"
+            motion:layout_constraintStart_toEndOf="@id/iv_record"
             motion:layout_constraintTop_toTopOf="parent" />
         <Constraint
             android:id="@+id/bt_send"
@@ -58,7 +60,7 @@
 
 
         <Constraint
-            android:id="@+id/bt_gallery"
+            android:id="@+id/iv_gallery"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -67,12 +69,12 @@
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="@id/et_message_input" />
         <Constraint
-            android:id="@+id/bt_record"
+            android:id="@+id/iv_record"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:visibility="invisible"
             motion:layout_constraintBottom_toBottomOf="@id/et_message_input"
-            motion:layout_constraintStart_toEndOf="@id/bt_gallery"
+            motion:layout_constraintStart_toEndOf="@id/iv_gallery"
             motion:layout_constraintTop_toTopOf="@id/et_message_input" />
         <Constraint
             android:id="@+id/et_message_input"

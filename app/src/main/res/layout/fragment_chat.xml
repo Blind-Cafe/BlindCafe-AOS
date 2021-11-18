@@ -94,7 +94,7 @@
 
 
             <ImageView
-                android:id="@+id/bt_gallery"
+                android:id="@+id/iv_gallery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -107,14 +107,15 @@
                 app:tint="@color/white" />
 
             <ImageView
-                android:id="@+id/bt_record"
+                android:id="@+id/iv_record"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#5555ff"
+                android:onClick="@{() -> viewModel.onClickRecorderButton()}"
                 android:cropToPadding="true"
                 android:src="@drawable/bt_recording"
                 app:layout_constraintBottom_toBottomOf="@id/et_message_input"
-                app:layout_constraintStart_toEndOf="@id/bt_gallery"
+                app:layout_constraintStart_toEndOf="@id/iv_gallery"
                 app:layout_constraintTop_toTopOf="@id/et_message_input"
                 app:tint="@color/white" />
 
@@ -140,7 +141,7 @@
                 android:textCursorDrawable="@drawable/ic_cursor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/bt_record"
+                app:layout_constraintStart_toEndOf="@id/iv_record"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
@@ -160,6 +161,52 @@
                 app:layout_constraintEnd_toEndOf="@id/et_message_input"
                 app:layout_constraintTop_toTopOf="@id/et_message_input"
                 app:tint="@color/white" />
+
+
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:id="@+id/ll_recorder_container"
+                android:layout_height="0dp"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="11dp"
+                android:onClick="@{() -> viewModel.onClickRecorderContainerButton()}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="18dp"
+                android:visibility="gone"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_rounding_16dp"
+                android:backgroundTint="@color/main"
+                android:layout_marginEnd="18dp"
+                android:layout_marginBottom="18dp"
+                android:orientation="horizontal">
+
+                <com.abouttime.blindcafe.presentation.chat.recorder.SoundVisualizerView
+                    android:id="@+id/sound_visualizer"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    />
+
+
+                <com.abouttime.blindcafe.presentation.chat.recorder.CountUpTextView
+                    android:id="@+id/tv_count_up"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/chat_recorder_initial_time"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_regular"
+                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                    />
+
+
+            </LinearLayout>
+
 
 
         </androidx.constraintlayout.motion.widget.MotionLayout>

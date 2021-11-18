@@ -11,6 +11,7 @@ import com.abouttime.blindcafe.common.constants.LogTag.CHATTING_TAG
 import com.abouttime.blindcafe.common.constants.LogTag.FIRESTORE_TAG
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.use_case.*
+import com.abouttime.blindcafe.presentation.chat.recorder.RecorderState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
@@ -36,6 +37,9 @@ class ChatViewModel(
 
     private val _receivedMessage = MutableLiveData<List<Message>>()
     val receivedMessage: LiveData<List<Message>> get() = _receivedMessage
+
+    private val _recorderState = MutableLiveData<RecorderState>(RecorderState.BEFORE_RECORDING)
+    val recorderState: LiveData<RecorderState> get() = _recorderState
 
 
 
@@ -148,6 +152,14 @@ class ChatViewModel(
 
     fun updateSendButton() {
         _isSendButtonEnabled.value = !messageEditText.value.isNullOrEmpty()
+    }
+
+    /** onClick **/
+    fun onClickRecorderButton() {
+        _recorderState.value = RecorderState.START_RECORDING
+    }
+    fun onClickRecorderContainerButton() {
+        _recorderState.value = RecorderState.STOP_RECORDING
     }
 
 
