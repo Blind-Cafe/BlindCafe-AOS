@@ -4,6 +4,7 @@
 
     <!-- common -->
     <string name="app_name">BlindCafe</string>
+    <string name="app_name_title">Blind cafe</string>
     <string name="temp_error">에러</string>
     <string name="no_value">-</string>
     <string name="toast_check_internet">인터넷 연결을 확인해주세요</string>
@@ -174,6 +175,12 @@
     <string name="profile_edit_location_title">지역</string>
     <string name="profile_edit_impossible">수정이 불가능합니다.</string>
     <string name="profile_edit_complete">수정하기</string>
+
+
+    <!-- dormancy -->
+    <string name="dormancy_title">휴면 회원 계정 전환</string>
+    <string name="dormancy_description">%s님은 5번 이상의 신고를 받아 현재 휴면계정으로 전환되었습니다.\n\n계정을 활성화하려면 블라인드카페 이메일로 문의주시길 바랍니다.</string>
+    <string name="dormancy_time">%s 님과 매칭시간이 100시간 남았습니다.</string>
 
 
 
