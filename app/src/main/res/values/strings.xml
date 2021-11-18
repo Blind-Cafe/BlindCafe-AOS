@@ -209,4 +209,7 @@
     <string name="profile_dismiss_reason_4">제가 대화를 지속하기 어려워요</string>
     <string name="profile_dismiss_next">거절하기</string>
 
+    <string name="profile_exchange_complete_title">축하드립니다.\n두 분의 마음이 맞았어요. 밝은 곳으로 안대해드릴게요.</string>
+    <string name="profile_exchange_complete_next">매칭 대화방으로 이동하기</string>
+
 </resources>
