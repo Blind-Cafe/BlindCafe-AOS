@@ -15,6 +15,7 @@
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/drawable/bg_interest.xml" value="0.359375" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/drawable/bg_interest_disabled.xml" value="0.5442708333333334" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/drawable/bg_interest_enabled.xml" value="0.5442708333333334" />
+        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/drawable/bg_location_main.xml" value="0.5442708333333334" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/drawable/bg_profile_edit.xml" value="0.5442708333333334" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/drawable/bg_profile_edit_button.xml" value="0.5442708333333334" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/drawable/bg_rouding_with_stroke.xml" value="0.5442708333333334" />
@@ -89,6 +90,8 @@
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/rv_item_chat_list.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/rv_item_interest.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/rv_item_interest_sub.xml" value="0.5239583333333333" />
+        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/rv_item_location.xml" value="0.5239583333333333" />
+        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/rv_item_location_sub.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/rv_item_report.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/spn_item_chat_menu.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/text.xml" value="0.6666666666666666" />

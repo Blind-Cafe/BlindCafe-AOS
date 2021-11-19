@@ -53,5 +53,7 @@
 
     <color name="profile_exchange_edit_button">#454545</color>
 
+    <color name="location_sub_background">#575e56</color>
+
 
 </resources>
