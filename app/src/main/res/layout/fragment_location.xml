@@ -1,6 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="27dp"
+        android:src="@drawable/bt_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/spoqa_han_sans_neo_bold"
+        android:text="@string/location_title"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size_regular"
+        app:layout_constraintBottom_toBottomOf="@id/iv_back"
+        app:layout_constraintStart_toEndOf="@id/iv_back"
+        app:layout_constraintTop_toTopOf="@id/iv_back" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_location_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="24dp"
+        android:background="@color/gray_900"
+        app:layout_constraintBottom_toTopOf="@id/tv_next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_back">
+
+
+        <TextView
+            android:id="@+id/tv_location_main_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:text="@string/location_main_title"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_17"
+            app:layout_constraintEnd_toStartOf="@id/v_vertical_divider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_location_sub_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:text="@string/location_sub_title"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_17"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@id/v_vertical_divider"
+            app:layout_constraintTop_toTopOf="@id/tv_location_main_title" />
+
+
+        <View
+            android:id="@+id/v_top_horizontal_divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/gray_300"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_location_main_title" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_location_main"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:paddingHorizontal="16dp"
+            android:clipToPadding="true"
+            android:paddingTop="13dp"
+            app:layout_constraintBottom_toTopOf="@id/v_bottom_horizontal_divider"
+            app:layout_constraintEnd_toStartOf="@id/v_vertical_divider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v_top_horizontal_divider" />
+
+        <View
+            android:id="@+id/v_vertical_divider"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/gray_300"
+            app:layout_constraintBottom_toTopOf="@id/v_bottom_horizontal_divider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.27"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v_top_horizontal_divider" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:id="@+id/rv_location_sub"
+            android:clipToPadding="true"
+            app:layout_constraintStart_toEndOf="@id/v_vertical_divider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v_top_horizontal_divider"
+            app:layout_constraintBottom_toTopOf="@id/v_bottom_horizontal_divider"
+            android:paddingTop="13dp"/>
+
+        <View
+            android:id="@+id/v_bottom_horizontal_divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginBottom="19dp"
+            android:background="@color/gray_300"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <TextView
+        android:id="@+id/tv_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="43dp"
+        android:layout_marginBottom="45dp"
+        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+        android:text="@string/location_next"
+        android:textColor="@color/main"
+        android:textSize="@dimen/font_size_17"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

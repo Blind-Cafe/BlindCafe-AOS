@@ -248,6 +248,11 @@
     <string name="report_list_none">신공한 내역이 없습니다.</string>
 
     <!-- locations -->
+    <string name="location_title">지역설정</string>
+    <string name="location_main_title">시/도</string>
+    <string name="location_sub_title">시/구/군</string>
+    <string name="location_next">확인</string>
+
     <string-array name="location_main">
         <item>서울</item>
         <item>경기</item>
