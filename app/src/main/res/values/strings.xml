@@ -247,9 +247,14 @@
     <string name="setting_account_logout"><u>로그아웃</u></string>
     <string name="setting_account_delete">계정삭제</string>
 
+    <!-- setting confirm -->
     <string name="logout_confirm_title">정말 로그아웃 하시겠습니까?</string>
     <string name="logout_confirm_no">취소</string>
     <string name="logout_confirm_yes">로그아웃</string>
+
+    <!-- report list -->
+    <string name="report_list_title">신고내역</string>
+    <string name="report_list_none">신공한 내역이 없습니다.</string>
 
 
 
