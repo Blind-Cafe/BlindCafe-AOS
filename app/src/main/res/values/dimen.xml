@@ -3,7 +3,7 @@
     <dimen name="font_size_super_small">13sp</dimen>
     <dimen name="font_size_small">15sp</dimen>
     <dimen name="font_size_16">16sp</dimen>
-    <string name="font_size_17">17sp</string>
+    <dimen name="font_size_17">17sp</dimen>
     <dimen name="font_size_regular">18sp</dimen>
     <dimen name="font_size_large">23sp</dimen>
     
