@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/matchingFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -83,6 +83,18 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_profileEditFragment"
+            app:destination="@id/profileEditFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_exitFragment"
+            app:destination="@id/exitFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_profileExchangeFragment2"
+            app:destination="@id/profileExchangeFragment" />
     </fragment>
     <fragment
         android:id="@+id/ruleFragment"
@@ -253,4 +265,87 @@
             app:popUpToInclusive="true"
             app:destination="@id/reportDialogFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/accountDeleteFragment"
+        tools:layout="@layout/fragment_account_delete"
+        android:name="com.abouttime.blindcafe.presentation.main.my_page.setting.account_delete.AccountDeleteFragment"
+        android:label="AccountDeleteFragment" />
+    <fragment
+        android:id="@+id/locationFragment"
+        tools:layout="@layout/fragment_location"
+        android:name="com.abouttime.blindcafe.presentation.profile_exchange.location.LocationFragment"
+        android:label="LocationFragment" />
+    <fragment
+        android:id="@+id/profileDismissFragment"
+        tools:layout="@layout/fragment_profile_dismiss"
+        android:name="com.abouttime.blindcafe.presentation.profile_exchange.dismiss.ProfileDismissFragment"
+        android:label="ProfileDismissFragment" />
+    <fragment
+        android:id="@+id/reportListFragment"
+        tools:layout="@layout/fragment_report_list"
+        android:name="com.abouttime.blindcafe.presentation.main.my_page.setting.report_list.ReportListFragment"
+        android:label="ReportListFragment" />
+    <fragment
+        android:id="@+id/settingFragment"
+        tools:layout="@layout/fragment_setting"
+        android:name="com.abouttime.blindcafe.presentation.main.my_page.setting.SettingFragment"
+        android:label="SettingFragment" >
+        <action
+            android:id="@+id/action_settingFragment_to_reportListFragment"
+            app:destination="@id/reportListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_settingFragment_to_accountDeleteFragment"
+            app:destination="@id/accountDeleteFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/profileEditFragment"
+        tools:layout="@layout/fragment_profile_edit"
+        android:name="com.abouttime.blindcafe.presentation.main.my_page.edit.ProfileEditFragment"
+        android:label="ProfileEditFragment"
+        />
+    <fragment
+        android:id="@+id/profileExchangeCompleteFragment"
+        tools:layout="@layout/fragment_profile_exchagnge_complete"
+        android:name="com.abouttime.blindcafe.presentation.profile_exchange.complete.ProfileExchangeCompleteFragment"
+        android:label="ProfileExchangeCompleteFragment" />
+    <fragment
+        android:id="@+id/exitFragment"
+        tools:layout="@layout/fragment_exit"
+        android:name="com.abouttime.blindcafe.presentation.main.home.exit.ExitFragment"
+        android:label="ExitFragment" />
+    <fragment
+        android:id="@+id/profileExchangeFragment"
+        tools:layout="@layout/fragment_profile_exchange"
+        android:name="com.abouttime.blindcafe.presentation.profile_exchange.ProfileExchangeFragment"
+        android:label="ProfileExchangeFragment" >
+        <action
+            android:id="@+id/action_profileExchangeFragment_to_locationFragment"
+            app:destination="@id/locationFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_profileExchangeFragment_to_profileExchangeCompleteFragment"
+            app:destination="@id/profileExchangeCompleteFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_profileExchangeFragment_to_profileDismissFragment"
+            app:destination="@id/profileDismissFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 </navigation>

@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.presentation.main.my_page.edit.location
+package com.abouttime.blindcafe.presentation.profile_exchange.location
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

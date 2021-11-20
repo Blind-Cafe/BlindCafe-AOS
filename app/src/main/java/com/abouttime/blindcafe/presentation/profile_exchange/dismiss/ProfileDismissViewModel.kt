@@ -7,7 +7,7 @@ import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.presentation.chat.report.reason.ReportReasonDialogFragmentDirections
 
-class DismissViewModel: BaseViewModel() {
+class ProfileDismissViewModel: BaseViewModel() {
 
     private val _reason = MutableLiveData(0)
     val reason: LiveData<Int> get() = _reason

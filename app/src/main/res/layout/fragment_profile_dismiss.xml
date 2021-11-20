@@ -15,7 +15,7 @@
 
         <variable
             name="viewModel"
-            type="com.abouttime.blindcafe.presentation.profile_exchange.dismiss.DismissViewModel" />
+            type="com.abouttime.blindcafe.presentation.profile_exchange.dismiss.ProfileDismissViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
