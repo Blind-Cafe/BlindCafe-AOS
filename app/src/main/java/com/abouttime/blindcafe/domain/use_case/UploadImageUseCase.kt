@@ -11,7 +11,7 @@ class UploadImageUseCase(
     private val repository: FirestorageRepository
 ) {
     operator fun invoke(message: Message, uri: Uri): Flow<Resource<Boolean>> = flow {
-        emit(Resource.Loading())
+        emit(Resource.Loading<Boolean>())
         try {
             val response = repository.uploadImage(
                 message = message,
@@ -20,11 +20,11 @@ class UploadImageUseCase(
             if (response != null) {
                 emit(Resource.Success(data = true))
             } else {
-                emit(Resource.Error(message = "response is null"))
+                emit(Resource.Error<Boolean>(message = "response is null"))
             }
 
         } catch (e: Exception) {
-            emit(Resource.Error(message = e.toString()))
+            emit(Resource.Error<Boolean>(message = e.toString()))
         }
     }
 }

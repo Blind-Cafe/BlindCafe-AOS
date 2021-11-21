@@ -9,6 +9,9 @@ import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.CHATTING_TAG
 import com.abouttime.blindcafe.common.constants.LogTag.FIRESTORE_TAG
+import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
+import com.abouttime.blindcafe.common.constants.Retrofit
+import com.abouttime.blindcafe.common.constants.Retrofit.USER_ID
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.use_case.*
 import com.abouttime.blindcafe.presentation.chat.recorder.RecorderState
@@ -42,12 +45,15 @@ class ChatViewModel(
     val recorderState: LiveData<RecorderState> get() = _recorderState
 
 
+    var matchingId: Int? = null
+    val userId = getStringData(USER_ID)
+
 
     init {
-        receiveMessages("-")
+        Log.e(RETROFIT_TAG, "ChatViewModel init")
     }
 
-    private fun receiveMessages(roomId: String) = viewModelScope.launch(Dispatchers.IO) {
+    fun subscribeMessages(roomId: String) = viewModelScope.launch(Dispatchers.IO) {
         receiveMessageUseCase(roomId).collect { result ->
             when (result) {
                 is Resource.Loading -> {

@@ -13,17 +13,17 @@ class PostUserInfoUseCase(
     private val repository: UserInfoRepository
 ) {
     operator fun invoke(postUserInfoDto: PostUserInfoDto): Flow<Resource<BaseResponse>> = flow {
-        emit(Resource.Loading())
+        emit(Resource.Loading<BaseResponse>())
         try {
             val response = repository.postUserInfo(postUserInfoDto = postUserInfoDto)
             if (response != null) {
                 emit(Resource.Success(response))
             } else {
-                emit(Resource.Error("response is null"))
+                emit(Resource.Error<BaseResponse>("response is null"))
             }
         } catch(e: Exception) {
             Log.e(LogTag.USER_INFO_TAG, e.toString())
-            emit(Resource.Error(e.toString()))
+            emit(Resource.Error<BaseResponse>(e.toString()))
         }
     }
 }

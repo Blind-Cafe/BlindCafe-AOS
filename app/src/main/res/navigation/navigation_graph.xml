@@ -106,7 +106,7 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
         <action
-            android:id="@+id/action_mainFragment_to_profileExchangeFragment2"
+            android:id="@+id/action_mainFragment_to_profileExchangeFragment"
             app:destination="@id/profileExchangeFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
@@ -198,6 +198,16 @@
         android:label="MatchingFragment"
         tools:layout="@layout/fragment_chat">
 
+        <argument android:name="matchingId"
+            app:argType="integer"
+            app:nullable="false"/>
+
+        <argument android:name="startTime"
+            app:argType="string"
+            app:nullable="true"/>
+
+
+
         <action
             android:id="@+id/action_matchingFragment_to_quitReasonDialogFragment"
             app:destination="@id/quitReasonDialogFragment"
@@ -225,6 +235,15 @@
         tools:layout="@layout/fragment_coffee_order"
         android:name="com.abouttime.blindcafe.presentation.main.home.coffee.CoffeeOrderFragment"
         android:label="CoffeeOrderFragment" >
+
+        <argument android:name="matchingId"
+            app:argType="integer" />
+
+
+        <argument android:name="startTime"
+            app:argType="string"
+            app:nullable="true"/>
+
         <action
             android:id="@+id/action_coffeeOrderFragment_to_matchingFragment"
             app:destination="@id/matchingFragment"
@@ -270,6 +289,8 @@
         android:label="QuitReasonDialogFragment" >
         <action
             android:id="@+id/action_quitReasonDialogFragment_to_confirmDialogFragment"
+            app:popUpTo="@id/quitReasonDialogFragment"
+            app:popUpToInclusive="true"
             app:destination="@id/confirmDialogFragment" />
     </dialog>
     <dialog
@@ -279,7 +300,10 @@
         android:label="ReportReasonDialogFragment" >
         <action
             android:id="@+id/action_reportReasonDialogFragment_to_confirmDialogFragment"
-            app:destination="@id/confirmDialogFragment" />
+            app:destination="@id/confirmDialogFragment"
+            app:popUpTo="@id/reportReasonDialogFragment"
+            app:popUpToInclusive="true"/>
+
     </dialog>
     <fragment
         android:id="@+id/accountDeleteFragment"
@@ -347,7 +371,16 @@
         android:id="@+id/exitFragment"
         tools:layout="@layout/fragment_exit"
         android:name="com.abouttime.blindcafe.presentation.main.home.exit.ExitFragment"
-        android:label="ExitFragment" />
+        android:label="ExitFragment" >
+
+        <argument android:name="reason"
+            app:argType="string"
+            app:nullable="true"/>
+        <argument android:name="partnerNickname"
+            app:argType="string"
+            app:nullable="true"/>
+
+    </fragment>
     <fragment
         android:id="@+id/profileExchangeFragment"
         tools:layout="@layout/fragment_profile_exchange"
@@ -380,6 +413,9 @@
         tools:layout="@layout/dialog_fragment_confirm"
         android:name="com.abouttime.blindcafe.presentation.common.confirm.ConfirmDialogFragment"
         android:label="ConfirmDialogFragment">
+        <argument android:name="id"
+            app:argType="integer"
+            app:nullable="false"/>
         <argument android:name="title"
             app:argType="string"
             app:nullable="true" />
@@ -399,6 +435,11 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_confirmDialogFragment_to_exitFragment"
+            app:popUpTo="@id/matchingFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/exitFragment" />
     </dialog>
     <fragment
         android:id="@+id/accountDeleteCompleteFragment"

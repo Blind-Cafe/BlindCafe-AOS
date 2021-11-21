@@ -27,8 +27,11 @@ class HomeFragment: BaseFragment<HomeViewModel>(R.layout.fragment_home) {
             when(statusCode) {
                 0 -> handleStatusNone()
                 1 -> handleStatusWait()
-                2 -> handleStatusMatching()
-                3 -> handleStatusFound()
+                2 -> handleStatusFound()
+                3 -> handleStatusMatching()
+                4 -> handleStatusFailedLeaveRoom()
+                5 -> handleStatusFailedReport()
+                6 -> handleWontExchange()
             }
         }
     }
@@ -42,6 +45,15 @@ class HomeFragment: BaseFragment<HomeViewModel>(R.layout.fragment_home) {
 
     }
     private fun handleStatusFound() {
+
+    }
+    private fun handleStatusFailedLeaveRoom() {
+
+    }
+    private fun handleStatusFailedReport() {
+
+    }
+    private fun handleWontExchange() {
 
     }
 

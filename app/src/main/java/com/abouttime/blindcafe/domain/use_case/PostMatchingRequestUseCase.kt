@@ -10,13 +10,13 @@ class PostMatchingRequestUseCase(
     private val repository: MatchingRepository
 ) {
     operator fun invoke(): Flow<Resource<PostMatchingRequestResponse?>> = flow {
-        emit(Resource.Loading())
+        emit(Resource.Loading<PostMatchingRequestResponse?>())
         try {
             val response = repository.postMatchingRequest()
             emit(Resource.Success(data = response))
 
         } catch (e: Exception) {
-            emit(Resource.Error(message = e.toString()))
+            emit(Resource.Error<PostMatchingRequestResponse?>(message = e.toString()))
         }
     }
 }

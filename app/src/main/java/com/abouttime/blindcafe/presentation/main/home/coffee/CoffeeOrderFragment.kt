@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
+import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.databinding.FragmentCoffeeOrderBinding
+import com.abouttime.blindcafe.presentation.common.confirm.ConfirmDialogFragmentArgs
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -17,6 +19,8 @@ class CoffeeOrderFragment : BaseFragment<CoffeeOrderViewModel>(R.layout.fragment
     private var binding: FragmentCoffeeOrderBinding? = null
     private lateinit var vpAdapter: CoffeeOrderVpAdapter
 
+    val args: CoffeeOrderFragmentArgs by navArgs()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val fragmentCoffeeOrderBinding = FragmentCoffeeOrderBinding.bind(view)
@@ -24,7 +28,8 @@ class CoffeeOrderFragment : BaseFragment<CoffeeOrderViewModel>(R.layout.fragment
         binding?.lifecycleOwner = this
         binding?.viewModel = viewModel
 
-
+        viewModel.matchingId = args.matchingId
+        viewModel.startTime = args.startTime
 
     }
 

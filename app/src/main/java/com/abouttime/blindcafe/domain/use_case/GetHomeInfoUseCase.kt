@@ -10,12 +10,12 @@ class GetHomeInfoUseCase(
     private val repository: HomeRepository
 ) {
     operator fun invoke(): Flow<Resource<GetHomeInfoDto>> = flow {
-        emit(Resource.Loading())
+        emit(Resource.Loading<GetHomeInfoDto>())
         try {
             val response = repository.getHomeInfo()
             emit(Resource.Success(response))
         } catch (e: Exception) {
-            emit(Resource.Error(e.toString()))
+            emit(Resource.Error<GetHomeInfoDto>(e.toString()))
         }
     }
 }

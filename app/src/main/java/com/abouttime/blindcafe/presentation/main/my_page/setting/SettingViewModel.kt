@@ -14,6 +14,7 @@ class SettingViewModel: BaseViewModel() {
     fun onClickLogoutContainer(v: View) {
 
         moveToDirections(SettingFragmentDirections.actionSettingFragmentToConfirmDialogFragment(
+            id = R.string.logout_confirm_title,
             title = v.resources.getString(R.string.logout_confirm_title),
             subtitle = null,
             no = v.resources.getString(R.string.logout_confirm_no),

@@ -29,5 +29,54 @@ class ConfirmDialogFragment: BaseDialogFragment<ConfirmViewModel>(R.layout.dialo
         tvSubtitle.text = args.subtitle ?: ""
         tvNo.text = args.no ?: "취소"
         tvYes.text = args.subtitle ?: "확인"
+
+
+
     }
+
+    private fun bindData() {
+        when(args.id) {
+            R.string.profile_dismiss_confirm_title -> {
+                handleProfileDismiss()
+            }
+            R.string.logout_confirm_title -> {
+                handleLogout()
+            }
+            R.string.delete_account_confirm_title -> {
+                handleDeleteAccount()
+            }
+            R.string.report_confirm_title -> {
+                handleReport()
+            }
+            R.string.quit_confirm_title -> {
+                handleQuit()
+            }
+        }
+    }
+    private fun handleProfileDismiss() {
+
+    }
+    private fun handleLogout() {
+
+    }
+    private fun handleDeleteAccount() {
+
+    }
+    private fun handleReport() {
+        binding?.tvYes?.setOnClickListener {
+            popDirections()
+        }
+        binding?.tvNo?.setOnClickListener {
+            popDirections()
+        }
+    }
+    private fun handleQuit() {
+        binding?.tvYes?.setOnClickListener {
+            popDirections()
+        }
+        binding?.tvNo?.setOnClickListener {
+            popDirections()
+        }
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.abouttime.blindcafe.data.repository
 
 import com.abouttime.blindcafe.data.server.api.MatchingApi
+import com.abouttime.blindcafe.data.server.dto.matching.PostDrinkDto
 import com.abouttime.blindcafe.data.server.dto.matching.PostDrinkResponse
 import com.abouttime.blindcafe.data.server.dto.matching.PostMatchingRequestResponse
 import com.abouttime.blindcafe.domain.repository.MatchingRepository
@@ -12,7 +13,7 @@ class MatchingRepositoryImpl(
         return matchingApi.postMatchingRequest()
     }
 
-    override suspend fun postDrink(matchingId: Int): PostDrinkResponse? {
-       return matchingApi.postDrink(matchingId)
+    override suspend fun postDrink(matchingId: Int, drink: PostDrinkDto): PostDrinkResponse? {
+       return matchingApi.postDrink(matchingId, drink)
     }
 }

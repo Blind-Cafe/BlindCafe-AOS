@@ -12,7 +12,7 @@ class DownloadAudioUrlUseCase(
 ) {
     operator fun invoke(message: Message): Flow<Resource<Uri>> = flow {
 
-        emit(Resource.Loading())
+        emit(Resource.Loading<Uri>())
 
         try {
             val response = firestorageRepository
@@ -22,7 +22,7 @@ class DownloadAudioUrlUseCase(
             if (response != null) {
                 emit(Resource.Success(data = response))
             } else {
-                emit(Resource.Error(message = "response is null!"))
+                emit(Resource.Error<Uri>(message = "response is null!"))
             }
 
         } catch (e: Exception) {

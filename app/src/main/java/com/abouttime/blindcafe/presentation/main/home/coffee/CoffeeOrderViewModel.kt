@@ -8,7 +8,9 @@ import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
+import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY
 import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.MATCHING_ID
+import com.abouttime.blindcafe.data.server.dto.matching.PostDrinkDto
 import com.abouttime.blindcafe.domain.use_case.PostDrinkUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -18,6 +20,12 @@ class CoffeeOrderViewModel(
 ): BaseViewModel() {
     private val _nextButton: MutableLiveData<Boolean> = MutableLiveData(false)
     val nextButton: LiveData<Boolean> get() = _nextButton
+
+    var matchingId: Int? = null
+    var startTime: String? = null
+
+
+    var currentSelect: Int? = null
 
     val resIds: List<Int> = mutableListOf(
         R.drawable.bt_drink_1,
@@ -59,40 +67,37 @@ class CoffeeOrderViewModel(
 
 
     private fun postDrink() {
-        val matchingId = getStringData(MATCHING_ID)
-        matchingId?.toInt()?.let {
-            postDrinkUseCase(it).onEach { response ->
-                when(response) {
-                    is Resource.Loading -> {
-                        Log.d(RETROFIT_TAG, "Loading")
+        matchingId?.let { mId ->
+            currentSelect?.let { drink ->
+                postDrinkUseCase(mId, PostDrinkDto(drink)).onEach { response ->
+                    when (response) {
+                        is Resource.Loading -> {
+                            Log.d(RETROFIT_TAG, "Loading")
+                        }
+                        is Resource.Success -> {
+                            Log.d(RETROFIT_TAG, response.data.toString())
+                            response.data?.startTime?.let { time ->
+                                startTime = time
+                                moveToChatFragment(
+                                    matchingId = mId,
+                                    startTime = startTime
+                                )
+                            }
+                        }
+                        is Resource.Error -> {
+                            Log.d(RETROFIT_TAG, response.message.toString())
+                            showToast(R.string.toast_check_internet)
+                        }
                     }
-                    is Resource.Success -> {
-                        Log.d(RETROFIT_TAG, response.data.toString())
-                        moveToChatFragment()
-                    }
-                    is Resource.Error -> {
-                        Log.d(RETROFIT_TAG, response.message.toString())
-                        showToast(R.string.toast_check_internet)
-                    }
-                }
-            }.launchIn(viewModelScope)
+                }.launchIn(viewModelScope)
+            } ?: kotlin.run {
+                Log.d(RETROFIT_TAG, "currentSelect 가 null 입니다.")
+            }
         } ?: kotlin.run {
-            postDrinkUseCase(1).onEach { response ->
-                when(response) {
-                    is Resource.Loading -> {
-                        Log.d(RETROFIT_TAG, "Loading")
-                    }
-                    is Resource.Success -> {
-                        Log.d(RETROFIT_TAG, response.data.toString())
-                        moveToChatFragment()
-                    }
-                    is Resource.Error -> {
-                        Log.d(RETROFIT_TAG, response.message.toString())
-                        showToast(R.string.toast_check_internet)
-                    }
-                }
-            }.launchIn(viewModelScope)
+            Log.d(RETROFIT_TAG, "matchingId 가 null 입니다.")
         }
+
+
     }
 
 
@@ -105,9 +110,11 @@ class CoffeeOrderViewModel(
     }
 
 
-
-    private fun moveToChatFragment() {
-        moveToDirections(CoffeeOrderFragmentDirections.actionCoffeeOrderFragmentToMatchingFragment())
+        private fun moveToChatFragment(matchingId: Int, startTime: String?) {
+        moveToDirections(CoffeeOrderFragmentDirections.actionCoffeeOrderFragmentToMatchingFragment(
+            matchingId = matchingId,
+            startTime = startTime
+        ))
     }
 
 

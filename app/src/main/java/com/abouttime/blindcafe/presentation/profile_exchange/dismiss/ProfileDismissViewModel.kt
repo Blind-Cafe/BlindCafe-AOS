@@ -26,6 +26,7 @@ class ProfileDismissViewModel: BaseViewModel() {
     fun onClickNextButton(v: View) {
         moveToDirections(
             ProfileDismissFragmentDirections.actionProfileDismissFragmentToConfirmDialogFragment(
+                id = R.string.profile_dismiss_confirm_title,
                 title = v.resources.getString(R.string.profile_dismiss_confirm_title),
                 subtitle = v.resources.getString(R.string.profile_dismiss_confirm_subtitle),
                 no = v.resources.getString(R.string.profile_dismiss_confirm_no),

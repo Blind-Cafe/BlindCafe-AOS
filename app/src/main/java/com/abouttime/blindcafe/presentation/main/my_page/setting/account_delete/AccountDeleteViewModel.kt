@@ -26,6 +26,7 @@ class AccountDeleteViewModel: BaseViewModel() {
     fun onClickNextButton(v: View) {
         moveToDirections(
             AccountDeleteFragmentDirections.actionAccountDeleteFragmentToConfirmDialogFragment(
+                id = R.string.delete_account_confirm_title,
                 title = v.resources.getString(R.string.delete_account_confirm_title),
                 subtitle = v.resources.getString(R.string.delete_account_confirm_subtitle),
                 no = v.resources.getString(R.string.delete_account_confirm_no),

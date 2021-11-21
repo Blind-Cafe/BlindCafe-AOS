@@ -13,6 +13,7 @@ class QuitReasonViewModel: BaseViewModel() {
     fun onClickYesButton(v: View) {
         moveToDirections(
             QuitReasonDialogFragmentDirections.actionQuitReasonDialogFragmentToConfirmDialogFragment(
+                id = R.string.quit_confirm_title,
                 title = v.resources.getString(R.string.quit_confirm_title),
                 subtitle = v.resources.getString(R.string.quit_confirm_subtitle),
                 no = v.resources.getString(R.string.quit_confirm_no),

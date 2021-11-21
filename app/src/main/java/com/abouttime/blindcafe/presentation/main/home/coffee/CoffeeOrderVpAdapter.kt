@@ -32,6 +32,11 @@ class CoffeeOrderVpAdapter(
                     }
                 }
                 isSelected[position] = !isSelected[position]
+                if (isSelected[position]) {
+                    currentSelect = position + 1
+                } else {
+                    currentSelect = null
+                }
                 updateNextButton()
                 notifyDataSetChanged()
             }

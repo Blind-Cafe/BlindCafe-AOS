@@ -7,15 +7,17 @@ data class GetHomeInfoDto(
     @SerializedName("code")
     val code: String?,
     @SerializedName("matchingId")
-    val matchingId: Any?,
+    val matchingId: Int?,
     @SerializedName("matchingStatus")
     val matchingStatus: String?,
     @SerializedName("message")
     val message: String?,
     @SerializedName("partnerId")
-    val partnerId: Any?,
+    val partnerId: Int?,
     @SerializedName("partnerNickname")
-    val partnerNickname: Any?,
+    val partnerNickname: String?,
     @SerializedName("startTime")
-    val startTime: Any?
+    val startTime: String?,
+    @SerializedName("reason")
+    val reason: String?
 )

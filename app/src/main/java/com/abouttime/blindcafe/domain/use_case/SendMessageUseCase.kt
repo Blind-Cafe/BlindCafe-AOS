@@ -11,15 +11,15 @@ import kotlinx.coroutines.flow.flow
 class SendMessageUseCase(private val repository: FirestoreRepository) {
     operator fun invoke(message: Message): Flow<Resource<DocumentReference>> =
         flow {
-            emit(Resource.Loading())
+            emit(Resource.Loading<DocumentReference>())
             try {
                 val docRef = repository.sendMessage(message = message)
-                if (docRef == null) emit(Resource.Error(message = "null"))
+                if (docRef == null) emit(Resource.Error<DocumentReference>(message = "null"))
                 else emit(Resource.Success(docRef))
 
             } catch (e: Exception) {
                 e.printStackTrace()
-                emit(Resource.Error(message = e.toString()))
+                emit(Resource.Error<DocumentReference>(message = e.toString()))
             }
         }
 }

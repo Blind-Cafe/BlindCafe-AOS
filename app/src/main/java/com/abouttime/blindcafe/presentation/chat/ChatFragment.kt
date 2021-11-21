@@ -2,7 +2,6 @@ package com.abouttime.blindcafe.presentation.chat
 
 import android.Manifest
 import android.content.Context
-import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.net.Uri
 import android.os.Bundle
@@ -17,11 +16,13 @@ import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.DeviceUtil
 import com.abouttime.blindcafe.common.base.BaseFragment
+import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.ext.setMarginRight
 import com.abouttime.blindcafe.common.ext.setMarginTop
 import com.abouttime.blindcafe.databinding.FragmentChatBinding
@@ -39,19 +40,18 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     override val viewModel: ChatViewModel by viewModel()
 
 
+    private val args: ChatFragmentArgs by navArgs()
+
     private val chatAdapter = GroupAdapter<GroupieViewHolder>()
     private var popupWindow: PopupWindow? = null
 
 
-
     private var recorder: MediaRecorder? = null
-    private var player: MediaPlayer? = null
     private val recordingFilePath: String by lazy {
         "${requireActivity().externalCacheDir?.absolutePath}/recording.3gp"
     }
 
 
-    private val tempUserId = "-"
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,9 +60,9 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         binding = fragmentChatBinding
         binding?.lifecycleOwner = this
         binding?.viewModel = viewModel
-
-
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
+        subscribeMessages()
 
         initChatRecyclerView(fragmentChatBinding)
         observeMessagesData()
@@ -78,6 +78,15 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         initGalleryButton(fragmentChatBinding)
 
         observeRecorderState(fragmentChatBinding)
+    }
+
+    private fun subscribeMessages() {
+        viewModel.matchingId = args.matchingId
+        viewModel?.matchingId?.let {
+            viewModel.subscribeMessages(it.toString())
+        } ?: kotlin.run {
+            Log.e(LogTag.RETROFIT_TAG, "matchingId is null")
+        }
     }
 
     /** recycler view **/
@@ -132,7 +141,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         viewModel.receivedMessage.observe(viewLifecycleOwner) { messages ->
             messages.forEach { message ->
                 Log.e("asdf", message.toString())
-                if (message.senderUid == tempUserId) {
+                if (message.senderUid == viewModel.userId) {
                     addMessageToMe(message)
                 } else {
                     addMessageToPartner(message)
@@ -168,12 +177,20 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         with(fragmentChatBinding
         ) {
             btSend.setOnClickListener {
-                viewModel?.sendMessage(Message(
-                    contents = etMessageInput.text.toString(),
-                    type = 1,
-                    senderUid = tempUserId,
-                    roomUid = tempUserId
-                ))
+                viewModel?.matchingId?.let { matchingId ->
+                    viewModel?.userId?.let { userId ->
+
+                        viewModel?.sendMessage(
+                            Message(
+                                contents = etMessageInput.text.toString(),
+                                type = 1,
+                                senderUid = userId,
+                                roomUid = matchingId.toString()
+                            )
+                        )
+
+                    }
+                }
                 btSend.requestFocus()
                 etMessageInput.text.clear()
             }
@@ -184,8 +201,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         fragmentChatBinding
         : FragmentChatBinding,
     ) =
-        with(fragmentChatBinding
-        ) {
+        with(fragmentChatBinding) {
 
             etMessageInput.setOnFocusChangeListener { view, isFocused ->
                 if (isFocused) {
@@ -313,20 +329,25 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         }
     }
 
-    val galleryCallback =
+    private val galleryCallback =
         registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uris ->
             uris.forEach { uri ->
                 uri?.let {
                     val id = System.currentTimeMillis().toString()
-                    viewModel.uploadImage(
-                        message = Message(
-                            senderUid = tempUserId,
-                            contents = id,
-                            roomUid = tempUserId,
-                            type = 2
-                        ),
-                        uri = it
-                    )
+                    viewModel?.userId?.let { userId ->
+                        viewModel?.matchingId?.let { matchingId ->
+                            viewModel.uploadImage(
+                                message = Message(
+                                    senderUid = userId,
+                                    contents = id,
+                                    roomUid = matchingId.toString(),
+                                    type = 2
+                                ),
+                                uri = it
+                            )
+                        }
+                    }
+
                 }
             }
 
@@ -433,15 +454,19 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
         uri?.let {
             val id = System.currentTimeMillis().toString()
-            viewModel.uploadAudio(
-                message = Message(
-                    senderUid = tempUserId,
-                    contents = id,
-                    roomUid = tempUserId,
-                    type = 3
-                ),
-                uri = it
-            )
+            viewModel?.matchingId?.let {  matchingId ->
+                viewModel?.userId?.let { userId ->
+                    viewModel.uploadAudio(
+                        message = Message(
+                            senderUid = userId,
+                            contents = id,
+                            roomUid = matchingId.toString(),
+                            type = 3
+                        ),
+                        uri = it
+                    )
+                }
+            }
         }
     }
 

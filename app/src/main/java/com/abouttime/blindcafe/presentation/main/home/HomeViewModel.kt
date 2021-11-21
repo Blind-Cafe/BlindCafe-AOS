@@ -4,37 +4,34 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
-import com.abouttime.blindcafe.common.constants.LogTag.HOME_TAG
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
-import com.abouttime.blindcafe.data.server.dto.notification.PostFcmDto
-import com.abouttime.blindcafe.data.server.dto.z.PushNotificationDto
 import com.abouttime.blindcafe.domain.use_case.GetHomeInfoUseCase
 import com.abouttime.blindcafe.domain.use_case.PostFcmUseCase
 import com.abouttime.blindcafe.domain.use_case.PostMatchingRequestUseCase
 import com.abouttime.blindcafe.domain.use_case.PostNotificationUseCase
 import com.abouttime.blindcafe.presentation.main.MainFragmentDirections
-import com.google.firebase.messaging.FirebaseMessaging
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 
 class HomeViewModel(
-    private val postNotificationUseCase: PostNotificationUseCase,
-    private val postFcmUseCase: PostFcmUseCase,
     private val getHomeInfoUseCase: GetHomeInfoUseCase,
     private val postMatchingRequestUseCase: PostMatchingRequestUseCase
 ): BaseViewModel() {
     private val _homeStatusCode: MutableLiveData<Int> = MutableLiveData<Int>(-1)
     val homeStatusCode: LiveData<Int> get() = _homeStatusCode
 
+    private var matchingId: Int? = null
+    private var startTime: String? = null
+    private var reason: String? = null
+    private var partnerNickname: String? = null
+
 
     init {
-        Log.d(HOME_TAG, "getHomeInfo() 호출")
         //testHomeState()
         getHomeInfo()
     }
@@ -47,8 +44,14 @@ class HomeViewModel(
                 }
                 is Resource.Success -> {
                     Log.d(RETROFIT_TAG, resource.data.toString())
-                    resource.data?.matchingStatus?.let {
-                        _homeStatusCode.postValue(getHomeSatusCode(it))
+                    resource.data?.matchingStatus?.let { status ->
+                        _homeStatusCode.postValue(getHomeStatusCode(status))
+                    }
+                    resource.data?.let {
+                        matchingId = it.matchingId
+                        startTime = it.startTime
+                        reason = it.reason
+                        partnerNickname = it.partnerNickname
                     }
                 }
                 is Resource.Error -> {
@@ -59,16 +62,7 @@ class HomeViewModel(
         }.launchIn(viewModelScope)
     }
 
-    private fun getHomeSatusCode(status: String): Int {
-        when(status) {
-            "NONE" -> return 0
-            "WAIT" -> return 1
-            "FOUND" -> return 2
-            "MATCHING" -> return 3
-            else -> return 0
-        }
 
-    }
 
     private fun testHomeState() = viewModelScope.launch {
         delay(5000)
@@ -82,38 +76,7 @@ class HomeViewModel(
     }
 
 
-    /*
-    private fun postNotification(notificationDto: PushNotificationDto) {
-        postNotificationUseCase(
-            notificationDto
-        ).onEach { result ->
-            when(result) {
-                is Resource.Loading -> {
-                    Log.d(RETROFIT_TAG, "loading")
-                }
-                is Resource.Success -> {
-                    Log.d(RETROFIT_TAG, "success ${result.data.toString()}  ")
-                }
-                is Resource.Error -> {
-                    Log.d(RETROFIT_TAG, "error")
-                }
-            }
-        }.launchIn(viewModelScope)
-    }
-    */
 
-    private fun postFcm(postFcmDto: PostFcmDto?) = viewModelScope.launch(Dispatchers.IO) {
-        val targetToken = FirebaseMessaging.getInstance().token.await()
-        Log.e(RETROFIT_TAG, "$targetToken")
-        postFcmUseCase(
-            PostFcmDto(
-                targetToken = targetToken,
-                title = "테스트 제목",
-                body = "테스트 바디",
-                path = "테스트 패스"
-            )
-        )
-    }
 
     private fun postMatchingRequest() {
         postMatchingRequestUseCase().onEach { response ->
@@ -123,7 +86,9 @@ class HomeViewModel(
                 }
                 is Resource.Success -> {
                     Log.d(RETROFIT_TAG, response.data.toString())
-                    moveToCoffeeOrderFragment()
+                    response.data?.matchingStatus?.let { status ->
+                        _homeStatusCode.postValue(getHomeStatusCode(status))
+                    }
                 }
                 is Resource.Error -> {
                     Log.d(RETROFIT_TAG, response.message.toString())
@@ -132,59 +97,84 @@ class HomeViewModel(
         }.launchIn(viewModelScope)
     }
 
+    private fun getHomeStatusCode(status: String): Int {
+        return when(status) {
+            "NONE" -> 0
+            "WAIT" -> 1
+            "FOUND" -> 2
+            "MATCHING" -> 3
+            "FAILED_LEAVE_ROOM" -> 4
+            "FAILED_REPORT" -> 5
+            "FAILED_WONT_EXCHANGE" -> 6
+            else -> 0
+        }
 
-
-    /** onClick **/
-    fun onClickTemporaryButton() {
-
-        postFcm(null)
-//        val firebaseToken = FirebaseMessaging.getInstance().token.await()
-//        val notificationData = NotificationData("임시 title", "임시 message")
-//        PushNotificationDto(notificationData, firebaseToken).also {
-//            postNotification(it)
-//        }
     }
 
+    /** onClick **/
     fun onClickCircleImageView() {
         val statusCode = _homeStatusCode.value
-        // TODO statusCode 각각에 맞는 리스너 전환
-        Log.d(RETROFIT_TAG, "onClickCircleImageView")
+
+
         when (statusCode) {
-            0 -> {
+            0 -> { // 매칭 없음
                 postMatchingRequest()
             }
-            1 -> {
-                postMatchingRequest()
+            1 -> { // 매칭 대기
+                showToast(R.string.toast_matching_wait)
             }
-            2 -> {
-                postMatchingRequest()
+            2 -> { // 음료수 미선택
+                matchingId?.let { id ->
+                    moveToCoffeeOrderFragment(
+                        matchingId = id,
+                        startTime = startTime
+                    )
+                }
             }
-            3 -> {
-                postMatchingRequest()
+            3 -> { // 매칭 + 음료선택 완료
+                matchingId?.let { id ->
+                    moveToChatFragment(
+                        matchingId = id,
+                        startTime = startTime
+                    )
+                }
             }
-            else -> {
-                postMatchingRequest()
+            4, 5, 6 -> { // 방 폭파 or 프로필 교환 거절
+                if (partnerNickname != null && reason != null) {
+                    moveToExitFragment(partnerNickname, reason)
+                }
             }
+            else -> {}
         }
     }
 
 
 
     /** navigation **/
-    fun moveToMatchingFragment() {
-        moveToDirections(MainFragmentDirections.actionMainFragmentToMatchingFragment())
+    private fun moveToChatFragment(matchingId: Int, startTime: String?) {
+        moveToDirections(MainFragmentDirections.actionMainFragmentToMatchingFragment(
+            matchingId = matchingId,
+            startTime = startTime
+        ))
     }
-    fun moveToCoffeeOrderFragment() {
-        moveToDirections(MainFragmentDirections.actionMainFragmentToCoffeeOrderFragment())
+    private fun moveToCoffeeOrderFragment(matchingId: Int, startTime: String? ) {
+        moveToDirections(MainFragmentDirections.actionMainFragmentToCoffeeOrderFragment(
+            matchingId = matchingId,
+            startTime = startTime
+        ))
     }
 
     fun moveToProfileExchangeFragment() {
-        moveToDirections(MainFragmentDirections.actionMainFragmentToProfileExchangeFragment2())
+        moveToDirections(MainFragmentDirections.actionMainFragmentToProfileExchangeFragment())
     }
 
-    fun moveToExitFragment() {
-        moveToDirections(MainFragmentDirections.actionMainFragmentToExitFragment())
+    fun moveToExitFragment(partnerNickname: String?, reason: String?) {
+        moveToDirections(MainFragmentDirections.actionMainFragmentToExitFragment(
+            partnerNickname = partnerNickname,
+            reason = reason
+        ))
     }
+
 
 
 

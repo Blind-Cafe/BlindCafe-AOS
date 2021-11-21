@@ -10,17 +10,17 @@ class GetUserInfoUseCase(
     private val repository: UserInfoRepository
 ) {
     operator fun invoke(): Flow<Resource<GetUserInfoDto>> = flow {
-        emit(Resource.Loading())
+        emit(Resource.Loading<GetUserInfoDto>())
         try {
            val response = repository.getUserInfo()
             if (response != null) {
                 emit(Resource.Success(response))
             } else {
-                emit(Resource.Error("response is null"))
+                emit(Resource.Error<GetUserInfoDto>("response is null"))
             }
 
         } catch (e: Exception) {
-            emit(Resource.Error(e.toString()))
+            emit(Resource.Error<GetUserInfoDto>(e.toString()))
         }
     }
 }

@@ -13,6 +13,7 @@ class ReportReasonViewModel : BaseViewModel() {
     fun onClickYesButton(v: View) {
         moveToDirections(
             ReportReasonDialogFragmentDirections.actionReportReasonDialogFragmentToConfirmDialogFragment(
+                id = R.string.report_confirm_title,
                 title = v.resources.getString(R.string.report_confirm_title),
                 subtitle = v.resources.getString(R.string.report_confirm_subtitle),
                 no = v.resources.getString(R.string.report_confirm_no),
