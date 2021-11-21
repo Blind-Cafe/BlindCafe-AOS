@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.presentation.main.my_page.edit
+package com.abouttime.blindcafe.presentation.main.my_page.edit.profile
 
 import android.os.Bundle
 import android.view.View

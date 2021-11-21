@@ -265,7 +265,7 @@
     </fragment>
     <dialog
         android:id="@+id/quitReasonDialogFragment"
-        android:name="com.abouttime.blindcafe.presentation.chat.quit.reason.QuitReasonDialogFragment"
+        android:name="com.abouttime.blindcafe.presentation.chat.quit.QuitReasonDialogFragment"
         tools:layout="@layout/dialog_fragment_quit_reason"
         android:label="QuitReasonDialogFragment" >
         <action
@@ -335,7 +335,7 @@
     <fragment
         android:id="@+id/profileEditFragment"
         tools:layout="@layout/fragment_profile_edit"
-        android:name="com.abouttime.blindcafe.presentation.main.my_page.edit.ProfileEditFragment"
+        android:name="com.abouttime.blindcafe.presentation.main.my_page.edit.profile.ProfileEditFragment"
         android:label="ProfileEditFragment"
         />
     <fragment
@@ -416,6 +416,6 @@
     <fragment
         android:id="@+id/interestEditFragment"
         tools:layout="@layout/fragment_interest_edit"
-        android:name="com.abouttime.blindcafe.presentation.main.my_page.setting.interest_edit.InterestEditFragment"
+        android:name="com.abouttime.blindcafe.presentation.main.my_page.edit.interest.InterestEditFragment"
         android:label="InterestEditFragment" />
 </navigation>

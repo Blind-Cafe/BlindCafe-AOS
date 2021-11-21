@@ -15,7 +15,7 @@
 
         <variable
             name="viewModel"
-            type="com.abouttime.blindcafe.presentation.chat.quit.reason.QuitReasonViewModel" />
+            type="com.abouttime.blindcafe.presentation.chat.quit.QuitReasonViewModel" />
     </data>
 
     <LinearLayout

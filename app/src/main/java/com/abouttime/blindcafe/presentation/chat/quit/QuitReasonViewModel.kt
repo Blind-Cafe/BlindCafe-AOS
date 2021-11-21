@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.presentation.chat.quit.reason
+package com.abouttime.blindcafe.presentation.chat.quit
 
 import android.view.View
 import androidx.lifecycle.LiveData

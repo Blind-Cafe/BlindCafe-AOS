@@ -14,7 +14,7 @@
 
         <variable
             name="viewModel"
-            type="com.abouttime.blindcafe.presentation.main.my_page.edit.ProfileEditViewModel" />
+            type="com.abouttime.blindcafe.presentation.main.my_page.edit.profile.ProfileEditViewModel" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:tools="http://schemas.android.com/tools"

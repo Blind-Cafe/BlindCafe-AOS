@@ -3,7 +3,7 @@ package com.abouttime.blindcafe.di
 import com.abouttime.blindcafe.presentation.NavHostViewModel
 import com.abouttime.blindcafe.presentation.chat.ChatViewModel
 import com.abouttime.blindcafe.presentation.chat.gallery.GalleryViewModel
-import com.abouttime.blindcafe.presentation.chat.quit.reason.QuitReasonViewModel
+import com.abouttime.blindcafe.presentation.chat.quit.QuitReasonViewModel
 import com.abouttime.blindcafe.presentation.chat.report.ReportReasonViewModel
 import com.abouttime.blindcafe.presentation.common.confirm.ConfirmViewModel
 import com.abouttime.blindcafe.presentation.main.MainViewModel
@@ -13,7 +13,7 @@ import com.abouttime.blindcafe.presentation.main.home.HomeViewModel
 import com.abouttime.blindcafe.presentation.main.home.coffee.CoffeeOrderViewModel
 import com.abouttime.blindcafe.presentation.main.home.exit.ExitViewModel
 import com.abouttime.blindcafe.presentation.main.my_page.MyPageViewModel
-import com.abouttime.blindcafe.presentation.main.my_page.edit.ProfileEditViewModel
+import com.abouttime.blindcafe.presentation.main.my_page.edit.profile.ProfileEditViewModel
 import com.abouttime.blindcafe.presentation.main.my_page.setting.SettingViewModel
 import com.abouttime.blindcafe.presentation.main.my_page.setting.account_delete.AccountDeleteViewModel
 import com.abouttime.blindcafe.presentation.main.my_page.setting.report_list.ReportListViewModel

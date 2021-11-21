@@ -1,11 +1,10 @@
-package com.abouttime.blindcafe.presentation.main.my_page.setting.interest_edit
+package com.abouttime.blindcafe.presentation.main.my_page.edit.interest
 
 import android.os.Bundle
 import android.view.View
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.databinding.FragmentInterestEditBinding
-import com.abouttime.blindcafe.databinding.FragmentInterestSubBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class InterestEditFragment: BaseFragment<InterestEditViewModel>(R.layout.fragment_interest_edit) {
