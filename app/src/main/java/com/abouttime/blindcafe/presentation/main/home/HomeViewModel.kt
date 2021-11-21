@@ -178,6 +178,14 @@ class HomeViewModel(
         moveToDirections(MainFragmentDirections.actionMainFragmentToCoffeeOrderFragment())
     }
 
+    fun moveToProfileExchangeFragment() {
+        moveToDirections(MainFragmentDirections.actionMainFragmentToProfileExchangeFragment2())
+    }
+
+    fun moveToExitFragment() {
+        moveToDirections(MainFragmentDirections.actionMainFragmentToExitFragment())
+    }
+
 
 
 }
