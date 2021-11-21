@@ -252,6 +252,11 @@
     <string name="report_list_title">신고내역</string>
     <string name="report_list_none">신공한 내역이 없습니다.</string>
 
+
+    <!-- account delete complete -->
+    <string name="account_delete_complete_description">답변 감사합니다.\n블라인드 카페가 그리우시면 언제든지 다시 돌려주세요</string>
+    <string name="account_delete_complete_next">계정 삭제하기</string>
+
     <!-- locations -->
     <string name="location_title">지역설정</string>
     <string name="location_main_title">시/도</string>

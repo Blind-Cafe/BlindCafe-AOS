@@ -387,5 +387,26 @@
             app:argType="string" />
         <argument android:name="yes"
             app:argType="string"/>
+        <action
+            android:id="@+id/action_confirmDialogFragment_to_accountDeleteCompleteFragment"
+            app:destination="@id/accountDeleteCompleteFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/mainFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </dialog>
+    <fragment
+        android:id="@+id/accountDeleteCompleteFragment"
+        android:name="com.abouttime.blindcafe.presentation.main.my_page.setting.account_delete.complete.AccountDeleteCompleteFragment"
+        android:label="AccountDeleteCompleteFragment" >
+        <action
+            android:id="@+id/action_accountDeleteCompleteFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 </navigation>
