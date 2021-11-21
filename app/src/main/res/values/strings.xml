@@ -257,6 +257,10 @@
     <string name="account_delete_complete_description">답변 감사합니다.\n블라인드 카페가 그리우시면 언제든지 다시 돌려주세요</string>
     <string name="account_delete_complete_next">계정 삭제하기</string>
 
+    <!-- interest main edit -->
+    <string name="interest_main_edit_title">관심사 수정</string>
+    <string name="interest_main_edit_next">확인</string>
+
     <!-- locations -->
     <string name="location_title">지역설정</string>
     <string name="location_main_title">시/도</string>

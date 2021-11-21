@@ -112,6 +112,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_interestEditFragment"
+            app:destination="@id/interestEditFragment" />
     </fragment>
     <fragment
         android:id="@+id/ruleFragment"
@@ -399,6 +402,7 @@
     </dialog>
     <fragment
         android:id="@+id/accountDeleteCompleteFragment"
+        tools:layout="@layout/fragment_account_delete"
         android:name="com.abouttime.blindcafe.presentation.main.my_page.setting.account_delete.complete.AccountDeleteCompleteFragment"
         android:label="AccountDeleteCompleteFragment" >
         <action
@@ -409,4 +413,9 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
+    <fragment
+        android:id="@+id/interestEditFragment"
+        tools:layout="@layout/fragment_interest_edit"
+        android:name="com.abouttime.blindcafe.presentation.main.my_page.setting.interest_edit.InterestEditFragment"
+        android:label="InterestEditFragment" />
 </navigation>

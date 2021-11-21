@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+
+    <ImageButton
+        android:id="@+id/ib_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="27dp"
+        android:background="@color/transparent"
+        android:src="@drawable/bt_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="7sp"
+        android:text="@string/interest_main_edit_title"
+        android:textColor="#fafafa"
+        android:textSize="@dimen/font_size_large"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/ib_back"
+        app:layout_constraintStart_toEndOf="@id/ib_back"
+        app:layout_constraintTop_toTopOf="@id/ib_back" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_interests_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="54dp"
+        app:layout_constraintBottom_toTopOf="@id/tv_next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:layout_constraintVertical_bias="0">
+
+
+
+            <ImageView
+                android:id="@+id/iv_interest_1"
+                android:layout_width="101dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="101:85"
+                android:layout_gravity="center"
+                android:src="@drawable/bt_interest_1"
+                android:layout_marginBottom="@dimen/interest_vertical_margin"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iv_interest_2"
+                app:layout_constraintBottom_toTopOf="@id/iv_interest_4"
+                app:layout_constraintVertical_chainStyle="spread"/>
+
+
+
+
+            <ImageView
+                android:id="@+id/iv_interest_2"
+                android:layout_width="101dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="101:85"
+                android:layout_gravity="center"
+                android:src="@drawable/bt_interest_2"
+                app:layout_constraintTop_toTopOf="@id/iv_interest_1"
+                app:layout_constraintBottom_toBottomOf="@id/iv_interest_1"
+                app:layout_constraintStart_toEndOf="@id/iv_interest_1"
+                app:layout_constraintEnd_toStartOf="@id/iv_interest_3"
+                app:tint="@color/disabled" />
+
+
+
+
+            <ImageView
+                android:id="@+id/iv_interest_3"
+                android:layout_width="101dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="101:85"
+                android:layout_gravity="center"
+                android:src="@drawable/bt_interest_3"
+                app:layout_constraintTop_toTopOf="@id/iv_interest_1"
+                app:layout_constraintBottom_toBottomOf="@id/iv_interest_1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_interest_2"
+                app:tint="@color/disabled" />
+
+
+
+
+            <ImageView
+                android:id="@+id/iv_interest_4"
+                android:layout_width="101dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="101:85"
+                android:layout_gravity="center"
+                android:src="@drawable/bt_interest_4"
+
+                android:layout_marginBottom="@dimen/interest_vertical_margin"
+                app:layout_constraintTop_toBottomOf="@id/iv_interest_1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iv_interest_5"
+                app:layout_constraintBottom_toTopOf="@id/iv_interest_7"
+                app:tint="@color/disabled" />
+
+
+
+
+            <ImageView
+                android:id="@+id/iv_interest_5"
+                android:layout_width="101dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="101:85"
+                android:layout_gravity="center"
+                android:src="@drawable/bt_interest_5"
+                app:layout_constraintStart_toEndOf="@id/iv_interest_4"
+                app:layout_constraintTop_toTopOf="@id/iv_interest_4"
+                app:layout_constraintBottom_toBottomOf="@id/iv_interest_4"
+                app:layout_constraintEnd_toStartOf="@id/iv_interest_6"
+                app:tint="@color/disabled" />
+
+
+
+
+
+            <ImageView
+                android:id="@+id/iv_interest_6"
+                android:layout_width="101dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="101:85"
+                android:layout_gravity="center"
+                android:src="@drawable/bt_interest_6"
+                app:layout_constraintTop_toTopOf="@id/iv_interest_4"
+                app:layout_constraintBottom_toBottomOf="@id/iv_interest_4"
+                app:layout_constraintStart_toEndOf="@id/iv_interest_5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:tint="@color/disabled" />
+
+
+
+
+
+            <ImageView
+                android:id="@+id/iv_interest_7"
+                android:layout_width="101dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="101:85"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/interest_vertical_margin"
+                android:src="@drawable/bt_interest_7"
+                app:layout_constraintTop_toBottomOf="@id/iv_interest_4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iv_interest_8"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:tint="@color/disabled" />
+
+
+
+
+
+            <ImageView
+                android:id="@+id/iv_interest_8"
+                android:layout_width="101dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="101:85"
+                android:layout_gravity="center"
+                android:src="@drawable/bt_interest_8"
+                app:layout_constraintTop_toTopOf="@id/iv_interest_7"
+                app:layout_constraintBottom_toBottomOf="@id/iv_interest_7"
+                app:layout_constraintStart_toEndOf="@id/iv_interest_7"
+                app:layout_constraintEnd_toStartOf="@id/iv_interest_9"
+                app:tint="@color/disabled" />
+
+
+
+
+
+            <ImageView
+                android:id="@+id/iv_interest_9"
+                android:layout_width="101dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="101:85"
+                android:layout_gravity="center"
+                android:src="@drawable/bt_interest_9"
+                app:layout_constraintTop_toTopOf="@id/iv_interest_7"
+                app:layout_constraintBottom_toBottomOf="@id/iv_interest_7"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_interest_8"
+                app:tint="@color/disabled" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv_next"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/button_disabled"
+        android:gravity="center"
+        android:text="@string/interest_main_edit_next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="296:48"
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

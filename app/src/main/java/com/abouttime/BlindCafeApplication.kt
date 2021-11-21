@@ -15,6 +15,7 @@ import com.abouttime.blindcafe.di.useCaseModule
 import com.abouttime.blindcafe.di.viewModelModule
 import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.common.KakaoSdk
+import com.kakao.sdk.common.util.Utility
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -27,6 +28,7 @@ class BlindCafeApplication: Application() {
         KakaoSdk.init(this, BuildConfig.KAKAO_API_KEY)
 
         sharedPreferences = getSharedPreferences("BLIND_CAFE", Context.MODE_PRIVATE)
+        //var keyHash = Utility.getKeyHash(this)
 
         FirebaseMessaging.getInstance().subscribeToTopic(Retrofit.FCM_MESSAGE_TOPIC).addOnCompleteListener { task ->
             var msg = "구독 성공"
