@@ -10,8 +10,15 @@ class QuitReasonViewModel: BaseViewModel() {
     private val _reason = MutableLiveData(0)
     val reason: LiveData<Int> get() = _reason
 
-    fun onClickYesButton() {
-        moveToQuitDialogFragment()
+    fun onClickYesButton(v: View) {
+        moveToDirections(
+            QuitReasonDialogFragmentDirections.actionQuitReasonDialogFragmentToConfirmDialogFragment(
+                title = v.resources.getString(R.string.quit_confirm_title),
+                subtitle = v.resources.getString(R.string.quit_confirm_subtitle),
+                no = v.resources.getString(R.string.quit_confirm_no),
+                yes = v.resources.getString(R.string.quit_confirm_yes)
+            )
+        )
     }
     fun onClickNoButton() {
         popDirections()
@@ -28,6 +35,6 @@ class QuitReasonViewModel: BaseViewModel() {
     }
 
     private fun moveToQuitDialogFragment() {
-        moveToDirections(QuitReasonDialogFragmentDirections.actionQuitReasonDialogFragmentToQuitDialogFragment())
+
     }
 }

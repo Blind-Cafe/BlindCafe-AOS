@@ -8,7 +8,8 @@ import com.abouttime.blindcafe.presentation.chat.gallery.GalleryViewModel
 import com.abouttime.blindcafe.presentation.chat.quit.confirm.QuitViewModel
 import com.abouttime.blindcafe.presentation.chat.quit.reason.QuitReasonViewModel
 import com.abouttime.blindcafe.presentation.chat.report.confirm.ReportViewModel
-import com.abouttime.blindcafe.presentation.chat.report.reason.ReportReasonViewModel
+import com.abouttime.blindcafe.presentation.chat.report.ReportReasonViewModel
+import com.abouttime.blindcafe.presentation.common.confirm.ConfirmViewModel
 import com.abouttime.blindcafe.presentation.main.chat_list.ChatListViewModel
 import com.abouttime.blindcafe.presentation.main.dormancy.DormancyViewModel
 import com.abouttime.blindcafe.presentation.main.home.coffee.CoffeeOrderViewModel
@@ -37,6 +38,11 @@ internal val viewModelModule = module {
 
     /** Splash **/
     viewModel { SplashViewModel() }
+
+
+    /** Common **/
+    viewModel { ConfirmViewModel()}
+
 
     /** Single Activity **/
     viewModel { NavHostViewModel() }

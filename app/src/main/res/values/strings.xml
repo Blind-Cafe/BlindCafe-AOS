@@ -136,10 +136,10 @@
     <string name="quit_reason_4">제가 대화를 지속하기 어려워요</string>
     <string name="quit_reason_no">안나갈래요</string>
     <string name="quit_reason_yes">이젠 안녕!</string>
-    <string name="quit_title">정말 매칭 방을 나가시겠습니까?</string>
-    <string name="quit_subtitle">지금 나가시면 로즈님과 다시 매칭 될 수 없어요</string>
-    <string name="quit_no">취소</string>
-    <string name="quit_yes">나가기</string>
+    <string name="quit_confirm_title">정말 매칭 방을 나가시겠습니까?</string>
+    <string name="quit_confirm_subtitle">지금 나가시면 로즈님과 다시 매칭 될 수 없어요</string>
+    <string name="quit_confirm_no">취소</string>
+    <string name="quit_confirm_yes">나가기</string>
 
 
     <!-- quit complete -->
@@ -158,10 +158,10 @@
     <string name="report_reason_email">적절한 신고 선택지가 없으실 땐 저희에게 언제든지 연락주세요 (blindcafeapp@gmail.com)</string>
     <string name="report_reason_no">취소</string>
     <string name="report_reason_yes">신고하기</string>
-    <string name="report_title">신고가 접수 되었습니다.\n대화 방을 바로 나가시겠습니까?</string>
-    <string name="report_subtitle">불쾌한 경험을 알겨드려 죄송합니다.\n보내주신 피드백으로 안전한 대화공간을 만들 수 있도록 노력하겠습니다.</string>
-    <string name="report_no">취소</string>
-    <string name="report_yes">나가기</string>
+    <string name="report_confirm_title">신고가 접수 되었습니다.\n대화 방을 바로 나가시겠습니까?</string>
+    <string name="report_confirm_subtitle">불쾌한 경험을 알겨드려 죄송합니다.\n보내주신 피드백으로 안전한 대화공간을 만들 수 있도록 노력하겠습니다.</string>
+    <string name="report_confirm_no">취소</string>
+    <string name="report_confirm_yes">나가기</string>
 
     <!-- profile edit -->
     <string name="profile_edit_title">프로필 수정</string>
@@ -201,6 +201,11 @@
     <string name="profile_dismiss_reason_3">대화가 재미 없어요</string>
     <string name="profile_dismiss_reason_4">제가 대화를 지속하기 어려워요</string>
     <string name="profile_dismiss_next">거절하기</string>
+    <!-- profile dismiss confirm -->
+    <string name="profile_dismiss_confirm_title">거절하시겠습니까?</string>
+    <string name="profile_dismiss_confirm_subtitle">지금 나가시면 로즈님과 다시 매칭 될 수 없어요</string>
+    <string name="profile_dismiss_confirm_no">취소</string>
+    <string name="profile_dismiss_confirm_yes">거절하기</string>
 
 
     <!-- profile exchange complete -->

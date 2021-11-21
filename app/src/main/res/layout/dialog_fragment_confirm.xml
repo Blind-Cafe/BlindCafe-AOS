@@ -13,7 +13,7 @@
 
         <variable
             name="viewModel"
-            type="com.abouttime.blindcafe.presentation.chat.report.confirm.ReportViewModel" />
+            type="com.abouttime.blindcafe.presentation.common.confirm.ConfirmViewModel" />
     </data>
 
     <LinearLayout
@@ -31,7 +31,7 @@
             android:layout_width="340dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/spoqa_han_sans_neo_bold"
-            android:text="@string/report_title"
+            android:text="@string/report_confirm_title"
             android:textColor="@color/white"
             android:textSize="@dimen/dialog_reason" />
 
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
-            android:text="@string/report_subtitle"
+            android:text="@string/report_confirm_subtitle"
             android:textColor="@color/gray_300"
             android:textSize="@dimen/font_size_small" />
 
@@ -70,7 +70,7 @@
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:gravity="center"
                 android:paddingVertical="11dp"
-                android:text="@string/report_no"
+                android:text="@string/report_confirm_no"
                 android:textColor="@color/gray_300"
                 android:textSize="@dimen/dialog_reason" />
 
@@ -83,7 +83,7 @@
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:gravity="center"
                 android:paddingVertical="11dp"
-                android:text="@string/report_yes"
+                android:text="@string/report_confirm_yes"
                 android:textColor="@color/main"
                 android:textSize="@dimen/dialog_reason" />
 

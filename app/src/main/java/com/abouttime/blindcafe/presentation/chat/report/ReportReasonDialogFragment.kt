@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.presentation.chat.report.reason
+package com.abouttime.blindcafe.presentation.chat.report
 
 import android.os.Bundle
 import android.view.View

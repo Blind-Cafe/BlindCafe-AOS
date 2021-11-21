@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.presentation.chat.report.reason
+package com.abouttime.blindcafe.presentation.chat.report
 
 import android.view.View
 import androidx.lifecycle.LiveData
@@ -10,8 +10,15 @@ class ReportReasonViewModel : BaseViewModel() {
     private val _reason = MutableLiveData(0)
     val reason: LiveData<Int> get() = _reason
 
-    fun onClickYesButton() {
-        moveToReportDialogFragment()
+    fun onClickYesButton(v: View) {
+        moveToDirections(
+            ReportReasonDialogFragmentDirections.actionReportReasonDialogFragmentToConfirmDialogFragment(
+                title = v.resources.getString(R.string.report_confirm_title),
+                subtitle = v.resources.getString(R.string.report_confirm_subtitle),
+                no = v.resources.getString(R.string.report_confirm_no),
+                yes = v.resources.getString(R.string.report_confirm_yes)
+            )
+        )
     }
     fun onClickNoButton() {
         popDirections()
@@ -27,7 +34,5 @@ class ReportReasonViewModel : BaseViewModel() {
         }
     }
 
-    private fun moveToReportDialogFragment() {
-        moveToDirections(ReportReasonDialogFragmentDirections.actionReportReasonDialogFragmentToReportDialogFragment())
-    }
+
 }

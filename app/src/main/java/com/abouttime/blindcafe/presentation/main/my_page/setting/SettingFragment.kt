@@ -15,6 +15,8 @@ class SettingFragment: BaseFragment<SettingViewModel>(R.layout.fragment_setting)
         super.onViewCreated(view, savedInstanceState)
         val fragmentSettingBinding = FragmentSettingBinding.bind(view)
         binding = fragmentSettingBinding
+        binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
 
     }
 

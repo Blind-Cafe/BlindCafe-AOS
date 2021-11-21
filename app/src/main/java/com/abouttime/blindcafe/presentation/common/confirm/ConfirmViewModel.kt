@@ -1,9 +1,8 @@
-package com.abouttime.blindcafe.presentation.chat.quit.confirm
+package com.abouttime.blindcafe.presentation.common.confirm
 
 import com.abouttime.blindcafe.common.base.BaseViewModel
 
-class QuitViewModel: BaseViewModel() {
-
+class ConfirmViewModel: BaseViewModel() {
     fun onClickYesButton() {
         popDirections()
     }

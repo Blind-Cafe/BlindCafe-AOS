@@ -218,6 +218,7 @@
             android:paddingHorizontal="13dp"
             android:text="@string/profile_dismiss_next"
             android:textColor="@color/white"
+            android:onClick="@{viewModel::onClickNextButton}"
             android:textSize="@dimen/font_size_regular"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="328:48"

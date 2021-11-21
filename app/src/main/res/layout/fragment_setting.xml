@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <import type="android.view.View.OnClickListener" />
+
+        <import type="android.view.View" />
+
+        <import type="androidx.core.content.ContextCompat" />
+
+        <import type="java.util.List" />
+
+        <variable
+            name="viewModel"
+            type="com.abouttime.blindcafe.presentation.main.my_page.setting.SettingViewModel" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black">
@@ -188,6 +206,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:background="@color/gray_900"
+        android:onClick="@{() -> viewModel.onClickReportListContainer()}"
         android:orientation="horizontal"
         android:paddingVertical="4dp"
         android:paddingStart="24dp"
@@ -234,9 +253,8 @@
         android:layout_marginTop="10dp"
         android:background="@color/gray_900"
         android:orientation="vertical"
-        android:paddingVertical="4dp"
-        android:paddingStart="24dp"
-        android:paddingEnd="18dp"
+
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_account_title">
@@ -245,9 +263,12 @@
         <TextView
             android:id="@+id/tv_logout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:paddingStart="24dp"
+            android:paddingEnd="18dp"
+            android:layout_height="match_parent"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
-            android:paddingVertical="13dp"
+            android:paddingVertical="15dp"
+            android:onClick="@{viewModel::onClickLogoutContainer}"
             android:text="@string/setting_account_logout"
             android:textColor="@color/white"
             android:textSize="@dimen/font_size_16" />
@@ -257,6 +278,7 @@
             android:id="@+id/ll_account_delete_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.onClickAccountDeleteContainer()}"
             android:orientation="horizontal">
 
 
@@ -264,8 +286,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:paddingStart="24dp"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                android:paddingVertical="13dp"
+                android:paddingVertical="15dp"
                 android:text="@string/setting_account_delete"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_size_16" />
@@ -274,6 +297,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingEnd="18dp"
                 android:layout_gravity="center"
                 android:src="@drawable/bt_next"/>
 
@@ -285,3 +309,6 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

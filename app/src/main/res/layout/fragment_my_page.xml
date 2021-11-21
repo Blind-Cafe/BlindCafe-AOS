@@ -49,6 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/bt_setting"
+                android:onClick="@{() -> viewModel.onClickSettingButton()}"
                 app:layout_constraintBottom_toBottomOf="@id/tv_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tv_title" />
@@ -211,6 +212,7 @@
                         android:paddingVertical="12dp"
                         android:text="@string/my_page_profile_edit"
                         android:textColor="@color/white_2"
+                        android:onClick="@{() -> viewModel.onClickEditProfileButton()}"
                         android:textSize="@dimen/font_size_small"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -13,7 +14,7 @@
 
         <variable
             name="viewModel"
-            type="com.abouttime.blindcafe.presentation.chat.report.reason.ReportReasonViewModel" />
+            type="com.abouttime.blindcafe.presentation.chat.report.ReportReasonViewModel" />
     </data>
 
     <LinearLayout
@@ -70,6 +71,7 @@
                 android:id="@+id/iv_check_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                tools:src="@drawable/bt_check"
                 android:onClick="@{viewModel::onClickCheckButton}"
                 android:src="@{viewModel.reason == 1 ? @drawable/bt_checked : @drawable/bt_check}" />
 
@@ -98,6 +100,7 @@
                 android:id="@+id/iv_check_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                tools:src="@drawable/bt_check"
                 android:onClick="@{viewModel::onClickCheckButton}"
                 android:src="@{viewModel.reason == 2 ? @drawable/bt_checked : @drawable/bt_check}" />
 
@@ -126,6 +129,7 @@
                 android:id="@+id/iv_check_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                tools:src="@drawable/bt_check"
                 android:onClick="@{viewModel::onClickCheckButton}"
                 android:src="@{viewModel.reason == 3 ? @drawable/bt_checked : @drawable/bt_check}" />
 
@@ -155,6 +159,7 @@
                 android:id="@+id/iv_check_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                tools:src="@drawable/bt_check"
                 android:onClick="@{viewModel::onClickCheckButton}"
                 android:src="@{viewModel.reason == 4 ? @drawable/bt_checked : @drawable/bt_check}" />
 
@@ -183,6 +188,7 @@
                 android:id="@+id/iv_check_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                tools:src="@drawable/bt_check"
                 android:onClick="@{viewModel::onClickCheckButton}"
                 android:src="@{viewModel.reason == 5 ? @drawable/bt_checked : @drawable/bt_check}" />
 
@@ -233,7 +239,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:gravity="center"
-                android:onClick="@{() -> viewModel.onClickYesButton()}"
+                android:onClick="@{viewModel::onClickYesButton}"
                 android:paddingVertical="12dp"
                 android:text="@string/report_reason_yes"
                 android:textColor="@color/main"
