@@ -40,7 +40,7 @@
                 android:fontFamily="@font/spoqa_han_sans_neo_bold"
                 android:text="@string/my_page_title"
                 android:textColor="@color/white"
-                android:textSize="@dimen/font_size_regular"
+                android:textSize="@dimen/font_size__16"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -93,7 +93,7 @@
                         android:text="@{viewModel.nickname}"
                         tools:text="당이"
                         android:textColor="@color/white_2"
-                        android:textSize="@dimen/font_size_regular"
+                        android:textSize="@dimen/font_size__16"
                         app:layout_constraintBottom_toTopOf="@id/tv_profile_message"
                         app:layout_constraintStart_toEndOf="@id/iv_profile_image"
                         app:layout_constraintTop_toTopOf="@+id/iv_profile_image"
@@ -123,7 +123,7 @@
                         android:fontFamily="@font/spoqa_han_sans_neo_regular"
                         android:text="@string/my_page_sex"
                         android:textColor="@color/gray_300"
-                        android:textSize="@dimen/font_size_small"
+                        android:textSize="@dimen/font_size_13"
                         app:layout_constraintBottom_toTopOf="@id/tv_sex_value"
                         app:layout_constraintStart_toStartOf="@id/tv_sex_value"
                         app:layout_constraintTop_toBottomOf="@id/iv_profile_image" />
@@ -135,7 +135,7 @@
                         android:fontFamily="@font/spoqa_han_sans_neo_regular"
                         android:text="@string/my_page_age"
                         android:textColor="@color/gray_300"
-                        android:textSize="@dimen/font_size_small"
+                        android:textSize="@dimen/font_size_13"
                         app:layout_constraintBottom_toBottomOf="@id/tv_sex"
                         app:layout_constraintStart_toStartOf="@id/tv_age_value"
                         app:layout_constraintTop_toTopOf="@id/tv_sex" />
@@ -148,7 +148,7 @@
                         android:fontFamily="@font/spoqa_han_sans_neo_regular"
                         android:text="@string/my_page_location"
                         android:textColor="@color/gray_300"
-                        android:textSize="@dimen/font_size_small"
+                        android:textSize="@dimen/font_size_13"
                         app:layout_constraintBottom_toBottomOf="@id/tv_sex"
                         app:layout_constraintStart_toStartOf="@id/tv_location_value"
                         app:layout_constraintTop_toTopOf="@id/tv_sex" />
@@ -163,7 +163,7 @@
                         android:fontFamily="@font/spoqa_han_sans_neo_regular"
                         tools:text="남자"
                         android:textColor="@color/white_2"
-                        android:textSize="@dimen/font_size_regular"
+                        android:textSize="@dimen/font_size__16"
                         android:text="@string/no_value"
                         app:layout_constraintBottom_toTopOf="@id/tv_edit_profile"
                         app:layout_constraintEnd_toStartOf="@id/tv_age_value"
@@ -179,7 +179,7 @@
                         android:text="@string/no_value"
                         tools:text="29세"
                         android:textColor="@color/white_2"
-                        android:textSize="@dimen/font_size_regular"
+                        android:textSize="@dimen/font_size__16"
                         app:layout_constraintBottom_toBottomOf="@id/tv_sex_value"
                         app:layout_constraintEnd_toStartOf="@id/tv_location_value"
                         app:layout_constraintStart_toEndOf="@id/tv_sex_value"
@@ -193,7 +193,7 @@
                         android:text="@{viewModel.location}"
                         tools:text="부산 광역시 해운대구"
                         android:textColor="@color/white_2"
-                        android:textSize="@dimen/font_size_regular"
+                        android:textSize="@dimen/font_size__16"
                         app:layout_constraintBottom_toBottomOf="@id/tv_sex_value"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tv_age_value"
@@ -213,7 +213,7 @@
                         android:text="@string/my_page_profile_edit"
                         android:textColor="@color/white_2"
                         android:onClick="@{() -> viewModel.onClickEditProfileButton()}"
-                        android:textSize="@dimen/font_size_small"
+                        android:textSize="@dimen/font_size_13"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -239,7 +239,7 @@
                         android:fontFamily="@font/spoqa_han_sans_neo_regular"
                         android:text="@string/my_page_interest"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/font_size_regular"
+                        android:textSize="@dimen/font_size__16"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -317,7 +317,7 @@
                         android:fontFamily="@font/spoqa_han_sans_neo_regular"
                         android:text="@string/my_page_badge_title"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/font_size_regular"
+                        android:textSize="@dimen/font_size__16"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -329,7 +329,7 @@
                         android:fontFamily="@font/spoqa_han_sans_neo_regular"
                         android:text="@string/my_page_badge_subtitle"
                         android:textColor="@color/gray_300"
-                        android:textSize="@dimen/font_size_small"
+                        android:textSize="@dimen/font_size_13"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_badge_title" />
 

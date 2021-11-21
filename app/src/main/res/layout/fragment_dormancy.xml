@@ -13,7 +13,7 @@
         android:fontFamily="@font/ghana_chocolate"
         android:text="@string/app_name_title"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_size_regular"
+        android:textSize="@dimen/font_size__16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +38,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:text="@string/dormancy_title"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size_regular"
+            android:textSize="@dimen/font_size__16"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,7 +51,7 @@
             android:lineSpacingExtra="7sp"
             android:text="@string/dormancy_description"
             android:textColor="@color/gray_300"
-            android:textSize="@dimen/font_size_small"
+            android:textSize="@dimen/font_size_13"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +79,7 @@
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:text="@string/dormancy_time"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_size_regular"
+        android:textSize="@dimen/font_size__16"
         app:layout_constraintBottom_toBottomOf="@id/iv_dormancy_time"
         app:layout_constraintEnd_toEndOf="@id/cl_description_container"
         app:layout_constraintStart_toEndOf="@id/iv_dormancy_time"

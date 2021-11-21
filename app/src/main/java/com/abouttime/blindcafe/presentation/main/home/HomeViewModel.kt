@@ -24,6 +24,8 @@ class HomeViewModel(
 ): BaseViewModel() {
     private val _homeStatusCode: MutableLiveData<Int> = MutableLiveData<Int>(-1)
     val homeStatusCode: LiveData<Int> get() = _homeStatusCode
+    private val _time: MutableLiveData<String> = MutableLiveData("00:00")
+    val time: LiveData<String> get() = _time
 
     private var matchingId: Int? = null
     private var startTime: String? = null
@@ -32,8 +34,8 @@ class HomeViewModel(
 
 
     init {
-        //testHomeState()
-        getHomeInfo()
+        testHomeState()
+        //getHomeInfo()
     }
 
     private fun getHomeInfo() {
@@ -130,6 +132,7 @@ class HomeViewModel(
                         startTime = startTime
                     )
                 }
+
             }
             3 -> { // 매칭 + 음료선택 완료
                 matchingId?.let { id ->

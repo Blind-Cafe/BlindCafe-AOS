@@ -42,7 +42,7 @@
             android:lineSpacingExtra="7sp"
             android:text="@string/profile_setting_title"
             android:textColor="#fafafa"
-            android:textSize="@dimen/font_size_large"
+            android:textSize="@dimen/font_size_15"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/ib_back"
             app:layout_constraintStart_toEndOf="@id/ib_back"
@@ -77,6 +77,7 @@
                 android:layout_marginTop="25dp"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:text="@string/profile_setting_step_1"
+                android:textSize="@dimen/font_size_super_small"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -88,7 +89,7 @@
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:text="@string/profile_setting_age"
                 android:textColor="@color/white"
-                android:textSize="@dimen/font_size_regular"
+                android:textSize="@dimen/font_size_15"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_step1" />
 
@@ -98,6 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
                 android:layout_marginTop="7dp"
+                android:textSize="@dimen/font_size_13"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:text="@string/profile_setting_age_hint"
                 app:layout_constraintStart_toStartOf="parent"
@@ -106,8 +108,10 @@
             <EditText
                 android:id="@+id/et_age"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
+                android:layout_height="44dp"
+                android:gravity="center"
                 android:layout_marginTop="2dp"
+                android:hint="@string/age_hint"
                 android:background="@drawable/et_bg_rounding_with_default_stroke"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:inputType="number"
@@ -115,7 +119,7 @@
                 android:padding="8dp"
                 android:text="@={viewModel.ageText}"
                 android:textCursorDrawable="@drawable/ic_cursor"
-                app:layout_constraintDimensionRatio="3:1"
+                app:layout_constraintDimensionRatio="60:44"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_sub_age"
                 tools:ignore="SpeakableTextPresentCheck" />
@@ -142,7 +146,7 @@
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:text="@string/profile_setting_sex"
                 android:textColor="@color/white"
-                android:textSize="@dimen/font_size_regular"
+                android:textSize="@dimen/font_size_15"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_alert_age" />
 
@@ -152,11 +156,11 @@
                 android:layout_height="0dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
-                android:layout_marginBottom="16dp"
                 android:background="@drawable/bg_rounding_3dp"
                 android:backgroundTint="@{viewModel.selectedSex == 1 ? @color/sex_container_enabled : @color/sex_container_disabled}"
                 android:onClick="@{() -> viewModel.onClickFemaleButton()}"
-                app:layout_constraintBottom_toTopOf="@id/tv_alert_age_sex"
+                app:layout_constraintVertical_bias="0"
+                app:layout_constraintBottom_toTopOf="@+id/tv_alert_age_sex"
                 app:layout_constraintDimensionRatio="135:85"
                 app:layout_constraintEnd_toStartOf="@id/fl_male_container"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -225,6 +229,7 @@
                 android:gravity="center"
                 android:onClick="@{()->viewModel.onClickNextButton()}"
                 android:text="@string/profile_setting_next"
+                android:textSize="@dimen/font_size_15"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="288:48"
                 app:layout_constraintEnd_toEndOf="parent"

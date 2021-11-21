@@ -1,13 +1,20 @@
 package com.abouttime.blindcafe.common.base
 
 import android.content.Context
+import android.content.res.Resources
 import android.os.Bundle
+import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
+import com.abouttime.blindcafe.R
+import com.abouttime.blindcafe.databinding.ToastBinding
 
 abstract class BaseDialogFragment<VM: BaseViewModel>(layoutId: Int): DialogFragment(layoutId) {
     // View Model
@@ -68,8 +75,23 @@ abstract class BaseDialogFragment<VM: BaseViewModel>(layoutId: Int): DialogFragm
 
     /** Util for all fragment **/
     fun showToast(resId: Int) {
-        Toast.makeText(requireContext(), getString(resId), Toast.LENGTH_SHORT).show()
+        //Toast.makeText(requireContext(), getString(resId), Toast.LENGTH_SHORT).show()
+        createToast(getString(resId))?.show()
     }
+    fun createToast(content: String): Toast? {
+        val inflater = LayoutInflater.from(requireContext())
+        val binding: ToastBinding = ToastBinding.inflate(layoutInflater)
+        binding.textView.text = content
+
+        return Toast(requireContext()).apply {
+            setGravity(Gravity.BOTTOM or Gravity.CENTER, 0, 48.toPx())
+            duration = Toast.LENGTH_SHORT
+            view = binding.root
+        }
+
+
+    }
+    private fun Int.toPx(): Int = (this * Resources.getSystem().displayMetrics.density).toInt()
 
     fun getColorByResId(resId: Int) = resources.getColor(resId, null)
 

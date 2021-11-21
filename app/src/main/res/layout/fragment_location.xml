@@ -22,7 +22,7 @@
         android:fontFamily="@font/spoqa_han_sans_neo_bold"
         android:text="@string/location_title"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_size_regular"
+        android:textSize="@dimen/font_size__16"
         app:layout_constraintBottom_toBottomOf="@id/iv_back"
         app:layout_constraintStart_toEndOf="@id/iv_back"
         app:layout_constraintTop_toTopOf="@id/iv_back" />
@@ -50,7 +50,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:text="@string/location_main_title"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size_17"
+            android:textSize="@dimen/font_size_15"
             app:layout_constraintEnd_toStartOf="@id/v_vertical_divider"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -63,7 +63,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:text="@string/location_sub_title"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size_17"
+            android:textSize="@dimen/font_size_15"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toEndOf="@id/v_vertical_divider"
@@ -138,7 +138,7 @@
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:text="@string/location_next"
         android:textColor="@color/main"
-        android:textSize="@dimen/font_size_17"
+        android:textSize="@dimen/font_size_15"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

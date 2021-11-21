@@ -43,7 +43,7 @@
             android:lineSpacingExtra="7sp"
             android:text="@string/delete_account_title"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size_regular"
+            android:textSize="@dimen/font_size__16"
             app:layout_constraintBottom_toBottomOf="@id/iv_back"
             app:layout_constraintStart_toEndOf="@id/iv_back"
             app:layout_constraintTop_toTopOf="@id/iv_back" />
@@ -57,7 +57,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:text="@string/delete_account_subtitle"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size_17"
+            android:textSize="@dimen/font_size_15"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
@@ -89,7 +89,7 @@
                     android:gravity="center_vertical"
                     android:text="@string/delete_account_reason_1"
                     android:textColor="@color/gray_300"
-                    android:textSize="@dimen/font_size_16" />
+                    android:textSize="@dimen/font_size_14" />
 
                 <ImageView
                     android:id="@+id/iv_check_1"
@@ -118,7 +118,7 @@
                     android:gravity="center_vertical"
                     android:text="@string/delete_account_reason_2"
                     android:textColor="@color/gray_300"
-                    android:textSize="@dimen/font_size_16" />
+                    android:textSize="@dimen/font_size_14" />
 
                 <ImageView
                     android:id="@+id/iv_check_2"
@@ -147,7 +147,7 @@
                     android:gravity="center_vertical"
                     android:text="@string/delete_account_reason_3"
                     android:textColor="@color/gray_300"
-                    android:textSize="@dimen/font_size_16" />
+                    android:textSize="@dimen/font_size_14" />
 
                 <ImageView
                     android:id="@+id/iv_check_3"
@@ -177,7 +177,7 @@
                     android:gravity="center_vertical"
                     android:text="@string/delete_account_reason_4"
                     android:textColor="@color/gray_300"
-                    android:textSize="@dimen/font_size_16" />
+                    android:textSize="@dimen/font_size_14" />
 
                 <ImageView
                     android:id="@+id/iv_check_4"
@@ -207,7 +207,7 @@
                     android:gravity="center_vertical"
                     android:text="@string/delete_account_reason_5"
                     android:textColor="@color/gray_300"
-                    android:textSize="@dimen/font_size_16" />
+                    android:textSize="@dimen/font_size_14" />
 
                 <ImageView
                     android:id="@+id/iv_check_5"
@@ -237,7 +237,7 @@
             android:text="@string/delete_account_next"
             android:textColor="@color/white"
             android:onClick="@{viewModel::onClickNextButton}"
-            android:textSize="@dimen/font_size_regular"
+            android:textSize="@dimen/font_size__16"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="328:48"
             app:layout_constraintEnd_toEndOf="parent"

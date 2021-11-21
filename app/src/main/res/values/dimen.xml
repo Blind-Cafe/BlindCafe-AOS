@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="font_size_super_small">13sp</dimen>
-    <dimen name="font_size_small">15sp</dimen>
-    <dimen name="font_size_16">16sp</dimen>
-    <dimen name="font_size_17">17sp</dimen>
-    <dimen name="font_size_regular">18sp</dimen>
-    <dimen name="font_size_large">23sp</dimen>
+    <dimen name="font_size_super_small">11sp</dimen>
+    <dimen name="font_size_13">13sp</dimen>
+    <dimen name="font_size_14">14sp</dimen>
+    <dimen name="font_size_15">15sp</dimen>
+    <dimen name="font_size__16">16sp</dimen>
+    <dimen name="font_size_21">21sp</dimen>
     
-    <dimen name="dialog_title">16sp</dimen>
-    <dimen name="dialog_reason">17sp</dimen>
+    <dimen name="dialog_title">14sp</dimen>
+    <dimen name="dialog_reason">15sp</dimen>
 
     <dimen name="chat_text_rounding">32dp</dimen>
 

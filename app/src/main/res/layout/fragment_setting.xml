@@ -41,7 +41,7 @@
         android:fontFamily="@font/spoqa_han_sans_neo_bold"
         android:text="@string/setting_title"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_size_regular"
+        android:textSize="@dimen/font_size__16"
         app:layout_constraintBottom_toBottomOf="@id/iv_back"
         app:layout_constraintStart_toEndOf="@id/iv_back"
         app:layout_constraintTop_toTopOf="@id/iv_back" />
@@ -56,7 +56,7 @@
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:text="@string/setting_notification_title"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_size_regular"
+        android:textSize="@dimen/font_size__16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
@@ -91,7 +91,7 @@
                     android:fontFamily="@font/spoqa_han_sans_neo_regular"
                     android:text="@string/setting_notification_matching_room_title"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_size_16" />
+                    android:textSize="@dimen/font_size_14" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -132,7 +132,7 @@
                     android:fontFamily="@font/spoqa_han_sans_neo_regular"
                     android:text="@string/setting_notification_matching_success_title"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_size_16" />
+                    android:textSize="@dimen/font_size_14" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -173,7 +173,7 @@
                     android:fontFamily="@font/spoqa_han_sans_neo_regular"
                     android:text="@string/setting_notification_drink_title"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_size_16" />
+                    android:textSize="@dimen/font_size_14" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -224,7 +224,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:text="@string/setting_report_list"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size_16" />
+            android:textSize="@dimen/font_size_14" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -243,7 +243,7 @@
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:text="@string/setting_account_title"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_size_regular"
+        android:textSize="@dimen/font_size__16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ll_report_list_container" />
 
@@ -271,7 +271,7 @@
             android:onClick="@{viewModel::onClickLogoutContainer}"
             android:text="@string/setting_account_logout"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size_16" />
+            android:textSize="@dimen/font_size_14" />
 
 
         <LinearLayout
@@ -291,7 +291,7 @@
                 android:paddingVertical="15dp"
                 android:text="@string/setting_account_delete"
                 android:textColor="@color/white"
-                android:textSize="@dimen/font_size_16" />
+                android:textSize="@dimen/font_size_14" />
 
 
             <ImageView

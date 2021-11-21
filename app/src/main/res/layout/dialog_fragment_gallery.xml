@@ -71,7 +71,7 @@
             android:paddingVertical="13dp"
             android:text="@string/gallery_send"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size_regular"
+            android:textSize="@dimen/font_size__16"
             android:visibility="visible"
             tools:visibility="visible" />
 

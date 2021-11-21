@@ -316,7 +316,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         ) {
             ivGallery.setOnClickListener {
                 openGalleryIfPermissionGranted()
-
             }
         }
 
@@ -331,6 +330,10 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
     private val galleryCallback =
         registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uris ->
+            if (uris.size > 5) {
+                showToast(R.string.toast_gallery_limit)
+                return@registerForActivityResult
+            }
             uris.forEach { uri ->
                 uri?.let {
                     val id = System.currentTimeMillis().toString()

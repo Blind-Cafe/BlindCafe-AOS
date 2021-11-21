@@ -44,7 +44,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:text="@string/quit_reason_subtitle"
             android:textColor="@color/gray_300"
-            android:textSize="@dimen/font_size_small" />
+            android:textSize="@dimen/font_size_13" />
 
 
         <LinearLayout

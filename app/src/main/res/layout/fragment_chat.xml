@@ -56,7 +56,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_bold"
             android:text="Erick"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size_regular"
+            android:textSize="@dimen/font_size__16"
             app:layout_constraintBottom_toBottomOf="@id/iv_back"
             app:layout_constraintStart_toEndOf="@id/iv_back"
             app:layout_constraintTop_toTopOf="@id/iv_back" />
@@ -135,7 +135,7 @@
                 android:scrollbars="vertical"
                 android:hint="@string/chat_et_hint"
                 android:text="@={viewModel.messageEditText}"
-                android:textSize="@dimen/font_size_small"
+                android:textSize="@dimen/font_size_13"
                 android:textColorHint="@color/gray_300"
                 android:singleLine="false"
                 android:textCursorDrawable="@drawable/ic_cursor"
@@ -210,7 +210,7 @@
                 android:visibility="visible"
                 android:text="@string/chat_recorder_initial_time"
                 android:textColor="@color/white"
-                android:textSize="@dimen/font_size_regular"
+                android:textSize="@dimen/font_size__16"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 />
 

@@ -26,7 +26,7 @@
         android:lineSpacingExtra="7sp"
         android:text="@string/interest_main_edit_title"
         android:textColor="#fafafa"
-        android:textSize="@dimen/font_size_large"
+        android:textSize="@dimen/font_size_21"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/ib_back"
         app:layout_constraintStart_toEndOf="@id/ib_back"

@@ -23,7 +23,7 @@
         android:fontFamily="@font/spoqa_han_sans_neo_bold"
         android:text="@string/report_list_title"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_size_regular"
+        android:textSize="@dimen/font_size__16"
         app:layout_constraintBottom_toBottomOf="@id/iv_back"
         app:layout_constraintStart_toEndOf="@id/iv_back"
         app:layout_constraintTop_toTopOf="@id/iv_back" />
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:text="@string/report_list_none"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
-        android:textSize="@dimen/font_size_17"
+        android:textSize="@dimen/font_size_15"
         android:textColor="@color/gray_300"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

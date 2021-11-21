@@ -92,9 +92,10 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:cpb_background_progressbar_color="@color/gray_900"
-                app:cpb_progress="100"
+                app:cpb_progress="30"
                 app:cpb_progressbar_color="@color/main"
                 app:cpb_progressbar_width="12dp"
+                app:cpb_round_border="true"
                 app:cpb_background_progressbar_width="12dp"
                 tools:visibility="visible"
                 app:cpb_progressbar_color_start="@color/main"
@@ -105,8 +106,6 @@
                 app:layout_constraintStart_toStartOf="@id/iv_home_bg_1"
                 app:layout_constraintTop_toTopOf="@id/iv_home_bg_1"
                 />
-
-
 
             <ImageView
                 android:id="@+id/iv_home_bg_1_1"
@@ -150,10 +149,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="00:00"
-                android:textSize="@dimen/font_size_regular"
+                android:textSize="@dimen/font_size__16"
                 android:textColor="@color/white"
                 android:id="@+id/tv_time"
                 tools:visibility="gone"
+                android:text="@{viewModel.time}"
                 android:visibility="@{viewModel.homeStatusCode == 2 | viewModel.homeStatusCode == 3 ? View.VISIBLE : View.INVISIBLE}"
                 app:layout_constraintBottom_toBottomOf="@id/iv_home_bg_2"
                 app:layout_constraintStart_toStartOf="@id/iv_home_bg_2"
@@ -175,7 +175,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:text="@string/home_title_none"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size_regular"
+            android:textSize="@dimen/font_size__16"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

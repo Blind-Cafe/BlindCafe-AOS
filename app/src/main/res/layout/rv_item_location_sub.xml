@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:paddingVertical="13dp"
         tools:text="강남구"
-        android:textSize="@dimen/font_size_17"
+        android:textSize="@dimen/font_size_15"
         android:textColor="@color/white"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         app:layout_constraintStart_toStartOf="parent"

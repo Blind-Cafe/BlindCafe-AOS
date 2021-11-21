@@ -53,6 +53,7 @@ class FirebaseService: FirebaseMessagingService() {
         val title = message.notification?.title
         val body = message.notification?.body
         val path = message.notification?.channelId
+
         Log.e(FCM_TAG, "->\ntitle: $title,\nbody: $body\n???: $path")
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

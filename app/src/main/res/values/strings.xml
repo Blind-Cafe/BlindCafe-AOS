@@ -12,7 +12,9 @@
     <string name="female">여자</string>
     <string name="sex">성별</string>
     <string name="age">나이</string>
+    <string name="age_hint">20</string>
     <string name="toast_matching_wait">아직 매칭 상대를 찾고 있어요!</string>
+    <string name="toast_gallery_limit">최대 다섯 장까지 가능합니다</string>
 
 
     <!-- rule -->

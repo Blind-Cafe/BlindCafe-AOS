@@ -39,7 +39,7 @@
         android:fontFamily="@font/spoqa_han_sans_neo_bold"
         android:text="@string/profile_edit_title"
         android:textColor="@color/white_2"
-        android:textSize="@dimen/font_size_regular"
+        android:textSize="@dimen/font_size__16"
         app:layout_constraintBottom_toBottomOf="@id/iv_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,7 @@
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:text="@string/profile_edit_image_title"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_size_regular"
+        android:textSize="@dimen/font_size__16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_back" />
 
@@ -171,7 +171,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:text="@string/profile_edit_age_title"
             android:textColor="@color/steel"
-            android:textSize="@dimen/font_size_small" />
+            android:textSize="@dimen/font_size_13" />
 
         <TextView
             android:id="@+id/tv_age_value"
@@ -181,7 +181,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size_regular"
+            android:textSize="@dimen/font_size__16"
             tools:text="22" />
 
         <View
@@ -210,7 +210,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:text="@string/profile_edit_sex_title"
             android:textColor="@color/steel"
-            android:textSize="@dimen/font_size_small" />
+            android:textSize="@dimen/font_size_13" />
 
         <TextView
             android:id="@+id/tv_sex_value"
@@ -220,7 +220,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size_regular"
+            android:textSize="@dimen/font_size__16"
             tools:text="남성" />
 
         <View
@@ -249,7 +249,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:text="@string/profile_edit_location_title"
             android:textColor="@color/steel"
-            android:textSize="@dimen/font_size_small" />
+            android:textSize="@dimen/font_size_13" />
 
         <TextView
             android:id="@+id/tv_location_value"
@@ -259,7 +259,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size_regular"
+            android:textSize="@dimen/font_size__16"
             tools:text="부산 광역시 해운대구" />
 
         <View
@@ -293,7 +293,7 @@
         android:text="@string/profile_edit_complete"
         android:onClick="@{() -> viewModel.onClickCompleteButton()}"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_size_regular"
+        android:textSize="@dimen/font_size__16"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="356:50"
         app:layout_constraintEnd_toEndOf="parent"

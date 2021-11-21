@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:textColor="@color/gray_300"
-        android:textSize="@dimen/font_size_small"
+        android:textSize="@dimen/font_size_13"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="다은님에게 신고함" />
@@ -26,7 +26,7 @@
         android:layout_marginTop="4dp"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_size_17"
+        android:textSize="@dimen/font_size_15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title"
         tools:text="욕설, 모욕등의 불쾌한 발언" />
