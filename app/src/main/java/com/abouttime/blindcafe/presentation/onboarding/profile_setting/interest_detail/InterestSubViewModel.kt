@@ -104,7 +104,6 @@ class InterestSubViewModel(
                         saveStringData(Pair(PREFERENCES_KEY.INFO_INPUT, response.data.code))
                         moveToSigninFragment()
                     }
-
                 }
                 is Resource.Error -> {
                     Log.d(LogTag.RETROFIT_TAG, "Error")

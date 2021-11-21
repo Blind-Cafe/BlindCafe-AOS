@@ -2,16 +2,14 @@ package com.abouttime.blindcafe.di
 
 import com.abouttime.blindcafe.presentation.NavHostViewModel
 import com.abouttime.blindcafe.presentation.chat.ChatViewModel
-import com.abouttime.blindcafe.presentation.main.MainViewModel
-import com.abouttime.blindcafe.presentation.main.home.HomeViewModel
 import com.abouttime.blindcafe.presentation.chat.gallery.GalleryViewModel
-import com.abouttime.blindcafe.presentation.chat.quit.confirm.QuitViewModel
 import com.abouttime.blindcafe.presentation.chat.quit.reason.QuitReasonViewModel
-import com.abouttime.blindcafe.presentation.chat.report.confirm.ReportViewModel
 import com.abouttime.blindcafe.presentation.chat.report.ReportReasonViewModel
 import com.abouttime.blindcafe.presentation.common.confirm.ConfirmViewModel
+import com.abouttime.blindcafe.presentation.main.MainViewModel
 import com.abouttime.blindcafe.presentation.main.chat_list.ChatListViewModel
 import com.abouttime.blindcafe.presentation.main.dormancy.DormancyViewModel
+import com.abouttime.blindcafe.presentation.main.home.HomeViewModel
 import com.abouttime.blindcafe.presentation.main.home.coffee.CoffeeOrderViewModel
 import com.abouttime.blindcafe.presentation.main.home.exit.ExitViewModel
 import com.abouttime.blindcafe.presentation.main.my_page.MyPageViewModel
@@ -26,6 +24,7 @@ import com.abouttime.blindcafe.presentation.onboarding.profile_setting.essential
 import com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest.InterestViewModel
 import com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest_detail.InterestSubViewModel
 import com.abouttime.blindcafe.presentation.onboarding.rule.RuleViewModel
+import com.abouttime.blindcafe.presentation.onboarding.signin.SigninViewModel
 import com.abouttime.blindcafe.presentation.onboarding.splash.SplashViewModel
 import com.abouttime.blindcafe.presentation.profile_exchange.ProfileExchangeViewModel
 import com.abouttime.blindcafe.presentation.profile_exchange.complete.ProfileExchangeCompleteViewModel
@@ -56,6 +55,7 @@ internal val viewModelModule = module {
     viewModel { EssentialSecondViewModel() }
     viewModel { InterestViewModel() }
     viewModel { InterestSubViewModel(get()) }
+    viewModel { SigninViewModel()}
 
     /** Main **/
     viewModel { MainViewModel() }
@@ -80,9 +80,7 @@ internal val viewModelModule = module {
     /** Chat **/
     viewModel { ChatViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { GalleryViewModel(get()) }
-    viewModel { QuitViewModel() }
     viewModel { QuitReasonViewModel() }
-    viewModel { ReportViewModel() }
     viewModel { ReportReasonViewModel() }
 
     /** Profile-Exchange **/

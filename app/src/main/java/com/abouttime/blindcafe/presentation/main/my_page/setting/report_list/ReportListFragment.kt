@@ -22,6 +22,7 @@ class ReportListFragment: BaseFragment<ReportListViewModel>(R.layout.fragment_re
     }
 
     private fun initRecyclerView(fragmentReportListBinding: FragmentReportListBinding) = with(fragmentReportListBinding) {
+        reportAdapter = ReportListAdapter(viewModel)
         rvReportList.apply {
             adapter = reportAdapter
             layoutManager = LinearLayoutManager(requireContext())

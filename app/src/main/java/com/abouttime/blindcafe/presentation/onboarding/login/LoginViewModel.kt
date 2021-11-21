@@ -55,16 +55,29 @@ class LoginViewModel(
                     val nick = result.data?.nickname
                     Log.d(RETROFIT_TAG, "->jwt $jwt\nid $id")
                     Log.d(RETROFIT_TAG, "-> \n${result.data?.message}\n ${result.data?.code}" )
+
+                    when(result.data?.code) {
+                        "990" -> { // 로그인
+                            moveToMainFragment()
+                        }
+                        "991" -> { // 회원가입
+                            moveToAgreementFragment()
+                        }
+                        "992" -> { // 회원가입 (필수정보 미입력)
+                            moveToAgreementFragment()
+                        }
+                        else -> {
+
+                        }
+                    }
                     if (jwt != null && id != null) {
                         saveStringData(Pair(JWT, jwt))
                         saveStringData(Pair(USER_ID, id.toString()))
-                        if (nick == null) {
-                            moveToAgreementFragment()
-                        } else {
-                            moveToMainFragment()
-                        }
                         _loginStateEvent.postValue(LoginState.Success)
                     }
+
+
+
                 }
                 is Resource.Error -> {
                     Log.d(RETROFIT_TAG, result.message ?: "message null")
