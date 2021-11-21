@@ -27,15 +27,15 @@ class HomeViewModel(
     private val _time: MutableLiveData<String> = MutableLiveData("00:00")
     val time: LiveData<String> get() = _time
 
-    private var matchingId: Int? = null
-    private var startTime: String? = null
+
     private var reason: String? = null
     private var partnerNickname: String? = null
-
+    private var matchingId: Int? = null
+    private var startTime: String? = null
 
     init {
-        testHomeState()
-        //getHomeInfo()
+        //testHomeState()
+        getHomeInfo()
     }
 
     private fun getHomeInfo() {
@@ -135,12 +135,15 @@ class HomeViewModel(
 
             }
             3 -> { // 매칭 + 음료선택 완료
-                matchingId?.let { id ->
+                if (matchingId != null && startTime != null && partnerNickname != null) {
                     moveToChatFragment(
-                        matchingId = id,
-                        startTime = startTime
+                        matchingId = matchingId!!,
+                        startTime = startTime,
+                        partnerNickname = partnerNickname
                     )
                 }
+
+
             }
             4, 5, 6 -> { // 방 폭파 or 프로필 교환 거절
                 if (partnerNickname != null && reason != null) {
@@ -154,10 +157,11 @@ class HomeViewModel(
 
 
     /** navigation **/
-    private fun moveToChatFragment(matchingId: Int, startTime: String?) {
+    private fun moveToChatFragment(matchingId: Int, startTime: String?, partnerNickname: String?) {
         moveToDirections(MainFragmentDirections.actionMainFragmentToMatchingFragment(
             matchingId = matchingId,
-            startTime = startTime
+            startTime = startTime,
+            partnerNickname = partnerNickname
         ))
     }
     private fun moveToCoffeeOrderFragment(matchingId: Int, startTime: String? ) {

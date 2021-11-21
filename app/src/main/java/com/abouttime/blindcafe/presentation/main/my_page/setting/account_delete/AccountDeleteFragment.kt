@@ -15,6 +15,8 @@ class AccountDeleteFragment: BaseFragment<AccountDeleteViewModel>(R.layout.fragm
         super.onViewCreated(view, savedInstanceState)
         val fragmentAccountDeleteBinding = FragmentAccountDeleteBinding.bind(view)
         binding = fragmentAccountDeleteBinding
+        binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
 
     }
 }

@@ -17,9 +17,9 @@ class HomeFragment: BaseFragment<HomeViewModel>(R.layout.fragment_home) {
         binding = fragmentHomeBinding
         binding?.viewModel = viewModel
         binding?.lifecycleOwner = this
+        //showLoadingDialog()
 
         observeHomeStatus()
-
     }
 
     private fun observeHomeStatus() {

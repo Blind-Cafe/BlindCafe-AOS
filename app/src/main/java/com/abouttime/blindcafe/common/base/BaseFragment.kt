@@ -26,18 +26,30 @@ abstract class BaseFragment<VM: BaseViewModel>(layoutId: Int) : Fragment(layoutI
 
 
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initLoadingDialog()
         observeToastEvent()
         observeNavigationEvent()
 
+    }
 
-
+    private fun observeLoadingEvent() {
+        viewModel.loadingEvent.observe(viewLifecycleOwner) {
+            if (it) {
+                showLoadingDialog()
+            } else {
+                dismissLoadingDialog()
+            }
+        }
     }
     private fun initLoadingDialog() {
         loadingDialog = Dialog(requireContext())
         loadingDialog.setContentView(R.layout.dialog_fragment_loading)
+        loadingDialog.setCanceledOnTouchOutside(true)
+        loadingDialog.window?.setGravity(Gravity.CENTER)
     }
     protected fun showLoadingDialog() {
         loadingDialog.show()

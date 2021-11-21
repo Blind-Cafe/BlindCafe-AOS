@@ -36,4 +36,8 @@ internal val useCaseModule = module {
     factory { PostMatchingRequestUseCase(get()) }
     factory { PostDrinkUseCase(get()) }
 
+
+    /** interests **/
+    factory { GetInterestUseCase(get()) }
+
 }

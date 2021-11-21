@@ -3,11 +3,13 @@ package com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.abouttime.blindcafe.R
+import com.abouttime.blindcafe.data.server.dto.interest.Interest
 import com.abouttime.blindcafe.databinding.RvItemInterestSubBinding
 import com.xwray.groupie.viewbinding.BindableItem
 
 
 class InterestSubRvItem(
+    private val interest: Interest,
     private val interestViewModel: InterestSubViewModel,
     private val index: Int,
 ) : BindableItem<RvItemInterestSubBinding>() {
@@ -26,6 +28,12 @@ class InterestSubRvItem(
                 tvSubInterest8,
                 tvSubInterest9
             )
+
+            tvTitle.text = interestViewModel.interestMap[interest.main]
+            subInterests.forEachIndexed { i, v ->
+              v.text = interest.sub[i]
+            }
+
             interestViewModel?.let { vm ->
                 with(vm) {
                     val selected = selectedSubInterests[index]
@@ -50,6 +58,8 @@ class InterestSubRvItem(
             }
         }
     }
+
+
 
     override fun getLayout(): Int = R.layout.rv_item_interest_sub
 

@@ -54,8 +54,8 @@ internal val viewModelModule = module {
     viewModel { EssentialFirstViewModel() }
     viewModel { EssentialSecondViewModel() }
     viewModel { InterestViewModel() }
-    viewModel { InterestSubViewModel(get()) }
-    viewModel { SigninViewModel()}
+    viewModel { InterestSubViewModel(get(), get()) }
+    viewModel { SigninViewModel() }
 
     /** Main **/
     viewModel { MainViewModel() }

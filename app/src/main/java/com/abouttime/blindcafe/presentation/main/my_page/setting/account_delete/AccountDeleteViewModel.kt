@@ -11,8 +11,6 @@ class AccountDeleteViewModel: BaseViewModel() {
     private val _reason = MutableLiveData(0)
     val reason: LiveData<Int> get() = _reason
 
-
-
     fun onClickCheckButton(view: View) {
         when(view.id) {
             R.id.iv_check_1 -> _reason.value = 1
@@ -24,15 +22,20 @@ class AccountDeleteViewModel: BaseViewModel() {
     }
 
     fun onClickNextButton(v: View) {
-        moveToDirections(
-            AccountDeleteFragmentDirections.actionAccountDeleteFragmentToConfirmDialogFragment(
-                id = R.string.delete_account_confirm_title,
-                title = v.resources.getString(R.string.delete_account_confirm_title),
-                subtitle = v.resources.getString(R.string.delete_account_confirm_subtitle),
-                no = v.resources.getString(R.string.delete_account_confirm_no),
-                yes = v.resources.getString(R.string.delete_account_confirm_yes)
+        if (canClickNextButton()) {
+            moveToDirections(
+                AccountDeleteFragmentDirections.actionAccountDeleteFragmentToConfirmDialogFragment(
+                    id = R.string.delete_account_confirm_title,
+                    title = v.resources.getString(R.string.delete_account_confirm_title),
+                    subtitle = v.resources.getString(R.string.delete_account_confirm_subtitle),
+                    no = v.resources.getString(R.string.delete_account_confirm_no),
+                    yes = v.resources.getString(R.string.delete_account_confirm_yes)
+                )
             )
-        )
+        } else {
+            showToast(R.string.toast_select_reason)
+        }
     }
+    fun canClickNextButton() = _reason.value != 0
 
 }

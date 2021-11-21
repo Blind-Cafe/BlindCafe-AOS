@@ -11,15 +11,20 @@ class ReportReasonViewModel : BaseViewModel() {
     val reason: LiveData<Int> get() = _reason
 
     fun onClickYesButton(v: View) {
-        moveToDirections(
-            ReportReasonDialogFragmentDirections.actionReportReasonDialogFragmentToConfirmDialogFragment(
-                id = R.string.report_confirm_title,
-                title = v.resources.getString(R.string.report_confirm_title),
-                subtitle = v.resources.getString(R.string.report_confirm_subtitle),
-                no = v.resources.getString(R.string.report_confirm_no),
-                yes = v.resources.getString(R.string.report_confirm_yes)
+        if (canClickNextButton()) {
+            moveToDirections(
+                ReportReasonDialogFragmentDirections.actionReportReasonDialogFragmentToConfirmDialogFragment(
+                    id = R.string.report_confirm_title,
+                    title = v.resources.getString(R.string.report_confirm_title),
+                    subtitle = v.resources.getString(R.string.report_confirm_subtitle),
+                    no = v.resources.getString(R.string.report_confirm_no),
+                    yes = v.resources.getString(R.string.report_confirm_yes)
+                )
             )
-        )
+        } else {
+            showToast(R.string.toast_select_reason)
+        }
+
     }
     fun onClickNoButton() {
         popDirections()
@@ -34,6 +39,8 @@ class ReportReasonViewModel : BaseViewModel() {
             R.id.iv_check_5 -> _reason.value = 5
         }
     }
+
+    fun canClickNextButton() = _reason.value != 0
 
 
 }

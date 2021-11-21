@@ -10,20 +10,6 @@ class QuitReasonViewModel: BaseViewModel() {
     private val _reason = MutableLiveData(0)
     val reason: LiveData<Int> get() = _reason
 
-    fun onClickYesButton(v: View) {
-        moveToDirections(
-            QuitReasonDialogFragmentDirections.actionQuitReasonDialogFragmentToConfirmDialogFragment(
-                id = R.string.quit_confirm_title,
-                title = v.resources.getString(R.string.quit_confirm_title),
-                subtitle = v.resources.getString(R.string.quit_confirm_subtitle),
-                no = v.resources.getString(R.string.quit_confirm_no),
-                yes = v.resources.getString(R.string.quit_confirm_yes)
-            )
-        )
-    }
-    fun onClickNoButton() {
-        popDirections()
-    }
 
 
     fun onClickCheckButton(view: View) {
@@ -35,7 +21,25 @@ class QuitReasonViewModel: BaseViewModel() {
         }
     }
 
-    private fun moveToQuitDialogFragment() {
-
+    fun onClickYesButton(v: View) {
+        if (canClickNextButton()) {
+            moveToDirections(
+                QuitReasonDialogFragmentDirections.actionQuitReasonDialogFragmentToConfirmDialogFragment(
+                    id = R.string.quit_confirm_title,
+                    title = v.resources.getString(R.string.quit_confirm_title),
+                    subtitle = v.resources.getString(R.string.quit_confirm_subtitle),
+                    no = v.resources.getString(R.string.quit_confirm_no),
+                    yes = v.resources.getString(R.string.quit_confirm_yes)
+                )
+            )
+        } else {
+            showToast(R.string.toast_select_reason)
+        }
     }
+    fun onClickNoButton() {
+        popDirections()
+    }
+
+
+    fun canClickNextButton() = _reason.value != 0
 }

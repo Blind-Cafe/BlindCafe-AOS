@@ -10,9 +10,11 @@ class LocationViewModel: BaseViewModel() {
 
 
     fun setMainLocation(list: List<String>) {
-
+        mainLocations.clear()
+        mainLocations.addAll(list)
     }
     fun setSubLocation(list: List<String>) {
-
+        subLocations.clear()
+        subLocations.addAll(list)
     }
 }

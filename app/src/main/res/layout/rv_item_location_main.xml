@@ -20,7 +20,7 @@
         android:padding="8dp"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="서울"
-        android:background="@drawable/bg_location_main"
+        tools:background="@drawable/bg_location_main"
         android:textSize="@dimen/font_size_15"
         android:textColor="@color/white"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"

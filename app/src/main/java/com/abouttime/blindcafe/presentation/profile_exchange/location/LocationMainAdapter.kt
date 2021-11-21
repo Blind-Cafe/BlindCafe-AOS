@@ -38,4 +38,5 @@ class LocationMainAdapter(
     override fun getItemCount(): Int = viewModel.mainLocations.size
 
 
+
 }

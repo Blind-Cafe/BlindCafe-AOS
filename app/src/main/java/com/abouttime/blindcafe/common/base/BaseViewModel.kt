@@ -51,4 +51,11 @@ open class BaseViewModel() : ViewModel() {
 
     }
 
+    fun showLoading() {
+        _loadingEvent.value = true
+    }
+    fun dismissLoading() {
+        _loadingEvent.value = false
+    }
+
 }

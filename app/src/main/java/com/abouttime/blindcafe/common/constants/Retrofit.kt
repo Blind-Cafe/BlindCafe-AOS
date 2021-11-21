@@ -12,7 +12,7 @@ object Retrofit {
     const val HOME_INFO_URL = "api/user/home"
     const val POST_MATCHING_REQUEST_URL = "api/matching"
     const val POST_DRINK_URL = "api/matching/{matchingId}/drink"
-
+    const val GET_INTEREST_URL = "api/interest"
 
     const val FIREBASE_BASE_URL = "https://fcm.googleapis.com"
     const val FIREBASE_SERVER_KEY = "AAAAbiX4hZc:APA91bG9edkyK7qJTiIFfkMnZrltJgYqmlcApiSW-kfopOWoc7rDyPBuxt77bPJkgdjwJUUfCiBntyGAP35t-3hA8Kqadhw9Vmo1aEQX-7fTWihpX2nKZ95qOpmF1HSo4rhka-OiNRQZ"

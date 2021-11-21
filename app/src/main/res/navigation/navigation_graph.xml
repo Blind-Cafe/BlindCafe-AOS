@@ -206,6 +206,10 @@
             app:argType="string"
             app:nullable="true"/>
 
+        <argument android:name="partnerNickname"
+            app:argType="string"
+            app:nullable="true"/>
+
 
 
         <action

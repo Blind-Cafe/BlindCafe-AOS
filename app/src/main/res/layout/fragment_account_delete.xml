@@ -99,6 +99,8 @@
                     android:src="@{viewModel.reason == 1 ? @drawable/bt_checked : @drawable/bt_check}"
                     tools:src="@drawable/bt_check" />
 
+
+
             </LinearLayout>
 
             <LinearLayout

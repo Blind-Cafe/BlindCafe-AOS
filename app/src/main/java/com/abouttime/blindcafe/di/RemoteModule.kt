@@ -21,6 +21,7 @@ internal val remoteModule = module {
     factory { provideFcmApi(provideRetrofit()) }
     factory { provideHomeApi(provideRetrofit()) }
     factory { provideMatchingApi(provideRetrofit()) }
+    factory { provideInterestApi(provideRetrofit()) }
 
 
 
@@ -101,4 +102,7 @@ internal fun provideHomeApi(retrofit: Retrofit): HomeApi =
 
 internal fun provideMatchingApi(retrofit: Retrofit): MatchingApi =
     retrofit.create(MatchingApi::class.java)
+
+internal fun provideInterestApi(retrofit: Retrofit): InterestApi =
+    retrofit.create(InterestApi::class.java)
 

@@ -24,27 +24,26 @@ class InterestSubFragment: BaseFragment<InterestSubViewModel>(R.layout.fragment_
         binding?.viewModel = viewModel
 
         initRecyclerView(fragmentInterestSubBinding)
+        observeInterestData()
     }
 
-    override fun onResume() {
-        super.onResume()
-        addItems()
-    }
+
     private fun initRecyclerView(fragmentInterestSubBinding: FragmentInterestSubBinding) = with(fragmentInterestSubBinding) {
         rvSubInterestContainer.apply {
             adapter = subInterestAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
-        Log.e("zcxv", "옴! $viewModel")
-
     }
-    private fun addItems() {
-        viewModel?.let {
-            Log.e("zcxv", "옴!")
-            subInterestAdapter.add(InterestSubRvItem(it, 0))
-            subInterestAdapter.add(InterestSubRvItem(it, 1))
-            subInterestAdapter.add(InterestSubRvItem(it, 2))
-            subInterestAdapter.notifyDataSetChanged()
+    private fun observeInterestData() {
+        viewModel.interest.observe(viewLifecycleOwner) { list ->
+            viewModel?.let { vm ->
+                Log.e("zcxv", "옴!")
+                subInterestAdapter.add(InterestSubRvItem(list[0], vm, 0))
+                subInterestAdapter.add(InterestSubRvItem(list[1], vm, 1))
+                subInterestAdapter.add(InterestSubRvItem(list[2], vm, 2))
+                subInterestAdapter.notifyDataSetChanged()
+            }
         }
     }
+
 }

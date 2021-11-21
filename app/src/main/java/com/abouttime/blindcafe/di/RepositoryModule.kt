@@ -19,5 +19,6 @@ internal val repositoryModule = module {
     single<FcmRepository> { FcmRepositoryImpl(get()) }
     single<HomeRepository> { HomeRepositoryImpl(get())}
     single<MatchingRepository> { MatchingRepositoryImpl(get()) }
+    single<InterestRepository> { InterestRepositoryImpl(get())}
 
 }

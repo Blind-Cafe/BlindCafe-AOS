@@ -44,8 +44,10 @@ class ChatViewModel(
     private val _recorderState = MutableLiveData<RecorderState>(RecorderState.BEFORE_RECORDING)
     val recorderState: LiveData<RecorderState> get() = _recorderState
 
-
+    var partnerNickname: String? = null
+    var startTime: String? = null
     var matchingId: Int? = null
+
     val userId = getStringData(USER_ID)
 
 

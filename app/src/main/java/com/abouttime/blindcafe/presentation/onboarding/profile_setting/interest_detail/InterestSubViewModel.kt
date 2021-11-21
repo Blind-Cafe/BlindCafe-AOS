@@ -9,23 +9,38 @@ import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY
-import com.abouttime.blindcafe.data.server.dto.user_info.Interest
+import com.abouttime.blindcafe.data.server.dto.interest.Interest
+import com.abouttime.blindcafe.data.server.dto.user_info.UserInterest
 import com.abouttime.blindcafe.data.server.dto.user_info.PostUserInfoDto
+import com.abouttime.blindcafe.domain.use_case.GetInterestUseCase
 import com.abouttime.blindcafe.domain.use_case.PostUserInfoUseCase
-import com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest.InterestFragmentDirections
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class InterestSubViewModel(
+    private val getInterestUseCase: GetInterestUseCase,
     private val postUserInfoUseCase: PostUserInfoUseCase
 ): BaseViewModel() {
 
     private val _nextButton = MutableLiveData(false)
     val nextButton: LiveData<Boolean> get() = _nextButton
 
+    private val _interests = MutableLiveData<List<Interest>>()
+    val interest: LiveData<List<Interest>> get() = _interests
+
     val selectedSubInterests = Array(3) { mutableListOf<Int>() }
+
+    init {
+        val interests = getStringData(PREFERENCES_KEY.INTERESTS)?.split(",")
+        val interest1 = interests?.get(0)?.let { interestMap[it.toInt()] }?.toInt()
+        val interest2 = interests?.get(1)?.let { interestMap[it.toInt()] }?.toInt()
+        val interest3 = interests?.get(2)?.let { interestMap[it.toInt()] }?.toInt()
+        if (interest1 != null && interest2 != null && interest3 != null) {
+            getInterest(interest1, interest2, interest3)
+        }
+    }
 
     val interestMap = mapOf(
         0 to "음식",
@@ -52,6 +67,27 @@ class InterestSubViewModel(
     }
 
 
+    private fun getInterest(id1 : Int, id2: Int, id3: Int) {
+        getInterestUseCase(id1, id2, id3)
+            .onEach { result ->
+                when(result) {
+                    is Resource.Loading -> {
+                        showLoading()
+                    }
+                    is Resource.Success -> {
+                        result.data?.interests?.let {
+                            _interests.postValue(it)
+                        }
+                        dismissLoading()
+                    }
+                    is Resource.Error -> {
+                        dismissLoading()
+                    }
+                }
+            }
+    }
+
+
 
     fun postUserInfo() = viewModelScope.launch(Dispatchers.IO) {
 
@@ -72,16 +108,16 @@ class InterestSubViewModel(
             myGender = myGender,
             nickname = nickname,
             partnerGender = partnerGender,
-            interests = listOf(
-                Interest(
+            userInterests = listOf(
+                UserInterest(
                     main = interests?.get(0)?.toInt()?.plus(1) ?: 0,
                     sub = subInterests1
                 ),
-                Interest(
+                UserInterest(
                     main = interests?.get(1)?.toInt()?.plus(1) ?: 0,
                     sub = subInterests2
                 ),
-                Interest(
+                UserInterest(
                     main = interests?.get(2)?.toInt()?.plus(1) ?: 0,
                     sub = subInterests3
                 )

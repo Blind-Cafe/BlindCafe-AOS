@@ -33,6 +33,7 @@ class LocationFragment: BaseFragment<LocationViewModel>(R.layout.fragment_locati
 
         val mainLocations = resources.getStringArray(R.array.location_main).toList()
         viewModel.setMainLocation(mainLocations)
+        locationMainAdapter.notifyDataSetChanged()
 
     }
     private fun initSubRecyclerView(fragmentLocationBinding: FragmentLocationBinding) = with(fragmentLocationBinding) {
@@ -43,7 +44,9 @@ class LocationFragment: BaseFragment<LocationViewModel>(R.layout.fragment_locati
         }
 
         val subLocations = resources.getStringArray(R.array.location_sub_0).toList()
+
         viewModel.setSubLocation(subLocations)
+        locationSubAdapter.notifyDataSetChanged()
     }
 
 }
