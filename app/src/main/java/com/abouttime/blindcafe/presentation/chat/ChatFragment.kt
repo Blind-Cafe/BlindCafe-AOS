@@ -16,6 +16,7 @@ import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,8 +31,12 @@ import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.presentation.chat.recorder.RecorderState
 import com.abouttime.blindcafe.presentation.chat.rv_item.DescriptionItem
 import com.example.chatexample.presentation.ui.chat.rv_item.*
+import com.google.firebase.messaging.FirebaseMessaging
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.io.File
 
@@ -42,17 +47,17 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
     private val args: ChatFragmentArgs by navArgs()
 
+    lateinit var token: String
 
     private val chatAdapter = GroupAdapter<GroupieViewHolder>()
     private var popupWindow: PopupWindow? = null
+
 
 
     private var recorder: MediaRecorder? = null
     private val recordingFilePath: String by lazy {
         "${requireActivity().externalCacheDir?.absolutePath}/recording.3gp"
     }
-
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,8 +67,14 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         binding?.lifecycleOwner = this
         binding?.viewModel = viewModel
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        lifecycleScope.launch(Dispatchers.IO) {
+            token = FirebaseMessaging.getInstance().token.await()
+        }
 
         subscribeMessages()
+
+        initNavArgs()
+        initPartnerNciknameTextView()
 
         initChatRecyclerView(fragmentChatBinding)
         observeMessagesData()
@@ -81,8 +92,18 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         observeRecorderState(fragmentChatBinding)
     }
 
-    private fun subscribeMessages() {
+    private fun initNavArgs() {
         viewModel.matchingId = args.matchingId
+        viewModel.startTime = args.startTime
+        viewModel.partnerNickname = args.partnerNickname
+    }
+
+    private fun initPartnerNciknameTextView() {
+        binding?.tvOtherName?.text = viewModel.partnerNickname
+    }
+
+
+    private fun subscribeMessages() {
         viewModel?.matchingId?.let {
             viewModel.subscribeMessages(it.toString())
         } ?: kotlin.run {
@@ -188,6 +209,11 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                                 senderUid = userId,
                                 roomUid = matchingId.toString()
                             )
+                        )
+                        viewModel?.postFcm(
+                            title = "메시지 도착",
+                            body = "${viewModel?.partnerNickname} : ${etMessageInput.text.toString()}",
+                            path = ""
                         )
 
                     }

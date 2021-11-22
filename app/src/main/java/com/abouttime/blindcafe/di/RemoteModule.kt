@@ -3,7 +3,6 @@ package com.abouttime.blindcafe.di
 
 import com.abouttime.blindcafe.common.AuthenticationInterceptor
 import com.abouttime.blindcafe.common.constants.Retrofit.BASE_URL
-import com.abouttime.blindcafe.common.constants.Retrofit.FIREBASE_BASE_URL
 import com.abouttime.blindcafe.data.server.api.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -15,20 +14,14 @@ import java.util.concurrent.TimeUnit
 
 internal val remoteModule = module {
 
+    single { provideRetrofit() }
 
-    factory { provideKakaoLoginApi(provideRetrofit()) }
-    factory { provideUserInfoApi(provideRetrofit()) }
-    factory { provideFcmApi(provideRetrofit()) }
-    factory { provideHomeApi(provideRetrofit()) }
-    factory { provideMatchingApi(provideRetrofit()) }
-    factory { provideInterestApi(provideRetrofit()) }
-
-
-
-
-    factory { provideNotificationApi(provideFirebaseRetrofit()) }
-
-
+    factory { provideKakaoLoginApi(get()) }
+    factory { provideUserInfoApi(get()) }
+    factory { provideFcmApi(get()) }
+    factory { provideHomeApi(get()) }
+    factory { provideMatchingApi(get()) }
+    factory { provideInterestApi(get()) }
 
 }
 
@@ -38,15 +31,6 @@ internal fun provideRetrofit(): Retrofit =
         .addConverterFactory(GsonConverterFactory.create())
         .client(buildOkHttpClient())
         .build()
-
-
-internal fun provideFirebaseRetrofit(): Retrofit =
-    Retrofit.Builder()
-        .baseUrl(FIREBASE_BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(buildFirebaseOkHttpClient())
-        .build()
-
 
 
 internal fun buildOkHttpClient(): OkHttpClient {
@@ -66,26 +50,6 @@ internal fun buildOkHttpClient(): OkHttpClient {
         .build()
 }
 
-internal fun buildFirebaseOkHttpClient(): OkHttpClient {
-    val interceptor = HttpLoggingInterceptor()
-
-    if (BuildConfig.DEBUG) {
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
-    } else {
-        interceptor.level = HttpLoggingInterceptor.Level.NONE
-    }
-
-    return OkHttpClient.Builder()
-        .connectTimeout(5, TimeUnit.SECONDS)
-        .connectTimeout(5, TimeUnit.SECONDS)
-        .addInterceptor(interceptor)
-        .build()
-}
-
-
-
-internal fun provideNotificationApi(retrofit: Retrofit): NotificationApi =
-    retrofit.create(NotificationApi::class.java)
 
 
 internal fun provideKakaoLoginApi(retrofit: Retrofit): LoginApi =

@@ -9,6 +9,7 @@ import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY
+import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.INFO_INPUT
 import com.abouttime.blindcafe.data.server.dto.interest.Interest
 import com.abouttime.blindcafe.data.server.dto.user_info.UserInterest
 import com.abouttime.blindcafe.data.server.dto.user_info.PostUserInfoDto
@@ -137,7 +138,7 @@ class InterestSubViewModel(
                     Log.d(LogTag.RETROFIT_TAG, "Success ${response.data?.code} ${response.data?.message}")
                     val code = response.data?.code?.toInt()
                     if (code == 1000) {
-                        saveStringData(Pair(PREFERENCES_KEY.INFO_INPUT, response.data.code))
+                        saveStringData(Pair(INFO_INPUT, response.data.code))
                         moveToSigninFragment()
                     }
                 }

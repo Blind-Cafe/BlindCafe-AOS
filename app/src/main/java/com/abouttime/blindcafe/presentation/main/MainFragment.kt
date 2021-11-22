@@ -21,8 +21,6 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
     override val viewModel: MainViewModel by viewModel()
 
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val fragmentMainBinding = FragmentMainBinding.bind(view)

@@ -40,7 +40,7 @@ internal val viewModelModule = module {
 
 
     /** Common **/
-    viewModel { ConfirmViewModel()}
+    viewModel { ConfirmViewModel(get())}
 
 
     /** Single Activity **/
@@ -78,7 +78,7 @@ internal val viewModelModule = module {
 
 
     /** Chat **/
-    viewModel { ChatViewModel(get(), get(), get(), get(), get(), get()) }
+    viewModel { ChatViewModel(get(), get(), get(), get(), get(), get(), get()) }
     viewModel { GalleryViewModel(get()) }
     viewModel { QuitReasonViewModel() }
     viewModel { ReportReasonViewModel() }

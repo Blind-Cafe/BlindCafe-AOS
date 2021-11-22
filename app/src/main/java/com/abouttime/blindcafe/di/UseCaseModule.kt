@@ -11,6 +11,7 @@ internal val useCaseModule = module {
     /** user info **/
     factory { GetUserInfoUseCase(get()) }
     factory { PostUserInfoUseCase(get()) }
+    factory { DeleteAccountUseCase(get()) }
 
     /** gallery **/
     factory { FetchImagesUseCase(get())}
@@ -26,7 +27,6 @@ internal val useCaseModule = module {
     factory { DownloadImageUrlUseCase(get()) }
 
     /** fcm **/
-    factory { PostNotificationUseCase(get()) } // firebase api
     factory { PostFcmUseCase(get()) }
 
 

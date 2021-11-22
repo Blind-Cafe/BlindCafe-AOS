@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
+import com.abouttime.BlindCafeApplication
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.databinding.ToastBinding
 
@@ -123,4 +124,27 @@ abstract class BaseFragment<VM: BaseViewModel>(layoutId: Int) : Fragment(layoutI
     fun getColorByResId(resId: Int) = resources.getColor(resId, null)
 
     fun getStringByResId(resId: Int): String = resources.getString(resId)
+
+    fun saveStringData(pair: Pair<String, String>) {
+        BlindCafeApplication.sharedPreferences
+            .edit()
+            .putString(
+                pair.first,
+                pair.second
+            )
+            .apply()
+    }
+
+    fun getStringData(key: String): String? {
+        return BlindCafeApplication.sharedPreferences
+            .getString(key, null)
+
+    }
+
+    fun Fragment.getNavigationResult(key: String = "result") =
+        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(key)
+
+    fun Fragment.setNavigationResult(result: String, key: String = "result") {
+        findNavController().previousBackStackEntry?.savedStateHandle?.set(key, result)
+    }
 }

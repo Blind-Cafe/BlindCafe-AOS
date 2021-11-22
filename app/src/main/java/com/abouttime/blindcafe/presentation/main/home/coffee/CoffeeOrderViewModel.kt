@@ -1,5 +1,6 @@
 package com.abouttime.blindcafe.presentation.main.home.coffee
 
+import android.provider.ContactsContract
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -23,6 +24,7 @@ class CoffeeOrderViewModel(
 
     var matchingId: Int? = null
     var startTime: String? = null
+    var partnerNickname: String? = null
 
 
     var currentSelect: Int? = null
@@ -80,7 +82,8 @@ class CoffeeOrderViewModel(
                                 startTime = time
                                 moveToChatFragment(
                                     matchingId = mId,
-                                    startTime = startTime
+                                    startTime = startTime,
+                                    partnerNickname = partnerNickname
                                 )
                             }
                         }
@@ -110,10 +113,11 @@ class CoffeeOrderViewModel(
     }
 
 
-        private fun moveToChatFragment(matchingId: Int, startTime: String?) {
+        private fun moveToChatFragment(matchingId: Int, startTime: String?, partnerNickname: String?) {
         moveToDirections(CoffeeOrderFragmentDirections.actionCoffeeOrderFragmentToMatchingFragment(
             matchingId = matchingId,
-            startTime = startTime
+            startTime = startTime,
+            partnerNickname = partnerNickname
         ))
     }
 

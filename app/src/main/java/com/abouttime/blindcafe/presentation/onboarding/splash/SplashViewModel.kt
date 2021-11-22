@@ -1,5 +1,6 @@
 package com.abouttime.blindcafe.presentation.onboarding.splash
 
+import android.util.Log
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.INFO_INPUT
 import com.abouttime.blindcafe.common.constants.Retrofit.JWT
@@ -16,7 +17,8 @@ class SplashViewModel: BaseViewModel() {
         val infoInput = getStringData(INFO_INPUT)
         if (jwt.isNullOrEmpty()) {
             moveToRuleFragment()
-        } else if (infoInput.isNullOrEmpty()) {
+        } else if (infoInput == null) {
+            Log.e(INFO_INPUT, "$infoInput")
             moveToAgreementFragment()
         } else {
             moveToMainFragment()
@@ -25,13 +27,13 @@ class SplashViewModel: BaseViewModel() {
 
 
 
-    fun moveToRuleFragment() {
+    private fun moveToRuleFragment() {
         moveToDirections(SplashFragmentDirections.actionSplashFragmentToRuleFragment())
     }
-    fun moveToAgreementFragment() {
+    private fun moveToAgreementFragment() {
         moveToDirections(SplashFragmentDirections.actionSplashFragmentToAgreementFragment())
     }
-    fun moveToMainFragment() {
+    private fun moveToMainFragment() {
         moveToDirections(SplashFragmentDirections.actionSplashFragmentToMainFragment())
     }
 }

@@ -13,6 +13,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
+import com.abouttime.BlindCafeApplication
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.databinding.ToastBinding
 
@@ -96,4 +97,20 @@ abstract class BaseDialogFragment<VM: BaseViewModel>(layoutId: Int): DialogFragm
     fun getColorByResId(resId: Int) = resources.getColor(resId, null)
 
     fun getStringByResId(resId: Int): String = resources.getString(resId)
+
+    fun saveStringData(pair: Pair<String, String>) {
+        BlindCafeApplication.sharedPreferences
+            .edit()
+            .putString(
+                pair.first,
+                pair.second
+            )
+            .apply()
+    }
+
+    fun getStringData(key: String): String? {
+        return BlindCafeApplication.sharedPreferences
+            .getString(key, null)
+
+    }
 }

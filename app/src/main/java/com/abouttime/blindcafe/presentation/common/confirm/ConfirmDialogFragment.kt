@@ -21,14 +21,14 @@ class ConfirmDialogFragment: BaseDialogFragment<ConfirmViewModel>(R.layout.dialo
         binding?.lifecycleOwner = this
         binding?.viewModel = viewModel
 
-
+        bindData()
         initViews(dialogFragmentConfirmBinding)
     }
     private fun initViews(dialogFragmentConfirmBinding: DialogFragmentConfirmBinding) = with(dialogFragmentConfirmBinding) {
         tvTitle.text = args.title ?: ""
         tvSubtitle.text = args.subtitle ?: ""
         tvNo.text = args.no ?: "취소"
-        tvYes.text = args.subtitle ?: "확인"
+        tvYes.text = args.yes ?: "확인"
 
 
 
@@ -60,6 +60,13 @@ class ConfirmDialogFragment: BaseDialogFragment<ConfirmViewModel>(R.layout.dialo
 
     }
     private fun handleDeleteAccount() {
+        binding?.tvYes?.setOnClickListener {
+            viewModel.deleteAccount(args.reason)
+        }
+        binding?.tvNo?.setOnClickListener {
+            popDirections()
+        }
+
 
     }
     private fun handleReport() {

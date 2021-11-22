@@ -9,9 +9,7 @@ import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.domain.use_case.GetHomeInfoUseCase
-import com.abouttime.blindcafe.domain.use_case.PostFcmUseCase
 import com.abouttime.blindcafe.domain.use_case.PostMatchingRequestUseCase
-import com.abouttime.blindcafe.domain.use_case.PostNotificationUseCase
 import com.abouttime.blindcafe.presentation.main.MainFragmentDirections
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
@@ -32,6 +30,7 @@ class HomeViewModel(
     private var partnerNickname: String? = null
     private var matchingId: Int? = null
     private var startTime: String? = null
+    private var partnerId: Int? = null
 
     init {
         //testHomeState()
@@ -54,6 +53,7 @@ class HomeViewModel(
                         startTime = it.startTime
                         reason = it.reason
                         partnerNickname = it.partnerNickname
+                        partnerId = it.partnerId
                     }
                 }
                 is Resource.Error -> {
@@ -129,7 +129,8 @@ class HomeViewModel(
                 matchingId?.let { id ->
                     moveToCoffeeOrderFragment(
                         matchingId = id,
-                        startTime = startTime
+                        startTime = startTime,
+                        partnerNickname = partnerNickname
                     )
                 }
 
@@ -164,10 +165,11 @@ class HomeViewModel(
             partnerNickname = partnerNickname
         ))
     }
-    private fun moveToCoffeeOrderFragment(matchingId: Int, startTime: String? ) {
+    private fun moveToCoffeeOrderFragment(matchingId: Int, startTime: String?, partnerNickname: String?) {
         moveToDirections(MainFragmentDirections.actionMainFragmentToCoffeeOrderFragment(
             matchingId = matchingId,
-            startTime = startTime
+            startTime = startTime,
+            partnerNickname = partnerNickname
         ))
     }
 

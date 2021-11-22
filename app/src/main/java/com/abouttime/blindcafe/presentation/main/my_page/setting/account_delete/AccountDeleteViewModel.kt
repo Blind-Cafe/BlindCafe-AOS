@@ -29,7 +29,8 @@ class AccountDeleteViewModel: BaseViewModel() {
                     title = v.resources.getString(R.string.delete_account_confirm_title),
                     subtitle = v.resources.getString(R.string.delete_account_confirm_subtitle),
                     no = v.resources.getString(R.string.delete_account_confirm_no),
-                    yes = v.resources.getString(R.string.delete_account_confirm_yes)
+                    yes = v.resources.getString(R.string.delete_account_confirm_yes),
+                    reason = _reason.value!!
                 )
             )
         } else {

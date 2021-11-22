@@ -12,14 +12,17 @@ import com.abouttime.blindcafe.common.constants.LogTag.FIRESTORE_TAG
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.constants.Retrofit
 import com.abouttime.blindcafe.common.constants.Retrofit.USER_ID
+import com.abouttime.blindcafe.data.server.dto.notification.PostFcmDto
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.use_case.*
 import com.abouttime.blindcafe.presentation.chat.recorder.RecorderState
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 class ChatViewModel(
@@ -29,6 +32,7 @@ class ChatViewModel(
     private val uploadAudioUseCase: UploadAudioUseCase,
     private val downloadImageUrlUseCase: DownloadImageUrlUseCase,
     private val downloadAudioUrlUseCase: DownloadAudioUrlUseCase,
+    private val fcmUseCase: PostFcmUseCase
 ) : BaseViewModel() {
 
     private val _isSendButtonEnabled = MutableLiveData(false)
@@ -47,12 +51,22 @@ class ChatViewModel(
     var partnerNickname: String? = null
     var startTime: String? = null
     var matchingId: Int? = null
-
     val userId = getStringData(USER_ID)
 
 
     init {
         Log.e(RETROFIT_TAG, "ChatViewModel init")
+    }
+
+    fun postFcm(title: String, path: String, body: String) = viewModelScope.launch(Dispatchers.IO) {
+        val token = FirebaseMessaging.getInstance().token.await()
+        val dto = PostFcmDto(
+           body = body,
+           path = path,
+           targetToken = token,
+           title = title
+        )
+        fcmUseCase(dto)
     }
 
     fun subscribeMessages(roomId: String) = viewModelScope.launch(Dispatchers.IO) {

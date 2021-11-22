@@ -28,9 +28,17 @@ class CoffeeOrderFragment : BaseFragment<CoffeeOrderViewModel>(R.layout.fragment
         binding?.lifecycleOwner = this
         binding?.viewModel = viewModel
 
+
+        initArgsData()
+
+
+    }
+
+
+    private fun initArgsData() {
         viewModel.matchingId = args.matchingId
         viewModel.startTime = args.startTime
-
+        viewModel.partnerNickname = args.partnerNickname
     }
 
     override fun onResume() {

@@ -4,7 +4,6 @@ import com.abouttime.blindcafe.common.base.BaseViewModel
 
 class SigninViewModel: BaseViewModel() {
 
-
     fun onClickNextButton() {
         moveToMainFragment()
     }

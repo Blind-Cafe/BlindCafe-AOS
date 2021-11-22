@@ -248,6 +248,10 @@
             app:argType="string"
             app:nullable="true"/>
 
+        <argument android:name="partnerNickname"
+            app:argType="string"
+            app:nullable="true"/>
+
         <action
             android:id="@+id/action_coffeeOrderFragment_to_matchingFragment"
             app:destination="@id/matchingFragment"
@@ -430,6 +434,9 @@
             app:argType="string" />
         <argument android:name="yes"
             app:argType="string"/>
+        <argument android:name="reason"
+            app:argType="integer"
+            android:defaultValue="0"/>
         <action
             android:id="@+id/action_confirmDialogFragment_to_accountDeleteCompleteFragment"
             app:destination="@id/accountDeleteCompleteFragment"
@@ -450,6 +457,7 @@
         tools:layout="@layout/fragment_account_delete"
         android:name="com.abouttime.blindcafe.presentation.main.my_page.setting.account_delete.complete.AccountDeleteCompleteFragment"
         android:label="AccountDeleteCompleteFragment" >
+
         <action
             android:id="@+id/action_accountDeleteCompleteFragment_to_loginFragment"
             app:destination="@id/loginFragment"
