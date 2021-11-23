@@ -4,9 +4,11 @@ import com.abouttime.blindcafe.common.base.BaseResponse
 import com.abouttime.blindcafe.common.constants.Retrofit.DELETE_EXIT_CHAT_ROOM_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_CHAT_ROOMS_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_CHAT_ROOM_INFO_URL
+import com.abouttime.blindcafe.common.constants.Retrofit.GET_TOPIC_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_DRINK_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_MATCHING_REQUEST_URL
 import com.abouttime.blindcafe.data.server.dto.matching.*
+import com.abouttime.blindcafe.data.server.dto.matching.topic.GetTopicDto
 import retrofit2.http.*
 
 interface MatchingApi {
@@ -34,6 +36,11 @@ interface MatchingApi {
         @Path("matchingId") matchingId: Int,
         @Query("reason") reason: Int
     ): BaseResponse?
+
+    @GET(GET_TOPIC_URL)
+    suspend fun getTopic(
+        @Path("matchingId") matchingId: Int
+    ): GetTopicDto?
 
 
 

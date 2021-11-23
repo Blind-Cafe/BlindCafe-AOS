@@ -1,10 +1,12 @@
 package com.abouttime.blindcafe.common.base
 
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDirections
 import com.abouttime.BlindCafeApplication.Companion.sharedPreferences
 import com.abouttime.blindcafe.common.SingleLiveData
+import com.abouttime.blindcafe.common.constants.LogTag
 
 open class BaseViewModel() : ViewModel() {
     private val _toastEvent = SingleLiveData<Int>()
@@ -52,6 +54,7 @@ open class BaseViewModel() : ViewModel() {
     }
 
     fun showLoading() {
+        Log.e(LogTag.RETROFIT_TAG, "Loading")
         //_loadingEvent.value = true
     }
     fun dismissLoading() {

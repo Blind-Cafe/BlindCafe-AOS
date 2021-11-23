@@ -3,6 +3,7 @@ package com.abouttime.blindcafe.data.repository
 import com.abouttime.blindcafe.common.base.BaseResponse
 import com.abouttime.blindcafe.data.server.api.MatchingApi
 import com.abouttime.blindcafe.data.server.dto.matching.*
+import com.abouttime.blindcafe.data.server.dto.matching.topic.GetTopicDto
 import com.abouttime.blindcafe.domain.repository.MatchingRepository
 
 class MatchingRepositoryImpl(
@@ -26,5 +27,9 @@ class MatchingRepositoryImpl(
 
     override suspend fun exitChatRoom(matchingId: Int, reason: Int): BaseResponse? {
         return matchingApi.exitChatRoom(matchingId, reason)
+    }
+
+    override suspend fun getTopic(matchingId: Int): GetTopicDto? {
+        return matchingApi.getTopic(matchingId)
     }
 }

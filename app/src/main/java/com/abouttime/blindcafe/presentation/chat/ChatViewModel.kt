@@ -6,11 +6,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.common.Resource
+import com.abouttime.blindcafe.common.SingleLiveData
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.CHATTING_TAG
 import com.abouttime.blindcafe.common.constants.LogTag.FIRESTORE_TAG
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.constants.Retrofit.USER_ID
+import com.abouttime.blindcafe.data.server.dto.matching.topic.GetTopicDto
 import com.abouttime.blindcafe.data.server.dto.notification.PostFcmDto
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.use_case.*
@@ -32,7 +34,8 @@ class ChatViewModel(
     private val downloadImageUrlUseCase: DownloadImageUrlUseCase,
     private val downloadAudioUrlUseCase: DownloadAudioUrlUseCase,
     private val fcmUseCase: PostFcmUseCase,
-    private val getChatRoomInfoUseCase: GetChatRoomInfoUseCase
+    private val getChatRoomInfoUseCase: GetChatRoomInfoUseCase,
+    private val getTopicUseCase: GetTopicUseCase
 ) : BaseViewModel() {
 
     private val _isSendButtonEnabled = MutableLiveData(false)
@@ -48,6 +51,9 @@ class ChatViewModel(
     private val _recorderState = MutableLiveData<RecorderState>(RecorderState.BEFORE_RECORDING)
     val recorderState: LiveData<RecorderState> get() = _recorderState
 
+    private val _topic = SingleLiveData<GetTopicDto>()
+    val topic: SingleLiveData<GetTopicDto> get() = _topic
+
     var partnerNickname: String? = null
     var startTime: String? = null
     var matchingId: Int? = null
@@ -58,6 +64,8 @@ class ChatViewModel(
         Log.e(RETROFIT_TAG, "ChatViewModel init")
     }
 
+
+    /** use cases **/
     fun postFcm(title: String, path: String, body: String) = viewModelScope.launch(Dispatchers.IO) {
         val token = FirebaseMessaging.getInstance().token.await()
         val dto = PostFcmDto(
@@ -191,6 +199,34 @@ class ChatViewModel(
     }
 
 
+    fun getTopic() {
+        matchingId?.let { it ->
+            getTopicUseCase(it).onEach { result ->
+                when(result) {
+                    is Resource.Loading -> {
+                        showLoading()
+                    }
+                    is Resource.Success -> {
+                        result.data?.let { topic ->
+                            _topic.value = topic
+                        }
+                        dismissLoading()
+
+                    }
+                    is Resource.Error -> {
+                        Log.e(RETROFIT_TAG, result.message.toString())
+                        dismissLoading()
+                    }
+                }
+            }.launchIn(viewModelScope)
+        }
+    }
+
+
+
+
+
+    /** update button **/
     fun updateSendButton() {
         _isSendButtonEnabled.value = !messageEditText.value.isNullOrEmpty()
     }
@@ -205,7 +241,7 @@ class ChatViewModel(
 
 
 
-    /** move **/
+    /** navigate **/
     fun moveToQuitDialogFragment() {
         matchingId?.let {
             moveToDirections(ChatFragmentDirections.actionMatchingFragmentToQuitReasonDialogFragment(
