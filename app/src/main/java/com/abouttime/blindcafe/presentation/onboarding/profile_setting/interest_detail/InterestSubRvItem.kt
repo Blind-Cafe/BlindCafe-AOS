@@ -39,17 +39,17 @@ class InterestSubRvItem(
                     val selected = selectedSubInterests[index]
                     for (i in subInterests.indices) {
                         subInterests[i].setOnClickListener { v ->
-                            if (selected.contains(i)) {
+                            if (selected.contains(interest.sub[i])) {
                                 subInterests[i].setTextColor(v.resources.getColor(R.color.gray_300,
                                     null))
                                 subInterests[i].background.setTint(ContextCompat.getColor(v.context, R.color.sub_interest_disabled))
-                                selected.remove(i)
+                                selected.remove(interest.sub[i])
 
                             } else {
                                 subInterests[i].setTextColor(v.resources.getColor(R.color.white,
                                     null))
                                 subInterests[i].background.setTint(ContextCompat.getColor(v.context, R.color.main))
-                                selected.add(i)
+                                selected.add(interest.sub[i])
                             }
                             updateNextButton()
                         }

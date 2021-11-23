@@ -68,7 +68,7 @@ internal val viewModelModule = module {
     viewModel { DormancyViewModel() }
 
 
-    viewModel { ChatListViewModel() }
+    viewModel { ChatListViewModel(get()) }
 
     viewModel { MyPageViewModel(get()) }
     viewModel { SettingViewModel() }

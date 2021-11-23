@@ -33,7 +33,7 @@ class InterestSubViewModel(
     private val _interests = SingleLiveData<List<Interest>>()
     val interests: SingleLiveData<List<Interest>> get() = _interests
 
-    val selectedSubInterests = Array(3) { mutableListOf<Int>() }
+    val selectedSubInterests = Array(3) { mutableListOf<String>() }
 
     init {
         try {
@@ -123,15 +123,15 @@ class InterestSubViewModel(
             userInterests = listOf(
                 UserInterest(
                     main = interests?.get(0)?.toInt() ?: 0,
-                    sub = subInterests1
+                    sub = selectedSubInterests[0]
                 ),
                 UserInterest(
                     main = interests?.get(1)?.toInt() ?: 0,
-                    sub = subInterests2
+                    sub =  selectedSubInterests[1]
                 ),
                 UserInterest(
                     main = interests?.get(2)?.toInt() ?: 0,
-                    sub = subInterests3
+                    sub =  selectedSubInterests[2]
                 )
             )
         )
@@ -154,7 +154,8 @@ class InterestSubViewModel(
                     }
                 }
                 is Resource.Error -> {
-                    Log.d(LogTag.RETROFIT_TAG, response?.data?.code.toString())
+                    Log.d(LogTag.RETROFIT_TAG, response.data?.code.toString())
+                    Log.d(LogTag.RETROFIT_TAG, response.message.toString())
                 }
             }
 

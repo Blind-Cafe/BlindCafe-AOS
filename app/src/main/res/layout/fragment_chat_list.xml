@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/black">
 
 
@@ -49,6 +50,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/tv_subtitle_none"
         android:layout_marginTop="12dp"
         android:text="@string/chat_list_subtitle_none"
         android:textColor="@color/gray_300"
@@ -60,9 +62,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="0dp"
+        android:id="@+id/rv_chat_rooms"
         android:layout_height="0dp"
         android:background="@color/black"
         android:visibility="gone"
+        tools:visibility="visible"
+        tools:listitem="@layout/rv_chat_list_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@+id/iv_chat_list_bg_none"
         app:layout_constraintStart_toStartOf="parent"

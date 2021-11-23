@@ -35,6 +35,7 @@ internal val useCaseModule = module {
     /** matching **/
     factory { PostMatchingRequestUseCase(get()) }
     factory { PostDrinkUseCase(get()) }
+    factory { GetChatRoomsUseCase(get())}
 
 
     /** interests **/

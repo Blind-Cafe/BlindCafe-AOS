@@ -14,6 +14,7 @@ object Retrofit {
     const val POST_DRINK_URL = "api/matching/{matchingId}/drink"
     const val GET_INTEREST_URL = "api/interest"
     const val DELETE_ACCOUNT_URL = "api/user"
+    const val GET_CHAT_ROOMS_URL = "api/matching"
 
 
     const val FCM_MESSAGE_TOPIC = "fcm_message_topic"

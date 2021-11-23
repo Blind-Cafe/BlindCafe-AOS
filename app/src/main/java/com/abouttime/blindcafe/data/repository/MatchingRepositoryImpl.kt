@@ -1,6 +1,7 @@
 package com.abouttime.blindcafe.data.repository
 
 import com.abouttime.blindcafe.data.server.api.MatchingApi
+import com.abouttime.blindcafe.data.server.dto.matching.GetChatRooms
 import com.abouttime.blindcafe.data.server.dto.matching.PostDrinkDto
 import com.abouttime.blindcafe.data.server.dto.matching.PostDrinkResponse
 import com.abouttime.blindcafe.data.server.dto.matching.PostMatchingRequestResponse
@@ -15,5 +16,9 @@ class MatchingRepositoryImpl(
 
     override suspend fun postDrink(matchingId: Int, drink: PostDrinkDto): PostDrinkResponse? {
        return matchingApi.postDrink(matchingId, drink)
+    }
+
+    override suspend fun getChatRooms(): GetChatRooms? {
+        return matchingApi.getChatRooms()
     }
 }
