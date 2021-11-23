@@ -2,10 +2,12 @@ package com.abouttime.blindcafe.domain.use_case
 
 import android.net.Uri
 import com.abouttime.blindcafe.common.Resource
+import com.abouttime.blindcafe.common.ext.parseErrorBody
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.repository.FirestorageRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import retrofit2.HttpException
 
 class UploadImageUseCase(
     private val repository: FirestorageRepository
@@ -24,7 +26,10 @@ class UploadImageUseCase(
             }
 
         } catch (e: Exception) {
-            emit(Resource.Error<Boolean>(message = e.toString()))
+            if (e is HttpException) {
+                val message = e.parseErrorBody()
+                emit(Resource.Error(message = message.toString()))
+            }
         }
     }
 }

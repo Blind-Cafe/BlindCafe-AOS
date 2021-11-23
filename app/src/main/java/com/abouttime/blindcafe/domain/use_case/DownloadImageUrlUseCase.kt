@@ -13,16 +13,20 @@ class DownloadImageUrlUseCase(
     operator fun invoke(message: Message): Flow<Resource<Uri>> = flow {
 
         emit(Resource.Loading())
+        try {
+            val response = firestorageRepository
+                .downloadImageUrl(
+                    message = message
+                )
+            if (response != null) {
+                emit(Resource.Success(data = response))
+            } else {
+                emit(Resource.Error(message = "response is null!"))
+            }
+        } catch (e: Exception) {
 
-        val response = firestorageRepository
-            .downloadImageUrl(
-                message = message
-            )
-        if (response != null) {
-            emit(Resource.Success(data = response))
-        } else {
-            //emit(Resource.Error(message = "response is null!"))
         }
+
 
     }
 }

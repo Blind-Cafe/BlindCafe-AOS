@@ -154,7 +154,6 @@ class InterestSubViewModel(
                     }
                 }
                 is Resource.Error -> {
-                    Log.d(LogTag.RETROFIT_TAG, response.data?.code.toString())
                     Log.d(LogTag.RETROFIT_TAG, response.message.toString())
                 }
             }

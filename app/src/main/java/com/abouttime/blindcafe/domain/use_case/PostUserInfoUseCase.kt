@@ -4,8 +4,11 @@ import android.util.Log
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseResponse
 import com.abouttime.blindcafe.common.constants.LogTag
+import com.abouttime.blindcafe.common.ext.parseErrorBody
 import com.abouttime.blindcafe.data.server.dto.user_info.PostUserInfoDto
 import com.abouttime.blindcafe.domain.repository.UserInfoRepository
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.json.JSONObject
@@ -26,18 +29,10 @@ class PostUserInfoUseCase(
             }
         } catch (e: Exception) {
             if (e is HttpException) {
-                emit(Resource.Error<BaseResponse>(data = response, message = e.code().toString()))
-                emit(Resource.Error<BaseResponse>(data = response,
-                    message = e.response().toString()))
-                emit(Resource.Error<BaseResponse>(data = response,
-                    message = e.response()?.body().toString()))
-
-                val jsonObject = JSONObject(e.response()?.errorBody().toString())
-                emit(Resource.Error<BaseResponse>(data = response, message = "$jsonObject"))
-
-            } else {
-                Log.e(LogTag.USER_INFO_TAG, e.toString())
+                val message = e.parseErrorBody()
+                emit(Resource.Error(message = message.toString()))
             }
         }
     }
 }
+

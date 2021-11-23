@@ -5,6 +5,9 @@ import com.abouttime.blindcafe.common.constants.LogTag.FCM_TAG
 import com.abouttime.blindcafe.data.server.dto.notification.PostFcmDto
 import com.abouttime.blindcafe.domain.repository.FcmRepository
 
+/**
+ * FCM 전송 (임시)
+ */
 class PostFcmUseCase(
     private val repository: FcmRepository
 ) {

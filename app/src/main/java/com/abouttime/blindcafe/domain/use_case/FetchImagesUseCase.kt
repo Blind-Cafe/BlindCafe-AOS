@@ -7,6 +7,9 @@ import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.data.gallery.Image
 import com.abouttime.blindcafe.domain.repository.ImageRepository
 
+/**
+ * GalleyFragmentDialog
+ */
 class FetchImagesUseCase(
     private val imageRepository: ImageRepository
 ) {

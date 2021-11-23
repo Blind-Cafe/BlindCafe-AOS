@@ -50,26 +50,7 @@ class InterestSubFragment : BaseFragment<InterestSubViewModel>(R.layout.fragment
                 adapter = subInterestAdapter
                 layoutManager = LinearLayoutManager(requireContext())
             }
-//            subInterestAdapter.add(InterestSubRvItem(
-//                Interest(
-//                    main = 1,
-//                    sub = listOf(
-//                        "1", "2", "3", "4", "5", "6", "7", "8", "9"
-//                    )
-//                ), viewModel!!, 0))
-//            subInterestAdapter.add(InterestSubRvItem(
-//                Interest(
-//                    main = 1,
-//                    sub = listOf(
-//                        "1", "2", "3", "4", "5", "6", "7", "8", "9"
-//                    )
-//                ), viewModel!!, 1))
-//            subInterestAdapter.add(InterestSubRvItem(Interest(
-//                main = 1,
-//                sub = listOf(
-//                    "1", "2", "3", "4", "5", "6", "7", "8", "9"
-//                )
-//            ), viewModel!!, 2))
+
         }
 
     private fun observeInterestData() {
