@@ -172,8 +172,8 @@
             android:text="@string/home_title_none"
             android:textColor="@color/white"
             android:textSize="@dimen/font_size_15"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_state_sub_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cl_home_bg_container" />
 
@@ -187,6 +187,7 @@
             android:textColor="@color/steel"
             android:textSize="@dimen/font_size_13"
             app:layout_constraintEnd_toEndOf="@id/tv_state_title"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_state_title"
             app:layout_constraintTop_toBottomOf="@id/tv_state_title" />
 

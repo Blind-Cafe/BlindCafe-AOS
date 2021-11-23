@@ -14,4 +14,5 @@ interface MatchingRepository {
     suspend fun exitChatRoom(matchingId: Int, reason: Int): BaseResponse?
     suspend fun getTopic(matchingId: Int): GetTopicDto?
     suspend fun postReport(report: PostReportDto): BaseResponse?
+    suspend fun postCancelMatching(): BaseResponse?
 }

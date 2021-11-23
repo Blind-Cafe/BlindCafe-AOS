@@ -20,6 +20,7 @@ object Retrofit {
     const val GET_TOPIC_URL = "api/matching/{matchingId}/topic"
     const val POST_REPORT_URL = "api/report"
     const val GET_REPORTS_URL = "api/report"
+    const val POST_CANCEL_MATCHING_URL = "api/matching/cancel"
 
 
     const val FCM_MESSAGE_TOPIC = "fcm_message_topic"

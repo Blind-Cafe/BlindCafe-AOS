@@ -42,6 +42,7 @@ internal val useCaseModule = module {
     factory { DeleteExitChatRoomUseCase(get())}
     factory { GetTopicUseCase(get())}
     factory { PostReportUseCase(get()) }
+    factory { PostCancelMatchingUseCase(get()) }
 
 
     /** interests **/

@@ -37,4 +37,8 @@ class MatchingRepositoryImpl(
     override suspend fun postReport(report: PostReportDto): BaseResponse? {
         return matchingApi.postReport(report)
     }
+
+    override suspend fun postCancelMatching(): BaseResponse? {
+        return matchingApi.postCancelMatching()
+    }
 }

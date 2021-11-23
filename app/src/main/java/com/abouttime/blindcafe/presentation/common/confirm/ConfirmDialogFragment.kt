@@ -22,8 +22,9 @@ class ConfirmDialogFragment :
         binding?.lifecycleOwner = this
         binding?.viewModel = viewModel
 
-        bindData()
+
         initViews(dialogFragmentConfirmBinding)
+        bindData()
     }
 
     private fun initViews(dialogFragmentConfirmBinding: DialogFragmentConfirmBinding) =
@@ -37,6 +38,9 @@ class ConfirmDialogFragment :
 
     private fun bindData() {
         when (args.id) {
+            R.string.home_matching_cancel_title -> {
+                handleHomeMatchingCancel()
+            }
             R.string.profile_dismiss_confirm_title -> {
                 handleProfileDismiss()
             }
@@ -53,6 +57,10 @@ class ConfirmDialogFragment :
                 handleQuit()
             }
         }
+    }
+    private fun handleHomeMatchingCancel() {
+        handleYesButton { viewModel.postCancelMatching() }
+        handleNoButton { popDirections() }
     }
 
     private fun handleProfileDismiss() {

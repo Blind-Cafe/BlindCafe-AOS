@@ -5,6 +5,7 @@ import com.abouttime.blindcafe.common.constants.Retrofit.DELETE_EXIT_CHAT_ROOM_U
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_CHAT_ROOMS_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_CHAT_ROOM_INFO_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_TOPIC_URL
+import com.abouttime.blindcafe.common.constants.Retrofit.POST_CANCEL_MATCHING_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_DRINK_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_MATCHING_REQUEST_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_REPORT_URL
@@ -48,6 +49,9 @@ interface MatchingApi {
     suspend fun postReport(
         @Body report: PostReportDto
     ): BaseResponse?
+
+    @POST(POST_CANCEL_MATCHING_URL)
+    suspend fun postCancelMatching(): BaseResponse?
 
 
 

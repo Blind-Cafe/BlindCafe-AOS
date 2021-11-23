@@ -3,8 +3,10 @@ package com.abouttime.blindcafe.presentation.main.home
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isGone
+import androidx.core.view.marginTop
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
+import com.abouttime.blindcafe.common.ext.setMarginTop
 import com.abouttime.blindcafe.databinding.FragmentHomeBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -18,9 +20,14 @@ class HomeFragment: BaseFragment<HomeViewModel>(R.layout.fragment_home) {
         binding = fragmentHomeBinding
         binding?.viewModel = viewModel
         binding?.lifecycleOwner = this
-        //showLoadingDialog()
 
         observeHomeStatus()
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getHomeInfo()
     }
 
     private fun observeHomeStatus() {
@@ -51,6 +58,7 @@ class HomeFragment: BaseFragment<HomeViewModel>(R.layout.fragment_home) {
         binding?.let { b ->
             b.tvStateTitle.isGone = true
             b.tvStateSubTitle.text = getString(R.string.home_subtitle_wait)
+            b.tvStateSubTitle.setMarginTop(48)
         }
 
     }

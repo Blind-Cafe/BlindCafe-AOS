@@ -10,6 +10,7 @@ import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.domain.use_case.GetHomeInfoUseCase
+import com.abouttime.blindcafe.domain.use_case.PostCancelMatchingUseCase
 import com.abouttime.blindcafe.domain.use_case.PostMatchingRequestUseCase
 import com.abouttime.blindcafe.presentation.main.MainFragmentDirections
 import kotlinx.coroutines.flow.launchIn
@@ -35,7 +36,8 @@ class HomeViewModel(
         getHomeInfo()
     }
 
-    private fun getHomeInfo() {
+    /** use cases **/
+    fun getHomeInfo() {
         getHomeInfoUseCase().onEach { resource ->
             when (resource) {
                 is Resource.Loading -> {
@@ -82,6 +84,8 @@ class HomeViewModel(
         }.launchIn(viewModelScope)
     }
 
+
+
     private fun getHomeStatusCode(status: String): Int {
         return when (status) {
             "NONE" -> 0
@@ -117,7 +121,6 @@ class HomeViewModel(
                         partnerNickname = partnerNickname
                     )
                 }
-
             }
             3 -> { // 매칭 + 음료선택 완료
                 if (matchingId != null && startTime != null && partnerNickname != null) {
@@ -173,7 +176,7 @@ class HomeViewModel(
         ))
     }
 
-    fun moveToConfirmDialogFragment(v: View) = with(v.resources) {
+    private fun moveToConfirmDialogFragment(v: View) = with(v.resources) {
         moveToDirections(
             MainFragmentDirections.actionMainFragmentToConfirmDialogFragment(
                 id = R.string.home_matching_cancel_title,
