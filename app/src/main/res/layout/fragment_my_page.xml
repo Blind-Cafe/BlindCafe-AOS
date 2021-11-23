@@ -156,7 +156,7 @@
 
                     <TextView
                         android:id="@+id/tv_sex_value"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="13dp"
                         android:layout_marginTop="8dp"
@@ -168,18 +168,20 @@
                         app:layout_constraintBottom_toTopOf="@id/tv_edit_profile"
                         app:layout_constraintEnd_toStartOf="@id/tv_age_value"
                         app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintHorizontal_weight="1"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_sex" />
 
                     <TextView
                         android:id="@+id/tv_age_value"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/spoqa_han_sans_neo_regular"
                         android:text="@string/no_value"
                         tools:text="29세"
                         android:textColor="@color/white_2"
                         android:textSize="@dimen/font_size_15"
+                        app:layout_constraintHorizontal_weight="1"
                         app:layout_constraintBottom_toBottomOf="@id/tv_sex_value"
                         app:layout_constraintEnd_toStartOf="@id/tv_location_value"
                         app:layout_constraintStart_toEndOf="@id/tv_sex_value"
@@ -187,12 +189,13 @@
 
                     <TextView
                         android:id="@+id/tv_location_value"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                        android:text="@{viewModel.location}"
-                        tools:text="부산 광역시 해운대구"
+                        android:text="@string/no_value"
                         android:textColor="@color/white_2"
+                        android:layout_marginEnd="13dp"
+                        app:layout_constraintHorizontal_weight="1"
                         android:textSize="@dimen/font_size_15"
                         app:layout_constraintBottom_toBottomOf="@id/tv_sex_value"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -258,10 +261,12 @@
 
                     <ImageView
                         android:id="@+id/iv_interest_1"
-                        android:layout_width="104dp"
-                        android:layout_height="84dp"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintDimensionRatio="104:84"
                         android:layout_marginTop="32dp"
                         android:layout_marginBottom="32dp"
+                        app:layout_constraintHorizontal_weight="1"
                         android:paddingTop="10dp"
                         android:paddingBottom="8dp"
                         android:src="@drawable/bt_interest_2"
@@ -274,10 +279,12 @@
 
                     <ImageView
                         android:id="@+id/iv_interest_2"
-                        android:layout_width="104dp"
-                        android:layout_height="84dp"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintHorizontal_weight="1"
                         android:paddingTop="10dp"
                         android:paddingBottom="8dp"
+                        app:layout_constraintDimensionRatio="104:84"
                         android:src="@drawable/bt_interest_2"
                         app:layout_constraintEnd_toStartOf="@id/iv_interest_3"
                         app:layout_constraintStart_toEndOf="@id/iv_interest_1"
@@ -287,8 +294,10 @@
 
                     <ImageView
                         android:id="@+id/iv_interest_3"
-                        android:layout_width="104dp"
-                        android:layout_height="84dp"
+                        android:layout_width="0dp"
+                        app:layout_constraintHorizontal_weight="1"
+                        android:layout_height="0dp"
+                        app:layout_constraintDimensionRatio="104:84"
                         android:paddingTop="10dp"
                         android:paddingBottom="8dp"
                         android:src="@drawable/bt_interest_2"
