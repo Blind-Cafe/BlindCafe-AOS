@@ -32,7 +32,8 @@ class ChatViewModel(
     private val uploadAudioUseCase: UploadAudioUseCase,
     private val downloadImageUrlUseCase: DownloadImageUrlUseCase,
     private val downloadAudioUrlUseCase: DownloadAudioUrlUseCase,
-    private val fcmUseCase: PostFcmUseCase
+    private val fcmUseCase: PostFcmUseCase,
+    private val getChatRoomInfoUseCase: GetChatRoomInfoUseCase
 ) : BaseViewModel() {
 
     private val _isSendButtonEnabled = MutableLiveData(false)
@@ -172,6 +173,16 @@ class ChatViewModel(
                 }
             }
         }
+
+
+    fun getChatRoomInfo() {
+        matchingId?.let {
+            getChatRoomInfoUseCase(it).onEach {
+
+            }
+        }
+
+    }
 
 
     fun updateSendButton() {

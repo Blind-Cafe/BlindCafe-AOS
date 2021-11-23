@@ -1,12 +1,10 @@
 package com.abouttime.blindcafe.data.server.api
 
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_CHAT_ROOMS_URL
+import com.abouttime.blindcafe.common.constants.Retrofit.GET_CHAT_ROOM_INFO_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_DRINK_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_MATCHING_REQUEST_URL
-import com.abouttime.blindcafe.data.server.dto.matching.GetChatRooms
-import com.abouttime.blindcafe.data.server.dto.matching.PostDrinkDto
-import com.abouttime.blindcafe.data.server.dto.matching.PostDrinkResponse
-import com.abouttime.blindcafe.data.server.dto.matching.PostMatchingRequestResponse
+import com.abouttime.blindcafe.data.server.dto.matching.*
 import retrofit2.http.*
 
 interface MatchingApi {
@@ -21,7 +19,13 @@ interface MatchingApi {
 
 
     @GET(GET_CHAT_ROOMS_URL)
-    suspend fun getChatRooms(): GetChatRooms?
+    suspend fun getChatRooms(): GetChatRoomsDto?
+
+    @GET(GET_CHAT_ROOM_INFO_URL)
+    suspend fun getChatRoomInfo(
+        @Path("matchingId") matchingId: Int
+    ): GetChatRoomInfoDto?
+
 
 
 
