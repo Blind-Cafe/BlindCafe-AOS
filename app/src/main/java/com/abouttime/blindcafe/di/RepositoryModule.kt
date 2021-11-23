@@ -1,8 +1,6 @@
 package com.abouttime.blindcafe.di
 
-import com.abouttime.blindcafe.data.gallery.ImageDataSource
-import com.abouttime.blindcafe.data.gallery.ImageDataSourceFactory
-import com.abouttime.blindcafe.data.gallery.MediaStoreAdapter
+
 import com.abouttime.blindcafe.data.repository.*
 import com.abouttime.blindcafe.domain.repository.*
 import org.koin.android.ext.koin.androidContext

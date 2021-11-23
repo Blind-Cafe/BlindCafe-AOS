@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
+import com.abouttime.blindcafe.common.SingleLiveData
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY
@@ -28,19 +29,25 @@ class InterestSubViewModel(
     private val _nextButton = MutableLiveData(false)
     val nextButton: LiveData<Boolean> get() = _nextButton
 
-    private val _interests = MutableLiveData<List<Interest>>()
-    val interest: LiveData<List<Interest>> get() = _interests
+    private val _interests = SingleLiveData<List<Interest>>()
+    val interests: SingleLiveData<List<Interest>> get() = _interests
 
     val selectedSubInterests = Array(3) { mutableListOf<Int>() }
 
     init {
-        val interests = getStringData(PREFERENCES_KEY.INTERESTS)?.split(",")
-        val interest1 = interests?.get(0)?.let { interestMap[it.toInt()] }?.toInt()
-        val interest2 = interests?.get(1)?.let { interestMap[it.toInt()] }?.toInt()
-        val interest3 = interests?.get(2)?.let { interestMap[it.toInt()] }?.toInt()
-        if (interest1 != null && interest2 != null && interest3 != null) {
-            getInterest(interest1, interest2, interest3)
+        try {
+            val interests = getStringData(PREFERENCES_KEY.INTERESTS)?.split(",")
+            val interest1 = interests?.get(0)?.let { interestMap[it.toInt()] }?.toInt()
+            val interest2 = interests?.get(1)?.let { interestMap[it.toInt()] }?.toInt()
+            val interest3 = interests?.get(2)?.let { interestMap[it.toInt()] }?.toInt()
+            if (interest1 != null && interest2 != null && interest3 != null) {
+                Log.e("InterestSubViewModel", "$interest1, $interest2, $interest3")
+                //getInterest(interest1, interest2, interest3)
+            }
+        } catch (e: Exception) {
+            Log.e("InterestSubViewModel", e.toString())
         }
+
     }
 
     val interestMap = mapOf(
