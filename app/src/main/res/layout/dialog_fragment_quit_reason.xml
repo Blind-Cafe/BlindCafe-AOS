@@ -34,7 +34,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_bold"
             android:text="@string/quit_reason_title"
             android:textColor="@color/white"
-            android:textSize="@dimen/dialog_title" />
+            android:textSize="@dimen/font_size_14" />
 
         <TextView
             android:id="@+id/tv_subtitle"

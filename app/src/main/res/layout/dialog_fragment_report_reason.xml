@@ -34,7 +34,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_bold"
             android:text="@string/report_reason_title"
             android:textColor="@color/white"
-            android:textSize="@dimen/dialog_title" />
+            android:textSize="@dimen/font_size_15" />
 
         <TextView
             android:id="@+id/tv_subtitle"
@@ -231,7 +231,7 @@
                 android:paddingVertical="12dp"
                 android:text="@string/report_reason_no"
                 android:textColor="@color/gray_300"
-                android:textSize="@dimen/dialog_title" />
+                android:textSize="@dimen/font_size_14" />
 
             <TextView
                 android:layout_width="0dp"
@@ -243,7 +243,7 @@
                 android:paddingVertical="12dp"
                 android:text="@string/report_reason_yes"
                 android:textColor="@color/main"
-                android:textSize="@dimen/dialog_title" />
+                android:textSize="@dimen/font_size_14" />
 
 
         </LinearLayout>

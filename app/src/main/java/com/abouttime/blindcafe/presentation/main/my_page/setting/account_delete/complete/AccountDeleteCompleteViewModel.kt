@@ -6,6 +6,6 @@ class AccountDeleteCompleteViewModel: BaseViewModel() {
 
 
     fun onClickNextButton() {
-
+        System.exit(0)
     }
 }

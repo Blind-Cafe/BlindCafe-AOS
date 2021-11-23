@@ -43,7 +43,7 @@
             android:lineSpacingExtra="7sp"
             android:text="@string/delete_account_title"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size_16"
+            android:textSize="@dimen/font_size_15"
             app:layout_constraintBottom_toBottomOf="@id/iv_back"
             app:layout_constraintStart_toEndOf="@id/iv_back"
             app:layout_constraintTop_toTopOf="@id/iv_back" />
@@ -239,7 +239,7 @@
             android:text="@string/delete_account_next"
             android:textColor="@color/white"
             android:onClick="@{viewModel::onClickNextButton}"
-            android:textSize="@dimen/font_size_16"
+            android:textSize="@dimen/font_size_15"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="328:48"
             app:layout_constraintEnd_toEndOf="parent"

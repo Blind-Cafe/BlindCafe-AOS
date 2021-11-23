@@ -11,7 +11,7 @@
     <dimen name="font_size_21">21sp</dimen>
 
 
-    <dimen name="dialog_title">14sp</dimen>
+    <dimen name="dialog_title">15sp</dimen>
     <dimen name="dialog_reason">15sp</dimen>
 
     <dimen name="chat_text_rounding">32dp</dimen>
