@@ -62,7 +62,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:text="@string/profile_setting_interest_title"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size__16"
+            android:textSize="@dimen/font_size_16"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_step2" />
 

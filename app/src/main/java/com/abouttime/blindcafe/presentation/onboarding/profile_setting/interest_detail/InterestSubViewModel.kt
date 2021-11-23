@@ -73,16 +73,16 @@ class InterestSubViewModel(
             .onEach { result ->
                 when(result) {
                     is Resource.Loading -> {
-                        showLoading()
+
                     }
                     is Resource.Success -> {
                         result.data?.interests?.let {
                             _interests.postValue(it)
                         }
-                        dismissLoading()
+
                     }
                     is Resource.Error -> {
-                        dismissLoading()
+
                     }
                 }
             }

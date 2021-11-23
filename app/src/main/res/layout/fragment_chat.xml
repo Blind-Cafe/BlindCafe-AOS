@@ -56,7 +56,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_bold"
             android:text="Erick"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size__16"
+            android:textSize="@dimen/font_size_16"
             app:layout_constraintBottom_toBottomOf="@id/iv_back"
             app:layout_constraintStart_toEndOf="@id/iv_back"
             app:layout_constraintTop_toTopOf="@id/iv_back" />
@@ -210,7 +210,7 @@
                 android:visibility="visible"
                 android:text="@string/chat_recorder_initial_time"
                 android:textColor="@color/white"
-                android:textSize="@dimen/font_size__16"
+                android:textSize="@dimen/font_size_16"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 />
 

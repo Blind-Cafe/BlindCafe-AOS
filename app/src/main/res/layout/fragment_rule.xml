@@ -6,17 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/black">
 
-    <ImageButton
-        android:id="@+id/ib_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="27dp"
-        android:background="@color/transparent"
-        android:src="@drawable/bt_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck" />
+
 
     <TextView
         android:id="@+id/tv_cafe_rule_title"
@@ -25,17 +15,18 @@
         android:lineSpacingExtra="7sp"
         android:text="@string/rule_title"
         android:textColor="#fafafa"
-        android:textSize="@dimen/font_size_21"
+        android:textSize="@dimen/font_size_15"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/ib_back"
-        app:layout_constraintStart_toEndOf="@id/ib_back"
-        app:layout_constraintTop_toTopOf="@id/ib_back" />
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_image_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:clipToPadding="false"
         android:orientation="horizontal"
         app:layout_constraintDimensionRatio="1:1"
@@ -47,7 +38,7 @@
         android:id="@+id/di_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="7dp"
         app:dotsColor="@color/steel"
         app:dotsSize="12dp"
         app:dotsSpacing="3dp"
@@ -56,23 +47,23 @@
         app:layout_constraintTop_toBottomOf="@id/vp_image_container"
         app:selectedDotColor="@color/main" />
 
+
     <TextView
         android:id="@+id/tv_cafe_rule_description"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginHorizontal="6dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintVertical_bias="0.3"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:gravity="center"
-        android:textSize="@dimen/font_size__16"
         android:lineSpacingExtra="7sp"
+        android:text="@string/rule_1"
+        android:textSize="@dimen/font_size_15"
         app:layout_constraintBottom_toTopOf="@id/tv_skip"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/di_indicator"
-        android:text="@string/rule_1" />
-
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tv_skip"
@@ -84,7 +75,7 @@
         android:padding="16dp"
         android:text="@string/rule_skip"
         android:textColor="@color/button_disabled"
-        android:textSize="@dimen/font_size__16"
+        android:textSize="@dimen/font_size_15"
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tv_next"
@@ -103,7 +94,7 @@
         android:paddingHorizontal="48dp"
         android:paddingVertical="12dp"
         android:text="@string/rule_next"
-        android:textSize="@dimen/font_size__16"
+        android:textSize="@dimen/font_size_16"
         app:layout_constraintBottom_toBottomOf="@id/tv_skip"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_skip"

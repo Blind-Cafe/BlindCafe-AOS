@@ -81,7 +81,7 @@
                     android:fontFamily="@font/spoqa_han_sans_neo_regular"
                     android:text="@string/agreement_1"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_size__16" />
+                    android:textSize="@dimen/font_size_16" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -121,7 +121,7 @@
                     android:fontFamily="@font/spoqa_han_sans_neo_regular"
                     android:text="@string/agreement_2"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_size__16" />
+                    android:textSize="@dimen/font_size_16" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -161,7 +161,7 @@
                     android:fontFamily="@font/spoqa_han_sans_neo_regular"
                     android:text="@string/agreement_3"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_size__16" />
+                    android:textSize="@dimen/font_size_16" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -202,7 +202,7 @@
                     android:gravity="center_vertical"
                     android:text="@string/agreement_4"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_size__16" />
+                    android:textSize="@dimen/font_size_16" />
 
 
             </LinearLayout>
@@ -233,7 +233,7 @@
         android:gravity="center"
         android:paddingVertical="16dp"
         android:text="@string/agreement_next"
-        android:textSize="@dimen/font_size__16"
+        android:textSize="@dimen/font_size_16"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
