@@ -16,11 +16,9 @@ class InterestViewModel(
 
     fun onClickNextButton() {
         if (canEnableNextButton()) {
-            val interests = selectedItemIdx.sorted().joinToString(",") { it.toString() }
+            val interests = selectedItemIdx.sorted().joinToString(",") { (it+1).toString() }
             Log.d(RETROFIT_TAG, interests.toString())
             saveStringData(Pair(INTERESTS, interests))
-            //postUserInfo()
-            // TODO 인자로 3개 리스트 넘기기!
             moveToDirections(InterestFragmentDirections.actionInterestFragmentToInterestSubFragment())
         } else {
             showToast(R.string.profile_setting_toast_select_interest)

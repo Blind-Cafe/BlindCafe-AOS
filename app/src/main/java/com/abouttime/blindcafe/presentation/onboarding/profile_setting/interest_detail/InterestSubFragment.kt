@@ -6,6 +6,8 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
+import com.abouttime.blindcafe.common.constants.LogTag
+import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY
 import com.abouttime.blindcafe.data.server.dto.interest.Interest
 import com.abouttime.blindcafe.databinding.FragmentInterestSubBinding
 import com.xwray.groupie.GroupAdapter
@@ -17,6 +19,18 @@ class InterestSubFragment : BaseFragment<InterestSubViewModel>(R.layout.fragment
     private var binding: FragmentInterestSubBinding? = null
     private val subInterestAdapter = GroupAdapter<GroupieViewHolder>()
 
+    val interestMap = mapOf(
+        1 to "취업",
+        2 to "만화/애니",
+        3 to "동물",
+        4 to "음식",
+        5 to "여행",
+        6 to "게임",
+        7 to "연예",
+        8 to "스포츠",
+        9 to "재테크"
+    )
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val fragmentInterestSubBinding = FragmentInterestSubBinding.bind(view)
@@ -26,13 +40,9 @@ class InterestSubFragment : BaseFragment<InterestSubViewModel>(R.layout.fragment
 
         initRecyclerView(fragmentInterestSubBinding)
         observeInterestData()
-    }
 
-    override fun onResume() {
-        super.onResume()
 
     }
-
 
     private fun initRecyclerView(fragmentInterestSubBinding: FragmentInterestSubBinding) =
         with(fragmentInterestSubBinding) {
@@ -40,26 +50,26 @@ class InterestSubFragment : BaseFragment<InterestSubViewModel>(R.layout.fragment
                 adapter = subInterestAdapter
                 layoutManager = LinearLayoutManager(requireContext())
             }
-            subInterestAdapter.add(InterestSubRvItem(
-                Interest(
-                    main = 1,
-                    sub = listOf(
-                        "1", "2", "3", "4", "5", "6", "7", "8", "9"
-                    )
-                ), viewModel!!, 0))
-            subInterestAdapter.add(InterestSubRvItem(
-                Interest(
-                    main = 1,
-                    sub = listOf(
-                        "1", "2", "3", "4", "5", "6", "7", "8", "9"
-                    )
-                ), viewModel!!, 1))
-            subInterestAdapter.add(InterestSubRvItem(Interest(
-                main = 1,
-                sub = listOf(
-                    "1", "2", "3", "4", "5", "6", "7", "8", "9"
-                )
-            ), viewModel!!, 2))
+//            subInterestAdapter.add(InterestSubRvItem(
+//                Interest(
+//                    main = 1,
+//                    sub = listOf(
+//                        "1", "2", "3", "4", "5", "6", "7", "8", "9"
+//                    )
+//                ), viewModel!!, 0))
+//            subInterestAdapter.add(InterestSubRvItem(
+//                Interest(
+//                    main = 1,
+//                    sub = listOf(
+//                        "1", "2", "3", "4", "5", "6", "7", "8", "9"
+//                    )
+//                ), viewModel!!, 1))
+//            subInterestAdapter.add(InterestSubRvItem(Interest(
+//                main = 1,
+//                sub = listOf(
+//                    "1", "2", "3", "4", "5", "6", "7", "8", "9"
+//                )
+//            ), viewModel!!, 2))
         }
 
     private fun observeInterestData() {

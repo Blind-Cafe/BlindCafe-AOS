@@ -33,7 +33,6 @@ class HomeViewModel(
     private var partnerId: Int? = null
 
     init {
-        //testHomeState()
         getHomeInfo()
     }
 
@@ -63,21 +62,6 @@ class HomeViewModel(
 
         }.launchIn(viewModelScope)
     }
-
-
-
-    private fun testHomeState() = viewModelScope.launch {
-        delay(5000)
-        _homeStatusCode.postValue(0)
-        delay(5000)
-        _homeStatusCode.postValue(1)
-        delay(5000)
-        _homeStatusCode.postValue(2)
-        delay(5000)
-        _homeStatusCode.postValue(3)
-    }
-
-
 
 
     private fun postMatchingRequest() {

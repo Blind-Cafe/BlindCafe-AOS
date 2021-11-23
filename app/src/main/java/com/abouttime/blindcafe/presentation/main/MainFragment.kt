@@ -28,22 +28,28 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
 
 
 
-        setCurrentFragment(HomeFragment())
+        //setCurrentFragment(HomeFragment())
         initBottomNavigationView(fragmentMainBinding)
     }
 
     private fun initBottomNavigationView(fragmentMainBinding: FragmentMainBinding) {
 
         fragmentMainBinding.bnTab.setOnItemSelectedListener { menuItem ->
-            when(menuItem.itemId) {
-                R.id.menu_home -> setCurrentFragment(HomeFragment())
-                R.id.menu_chat -> setCurrentFragment(ChatListFragment())
-                R.id.menu_my_page -> setCurrentFragment(MyPageFragment())
-            }
+            viewModel.lastPageId = menuItem.itemId
+            setCurrentFragmentById(menuItem.itemId)
             true
         }
+        setCurrentFragmentById(viewModel.lastPageId)
+        fragmentMainBinding.bnTab.selectedItemId = viewModel.lastPageId
 
 
+    }
+    private fun setCurrentFragmentById(id: Int) {
+        when(id) {
+            R.id.menu_home -> setCurrentFragment(HomeFragment())
+            R.id.menu_chat -> setCurrentFragment(ChatListFragment())
+            R.id.menu_my_page -> setCurrentFragment(MyPageFragment())
+        }
     }
 
     private fun setCurrentFragment(fragment: Fragment) =

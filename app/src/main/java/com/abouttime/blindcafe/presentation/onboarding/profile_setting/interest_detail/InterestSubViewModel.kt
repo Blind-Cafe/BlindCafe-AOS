@@ -9,6 +9,7 @@ import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.SingleLiveData
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag
+import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY
 import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.INFO_INPUT
 import com.abouttime.blindcafe.data.server.dto.interest.Interest
@@ -37,29 +38,31 @@ class InterestSubViewModel(
     init {
         try {
             val interests = getStringData(PREFERENCES_KEY.INTERESTS)?.split(",")
-            val interest1 = interests?.get(0)?.let { interestMap[it.toInt()] }?.toInt()
-            val interest2 = interests?.get(1)?.let { interestMap[it.toInt()] }?.toInt()
-            val interest3 = interests?.get(2)?.let { interestMap[it.toInt()] }?.toInt()
+            Log.e(RETROFIT_TAG, interests.toString())
+            val interest1 = interests?.get(0)?.toInt()
+            val interest2 = interests?.get(1)?.toInt()
+            val interest3 = interests?.get(2)?.toInt()
+            Log.e(RETROFIT_TAG, "$interest1, $interest2, $interest3")
             if (interest1 != null && interest2 != null && interest3 != null) {
-                Log.e("InterestSubViewModel", "$interest1, $interest2, $interest3")
-                //getInterest(interest1, interest2, interest3)
+                Log.e(RETROFIT_TAG, "$interest1, $interest2, $interest3")
+                getInterest(interest1, interest2, interest3)
             }
         } catch (e: Exception) {
-            Log.e("InterestSubViewModel", e.toString())
+            Log.e(RETROFIT_TAG, e.toString())
         }
 
     }
 
     val interestMap = mapOf(
-        0 to "음식",
-        1 to "여행",
-        2 to "게임",
-        3 to "연예",
-        4 to "스포츠",
-        5 to "제테크",
-        6 to "취업",
-        7 to "만화/애니",
-        8 to "동물"
+        1 to "취업",
+        2 to "만화/애니",
+        3 to "동물",
+        4 to "음식",
+        5 to "여행",
+        6 to "게임",
+        7 to "연예",
+        8 to "스포츠",
+        9 to "재테크"
     )
 
 
@@ -75,24 +78,25 @@ class InterestSubViewModel(
     }
 
 
-    private fun getInterest(id1 : Int, id2: Int, id3: Int) {
+    fun getInterest(id1 : Int, id2: Int, id3: Int) {
         getInterestUseCase(id1, id2, id3)
             .onEach { result ->
                 when(result) {
                     is Resource.Loading -> {
-
+                        Log.e(RETROFIT_TAG, "Loading")
                     }
                     is Resource.Success -> {
                         result.data?.interests?.let {
+                            Log.e(RETROFIT_TAG, "$it")
                             _interests.postValue(it)
                         }
 
                     }
                     is Resource.Error -> {
-
+                        Log.e(RETROFIT_TAG, "${result?.message}")
                     }
                 }
-            }
+            }.launchIn(viewModelScope)
     }
 
 
@@ -118,15 +122,15 @@ class InterestSubViewModel(
             partnerGender = partnerGender,
             userInterests = listOf(
                 UserInterest(
-                    main = interests?.get(0)?.toInt()?.plus(1) ?: 0,
+                    main = interests?.get(0)?.toInt() ?: 0,
                     sub = subInterests1
                 ),
                 UserInterest(
-                    main = interests?.get(1)?.toInt()?.plus(1) ?: 0,
+                    main = interests?.get(1)?.toInt() ?: 0,
                     sub = subInterests2
                 ),
                 UserInterest(
-                    main = interests?.get(2)?.toInt()?.plus(1) ?: 0,
+                    main = interests?.get(2)?.toInt() ?: 0,
                     sub = subInterests3
                 )
             )
@@ -150,7 +154,7 @@ class InterestSubViewModel(
                     }
                 }
                 is Resource.Error -> {
-                    Log.d(LogTag.RETROFIT_TAG, "Error")
+                    Log.d(LogTag.RETROFIT_TAG, response?.data?.code.toString())
                 }
             }
 

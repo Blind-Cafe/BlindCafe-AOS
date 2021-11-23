@@ -23,7 +23,7 @@ class PostUserInfoUseCase(
             }
         } catch(e: Exception) {
             Log.e(LogTag.USER_INFO_TAG, e.toString())
-            emit(Resource.Error<BaseResponse>(e.toString()))
+            emit(Resource.Error<BaseResponse>(message = e.toString()))
         }
     }
 }
