@@ -76,7 +76,7 @@
                 android:layout_marginTop="25dp"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:text="@string/profile_setting_step_1"
-                android:textSize="@dimen/font_size_11"
+                android:textSize="@dimen/font_size_13"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -103,7 +103,7 @@
                 android:inputType="text"
                 android:maxLength="9"
                 android:padding="8dp"
-                android:textSize="@dimen/font_size_11"
+                android:textSize="@dimen/font_size_13"
                 android:text="@={viewModel.nickNameText}"
                 android:textCursorDrawable="@drawable/ic_cursor"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -208,7 +208,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/bt_female_small"
+                    android:src="@drawable/bt_bisexual_small"
                     app:tint="@color/disabled"
                      />
 
