@@ -35,7 +35,7 @@ open class BaseViewModel() : ViewModel() {
         _navigationEvent.value = null
     }
 
-    fun saveStringData(pair: Pair<String, String>) {
+    fun saveStringData(pair: Pair<String, String?>) {
         sharedPreferences
             .edit()
             .putString(

@@ -216,7 +216,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{viewModel::onClickCheckButton}"
-                    android:src="@{viewModel.reason == 4 ? @drawable/bt_checked : @drawable/bt_check}"
+                    android:src="@{viewModel.reason == 5 ? @drawable/bt_checked : @drawable/bt_check}"
                     tools:src="@drawable/bt_check" />
 
             </LinearLayout>

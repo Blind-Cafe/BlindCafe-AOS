@@ -6,6 +6,8 @@ import androidx.navigation.fragment.navArgs
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
+import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.INFO_INPUT
+import com.abouttime.blindcafe.common.constants.Retrofit.JWT
 import com.abouttime.blindcafe.domain.use_case.DeleteAccountUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -23,6 +25,8 @@ class ConfirmViewModel(
                 is Resource.Success -> {
                     result.data?.code?.let {
                         Log.e(RETROFIT_TAG, it)
+                        saveStringData(Pair(JWT, null))
+                        saveStringData(Pair(INFO_INPUT, null))
                         moveToDirections(ConfirmDialogFragmentDirections.actionConfirmDialogFragmentToAccountDeleteCompleteFragment())
                     }
 

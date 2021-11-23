@@ -16,6 +16,7 @@ import com.abouttime.blindcafe.presentation.main.my_page.MyPageViewModel
 import com.abouttime.blindcafe.presentation.main.my_page.edit.profile.ProfileEditViewModel
 import com.abouttime.blindcafe.presentation.main.my_page.setting.SettingViewModel
 import com.abouttime.blindcafe.presentation.main.my_page.setting.account_delete.AccountDeleteViewModel
+import com.abouttime.blindcafe.presentation.main.my_page.setting.account_delete.complete.AccountDeleteCompleteViewModel
 import com.abouttime.blindcafe.presentation.main.my_page.setting.report_list.ReportListViewModel
 import com.abouttime.blindcafe.presentation.onboarding.agreement.AgreementViewModel
 import com.abouttime.blindcafe.presentation.onboarding.login.LoginViewModel
@@ -73,6 +74,7 @@ internal val viewModelModule = module {
     viewModel { SettingViewModel() }
     viewModel { ProfileEditViewModel() }
     viewModel { AccountDeleteViewModel() }
+    viewModel { AccountDeleteCompleteViewModel() }
     viewModel { ReportListViewModel() }
 
 
