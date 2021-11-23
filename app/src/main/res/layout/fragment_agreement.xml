@@ -16,32 +16,25 @@
     android:layout_height="match_parent"
     android:background="@color/black">
 
-    <ImageButton
-        android:id="@+id/ib_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="27dp"
-        android:background="@color/transparent"
-        android:src="@drawable/bt_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck" />
+
 
     <TextView
         android:id="@+id/tv_agreement_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20.4dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="103dp"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:lineSpacingExtra="9sp"
         android:text="@string/agreement_title"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_size_21"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="@dimen/font_size_20"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ib_back" />
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <View
         android:id="@+id/v_divider"
@@ -81,7 +74,7 @@
                     android:fontFamily="@font/spoqa_han_sans_neo_regular"
                     android:text="@string/agreement_1"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_size_16" />
+                    android:textSize="@dimen/font_size_15" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -89,7 +82,7 @@
                     android:layout_marginTop="12dp"
                     android:text="@string/agreement_sub_1"
                     android:textColor="@color/gray_300"
-                    android:textSize="@dimen/font_size_13" />
+                    android:textSize="@dimen/font_size_12" />
 
 
             </LinearLayout>
@@ -233,7 +226,7 @@
         android:gravity="center"
         android:paddingVertical="16dp"
         android:text="@string/agreement_next"
-        android:textSize="@dimen/font_size_16"
+        android:textSize="@dimen/font_size_15"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

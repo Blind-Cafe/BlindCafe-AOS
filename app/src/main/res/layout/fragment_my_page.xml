@@ -107,7 +107,7 @@
                         android:fontFamily="@font/spoqa_han_sans_neo_regular"
                         android:text="@string/my_page_profile_message"
                         android:textColor="@color/steel"
-                        android:textSize="@dimen/font_size_super_small"
+                        android:textSize="@dimen/font_size_11"
                         app:layout_constraintBottom_toBottomOf="@id/iv_profile_image"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0"
@@ -250,7 +250,7 @@
                         android:fontFamily="@font/spoqa_han_sans_neo_regular"
                         android:text="@string/my_page_interest_edit"
                         android:textColor="@color/gray_300"
-                        android:textSize="@dimen/font_size_super_small"
+                        android:textSize="@dimen/font_size_11"
                         app:layout_constraintBottom_toBottomOf="@id/tv_interest_title"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@id/tv_interest_title" />

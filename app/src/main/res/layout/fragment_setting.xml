@@ -100,7 +100,7 @@
                     android:fontFamily="@font/spoqa_han_sans_neo_regular"
                     android:text="@string/setting_notification_matching_room_subtitle"
                     android:textColor="@color/gray_300"
-                    android:textSize="@dimen/font_size_super_small" />
+                    android:textSize="@dimen/font_size_11" />
 
 
             </LinearLayout>
@@ -141,7 +141,7 @@
                     android:fontFamily="@font/spoqa_han_sans_neo_regular"
                     android:text="@string/setting_notification_matching_success_subtitle"
                     android:textColor="@color/gray_300"
-                    android:textSize="@dimen/font_size_super_small" />
+                    android:textSize="@dimen/font_size_11" />
 
 
             </LinearLayout>
@@ -182,7 +182,7 @@
                     android:fontFamily="@font/spoqa_han_sans_neo_regular"
                     android:text="@string/setting_notification_drink_subtitle"
                     android:textColor="@color/gray_300"
-                    android:textSize="@dimen/font_size_super_small" />
+                    android:textSize="@dimen/font_size_11" />
 
 
             </LinearLayout>

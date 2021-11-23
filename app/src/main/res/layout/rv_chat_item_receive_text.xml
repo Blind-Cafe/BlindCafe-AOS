@@ -37,7 +37,7 @@
             android:layout_marginStart="4dp"
             android:visibility="gone"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size_super_small"
+            android:textSize="@dimen/font_size_11"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             app:layout_constraintStart_toEndOf="@id/iv_profile_image"
             app:layout_constraintTop_toTopOf="@id/iv_profile_image"
@@ -69,7 +69,7 @@
             android:lineSpacingExtra="6sp"
             android:layout_marginStart="4dp"
             android:textColor="@color/chat_time_color"
-            android:textSize="@dimen/font_size_super_small"
+            android:textSize="@dimen/font_size_11"
             app:layout_constraintBottom_toBottomOf="@id/tv_content_text"
             app:layout_constraintStart_toEndOf="@id/tv_content_text"
             tools:text="오후 1:00" />

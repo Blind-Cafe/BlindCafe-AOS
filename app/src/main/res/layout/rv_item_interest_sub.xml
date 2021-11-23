@@ -34,7 +34,7 @@
             android:layout_marginTop="4dp"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:textColor="@color/gray_300"
-            android:textSize="@dimen/font_size_super_small"
+            android:textSize="@dimen/font_size_11"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
             android:text="좋아하는 키워드를 선택하세요" />

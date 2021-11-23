@@ -198,7 +198,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:text="@string/profile_edit_impossible"
             android:textColor="@color/gray_300"
-            android:textSize="@dimen/font_size_super_small" />
+            android:textSize="@dimen/font_size_11" />
 
 
         <TextView
@@ -237,7 +237,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:text="@string/profile_edit_impossible"
             android:textColor="@color/gray_300"
-            android:textSize="@dimen/font_size_super_small" />
+            android:textSize="@dimen/font_size_11" />
 
 
         <TextView
@@ -276,7 +276,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:text="@string/profile_edit_impossible"
             android:textColor="@color/gray_300"
-            android:textSize="@dimen/font_size_super_small" />
+            android:textSize="@dimen/font_size_11" />
 
 
     </LinearLayout>

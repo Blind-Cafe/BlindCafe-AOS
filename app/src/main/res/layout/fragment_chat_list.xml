@@ -52,7 +52,7 @@
         android:layout_marginTop="12dp"
         android:text="@string/chat_list_subtitle_none"
         android:textColor="@color/gray_300"
-        android:textSize="@dimen/font_size_super_small"
+        android:textSize="@dimen/font_size_11"
         app:layout_constraintEnd_toEndOf="@id/tv_title_none"
         app:layout_constraintStart_toStartOf="@id/tv_title_none"
         app:layout_constraintTop_toBottomOf="@id/tv_title_none" />

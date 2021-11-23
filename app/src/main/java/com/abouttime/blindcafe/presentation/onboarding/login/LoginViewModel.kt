@@ -56,6 +56,13 @@ class LoginViewModel(
                     Log.d(RETROFIT_TAG, "->jwt $jwt\nid $id")
                     Log.d(RETROFIT_TAG, "-> \n${result.data?.message}\n ${result.data?.code}" )
 
+
+                    if (jwt != null && id != null) {
+                        saveStringData(Pair(JWT, jwt))
+                        saveStringData(Pair(USER_ID, id.toString()))
+                        _loginStateEvent.postValue(LoginState.Success)
+                    }
+
                     when(result.data?.code) {
                         "990" -> { // 로그인
                             moveToMainFragment()
@@ -70,13 +77,6 @@ class LoginViewModel(
 
                         }
                     }
-                    if (jwt != null && id != null) {
-                        saveStringData(Pair(JWT, jwt))
-                        saveStringData(Pair(USER_ID, id.toString()))
-                        _loginStateEvent.postValue(LoginState.Success)
-                    }
-
-
 
                 }
                 is Resource.Error -> {

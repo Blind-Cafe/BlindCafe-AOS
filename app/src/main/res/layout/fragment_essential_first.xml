@@ -77,7 +77,7 @@
                 android:layout_marginTop="25dp"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:text="@string/profile_setting_step_1"
-                android:textSize="@dimen/font_size_super_small"
+                android:textSize="@dimen/font_size_11"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -132,7 +132,7 @@
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:text="@string/profile_setting_alert_age"
                 android:textColor="@color/et_bg_stroke_red"
-                android:textSize="@dimen/font_size_super_small"
+                android:textSize="@dimen/font_size_11"
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/et_age"
@@ -213,7 +213,7 @@
                 android:layout_marginBottom="15dp"
                 android:text="@string/profile_setting_alert_age_sex"
                 android:textColor="@color/alert_red"
-                android:textSize="@dimen/font_size_super_small"
+                android:textSize="@dimen/font_size_11"
                 app:layout_constraintBottom_toTopOf="@id/tv_next"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

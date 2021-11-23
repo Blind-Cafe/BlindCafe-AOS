@@ -22,7 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:textColor="@color/gray_300"
-        android:textSize="@dimen/font_size_super_small"
+        android:textSize="@dimen/font_size_11"
         android:lineSpacingExtra="6sp"
         app:layout_constraintTop_toTopOf="parent"
         android:padding="12dp"

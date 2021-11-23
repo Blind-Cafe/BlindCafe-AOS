@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:textColor="@color/gray_300"
-        android:textSize="@dimen/font_size_super_small"
+        android:textSize="@dimen/font_size_11"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="2021.01.01" />

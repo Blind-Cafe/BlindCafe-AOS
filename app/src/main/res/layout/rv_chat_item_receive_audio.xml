@@ -35,7 +35,7 @@
         android:layout_marginStart="4dp"
         android:visibility="gone"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_size_super_small"
+        android:textSize="@dimen/font_size_11"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         app:layout_constraintStart_toEndOf="@id/iv_profile_image"
         app:layout_constraintTop_toTopOf="@id/iv_profile_image"
@@ -95,7 +95,7 @@
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:lineSpacingExtra="6sp"
         android:textColor="@color/chat_time_color"
-        android:textSize="@dimen/font_size_super_small"
+        android:textSize="@dimen/font_size_11"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/cl_audio_container"
         tools:text="00:00" />

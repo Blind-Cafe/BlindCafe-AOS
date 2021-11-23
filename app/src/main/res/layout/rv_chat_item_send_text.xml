@@ -43,7 +43,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:lineSpacingExtra="6sp"
             android:textColor="@color/chat_time_color"
-            android:textSize="@dimen/font_size_super_small"
+            android:textSize="@dimen/font_size_11"
             app:layout_constraintBottom_toBottomOf="@id/message_send_content"
             app:layout_constraintEnd_toStartOf="@id/message_send_content"
             tools:text="오후 1:00" />

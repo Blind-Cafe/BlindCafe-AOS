@@ -202,7 +202,7 @@
             android:lineSpacingExtra="6sp"
             android:text="@string/report_reason_email"
             android:textColor="@color/gray_300"
-            android:textSize="@dimen/font_size_super_small" />
+            android:textSize="@dimen/font_size_11" />
 
 
         <View

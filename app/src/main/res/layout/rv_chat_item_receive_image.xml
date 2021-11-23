@@ -36,7 +36,7 @@
             android:layout_marginStart="4dp"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size_super_small"
+            android:textSize="@dimen/font_size_11"
             android:visibility="gone"
             app:layout_constraintStart_toEndOf="@id/iv_profile_image"
             app:layout_constraintTop_toTopOf="@id/iv_profile_image"
@@ -74,7 +74,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:lineSpacingExtra="6sp"
             android:textColor="@color/chat_time_color"
-            android:textSize="@dimen/font_size_super_small"
+            android:textSize="@dimen/font_size_11"
             app:layout_constraintBottom_toBottomOf="@id/cv_content_container"
             app:layout_constraintStart_toEndOf="@id/cv_content_container"
             tools:text="오후 1:00" />

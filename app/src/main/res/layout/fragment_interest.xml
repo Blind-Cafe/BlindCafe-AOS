@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/profile_setting_interest_sub_title"
-            android:textSize="@dimen/font_size_super_small"
+            android:textSize="@dimen/font_size_11"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_interest_title" />
 

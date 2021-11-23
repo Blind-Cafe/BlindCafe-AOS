@@ -28,7 +28,8 @@ class BlindCafeApplication: Application() {
         KakaoSdk.init(this, BuildConfig.KAKAO_API_KEY)
 
         sharedPreferences = getSharedPreferences("BLIND_CAFE", Context.MODE_PRIVATE)
-        //var keyHash = Utility.getKeyHash(this)
+        var keyHash = Utility.getKeyHash(this)
+        Log.e(LogTag.FCM_TAG, keyHash)
 
         FirebaseMessaging.getInstance().subscribeToTopic(Retrofit.FCM_MESSAGE_TOPIC).addOnCompleteListener { task ->
             var msg = "구독 성공"
