@@ -65,7 +65,7 @@
                 android:textSize="@dimen/font_size_15"
                 app:layout_constraintBottom_toTopOf="@id/tv_sub_interest_4"
                 app:layout_constraintEnd_toStartOf="@id/tv_sub_interest_2"
-                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:text="SM" />
@@ -125,7 +125,7 @@
                 android:textSize="@dimen/font_size_15"
                 app:layout_constraintBottom_toTopOf="@id/tv_sub_interest_7"
                 app:layout_constraintEnd_toStartOf="@id/tv_sub_interest_5"
-                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintDimensionRatio="92:36"
                 app:layout_constraintTop_toBottomOf="@id/tv_sub_interest_1"
@@ -186,7 +186,7 @@
                 android:textSize="@dimen/font_size_15"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/tv_sub_interest_8"
-                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_sub_interest_4"
                 android:text="SM" />

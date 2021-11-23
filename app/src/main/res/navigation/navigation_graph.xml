@@ -83,35 +83,35 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_mainFragment_to_settingFragment"
             app:destination="@id/settingFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_mainFragment_to_profileEditFragment"
             app:destination="@id/profileEditFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_mainFragment_to_exitFragment"
             app:destination="@id/exitFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_mainFragment_to_profileExchangeFragment"
             app:destination="@id/profileExchangeFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_mainFragment_to_interestEditFragment"
             app:destination="@id/interestEditFragment" />
@@ -190,7 +190,7 @@
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out"/>
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/matchingFragment"
@@ -198,18 +198,20 @@
         android:label="MatchingFragment"
         tools:layout="@layout/fragment_chat">
 
-        <argument android:name="matchingId"
+        <argument
+            android:name="matchingId"
             app:argType="integer"
-            app:nullable="false"/>
+            app:nullable="false" />
 
-        <argument android:name="startTime"
+        <argument
+            android:name="startTime"
             app:argType="string"
-            app:nullable="true"/>
+            app:nullable="true" />
 
-        <argument android:name="partnerNickname"
+        <argument
+            android:name="partnerNickname"
             app:argType="string"
-            app:nullable="true"/>
-
+            app:nullable="true" />
 
 
         <action
@@ -218,7 +220,7 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
 
         <action
             android:id="@+id/action_matchingFragment_to_reportReasonDialogFragment"
@@ -226,7 +228,7 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
 
     </fragment>
     <fragment
@@ -236,21 +238,24 @@
         tools:layout="@layout/dialog_fragment_gallery" />
     <fragment
         android:id="@+id/coffeeOrderFragment"
-        tools:layout="@layout/fragment_coffee_order"
         android:name="com.abouttime.blindcafe.presentation.main.home.coffee.CoffeeOrderFragment"
-        android:label="CoffeeOrderFragment" >
+        android:label="CoffeeOrderFragment"
+        tools:layout="@layout/fragment_coffee_order">
 
-        <argument android:name="matchingId"
+        <argument
+            android:name="matchingId"
             app:argType="integer" />
 
 
-        <argument android:name="startTime"
+        <argument
+            android:name="startTime"
             app:argType="string"
-            app:nullable="true"/>
+            app:nullable="true" />
 
-        <argument android:name="partnerNickname"
+        <argument
+            android:name="partnerNickname"
             app:argType="string"
-            app:nullable="true"/>
+            app:nullable="true" />
 
         <action
             android:id="@+id/action_coffeeOrderFragment_to_matchingFragment"
@@ -259,14 +264,14 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/coffeeOrderFragment"/>
+            app:popUpTo="@id/coffeeOrderFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/signinFragment"
         android:name="com.abouttime.blindcafe.presentation.onboarding.signin.SigninFragment"
-        tools:layout="@layout/fragment_signin"
-        android:label="SigninFragment" >
+        android:label="SigninFragment"
+        tools:layout="@layout/fragment_signin">
         <action
             android:id="@+id/action_signinFragment_to_mainFragment"
             app:destination="@id/mainFragment"
@@ -274,201 +279,208 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/agreementFragment"/>
+            app:popUpTo="@id/agreementFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/interestSubFragment"
-        tools:layout="@layout/fragment_interest_sub"
         android:name="com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest_detail.InterestSubFragment"
-        android:label="InterestSubFragment" >
+        android:label="InterestSubFragment"
+        tools:layout="@layout/fragment_interest_sub">
         <action
             android:id="@+id/action_interestSubFragment_to_signinFragment"
             app:destination="@id/signinFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <dialog
         android:id="@+id/quitReasonDialogFragment"
         android:name="com.abouttime.blindcafe.presentation.chat.quit.QuitReasonDialogFragment"
-        tools:layout="@layout/dialog_fragment_quit_reason"
-        android:label="QuitReasonDialogFragment" >
+        android:label="QuitReasonDialogFragment"
+        tools:layout="@layout/dialog_fragment_quit_reason">
         <action
             android:id="@+id/action_quitReasonDialogFragment_to_confirmDialogFragment"
+            app:destination="@id/confirmDialogFragment"
             app:popUpTo="@id/quitReasonDialogFragment"
-            app:popUpToInclusive="true"
-            app:destination="@id/confirmDialogFragment" />
+            app:popUpToInclusive="true" />
     </dialog>
     <dialog
         android:id="@+id/reportReasonDialogFragment"
-        tools:layout="@layout/dialog_fragment_report_reason"
         android:name="com.abouttime.blindcafe.presentation.chat.report.ReportReasonDialogFragment"
-        android:label="ReportReasonDialogFragment" >
+        android:label="ReportReasonDialogFragment"
+        tools:layout="@layout/dialog_fragment_report_reason">
         <action
             android:id="@+id/action_reportReasonDialogFragment_to_confirmDialogFragment"
             app:destination="@id/confirmDialogFragment"
             app:popUpTo="@id/reportReasonDialogFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
 
     </dialog>
     <fragment
         android:id="@+id/accountDeleteFragment"
-        tools:layout="@layout/fragment_account_delete"
         android:name="com.abouttime.blindcafe.presentation.main.my_page.setting.account_delete.AccountDeleteFragment"
-        android:label="AccountDeleteFragment" >
+        android:label="AccountDeleteFragment"
+        tools:layout="@layout/fragment_account_delete">
         <action
             android:id="@+id/action_accountDeleteFragment_to_confirmDialogFragment"
             app:destination="@id/confirmDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/locationFragment"
-        tools:layout="@layout/fragment_location"
         android:name="com.abouttime.blindcafe.presentation.profile_exchange.location.LocationFragment"
-        android:label="LocationFragment" />
+        android:label="LocationFragment"
+        tools:layout="@layout/fragment_location" />
     <fragment
         android:id="@+id/profileDismissFragment"
-        tools:layout="@layout/fragment_profile_dismiss"
         android:name="com.abouttime.blindcafe.presentation.profile_exchange.dismiss.ProfileDismissFragment"
-        android:label="ProfileDismissFragment" >
+        android:label="ProfileDismissFragment"
+        tools:layout="@layout/fragment_profile_dismiss">
         <action
             android:id="@+id/action_profileDismissFragment_to_confirmDialogFragment"
             app:destination="@id/confirmDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/reportListFragment"
-        tools:layout="@layout/fragment_report_list"
         android:name="com.abouttime.blindcafe.presentation.main.my_page.setting.report_list.ReportListFragment"
-        android:label="ReportListFragment" />
+        android:label="ReportListFragment"
+        tools:layout="@layout/fragment_report_list" />
     <fragment
         android:id="@+id/settingFragment"
-        tools:layout="@layout/fragment_setting"
         android:name="com.abouttime.blindcafe.presentation.main.my_page.setting.SettingFragment"
-        android:label="SettingFragment" >
+        android:label="SettingFragment"
+        tools:layout="@layout/fragment_setting">
         <action
             android:id="@+id/action_settingFragment_to_reportListFragment"
             app:destination="@id/reportListFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_settingFragment_to_accountDeleteFragment"
             app:destination="@id/accountDeleteFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_settingFragment_to_confirmDialogFragment"
             app:destination="@id/confirmDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileEditFragment"
-        tools:layout="@layout/fragment_profile_edit"
         android:name="com.abouttime.blindcafe.presentation.main.my_page.edit.profile.ProfileEditFragment"
         android:label="ProfileEditFragment"
-        />
+        tools:layout="@layout/fragment_profile_edit" />
     <fragment
         android:id="@+id/profileExchangeCompleteFragment"
-        tools:layout="@layout/fragment_profile_exchagnge_complete"
         android:name="com.abouttime.blindcafe.presentation.profile_exchange.complete.ProfileExchangeCompleteFragment"
-        android:label="ProfileExchangeCompleteFragment" />
+        android:label="ProfileExchangeCompleteFragment"
+        tools:layout="@layout/fragment_profile_exchagnge_complete" />
     <fragment
         android:id="@+id/exitFragment"
-        tools:layout="@layout/fragment_exit"
         android:name="com.abouttime.blindcafe.presentation.main.home.exit.ExitFragment"
-        android:label="ExitFragment" >
+        android:label="ExitFragment"
+        tools:layout="@layout/fragment_exit">
 
-        <argument android:name="reason"
+        <argument
+            android:name="reason"
             app:argType="string"
-            app:nullable="true"/>
-        <argument android:name="partnerNickname"
+            app:nullable="true" />
+        <argument
+            android:name="partnerNickname"
             app:argType="string"
-            app:nullable="true"/>
+            app:nullable="true" />
 
     </fragment>
     <fragment
         android:id="@+id/profileExchangeFragment"
-        tools:layout="@layout/fragment_profile_exchange"
         android:name="com.abouttime.blindcafe.presentation.profile_exchange.ProfileExchangeFragment"
-        android:label="ProfileExchangeFragment" >
+        android:label="ProfileExchangeFragment"
+        tools:layout="@layout/fragment_profile_exchange">
         <action
             android:id="@+id/action_profileExchangeFragment_to_locationFragment"
             app:destination="@id/locationFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_profileExchangeFragment_to_profileExchangeCompleteFragment"
             app:destination="@id/profileExchangeCompleteFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_profileExchangeFragment_to_profileDismissFragment"
             app:destination="@id/profileDismissFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <dialog
         android:id="@+id/confirmDialogFragment"
-        tools:layout="@layout/dialog_fragment_confirm"
         android:name="com.abouttime.blindcafe.presentation.common.confirm.ConfirmDialogFragment"
-        android:label="ConfirmDialogFragment">
-        <argument android:name="id"
+        android:label="ConfirmDialogFragment"
+        tools:layout="@layout/dialog_fragment_confirm">
+        <argument
+            android:name="id"
             app:argType="integer"
-            app:nullable="false"/>
-        <argument android:name="title"
+            app:nullable="false" />
+        <argument
+            android:name="title"
             app:argType="string"
             app:nullable="true" />
-        <argument android:name="subtitle"
+        <argument
+            android:name="subtitle"
             app:argType="string"
             app:nullable="true" />
-        <argument android:name="no"
+        <argument
+            android:name="no"
             app:argType="string" />
-        <argument android:name="yes"
-            app:argType="string"/>
-        <argument android:name="reason"
-            app:argType="integer"
-            android:defaultValue="0"/>
+        <argument
+            android:name="yes"
+            app:argType="string" />
+        <argument
+            android:name="reason"
+            android:defaultValue="0"
+            app:argType="integer" />
         <action
             android:id="@+id/action_confirmDialogFragment_to_accountDeleteCompleteFragment"
             app:destination="@id/accountDeleteCompleteFragment"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/mainFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_confirmDialogFragment_to_exitFragment"
+            app:destination="@id/exitFragment"
             app:popUpTo="@id/matchingFragment"
-            app:popUpToInclusive="true"
-            app:destination="@id/exitFragment" />
-    </dialog>
-    <fragment
-        android:id="@+id/accountDeleteCompleteFragment"
-        tools:layout="@layout/fragment_account_delete"
-        android:name="com.abouttime.blindcafe.presentation.main.my_page.setting.account_delete.complete.AccountDeleteCompleteFragment"
-        android:label="AccountDeleteCompleteFragment" >
-
+            app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_accountDeleteCompleteFragment_to_loginFragment"
+            android:id="@+id/action_confirmDialogFragment_to_loginFragment"
             app:destination="@id/loginFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-    </fragment>
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
+    </dialog>
+    <fragment
+        android:id="@+id/accountDeleteCompleteFragment"
+        android:name="com.abouttime.blindcafe.presentation.main.my_page.setting.account_delete.complete.AccountDeleteCompleteFragment"
+        android:label="AccountDeleteCompleteFragment"
+        tools:layout="@layout/fragment_account_delete" />
     <fragment
         android:id="@+id/interestEditFragment"
-        tools:layout="@layout/fragment_interest_edit"
         android:name="com.abouttime.blindcafe.presentation.main.my_page.edit.interest.InterestEditFragment"
-        android:label="InterestEditFragment" />
+        android:label="InterestEditFragment"
+        tools:layout="@layout/fragment_interest_edit" />
 </navigation>

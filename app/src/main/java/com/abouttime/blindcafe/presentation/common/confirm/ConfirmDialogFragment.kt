@@ -8,7 +8,8 @@ import com.abouttime.blindcafe.common.base.BaseDialogFragment
 import com.abouttime.blindcafe.databinding.DialogFragmentConfirmBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class ConfirmDialogFragment: BaseDialogFragment<ConfirmViewModel>(R.layout.dialog_fragment_confirm) {
+class ConfirmDialogFragment :
+    BaseDialogFragment<ConfirmViewModel>(R.layout.dialog_fragment_confirm) {
     val args: ConfirmDialogFragmentArgs by navArgs()
 
 
@@ -24,16 +25,18 @@ class ConfirmDialogFragment: BaseDialogFragment<ConfirmViewModel>(R.layout.dialo
         bindData()
         initViews(dialogFragmentConfirmBinding)
     }
-    private fun initViews(dialogFragmentConfirmBinding: DialogFragmentConfirmBinding) = with(dialogFragmentConfirmBinding) {
-        tvTitle.text = args.title ?: ""
-        tvSubtitle.text = args.subtitle ?: ""
-        tvNo.text = args.no ?: "취소"
-        tvYes.text = args.yes ?: "확인"
 
-    }
+    private fun initViews(dialogFragmentConfirmBinding: DialogFragmentConfirmBinding) =
+        with(dialogFragmentConfirmBinding) {
+            tvTitle.text = args.title ?: ""
+            tvSubtitle.text = args.subtitle ?: ""
+            tvNo.text = args.no ?: "취소"
+            tvYes.text = args.yes ?: "확인"
+
+        }
 
     private fun bindData() {
-        when(args.id) {
+        when (args.id) {
             R.string.profile_dismiss_confirm_title -> {
                 handleProfileDismiss()
             }
@@ -51,36 +54,41 @@ class ConfirmDialogFragment: BaseDialogFragment<ConfirmViewModel>(R.layout.dialo
             }
         }
     }
+
     private fun handleProfileDismiss() {
 
     }
+
     private fun handleLogout() {
-
+        handleYesButton { viewModel.logout() }
+        handleNoButton { popDirections() }
     }
+
     private fun handleDeleteAccount() {
-        binding?.tvYes?.setOnClickListener {
-            viewModel.deleteAccount(args.reason)
-        }
-        binding?.tvNo?.setOnClickListener {
-            popDirections()
-        }
-
-
+        handleYesButton {  viewModel.deleteAccount(args.reason) }
+        handleNoButton { popDirections() }
     }
+
     private fun handleReport() {
+        handleYesButton { popDirections() } // TODO 방 나가기 api (MatchingId 필요)
+        handleNoButton { popDirections() }
+    }
+
+    private fun handleQuit() {
+        handleYesButton { popDirections() } // TODO 방 나가기 api (MatchingId 필요)
+        handleNoButton { popDirections() }
+    }
+
+
+    private fun handleYesButton(onClickYesButton: () -> Unit) {
         binding?.tvYes?.setOnClickListener {
-            popDirections()
-        }
-        binding?.tvNo?.setOnClickListener {
-            popDirections()
+            onClickYesButton()
         }
     }
-    private fun handleQuit() {
-        binding?.tvYes?.setOnClickListener {
-            popDirections()
-        }
+
+    private fun handleNoButton(onClickNoButton: () -> Unit) {
         binding?.tvNo?.setOnClickListener {
-            popDirections()
+            onClickNoButton()
         }
     }
 

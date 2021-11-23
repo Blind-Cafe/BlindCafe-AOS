@@ -16,6 +16,11 @@ class ConfirmViewModel(
     private val deleteAccountUseCase: DeleteAccountUseCase
 ): BaseViewModel() {
 
+    fun logout() {
+        saveStringData(Pair(JWT, null))
+        moveToDirections(ConfirmDialogFragmentDirections.actionConfirmDialogFragmentToLoginFragment())
+    }
+
     fun deleteAccount(reason: Int) {
         deleteAccountUseCase(reason).onEach { result ->
             when(result) {

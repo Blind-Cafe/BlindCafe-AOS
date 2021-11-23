@@ -23,7 +23,7 @@
 
     <dimen name="interest_horizontal_margin">20dp</dimen>
     <dimen name="interest_vertical_margin">30dp</dimen>
-    <dimen name="sub_interest_vertical_padding">9dp</dimen>
+    <dimen name="sub_interest_vertical_padding">10dp</dimen>
     <dimen name="sub_interest_horizontal_padding">7dp</dimen>
     <dimen name="sub_interest_horizontal_margin">10dp</dimen>
     <dimen name="sub_interest_vertical_margin">10dp</dimen>
