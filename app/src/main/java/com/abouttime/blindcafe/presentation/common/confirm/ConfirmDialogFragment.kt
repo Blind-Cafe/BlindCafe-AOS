@@ -30,8 +30,6 @@ class ConfirmDialogFragment: BaseDialogFragment<ConfirmViewModel>(R.layout.dialo
         tvNo.text = args.no ?: "취소"
         tvYes.text = args.yes ?: "확인"
 
-
-
     }
 
     private fun bindData() {

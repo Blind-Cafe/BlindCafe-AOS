@@ -24,7 +24,7 @@
         android:layout_marginStart="8dp"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:textColor="@color/white_2"
-        android:textSize="@dimen/font_size_16"
+        android:textSize="@dimen/font_size_15"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintBottom_toTopOf="@id/tv_last_message"
         app:layout_constraintStart_toEndOf="@id/iv_profile_image"
