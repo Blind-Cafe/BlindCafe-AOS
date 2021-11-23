@@ -80,10 +80,10 @@ internal val viewModelModule = module {
 
 
     /** Chat **/
-    viewModel { ChatViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
+    viewModel { ChatViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
     viewModel { GalleryViewModel(get()) }
     viewModel { QuitReasonViewModel() }
-    viewModel { ReportReasonViewModel() }
+    viewModel { ReportReasonViewModel(get()) }
 
     /** Profile-Exchange **/
     viewModel { ProfileExchangeViewModel() }

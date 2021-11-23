@@ -302,7 +302,7 @@
         tools:layout="@layout/dialog_fragment_quit_reason">
 
         <argument android:name="matchingId"
-            app:argType="int"
+            app:argType="integer"
             app:nullable="false"/>
         <action
             android:id="@+id/action_quitReasonDialogFragment_to_confirmDialogFragment"
@@ -316,7 +316,7 @@
         android:label="ReportReasonDialogFragment"
         tools:layout="@layout/dialog_fragment_report_reason">
         <argument android:name="matchingId"
-            app:argType="int"
+            app:argType="integer"
             app:nullable="false"/>
         <action
             android:id="@+id/action_reportReasonDialogFragment_to_confirmDialogFragment"
