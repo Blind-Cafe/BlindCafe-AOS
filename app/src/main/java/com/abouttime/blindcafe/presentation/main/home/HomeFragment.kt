@@ -2,6 +2,7 @@ package com.abouttime.blindcafe.presentation.main.home
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isGone
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.databinding.FragmentHomeBinding
@@ -36,25 +37,70 @@ class HomeFragment: BaseFragment<HomeViewModel>(R.layout.fragment_home) {
         }
     }
     private fun handleStatusNone() {
+        binding?.let { b ->
+            b.tvStateTitle.apply {
+                isGone = false
+                text = getString(R.string.home_title_none)
+            }
+            b.tvStateSubTitle.text = getString(R.string.home_subtitle_none)
+
+        }
 
     }
     private fun handleStatusWait() {
+        binding?.let { b ->
+            b.tvStateTitle.isGone = true
+            b.tvStateSubTitle.text = getString(R.string.home_subtitle_wait)
+        }
 
     }
-    private fun handleStatusMatching() {
 
-    }
     private fun handleStatusFound() {
-
+        binding?.let { b ->
+            b.tvStateTitle.apply {
+                isGone = false
+                text = getString(R.string.home_title_found)
+            }
+            b.tvStateSubTitle.text = getString(R.string.home_subtitle_found)
+        }
     }
-    private fun handleStatusFailedLeaveRoom() {
 
+    private fun handleStatusMatching() {
+        binding?.let { b ->
+            b.tvStateTitle.apply {
+                isGone = false
+                text = getString(R.string.home_title_matching)
+            }
+            b.tvStateSubTitle.text = getString(R.string.home_subtitle_matching)
+        }
     }
-    private fun handleStatusFailedReport() {
 
+    private fun handleStatusFailedLeaveRoom() { // TODO 어떻게 처리할지 기획 질문할 것!
+        binding?.let { b ->
+            b.tvStateTitle.apply {
+                isGone = false
+                text = getString(R.string.home_title_matching)
+            }
+            b.tvStateSubTitle.text = getString(R.string.home_subtitle_matching)
+        }
     }
-    private fun handleWontExchange() {
-
+    private fun handleStatusFailedReport() { // TODO 어떻게 처리할지 기획 질문할 것!
+        binding?.let { b ->
+            b.tvStateTitle.apply {
+                isGone = false
+                text = getString(R.string.home_title_matching)
+            }
+            b.tvStateSubTitle.text = getString(R.string.home_subtitle_matching)
+        }
+    }
+    private fun handleWontExchange() { // TODO 어떻게 처리할지 기획 질문할 것!
+        binding?.let { b ->
+            b.tvStateTitle.apply {
+                isGone = false
+                text = getString(R.string.home_title_matching)
+            }
+            b.tvStateSubTitle.text = getString(R.string.home_subtitle_matching)
+        }
     }
 
 }

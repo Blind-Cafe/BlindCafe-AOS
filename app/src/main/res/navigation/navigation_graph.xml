@@ -115,6 +115,9 @@
         <action
             android:id="@+id/action_mainFragment_to_interestEditFragment"
             app:destination="@id/interestEditFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_confirmDialogFragment"
+            app:destination="@id/confirmDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/ruleFragment"
@@ -434,6 +437,7 @@
         android:name="com.abouttime.blindcafe.presentation.common.confirm.ConfirmDialogFragment"
         android:label="ConfirmDialogFragment"
         tools:layout="@layout/dialog_fragment_confirm">
+        <!-- 꼭 보낼 5 가지 -->
         <argument
             android:name="id"
             app:argType="integer"
@@ -452,6 +456,9 @@
         <argument
             android:name="yes"
             app:argType="string" />
+
+
+        <!-- 채팅방 나가기에 쓰이는 두 가지 -->
         <argument
             android:name="reason"
             android:defaultValue="0"

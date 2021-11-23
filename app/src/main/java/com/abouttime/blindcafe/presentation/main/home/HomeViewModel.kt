@@ -1,6 +1,7 @@
 package com.abouttime.blindcafe.presentation.main.home
 
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -11,15 +12,13 @@ import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.domain.use_case.GetHomeInfoUseCase
 import com.abouttime.blindcafe.domain.use_case.PostMatchingRequestUseCase
 import com.abouttime.blindcafe.presentation.main.MainFragmentDirections
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val getHomeInfoUseCase: GetHomeInfoUseCase,
-    private val postMatchingRequestUseCase: PostMatchingRequestUseCase
-): BaseViewModel() {
+    private val postMatchingRequestUseCase: PostMatchingRequestUseCase,
+) : BaseViewModel() {
     private val _homeStatusCode: MutableLiveData<Int> = MutableLiveData<Int>(-1)
     val homeStatusCode: LiveData<Int> get() = _homeStatusCode
     private val _time: MutableLiveData<String> = MutableLiveData("00:00")
@@ -38,7 +37,7 @@ class HomeViewModel(
 
     private fun getHomeInfo() {
         getHomeInfoUseCase().onEach { resource ->
-            when(resource) {
+            when (resource) {
                 is Resource.Loading -> {
                     Log.d(RETROFIT_TAG, "Loading")
                 }
@@ -66,7 +65,7 @@ class HomeViewModel(
 
     private fun postMatchingRequest() {
         postMatchingRequestUseCase().onEach { response ->
-            when(response) {
+            when (response) {
                 is Resource.Loading -> {
                     Log.d(RETROFIT_TAG, "Loading")
                 }
@@ -84,7 +83,7 @@ class HomeViewModel(
     }
 
     private fun getHomeStatusCode(status: String): Int {
-        return when(status) {
+        return when (status) {
             "NONE" -> 0
             "WAIT" -> 1
             "FOUND" -> 2
@@ -98,7 +97,7 @@ class HomeViewModel(
     }
 
     /** onClick **/
-    fun onClickCircleImageView() {
+    fun onClickCircleImageView(v: View) {
         val statusCode = _homeStatusCode.value
 
 
@@ -108,6 +107,7 @@ class HomeViewModel(
             }
             1 -> { // 매칭 대기
                 showToast(R.string.toast_matching_wait)
+                moveToConfirmDialogFragment(v)
             }
             2 -> { // 음료수 미선택
                 matchingId?.let { id ->
@@ -135,10 +135,10 @@ class HomeViewModel(
                     moveToExitFragment(partnerNickname, reason)
                 }
             }
-            else -> {}
+            else -> {
+            }
         }
     }
-
 
 
     /** navigation **/
@@ -149,7 +149,12 @@ class HomeViewModel(
             partnerNickname = partnerNickname
         ))
     }
-    private fun moveToCoffeeOrderFragment(matchingId: Int, startTime: String?, partnerNickname: String?) {
+
+    private fun moveToCoffeeOrderFragment(
+        matchingId: Int,
+        startTime: String?,
+        partnerNickname: String?,
+    ) {
         moveToDirections(MainFragmentDirections.actionMainFragmentToCoffeeOrderFragment(
             matchingId = matchingId,
             startTime = startTime,
@@ -168,7 +173,17 @@ class HomeViewModel(
         ))
     }
 
-
+    fun moveToConfirmDialogFragment(v: View) = with(v.resources) {
+        moveToDirections(
+            MainFragmentDirections.actionMainFragmentToConfirmDialogFragment(
+                id = R.string.home_matching_cancel_title,
+                title = getString(R.string.home_matching_cancel_title),
+                subtitle = getString(R.string.home_matching_cancel_subtitle),
+                no = getString(R.string.home_matching_cancel_no),
+                yes = getString(R.string.home_matching_cancel_yes)
+            )
+        )
+    }
 
 
 }

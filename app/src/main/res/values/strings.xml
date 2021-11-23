@@ -97,12 +97,16 @@
     <!-- home -->
     <string name="home_title_none">매칭하러 가기</string>
     <string name="home_subtitle_none">버튼을 눌러 매칭상대를 만나보세요</string>
-    <string name="home_title_wait">매칭하러 가기</string>
-    <string name="home_subtitle_wait">버튼을 눌러 매칭상대를 만나보세요</string>
-    <string name="home_title_matching">대화하러 가기</string>
-    <string name="home_subtitle_matching">버튼을 눌러 매칭상대를 만나보세요</string>
-    <string name="home_title_found">대화하러 가기</string>
-    <string name="home_subtitle_found">버튼을 눌러 매칭상대를 만나보세요</string>
+    <string name="home_subtitle_wait">상대방을 찾고 있습니다.\n잠시만 기다려주세요.</string>
+    <string name="home_title_matching">대화하기</string>
+    <string name="home_subtitle_matching">하트를 눌러 상대방과 대화를 시작하세요</string>
+    <string name="home_title_found">대화하기</string>
+    <string name="home_subtitle_found">하트를 눌러 상대방과 대화를 시작하세요</string>
+    
+    <string name="home_matching_cancel_title">정말 매칭을 취소하시겠습니까?</string>
+    <string name="home_matching_cancel_subtitle">지금 취소하면 더 오래 기다려야 합니다.</string>
+    <string name="home_matching_cancel_no">아니요</string>
+    <string name="home_matching_cancel_yes">매칭 취소</string>
 
     <!-- chat list -->
     <string name="chat_list_title">내 테이블</string>

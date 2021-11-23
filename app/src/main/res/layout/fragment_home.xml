@@ -53,7 +53,7 @@
             android:id="@+id/cl_home_bg_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:onClick="@{()->viewModel.onClickCircleImageView()}"
+            android:onClick="@{viewModel::onClickCircleImageView}"
             app:layout_constraintBottom_toTopOf="@+id/tv_state_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
