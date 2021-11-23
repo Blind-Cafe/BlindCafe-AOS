@@ -206,6 +206,8 @@
     <string name="profile_dismiss_reason_3">대화가 재미 없어요</string>
     <string name="profile_dismiss_reason_4">제가 대화를 지속하기 어려워요</string>
     <string name="profile_dismiss_next">거절하기</string>
+
+    
     <!-- profile dismiss confirm -->
     <string name="profile_dismiss_confirm_title">거절하시겠습니까?</string>
     <string name="profile_dismiss_confirm_subtitle">지금 나가시면 로즈님과 다시 매칭 될 수 없어요</string>
@@ -216,6 +218,10 @@
     <!-- profile exchange complete -->
     <string name="profile_exchange_complete_title">축하드립니다.\n두 분의 마음이 맞았어요. 밝은 곳으로 안대해드릴게요.</string>
     <string name="profile_exchange_complete_next">매칭 대화방으로 이동하기</string>
+    
+    
+    <!-- profile reports -->
+    <string name="profile_reports_target">%s님을 신고함</string>
 
     <!-- delete account -->
     <string name="delete_account_title">계정 삭제</string>

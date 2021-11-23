@@ -12,6 +12,7 @@ internal val useCaseModule = module {
     factory { GetUserInfoUseCase(get()) }
     factory { PostUserInfoUseCase(get()) }
     factory { DeleteAccountUseCase(get()) }
+    factory { GetReportsUseCase(get())}
 
     /** gallery **/
     factory { FetchImagesUseCase(get())}

@@ -5,6 +5,7 @@ import com.abouttime.blindcafe.data.server.api.UserInfoApi
 import com.abouttime.blindcafe.data.server.dto.user_info.DeleteAccountResponse
 import com.abouttime.blindcafe.data.server.dto.user_info.GetUserInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.PostUserInfoDto
+import com.abouttime.blindcafe.data.server.dto.user_info.report.GetReportsDto
 import com.abouttime.blindcafe.domain.repository.UserInfoRepository
 
 class UserInfoRepositoryImpl(
@@ -20,5 +21,9 @@ class UserInfoRepositoryImpl(
 
     override suspend fun deleteAccount(reason: Int): DeleteAccountResponse? {
         return userInfoApi.deleteAccount(reason)
+    }
+
+    override suspend fun getReports(): GetReportsDto? {
+        return userInfoApi.getReports()
     }
 }

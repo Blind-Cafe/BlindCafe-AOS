@@ -10,7 +10,7 @@
     android:paddingVertical="8dp">
 
     <TextView
-        android:id="@+id/tv_title"
+        android:id="@+id/tv_target"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
@@ -21,6 +21,7 @@
         tools:text="다은님에게 신고함" />
 
     <TextView
+        android:id="@+id/tv_reason"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -28,10 +29,11 @@
         android:textColor="@color/white"
         android:textSize="@dimen/font_size_15"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_target"
         tools:text="욕설, 모욕등의 불쾌한 발언" />
 
     <TextView
+        android:id="@+id/tv_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"

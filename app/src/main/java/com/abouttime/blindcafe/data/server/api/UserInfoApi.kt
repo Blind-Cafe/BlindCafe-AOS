@@ -2,10 +2,12 @@ package com.abouttime.blindcafe.data.server.api
 
 import com.abouttime.blindcafe.common.base.BaseResponse
 import com.abouttime.blindcafe.common.constants.Retrofit.DELETE_ACCOUNT_URL
+import com.abouttime.blindcafe.common.constants.Retrofit.GET_REPORTS_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.USER_INFO_URL
 import com.abouttime.blindcafe.data.server.dto.user_info.DeleteAccountResponse
 import com.abouttime.blindcafe.data.server.dto.user_info.GetUserInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.PostUserInfoDto
+import com.abouttime.blindcafe.data.server.dto.user_info.report.GetReportsDto
 import retrofit2.http.*
 
 interface UserInfoApi {
@@ -20,4 +22,7 @@ interface UserInfoApi {
 
     @DELETE(DELETE_ACCOUNT_URL)
     suspend fun deleteAccount(@Query("reason") reason: Int): DeleteAccountResponse?
+
+    @GET(GET_REPORTS_URL)
+    suspend fun getReports(): GetReportsDto?
 }
