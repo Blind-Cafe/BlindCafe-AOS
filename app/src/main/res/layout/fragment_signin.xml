@@ -37,6 +37,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/signin_title"
+            android:textSize="@dimen/font_size_15"
+            android:fontFamily="@font/spoqa_han_sans_neo_bold"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@id/iv_back"
             app:layout_constraintStart_toEndOf="@+id/iv_back"
             app:layout_constraintTop_toTopOf="@id/iv_back" />
@@ -47,10 +50,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/bg_signin"
+            app:layout_constraintVertical_bias="0.25"
             app:layout_constraintBottom_toTopOf="@id/tv_subtitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_back"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
@@ -59,7 +63,7 @@
             android:layout_height="wrap_content"
             android:text="@string/signin_subtitle"
             android:textColor="@color/white_2"
-            android:textSize="@dimen/font_size_16"
+            android:textSize="@dimen/font_size_15"
             app:layout_constraintBottom_toTopOf="@id/tv_next"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +83,7 @@
             android:paddingVertical="16dp"
             android:text="@string/signin_next"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_size_16"
+            android:textSize="@dimen/font_size_15"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
