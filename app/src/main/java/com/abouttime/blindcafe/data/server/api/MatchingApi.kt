@@ -7,7 +7,9 @@ import com.abouttime.blindcafe.common.constants.Retrofit.GET_CHAT_ROOM_INFO_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_TOPIC_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_DRINK_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_MATCHING_REQUEST_URL
+import com.abouttime.blindcafe.common.constants.Retrofit.POST_REPORT_URL
 import com.abouttime.blindcafe.data.server.dto.matching.*
+import com.abouttime.blindcafe.data.server.dto.matching.report.PostReportDto
 import com.abouttime.blindcafe.data.server.dto.matching.topic.GetTopicDto
 import retrofit2.http.*
 
@@ -41,6 +43,11 @@ interface MatchingApi {
     suspend fun getTopic(
         @Path("matchingId") matchingId: Int
     ): GetTopicDto?
+
+    @POST(POST_REPORT_URL)
+    suspend fun postReport(
+        @Body report: PostReportDto
+    ): BaseResponse?
 
 
 
