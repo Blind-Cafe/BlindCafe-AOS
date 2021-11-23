@@ -41,7 +41,7 @@ internal val viewModelModule = module {
 
 
     /** Common **/
-    viewModel { ConfirmViewModel(get())}
+    viewModel { ConfirmViewModel(get(), get())}
 
 
     /** Single Activity **/

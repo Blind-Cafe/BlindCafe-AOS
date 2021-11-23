@@ -32,10 +32,13 @@ internal val useCaseModule = module {
 
     /** home **/
     factory { GetHomeInfoUseCase(get()) }
+
     /** matching **/
     factory { PostMatchingRequestUseCase(get()) }
     factory { PostDrinkUseCase(get()) }
     factory { GetChatRoomsUseCase(get())}
+    factory { GetChatRoomInfoUseCase(get()) }
+    factory { DeleteExitChatRoomUseCase(get())}
 
 
     /** interests **/

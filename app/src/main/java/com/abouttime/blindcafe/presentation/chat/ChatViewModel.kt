@@ -10,12 +10,11 @@ import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.CHATTING_TAG
 import com.abouttime.blindcafe.common.constants.LogTag.FIRESTORE_TAG
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
-import com.abouttime.blindcafe.common.constants.Retrofit
 import com.abouttime.blindcafe.common.constants.Retrofit.USER_ID
 import com.abouttime.blindcafe.data.server.dto.notification.PostFcmDto
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.use_case.*
-import com.abouttime.blindcafe.presentation.chat.recorder.RecorderState
+import com.abouttime.blindcafe.presentation.chat.audio.RecorderState
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -177,9 +176,16 @@ class ChatViewModel(
 
     fun getChatRoomInfo() {
         matchingId?.let {
-            getChatRoomInfoUseCase(it).onEach {
+            getChatRoomInfoUseCase(it).onEach { result ->
+                when(result) {
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
 
-            }
+                    }
+                    is Resource.Error -> {}
+                }
+
+            }.launchIn(viewModelScope)
         }
 
     }
@@ -201,10 +207,24 @@ class ChatViewModel(
 
     /** move **/
     fun moveToQuitDialogFragment() {
-        moveToDirections(ChatFragmentDirections.actionMatchingFragmentToQuitReasonDialogFragment())
+        matchingId?.let {
+            moveToDirections(ChatFragmentDirections.actionMatchingFragmentToQuitReasonDialogFragment(
+                matchingId = it
+            ))
+        } ?: kotlin.run {
+            popDirections()
+        }
+
     }
     fun moveToReportDialogFragment() {
-        moveToDirections(ChatFragmentDirections.actionMatchingFragmentToReportReasonDialogFragment())
+        matchingId?.let {
+            moveToDirections(ChatFragmentDirections.actionMatchingFragmentToReportReasonDialogFragment(
+                matchingId = it
+            ))
+        } ?: kotlin.run {
+            popDirections()
+        }
+
     }
 
 

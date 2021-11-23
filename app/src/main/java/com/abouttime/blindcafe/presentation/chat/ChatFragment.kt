@@ -28,7 +28,7 @@ import com.abouttime.blindcafe.common.ext.setMarginRight
 import com.abouttime.blindcafe.common.ext.setMarginTop
 import com.abouttime.blindcafe.databinding.FragmentChatBinding
 import com.abouttime.blindcafe.domain.model.Message
-import com.abouttime.blindcafe.presentation.chat.recorder.RecorderState
+import com.abouttime.blindcafe.presentation.chat.audio.RecorderState
 import com.abouttime.blindcafe.presentation.chat.rv_item.DescriptionItem
 import com.example.chatexample.presentation.ui.chat.rv_item.*
 import com.google.firebase.messaging.FirebaseMessaging

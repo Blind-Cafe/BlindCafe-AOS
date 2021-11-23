@@ -9,12 +9,31 @@ import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.INFO_INPUT
 import com.abouttime.blindcafe.common.constants.Retrofit.JWT
 import com.abouttime.blindcafe.domain.use_case.DeleteAccountUseCase
+import com.abouttime.blindcafe.domain.use_case.DeleteExitChatRoomUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 class ConfirmViewModel(
-    private val deleteAccountUseCase: DeleteAccountUseCase
+    private val deleteAccountUseCase: DeleteAccountUseCase,
+    private val exitChatRoomUseCase: DeleteExitChatRoomUseCase
 ): BaseViewModel() {
+
+
+    fun exitChatRoom(matchingId: Int, reason: Int) {
+        exitChatRoomUseCase(matchingId, reason).onEach { result ->
+            when(result) {
+                is Resource.Loading -> {}
+                is Resource.Success -> {
+                    moveToDirections(ConfirmDialogFragmentDirections.actionConfirmDialogFragmentToMainFragment())
+                }
+                is Resource.Error -> {
+                    Log.e(RETROFIT_TAG, result.message.toString())
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+
 
     fun logout() {
         saveStringData(Pair(JWT, null))

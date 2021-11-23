@@ -1,5 +1,7 @@
 package com.abouttime.blindcafe.data.server.api
 
+import com.abouttime.blindcafe.common.base.BaseResponse
+import com.abouttime.blindcafe.common.constants.Retrofit.DELETE_EXIT_CHAT_ROOM_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_CHAT_ROOMS_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_CHAT_ROOM_INFO_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_DRINK_URL
@@ -25,6 +27,13 @@ interface MatchingApi {
     suspend fun getChatRoomInfo(
         @Path("matchingId") matchingId: Int
     ): GetChatRoomInfoDto?
+
+
+    @DELETE(DELETE_EXIT_CHAT_ROOM_URL)
+    suspend fun exitChatRoom(
+        @Path("matchingId") matchingId: Int,
+        @Query("reason") reason: Int
+    ): BaseResponse?
 
 
 

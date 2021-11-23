@@ -1,5 +1,6 @@
 package com.abouttime.blindcafe.data.repository
 
+import com.abouttime.blindcafe.common.base.BaseResponse
 import com.abouttime.blindcafe.data.server.api.MatchingApi
 import com.abouttime.blindcafe.data.server.dto.matching.*
 import com.abouttime.blindcafe.domain.repository.MatchingRepository
@@ -21,5 +22,9 @@ class MatchingRepositoryImpl(
 
     override suspend fun getChatRoomInfo(matchingId: Int): GetChatRoomInfoDto? {
         return matchingApi.getChatRoomInfo(matchingId)
+    }
+
+    override suspend fun exitChatRoom(matchingId: Int, reason: Int): BaseResponse? {
+        return matchingApi.exitChatRoom(matchingId, reason)
     }
 }

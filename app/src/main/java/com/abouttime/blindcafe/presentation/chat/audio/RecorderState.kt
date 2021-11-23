@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.presentation.chat.recorder
+package com.abouttime.blindcafe.presentation.chat.audio
 
 enum class RecorderState {
     BEFORE_RECORDING,

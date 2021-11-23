@@ -1,5 +1,6 @@
 package com.abouttime.blindcafe.presentation.chat.quit
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,6 +10,8 @@ import com.abouttime.blindcafe.common.base.BaseViewModel
 class QuitReasonViewModel: BaseViewModel() {
     private val _reason = MutableLiveData(0)
     val reason: LiveData<Int> get() = _reason
+
+    var matchingId: Int? = null
 
 
 
@@ -23,15 +26,21 @@ class QuitReasonViewModel: BaseViewModel() {
 
     fun onClickYesButton(v: View) {
         if (canClickNextButton()) {
-            moveToDirections(
-                QuitReasonDialogFragmentDirections.actionQuitReasonDialogFragmentToConfirmDialogFragment(
-                    id = R.string.quit_confirm_title,
-                    title = v.resources.getString(R.string.quit_confirm_title),
-                    subtitle = v.resources.getString(R.string.quit_confirm_subtitle),
-                    no = v.resources.getString(R.string.quit_confirm_no),
-                    yes = v.resources.getString(R.string.quit_confirm_yes)
+            if (reason.value != null && matchingId != null) {
+                moveToDirections(
+                    QuitReasonDialogFragmentDirections.actionQuitReasonDialogFragmentToConfirmDialogFragment(
+                        id = R.string.quit_confirm_title,
+                        title = v.resources.getString(R.string.quit_confirm_title),
+                        subtitle = v.resources.getString(R.string.quit_confirm_subtitle),
+                        no = v.resources.getString(R.string.quit_confirm_no),
+                        yes = v.resources.getString(R.string.quit_confirm_yes),
+                        reason = reason.value ?: 0,
+                        matchingId = matchingId ?: 0
+                    )
                 )
-            )
+            } else {
+                showToast(R.string.toast_fail)
+            }
         } else {
             showToast(R.string.toast_select_reason)
         }

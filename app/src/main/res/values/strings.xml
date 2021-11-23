@@ -16,6 +16,7 @@
     <string name="toast_matching_wait">아직 매칭 상대를 찾고 있어요!</string>
     <string name="toast_gallery_limit">최대 다섯 장까지 가능합니다</string>
     <string name="toast_select_reason">먼저 이유를 선택해주세요</string>
+    <string name="toast_fail">요청에 실패했습니다</string>
 
 
     <!-- rule -->

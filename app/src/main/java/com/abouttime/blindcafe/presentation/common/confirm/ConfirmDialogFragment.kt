@@ -56,7 +56,8 @@ class ConfirmDialogFragment :
     }
 
     private fun handleProfileDismiss() {
-
+        handleYesButton { } // TODO 프로필 교환 거절 api 추가
+        handleNoButton { popDirections() }
     }
 
     private fun handleLogout() {
@@ -70,16 +71,36 @@ class ConfirmDialogFragment :
     }
 
     private fun handleReport() {
-        handleYesButton { popDirections() } // TODO 방 나가기 api (MatchingId 필요)
+        val matchingId = args.matchingId
+        val reason = args.reason
+
+        handleYesButton {
+            if (matchingId != 0 && reason != 0) {
+                viewModel.exitChatRoom(matchingId, reason)
+            } else {
+                showToast(R.string.toast_check_internet)
+            }
+        }
         handleNoButton { popDirections() }
     }
 
     private fun handleQuit() {
-        handleYesButton { popDirections() } // TODO 방 나가기 api (MatchingId 필요)
+        val matchingId = args.matchingId
+        val reason = args.reason
+
+        handleYesButton {
+            if (matchingId != 0 && reason != 0) {
+                viewModel.exitChatRoom(matchingId, reason)
+            } else {
+                showToast(R.string.toast_fail)
+            }
+        }
         handleNoButton { popDirections() }
     }
 
 
+
+    /** yes/no button **/
     private fun handleYesButton(onClickYesButton: () -> Unit) {
         binding?.tvYes?.setOnClickListener {
             onClickYesButton()

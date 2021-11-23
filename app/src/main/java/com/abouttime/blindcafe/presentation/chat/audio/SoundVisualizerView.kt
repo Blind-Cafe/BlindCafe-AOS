@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.presentation.chat.recorder
+package com.abouttime.blindcafe.presentation.chat.audio
 
 import android.content.Context
 import android.graphics.Canvas
