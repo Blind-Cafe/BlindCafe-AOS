@@ -42,7 +42,7 @@
         android:fontFamily="@font/spoqa_han_sans_neo_bold"
         android:text="@string/coffee_order_title"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_size_16"
+        android:textSize="@dimen/font_size_15"
         app:layout_constraintBottom_toBottomOf="@id/iv_back"
         app:layout_constraintStart_toEndOf="@id/iv_back"
         app:layout_constraintTop_toTopOf="@id/iv_back" />
@@ -56,6 +56,7 @@
         android:fontFamily="@font/spoqa_han_sans_neo_bold"
         android:text="@string/coffee_order_subtitle"
         android:textColor="@color/main"
+        android:textSize="@dimen/font_size_16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_back" />
 
@@ -79,7 +80,7 @@
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:text="@string/coffee_order_description"
         android:textColor="@color/gray_300"
-        android:textSize="@dimen/font_size_11"
+        android:textSize="@dimen/font_size_12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/v_divider" />
@@ -109,6 +110,9 @@
         android:gravity="center"
         android:layout_marginHorizontal="36dp"
         android:text="@string/profile_setting_next"
+        android:textSize="@dimen/font_size_16"
+        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="288:48"
         app:layout_constraintEnd_toEndOf="parent"
