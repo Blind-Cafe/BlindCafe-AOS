@@ -40,12 +40,12 @@ internal val viewModelModule = module {
     viewModel { SplashViewModel() }
 
 
-    /** Common **/
-    viewModel { ConfirmViewModel(get(), get(), get())}
-
-
     /** Single Activity **/
     viewModel { NavHostViewModel() }
+
+
+    /** Common **/
+    viewModel { ConfirmViewModel(get(), get(), get())}
 
 
     /** On-Boarding **/
@@ -59,17 +59,20 @@ internal val viewModelModule = module {
     viewModel { SigninViewModel() }
 
     /** Main **/
-    viewModel { MainViewModel() }
+    viewModel { MainViewModel(get()) }
 
+    /** Main - Home **/
     viewModel { HomeViewModel(get(), get()) }
     viewModel { CoffeeOrderViewModel(get()) }
     viewModel { ExitViewModel() }
 
+    /** Main - Dormancy **/
     viewModel { DormancyViewModel() }
 
-
+    /** Main - ChatList **/
     viewModel { ChatListViewModel(get()) }
 
+    /** Main - MyPage **/
     viewModel { MyPageViewModel(get()) }
     viewModel { SettingViewModel() }
     viewModel { ProfileEditViewModel(get()) }

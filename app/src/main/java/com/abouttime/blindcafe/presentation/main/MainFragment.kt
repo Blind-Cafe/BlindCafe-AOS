@@ -65,63 +65,6 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
             isVisible = true
         }
     }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        Log.d(LIFECYCLE_TAG, "onCreate")
-    }
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        Log.d(LIFECYCLE_TAG, "onCreateView")
-        return super.onCreateView(inflater, container, savedInstanceState)
-
-    }
-
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        Log.d(LIFECYCLE_TAG, "onViewStateRestored")
-
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d(LIFECYCLE_TAG, "onStart")
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d(LIFECYCLE_TAG, "onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d(LIFECYCLE_TAG, "onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d(LIFECYCLE_TAG, "onStop")
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        Log.d(LIFECYCLE_TAG, "onSaveInstanceState")
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.d(LIFECYCLE_TAG, "onDestroyView")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d(LIFECYCLE_TAG, "onDestroy")
-    }
-
 
 
 

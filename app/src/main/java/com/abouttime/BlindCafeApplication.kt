@@ -48,6 +48,7 @@ class BlindCafeApplication: Application() {
             modules(useCaseModule)
             modules(sharedPreferencesModule)
             modules(firebaseModule)
+            modules(backgroundModule)
 
         }
 

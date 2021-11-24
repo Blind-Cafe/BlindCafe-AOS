@@ -4,6 +4,7 @@ import com.abouttime.blindcafe.common.base.BaseResponse
 import com.abouttime.blindcafe.data.server.dto.user_info.DeleteAccountResponse
 import com.abouttime.blindcafe.data.server.dto.user_info.GetUserInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.PostUserInfoDto
+import com.abouttime.blindcafe.data.server.dto.user_info.device_token.PostDeviceTokenDto
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.GetProfileInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.report.GetReportsDto
 
@@ -13,4 +14,5 @@ interface UserInfoRepository {
     suspend fun deleteAccount(reason: Int): DeleteAccountResponse?
     suspend fun getReports(): GetReportsDto?
     suspend fun getProfileInfo(): GetProfileInfoDto?
+    suspend fun postDeviceToken(postDeviceTokenDto: PostDeviceTokenDto): BaseResponse?
 }

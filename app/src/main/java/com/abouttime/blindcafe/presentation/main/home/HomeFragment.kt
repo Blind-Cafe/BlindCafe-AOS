@@ -1,11 +1,15 @@
 package com.abouttime.blindcafe.presentation.main.home
 
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.core.view.marginTop
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
+import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.ext.setMarginTop
 import com.abouttime.blindcafe.databinding.FragmentHomeBinding
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -24,11 +28,6 @@ class HomeFragment: BaseFragment<HomeViewModel>(R.layout.fragment_home) {
         observeHomeStatus()
     }
 
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.getHomeInfo()
-    }
 
     private fun observeHomeStatus() {
         viewModel.homeStatusCode.observe(viewLifecycleOwner) { statusCode ->
@@ -110,5 +109,68 @@ class HomeFragment: BaseFragment<HomeViewModel>(R.layout.fragment_home) {
             b.tvStateSubTitle.text = getString(R.string.home_subtitle_matching)
         }
     }
+
+
+
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        Log.d(LogTag.LIFECYCLE_TAG, "onCreate")
+    }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        Log.d(LogTag.LIFECYCLE_TAG, "onCreateView")
+        return super.onCreateView(inflater, container, savedInstanceState)
+
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        Log.d(LogTag.LIFECYCLE_TAG, "onViewStateRestored")
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(LogTag.LIFECYCLE_TAG, "onStart")
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(LogTag.LIFECYCLE_TAG, "onResume")
+        viewModel.getHomeInfo()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(LogTag.LIFECYCLE_TAG, "onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(LogTag.LIFECYCLE_TAG, "onStop")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        Log.d(LogTag.LIFECYCLE_TAG, "onSaveInstanceState")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d(LogTag.LIFECYCLE_TAG, "onDestroyView")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(LogTag.LIFECYCLE_TAG, "onDestroy")
+    }
+
 
 }

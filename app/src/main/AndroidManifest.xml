@@ -17,7 +17,7 @@
         android:theme="@style/SplashScreenTheme"
         android:usesCleartextTraffic="true">
 
-        <service android:name=".common.background.service.FirebaseService"
+        <service android:name=".background.service.FirebaseService"
             android:permission="com.google.android.c2dm.permission.SEND"
             android:exported="false">
             <intent-filter>

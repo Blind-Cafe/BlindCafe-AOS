@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.common.background.service
+package com.abouttime.blindcafe.background.service
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -14,6 +14,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.constants.LogTag.FCM_TAG
+import com.abouttime.blindcafe.domain.use_case.PostDeviceTokenUseCase
 import com.abouttime.blindcafe.presentation.NavHostActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -21,7 +22,8 @@ import kotlin.random.Random
 
 private const val CHANNEL_ID = "FCM Message Channel"
 
-class FirebaseService: FirebaseMessagingService() {
+class FirebaseService(
+): FirebaseMessagingService() {
 
 
     companion object {
