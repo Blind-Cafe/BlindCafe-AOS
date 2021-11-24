@@ -232,7 +232,7 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="32dp"
             android:background="@drawable/bg_rounding_3dp"
-            android:backgroundTint="@color/disabled"
+            android:backgroundTint="@{viewModel.reason == 0 ? @color/disabled : @color/main}"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:gravity="center"
             android:paddingHorizontal="13dp"

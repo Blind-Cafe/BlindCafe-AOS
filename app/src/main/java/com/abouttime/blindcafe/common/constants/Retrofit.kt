@@ -7,7 +7,7 @@ object Retrofit {
 
 
     const val POST_KAKAO_LOGIN_URL = "api/kakao"
-    const val USER_INFO_URL = "api/user"
+    const val POST_USER_INFO_URL = "api/user"
     const val FCM_URL = "fcm"
     const val HOME_INFO_URL = "api/user/home"
     const val POST_MATCHING_REQUEST_URL = "api/matching"
@@ -21,6 +21,8 @@ object Retrofit {
     const val POST_REPORT_URL = "api/report"
     const val GET_REPORTS_URL = "api/report"
     const val POST_CANCEL_MATCHING_URL = "api/matching/cancel"
+    const val GET_PROFILE_INFO = "api/user/profile"
+
 
 
     const val FCM_MESSAGE_TOPIC = "fcm_message_topic"

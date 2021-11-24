@@ -5,6 +5,7 @@ import com.abouttime.blindcafe.data.server.api.UserInfoApi
 import com.abouttime.blindcafe.data.server.dto.user_info.DeleteAccountResponse
 import com.abouttime.blindcafe.data.server.dto.user_info.GetUserInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.PostUserInfoDto
+import com.abouttime.blindcafe.data.server.dto.user_info.profile.GetProfileInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.report.GetReportsDto
 import com.abouttime.blindcafe.domain.repository.UserInfoRepository
 
@@ -25,5 +26,9 @@ class UserInfoRepositoryImpl(
 
     override suspend fun getReports(): GetReportsDto? {
         return userInfoApi.getReports()
+    }
+
+    override suspend fun getProfileInfo(): GetProfileInfoDto? {
+        return userInfoApi.getProfileInfo()
     }
 }

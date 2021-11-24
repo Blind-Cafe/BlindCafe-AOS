@@ -19,4 +19,5 @@ class AccountDeleteFragment: BaseFragment<AccountDeleteViewModel>(R.layout.fragm
         binding?.viewModel = viewModel
 
     }
+
 }
