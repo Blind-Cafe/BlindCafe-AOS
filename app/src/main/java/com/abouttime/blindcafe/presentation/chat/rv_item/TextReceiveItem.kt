@@ -3,6 +3,7 @@ package com.example.chatexample.presentation.ui.chat.rv_item
 import android.view.View
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.ext.millisecondToChatTime
+import com.abouttime.blindcafe.common.ext.secondToChatTime
 import com.abouttime.blindcafe.databinding.RvChatItemReceiveTextBinding
 import com.abouttime.blindcafe.domain.model.Message
 import com.xwray.groupie.viewbinding.BindableItem
@@ -11,7 +12,7 @@ class TextReceiveItem(private val message: Message): BindableItem<RvChatItemRece
     override fun bind(viewBinding: RvChatItemReceiveTextBinding, position: Int) {
         viewBinding.message = message
         viewBinding.tvTime.text =
-            message.timestamp?.seconds?.millisecondToChatTime()
+            message.timestamp?.seconds?.secondToChatTime()
             ?: System.currentTimeMillis().millisecondToChatTime()
     }
 

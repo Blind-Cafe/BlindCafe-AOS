@@ -126,8 +126,8 @@ class HomeViewModel(
                 if (matchingId != null && startTime != null && partnerNickname != null) {
                     moveToChatFragment(
                         matchingId = matchingId!!,
-                        startTime = startTime,
-                        partnerNickname = partnerNickname
+                        startTime = startTime!!,
+                        partnerNickname = partnerNickname!!
                     )
                 }
 
@@ -145,7 +145,7 @@ class HomeViewModel(
 
 
     /** navigation **/
-    private fun moveToChatFragment(matchingId: Int, startTime: String?, partnerNickname: String?) {
+    private fun moveToChatFragment(matchingId: Int, startTime: String, partnerNickname: String) {
         moveToDirections(MainFragmentDirections.actionMainFragmentToMatchingFragment(
             matchingId = matchingId,
             startTime = startTime,

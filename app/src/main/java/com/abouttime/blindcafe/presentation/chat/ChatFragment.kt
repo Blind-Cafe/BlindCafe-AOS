@@ -23,7 +23,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.DeviceUtil
 import com.abouttime.blindcafe.common.base.BaseFragment
-import com.abouttime.blindcafe.common.constants.LogTag
+import com.abouttime.blindcafe.common.constants.LogTag.CHATTING_TAG
+import com.abouttime.blindcafe.common.ext.secondToLapse
 import com.abouttime.blindcafe.common.ext.setMarginRight
 import com.abouttime.blindcafe.common.ext.setMarginTop
 import com.abouttime.blindcafe.databinding.FragmentChatBinding
@@ -53,7 +54,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     private var popupWindow: PopupWindow? = null
 
 
-
     private var recorder: MediaRecorder? = null
     private val recordingFilePath: String by lazy {
         "${requireActivity().externalCacheDir?.absolutePath}/recording.3gp"
@@ -67,16 +67,17 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         binding?.lifecycleOwner = this
         binding?.viewModel = viewModel
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
         lifecycleScope.launch(Dispatchers.IO) {
             token = FirebaseMessaging.getInstance().token.await()
         }
 
-        subscribeMessages()
-
         initNavArgs()
+
         initPartnerNciknameTextView()
 
         initChatRecyclerView(fragmentChatBinding)
+        subscribeMessages()
         observeMessagesData()
 
 
@@ -107,7 +108,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         viewModel?.matchingId?.let {
             viewModel.subscribeMessages(it.toString())
         } ?: kotlin.run {
-            Log.e(LogTag.RETROFIT_TAG, "matchingId is null")
+            Log.e(CHATTING_TAG, "myNickname is null")
         }
     }
 
@@ -143,8 +144,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                 }
             }
             )
-
-
         }
 
     private fun scrollRvToLastPosition(
@@ -201,23 +200,33 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             btSend.setOnClickListener {
                 viewModel?.matchingId?.let { matchingId ->
                     viewModel?.userId?.let { userId ->
-
-                        viewModel?.sendMessage(
-                            Message(
-                                contents = etMessageInput.text.toString(),
-                                type = 1,
-                                senderUid = userId,
-                                roomUid = matchingId.toString()
+                        viewModel?.myNickname?.let { nickName ->
+                            viewModel?.sendMessage(
+                                Message(
+                                    contents = etMessageInput.text.toString(),
+                                    type = 1,
+                                    senderUid = userId,
+                                    senderName = nickName,
+                                    roomUid = matchingId.toString()
+                                )
                             )
-                        )
-                        viewModel?.postFcm(
-                            title = "메시지 도착",
-                            body = "${viewModel?.partnerNickname} : ${etMessageInput.text.toString()}",
-                            path = ""
-                        )
 
+                            viewModel?.postFcm(
+                                title = "${viewModel?.partnerNickname}",
+                                body = "${etMessageInput.text}",
+                                path = ""
+                            )
+                        } ?: kotlin.run {
+                            Log.e(CHATTING_TAG, "myNickname is null")
+                        }
+                    } ?: kotlin.run {
+                        Log.e(CHATTING_TAG, "userId is null")
                     }
+                } ?: kotlin.run {
+                    Log.e(CHATTING_TAG, "matchingId is null")
                 }
+
+
                 btSend.requestFocus()
                 etMessageInput.text.clear()
             }
@@ -295,7 +304,9 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     }
 
     private fun initTimeContainer(view: TextView) {
-
+        viewModel?.startTime?.let { st ->
+            view.text = st.toLong().secondToLapse()
+        }
     }
 
     private fun initReportContainer(view: View) {
@@ -395,34 +406,37 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
 
     /** Audio **/
-    private fun observeRecorderState(fragmentChatBinding: FragmentChatBinding) = with(fragmentChatBinding) {
-        viewModel?.recorderState?.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                RecorderState.BEFORE_RECORDING -> {
-                    Log.e("record", "BEFORE_RECORDING")
-                    initSoundVisualizerView(fragmentChatBinding)
-                }
-                RecorderState.START_RECORDING -> {
-                    Log.e("record", "START_RECORDING")
-                    recordIfPermissionGranted()
-                }
-                RecorderState.STOP_RECORDING -> {
-                    Log.e("record", "STOP_RECORDING")
-                    stopRecording()
-                    sendAudioMessage()
+    private fun observeRecorderState(fragmentChatBinding: FragmentChatBinding) =
+        with(fragmentChatBinding) {
+            viewModel?.recorderState?.observe(viewLifecycleOwner) { state ->
+                when (state) {
+                    RecorderState.BEFORE_RECORDING -> {
+                        Log.e("record", "BEFORE_RECORDING")
+                        initSoundVisualizerView(fragmentChatBinding)
+                    }
+                    RecorderState.START_RECORDING -> {
+                        Log.e("record", "START_RECORDING")
+                        recordIfPermissionGranted()
+                    }
+                    RecorderState.STOP_RECORDING -> {
+                        Log.e("record", "STOP_RECORDING")
+                        stopRecording()
+                        sendAudioMessage()
+                    }
                 }
             }
         }
-    }
 
 
-    private fun initSoundVisualizerView(fragmentChatBinding: FragmentChatBinding) = with(fragmentChatBinding) {
-        // 여기서 maxAmplitude 를 전달해준다.
-        soundVisualizer.onRequestCurrentAmplitude = {
-            recorder?.maxAmplitude ?: 0
+    private fun initSoundVisualizerView(fragmentChatBinding: FragmentChatBinding) =
+        with(fragmentChatBinding) {
+            // 여기서 maxAmplitude 를 전달해준다.
+            soundVisualizer.onRequestCurrentAmplitude = {
+                recorder?.maxAmplitude ?: 0
+            }
+
         }
 
-    }
     private fun recordIfPermissionGranted() {
         if (DeviceUtil.hasRecordPermission(requireContext())) {
             startRecording()
@@ -440,7 +454,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             }
         }
 
-    private fun startRecording()  {
+    private fun startRecording() {
         recorder = MediaRecorder().apply {
             setAudioSource(MediaRecorder.AudioSource.MIC)
             setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
@@ -484,7 +498,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
         uri?.let {
             val id = System.currentTimeMillis().toString()
-            viewModel?.matchingId?.let {  matchingId ->
+            viewModel?.matchingId?.let { matchingId ->
                 viewModel?.userId?.let { userId ->
                     viewModel.uploadAudio(
                         message = Message(
@@ -499,14 +513,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             }
         }
     }
-
-
-
-
-
-
-
-
 
 
 }

@@ -5,6 +5,7 @@ import android.view.View
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.ext.millisecondToChatTime
+import com.abouttime.blindcafe.common.ext.secondToChatTime
 import com.abouttime.blindcafe.databinding.RvChatItemSendImageBinding
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.presentation.chat.ChatViewModel
@@ -27,7 +28,7 @@ class ImageSendItem(
             }
         )
         viewBinding.tvTime.text =
-            message.timestamp?.seconds?.millisecondToChatTime()
+            message.timestamp?.seconds?.secondToChatTime()
                 ?: System.currentTimeMillis().millisecondToChatTime()
 
     }

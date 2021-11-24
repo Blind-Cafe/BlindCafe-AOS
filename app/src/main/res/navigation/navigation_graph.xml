@@ -209,13 +209,12 @@
         <argument
             android:name="startTime"
             app:argType="string"
-            app:nullable="true" />
+            app:nullable="false" />
 
         <argument
             android:name="partnerNickname"
             app:argType="string"
-            app:nullable="true" />
-
+            app:nullable="false" />
 
         <action
             android:id="@+id/action_matchingFragment_to_quitReasonDialogFragment"

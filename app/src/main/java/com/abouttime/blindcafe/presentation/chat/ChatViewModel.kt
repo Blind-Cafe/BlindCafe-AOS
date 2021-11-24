@@ -11,6 +11,7 @@ import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.CHATTING_TAG
 import com.abouttime.blindcafe.common.constants.LogTag.FIRESTORE_TAG
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
+import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.NICKNAME
 import com.abouttime.blindcafe.common.constants.Retrofit.USER_ID
 import com.abouttime.blindcafe.data.server.dto.matching.topic.GetTopicDto
 import com.abouttime.blindcafe.data.server.dto.notification.PostFcmDto
@@ -54,6 +55,9 @@ class ChatViewModel(
     private val _topic = SingleLiveData<GetTopicDto>()
     val topic: SingleLiveData<GetTopicDto> get() = _topic
 
+
+    /** room info **/
+    var myNickname = getStringData(NICKNAME)
     var partnerNickname: String? = null
     var startTime: String? = null
     var matchingId: Int? = null
@@ -195,7 +199,6 @@ class ChatViewModel(
 
             }.launchIn(viewModelScope)
         }
-
     }
 
 
@@ -250,7 +253,6 @@ class ChatViewModel(
         } ?: kotlin.run {
             popDirections()
         }
-
     }
     fun moveToReportDialogFragment() {
         matchingId?.let {
@@ -260,7 +262,6 @@ class ChatViewModel(
         } ?: kotlin.run {
             popDirections()
         }
-
     }
 
 

@@ -6,6 +6,7 @@ import android.view.View
 import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.ext.millisecondToChatTime
+import com.abouttime.blindcafe.common.ext.secondToChatTime
 import com.abouttime.blindcafe.databinding.RvChatItemSendAudioBinding
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.presentation.chat.ChatViewModel
@@ -61,7 +62,7 @@ class AudioSendItem(
         }
 
         viewBinding.tvTime.text =
-            message.timestamp?.seconds?.millisecondToChatTime()
+            message.timestamp?.seconds?.secondToChatTime()
                 ?: System.currentTimeMillis().millisecondToChatTime()
 
 

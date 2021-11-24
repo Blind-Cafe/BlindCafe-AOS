@@ -80,11 +80,14 @@ class CoffeeOrderViewModel(
                             Log.d(RETROFIT_TAG, response.data.toString())
                             response.data?.startTime?.let { time ->
                                 startTime = time
-                                moveToChatFragment(
-                                    matchingId = mId,
-                                    startTime = startTime,
-                                    partnerNickname = partnerNickname
-                                )
+                                partnerNickname?.let { pn ->
+                                    moveToChatFragment(
+                                        matchingId = mId,
+                                        startTime = time,
+                                        partnerNickname = pn
+                                    )
+                                }
+
                             }
                         }
                         is Resource.Error -> {
@@ -113,7 +116,7 @@ class CoffeeOrderViewModel(
     }
 
 
-        private fun moveToChatFragment(matchingId: Int, startTime: String?, partnerNickname: String?) {
+        private fun moveToChatFragment(matchingId: Int, startTime: String, partnerNickname: String) {
         moveToDirections(CoffeeOrderFragmentDirections.actionCoffeeOrderFragmentToMatchingFragment(
             matchingId = matchingId,
             startTime = startTime,
