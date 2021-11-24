@@ -147,4 +147,6 @@ abstract class BaseFragment<VM: BaseViewModel>(layoutId: Int) : Fragment(layoutI
     fun Fragment.setNavigationResult(result: String, key: String = "result") {
         findNavController().previousBackStackEntry?.savedStateHandle?.set(key, result)
     }
+
+
 }

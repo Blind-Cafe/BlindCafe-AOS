@@ -3,7 +3,7 @@ package com.abouttime.blindcafe.data.server.dto.matching.topic
 
 import com.google.gson.annotations.SerializedName
 
-data class Audio(
+data class TopicAudio(
     @SerializedName("src")
     val src: String?,
     @SerializedName("title")

@@ -88,6 +88,10 @@
     <string name="chat_et_hint">메시지 작성하기</string>
     <string name="chat_toast_permission">권한을 허용해주셔야 사용하실 수 있습니다</string>
     <string name="chat_recorder_initial_time">00:00</string>
+    <string name="chat_topic_text_title">상대와 이 주제로 대화를 나눠보세요</string>
+    <string name="chat_topic_audio_title">어떤 소리인지 같이 맞춰보세요</string>
+    <string name="chat_topic_image_title">어떤 사진인지 같이 맞춰보세요</string>
+    <string name="chat_topic_fold">다신 보지 않기</string>
 
     <!-- gallery -->
     <string name="gallery_title">갤러리</string>

@@ -5,11 +5,11 @@ import com.google.gson.annotations.SerializedName
 
 data class GetTopicDto(
     @SerializedName("audio")
-    val audio: Audio?,
+    val topicAudio: TopicAudio?,
     @SerializedName("image")
-    val image: Image?,
+    val topicImage: TopicImage?,
     @SerializedName("text")
-    val text: Text?,
+    val topicText: TopicText?,
     @SerializedName("type")
     val type: String?
 )

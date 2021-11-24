@@ -9,6 +9,7 @@
     <color name="main">#bbd2b6</color>
     <color name="white">#fafafa</color>
     <color name="black">#2d2d2d</color>
+    <color name="black_2">#373737</color>
     <color name="transparent">#00000000</color>
 
 <color name="toast_background">#d9636366</color>
@@ -54,6 +55,8 @@
     <color name="profile_exchange_edit_button">#454545</color>
 
     <color name="location_sub_background">#575e56</color>
+
+    <color name="chat_topic_divider">#48484a</color>
 
 
 </resources>
