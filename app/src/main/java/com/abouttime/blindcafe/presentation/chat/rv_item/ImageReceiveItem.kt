@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.View
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.constants.LogTag.CHATTING_TAG
+import com.abouttime.blindcafe.common.ext.millisecondToChatTime
 import com.abouttime.blindcafe.databinding.RvChatItemReceiveImageBinding
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.presentation.chat.ChatViewModel
@@ -24,8 +25,9 @@ class ImageReceiveItem(
                     .into(viewBinding.ivContent)
             }
         )
-        viewBinding.tvTime.text = message.timestamp?.seconds.toString()
-
+        viewBinding.tvTime.text =
+            message.timestamp?.seconds?.millisecondToChatTime()
+                ?: System.currentTimeMillis().millisecondToChatTime()
     }
 
     override fun getLayout(): Int = R.layout.rv_chat_item_receive_image

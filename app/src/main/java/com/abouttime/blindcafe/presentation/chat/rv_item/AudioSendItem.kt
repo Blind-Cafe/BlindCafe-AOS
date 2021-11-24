@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.R
+import com.abouttime.blindcafe.common.ext.millisecondToChatTime
 import com.abouttime.blindcafe.databinding.RvChatItemSendAudioBinding
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.presentation.chat.ChatViewModel
@@ -14,7 +15,6 @@ import kotlinx.coroutines.launch
 
 class AudioSendItem(
     private val message: Message,
-    private val onClickAudioMessage: (Message) -> Unit = {},
     private val viewModel: ChatViewModel,
 ) : BindableItem<RvChatItemSendAudioBinding>() {
 
@@ -60,7 +60,9 @@ class AudioSendItem(
             )
         }
 
-        viewBinding.tvTime.text = message.timestamp?.seconds.toString()
+        viewBinding.tvTime.text =
+            message.timestamp?.seconds?.millisecondToChatTime()
+                ?: System.currentTimeMillis().millisecondToChatTime()
 
 
     }
