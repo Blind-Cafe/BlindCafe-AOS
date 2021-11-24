@@ -1,7 +1,9 @@
 package com.abouttime.blindcafe.presentation.chat
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
+import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.net.Uri
 import android.os.Bundle
@@ -18,6 +20,7 @@ import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isGone
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -38,6 +41,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -90,13 +94,11 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         initGalleryButton(fragmentChatBinding) // 갤러리 버튼 초기화
 
 
-
         addBackPressButtonListener() // 뒤로가기 버튼 리스너
         observeRecorderState(fragmentChatBinding) // 녹음 상태별 초기화
 
         observeTopicData(fragmentChatBinding)
     }
-
 
 
     /** init variables  **/
@@ -109,8 +111,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     private fun initPartnerNciknameTextView() {
         binding?.tvOtherName?.text = viewModel.partnerNickname
     }
-
-
 
 
     /** recycler view **/
@@ -443,7 +443,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     }
 
 
-
     /** menu **/
     private fun initMenuButton(fragmentChatBinding: FragmentChatBinding) =
         with(fragmentChatBinding) {
@@ -516,30 +515,43 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     }
 
     /** topic **/
-    private fun observeTopicData(fragmentChatBinding: FragmentChatBinding) = with(fragmentChatBinding) {
-        viewModel?.topic?.observe(viewLifecycleOwner) { topic ->
-            clTopicContainer.isGone = false
-            topic.type?.let { t ->
-                when (t) {
-                    "text" -> handleTextTopic(fragmentChatBinding, topic.topicText?.content ?: "")
-                    "image" -> handleImageTopic(fragmentChatBinding, topic.topicImage?.title ?: "", topic.topicImage?.src ?: "")
-                    "audio" -> handleAudioTopic(fragmentChatBinding, topic.topicAudio?.title ?: "", topic.topicAudio?.src ?: "")
+    private fun observeTopicData(fragmentChatBinding: FragmentChatBinding) =
+        with(fragmentChatBinding) {
+            viewModel?.topic?.observe(viewLifecycleOwner) { topic ->
+                clTopicContainer.isGone = false
+                topic.type?.let { t ->
+                    when (t) {
+                        "text" -> handleTextTopic(fragmentChatBinding,
+                            topic.topicText?.content ?: "")
+                        "image" -> handleImageTopic(fragmentChatBinding,
+                            topic.topicImage?.title ?: "",
+                            topic.topicImage?.src ?: "")
+                        "audio" -> handleAudioTopic(fragmentChatBinding,
+                            topic.topicAudio?.title ?: "",
+                            topic.topicAudio?.src ?: "")
+                    }
+                    initFoldButton(fragmentChatBinding)
                 }
-                initFoldButton(fragmentChatBinding)
             }
         }
-    }
-    private fun handleTextTopic(fragmentChatBinding: FragmentChatBinding, contents: String) = with(fragmentChatBinding) {
-        tvTopicTitle.text = getString(R.string.chat_topic_text_title)
 
-        tvTopicContentsText.isGone = false
-        ivTopicContentsImage.isGone = true
-        clTopicContentsAudioContainer.isGone = true
+    private fun handleTextTopic(fragmentChatBinding: FragmentChatBinding, contents: String) =
+        with(fragmentChatBinding) {
+            tvTopicTitle.text = getString(R.string.chat_topic_text_title)
 
-        tvTopicContentsText.text = contents
+            tvTopicContentsText.isGone = false
+            ivTopicContentsImage.isGone = true
+            clTopicContentsAudioContainer.isGone = true
 
-    }
-    private fun handleImageTopic(fragmentChatBinding: FragmentChatBinding, title: String, contents: String) = with(fragmentChatBinding) {
+            tvTopicContentsText.text = contents
+
+        }
+
+    private fun handleImageTopic(
+        fragmentChatBinding: FragmentChatBinding,
+        title: String,
+        contents: String,
+    ) = with(fragmentChatBinding) {
         tvTopicTitle.text = title
 
         tvTopicContentsText.isGone = true
@@ -550,20 +562,82 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             .load(contents)
             .into(ivTopicContentsImage)
     }
-    private fun handleAudioTopic(fragmentChatBinding: FragmentChatBinding, title: String,  contents: String) = with(fragmentChatBinding) {
+
+    @SuppressLint("SetTextI18n")
+    private fun handleAudioTopic(
+        fragmentChatBinding: FragmentChatBinding,
+        title: String,
+        contents: String,
+    ) = with(fragmentChatBinding) {
         tvTopicTitle.text = title
 
         tvTopicContentsText.isGone = true
         ivTopicContentsImage.isGone = false
         clTopicContentsAudioContainer.isGone = true
 
+        var duration = 0
+        val initMediaPlayer = MediaPlayer()
+        initMediaPlayer.setDataSource(contents)
+        initMediaPlayer.setOnPreparedListener { player ->
+            duration = player.duration
+            val minutes = (duration / 60) % 60
+            tvTopicContentsAudioDuration.isGone = false
+            tvTopicContentsAudioDuration.text = "/%02d:%02d".format(duration, minutes)
+        }
+        initMediaPlayer.prepareAsync()
+
+        ivTopicContentsAudioPlayController.setOnClickListener {
+            if (ivTopicContentsAudioPlayController.isClickable) {
+
+                ivTopicContentsAudioPlayController.isClickable = false
+                val mediaPlayer = MediaPlayer()
+                var isPlaying = false
+                mediaPlayer.setDataSource(contents)
+
+
+
+                mediaPlayer.setOnPreparedListener { player ->
+                    ivTopicContentsAudioPlayController.setImageResource(R.drawable.bt_pause)
+                    tvTopicContentsAudioPlayTime.startCountUp()
+                    player.start()
+                    isPlaying = true
+
+                    viewModel.viewModelScope.launch {
+                        while (isPlaying) {
+                            lpiTopicContentsAudioProgress.progress =
+                                ((mediaPlayer.currentPosition / duration.toFloat()) * 100).toInt()
+                            delay(200)
+                        }
+                    }
+                }
+                mediaPlayer.setOnCompletionListener { player ->
+                    ivTopicContentsAudioPlayController.setImageResource(R.drawable.bt_play)
+                    tvTopicContentsAudioPlayTime.stopCountUp()
+                    tvTopicContentsAudioPlayTime.text = "00:00"
+                    lpiTopicContentsAudioProgress.progress = 0
+                    isPlaying = false
+                    ivTopicContentsAudioPlayController.isClickable = true
+                    mediaPlayer.release()
+                }
+
+                mediaPlayer.prepareAsync()
+            }
+        }
+
 
     }
 
-    private fun initFoldButton(fragmentChatBinding: FragmentChatBinding) = with(fragmentChatBinding) {
-
-
-    }
+    private fun initFoldButton(fragmentChatBinding: FragmentChatBinding) =
+        with(fragmentChatBinding) {
+            ivFoldUnfold.setOnClickListener {
+                val isGone = llTopicUnfoldContainer.isGone
+                llTopicUnfoldContainer.isGone = !isGone
+            }
+            tvTopicUnfold.setOnClickListener {
+                llTopicUnfoldContainer.isGone = true
+                clTopicContainer.isGone = true
+            }
+        }
 
 
     /** BackPressButton **/

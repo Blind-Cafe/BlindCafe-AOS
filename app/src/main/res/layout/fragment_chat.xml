@@ -139,10 +139,26 @@
                     android:layout_height="wrap_content"
                     android:text="@string/zero_time"
                     android:textColor="@color/white"
+                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
                     android:textSize="@dimen/font_size_11"
                     app:layout_constraintBottom_toBottomOf="@id/iv_topic_contents_audio_play_controller"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_topic_contents_audio_duration"
                     app:layout_constraintTop_toTopOf="@id/iv_topic_contents_audio_play_controller" />
+
+                <TextView
+                    android:id="@+id/tv_topic_contents_audio_duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_11"
+                    android:visibility="gone"
+                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_topic_contents_audio_play_controller"
+                    tools:text="/00:00"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/iv_topic_contents_audio_play_controller"/>
+
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -166,6 +182,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
+            android:id="@+id/ll_topic_unfold_container"
             android:visibility="gone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -182,6 +199,7 @@
                 android:background="@color/chat_topic_divider" />
 
             <TextView
+                android:id="@+id/tv_topic_unfold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/black_2"

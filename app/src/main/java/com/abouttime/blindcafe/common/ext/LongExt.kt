@@ -25,7 +25,7 @@ internal fun Long.secondToLapseForChat(): String {
     val seconds = currentTime - this
     val minutes = (seconds / 60) % 60
     val hours = seconds / (60 * 60)
-    return "%d시간 %02d분".format(hours, minutes)
+    return "%02d시간 %02d분".format(hours, minutes)
 }
 
 internal fun Long.secondToLapseForHome(): String {
@@ -33,6 +33,6 @@ internal fun Long.secondToLapseForHome(): String {
     val seconds = currentTime - this
     val minutes = (seconds / 60) % 60
     val hours = seconds / (60 * 60)
-    return "%d시간 %02d분".format(hours, minutes)
+    return "%02d:%02d".format(hours, minutes)
 }
 
