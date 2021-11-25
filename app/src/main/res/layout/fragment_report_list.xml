@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View.OnClickListener" />
+
+        <import type="android.view.View" />
+
+        <import type="androidx.core.content.ContextCompat" />
+
+        <variable
+            name="viewModel"
+            type="com.abouttime.blindcafe.presentation.main.my_page.setting.report_list.ReportListViewModel" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/black"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/black">
 
     <ImageView
         android:id="@+id/iv_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
+        android:onClick="@{() -> viewModel.onClickBackButton()}"
         android:layout_marginTop="27dp"
         android:src="@drawable/bt_back"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +39,7 @@
         android:fontFamily="@font/spoqa_han_sans_neo_bold"
         android:text="@string/report_list_title"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_size_16"
+        android:textSize="@dimen/font_size_15"
         app:layout_constraintBottom_toBottomOf="@id/iv_back"
         app:layout_constraintStart_toEndOf="@id/iv_back"
         app:layout_constraintTop_toTopOf="@id/iv_back" />
@@ -36,6 +52,7 @@
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:textSize="@dimen/font_size_15"
         android:textColor="@color/gray_300"
+        android:visibility="@{viewModel.isNone ? View.VISIBLE : View.INVISIBLE}"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,6 +65,7 @@
         android:id="@+id/rv_report_list"
         app:layout_constraintTop_toBottomOf="@id/iv_back"
         android:layout_marginTop="13dp"
+        android:visibility="@{viewModel.isNone ? View.INVISIBLE : View.VISIBLE}"
         app:layout_constraintStart_toStartOf="parent"
         tools:listitem="@layout/rv_item_report"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,3 +80,5 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

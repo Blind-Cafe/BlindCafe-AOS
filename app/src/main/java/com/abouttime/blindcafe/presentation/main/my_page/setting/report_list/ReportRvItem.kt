@@ -11,7 +11,7 @@ class ReportRvItem(
     private val report: Report
 ): BindableItem<RvItemReportBinding>() {
     override fun bind(viewBinding: RvItemReportBinding, position: Int) = with(viewBinding) {
-        tvTarget.text = tvTarget.resources.getString(R.string.report_confirm_yes).format(report.target)
+        tvTarget.text = tvTarget.resources.getString(R.string.report_list_item_title).format(report.target)
         tvReason.text = report.reason
         tvDate.text = report.date
     }

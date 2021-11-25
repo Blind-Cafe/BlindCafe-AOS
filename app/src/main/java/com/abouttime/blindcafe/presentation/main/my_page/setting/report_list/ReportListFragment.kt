@@ -19,6 +19,8 @@ class ReportListFragment: BaseFragment<ReportListViewModel>(R.layout.fragment_re
         super.onViewCreated(view, savedInstanceState)
         val fragmentReportListBinding = FragmentReportListBinding.bind(view)
         binding = fragmentReportListBinding
+        binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
 
         initRecyclerView(fragmentReportListBinding)
         observeReportsData()

@@ -180,8 +180,7 @@
     <string name="report_confirm_no">취소</string>
     <string name="report_confirm_yes">나가기</string>
 
-    <!-- report list  -->
-    <string name="report_list_title">%s님을 신고함</string>
+
 
 
     <!-- profile edit -->
@@ -277,6 +276,7 @@
 
     <!-- report list -->
     <string name="report_list_title">신고내역</string>
+    <string name="report_list_item_title">%s님을 신고함</string>
     <string name="report_list_none">신공한 내역이 없습니다.</string>
 
 
