@@ -190,6 +190,10 @@
     <string name="profile_edit_age_title">나이</string>
     <string name="profile_edit_sex_title">성별</string>
     <string name="profile_edit_location_title">지역</string>
+    <string name="profile_edit_nickname_hint">닉네임을 설정해주세요.</string>
+    <string name="profile_edit_age_hint">나이를 설정해주세요.</string>
+    <string name="profile_edit_sex_hint">성별을 설정해주세요.</string>
+    <string name="profile_edit_location_hint">지역을 설정해주세요.</string>
     <string name="profile_edit_impossible">수정이 불가능합니다.</string>
     <string name="profile_edit_complete">수정하기</string>
 

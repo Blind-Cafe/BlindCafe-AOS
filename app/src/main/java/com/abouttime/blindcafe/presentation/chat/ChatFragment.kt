@@ -46,8 +46,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import me.everything.android.ui.overscroll.IOverScrollState.*
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.io.File
+
 
 class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     private var binding: FragmentChatBinding? = null
@@ -86,18 +89,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         initPartnerNciknameTextView() // 상단 닉네임 초기화
 
         initChatRecyclerView(fragmentChatBinding) // 채팅 리사이클러뷰 초기화
-
-        binding?.srlRvContainer?.let { srl ->
-            srl.setColorSchemeResources(R.color.main, R.color.black_2)
-            srl.setScrollResolver(object : SwipeRefreshLayoutWithOverscroll.ScrollResolver {
-                override fun canScrollUp(): Boolean {
-                    return fragmentChatBinding.rvChatContainer.canScrollVertically(-1)
-                }
-            })
-            srl.setOnRefreshListener {
-                Log.e("swipe", "setOnRefreshListener 호출")
-            }
-        }
 
 
         subscribeMessages()
@@ -139,6 +130,30 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         ) {
             rvChatContainer.adapter = chatAdapter
             rvChatContainer.layoutManager = LinearLayoutManager(requireContext())
+
+            val decor = OverScrollDecoratorHelper.setUpOverScroll(rvChatContainer,
+                OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
+            decor.setOverScrollStateListener { decor, oldState, newState ->
+                Log.e("StateListener", "oldState: $oldState, newState: $newState")
+                when (newState) {
+                    STATE_IDLE -> {
+                    }
+                    STATE_DRAG_START_SIDE -> {
+                    }
+                    STATE_DRAG_END_SIDE -> {
+                    }
+                    STATE_BOUNCE_BACK -> if (oldState === STATE_DRAG_START_SIDE) {
+                        // Dragging stopped -- view is starting to bounce back from the *left-end* onto natural position.
+                    }
+                    else { // i.e. (oldState == STATE_DRAG_END_SIDE)
+                        // View is starting to bounce back from the *right-end*.
+                    }
+                }
+            }
+            decor.setOverScrollUpdateListener { decor, state, offset ->
+                Log.e("UpdateListener", "state: $state, $offset")
+            }
+
 
             var isScrolling = false
 
@@ -532,11 +547,13 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     }
 
     /** topic **/
-    private fun initTopicButton(fragmentChatBinding: FragmentChatBinding) = with(fragmentChatBinding) {
-        ivBell.setOnClickListener {
-            viewModel?.getTopic()
+    private fun initTopicButton(fragmentChatBinding: FragmentChatBinding) =
+        with(fragmentChatBinding) {
+            ivBell.setOnClickListener {
+                viewModel?.getTopic()
+            }
         }
-    }
+
     private fun observeTopicData(fragmentChatBinding: FragmentChatBinding) =
         with(fragmentChatBinding) {
             viewModel?.topic?.observe(viewLifecycleOwner) { topic ->

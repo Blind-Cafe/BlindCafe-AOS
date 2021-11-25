@@ -13,7 +13,8 @@ import com.abouttime.blindcafe.presentation.main.home.HomeViewModel
 import com.abouttime.blindcafe.presentation.main.home.coffee.CoffeeOrderViewModel
 import com.abouttime.blindcafe.presentation.main.home.exit.ExitViewModel
 import com.abouttime.blindcafe.presentation.main.my_page.MyPageViewModel
-import com.abouttime.blindcafe.presentation.main.my_page.edit.profile.ProfileEditViewModel
+import com.abouttime.blindcafe.presentation.main.my_page.edit.profile.image.ProfileImageEditViewModel
+import com.abouttime.blindcafe.presentation.main.my_page.edit.profile.info.ProfileEditViewModel
 import com.abouttime.blindcafe.presentation.main.my_page.setting.SettingViewModel
 import com.abouttime.blindcafe.presentation.main.my_page.setting.account_delete.AccountDeleteViewModel
 import com.abouttime.blindcafe.presentation.main.my_page.setting.account_delete.complete.AccountDeleteCompleteViewModel
@@ -76,6 +77,7 @@ internal val viewModelModule = module {
     viewModel { MyPageViewModel(get()) }
     viewModel { SettingViewModel() }
     viewModel { ProfileEditViewModel(get()) }
+    viewModel { ProfileImageEditViewModel(get())}
     viewModel { AccountDeleteViewModel() }
     viewModel { AccountDeleteCompleteViewModel() }
     viewModel { ReportListViewModel(get()) }
