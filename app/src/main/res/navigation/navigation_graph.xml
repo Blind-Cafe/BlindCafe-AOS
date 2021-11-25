@@ -28,6 +28,15 @@
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/ruleFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_dormancyFragment"
+            app:destination="@id/dormancyFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/ruleFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -118,6 +127,15 @@
         <action
             android:id="@+id/action_mainFragment_to_confirmDialogFragment"
             app:destination="@id/confirmDialogFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_dormancyFragment"
+            app:destination="@id/dormancyFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/ruleFragment"
@@ -303,9 +321,10 @@
         android:label="QuitReasonDialogFragment"
         tools:layout="@layout/dialog_fragment_quit_reason">
 
-        <argument android:name="matchingId"
+        <argument
+            android:name="matchingId"
             app:argType="integer"
-            app:nullable="false"/>
+            app:nullable="false" />
         <action
             android:id="@+id/action_quitReasonDialogFragment_to_confirmDialogFragment"
             app:destination="@id/confirmDialogFragment"
@@ -317,9 +336,10 @@
         android:name="com.abouttime.blindcafe.presentation.chat.report.ReportReasonDialogFragment"
         android:label="ReportReasonDialogFragment"
         tools:layout="@layout/dialog_fragment_report_reason">
-        <argument android:name="matchingId"
+        <argument
+            android:name="matchingId"
             app:argType="integer"
-            app:nullable="false"/>
+            app:nullable="false" />
         <action
             android:id="@+id/action_reportReasonDialogFragment_to_confirmDialogFragment"
             app:destination="@id/confirmDialogFragment"
@@ -465,7 +485,7 @@
         <argument
             android:name="matchingId"
             android:defaultValue="0"
-            app:argType="integer"/>
+            app:argType="integer" />
 
 
         <action
@@ -480,30 +500,30 @@
         <action
             android:id="@+id/action_confirmDialogFragment_to_exitFragment"
             app:destination="@id/exitFragment"
-            app:popUpTo="@id/matchingFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/matchingFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_confirmDialogFragment_to_loginFragment"
             app:destination="@id/loginFragment"
-            app:popUpTo="@id/mainFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/mainFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_confirmDialogFragment_to_mainFragment"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/mainFragment"
+            app:destination="@id/mainFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:destination="@id/mainFragment" />
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
     </dialog>
     <fragment
         android:id="@+id/accountDeleteCompleteFragment"
@@ -515,4 +535,9 @@
         android:name="com.abouttime.blindcafe.presentation.main.my_page.edit.interest.InterestEditFragment"
         android:label="InterestEditFragment"
         tools:layout="@layout/fragment_interest_edit" />
+    <fragment
+        android:id="@+id/dormancyFragment"
+        android:name="com.abouttime.blindcafe.presentation.main.dormancy.DormancyFragment"
+        android:label="DormancyFragment"
+        tools:layout="@layout/fragment_dormancy" />
 </navigation>

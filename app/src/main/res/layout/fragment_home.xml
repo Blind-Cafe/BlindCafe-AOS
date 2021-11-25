@@ -49,7 +49,9 @@
         <ImageView
             android:id="@+id/iv_bell_on"
             android:layout_width="wrap_content"
+            android:visibility="gone"
             android:layout_height="wrap_content"
+            tools:visibility="visible"
             android:src="@drawable/bt_home_bell_on"
             app:layout_constraintEnd_toEndOf="@id/iv_bell"
             app:layout_constraintTop_toTopOf="@id/iv_bell" />
@@ -58,6 +60,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
+            android:visibility="gone"
+            tools:visibility="visible"
             android:layout_marginEnd="4dp"
             android:background="@color/home_notification_background"
             android:paddingHorizontal="8dp"

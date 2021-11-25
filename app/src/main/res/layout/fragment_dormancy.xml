@@ -63,6 +63,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_marginTop="18dp"
         android:src="@drawable/ic_dormancy_time"
         android:id="@+id/iv_dormancy_time"
@@ -80,6 +81,7 @@
         android:text="@string/dormancy_time"
         android:textColor="@color/white"
         android:textSize="@dimen/font_size_16"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/iv_dormancy_time"
         app:layout_constraintEnd_toEndOf="@id/cl_description_container"
         app:layout_constraintStart_toEndOf="@id/iv_dormancy_time"
