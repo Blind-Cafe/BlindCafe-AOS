@@ -10,6 +10,7 @@ import androidx.core.view.marginTop
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.common.constants.LogTag
+import com.abouttime.blindcafe.common.constants.LogTag.HOME_TAG
 import com.abouttime.blindcafe.common.ext.secondToLapseForHome
 import com.abouttime.blindcafe.common.ext.setMarginTop
 import com.abouttime.blindcafe.databinding.FragmentHomeBinding
@@ -80,9 +81,15 @@ class HomeFragment: BaseFragment<HomeViewModel>(R.layout.fragment_home) {
                 text = getString(R.string.home_title_matching)
             }
             b.tvStateSubTitle.text = getString(R.string.home_subtitle_matching)
+
             viewModel?.startTime?.let { time ->
-                b.cpbLeftTime.progress = (((System.currentTimeMillis() / 1000) - time.toLong()) / (72 * 60 * 60)).toFloat()
+                val progress = ((((System.currentTimeMillis() / 1000) - time.toLong()) / (72 * 60 * 60).toFloat()) * 100)
+                Log.e(HOME_TAG, progress.toString())
+                b.cpbLeftTime.progress = progress
             }
+            val time  = viewModel?.startTime?.toLong()?.secondToLapseForHome()
+            b.tvTime.text = time
+            Log.e(HOME_TAG, time.toString())
 
         }
     }

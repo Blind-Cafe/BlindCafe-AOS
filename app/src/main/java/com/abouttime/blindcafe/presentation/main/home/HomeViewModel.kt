@@ -132,7 +132,6 @@ class HomeViewModel(
                         partnerNickname = partnerNickname!!
                     )
                 }
-                _time.value = startTime?.toLong()?.secondToLapseForHome()
             }
             4, 5, 6 -> { // 방 폭파 or 프로필 교환 거절
                 if (partnerNickname != null && reason != null) {
