@@ -24,21 +24,21 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_toolbar_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/cl_toolbar_container"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
 
 
             <ImageView
                 android:id="@+id/iv_back"
                 android:layout_width="wrap_content"
-                android:onClick="@{() -> viewModel.onClickBackButton()}"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="27dp"
+                android:onClick="@{() -> viewModel.onClickBackButton()}"
                 android:src="@drawable/bt_back"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -77,29 +77,37 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_chat_container"
+        <com.abouttime.blindcafe.presentation.chat.SwipeRefreshLayoutWithOverscroll
+            android:id="@+id/srl_rv_container"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:paddingTop="8dp"
-            android:clipToPadding="true"
+            android:overScrollMode="always"
             app:layout_constraintBottom_toTopOf="@id/ml_input_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ll_topic_unfold_container"
-            app:layout_constraintVertical_bias="1"
-            tools:listitem="@layout/rv_chat_item_receive_text" />
+            app:layout_constraintTop_toBottomOf="@id/ll_topic_unfold_container">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_chat_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:clipToPadding="true"
+                android:focusable="true"
+                android:overScrollMode="always"
+                android:paddingTop="8dp"
+                tools:listitem="@layout/rv_chat_item_receive_text" />
+
+
+        </com.abouttime.blindcafe.presentation.chat.SwipeRefreshLayoutWithOverscroll>
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_topic_container"
             android:layout_width="0dp"
-            android:visibility="gone"
             android:layout_height="wrap_content"
             android:background="@color/black_2"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cl_toolbar_container">
@@ -129,14 +137,14 @@
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_size_12"
-                tools:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/iv_fold_unfold"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_topic_title"
                 app:layout_constraintVertical_bias="0"
-                tools:text="영화관에서 보고 싶은 영화 장르는? 집에서 보는 장르와 다른가요? 다르냐고 아 달라??" />
+                tools:text="영화관에서 보고 싶은 영화 장르는? 집에서 보는 장르와 다른가요? 다르냐고 아 달라??"
+                tools:visibility="visible" />
 
 
             <ImageView
@@ -148,12 +156,12 @@
                 android:layout_marginBottom="8dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/temp_topic"
-                tools:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/iv_fold_unfold"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_topic_title" />
+                app:layout_constraintTop_toBottomOf="@id/tv_topic_title"
+                tools:visibility="visible" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_topic_contents_audio_container"
@@ -194,9 +202,9 @@
                     android:id="@+id/tv_topic_contents_audio_play_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
                     android:text="@string/zero_time"
                     android:textColor="@color/white"
-                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
                     android:textSize="@dimen/font_size_11"
                     app:layout_constraintBottom_toBottomOf="@id/iv_topic_contents_audio_play_controller"
                     app:layout_constraintEnd_toStartOf="@id/tv_topic_contents_audio_duration"
@@ -206,30 +214,26 @@
                     android:id="@+id/tv_topic_contents_audio_duration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
                     android:textColor="@color/white"
                     android:textSize="@dimen/font_size_11"
                     android:visibility="gone"
-                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
                     app:layout_constraintBottom_toBottomOf="@id/iv_topic_contents_audio_play_controller"
-                    tools:text="/00:00"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/iv_topic_contents_audio_play_controller"/>
-
+                    app:layout_constraintTop_toTopOf="@id/iv_topic_contents_audio_play_controller"
+                    tools:text="/00:00" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 
 
             <ImageView
                 android:id="@+id/iv_fold_unfold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="4dp"
-                android:layout_marginTop="4dp"
                 android:src="@drawable/bt_unfold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -240,10 +244,10 @@
 
         <LinearLayout
             android:id="@+id/ll_topic_unfold_container"
-            android:visibility="gone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cl_topic_container">
@@ -271,12 +275,6 @@
                 tools:ignore="RtlSymmetry" />
 
         </LinearLayout>
-
-
-
-
-
-
 
 
         <androidx.constraintlayout.motion.widget.MotionLayout

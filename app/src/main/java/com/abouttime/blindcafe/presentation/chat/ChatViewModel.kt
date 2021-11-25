@@ -39,7 +39,8 @@ class ChatViewModel(
     private val downloadAudioUrlUseCase: DownloadAudioUrlUseCase,
     private val fcmUseCase: PostFcmUseCase,
     private val getChatRoomInfoUseCase: GetChatRoomInfoUseCase,
-    private val getTopicUseCase: GetTopicUseCase
+    private val getTopicUseCase: GetTopicUseCase,
+    private val receiveMessagesUseCase: ReceiveMessagesUseCase
 ) : BaseViewModel() {
 
     private val _isSendButtonEnabled = MutableLiveData(false)
@@ -65,11 +66,6 @@ class ChatViewModel(
     var startTime: String? = null
     var matchingId: Int? = null
     val userId = getStringData(USER_ID)
-
-
-    init {
-        Log.e(RETROFIT_TAG, "ChatViewModel init")
-    }
 
 
     /** use cases **/

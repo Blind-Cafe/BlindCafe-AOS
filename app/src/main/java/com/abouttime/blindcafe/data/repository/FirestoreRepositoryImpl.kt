@@ -60,11 +60,12 @@ class FirestoreRepositoryImpl(
 
         } as Flow<Resource<List<Message>>>
 
-    override suspend fun receiveMessages(roomId: String): List<Message?> {
+    override suspend fun receiveMessages(roomId: String, startAt: Int, endAt: Int): List<Message?> {
         return firestore
             .roomCollectionRef
             .document(roomId)
             .collection(SUB_COLLECTION_MESSAGES)
+            .orderBy("timestamp", Query.Direction.ASCENDING)
             .get()
             .await()
             .documents

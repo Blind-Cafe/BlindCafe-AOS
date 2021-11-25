@@ -86,6 +86,13 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         initPartnerNciknameTextView() // 상단 닉네임 초기화
 
         initChatRecyclerView(fragmentChatBinding) // 채팅 리사이클러뷰 초기화
+
+        binding?.srlRvContainer?.setOnRefreshListener {
+            Log.e("swipe", "스와이프 됨")
+
+        }
+
+
         subscribeMessages()
         observeMessagesData()
 
@@ -148,6 +155,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                 }
             }
             )
+
         }
 
     private fun scrollRvToLastPosition(

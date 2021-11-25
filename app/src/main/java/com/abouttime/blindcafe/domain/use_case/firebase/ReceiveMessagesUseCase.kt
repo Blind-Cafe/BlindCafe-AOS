@@ -11,10 +11,10 @@ import retrofit2.HttpException
 class ReceiveMessagesUseCase(
     private val repository: FirestoreRepository
 ) {
-    operator fun invoke(roomId: String): Flow<Resource<List<Message?>>> = flow {
+    operator fun invoke(roomId: String, startAt: Int, endAt: Int): Flow<Resource<List<Message?>>> = flow {
         emit(Resource.Loading())
         try {
-            val response = repository.receiveMessages(roomId)
+            val response = repository.receiveMessages(roomId, startAt, endAt)
             emit(Resource.Success(response))
         } catch (e: Exception) {
             if (e is HttpException) {
