@@ -1,6 +1,7 @@
 package com.abouttime.blindcafe.presentation.common.confirm
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.view.isGone
 import androidx.navigation.fragment.navArgs
@@ -65,6 +66,7 @@ class ConfirmDialogFragment :
     private fun handleHomeMatchingCancel() {
         handleYesButton { viewModel.postCancelMatching() }
         handleNoButton {
+            Log.e("navigation", "아니요 누름")
             saveNavigationResult(CONFIRM_MATCHING_CANCEL, CONFIRM_NO)
             popDirections()
         }

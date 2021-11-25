@@ -38,6 +38,7 @@ class ConfirmViewModel(
                     if (result.message == "400") {
                         showToast(R.string.toast_fail)
                     } else {
+                        Log.e("navigation", "취소하기 누름")
                         saveNavigationData(Pair(CONFIRM_MATCHING_CANCEL, CONFIRM_YES))
                         popDirections()
                     }

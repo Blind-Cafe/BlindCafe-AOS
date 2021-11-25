@@ -27,7 +27,7 @@ abstract class BaseDialogFragment<VM: BaseViewModel>(layoutId: Int): DialogFragm
         super.onViewCreated(view, savedInstanceState)
         observeToastEvent()
         observeNavigationEvent()
-
+        observeSaveNavigationDataEvent()
 
     }
 
@@ -67,6 +67,9 @@ abstract class BaseDialogFragment<VM: BaseViewModel>(layoutId: Int): DialogFragm
 
     protected fun saveNavigationResult(key: String = "result", result: String) {
         findNavController().previousBackStackEntry?.savedStateHandle?.set(key, result)
+    }
+    protected fun saveHomeResult(key: String, result: String) {
+        findNavController().getBackStackEntry(R.id.mainFragment).savedStateHandle.set(key, result)
     }
 
 

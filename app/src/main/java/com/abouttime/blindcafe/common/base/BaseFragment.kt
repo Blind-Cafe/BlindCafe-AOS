@@ -36,7 +36,7 @@ abstract class BaseFragment<VM: BaseViewModel>(layoutId: Int) : Fragment(layoutI
         initLoadingDialog()
         observeToastEvent()
         observeNavigationEvent()
-
+        observeSaveNavigationDataEvent()
     }
 
     private fun observeLoadingEvent() {
@@ -54,9 +54,11 @@ abstract class BaseFragment<VM: BaseViewModel>(layoutId: Int) : Fragment(layoutI
         loadingDialog.setCanceledOnTouchOutside(true)
         loadingDialog.window?.setGravity(Gravity.CENTER)
     }
+
     protected fun showLoadingDialog() {
         loadingDialog.show()
     }
+
     protected fun dismissLoadingDialog() {
         loadingDialog.dismiss()
     }
@@ -88,7 +90,6 @@ abstract class BaseFragment<VM: BaseViewModel>(layoutId: Int) : Fragment(layoutI
 
     private fun observeSaveNavigationDataEvent() {
         viewModel.saveNavigationDataEvent.observe(viewLifecycleOwner) { pair ->
-
             saveNavigationResult(pair.first, pair.second)
         }
     }

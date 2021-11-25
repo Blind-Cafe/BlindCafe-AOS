@@ -132,9 +132,8 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
 
 
     private fun observeSavedNavigationData() {
-
         getNavigationResult(CONFIRM_MATCHING_CANCEL)?.observe(viewLifecycleOwner) { result ->
-
+            Log.e("navigation", "observeSavedNavigationData Home")
             viewModel.getHomeInfo()
         }
     }
