@@ -12,8 +12,8 @@ import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NICKNAME
 import com.abouttime.blindcafe.data.server.dto.matching.PostDrinkDto
 import com.abouttime.blindcafe.domain.model.Message
-import com.abouttime.blindcafe.domain.use_case.PostDrinkUseCase
-import com.abouttime.blindcafe.domain.use_case.SendMessageUseCase
+import com.abouttime.blindcafe.domain.use_case.server.PostDrinkUseCase
+import com.abouttime.blindcafe.domain.use_case.firebase.SendMessageUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -148,7 +148,7 @@ class CoffeeOrderViewModel(
             matchingId?.let { roomUid ->
                 sendDescriptionMessage(
                     Message(
-                        contents = "%s님 %s을(를) 주문하셨습니다.".format(mapToDrinkName(currentSelect), myNickname),
+                        contents = "%s님은 %s을(를) 주문하셨습니다.".format(myNickname, mapToDrinkName(currentSelect)),
                         type = 7,
                         roomUid = roomUid.toString()
                     )

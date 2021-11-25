@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.domain.use_case
+package com.abouttime.blindcafe.domain.use_case.firebase
 
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.ext.parseErrorBody

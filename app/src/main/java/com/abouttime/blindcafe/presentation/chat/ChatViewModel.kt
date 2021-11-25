@@ -16,7 +16,10 @@ import com.abouttime.blindcafe.common.constants.Retrofit.USER_ID
 import com.abouttime.blindcafe.data.server.dto.matching.topic.GetTopicDto
 import com.abouttime.blindcafe.data.server.dto.notification.PostFcmDto
 import com.abouttime.blindcafe.domain.model.Message
-import com.abouttime.blindcafe.domain.use_case.*
+import com.abouttime.blindcafe.domain.use_case.firebase.*
+import com.abouttime.blindcafe.domain.use_case.server.GetChatRoomInfoUseCase
+import com.abouttime.blindcafe.domain.use_case.server.GetTopicUseCase
+import com.abouttime.blindcafe.domain.use_case.server.PostFcmUseCase
 import com.abouttime.blindcafe.presentation.chat.audio.RecorderState
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.Dispatchers
@@ -28,7 +31,7 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 class ChatViewModel(
-    private val receiveMessageUseCase: ReceiveMessageUseCase,
+    private val subscribeMessageUseCase: SubscribeMessageUseCase,
     private val sendMessageUseCase: SendMessageUseCase,
     private val uploadImageUseCase: UploadImageUseCase,
     private val uploadAudioUseCase: UploadAudioUseCase,
@@ -82,7 +85,7 @@ class ChatViewModel(
     }
 
     fun subscribeMessages(roomId: String) = viewModelScope.launch(Dispatchers.IO) {
-        receiveMessageUseCase(roomId).collect { result ->
+        subscribeMessageUseCase(roomId).collect { result ->
             when (result) {
                 is Resource.Loading -> {
                     Log.d(FIRESTORE_TAG, "Messages Loading")

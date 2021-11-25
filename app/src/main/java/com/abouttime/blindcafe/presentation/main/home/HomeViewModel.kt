@@ -12,10 +12,9 @@ import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.ext.secondToLapseForHome
 import com.abouttime.blindcafe.domain.model.Message
-import com.abouttime.blindcafe.domain.use_case.GetHomeInfoUseCase
-import com.abouttime.blindcafe.domain.use_case.PostCancelMatchingUseCase
-import com.abouttime.blindcafe.domain.use_case.PostMatchingRequestUseCase
-import com.abouttime.blindcafe.domain.use_case.SendMessageUseCase
+import com.abouttime.blindcafe.domain.use_case.server.GetHomeInfoUseCase
+import com.abouttime.blindcafe.domain.use_case.server.PostMatchingRequestUseCase
+import com.abouttime.blindcafe.domain.use_case.firebase.SendMessageUseCase
 import com.abouttime.blindcafe.presentation.main.MainFragmentDirections
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
@@ -84,10 +83,12 @@ class HomeViewModel(
                         _homeStatusCode.postValue(getHomeStatusCode(status))
                         response.data?.matchingId?.let { roomUid ->
                             if (getHomeStatusCode(status) == 2) {
-                                Message(
-                                    contents = "매칭에 성공하였습니다.\n간단한 인사로 반갑게 맞아주세요.",
-                                    type = 7,
-                                    roomUid = roomUid.toString()
+                                sendDescriptionMessage(
+                                    Message(
+                                        contents = "매칭에 성공하였습니다.\n간단한 인사로 반갑게 맞아주세요.",
+                                        type = 7,
+                                        roomUid = roomUid.toString()
+                                    )
                                 )
                             }
                         }

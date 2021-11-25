@@ -1,6 +1,7 @@
 package com.abouttime.blindcafe.di
 
-import com.abouttime.blindcafe.domain.use_case.*
+import com.abouttime.blindcafe.domain.use_case.firebase.*
+import com.abouttime.blindcafe.domain.use_case.server.*
 import org.koin.dsl.module
 
 internal val useCaseModule = module {
@@ -12,16 +13,17 @@ internal val useCaseModule = module {
     factory { GetUserInfoUseCase(get()) }
     factory { PostUserInfoUseCase(get()) }
     factory { DeleteAccountUseCase(get()) }
-    factory { GetReportsUseCase(get())}
+    factory { GetReportsUseCase(get()) }
     factory { GetProfileInfoUseCase(get()) }
-    factory { PostDeviceTokenUseCase(get())}
+    factory { PostDeviceTokenUseCase(get()) }
 
     /** gallery **/
-    factory { FetchImagesUseCase(get())}
+    factory { FetchImagesUseCase(get()) }
 
     /** fire store **/
     factory { SendMessageUseCase(get()) }
-    factory { ReceiveMessageUseCase(get()) }
+    factory { SubscribeMessageUseCase(get()) }
+    factory { ReceiveMessagesUseCase(get()) }
 
     /** firebase storage **/
     factory { UploadAudioUseCase(get()) }
@@ -39,10 +41,10 @@ internal val useCaseModule = module {
     /** matching **/
     factory { PostMatchingRequestUseCase(get()) }
     factory { PostDrinkUseCase(get()) }
-    factory { GetChatRoomsUseCase(get())}
+    factory { GetChatRoomsUseCase(get()) }
     factory { GetChatRoomInfoUseCase(get()) }
-    factory { DeleteExitChatRoomUseCase(get())}
-    factory { GetTopicUseCase(get())}
+    factory { DeleteExitChatRoomUseCase(get()) }
+    factory { GetTopicUseCase(get()) }
     factory { PostReportUseCase(get()) }
     factory { PostCancelMatchingUseCase(get()) }
 

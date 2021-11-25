@@ -7,7 +7,7 @@ import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.data.server.dto.user_info.device_token.PostDeviceTokenDto
-import com.abouttime.blindcafe.domain.use_case.PostDeviceTokenUseCase
+import com.abouttime.blindcafe.domain.use_case.server.PostDeviceTokenUseCase
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn

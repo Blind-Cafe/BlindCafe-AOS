@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.domain.use_case
+package com.abouttime.blindcafe.domain.use_case.firebase
 
 import android.net.Uri
 import com.abouttime.blindcafe.common.Resource
@@ -9,13 +9,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 
-class UploadAudioUseCase(
+class UploadImageUseCase(
     private val repository: FirestorageRepository
 ) {
     operator fun invoke(message: Message, uri: Uri): Flow<Resource<Boolean>> = flow {
         emit(Resource.Loading<Boolean>())
         try {
-            val response = repository.uploadAudio(
+            val response = repository.uploadImage(
                 message = message,
                 uri = uri
             )
@@ -31,6 +31,5 @@ class UploadAudioUseCase(
                 emit(Resource.Error(message = message.toString()))
             }
         }
-
     }
 }

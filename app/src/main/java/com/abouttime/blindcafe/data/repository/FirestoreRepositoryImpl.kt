@@ -2,6 +2,7 @@ package com.abouttime.blindcafe.data.repository
 
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.constants.FirebaseKey
+import com.abouttime.blindcafe.common.constants.FirebaseKey.SUB_COLLECTION_MESSAGES
 import com.abouttime.blindcafe.data.firebase.Firestore
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.repository.FirestoreRepository
@@ -19,21 +20,23 @@ class FirestoreRepositoryImpl(
     private val firestore: Firestore,
 ) : FirestoreRepository {
     override suspend fun sendMessage(message: Message): DocumentReference? {
-        return firestore.roomCollectionRef
+        return firestore
+            .roomCollectionRef
             .document(message.roomUid)
-            .collection(FirebaseKey.SUB_COLLECTION_MESSAGES)
+            .collection(SUB_COLLECTION_MESSAGES)
             .add(message)
             .await()
     }
 
 
     @ExperimentalCoroutinesApi
-    override suspend fun receiveMessages(roomId: String): Flow<Resource<List<Message>>> =
+    override suspend fun subscribeMessages(roomId: String): Flow<Resource<List<Message>>> =
         callbackFlow {
             val subscription =
-                firestore.roomCollectionRef
+                firestore
+                    .roomCollectionRef
                     .document(roomId)
-                    .collection(FirebaseKey.SUB_COLLECTION_MESSAGES)
+                    .collection(SUB_COLLECTION_MESSAGES)
                     .orderBy("timestamp", Query.Direction.ASCENDING)
                     .addSnapshotListener { snapshot, error ->
                         if (snapshot != null) {
@@ -56,4 +59,17 @@ class FirestoreRepositoryImpl(
 
 
         } as Flow<Resource<List<Message>>>
+
+    override suspend fun receiveMessages(roomId: String): List<Message?> {
+        return firestore
+            .roomCollectionRef
+            .document(roomId)
+            .collection(SUB_COLLECTION_MESSAGES)
+            .get()
+            .await()
+            .documents
+            .map { doc ->
+                doc.toObject<Message>()
+            }
+    }
 }

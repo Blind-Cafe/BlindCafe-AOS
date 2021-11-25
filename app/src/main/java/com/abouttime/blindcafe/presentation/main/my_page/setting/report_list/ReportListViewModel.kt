@@ -9,7 +9,7 @@ import com.abouttime.blindcafe.common.SingleLiveData
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.data.server.dto.user_info.report.Report
-import com.abouttime.blindcafe.domain.use_case.GetReportsUseCase
+import com.abouttime.blindcafe.domain.use_case.server.GetReportsUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 

@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.data.gallery.Image
-import com.abouttime.blindcafe.domain.use_case.FetchImagesUseCase
+import com.abouttime.blindcafe.domain.use_case.firebase.FetchImagesUseCase
 
 class GalleryViewModel(
     private val fetchImagesUseCase: FetchImagesUseCase

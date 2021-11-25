@@ -1,22 +1,20 @@
-package com.abouttime.blindcafe.domain.use_case
+package com.abouttime.blindcafe.domain.use_case.server
 
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.ext.parseErrorBody
-import com.abouttime.blindcafe.data.server.dto.matching.PostDrinkDto
-import com.abouttime.blindcafe.data.server.dto.matching.PostDrinkResponse
+import com.abouttime.blindcafe.data.server.dto.matching.PostMatchingRequestResponse
 import com.abouttime.blindcafe.domain.repository.MatchingRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 
-class PostDrinkUseCase(
+class PostMatchingRequestUseCase(
     private val repository: MatchingRepository
 ) {
-    operator fun invoke(matchingId: Int, drink: PostDrinkDto): Flow<Resource<PostDrinkResponse?>> = flow {
-
-        emit(Resource.Loading<PostDrinkResponse?>())
+    operator fun invoke(): Flow<Resource<PostMatchingRequestResponse?>> = flow {
+        emit(Resource.Loading<PostMatchingRequestResponse?>())
         try {
-            val response = repository.postDrink(matchingId, drink)
+            val response = repository.postMatchingRequest()
             emit(Resource.Success(data = response))
 
         } catch (e: Exception) {

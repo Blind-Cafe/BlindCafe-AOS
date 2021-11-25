@@ -8,5 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface FirestoreRepository {
     suspend fun sendMessage(message: Message): DocumentReference?
-    suspend fun receiveMessages(roomId: String): Flow<Resource<List<Message>>>
+    suspend fun subscribeMessages(roomId: String): Flow<Resource<List<Message>>>
+    suspend fun receiveMessages(roomId: String): List<Message?>
+
 }

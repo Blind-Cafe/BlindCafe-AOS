@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.domain.use_case
+package com.abouttime.blindcafe.domain.use_case.server
 
 import android.util.Log
 import com.abouttime.blindcafe.common.Resource

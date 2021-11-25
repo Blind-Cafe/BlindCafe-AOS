@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.domain.use_case
+package com.abouttime.blindcafe.domain.use_case.firebase
 
 import android.net.Uri
 import com.abouttime.blindcafe.common.Resource
@@ -9,22 +9,20 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 
-class DownloadAudioUrlUseCase(
-    private val firestorageRepository: FirestorageRepository
+class UploadAudioUseCase(
+    private val repository: FirestorageRepository
 ) {
-    operator fun invoke(message: Message): Flow<Resource<Uri>> = flow {
-
-        emit(Resource.Loading<Uri>())
-
+    operator fun invoke(message: Message, uri: Uri): Flow<Resource<Boolean>> = flow {
+        emit(Resource.Loading<Boolean>())
         try {
-            val response = firestorageRepository
-                .downloadAudioUrl(
-                    message = message
-                )
+            val response = repository.uploadAudio(
+                message = message,
+                uri = uri
+            )
             if (response != null) {
-                emit(Resource.Success(data = response))
+                emit(Resource.Success(data = true))
             } else {
-                emit(Resource.Error<Uri>(message = "response is null!"))
+                emit(Resource.Error<Boolean>(message = "response is null"))
             }
 
         } catch (e: Exception) {

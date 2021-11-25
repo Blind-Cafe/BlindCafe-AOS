@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.domain.use_case
+package com.abouttime.blindcafe.domain.use_case.firebase
 
 import android.util.Log
 import androidx.lifecycle.LiveData

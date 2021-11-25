@@ -10,9 +10,9 @@ import com.abouttime.blindcafe.common.constants.NavigationKey.CONFIRM_MATCHING_C
 import com.abouttime.blindcafe.common.constants.NavigationKey.CONFIRM_YES
 import com.abouttime.blindcafe.common.constants.PreferenceKey.INFO_INPUT
 import com.abouttime.blindcafe.common.constants.Retrofit.JWT
-import com.abouttime.blindcafe.domain.use_case.DeleteAccountUseCase
-import com.abouttime.blindcafe.domain.use_case.DeleteExitChatRoomUseCase
-import com.abouttime.blindcafe.domain.use_case.PostCancelMatchingUseCase
+import com.abouttime.blindcafe.domain.use_case.server.DeleteAccountUseCase
+import com.abouttime.blindcafe.domain.use_case.server.DeleteExitChatRoomUseCase
+import com.abouttime.blindcafe.domain.use_case.server.PostCancelMatchingUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 

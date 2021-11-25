@@ -1,21 +1,24 @@
-package com.abouttime.blindcafe.domain.use_case
+package com.abouttime.blindcafe.domain.use_case.server
 
 import com.abouttime.blindcafe.common.Resource
-import com.abouttime.blindcafe.common.base.BaseResponse
 import com.abouttime.blindcafe.common.ext.parseErrorBody
+import com.abouttime.blindcafe.data.server.dto.matching.PostDrinkDto
+import com.abouttime.blindcafe.data.server.dto.matching.PostDrinkResponse
 import com.abouttime.blindcafe.domain.repository.MatchingRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 
-class DeleteExitChatRoomUseCase(
+class PostDrinkUseCase(
     private val repository: MatchingRepository
 ) {
-    operator fun invoke(matchingId: Int, reason: Int): Flow<Resource<BaseResponse?>> = flow {
-        emit(Resource.Loading())
+    operator fun invoke(matchingId: Int, drink: PostDrinkDto): Flow<Resource<PostDrinkResponse?>> = flow {
+
+        emit(Resource.Loading<PostDrinkResponse?>())
         try {
-            val response = repository.exitChatRoom(matchingId, reason)
-            emit(Resource.Success(response))
+            val response = repository.postDrink(matchingId, drink)
+            emit(Resource.Success(data = response))
+
         } catch (e: Exception) {
             if (e is HttpException) {
                 val message = e.parseErrorBody()
