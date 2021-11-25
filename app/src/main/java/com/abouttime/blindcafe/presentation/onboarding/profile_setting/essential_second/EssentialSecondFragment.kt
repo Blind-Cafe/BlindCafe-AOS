@@ -59,7 +59,7 @@ class EssentialSecondFragment :
 
     private fun initAgeEditText(fragmentEssentialSecondBinding: FragmentEssentialSecondBinding) {
         val nicknameEditText = fragmentEssentialSecondBinding.etNickname
-        val alertNicknameText = fragmentEssentialSecondBinding.tvAlertNickname
+        val alertNicknameText = fragmentEssentialSecondBinding.tvAlertNickname1
 
         nicknameEditText.setOnFocusChangeListener { view, isFocused ->
             if (isFocused) {

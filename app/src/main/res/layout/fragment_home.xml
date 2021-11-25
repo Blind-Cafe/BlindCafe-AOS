@@ -90,13 +90,13 @@
 
 
             <com.mikhaellopez.circularprogressbar.CircularProgressBar
-                android:id="@+id/pb_left_time"
+                android:id="@+id/cpb_left_time"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:visibility="@{viewModel.homeStatusCode == 3 ? View.VISIBLE : View.INVISIBLE}"
-                app:cpb_background_progressbar_color="@color/gray_900"
+                android:visibility="@{viewModel.homeStatusCode == 2 | viewModel.homeStatusCode == 3 ? View.VISIBLE : View.INVISIBLE}"
+                app:cpb_background_progressbar_color="@color/disabled"
                 app:cpb_background_progressbar_width="12dp"
-                app:cpb_progress="30"
+                app:cpb_progress="0"
                 app:cpb_progressbar_color="@color/main"
                 app:cpb_progressbar_color_end="@color/home_cpb_end"
                 app:cpb_progressbar_color_start="@color/main"
@@ -156,7 +156,6 @@
                 app:layout_constraintEnd_toEndOf="@id/iv_home_bg_2"
                 app:layout_constraintStart_toStartOf="@id/iv_home_bg_2"
                 app:layout_constraintTop_toBottomOf="@id/iv_home_ic"
-                tools:text="00:00"
                 tools:visibility="gone" />
 
 

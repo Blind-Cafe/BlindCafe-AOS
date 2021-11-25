@@ -111,16 +111,31 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_age" />
 
             <TextView
-                android:id="@+id/tv_alert_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_alert_nickname_1"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                android:text="@string/profile_setting_nickname_rule_1"
+                android:textColor="@color/main"
+                android:textSize="@dimen/font_size_11"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_nickname"
+                tools:visibility="visible"/>
+
+
+            <TextView
+                android:id="@+id/tv_alert_nickname_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                android:text="@string/profile_setting_nickname_rule"
+                android:text="@string/profile_setting_nickname_rule_2"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_size_11"
                 android:visibility="gone"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_alert_nickname_1"
                 app:layout_constraintTop_toBottomOf="@id/et_nickname"
                 tools:visibility="visible" />
 
@@ -134,7 +149,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_size_15"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_alert_nickname" />
+                app:layout_constraintTop_toBottomOf="@id/tv_alert_nickname_2" />
 
             <FrameLayout
                 android:id="@+id/fl_female_container"

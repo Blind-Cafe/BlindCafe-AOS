@@ -3,6 +3,7 @@ package com.abouttime.blindcafe.common.ext
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintProperties
 import androidx.core.view.updateLayoutParams
 
 fun View.setMarginTop(value: Int) = updateLayoutParams<ViewGroup.MarginLayoutParams> {

@@ -97,7 +97,8 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         addBackPressButtonListener() // 뒤로가기 버튼 리스너
         observeRecorderState(fragmentChatBinding) // 녹음 상태별 초기화
 
-        observeTopicData(fragmentChatBinding)
+        initTopicButton(fragmentChatBinding) // 토픽요청 버튼 초기화
+        observeTopicData(fragmentChatBinding) // 토픽 데이터 구독
     }
 
 
@@ -515,6 +516,11 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     }
 
     /** topic **/
+    private fun initTopicButton(fragmentChatBinding: FragmentChatBinding) = with(fragmentChatBinding) {
+        ivBell.setOnClickListener {
+            viewModel?.getTopic()
+        }
+    }
     private fun observeTopicData(fragmentChatBinding: FragmentChatBinding) =
         with(fragmentChatBinding) {
             viewModel?.topic?.observe(viewLifecycleOwner) { topic ->
@@ -602,7 +608,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                     player.start()
                     isPlaying = true
 
-                    viewModel.viewModelScope.launch {
+                    viewModel?.viewModelScope?.launch {
                         while (isPlaying) {
                             lpiTopicContentsAudioProgress.progress =
                                 ((mediaPlayer.currentPosition / duration.toFloat()) * 100).toInt()

@@ -9,6 +9,7 @@ import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
+import com.abouttime.blindcafe.common.ext.secondToLapseForHome
 import com.abouttime.blindcafe.domain.use_case.GetHomeInfoUseCase
 import com.abouttime.blindcafe.domain.use_case.PostCancelMatchingUseCase
 import com.abouttime.blindcafe.domain.use_case.PostMatchingRequestUseCase
@@ -29,7 +30,7 @@ class HomeViewModel(
     private var reason: String? = null
     private var partnerNickname: String? = null
     private var matchingId: Int? = null
-    private var startTime: String? = null
+    var startTime: String? = null
     private var partnerId: Int? = null
 
     init {
@@ -121,6 +122,7 @@ class HomeViewModel(
                         partnerNickname = partnerNickname
                     )
                 }
+                _time.value = "00:00"
             }
             3 -> { // 매칭 + 음료선택 완료
                 if (matchingId != null && startTime != null && partnerNickname != null) {
@@ -130,13 +132,13 @@ class HomeViewModel(
                         partnerNickname = partnerNickname!!
                     )
                 }
-
-
+                _time.value = startTime?.toLong()?.secondToLapseForHome()
             }
             4, 5, 6 -> { // 방 폭파 or 프로필 교환 거절
                 if (partnerNickname != null && reason != null) {
                     moveToExitFragment(partnerNickname, reason)
                 }
+                _time.value = startTime?.toLong()?.secondToLapseForHome()
             }
             else -> {
             }
@@ -187,6 +189,8 @@ class HomeViewModel(
             )
         )
     }
+
+
 
 
 }

@@ -23,17 +23,72 @@
         android:background="@color/black">
 
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/cl_toolbar_container"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="27dp"
+                android:src="@drawable/bt_back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_other_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/spoqa_han_sans_neo_bold"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_15"
+                app:layout_constraintBottom_toBottomOf="@id/iv_back"
+                app:layout_constraintStart_toEndOf="@id/iv_back"
+                app:layout_constraintTop_toTopOf="@id/iv_back"
+                tools:text="Erick" />
+
+            <ImageView
+                android:id="@+id/iv_bell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bt_bell"
+                app:layout_constraintBottom_toBottomOf="@id/iv_back"
+                app:layout_constraintEnd_toStartOf="@+id/iv_menu"
+                app:layout_constraintTop_toTopOf="@id/iv_back" />
+
+            <ImageView
+                android:id="@+id/iv_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/bt_menu"
+                app:layout_constraintBottom_toBottomOf="@id/iv_back"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/iv_back" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_chat_container"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
             android:clickable="true"
             android:focusable="true"
+            android:paddingTop="8dp"
+            android:clipToPadding="true"
             app:layout_constraintBottom_toTopOf="@id/ml_input_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_back"
+            app:layout_constraintTop_toBottomOf="@id/cl_topic_container"
             app:layout_constraintVertical_bias="1"
             tools:listitem="@layout/rv_chat_item_receive_text" />
 
@@ -41,11 +96,12 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_topic_container"
             android:layout_width="0dp"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:background="@color/black_2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/rv_chat_container">
+            app:layout_constraintTop_toBottomOf="@id/cl_toolbar_container">
 
             <TextView
                 android:id="@+id/tv_topic_title"
@@ -216,46 +272,10 @@
         </LinearLayout>
 
 
-        <ImageView
-            android:id="@+id/iv_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="27dp"
-            android:src="@drawable/bt_back"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_other_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/spoqa_han_sans_neo_bold"
-            android:textColor="@color/white"
-            android:textSize="@dimen/font_size_15"
-            app:layout_constraintBottom_toBottomOf="@id/iv_back"
-            app:layout_constraintStart_toEndOf="@id/iv_back"
-            app:layout_constraintTop_toTopOf="@id/iv_back"
-            tools:text="Erick" />
 
-        <ImageView
-            android:id="@+id/iv_bell"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/bt_bell"
-            app:layout_constraintBottom_toBottomOf="@id/iv_back"
-            app:layout_constraintEnd_toStartOf="@+id/iv_menu"
-            app:layout_constraintTop_toTopOf="@id/iv_back" />
 
-        <ImageView
-            android:id="@+id/iv_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/bt_menu"
-            app:layout_constraintBottom_toBottomOf="@id/iv_back"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/iv_back" />
+
 
 
         <androidx.constraintlayout.motion.widget.MotionLayout
