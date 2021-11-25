@@ -148,7 +148,7 @@ class CoffeeOrderViewModel(
             matchingId?.let { roomUid ->
                 sendDescriptionMessage(
                     Message(
-                        contents = "%s를 주문한 %s 님입니다.\n간단한 인사를 건네 반갑게 맞아주세요.".format(mapToDrinkName(currentSelect), myNickname),
+                        contents = "%s님 %s을(를) 주문하셨습니다.".format(mapToDrinkName(currentSelect), myNickname),
                         type = 7,
                         roomUid = roomUid.toString()
                     )

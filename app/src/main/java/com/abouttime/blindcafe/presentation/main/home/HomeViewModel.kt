@@ -8,18 +8,24 @@ import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
+import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.ext.secondToLapseForHome
+import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.use_case.GetHomeInfoUseCase
 import com.abouttime.blindcafe.domain.use_case.PostCancelMatchingUseCase
 import com.abouttime.blindcafe.domain.use_case.PostMatchingRequestUseCase
+import com.abouttime.blindcafe.domain.use_case.SendMessageUseCase
 import com.abouttime.blindcafe.presentation.main.MainFragmentDirections
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val getHomeInfoUseCase: GetHomeInfoUseCase,
     private val postMatchingRequestUseCase: PostMatchingRequestUseCase,
+    private val sendMessageUseCase: SendMessageUseCase
 ) : BaseViewModel() {
     private val _homeStatusCode: MutableLiveData<Int> = MutableLiveData<Int>(-1)
     val homeStatusCode: LiveData<Int> get() = _homeStatusCode
@@ -76,12 +82,39 @@ class HomeViewModel(
                     Log.d(RETROFIT_TAG, response.data.toString())
                     response.data?.matchingStatus?.let { status ->
                         _homeStatusCode.postValue(getHomeStatusCode(status))
+                        response.data?.matchingId?.let { roomUid ->
+                            if (getHomeStatusCode(status) == 2) {
+                                Message(
+                                    contents = "매칭에 성공하였습니다.\n간단한 인사로 반갑게 맞아주세요.",
+                                    type = 7,
+                                    roomUid = roomUid.toString()
+                                )
+                            }
+                        }
+
                     }
                 }
                 is Resource.Error -> {
                     Log.d(RETROFIT_TAG, response.message.toString())
                 }
             }
+        }.launchIn(viewModelScope)
+    }
+
+    fun sendDescriptionMessage(message: Message) = viewModelScope.launch(Dispatchers.IO) {
+        sendMessageUseCase(message).onEach { result ->
+            when (result) {
+                is Resource.Loading -> {
+                    Log.d(LogTag.FIRESTORE_TAG, "Loading")
+                }
+                is Resource.Success -> {
+                    Log.d(LogTag.FIRESTORE_TAG, "${result.data?.id}")
+                }
+                is Resource.Error -> {
+                    Log.d(LogTag.FIRESTORE_TAG, "Error")
+                }
+            }
+
         }.launchIn(viewModelScope)
     }
 

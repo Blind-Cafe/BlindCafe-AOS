@@ -22,8 +22,7 @@ import kotlin.random.Random
 
 private const val CHANNEL_ID = "FCM Message Channel"
 
-class FirebaseService(
-): FirebaseMessagingService() {
+class FirebaseService(): FirebaseMessagingService() {
 
 
     companion object {
