@@ -1,7 +1,7 @@
 package com.abouttime.blindcafe.data.firebase
 
-import com.abouttime.blindcafe.common.constants.FIREBASE_KEY.STORAGE_AUDIO
-import com.abouttime.blindcafe.common.constants.FIREBASE_KEY.STORAGE_IMAGE
+import com.abouttime.blindcafe.common.constants.FirebaseKey.STORAGE_AUDIO
+import com.abouttime.blindcafe.common.constants.FirebaseKey.STORAGE_IMAGE
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 

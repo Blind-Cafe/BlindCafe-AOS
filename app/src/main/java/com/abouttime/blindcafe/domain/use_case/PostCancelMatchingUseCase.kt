@@ -15,11 +15,14 @@ class PostCancelMatchingUseCase(
         emit(Resource.Loading())
         try {
             val response = repository.postCancelMatching()
-            emit(Resource.Success(response))
+            emit(Resource.Success<BaseResponse?>(BaseResponse()))
+            //emit(Resource.Success(response))
         } catch (e: Exception) {
             if (e is HttpException) {
                 val message = e.parseErrorBody()
-                emit(Resource.Error(message = message.toString()))
+                emit(Resource.Error(message = message.code.toString()))
+            } else {
+                emit(Resource.Error(message = e.message.toString()))
             }
         }
     }

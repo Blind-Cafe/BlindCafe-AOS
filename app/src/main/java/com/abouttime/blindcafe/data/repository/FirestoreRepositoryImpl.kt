@@ -1,7 +1,7 @@
 package com.abouttime.blindcafe.data.repository
 
 import com.abouttime.blindcafe.common.Resource
-import com.abouttime.blindcafe.common.constants.FIREBASE_KEY
+import com.abouttime.blindcafe.common.constants.FirebaseKey
 import com.abouttime.blindcafe.data.firebase.Firestore
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.repository.FirestoreRepository
@@ -21,7 +21,7 @@ class FirestoreRepositoryImpl(
     override suspend fun sendMessage(message: Message): DocumentReference? {
         return firestore.roomCollectionRef
             .document(message.roomUid)
-            .collection(FIREBASE_KEY.SUB_COLLECTION_MESSAGES)
+            .collection(FirebaseKey.SUB_COLLECTION_MESSAGES)
             .add(message)
             .await()
     }
@@ -33,7 +33,7 @@ class FirestoreRepositoryImpl(
             val subscription =
                 firestore.roomCollectionRef
                     .document(roomId)
-                    .collection(FIREBASE_KEY.SUB_COLLECTION_MESSAGES)
+                    .collection(FirebaseKey.SUB_COLLECTION_MESSAGES)
                     .orderBy("timestamp", Query.Direction.ASCENDING)
                     .addSnapshotListener { snapshot, error ->
                         if (snapshot != null) {

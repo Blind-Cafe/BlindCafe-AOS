@@ -34,6 +34,8 @@ import com.abouttime.blindcafe.common.ext.setMarginTop
 import com.abouttime.blindcafe.databinding.FragmentChatBinding
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.presentation.chat.audio.RecorderState
+import com.abouttime.blindcafe.presentation.chat.rv_item.AudioReceiveItem
+import com.abouttime.blindcafe.presentation.chat.rv_item.AudioSendItem
 import com.abouttime.blindcafe.presentation.chat.rv_item.DescriptionItem
 import com.bumptech.glide.Glide
 import com.example.chatexample.presentation.ui.chat.rv_item.*
@@ -387,7 +389,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     private fun startRecording() {
         recorder = MediaRecorder().apply {
             setAudioSource(MediaRecorder.AudioSource.MIC)
-            setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+            setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
             setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
             // 따로 저장하지 않을거라서 캐시에 저장
             // 나중에 다른 곳에 저장할 때는 내부 저장소는 녹음 파일이 얼마나 커질지 모르니 충분한 공간을 제공하지 못할 수 있음에 주의

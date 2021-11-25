@@ -56,6 +56,19 @@ abstract class BaseDialogFragment<VM: BaseViewModel>(layoutId: Int): DialogFragm
         findNavController().popBackStack()
     }
 
+    private fun observeSaveNavigationDataEvent() {
+        viewModel.saveNavigationDataEvent.observe(viewLifecycleOwner) { pair ->
+            saveNavigationResult(pair.first, pair.second)
+        }
+    }
+
+    protected fun getNavigationResult(key: String = "result") =
+        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(key)
+
+    protected fun saveNavigationResult(key: String = "result", result: String) {
+        findNavController().previousBackStackEntry?.savedStateHandle?.set(key, result)
+    }
+
 
     /** Hide Keyboard **/
     fun hideKeyboard() {

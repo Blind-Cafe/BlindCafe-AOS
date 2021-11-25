@@ -122,7 +122,7 @@ class HomeViewModel(
                         partnerNickname = partnerNickname
                     )
                 }
-                _time.value = "00:00"
+
             }
             3 -> { // 매칭 + 음료선택 완료
                 if (matchingId != null && startTime != null && partnerNickname != null) {

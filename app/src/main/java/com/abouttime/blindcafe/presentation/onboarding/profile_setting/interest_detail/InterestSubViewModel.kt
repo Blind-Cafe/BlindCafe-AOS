@@ -10,8 +10,8 @@ import com.abouttime.blindcafe.common.SingleLiveData
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
-import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY
-import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.INFO_INPUT
+import com.abouttime.blindcafe.common.constants.PreferenceKey
+import com.abouttime.blindcafe.common.constants.PreferenceKey.INFO_INPUT
 import com.abouttime.blindcafe.data.server.dto.interest.Interest
 import com.abouttime.blindcafe.data.server.dto.user_info.UserInterest
 import com.abouttime.blindcafe.data.server.dto.user_info.PostUserInfoDto
@@ -37,7 +37,7 @@ class InterestSubViewModel(
 
     init {
         try {
-            val interests = getStringData(PREFERENCES_KEY.INTERESTS)?.split(",")
+            val interests = getStringData(PreferenceKey.INTERESTS)?.split(",")
             Log.e(RETROFIT_TAG, interests.toString())
             val interest1 = interests?.get(0)?.toInt()
             val interest2 = interests?.get(1)?.toInt()
@@ -103,11 +103,11 @@ class InterestSubViewModel(
 
     fun postUserInfo() = viewModelScope.launch(Dispatchers.IO) {
 
-        val age = getStringData(PREFERENCES_KEY.AGE)?.toInt()
-        val myGender = getStringData(PREFERENCES_KEY.SEX)
-        val nickname = getStringData(PREFERENCES_KEY.NICKNAME)
-        val partnerGender = getStringData(PREFERENCES_KEY.MATCHING_SEX)
-        val interests = getStringData(PREFERENCES_KEY.INTERESTS)?.split(",")
+        val age = getStringData(PreferenceKey.AGE)?.toInt()
+        val myGender = getStringData(PreferenceKey.SEX)
+        val nickname = getStringData(PreferenceKey.NICKNAME)
+        val partnerGender = getStringData(PreferenceKey.MATCHING_SEX)
+        val interests = getStringData(PreferenceKey.INTERESTS)?.split(",")
         val interest1 = interests?.get(0)?.let { interestMap[it.toInt()] }
         val interest2 = interests?.get(1)?.let { interestMap[it.toInt()] }
         val interest3 = interests?.get(2)?.let { interestMap[it.toInt()] }

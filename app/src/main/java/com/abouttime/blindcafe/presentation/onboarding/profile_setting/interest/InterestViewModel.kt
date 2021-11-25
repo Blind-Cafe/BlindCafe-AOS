@@ -4,7 +4,7 @@ import android.util.Log
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
-import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.INTERESTS
+import com.abouttime.blindcafe.common.constants.PreferenceKey.INTERESTS
 
 class InterestViewModel(
 

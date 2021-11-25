@@ -1,6 +1,6 @@
 package com.abouttime.blindcafe.common.constants
 
-object PREFERENCES_KEY {
+object PreferenceKey {
     const val PREFERENCES_NAME = "BLIND_CAFE"
     const val AGE = "age"
     const val SEX = "sex"

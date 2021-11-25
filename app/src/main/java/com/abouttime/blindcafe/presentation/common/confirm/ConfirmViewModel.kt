@@ -2,12 +2,13 @@ package com.abouttime.blindcafe.presentation.common.confirm
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.fragment.navArgs
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
-import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.INFO_INPUT
+import com.abouttime.blindcafe.common.constants.NavigationKey.CONFIRM_MATCHING_CANCEL
+import com.abouttime.blindcafe.common.constants.NavigationKey.CONFIRM_YES
+import com.abouttime.blindcafe.common.constants.PreferenceKey.INFO_INPUT
 import com.abouttime.blindcafe.common.constants.Retrofit.JWT
 import com.abouttime.blindcafe.domain.use_case.DeleteAccountUseCase
 import com.abouttime.blindcafe.domain.use_case.DeleteExitChatRoomUseCase
@@ -34,8 +35,13 @@ class ConfirmViewModel(
                 }
                 is Resource.Error -> {
                     Log.e(RETROFIT_TAG, result.message.toString())
+                    if (result.message == "400") {
+                        showToast(R.string.toast_fail)
+                    } else {
+                        saveNavigationData(Pair(CONFIRM_MATCHING_CANCEL, CONFIRM_YES))
+                        popDirections()
+                    }
                     dismissLoading()
-                    showToast(R.string.toast_fail)
                 }
             }
         }.launchIn(viewModelScope)
@@ -61,6 +67,12 @@ class ConfirmViewModel(
         }.launchIn(viewModelScope)
     }
 
+    fun exitChatRoomByReport(isReport: Boolean, title: String) {
+        moveToDirections(ConfirmDialogFragmentDirections.actionConfirmDialogFragmentToExitFragment(
+            isReport = isReport,
+            title = title
+        ))
+    }
 
 
     fun logout() {

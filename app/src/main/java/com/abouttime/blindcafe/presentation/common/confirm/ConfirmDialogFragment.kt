@@ -6,7 +6,9 @@ import androidx.core.view.isGone
 import androidx.navigation.fragment.navArgs
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseDialogFragment
-import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.NICKNAME
+import com.abouttime.blindcafe.common.constants.NavigationKey.CONFIRM_MATCHING_CANCEL
+import com.abouttime.blindcafe.common.constants.NavigationKey.CONFIRM_NO
+import com.abouttime.blindcafe.common.constants.PreferenceKey.NICKNAME
 import com.abouttime.blindcafe.databinding.DialogFragmentConfirmBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -23,7 +25,7 @@ class ConfirmDialogFragment :
         binding = dialogFragmentConfirmBinding
         binding?.lifecycleOwner = this
         binding?.viewModel = viewModel
-
+        isCancelable = false
 
         initViews(dialogFragmentConfirmBinding)
         bindData()
@@ -62,7 +64,10 @@ class ConfirmDialogFragment :
     }
     private fun handleHomeMatchingCancel() {
         handleYesButton { viewModel.postCancelMatching() }
-        handleNoButton { popDirections() }
+        handleNoButton {
+            saveNavigationResult(CONFIRM_MATCHING_CANCEL, CONFIRM_NO)
+            popDirections()
+        }
     }
 
     private fun handleProfileDismiss() {
@@ -81,19 +86,15 @@ class ConfirmDialogFragment :
     }
 
     private fun handleReport() {
-        val matchingId = args.matchingId
-        val reason = args.reason
-
         binding?.tvNo?.isGone = true
-        handleYesButton {
-            if (matchingId != 0 && reason != 0) {
-                val title = getString(R.string.exit_complete_title_by_report).format(getStringData(NICKNAME))
-                viewModel.exitChatRoom(matchingId, reason, true, title)
-            } else {
-                showToast(R.string.toast_check_internet)
-            }
-        }
 
+        handleYesButton {
+            val title = getString(R.string.exit_complete_title).format(getStringData(NICKNAME))
+            viewModel.exitChatRoomByReport(true, title)
+        }
+        handleNoButton {
+            popDirections()
+        }
     }
 
     private fun handleQuit() {

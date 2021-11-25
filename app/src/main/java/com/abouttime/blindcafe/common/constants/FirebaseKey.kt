@@ -1,6 +1,6 @@
 package com.abouttime.blindcafe.common.constants
 
-object FIREBASE_KEY {
+object FirebaseKey {
 
     const val COLLECTION_ROOMS = "Rooms"
     const val SUB_COLLECTION_MESSAGES = "Messages"

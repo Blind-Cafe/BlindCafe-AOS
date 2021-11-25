@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.abouttime.BlindCafeApplication
@@ -84,6 +86,23 @@ abstract class BaseFragment<VM: BaseViewModel>(layoutId: Int) : Fragment(layoutI
         findNavController().popBackStack()
     }
 
+    private fun observeSaveNavigationDataEvent() {
+        viewModel.saveNavigationDataEvent.observe(viewLifecycleOwner) { pair ->
+
+            saveNavigationResult(pair.first, pair.second)
+        }
+    }
+
+    protected fun getNavigationResult(key: String): MutableLiveData<String>? {
+        Log.e("navigation", "getNavigationResult $key")
+        return findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(key)
+    }
+    private fun saveNavigationResult(key: String, result: String) {
+        Log.e("navigation", "saveNavigationResult $key $result")
+        findNavController().previousBackStackEntry?.savedStateHandle?.set(key, result)
+    }
+
+
 
     /** Hide Keyboard **/
     fun hideKeyboard() {
@@ -141,12 +160,6 @@ abstract class BaseFragment<VM: BaseViewModel>(layoutId: Int) : Fragment(layoutI
 
     }
 
-    fun Fragment.getNavigationResult(key: String = "result") =
-        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(key)
-
-    fun Fragment.setNavigationResult(result: String, key: String = "result") {
-        findNavController().previousBackStackEntry?.savedStateHandle?.set(key, result)
-    }
 
 
 }

@@ -1,4 +1,4 @@
-package com.example.chatexample.presentation.ui.chat.rv_item
+package com.abouttime.blindcafe.presentation.chat.rv_item
 
 import android.media.MediaPlayer
 import android.view.View
@@ -25,6 +25,8 @@ class AudioReceiveItem(
             viewModel.downloadAudioUrl(
                 message = message,
                 callback = { uri ->
+                    viewBinding.root.isClickable = false
+
                     val mediaPlayer = MediaPlayer()
                     mediaPlayer.setDataSource(uri.toString())
                     mediaPlayer.setOnPreparedListener { player ->
@@ -48,7 +50,7 @@ class AudioReceiveItem(
                         viewBinding.tvAudioTime.text = "00:00"
                         viewBinding.lpiProgress.progress = 0
                         isPlaying = false
-
+                        viewBinding.root.isClickable = false
                         mediaPlayer.release()
                     }
 

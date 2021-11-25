@@ -6,9 +6,6 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
-import com.abouttime.blindcafe.common.constants.LogTag
-import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY
-import com.abouttime.blindcafe.data.server.dto.interest.Interest
 import com.abouttime.blindcafe.databinding.FragmentInterestSubBinding
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder

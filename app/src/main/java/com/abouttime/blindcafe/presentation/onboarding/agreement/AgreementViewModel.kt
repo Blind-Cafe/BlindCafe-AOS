@@ -3,7 +3,7 @@ package com.abouttime.blindcafe.presentation.onboarding.agreement
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.abouttime.blindcafe.common.base.BaseViewModel
-import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.INFO_INPUT
+import com.abouttime.blindcafe.common.constants.PreferenceKey.INFO_INPUT
 
 class AgreementViewModel : BaseViewModel() {
     private val _enableNextButton = MutableLiveData(false)

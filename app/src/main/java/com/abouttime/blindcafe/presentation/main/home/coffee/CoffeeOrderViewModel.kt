@@ -1,6 +1,5 @@
 package com.abouttime.blindcafe.presentation.main.home.coffee
 
-import android.provider.ContactsContract
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,9 +9,7 @@ import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
-import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY
-import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.MATCHING_ID
-import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.NICKNAME
+import com.abouttime.blindcafe.common.constants.PreferenceKey.NICKNAME
 import com.abouttime.blindcafe.data.server.dto.matching.PostDrinkDto
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.use_case.PostDrinkUseCase
@@ -110,7 +107,6 @@ class CoffeeOrderViewModel(
                                         partnerNickname = pn
                                     )
                                 }
-
                             }
                         }
                         is Resource.Error -> {

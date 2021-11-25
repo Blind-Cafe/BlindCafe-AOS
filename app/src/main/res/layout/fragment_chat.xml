@@ -35,6 +35,7 @@
             <ImageView
                 android:id="@+id/iv_back"
                 android:layout_width="wrap_content"
+                android:onClick="@{() -> viewModel.onClickBackButton()}"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="27dp"
@@ -88,7 +89,7 @@
             app:layout_constraintBottom_toTopOf="@id/ml_input_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cl_topic_container"
+            app:layout_constraintTop_toBottomOf="@id/ll_topic_unfold_container"
             app:layout_constraintVertical_bias="1"
             tools:listitem="@layout/rv_chat_item_receive_text" />
 

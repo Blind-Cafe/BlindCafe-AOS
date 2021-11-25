@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseViewModel
-import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.MATCHING_SEX
-import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.NICKNAME
+import com.abouttime.blindcafe.common.constants.PreferenceKey.MATCHING_SEX
+import com.abouttime.blindcafe.common.constants.PreferenceKey.NICKNAME
 
 class EssentialSecondViewModel: BaseViewModel() {
 

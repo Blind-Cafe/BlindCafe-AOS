@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseViewModel
-import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.AGE
-import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.SEX
+import com.abouttime.blindcafe.common.constants.PreferenceKey.AGE
+import com.abouttime.blindcafe.common.constants.PreferenceKey.SEX
 import java.lang.Exception
 
 class EssentialFirstViewModel: BaseViewModel() {

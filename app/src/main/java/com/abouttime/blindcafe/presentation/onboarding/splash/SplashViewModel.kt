@@ -2,7 +2,7 @@ package com.abouttime.blindcafe.presentation.onboarding.splash
 
 import android.util.Log
 import com.abouttime.blindcafe.common.base.BaseViewModel
-import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.INFO_INPUT
+import com.abouttime.blindcafe.common.constants.PreferenceKey.INFO_INPUT
 import com.abouttime.blindcafe.common.constants.Retrofit.JWT
 
 class SplashViewModel: BaseViewModel() {

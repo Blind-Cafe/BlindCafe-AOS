@@ -16,6 +16,12 @@ open class BaseViewModel() : ViewModel() {
     private val _navigationEvent = SingleLiveData<NavDirections?>()
     val navigationEvent: SingleLiveData<NavDirections?> get() = _navigationEvent
 
+    private val _saveNavigationDataEvent = SingleLiveData<Pair<String, String>>()
+    val saveNavigationDataEvent: SingleLiveData<Pair<String, String>> get() = _saveNavigationDataEvent
+
+    private val _getNavigationDataEvent = SingleLiveData<String>()
+    val getNavigationDataEvent: SingleLiveData<String> get() = _getNavigationDataEvent
+
 
     private val _saveStringDataEvent = SingleLiveData<Pair<String, String>>()
     val saveStringDataEvent: SingleLiveData<Pair<String, String>> get() = _saveStringDataEvent
@@ -60,5 +66,10 @@ open class BaseViewModel() : ViewModel() {
     fun dismissLoading() {
         //_loadingEvent.value = false
     }
+
+    fun saveNavigationData(pair: Pair<String, String>) {
+        _saveNavigationDataEvent.value = pair
+    }
+
 
 }
