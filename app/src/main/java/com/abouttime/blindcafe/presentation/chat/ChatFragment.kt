@@ -87,9 +87,16 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
         initChatRecyclerView(fragmentChatBinding) // 채팅 리사이클러뷰 초기화
 
-        binding?.srlRvContainer?.setOnRefreshListener {
-            Log.e("swipe", "스와이프 됨")
-
+        binding?.srlRvContainer?.let { srl ->
+            srl.setColorSchemeResources(R.color.main, R.color.black_2)
+            srl.setScrollResolver(object : SwipeRefreshLayoutWithOverscroll.ScrollResolver {
+                override fun canScrollUp(): Boolean {
+                    return fragmentChatBinding.rvChatContainer.canScrollVertically(-1)
+                }
+            })
+            srl.setOnRefreshListener {
+                Log.e("swipe", "setOnRefreshListener 호출")
+            }
         }
 
 

@@ -41,116 +41,9 @@
         android:textColor="@color/white_2"
         android:textSize="@dimen/font_size_16"
         app:layout_constraintBottom_toBottomOf="@id/iv_back"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_back"
         app:layout_constraintTop_toTopOf="@id/iv_back" />
 
-    <TextView
-        android:id="@+id/tv_image_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/spoqa_han_sans_neo_regular"
-        android:text="@string/profile_edit_image_title"
-        android:textColor="@color/white"
-        android:textSize="@dimen/font_size_16"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_back" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_image_1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="10dp"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintDimensionRatio="112:152"
-        app:layout_constraintEnd_toStartOf="@id/cv_image_2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_image_title">
-
-        <ImageView
-            android:id="@+id/iv_image_1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/bg_profile_image" />
-
-        <ImageView
-            android:id="@+id/iv_image_add_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/bg_profile_edit_button"
-            android:src="@drawable/bt_profile_image_add" />
-
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_image_2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="10dp"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="@id/cv_image_1"
-        app:layout_constraintDimensionRatio="112:152"
-        app:layout_constraintEnd_toStartOf="@id/cv_image_3"
-        app:layout_constraintStart_toEndOf="@id/cv_image_1"
-        app:layout_constraintTop_toTopOf="@id/cv_image_1">
-
-        <ImageView
-            android:id="@+id/iv_image_2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/bg_profile_image" />
-
-        <ImageView
-            android:id="@+id/iv_image_add_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/bg_profile_edit_button"
-            android:src="@drawable/bt_profile_image_add" />
-
-
-    </androidx.cardview.widget.CardView>
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_image_3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="@id/cv_image_1"
-        app:layout_constraintDimensionRatio="112:152"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/cv_image_2"
-        app:layout_constraintTop_toTopOf="@id/cv_image_1">
-
-        <ImageView
-            android:id="@+id/iv_image_3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/bg_profile_image" />
-
-        <ImageView
-            android:id="@+id/iv_image_add_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/bg_profile_edit_button"
-            android:src="@drawable/bt_profile_image_add" />
-
-
-    </androidx.cardview.widget.CardView>
 
 
     <LinearLayout
@@ -158,16 +51,55 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_image_1">
+        app:layout_constraintTop_toBottomOf="@id/iv_back">
+
+        <TextView
+            android:id="@+id/tv_nickname_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:text="@string/profile_edit_nickname_title"
+            android:textColor="@color/steel"
+            android:textSize="@dimen/font_size_13" />
+
+        <TextView
+            android:id="@+id/tv_nickname_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_16"
+            tools:text="당" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:text="@string/profile_edit_impossible"
+            android:textColor="@color/gray_300"
+            android:textSize="@dimen/font_size_11" />
+
 
         <TextView
             android:id="@+id/tv_age_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="22dp"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:text="@string/profile_edit_age_title"
             android:textColor="@color/steel"
@@ -206,7 +138,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="22dp"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:text="@string/profile_edit_sex_title"
             android:textColor="@color/steel"
@@ -245,7 +177,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="22dp"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:text="@string/profile_edit_location_title"
             android:textColor="@color/steel"

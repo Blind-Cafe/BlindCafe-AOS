@@ -186,6 +186,7 @@
     <!-- profile edit -->
     <string name="profile_edit_title">프로필 수정</string>
     <string name="profile_edit_image_title">프로필 등록하기</string>
+    <string name="profile_edit_nickname_title">닉네임</string>
     <string name="profile_edit_age_title">나이</string>
     <string name="profile_edit_sex_title">성별</string>
     <string name="profile_edit_location_title">지역</string>
