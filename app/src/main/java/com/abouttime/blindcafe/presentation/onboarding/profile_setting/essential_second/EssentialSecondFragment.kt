@@ -59,7 +59,8 @@ class EssentialSecondFragment :
 
     private fun initAgeEditText(fragmentEssentialSecondBinding: FragmentEssentialSecondBinding) {
         val nicknameEditText = fragmentEssentialSecondBinding.etNickname
-        val alertNicknameText = fragmentEssentialSecondBinding.tvAlertNickname1
+        val alertNicknameText1 = fragmentEssentialSecondBinding.tvAlertNickname1
+        val alertNicknameText2 = fragmentEssentialSecondBinding.tvAlertNickname2
 
         nicknameEditText.setOnFocusChangeListener { view, isFocused ->
             if (isFocused) {
@@ -72,10 +73,13 @@ class EssentialSecondFragment :
         viewModel.nickNameText.observe(viewLifecycleOwner) {
             if (viewModel.isCorrectNickname()) {
                 nicknameEditText.setBackgroundResource(R.drawable.et_bg_rouding_with_green_stroke)
-                alertNicknameText.setTextColor(resources.getColor(R.color.white, null))
+                alertNicknameText1.setTextColor(getColorByResId(R.color.main))
+                alertNicknameText2.setTextColor(getColorByResId(R.color.white))
             } else {
                 nicknameEditText.setBackgroundResource(R.drawable.et_bg_rouding_with_red_stroke)
-                alertNicknameText.setTextColor(resources.getColor(R.color.alert_red, null))
+                alertNicknameText1.setTextColor(getColorByResId(R.color.alert_red))
+                alertNicknameText2.setTextColor(getColorByResId(R.color.alert_red))
+
                 showToast(R.string.profile_setting_toast_input_again_nickname)
             }
 
