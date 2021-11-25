@@ -10,73 +10,74 @@
             type="com.abouttime.blindcafe.domain.model.Message" />
 
     </data>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:paddingEnd="@dimen/chat_content_padding"
-    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_container"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:background="@drawable/bg_rounding_16dp"
-        android:backgroundTint="@color/main"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:paddingEnd="@dimen/chat_content_padding">
 
-
-        <ImageView
-            android:id="@+id/iv_play_controller"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/bt_play"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/bg_rounding_16dp"
+            android:backgroundTint="@color/main"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.progressindicator.LinearProgressIndicator
-            android:id="@+id/lpi_progress"
-            android:layout_width="80dp"
-            app:indicatorColor="@color/white"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toBottomOf="@id/iv_play_controller"
-            app:layout_constraintEnd_toStartOf="@id/tv_audio_time"
-            app:layout_constraintStart_toEndOf="@id/iv_play_controller"
-            app:layout_constraintTop_toTopOf="@id/iv_play_controller" />
 
-        <com.abouttime.blindcafe.presentation.chat.audio.CountUpTextView
-            android:id="@+id/tv_audio_time"
+            <ImageView
+                android:id="@+id/iv_play_controller"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bt_play"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/lpi_progress"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:indicatorColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/iv_play_controller"
+                app:layout_constraintEnd_toStartOf="@id/tv_audio_time"
+                app:layout_constraintStart_toEndOf="@id/iv_play_controller"
+                app:layout_constraintTop_toTopOf="@id/iv_play_controller" />
+
+            <com.abouttime.blindcafe.presentation.chat.audio.CountUpTextView
+                android:id="@+id/tv_audio_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                android:text="@string/zero_time"
+                android:textColorHint="@color/white"
+                android:textSize="@dimen/font_size_11"
+                app:layout_constraintBottom_toBottomOf="@id/iv_play_controller"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/iv_play_controller" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
-            android:textColorHint="@color/white"
+            android:textColor="@color/chat_time_color"
             android:textSize="@dimen/font_size_11"
-            app:layout_constraintBottom_toBottomOf="@id/iv_play_controller"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/iv_play_controller"
-            android:text="@string/zero_time" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/cl_container"
+            tools:text="00:00" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/tv_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp"
-        android:textColor="@color/chat_time_color"
-        android:fontFamily="@font/spoqa_han_sans_neo_regular"
-        android:textSize="@dimen/font_size_11"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/cl_container"
-        tools:text="00:00" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

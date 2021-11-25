@@ -9,7 +9,7 @@ import com.xwray.groupie.viewbinding.BindableItem
 
 class DescriptionItem(private val message: Message): BindableItem<RvChatItemDescriptionBinding>() {
     override fun bind(viewBinding: RvChatItemDescriptionBinding, position: Int) {
-        //viewBinding.message = message
+        viewBinding.message = message
     }
 
     override fun getLayout(): Int = R.layout.rv_chat_item_description

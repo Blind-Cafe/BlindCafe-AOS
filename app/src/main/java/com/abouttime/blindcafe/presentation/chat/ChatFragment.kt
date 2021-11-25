@@ -62,7 +62,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
     private var recorder: MediaRecorder? = null
     private val recordingFilePath: String by lazy {
-        "${requireActivity().externalCacheDir?.absolutePath}/recording.3gp"
+        "${requireActivity().externalCacheDir?.absolutePath}/recording.mp4"
     }
 
 
@@ -187,7 +187,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             1 -> chatAdapter.add(TextSendItem(message))
             2 -> chatAdapter.add(ImageSendItem(message, viewModel = viewModel))
             3 -> chatAdapter.add(AudioSendItem(message, viewModel = viewModel))
-            4 -> chatAdapter.add(DescriptionItem(message))
+            7 -> chatAdapter.add(DescriptionItem(message))
         }
     }
 
@@ -196,7 +196,8 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             1 -> chatAdapter.add(TextReceiveItem(message))
             2 -> chatAdapter.add(ImageReceiveItem(message, viewModel = viewModel))
             3 -> chatAdapter.add(AudioReceiveItem(message, viewModel = viewModel))
-            4 -> chatAdapter.add(DescriptionItem(message))
+            7 -> chatAdapter.add(DescriptionItem(message))
+
         }
     }
 
@@ -503,9 +504,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     }
 
     private fun initNotificationContainer(view: View) {
-        view.setOnClickListener {
-            showToast(R.string.toast_check_internet)
-        }
+        view.isGone = true
     }
 
     private fun initQuitContainer(view: View) {

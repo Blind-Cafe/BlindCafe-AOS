@@ -35,7 +35,7 @@ class CoffeeOrderVpAdapter(
                 if (isSelected[position]) {
                     currentSelect = position + 1
                 } else {
-                    currentSelect = null
+                    currentSelect = -1
                 }
                 updateNextButton()
                 notifyDataSetChanged()

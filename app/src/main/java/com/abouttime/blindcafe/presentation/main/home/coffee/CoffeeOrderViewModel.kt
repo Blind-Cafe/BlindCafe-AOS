@@ -8,16 +8,23 @@ import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
+import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY
 import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.MATCHING_ID
+import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.NICKNAME
 import com.abouttime.blindcafe.data.server.dto.matching.PostDrinkDto
+import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.use_case.PostDrinkUseCase
+import com.abouttime.blindcafe.domain.use_case.SendMessageUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 class CoffeeOrderViewModel(
-    private val postDrinkUseCase: PostDrinkUseCase
+    private val postDrinkUseCase: PostDrinkUseCase,
+    private val sendMessageUseCase: SendMessageUseCase,
 ): BaseViewModel() {
     private val _nextButton: MutableLiveData<Boolean> = MutableLiveData(false)
     val nextButton: LiveData<Boolean> get() = _nextButton
@@ -25,9 +32,10 @@ class CoffeeOrderViewModel(
     var matchingId: Int? = null
     var startTime: String? = null
     var partnerNickname: String? = null
+    val myNickname = getStringData(NICKNAME)
 
 
-    var currentSelect: Int? = null
+    var currentSelect: Int = -1
 
     val resIds: List<Int> = mutableListOf(
         R.drawable.bt_drink_1,
@@ -53,6 +61,21 @@ class CoffeeOrderViewModel(
         R.drawable.bt_drink_selected_9,
     )
     val isSelected = Array(9) { false }
+
+    fun mapToDrinkName(idx: Int): String {
+        return when (idx) {
+            1 -> "아메리카노"
+            2 -> "카페라떼"
+            3 -> "카페모카"
+            4 -> "버블티"
+            5 -> "민트초코"
+            6 -> "딸기 스무디"
+            7 -> "블루 레몬 에이드"
+            8 -> "녹차"
+            9 -> "자몽티"
+            else -> ""
+        }
+    }
 
 
     fun updateNextButton() {
@@ -106,9 +129,36 @@ class CoffeeOrderViewModel(
 
     }
 
+    fun sendDescriptionMessage(message: Message) = viewModelScope.launch(Dispatchers.IO) {
+        sendMessageUseCase(message).onEach { result ->
+            when (result) {
+                is Resource.Loading -> {
+                    Log.d(LogTag.FIRESTORE_TAG, "Loading")
+                }
+                is Resource.Success -> {
+                    Log.d(LogTag.FIRESTORE_TAG, "${result.data?.id}")
+                }
+                is Resource.Error -> {
+                    Log.d(LogTag.FIRESTORE_TAG, "Error")
+                }
+            }
+
+        }.launchIn(viewModelScope)
+    }
+
 
     fun onClickNextButton() {
         if (canClickNextButton()) {
+            matchingId?.let { roomUid ->
+                sendDescriptionMessage(
+                    Message(
+                        contents = "%s를 주문한 %s 님입니다.\n간단한 인사를 건네 반갑게 맞아주세요.".format(mapToDrinkName(currentSelect), myNickname),
+                        type = 7,
+                        roomUid = roomUid.toString()
+                    )
+                )
+            }
+
             postDrink()
         } else {
             showToast(R.string.coffee_order_next_alert)

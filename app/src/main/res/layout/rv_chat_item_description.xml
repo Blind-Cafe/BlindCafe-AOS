@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/black"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="message"
+            type="com.abouttime.blindcafe.domain.model.Message" />
+
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/black">
 
     <View
         android:layout_width="0dp"
@@ -18,7 +29,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="아메리카노를 주문한 로즈님이세요.\n간단한 인사로 반갑게 맞아주세요."
+        tools:text="아메리카노 시키신 당 입장"
+        android:text="@{message.contents}"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:textColor="@color/gray_300"
@@ -34,3 +46,5 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

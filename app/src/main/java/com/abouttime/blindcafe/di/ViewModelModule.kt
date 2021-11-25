@@ -63,7 +63,7 @@ internal val viewModelModule = module {
 
     /** Main - Home **/
     viewModel { HomeViewModel(get(), get()) }
-    viewModel { CoffeeOrderViewModel(get()) }
+    viewModel { CoffeeOrderViewModel(get(), get()) }
     viewModel { ExitViewModel() }
 
     /** Main - Dormancy **/
