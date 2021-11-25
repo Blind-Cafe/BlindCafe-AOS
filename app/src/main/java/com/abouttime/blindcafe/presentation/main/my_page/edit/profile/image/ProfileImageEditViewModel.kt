@@ -1,5 +1,6 @@
 package com.abouttime.blindcafe.presentation.main.my_page.edit.profile.image
 
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.common.Resource
@@ -17,6 +18,8 @@ class ProfileImageEditViewModel(
 
     private val _imageUrls = SingleLiveData<List<String>>()
     val imageUrls: SingleLiveData<List<String>> get() = _imageUrls
+
+    val editedUrls = mutableListOf<Uri>()
 
 
     init {

@@ -8,6 +8,7 @@ import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.databinding.FragmentReportListBinding
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ReportListFragment: BaseFragment<ReportListViewModel>(R.layout.fragment_report_list) {
@@ -31,6 +32,7 @@ class ReportListFragment: BaseFragment<ReportListViewModel>(R.layout.fragment_re
             adapter = reportAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
+        OverScrollDecoratorHelper.setUpOverScroll(rvReportList, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
     }
 
     private fun observeReportsData() {

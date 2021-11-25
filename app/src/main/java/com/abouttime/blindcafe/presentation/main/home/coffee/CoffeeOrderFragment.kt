@@ -6,11 +6,13 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import androidx.navigation.fragment.navArgs
+import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.databinding.FragmentCoffeeOrderBinding
 import com.abouttime.blindcafe.presentation.common.confirm.ConfirmDialogFragmentArgs
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -29,10 +31,13 @@ class CoffeeOrderFragment : BaseFragment<CoffeeOrderViewModel>(R.layout.fragment
         binding?.viewModel = viewModel
 
 
+
         initArgsData()
 
 
     }
+
+
 
 
     private fun initArgsData() {
@@ -57,6 +62,8 @@ class CoffeeOrderFragment : BaseFragment<CoffeeOrderViewModel>(R.layout.fragment
 
             it.vpImageContainer.setPageTransformer(ZoomOutPageTransformer())
         }
+
+
     }
 
     fun dpToPx(dp: Float, context: Context): Float {

@@ -9,6 +9,7 @@ import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.databinding.FragmentInterestSubBinding
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class InterestSubFragment : BaseFragment<InterestSubViewModel>(R.layout.fragment_interest_sub) {
@@ -47,6 +48,8 @@ class InterestSubFragment : BaseFragment<InterestSubViewModel>(R.layout.fragment
                 adapter = subInterestAdapter
                 layoutManager = LinearLayoutManager(requireContext())
             }
+
+            OverScrollDecoratorHelper.setUpOverScroll(rvSubInterestContainer, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
 
         }
 

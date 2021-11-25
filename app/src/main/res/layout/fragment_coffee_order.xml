@@ -94,6 +94,7 @@
         app:layout_constraintDimensionRatio="310:225"
         android:clipToPadding="false"
         android:clipChildren="false"
+        android:overScrollMode="never"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_description" />

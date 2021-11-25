@@ -331,7 +331,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                 showToast(R.string.toast_gallery_limit)
                 return@registerForActivityResult
             }
-            sendAudioMessage(uris)
+            sendImageMessage(uris)
         }
 
     private val galleryPermissionCallback =
@@ -344,7 +344,8 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             }
         }
 
-    private fun sendAudioMessage(uris: List<Uri>) {
+
+    private fun sendImageMessage(uris: List<Uri>) {
         uris.forEach { uri ->
             uri?.let {
                 val id = System.currentTimeMillis().toString()
@@ -367,6 +368,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     }
 
 
+
     /** Audio Message **/
     private fun observeRecorderState(fragmentChatBinding: FragmentChatBinding) =
         with(fragmentChatBinding) {
@@ -383,7 +385,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                     RecorderState.STOP_RECORDING -> {
                         Log.e("record", "STOP_RECORDING")
                         stopRecording()
-                        sendAudioMessage()
+                        sendImageMessage()
                     }
                 }
             }
@@ -454,7 +456,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
     }
 
-    private fun sendAudioMessage() {
+    private fun sendImageMessage() {
         val uri = Uri.fromFile(File(recordingFilePath))
         val id = System.currentTimeMillis().toString()
 

@@ -6,6 +6,7 @@ import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.databinding.FragmentMyPageBinding
 import com.bumptech.glide.Glide
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MyPageFragment : BaseFragment<MyPageViewModel>(R.layout.fragment_my_page) {
@@ -19,12 +20,18 @@ class MyPageFragment : BaseFragment<MyPageViewModel>(R.layout.fragment_my_page) 
         binding?.lifecycleOwner = this
         binding?.viewModel = viewModel
 
+
+        initScrollView(fragmentMyPageBinding)
         observeProfileImageData(fragmentMyPageBinding)
         observeSexData(fragmentMyPageBinding)
         observeAgeData(fragmentMyPageBinding)
         observeInterestsData(fragmentMyPageBinding)
         observeDrinkData(fragmentMyPageBinding)
 
+    }
+
+    private fun initScrollView(fragmentMyPageBinding: FragmentMyPageBinding) = with(fragmentMyPageBinding) {
+        OverScrollDecoratorHelper.setUpOverScroll(svUserInfoContainer)
     }
 
     private fun observeProfileImageData(fragmentMyPageBinding: FragmentMyPageBinding) =
