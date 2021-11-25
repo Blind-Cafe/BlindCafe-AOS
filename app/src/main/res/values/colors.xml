@@ -58,5 +58,6 @@
 
     <color name="chat_topic_divider">#48484a</color>
 
+    <color name="home_notification_background">#48484a</color>
 
 </resources>

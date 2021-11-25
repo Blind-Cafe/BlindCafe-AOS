@@ -36,6 +36,39 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/iv_bell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="26dp"
+            android:src="@drawable/bt_home_bell"
+            app:layout_constraintBottom_toBottomOf="@id/tv_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_title" />
+
+        <ImageView
+            android:id="@+id/iv_bell_on"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bt_home_bell_on"
+            app:layout_constraintEnd_toEndOf="@id/iv_bell"
+            app:layout_constraintTop_toTopOf="@id/iv_bell" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="4dp"
+            android:background="@color/home_notification_background"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="8dp"
+            android:text="@string/home_notification_message"
+            android:textColor="@color/gray_300"
+            android:textSize="@dimen/font_size_11"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            app:layout_constraintEnd_toEndOf="@id/iv_bell"
+            app:layout_constraintTop_toBottomOf="@id/iv_bell" />
+
 
         <ImageView
             android:id="@+id/iv_home_bg_gradation"
@@ -171,8 +204,8 @@
             android:text="@string/home_title_none"
             android:textColor="@color/white"
             android:textSize="@dimen/font_size_15"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/tv_state_sub_title"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cl_home_bg_container" />
 
@@ -185,8 +218,8 @@
             android:text="@string/home_subtitle_none"
             android:textColor="@color/steel"
             android:textSize="@dimen/font_size_13"
-            app:layout_constraintEnd_toEndOf="@id/tv_state_title"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/tv_state_title"
             app:layout_constraintStart_toStartOf="@id/tv_state_title"
             app:layout_constraintTop_toBottomOf="@id/tv_state_title" />
 

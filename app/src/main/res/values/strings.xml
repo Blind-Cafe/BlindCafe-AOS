@@ -113,6 +113,8 @@
     <string name="home_matching_cancel_no">아니요</string>
     <string name="home_matching_cancel_yes">매칭 취소</string>
 
+    <string name="home_notification_message">%d건의 메시지가 도착했습니다.</string>
+
     <!-- chat list -->
     <string name="chat_list_title">내 테이블</string>
     <string name="chat_list_title_none">아직 매칭 대화 상대가 없어요</string>
