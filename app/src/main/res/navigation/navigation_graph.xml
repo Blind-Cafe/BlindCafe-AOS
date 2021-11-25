@@ -413,15 +413,15 @@
         android:name="com.abouttime.blindcafe.presentation.main.home.exit.ExitFragment"
         android:label="ExitFragment"
         tools:layout="@layout/fragment_exit">
+        <argument android:name="isReport"
+            app:argType="boolean"
+            app:nullable="false" />
 
         <argument
-            android:name="reason"
+            android:name="title"
             app:argType="string"
-            app:nullable="true" />
-        <argument
-            android:name="partnerNickname"
-            app:argType="string"
-            app:nullable="true" />
+            app:nullable="false" />
+
 
     </fragment>
     <fragment

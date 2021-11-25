@@ -159,9 +159,10 @@
 
 
     <!-- quit complete -->
-    <string name="exit_complete_title">님과 3일간의 추억은 즐거우셨나요?\n이제 더 좋은 추억을 쌓으러 가보죠!</string>
-    <string name="exit_complete_next">새로운 손님과 합석하기</string>
+    <string name="exit_complete_title">%s님과 3일간의 추억은 즐거우셨나요?\n이제 더 좋은 추억을 쌓으러 가보죠!</string>
+    <string name="exit_complete_title_by_report">%s님의 불편함을 느낀 대화를 종료했스빈다.\n아쉽지만 새로운 손님과 또 다른 추억을 쌓으러 가볼까요?</string>
     <string name="exit_completed_title">%s님이\"%s\"라는 이유로 대화를 진행하지 못하게되었습니다.\n\n아쉽지만 새로운 손님과 또 다른 추억을 쌓을 수 있습니다.</string>
+    <string name="exit_complete_next">새로운 손님과 합석하기</string>
 
     <!-- report -->
     <string name="report_reason_title">신고</string>
@@ -174,10 +175,14 @@
     <string name="report_reason_email">적절한 신고 선택지가 없으실 땐 저희에게 언제든지 연락주세요 (blindcafeapp@gmail.com)</string>
     <string name="report_reason_no">취소</string>
     <string name="report_reason_yes">신고하기</string>
-    <string name="report_confirm_title">신고가 접수 되었습니다.\n대화 방을 바로 나가시겠습니까?</string>
+    <string name="report_confirm_title">신고가 접수 되었습니다.</string>
     <string name="report_confirm_subtitle">불쾌한 경험을 알겨드려 죄송합니다.\n보내주신 피드백으로 안전한 대화공간을 만들 수 있도록 노력하겠습니다.</string>
     <string name="report_confirm_no">취소</string>
     <string name="report_confirm_yes">나가기</string>
+
+    <!-- report list  -->
+    <string name="report_list_title">%s님을 신고함</string>
+
 
     <!-- profile edit -->
     <string name="profile_edit_title">프로필 수정</string>

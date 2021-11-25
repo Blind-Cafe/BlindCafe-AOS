@@ -44,12 +44,15 @@ class ConfirmViewModel(
 
 
 
-    fun exitChatRoom(matchingId: Int, reason: Int) {
+    fun exitChatRoom(matchingId: Int, reason: Int, isReport: Boolean, title: String) {
         exitChatRoomUseCase(matchingId, reason).onEach { result ->
             when(result) {
                 is Resource.Loading -> {}
                 is Resource.Success -> {
-                    moveToDirections(ConfirmDialogFragmentDirections.actionConfirmDialogFragmentToMainFragment())
+                    moveToDirections(ConfirmDialogFragmentDirections.actionConfirmDialogFragmentToExitFragment(
+                        isReport = isReport,
+                        title = title
+                    ))
                 }
                 is Resource.Error -> {
                     Log.e(RETROFIT_TAG, result.message.toString())
@@ -86,6 +89,7 @@ class ConfirmViewModel(
             }
         }.launchIn(viewModelScope)
     }
+
 
 
 

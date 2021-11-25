@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View.OnClickListener" />
+
+        <import type="android.view.View" />
+
+        <import type="androidx.core.content.ContextCompat" />
+
+        <import type="java.util.List" />
+
+        <variable
+            name="viewModel"
+            type="com.abouttime.blindcafe.presentation.main.home.exit.ExitViewModel" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="28dp"
-        android:src="@drawable/bt_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/iv_background"
@@ -29,21 +39,24 @@
 
 
     <TextView
+        android:id="@+id/tv_title_report"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:lineSpacingExtra="15sp"
         android:text="@string/exit_complete_title"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_size_16"
+        android:textSize="@dimen/font_size_15"
         app:layout_constraintBottom_toBottomOf="@id/iv_background"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_background"
-        tools:visibility="gone" />
+        tools:visibility="visible" />
 
 
     <TextView
+        android:id="@+id/tv_title_reported"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="23dp"
@@ -71,8 +84,9 @@
         android:paddingHorizontal="13dp"
         android:text="@string/exit_complete_next"
         android:textColor="@color/white"
+        android:onClick="@{() -> viewModel.onClickNextButton()}"
         android:id="@+id/tv_next"
-        android:textSize="@dimen/font_size_16"
+        android:textSize="@dimen/font_size_15"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="328:48"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,3 +94,5 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

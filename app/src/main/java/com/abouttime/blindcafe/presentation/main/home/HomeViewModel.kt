@@ -135,7 +135,7 @@ class HomeViewModel(
             }
             4, 5, 6 -> { // 방 폭파 or 프로필 교환 거절
                 if (partnerNickname != null && reason != null) {
-                    moveToExitFragment(partnerNickname, reason)
+                    moveToExitFragment(partnerNickname!!, reason!!)
                 }
                 _time.value = startTime?.toLong()?.secondToLapseForHome()
             }
@@ -170,10 +170,10 @@ class HomeViewModel(
         moveToDirections(MainFragmentDirections.actionMainFragmentToProfileExchangeFragment())
     }
 
-    fun moveToExitFragment(partnerNickname: String?, reason: String?) {
+    private fun moveToExitFragment(partnerNickname: String, reason: String) {
         moveToDirections(MainFragmentDirections.actionMainFragmentToExitFragment(
-            partnerNickname = partnerNickname,
-            reason = reason
+            isReport = false,
+            title = "%s님이\\\"%s\\\"라는 이유로 대화를 진행하지 못하게되었습니다.\\n\\n아쉽지만 새로운 손님과 또 다른 추억을 쌓을 수 있습니다.".format(partnerNickname, reason) // TODO 리소스로 관리해라
         ))
     }
 

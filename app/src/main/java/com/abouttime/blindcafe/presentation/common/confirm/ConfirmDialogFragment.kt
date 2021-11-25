@@ -2,9 +2,11 @@ package com.abouttime.blindcafe.presentation.common.confirm
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isGone
 import androidx.navigation.fragment.navArgs
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseDialogFragment
+import com.abouttime.blindcafe.common.constants.PREFERENCES_KEY.NICKNAME
 import com.abouttime.blindcafe.databinding.DialogFragmentConfirmBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -82,14 +84,16 @@ class ConfirmDialogFragment :
         val matchingId = args.matchingId
         val reason = args.reason
 
+        binding?.tvNo?.isGone = true
         handleYesButton {
             if (matchingId != 0 && reason != 0) {
-                viewModel.exitChatRoom(matchingId, reason)
+                val title = getString(R.string.exit_complete_title_by_report).format(getStringData(NICKNAME))
+                viewModel.exitChatRoom(matchingId, reason, true, title)
             } else {
                 showToast(R.string.toast_check_internet)
             }
         }
-        handleNoButton { popDirections() }
+
     }
 
     private fun handleQuit() {
@@ -98,7 +102,8 @@ class ConfirmDialogFragment :
 
         handleYesButton {
             if (matchingId != 0 && reason != 0) {
-                viewModel.exitChatRoom(matchingId, reason)
+                val title = getString(R.string.exit_complete_title).format(getStringData(NICKNAME))
+                viewModel.exitChatRoom(matchingId, reason, false, title)
             } else {
                 showToast(R.string.toast_fail)
             }
