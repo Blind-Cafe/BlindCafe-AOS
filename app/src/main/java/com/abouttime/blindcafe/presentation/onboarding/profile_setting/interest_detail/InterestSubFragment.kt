@@ -17,18 +17,6 @@ class InterestSubFragment : BaseFragment<InterestSubViewModel>(R.layout.fragment
     private var binding: FragmentInterestSubBinding? = null
     private val subInterestAdapter = GroupAdapter<GroupieViewHolder>()
 
-    val interestMap = mapOf(
-        1 to "취업",
-        2 to "만화/애니",
-        3 to "동물",
-        4 to "음식",
-        5 to "여행",
-        6 to "게임",
-        7 to "연예",
-        8 to "스포츠",
-        9 to "재테크"
-    )
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val fragmentInterestSubBinding = FragmentInterestSubBinding.bind(view)
@@ -55,7 +43,6 @@ class InterestSubFragment : BaseFragment<InterestSubViewModel>(R.layout.fragment
 
     private fun observeInterestData() {
         viewModel.interests.observe(viewLifecycleOwner) { list ->
-            Log.e("zcxv", "옴!")
             subInterestAdapter.add(InterestSubRvItem(list[0], viewModel, 0))
             subInterestAdapter.add(InterestSubRvItem(list[1], viewModel, 1))
             subInterestAdapter.add(InterestSubRvItem(list[2], viewModel, 2))

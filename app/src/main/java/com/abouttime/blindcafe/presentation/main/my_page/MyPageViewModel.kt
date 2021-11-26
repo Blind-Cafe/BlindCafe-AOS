@@ -84,5 +84,11 @@ class MyPageViewModel(
     fun onClickSettingButton() {
         moveToDirections(MainFragmentDirections.actionMainFragmentToSettingFragment())
     }
+    fun onClickEditProfileImageButton() {
+        moveToDirections(MainFragmentDirections.actionMainFragmentToProfileImageEditFragment())
+    }
+    fun onClickEditInterestButton() {
+        moveToDirections(MainFragmentDirections.actionMainFragmentToInterestEditFragment())
+    }
 
 }

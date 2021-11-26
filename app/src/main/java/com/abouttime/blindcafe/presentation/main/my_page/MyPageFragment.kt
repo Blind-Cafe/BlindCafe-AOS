@@ -36,10 +36,10 @@ class MyPageFragment : BaseFragment<MyPageViewModel>(R.layout.fragment_my_page) 
 
     private fun observeProfileImageData(fragmentMyPageBinding: FragmentMyPageBinding) =
         with(fragmentMyPageBinding) {
-            Glide.with(this@MyPageFragment)
-                .load("https://www.nemopan.com/files/attach/images/6294/004/387/013/63dac7acb2889fd9d34b68a338f9af8c.jpg")
-                .circleCrop()
-                .into(ivProfileImage)
+//            Glide.with(this@MyPageFragment)
+//                .load("")
+//                .circleCrop()
+//                .into(ivProfileImage)
         }
 
     private fun observeSexData(fragmentMyPageBinding: FragmentMyPageBinding) =

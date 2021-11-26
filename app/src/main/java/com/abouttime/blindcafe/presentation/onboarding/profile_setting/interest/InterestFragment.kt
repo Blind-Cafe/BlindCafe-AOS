@@ -17,30 +17,10 @@ class InterestFragment : BaseFragment<InterestViewModel>(R.layout.fragment_inter
         val fragmentInterestBinding = FragmentInterestBinding.bind(view)
         binding = fragmentInterestBinding
 
-        //initRecyclerView(fragmentInterestBinding)
+
         initNextButton(fragmentInterestBinding)
         initInterestsButton(fragmentInterestBinding)
     }
-
-    private fun initRecyclerView(fragmentInterestBinding: FragmentInterestBinding) =
-        with(fragmentInterestBinding) {
-            /*
-            interestRvAdapter = InterestRvAdapter(
-                requireContext(),
-                viewModel = viewModel,
-                isClickedThreeItem = { isClickedThreeItem ->
-                    setNextTextViewBackgroundColor(isClickedThreeItem, fragmentInterestBinding)
-                }
-            )
-
-            fragmentInterestBinding.rvInterest.apply {
-                adapter = interestRvAdapter
-                layoutManager = GridLayoutManager(requireContext(), 3)
-
-                addItemDecoration(RvGridDecoration(3, 30, true))
-            }
-             */
-        }
 
     private fun initNextButton(fragmentInterestBinding: FragmentInterestBinding) {
         fragmentInterestBinding.tvNext.setOnClickListener {
@@ -84,6 +64,8 @@ class InterestFragment : BaseFragment<InterestViewModel>(R.layout.fragment_inter
                                 selectedItemIdx.add(i)
                                 containers[i].setBackgroundResource(R.drawable.bg_interest_enabled)
                                 icons[i].setColorFilter(getColorByResId(R.color.interest_icon_enabled))
+                            } else {
+                                showToast(R.string.interest_toast_up_to_3)
                             }
                         }
 

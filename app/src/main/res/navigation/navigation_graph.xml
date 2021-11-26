@@ -123,7 +123,11 @@
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_mainFragment_to_interestEditFragment"
-            app:destination="@id/interestEditFragment" />
+            app:destination="@id/interestEditFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_mainFragment_to_confirmDialogFragment"
             app:destination="@id/confirmDialogFragment" />
@@ -547,9 +551,21 @@
         tools:layout="@layout/fragment_account_delete" />
     <fragment
         android:id="@+id/interestEditFragment"
-        android:name="com.abouttime.blindcafe.presentation.main.my_page.edit.interest.InterestEditFragment"
+        android:name="com.abouttime.blindcafe.presentation.main.my_page.edit.interest.main.InterestEditFragment"
         android:label="InterestEditFragment"
-        tools:layout="@layout/fragment_interest_edit" />
+        tools:layout="@layout/fragment_interest_edit">
+
+
+
+
+        <action
+            android:id="@+id/action_interestEditFragment_to_interestSubEditFragment"
+            app:destination="@id/interestSubEditFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
     <fragment
         android:id="@+id/dormancyFragment"
         android:name="com.abouttime.blindcafe.presentation.main.dormancy.DormancyFragment"
@@ -560,4 +576,22 @@
         tools:layout="@layout/fragment_profile_image_edit"
         android:name="com.abouttime.blindcafe.presentation.main.my_page.edit.profile.image.ProfileImageEditFragment"
         android:label="ProfileImageEditFragment" />
+    <fragment
+        android:id="@+id/interestSubEditFragment"
+        tools:layout="@layout/fragment_interest_sub_edit"
+        android:name="com.abouttime.blindcafe.presentation.main.my_page.edit.interest.sub.InterestSubEditFragment"
+        android:label="InterestSubEditFragment">
+
+        <argument android:name="mainInterest1"
+            app:argType="integer"
+            />
+        <argument android:name="mainInterest2"
+            app:argType="integer"
+            />
+        <argument android:name="mainInterest3"
+            app:argType="integer"
+            />
+
+
+    </fragment>
 </navigation>

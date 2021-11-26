@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View.OnClickListener" />
+
+        <import type="android.view.View" />
+
+        <import type="androidx.core.content.ContextCompat" />
+
+        <variable
+            name="viewModel"
+            type="com.abouttime.blindcafe.presentation.main.my_page.edit.interest.main.InterestEditViewModel" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black">
@@ -26,7 +41,7 @@
         android:lineSpacingExtra="7sp"
         android:text="@string/interest_main_edit_title"
         android:textColor="#fafafa"
-        android:textSize="@dimen/font_size_21"
+        android:textSize="@dimen/font_size_15"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/ib_back"
         app:layout_constraintStart_toEndOf="@id/ib_back"
@@ -217,4 +232,5 @@
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
+</layout>
 

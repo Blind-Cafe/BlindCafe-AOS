@@ -136,17 +136,17 @@ class InterestSubViewModel(
             )
         )
 
-        Log.d(LogTag.RETROFIT_TAG, dto.toString())
+        Log.d(RETROFIT_TAG, dto.toString())
 
         postUserInfoUseCase(
             dto
         ).onEach { response ->
             when (response){
                 is Resource.Loading -> {
-                    Log.d(LogTag.RETROFIT_TAG, "Loading")
+                    Log.d(RETROFIT_TAG, "Loading")
                 }
                 is Resource.Success -> {
-                    Log.d(LogTag.RETROFIT_TAG, "Success ${response.data?.code} ${response.data?.message}")
+                    Log.d(RETROFIT_TAG, "Success ${response.data?.code} ${response.data?.message}")
                     val code = response.data?.code?.toInt()
                     if (code == 1000) {
                         saveStringData(Pair(INFO_INPUT, response.data.code))
@@ -154,7 +154,7 @@ class InterestSubViewModel(
                     }
                 }
                 is Resource.Error -> {
-                    Log.d(LogTag.RETROFIT_TAG, response.message.toString())
+                    Log.d(RETROFIT_TAG, response.message.toString())
                 }
             }
 
