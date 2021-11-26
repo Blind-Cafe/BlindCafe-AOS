@@ -60,11 +60,17 @@ class ChatViewModel(
     val topic: SingleLiveData<GetTopicDto> get() = _topic
 
 
-    /** room info **/
     var myNickname = getStringData(NICKNAME)
-    var partnerNickname: String? = null
-    var startTime: String? = null
+
+    /** room info **/
     var matchingId: Int? = null
+    var partnerNickname: String? = null
+    var profileImage: String? = null
+    var drink: String? = null
+    var commonInterest: String? = null
+    var startTime: String? = null
+    var interest: String? = null
+
     val userId = getStringData(USER_ID)
 
 
@@ -190,19 +196,28 @@ class ChatViewModel(
         }
 
 
-    fun getChatRoomInfo() {
-        matchingId?.let {
-            getChatRoomInfoUseCase(it).onEach { result ->
-                when(result) {
-                    is Resource.Loading -> {}
-                    is Resource.Success -> {
-
-                    }
-                    is Resource.Error -> {}
+    fun getChatRoomInfo(mId: Int) {
+        getChatRoomInfoUseCase(mId).onEach { result ->
+            when (result) {
+                is Resource.Loading -> {
                 }
+                is Resource.Success -> {
+                    with(result.data) {
+                        matchingId = matchingId
+                        partnerNickname = partnerNickname
+                        profileImage = profileImage
+                        drink = drink
+                        commonInterest = interest
+                        startTime = startTime
+                        interest = interest
+                    }
+                }
+                is Resource.Error -> {
+                }
+            }
 
-            }.launchIn(viewModelScope)
-        }
+        }.launchIn(viewModelScope)
+
     }
 
 

@@ -81,18 +81,6 @@ class HomeViewModel(
                     Log.d(RETROFIT_TAG, response.data.toString())
                     response.data?.matchingStatus?.let { status ->
                         _homeStatusCode.postValue(getHomeStatusCode(status))
-                        response.data?.matchingId?.let { roomUid ->
-                            if (getHomeStatusCode(status) == 2) {
-                                sendDescriptionMessage(
-                                    Message(
-                                        contents = "매칭에 성공하였습니다.\n간단한 인사로 반갑게 맞아주세요.",
-                                        type = 7,
-                                        roomUid = roomUid.toString()
-                                    )
-                                )
-                            }
-                        }
-
                     }
                 }
                 is Resource.Error -> {
@@ -205,7 +193,7 @@ class HomeViewModel(
     private fun moveToExitFragment(partnerNickname: String, reason: String) {
         moveToDirections(MainFragmentDirections.actionMainFragmentToExitFragment(
             isReport = false,
-            title = "%s님이\\\"%s\\\"라는 이유로 대화를 진행하지 못하게되었습니다.\\n\\n아쉽지만 새로운 손님과 또 다른 추억을 쌓을 수 있습니다.".format(partnerNickname, reason) // TODO 리소스로 관리해라
+            title = "%s님이\"%s\"라는 이유로 대화를 진행하지 못하게되었습니다.\n\n아쉽지만 새로운 손님과 또 다른 추억을 쌓을 수 있습니다.".format(partnerNickname, reason) // TODO 리소스로 관리해라
         ))
     }
 

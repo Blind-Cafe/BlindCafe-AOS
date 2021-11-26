@@ -94,6 +94,7 @@
     <string name="chat_topic_audio_title">어떤 소리인지 같이 맞춰보세요</string>
     <string name="chat_topic_image_title">어떤 사진인지 같이 맞춰보세요</string>
     <string name="chat_topic_fold">다신 보지 않기</string>
+    <string name="chat_common_interest">%s님과 %s님의 공통 관심사는 %s 입니다.</string>
 
     <!-- gallery -->
     <string name="gallery_title">갤러리</string>

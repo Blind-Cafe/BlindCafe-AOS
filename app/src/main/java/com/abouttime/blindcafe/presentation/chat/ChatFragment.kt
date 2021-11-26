@@ -86,11 +86,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
         initNavArgs() // NavArgs 변수 초기화 (맨 위에 와야함!)
 
-        initPartnerNciknameTextView() // 상단 닉네임 초기화
-
         initChatRecyclerView(fragmentChatBinding) // 채팅 리사이클러뷰 초기화
-
-
         subscribeMessages()
         observeMessagesData()
 
@@ -114,6 +110,10 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         viewModel.matchingId = args.matchingId
         viewModel.startTime = args.startTime
         viewModel.partnerNickname = args.partnerNickname
+        viewModel.matchingId?.let { id ->
+            viewModel.getChatRoomInfo(id)
+        }
+        initPartnerNciknameTextView() // 상단 닉네임 초기화
     }
 
     private fun initPartnerNciknameTextView() {

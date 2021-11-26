@@ -24,7 +24,6 @@ object Retrofit {
     const val GET_PROFILE_INFO = "api/user/profile"
     const val POST_DEVICE_TOKEN = "api/user/device"
 
-
     const val FCM_MESSAGE_TOPIC = "fcm_message_topic"
 
     const val JWT = "jwt"
