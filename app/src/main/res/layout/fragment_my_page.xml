@@ -104,7 +104,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="13dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="20dp"
                         android:fontFamily="@font/spoqa_han_sans_neo_regular"
                         tools:text="남자"
                         android:textColor="@color/white_2"
