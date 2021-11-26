@@ -112,7 +112,6 @@ class CoffeeOrderViewModel(
                             }
                             matchingId?.let { roomUid ->
                                 getChatRoomInfo(roomUid)
-
                             }
                         }
                         is Resource.Error -> {
@@ -137,43 +136,47 @@ class CoffeeOrderViewModel(
                 is Resource.Loading -> {
                 }
                 is Resource.Success -> {
-                    with(result.data) {
-                        matchingId = matchingId
-                        partnerNickname = partnerNickname
-                        profileImage = profileImage
-                        drink = drink
-                        commonInterest = interest
-                        startTime = startTime
-                        interest = interest
-                    }
-                    matchingId?.let { id ->
+                    result.data?.let { dto ->
+                        matchingId?.let { mId ->
+                            Log.e("drink", "${dto.drink} 0")
 
+                            Log.e("drink", "${dto.drink} 1")
+                            if (dto.drink == "미입력") {
 
-                        if (drink == "미입력") {
-                            sendDescriptionMessage(
-                                Message(
-                                    contents = "매칭에 성공하였습니다.\n간단한 인사로 반갑게 맞아주세요".format(
-                                        myNickname,
-                                        partnerNickname,
-                                        interest
-                                    ),
-                                    roomUid = id.toString(),
-                                    type = 7
+                                Log.e("drink", "${dto.drink} 2")
+                                sendDescriptionMessage(
+                                    Message(
+                                        contents = "매칭에 성공하였습니다.\n간단한 인사로 반갑게 맞아주세요",
+                                        roomUid = mId.toString(),
+                                        type = 7
+                                    )
                                 )
-                            )
-                            sendDescriptionMessage(
-                                Message(
-                                    contents = "%s님과 %s님의 공통 관심사는 %s 입니다.".format(
-                                        myNickname,
-                                        partnerNickname,
-                                        interest
-                                    ),
-                                    roomUid = id.toString(),
-                                    type = 7
+                                Log.e("drink", "${dto.drink} 3")
+                                sendDescriptionMessage(
+                                    Message(
+                                        contents = "%s님과 %s님의 공통 관심사는 %s 입니다.".format(
+                                            myNickname,
+                                            partnerNickname,
+                                            dto.interest
+                                        ),
+                                        roomUid = mId.toString(),
+                                        type = 7
+                                    )
                                 )
-                            )
+                                Log.e("drink", "${dto.drink} 4")
+                            }
                         }
+                        this@CoffeeOrderViewModel.matchingId = dto.matchingId
+                        this@CoffeeOrderViewModel.profileImage = dto.profileImage
+                        this@CoffeeOrderViewModel.drink = dto.drink
+                        this@CoffeeOrderViewModel.commonInterest = interest
+                        this@CoffeeOrderViewModel.startTime = dto.startTime
+                        this@CoffeeOrderViewModel.interest = dto.interest
 
+                    }
+
+
+                    matchingId?.let { id ->
                         sendDescriptionMessage(
                             Message(
                                 contents = "%s님은 %s을(를) 주문하셨습니다.".format(
@@ -184,6 +187,7 @@ class CoffeeOrderViewModel(
                                 roomUid = id.toString()
                             )
                         )
+
 
                         startTime?.let { time ->
                             partnerNickname?.let { pn ->
