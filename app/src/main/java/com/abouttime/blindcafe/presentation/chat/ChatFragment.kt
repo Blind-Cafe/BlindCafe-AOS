@@ -3,6 +3,7 @@ package com.abouttime.blindcafe.presentation.chat
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
+import android.media.AudioRecord
 import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.net.Uri
@@ -421,8 +422,8 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     private fun startRecording() {
         recorder = MediaRecorder().apply {
             setAudioSource(MediaRecorder.AudioSource.MIC)
-            setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
-            setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+            setOutputFormat(MediaRecorder.OutputFormat.DEFAULT)
+            setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT)
             // 따로 저장하지 않을거라서 캐시에 저장
             // 나중에 다른 곳에 저장할 때는 내부 저장소는 녹음 파일이 얼마나 커질지 모르니 충분한 공간을 제공하지 못할 수 있음에 주의
             // 그러니 여기서도 외부 저장소의 캐시 디렉토리에 접근해서 임시적으로 녹음파일을 저장하되 이 앱이 지워지거나

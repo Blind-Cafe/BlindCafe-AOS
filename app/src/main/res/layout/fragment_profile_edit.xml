@@ -245,6 +245,71 @@
                 android:textColor="@color/gray_300"
                 android:textSize="@dimen/font_size_11" />
 
+            <TextView
+                android:id="@+id/tv_partner_sex_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                android:text="@string/profile_edit_partner_sex_title"
+                android:textColor="@color/steel"
+                android:textSize="@dimen/font_size_13" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:weightSum="3"
+                >
+
+                <TextView
+                    android:id="@+id/tv_partner_sex_male"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingVertical="10dp"
+                    android:background="@drawable/bg_partner_sex_unselected"
+                    android:text="@string/female"
+                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                    android:textColor="white"
+                    android:layout_marginEnd="10dp"
+                    android:textSize="@dimen/font_size_13"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_partner_sex_female"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingVertical="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/bg_partner_sex_unselected"
+                    android:text="@string/male"
+                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                    android:textColor="white"
+                    android:textSize="@dimen/font_size_13"
+                    />
+
+
+                <TextView
+                    android:id="@+id/tv_partner_sex_bisexual"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingVertical="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/bg_partner_sex_unselected"
+                    android:text="@string/bisexual"
+                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                    android:textColor="white"
+                    android:textSize="@dimen/font_size_13"
+                    />
+
+
+            </LinearLayout>
+
 
         </LinearLayout>
 

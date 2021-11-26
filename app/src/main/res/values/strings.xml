@@ -10,6 +10,7 @@
     <string name="zero_time">00:00</string>
     <string name="male">남자</string>
     <string name="female">여자</string>
+    <string name="bisexual">상관없음</string>
     <string name="sex">성별</string>
     <string name="age">나이</string>
     <string name="age_hint">20</string>
@@ -192,6 +193,7 @@
     <string name="profile_edit_age_title">나이</string>
     <string name="profile_edit_sex_title">성별</string>
     <string name="profile_edit_location_title">지역</string>
+    <string name="profile_edit_partner_sex_title">대화 상대 성별</string>
     <string name="profile_edit_nickname_hint">닉네임을 설정해주세요.</string>
     <string name="profile_edit_age_hint">나이를 설정해주세요.</string>
     <string name="profile_edit_sex_hint">성별을 설정해주세요.</string>

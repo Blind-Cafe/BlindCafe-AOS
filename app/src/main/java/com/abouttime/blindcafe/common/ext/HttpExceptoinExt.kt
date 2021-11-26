@@ -13,6 +13,14 @@ internal fun HttpException.parseErrorBody(): BaseResponse {
     Log.e(LogTag.RETROFIT_TAG, errorBody.toString())
     Log.e(LogTag.RETROFIT_TAG, code)
     Log.e(LogTag.RETROFIT_TAG, message)
+    try {
+        if (code == "1007") {
+
+        }
+    } catch (e: Exception) {
+
+    }
+
 
     return BaseResponse(code = code, message = message)
 
