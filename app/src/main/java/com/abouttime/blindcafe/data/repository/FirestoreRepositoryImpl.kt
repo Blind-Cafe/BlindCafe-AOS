@@ -66,6 +66,8 @@ class FirestoreRepositoryImpl(
             .document(roomId)
             .collection(SUB_COLLECTION_MESSAGES)
             .orderBy("timestamp", Query.Direction.ASCENDING)
+            .startAt(startAt)
+            .endAt(endAt)
             .get()
             .await()
             .documents

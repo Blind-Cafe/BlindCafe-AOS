@@ -3,6 +3,7 @@ package com.abouttime.blindcafe.presentation.profile_exchange.location
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.databinding.RvItemLocationSubBinding
 
 
@@ -14,13 +15,19 @@ class LocationSubAdapter(
 
     inner class ViewHolder(private val binding: RvItemLocationSubBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bindResource(data: String) = with(binding) {
-            tvLocationSub.text = data
+        fun bindResource(position: Int) = with(binding) {
+            if (viewModel.selectedSubLocation == position) {
+                tvLocationSub.setBackgroundResource(R.color.location_sub_background)
+            } else {
+                tvLocationSub.setBackgroundResource(R.color.gray_900)
+            }
+            tvLocationSub.text = viewModel.subLocations[position]
         }
 
-        fun bindView(data: String) = with(binding) {
+        fun bindView(position: Int) = with(binding) {
             root.setOnClickListener {
-
+                viewModel.selectedSubLocation = position
+                notifyDataSetChanged()
             }
         }
     }
@@ -32,8 +39,8 @@ class LocationSubAdapter(
         )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindResource(viewModel.subLocations[position])
-        holder.bindView(viewModel.subLocations[position])
+        holder.bindResource(position)
+        holder.bindView(position)
     }
 
     override fun getItemCount(): Int = viewModel.subLocations.size

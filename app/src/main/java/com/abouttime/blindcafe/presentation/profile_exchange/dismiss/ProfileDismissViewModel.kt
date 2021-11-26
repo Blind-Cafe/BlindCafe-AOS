@@ -34,8 +34,4 @@ class ProfileDismissViewModel: BaseViewModel() {
             )
         )
     }
-
-    private fun moveToReportDialogFragment() {
-
-    }
 }

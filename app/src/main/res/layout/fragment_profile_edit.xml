@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -132,7 +133,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
                 android:layout_marginTop="6dp"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:text="@string/profile_edit_impossible"
@@ -174,7 +174,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_marginTop="6dp"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:text="@string/profile_edit_impossible"
                 android:textColor="@color/gray_300"
@@ -192,8 +192,7 @@
                 android:textSize="@dimen/font_size_13" />
 
             <FrameLayout
-                android:id="@+id/fl_location_et_container"
-                android:onClick="@{() -> viewModel.onClickLocationEditText()}"
+                android:id="@+id/cl_location_et_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -203,19 +202,33 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/transparent"
-                    android:focusable="true"
                     android:enabled="false"
-                    android:clickable="true"
-                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                    android:focusable="false"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     android:hint="@string/profile_edit_location_hint"
                     android:paddingHorizontal="6dp"
                     android:paddingVertical="16dp"
-                    android:text="@={viewModel.location}"
+                  />
+
+                <TextView
+                    android:id="@+id/tv_location_value"
+                    android:layout_width="match_parent"
+                    android:text="@{viewModel.location}"
+                    tools:text="adsf"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="16dp"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_size_16" />
+                    android:textSize="@dimen/font_size_16"
+                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                    android:layout_height="match_parent"
+                    android:onClick="@{() -> viewModel.onClickLocationEditText()}"
+                    android:backgroundTint="@color/transparent"/>
 
             </FrameLayout>
-
 
 
             <View
@@ -242,7 +255,7 @@
             android:layout_height="0dp"
             android:layout_marginBottom="54dp"
             android:background="@drawable/bg_rounding_3dp"
-            android:backgroundTint="@color/main"
+            android:backgroundTint="@color/edit_profile_button_disabled"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:gravity="center"
             android:onClick="@{() -> viewModel.onClickCompleteButton()}"

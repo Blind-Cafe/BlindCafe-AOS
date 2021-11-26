@@ -409,7 +409,15 @@
         android:id="@+id/profileEditFragment"
         android:name="com.abouttime.blindcafe.presentation.main.my_page.edit.profile.info.ProfileEditFragment"
         android:label="ProfileEditFragment"
-        tools:layout="@layout/fragment_profile_edit" />
+        tools:layout="@layout/fragment_profile_edit" >
+        <action
+            android:id="@+id/action_profileEditFragment_to_locationFragment"
+            app:destination="@id/locationFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
     <fragment
         android:id="@+id/profileExchangeCompleteFragment"
         android:name="com.abouttime.blindcafe.presentation.profile_exchange.complete.ProfileExchangeCompleteFragment"
@@ -551,14 +559,5 @@
         android:id="@+id/profileImageEditFragment"
         tools:layout="@layout/fragment_profile_image_edit"
         android:name="com.abouttime.blindcafe.presentation.main.my_page.edit.profile.image.ProfileImageEditFragment"
-        android:label="ProfileImageEditFragment" >
-        <action
-            android:id="@+id/action_profileImageEditFragment_to_locationFragment"
-            app:destination="@id/locationFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            />
-    </fragment>
+        android:label="ProfileImageEditFragment" />
 </navigation>

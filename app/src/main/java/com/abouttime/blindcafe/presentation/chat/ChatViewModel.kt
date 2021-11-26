@@ -31,6 +31,7 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 class ChatViewModel(
+    private val receiveMessagesUseCase: ReceiveMessagesUseCase,
     private val subscribeMessageUseCase: SubscribeMessageUseCase,
     private val sendMessageUseCase: SendMessageUseCase,
     private val uploadImageUseCase: UploadImageUseCase,
@@ -39,8 +40,7 @@ class ChatViewModel(
     private val downloadAudioUrlUseCase: DownloadAudioUrlUseCase,
     private val fcmUseCase: PostFcmUseCase,
     private val getChatRoomInfoUseCase: GetChatRoomInfoUseCase,
-    private val getTopicUseCase: GetTopicUseCase,
-    private val receiveMessagesUseCase: ReceiveMessagesUseCase
+    private val getTopicUseCase: GetTopicUseCase
 ) : BaseViewModel() {
 
     private val _isSendButtonEnabled = MutableLiveData(false)
@@ -69,6 +69,11 @@ class ChatViewModel(
 
 
     /** use cases **/
+    fun receivePagedMessages(roomId: String, startAt: Int, endAt: Int) {
+
+    }
+
+
     fun postFcm(title: String, path: String, body: String) = viewModelScope.launch(Dispatchers.IO) {
         val token = FirebaseMessaging.getInstance().token.await()
         val dto = PostFcmDto(

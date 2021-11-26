@@ -1,6 +1,8 @@
 package com.abouttime.blindcafe.presentation.main.my_page.edit.profile.info
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.SingleLiveData
@@ -8,7 +10,6 @@ import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.GetProfileInfoDto
 import com.abouttime.blindcafe.domain.use_case.server.GetProfileInfoUseCase
-import com.abouttime.blindcafe.presentation.main.my_page.edit.profile.image.ProfileImageEditFragmentDirections
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -27,10 +28,17 @@ class ProfileEditViewModel(
     private val _age = SingleLiveData<String>()
     val age: SingleLiveData<String> get() = _age
 
-    private val _location = SingleLiveData<String>()
-    val location: SingleLiveData<String> get() = _location
+    val _location = MutableLiveData<String>("위치")
+    val location: LiveData<String> get() = _location
 
 
+    private val _canEnableNext = MutableLiveData<Boolean>()
+    val canEnableNext: LiveData<Boolean> get() = _canEnableNext
+
+    fun setLocation(location: String) {
+        _location.value = location
+        _canEnableNext.value = true
+    }
 
 
     init {
@@ -56,6 +64,7 @@ class ProfileEditViewModel(
                             }
                         )
                         _location.postValue(dto.region ?: "")
+                        _canEnableNext.postValue(!dto.region.isNullOrEmpty())
                     }
                 }
                 is Resource.Error -> {
@@ -82,7 +91,7 @@ class ProfileEditViewModel(
     }
 
     private fun moveToLocationFragment() {
-        moveToDirections(ProfileImageEditFragmentDirections.actionProfileImageEditFragmentToLocationFragment())
+        moveToDirections(ProfileEditFragmentDirections.actionProfileEditFragmentToLocationFragment())
     }
 
 }
