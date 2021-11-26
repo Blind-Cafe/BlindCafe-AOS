@@ -18,5 +18,7 @@ data class GetUserInfoDto(
     @SerializedName("profileImage")
     val profileImage: String?,
     @SerializedName("region")
-    val region: String?
+    val region: String?,
+    @SerializedName("partnerGender")
+    val partnerGender: String?
 ): BaseResponse()

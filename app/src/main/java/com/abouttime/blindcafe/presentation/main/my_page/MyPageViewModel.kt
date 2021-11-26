@@ -30,6 +30,8 @@ class MyPageViewModel(
     val age: LiveData<String> get() = _age
     private val _location = MutableLiveData("-")
     val location: LiveData<String> get() = _location
+    private val _partenerSex = MutableLiveData("-")
+    val partenerSex: LiveData<String> get() = _partenerSex
 
     private val _interests = SingleLiveData<List<Int>>()
     val interests: SingleLiveData<List<Int>> get() = _interests
@@ -60,6 +62,14 @@ class MyPageViewModel(
                         _nickname.postValue(it.nickname)
                         _sex.postValue(it.myGender)
                         _age.postValue(it.age.toString())
+                        _partenerSex.postValue(
+                            when (it.partnerGender) {
+                                "M" -> "남자"
+                                "F" -> "여자"
+                                "N" -> "상관없음"
+                                else -> ""
+                            }
+                        )
                         _location.postValue(it.region)
                         if (!it.interests.isNullOrEmpty()) {
                             _interests.postValue(it.interests!!)
@@ -67,6 +77,7 @@ class MyPageViewModel(
                         if (!it.drinks.isNullOrEmpty()) {
                             _badges.postValue(it.drinks!!)
                         }
+
 
                     }
                 }
