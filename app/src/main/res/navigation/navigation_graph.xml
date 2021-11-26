@@ -318,6 +318,19 @@
         android:name="com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest_detail.InterestSubFragment"
         android:label="InterestSubFragment"
         tools:layout="@layout/fragment_interest_sub">
+
+        <argument android:name="i1"
+            app:argType="integer"
+            />
+
+        <argument android:name="i2"
+            app:argType="integer"
+            />
+
+        <argument android:name="i3"
+            app:argType="integer"/>
+
+
         <action
             android:id="@+id/action_interestSubFragment_to_signinFragment"
             app:destination="@id/signinFragment"

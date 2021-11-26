@@ -29,7 +29,7 @@ class BlindCafeApplication: Application() {
 
         sharedPreferences = getSharedPreferences("BLIND_CAFE", Context.MODE_PRIVATE)
         var keyHash = Utility.getKeyHash(this)
-        Log.e(LogTag.FCM_TAG, keyHash)
+        Log.e("keyHash", keyHash)
 
         FirebaseMessaging.getInstance().subscribeToTopic(Retrofit.FCM_MESSAGE_TOPIC).addOnCompleteListener { task ->
             var msg = "구독 성공"

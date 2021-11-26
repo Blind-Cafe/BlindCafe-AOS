@@ -16,11 +16,12 @@ class InterestViewModel(
 
     fun onClickNextButton() {
         if (canEnableNextButton()) {
-            val interests = selectedItemIdx.sorted().joinToString(",") { (it+1).toString() }
-            Log.d(RETROFIT_TAG, interests.toString())
-            saveStringData(Pair(INTERESTS, interests))
-            selectedItemIdx.clear()
-            moveToDirections(InterestFragmentDirections.actionInterestFragmentToInterestSubFragment())
+            selectedItemIdx.sort()
+            moveToDirections(InterestFragmentDirections.actionInterestFragmentToInterestSubFragment(
+                i1 = selectedItemIdx[0]+1,
+                i2 = selectedItemIdx[1]+1,
+                i3 = selectedItemIdx[2]+1
+            ))
         } else {
             showToast(R.string.profile_setting_toast_select_interest)
         }

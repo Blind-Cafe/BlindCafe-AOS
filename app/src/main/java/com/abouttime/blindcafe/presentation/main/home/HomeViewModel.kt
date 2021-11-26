@@ -139,7 +139,6 @@ class HomeViewModel(
     fun onClickCircleImageView(v: View) {
         val statusCode = _homeStatusCode.value
 
-
         when (statusCode) {
             0 -> { // 매칭 없음
                 postMatchingRequest()
@@ -156,7 +155,6 @@ class HomeViewModel(
                         partnerNickname = partnerNickname
                     )
                 }
-
             }
             3 -> { // 매칭 + 음료선택 완료
                 if (matchingId != null && startTime != null && partnerNickname != null) {

@@ -35,27 +35,13 @@ class InterestSubViewModel(
 
     val selectedSubInterests = Array(3) { mutableListOf<String>() }
 
-    init {
-        try {
-            val interests = getStringData(PreferenceKey.INTERESTS)?.split(",")
-            Log.e(RETROFIT_TAG, interests.toString())
-            val interest1 = interests?.get(0)?.toInt()
-            val interest2 = interests?.get(1)?.toInt()
-            val interest3 = interests?.get(2)?.toInt()
-            Log.e(RETROFIT_TAG, "$interest1, $interest2, $interest3")
-            if (interest1 != null && interest2 != null && interest3 != null) {
-                Log.e(RETROFIT_TAG, "$interest1, $interest2, $interest3")
-                getInterest(interest1, interest2, interest3)
-            }
-        } catch (e: Exception) {
-            Log.e(RETROFIT_TAG, e.toString())
-        }
-
-    }
+    var i1 = 0
+    var i2 = 0
+    var i3 = 0
 
     val interestMap = mapOf(
         1 to "취업",
-        2 to "만화/애니",
+        2 to "작품",
         3 to "동물",
         4 to "음식",
         5 to "여행",
@@ -79,6 +65,9 @@ class InterestSubViewModel(
 
 
     fun getInterest(id1 : Int, id2: Int, id3: Int) {
+        i1 = id1
+        i2 = id2
+        i3 = id3
         getInterestUseCase(id1, id2, id3)
             .onEach { result ->
                 when(result) {
@@ -90,8 +79,8 @@ class InterestSubViewModel(
                             Log.e(RETROFIT_TAG, "$it")
                             _interests.postValue(it)
                         }
-
                     }
+
                     is Resource.Error -> {
                         Log.e(RETROFIT_TAG, "${result?.message}")
                     }
@@ -107,13 +96,6 @@ class InterestSubViewModel(
         val myGender = getStringData(PreferenceKey.SEX)
         val nickname = getStringData(PreferenceKey.NICKNAME)
         val partnerGender = getStringData(PreferenceKey.MATCHING_SEX)
-        val interests = getStringData(PreferenceKey.INTERESTS)?.split(",")
-        val interest1 = interests?.get(0)?.let { interestMap[it.toInt()] }
-        val interest2 = interests?.get(1)?.let { interestMap[it.toInt()] }
-        val interest3 = interests?.get(2)?.let { interestMap[it.toInt()] }
-        val subInterests1 = selectedSubInterests[0].map { interest1+(it + 1) }
-        val subInterests2 = selectedSubInterests[1].map { interest2+(it + 1) }
-        val subInterests3 = selectedSubInterests[2].map { interest3+(it + 1) }
 
         val dto =  PostUserInfoDto(
             age = age,
@@ -122,15 +104,15 @@ class InterestSubViewModel(
             partnerGender = partnerGender,
             userInterests = listOf(
                 UserInterest(
-                    main = interests?.get(0)?.toInt() ?: 0,
+                    main = i1,
                     sub = selectedSubInterests[0]
                 ),
                 UserInterest(
-                    main = interests?.get(1)?.toInt() ?: 0,
+                    main = i2,
                     sub =  selectedSubInterests[1]
                 ),
                 UserInterest(
-                    main = interests?.get(2)?.toInt() ?: 0,
+                    main = i3,
                     sub =  selectedSubInterests[2]
                 )
             )

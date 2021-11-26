@@ -16,8 +16,12 @@ class InterestEditViewModel: BaseViewModel() {
 
     fun onClickNextButton() {
         if (canEnableNextButton()) {
+            val i1 = selectedItemIdx[0]
+            val i2 = selectedItemIdx[1]
+            val i3 = selectedItemIdx[2]
             selectedItemIdx.clear()
-            moveToInterestSubEditFragment(selectedItemIdx[0], selectedItemIdx[1], selectedItemIdx[2])
+            moveToInterestSubEditFragment(i1, i2, i3)
+
         } else {
             showToast(R.string.profile_setting_toast_select_interest)
         }
@@ -25,9 +29,9 @@ class InterestEditViewModel: BaseViewModel() {
 
     private fun moveToInterestSubEditFragment(i1: Int, i2: Int, i3: Int) {
         moveToDirections(InterestEditFragmentDirections.actionInterestEditFragmentToInterestSubEditFragment(
-            mainInterest1 = i1,
-            mainInterest2 = i2,
-            mainInterest3 = i3
+            mainInterest1 = i1+1,
+            mainInterest2 = i2+1,
+            mainInterest3 = i3+1
         ))
     }
 

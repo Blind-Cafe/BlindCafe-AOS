@@ -53,7 +53,7 @@ class InterestSubEditFragment: BaseFragment<InterestSubEditViewModel>(R.layout.f
                 layoutManager = LinearLayoutManager(requireContext())
             }
 
-            OverScrollDecoratorHelper.setUpOverScroll(rvSubInterestContainer, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
+            //OverScrollDecoratorHelper.setUpOverScroll(rvSubInterestContainer, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
 
         }
 

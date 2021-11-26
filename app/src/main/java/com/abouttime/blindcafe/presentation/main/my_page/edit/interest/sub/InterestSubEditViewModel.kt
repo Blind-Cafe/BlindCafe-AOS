@@ -30,7 +30,7 @@ class InterestSubEditViewModel(
 
     val interestMap = mapOf(
         1 to "취업",
-        2 to "만화/애니",
+        2 to "작품",
         3 to "동물",
         4 to "음식",
         5 to "여행",

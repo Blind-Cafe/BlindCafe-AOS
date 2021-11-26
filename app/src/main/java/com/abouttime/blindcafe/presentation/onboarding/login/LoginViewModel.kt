@@ -8,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
+import com.abouttime.blindcafe.common.constants.PreferenceKey
+import com.abouttime.blindcafe.common.constants.PreferenceKey.INFO_INPUT
 import com.abouttime.blindcafe.common.constants.Retrofit.JWT
 import com.abouttime.blindcafe.common.constants.Retrofit.USER_ID
 import com.abouttime.blindcafe.data.server.dto.login.KakaoTokenDto
@@ -61,6 +63,9 @@ class LoginViewModel(
                         saveStringData(Pair(JWT, jwt))
                         saveStringData(Pair(USER_ID, id.toString()))
                         _loginStateEvent.postValue(LoginState.Success)
+                    }
+                    if (nick != null) {
+                        saveStringData(Pair(INFO_INPUT, nick))
                     }
 
                     when(result.data?.code) {
