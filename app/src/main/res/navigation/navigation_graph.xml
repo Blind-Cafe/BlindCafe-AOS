@@ -693,5 +693,12 @@
         android:id="@+id/exchangeWaitFragment"
         android:name="com.abouttime.blindcafe.presentation.profile_exchange.wait.ExchangeWaitFragment"
         android:label="ExchangeWaitFragment"
-        tools:layout="@layout/fragment_exchange_wait" />
+        tools:layout="@layout/fragment_exchange_wait">
+        <argument android:name="partnerNickname"
+            app:argType="string"
+            app:nullable="false"
+            />
+
+
+    </fragment>
 </navigation>

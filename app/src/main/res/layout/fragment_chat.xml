@@ -37,7 +37,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ll_topic_unfold_container"
                 android:overScrollMode="always"
-                android:paddingTop="8dp"
                 tools:listitem="@layout/rv_chat_item_receive_text" />
 
         <androidx.constraintlayout.widget.ConstraintLayout

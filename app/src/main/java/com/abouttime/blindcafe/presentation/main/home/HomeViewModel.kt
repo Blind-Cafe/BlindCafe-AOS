@@ -8,23 +8,30 @@ import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
-import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.ext.secondToLapseForHome
-import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.use_case.server.GetHomeInfoUseCase
+import com.abouttime.blindcafe.domain.use_case.server.GetPartnerProfileUseCase
 import com.abouttime.blindcafe.domain.use_case.server.PostMatchingRequestUseCase
-import com.abouttime.blindcafe.domain.use_case.firebase.SendMessageUseCase
 import com.abouttime.blindcafe.presentation.main.MainFragmentDirections
-import kotlinx.coroutines.Dispatchers
+import com.abouttime.blindcafe.presentation.main.home.HomeState.FAILED_LEAVE_ROOM
+import com.abouttime.blindcafe.presentation.main.home.HomeState.FAILED_REPORT
+import com.abouttime.blindcafe.presentation.main.home.HomeState.FAILED_WONT_EXCHANGE
+import com.abouttime.blindcafe.presentation.main.home.HomeState.FOUND
+import com.abouttime.blindcafe.presentation.main.home.HomeState.MATCHING
+import com.abouttime.blindcafe.presentation.main.home.HomeState.MATCHING_CONTINUE
+import com.abouttime.blindcafe.presentation.main.home.HomeState.NONE
+import com.abouttime.blindcafe.presentation.main.home.HomeState.PROFILE_ACCEPT
+import com.abouttime.blindcafe.presentation.main.home.HomeState.PROFILE_OPEN
+import com.abouttime.blindcafe.presentation.main.home.HomeState.PROFILE_READY
+import com.abouttime.blindcafe.presentation.main.home.HomeState.WAIT
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val getHomeInfoUseCase: GetHomeInfoUseCase,
     private val postMatchingRequestUseCase: PostMatchingRequestUseCase,
-    private val sendMessageUseCase: SendMessageUseCase
+    private val getPartnerProfileUseCase: GetPartnerProfileUseCase
 ) : BaseViewModel() {
     private val _homeStatusCode: MutableLiveData<Int> = MutableLiveData<Int>(-1)
     val homeStatusCode: LiveData<Int> get() = _homeStatusCode
@@ -90,34 +97,35 @@ class HomeViewModel(
         }.launchIn(viewModelScope)
     }
 
-    fun sendDescriptionMessage(message: Message) = viewModelScope.launch(Dispatchers.IO) {
-        sendMessageUseCase(message).onEach { result ->
-            when (result) {
-                is Resource.Loading -> {
-                    Log.d(LogTag.FIRESTORE_TAG, "Loading")
-                }
-                is Resource.Success -> {
-                    Log.d(LogTag.FIRESTORE_TAG, "${result.data?.id}")
-                }
-                is Resource.Error -> {
-                    Log.d(LogTag.FIRESTORE_TAG, "Error")
-                }
-            }
+    private fun getPartnerProfile() {
+        matchingId?.let { id ->
+            getPartnerProfileUseCase(id).onEach {
 
-        }.launchIn(viewModelScope)
+            }.launchIn(viewModelScope)
+        } ?: kotlin.run {
+            showToast(R.string.temp_error)
+        }
     }
 
 
 
+
+
+
+    /** mapping status **/
     private fun getHomeStatusCode(status: String): Int {
         return when (status) {
-            "NONE" -> 0
-            "WAIT" -> 1
-            "FOUND" -> 2
-            "MATCHING" -> 3
-            "FAILED_LEAVE_ROOM" -> 4
-            "FAILED_REPORT" -> 5
-            "FAILED_WONT_EXCHANGE" -> 6
+            NONE -> 0
+            WAIT -> 1
+            FOUND -> 2
+            MATCHING -> 3
+            PROFILE_OPEN -> 4
+            PROFILE_READY -> 5
+            PROFILE_ACCEPT -> 6
+            MATCHING_CONTINUE -> 7
+            FAILED_LEAVE_ROOM -> 8
+            FAILED_REPORT -> 9
+            FAILED_WONT_EXCHANGE -> 10
             else -> 0
         }
 
@@ -153,7 +161,19 @@ class HomeViewModel(
                     )
                 }
             }
-            4, 5, 6 -> { // 방 폭파 or 프로필 교환 거절
+            4 -> {
+                moveToExchangeOpenFragment()
+            }
+            5 -> {
+
+            }
+            6 -> {
+
+            }
+            7 -> {
+
+            }
+            8, 9, 10 -> { // 방 폭파 or 프로필 교환 거절
                 if (partnerNickname != null && reason != null) {
                     moveToExitFragment(partnerNickname!!, reason!!)
                 }
@@ -186,9 +206,6 @@ class HomeViewModel(
         ))
     }
 
-    fun moveToProfileExchangeFragment() {
-        moveToDirections(MainFragmentDirections.actionMainFragmentToExchangeAcceptFragment())
-    }
 
     private fun moveToExitFragment(partnerNickname: String, reason: String) {
         moveToDirections(MainFragmentDirections.actionMainFragmentToExitFragment(
@@ -209,7 +226,18 @@ class HomeViewModel(
         )
     }
 
+    private fun moveToExchangeOpenFragment() {
+        matchingId?.let { id ->
+            moveToDirections(MainFragmentDirections.actionMainFragmentToExchangeOpenFragment(
+                matchingId = id
+            ))
+        }
+    }
 
+
+    fun moveToExchangeFragment() {
+        moveToDirections(MainFragmentDirections.actionMainFragmentToExchangeAcceptFragment())
+    }
 
 
 }

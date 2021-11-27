@@ -4,16 +4,19 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.core.view.isGone
+import androidx.navigation.fragment.navArgs
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.common.constants.NavigationKey
 import com.abouttime.blindcafe.databinding.FragmentExchangeOpenBinding
 import com.abouttime.blindcafe.databinding.FragmentProfileEditBinding
+import com.bumptech.glide.Glide
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ExchangeOpenFragment: BaseFragment<ExchangeOpenViewModel>(R.layout.fragment_exchange_open) {
     override val viewModel: ExchangeOpenViewModel by viewModel()
     private var binding: FragmentExchangeOpenBinding? = null
+    private val args: ExchangeOpenFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -23,12 +26,20 @@ class ExchangeOpenFragment: BaseFragment<ExchangeOpenViewModel>(R.layout.fragmen
         binding?.lifecycleOwner = this
         binding?.viewModel = viewModel
 
+        initNavArgs()
+
         initNicknameEditText(fragmentExchangeOpenBinding)
 
         observeSavedNavigationData(fragmentExchangeOpenBinding)
         observeLocationData(fragmentExchangeOpenBinding)
         observeNicknameData(fragmentExchangeOpenBinding)
         observeInterestsData(fragmentExchangeOpenBinding)
+        observeProfileImageData(fragmentExchangeOpenBinding)
+    }
+
+    private fun initNavArgs() {
+        val matchingId = args.matchingId
+        viewModel.getProfileForOpen(matchingId)
     }
 
 
@@ -83,6 +94,14 @@ class ExchangeOpenFragment: BaseFragment<ExchangeOpenViewModel>(R.layout.fragmen
             }
 
 
+        }
+    }
+
+    private fun observeProfileImageData(fragmentExchangeOpenBinding: FragmentExchangeOpenBinding) = with(fragmentExchangeOpenBinding) {
+        viewModel?.profileImage?.observe(viewLifecycleOwner) { url ->
+            Glide.with(requireContext())
+                .load(url)
+                .into(ivProfileImage)
         }
     }
 

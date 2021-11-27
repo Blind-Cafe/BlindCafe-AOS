@@ -2,6 +2,7 @@ package com.abouttime.blindcafe.data.server.api
 
 import com.abouttime.blindcafe.common.base.BaseResponse
 import com.abouttime.blindcafe.common.constants.Retrofit.DELETE_ACCOUNT_URL
+import com.abouttime.blindcafe.common.constants.Retrofit.GET_PARTNER_PROFILE
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_PROFILE_FOR_OPEN
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_PROFILE_IMAGE_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_PROFILE_INFO_URL
@@ -17,6 +18,7 @@ import com.abouttime.blindcafe.data.server.dto.user_info.PostUserInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.device_token.PostDeviceTokenDto
 import com.abouttime.blindcafe.data.server.dto.user_info.edit.info.PutProfileInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.edit.info.PutProfileInfoResponse
+import com.abouttime.blindcafe.data.server.dto.user_info.partner.GetPartnerProfileDto
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.GetProfileForOpenDto
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.PostProfileForOpenDto
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.PostProfileForOpenResponse
@@ -80,5 +82,10 @@ interface UserInfoApi {
     suspend fun postProfileForOpen(
         @Body postProfileForOpenDto: PostProfileForOpenDto
     ): PostProfileForOpenResponse?
+
+    @GET(GET_PARTNER_PROFILE)
+    suspend fun getPartnerProfile(
+        @Path("matchingId") matchingId: Int
+    ): GetPartnerProfileDto?
 
 }

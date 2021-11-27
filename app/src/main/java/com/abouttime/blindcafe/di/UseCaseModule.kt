@@ -20,6 +20,7 @@ internal val useCaseModule = module {
     factory { PatchProfileImageUseCase(get()) }
     factory { GetProfileImageUseCase(get()) }
     factory { GetProfileForOpenUseCase(get()) }
+    factory { GetPartnerProfileUseCase(get()) }
 
     /** gallery **/
     factory { FetchImagesUseCase(get()) }
