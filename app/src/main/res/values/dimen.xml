@@ -41,5 +41,11 @@
 
 
     <dimen name="chat_topic_vertical_margin">16dp</dimen>
+    <dimen name="chat_message_top_margin">4dp</dimen>
+    <dimen name="chat_message_bottom_margin">4dp</dimen>
+    <dimen name="chat_topic_top_margin">4dp</dimen>
+    <dimen name="chat_topic_bottom_margin">4dp</dimen>
+    <dimen name="chat_description_top_margin">6dp</dimen>
+    <dimen name="chat_description_bottom_margin">6dp</dimen>
 
 </resources>

@@ -83,9 +83,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/bg_profile_edit_button"
             android:src="@drawable/bt_profile_image_add" />
 
 
@@ -116,9 +113,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/bg_profile_edit_button"
             android:src="@drawable/bt_profile_image_add" />
 
 
@@ -149,9 +143,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/bg_profile_edit_button"
             android:src="@drawable/bt_profile_image_add" />
 
 
@@ -171,6 +162,7 @@
         android:onClick="@{() -> viewModel.onClickCompleteButton()}"
         android:textColor="@color/white"
         android:textSize="@dimen/font_size_16"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="356:50"
         app:layout_constraintEnd_toEndOf="parent"
