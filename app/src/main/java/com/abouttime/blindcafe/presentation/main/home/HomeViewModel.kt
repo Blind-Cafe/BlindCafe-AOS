@@ -10,6 +10,7 @@ import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.ext.secondToLapseForHome
+import com.abouttime.blindcafe.data.server.dto.user_info.partner.GetPartnerProfileDto
 import com.abouttime.blindcafe.domain.use_case.server.GetHomeInfoUseCase
 import com.abouttime.blindcafe.domain.use_case.server.GetPartnerProfileUseCase
 import com.abouttime.blindcafe.domain.use_case.server.PostMatchingRequestUseCase
@@ -31,7 +32,7 @@ import kotlinx.coroutines.flow.onEach
 class HomeViewModel(
     private val getHomeInfoUseCase: GetHomeInfoUseCase,
     private val postMatchingRequestUseCase: PostMatchingRequestUseCase,
-    private val getPartnerProfileUseCase: GetPartnerProfileUseCase
+    private val getPartnerProfileUseCase: GetPartnerProfileUseCase,
 ) : BaseViewModel() {
     private val _homeStatusCode: MutableLiveData<Int> = MutableLiveData<Int>(-1)
     val homeStatusCode: LiveData<Int> get() = _homeStatusCode
@@ -54,6 +55,7 @@ class HomeViewModel(
         getHomeInfoUseCase().onEach { resource ->
             when (resource) {
                 is Resource.Loading -> {
+                    showLoading()
                     Log.d(RETROFIT_TAG, "Loading")
                 }
                 is Resource.Success -> {
@@ -68,9 +70,11 @@ class HomeViewModel(
                         partnerNickname = it.partnerNickname
                         partnerId = it.partnerId
                     }
+                    dismissLoading()
                 }
                 is Resource.Error -> {
                     Log.d(RETROFIT_TAG, resource.message.toString())
+                    dismissLoading()
                 }
             }
 
@@ -99,7 +103,21 @@ class HomeViewModel(
 
     private fun getPartnerProfile() {
         matchingId?.let { id ->
-            getPartnerProfileUseCase(id).onEach {
+            getPartnerProfileUseCase(id).onEach { result ->
+                when (result) {
+                    is Resource.Loading -> {
+                        showLoading()
+                    }
+                    is Resource.Success -> {
+                        result.data?.let { dto ->
+                            handleGetPartnerProfileDto(dto)
+                        }
+                        dismissLoading()
+                    }
+                    is Resource.Error -> {
+                        dismissLoading()
+                    }
+                }
 
             }.launchIn(viewModelScope)
         } ?: kotlin.run {
@@ -107,9 +125,17 @@ class HomeViewModel(
         }
     }
 
+    /** handler **/
+    private fun handleGetPartnerProfileDto(dto: GetPartnerProfileDto) {
+        if (dto.fill == true) {
+            /** 나 공개한 상태인데 상대방 작성 했으니 '(내)수락' 화면으로 이동 */
+            moveToExchangeAcceptFragment()
 
-
-
+        } else {
+            /** 나 공개한 상태인데 상대방 작성 안 했으니 '상대 작성 대기' 화면으로 이동 */
+            moveToExchangeOpenWaitFragment()
+        }
+    }
 
 
     /** mapping status **/
@@ -162,16 +188,20 @@ class HomeViewModel(
                 }
             }
             4 -> {
+                /** 3일 끝, 나 작성도 했는지 모름, '공개하기' 화면가서 확인해 볼거임 */
                 moveToExchangeOpenFragment()
             }
             5 -> {
-
+                /** 나 일단 프로필 작성만 완료한 상태  */
+                getPartnerProfile()
             }
             6 -> {
-
+                /** 나 수락한 상태(즉 상대방 작성 o)이니 '상대 수락 대기' 화면으로 이동 */
+                // TODO
             }
             7 -> {
-
+                /** 매칭 성공 -> 내 테이블로 이동 할 때 성공화면 pop 해야한다. */
+                moveToExchangeCompleteFragment()
             }
             8, 9, 10 -> { // 방 폭파 or 프로필 교환 거절
                 if (partnerNickname != null && reason != null) {
@@ -210,7 +240,9 @@ class HomeViewModel(
     private fun moveToExitFragment(partnerNickname: String, reason: String) {
         moveToDirections(MainFragmentDirections.actionMainFragmentToExitFragment(
             isReport = false,
-            title = "%s님이\"%s\"라는 이유로 대화를 진행하지 못하게되었습니다.\n\n아쉽지만 새로운 손님과 또 다른 추억을 쌓을 수 있습니다.".format(partnerNickname, reason) // TODO 리소스로 관리해라
+            title = "%s님이\"%s\"라는 이유로 대화를 진행하지 못하게되었습니다.\n\n아쉽지만 새로운 손님과 또 다른 추억을 쌓을 수 있습니다.".format(
+                partnerNickname,
+                reason) // TODO 리소스로 관리해라
         ))
     }
 
@@ -234,9 +266,20 @@ class HomeViewModel(
         }
     }
 
+    private fun moveToExchangeCompleteFragment() {
+        moveToDirections(MainFragmentDirections.actionMainFragmentToExchangeCompleteFragment())
+    }
 
-    fun moveToExchangeFragment() {
+
+    private fun moveToExchangeAcceptFragment() {
         moveToDirections(MainFragmentDirections.actionMainFragmentToExchangeAcceptFragment())
+    }
+
+    private fun moveToExchangeOpenWaitFragment() {
+        partnerNickname?.let {
+            moveToDirections(MainFragmentDirections.actionMainFragmentToExchangeWaitFragment(it))
+        }
+
     }
 
 

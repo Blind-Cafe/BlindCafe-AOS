@@ -208,7 +208,7 @@ class ExchangeOpenViewModel(
         moveToLocationFragment()
     }
 
-    fun onClickProfileImageEditButton() {
+    fun onClickEditProfileImageButton() {
         moveToProfileImageEditFragment()
     }
 
