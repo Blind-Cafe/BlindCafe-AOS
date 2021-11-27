@@ -13,7 +13,7 @@
 
         <variable
             name="viewModel"
-            type="com.abouttime.blindcafe.presentation.profile_exchange.location.LocationViewModel" />
+            type="com.abouttime.blindcafe.presentation.edit.location.LocationViewModel" />
     </data>
 
 

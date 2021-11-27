@@ -129,8 +129,8 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_mainFragment_to_profileExchangeFragment"
-            app:destination="@id/profileExchangeFragment"
+            android:id="@+id/action_mainFragment_to_exchangeAcceptFragment"
+            app:destination="@id/exchangeAcceptFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -396,16 +396,16 @@
     </fragment>
     <fragment
         android:id="@+id/locationFragment"
-        android:name="com.abouttime.blindcafe.presentation.profile_exchange.location.LocationFragment"
+        android:name="com.abouttime.blindcafe.presentation.edit.location.LocationFragment"
         android:label="LocationFragment"
         tools:layout="@layout/fragment_location" />
     <fragment
-        android:id="@+id/profileDismissFragment"
-        android:name="com.abouttime.blindcafe.presentation.profile_exchange.dismiss.ProfileDismissFragment"
-        android:label="ProfileDismissFragment"
-        tools:layout="@layout/fragment_profile_dismiss">
+        android:id="@+id/exchangeDismissFragment"
+        android:name="com.abouttime.blindcafe.presentation.profile_exchange.dismiss.ExchangeDismissFragment"
+        android:label="ExchangeDismissFragment"
+        tools:layout="@layout/fragment_exchange_dismiss">
         <action
-            android:id="@+id/action_profileDismissFragment_to_confirmDialogFragment"
+            android:id="@+id/action_exchangeDismissFragment_to_confirmDialogFragment"
             app:destination="@id/confirmDialogFragment" />
     </fragment>
     <fragment
@@ -438,7 +438,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileEditFragment"
-        android:name="com.abouttime.blindcafe.presentation.main.my_page.edit.profile.info.ProfileEditFragment"
+        android:name="com.abouttime.blindcafe.presentation.edit.profile.info.ProfileEditFragment"
         android:label="ProfileEditFragment"
         tools:layout="@layout/fragment_profile_edit" >
         <action
@@ -450,10 +450,10 @@
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
-        android:id="@+id/profileExchangeCompleteFragment"
-        android:name="com.abouttime.blindcafe.presentation.profile_exchange.complete.ProfileExchangeCompleteFragment"
-        android:label="ProfileExchangeCompleteFragment"
-        tools:layout="@layout/fragment_profile_exchagnge_complete" />
+        android:id="@+id/exchangeCompleteFragment"
+        android:name="com.abouttime.blindcafe.presentation.profile_exchange.complete.ExchangeCompleteFragment"
+        android:label="ExchangeCompleteFragment"
+        tools:layout="@layout/fragment_exchange_complete" />
     <fragment
         android:id="@+id/exitFragment"
         android:name="com.abouttime.blindcafe.presentation.main.home.exit.ExitFragment"
@@ -471,27 +471,27 @@
 
     </fragment>
     <fragment
-        android:id="@+id/profileExchangeFragment"
-        android:name="com.abouttime.blindcafe.presentation.profile_exchange.ProfileExchangeFragment"
-        android:label="ProfileExchangeFragment"
-        tools:layout="@layout/fragment_profile_exchange">
+        android:id="@+id/exchangeAcceptFragment"
+        android:name="com.abouttime.blindcafe.presentation.profile_exchange.accept.ExchangeAcceptFragment"
+        android:label="ExchangeAcceptFragment"
+        tools:layout="@layout/fragment_exchange_accept">
         <action
-            android:id="@+id/action_profileExchangeFragment_to_locationFragment"
+            android:id="@+id/exchangeAcceptFragment_to_locationFragment"
             app:destination="@id/locationFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_profileExchangeFragment_to_profileExchangeCompleteFragment"
-            app:destination="@id/profileExchangeCompleteFragment"
+            android:id="@+id/exchangeAcceptFragment_to_exchangeCompleteFragment"
+            app:destination="@id/exchangeCompleteFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_profileExchangeFragment_to_profileDismissFragment"
-            app:destination="@id/profileDismissFragment"
+            android:id="@+id/exchangeAcceptFragment_to_exchangeDismissFragment"
+            app:destination="@id/exchangeDismissFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -578,7 +578,7 @@
         tools:layout="@layout/fragment_account_delete" />
     <fragment
         android:id="@+id/interestEditFragment"
-        android:name="com.abouttime.blindcafe.presentation.main.my_page.edit.interest.main.InterestEditFragment"
+        android:name="com.abouttime.blindcafe.presentation.edit.interest.main.InterestEditFragment"
         android:label="InterestEditFragment"
         tools:layout="@layout/fragment_interest_edit">
 
@@ -598,12 +598,12 @@
     <fragment
         android:id="@+id/profileImageEditFragment"
         tools:layout="@layout/fragment_profile_image_edit"
-        android:name="com.abouttime.blindcafe.presentation.main.my_page.edit.profile.image.ProfileImageEditFragment"
+        android:name="com.abouttime.blindcafe.presentation.edit.profile.image.ProfileImageEditFragment"
         android:label="ProfileImageEditFragment" />
     <fragment
         android:id="@+id/interestSubEditFragment"
         tools:layout="@layout/fragment_interest_sub_edit"
-        android:name="com.abouttime.blindcafe.presentation.main.my_page.edit.interest.sub.InterestSubEditFragment"
+        android:name="com.abouttime.blindcafe.presentation.edit.interest.sub.InterestSubEditFragment"
         android:label="InterestSubEditFragment">
 
         <argument android:name="mainInterest1"

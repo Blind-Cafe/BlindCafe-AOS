@@ -14,7 +14,7 @@
 
         <variable
             name="viewModel"
-            type="com.abouttime.blindcafe.presentation.main.my_page.edit.interest.sub.InterestSubEditViewModel" />
+            type="com.abouttime.blindcafe.presentation.edit.interest.sub.InterestSubEditViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

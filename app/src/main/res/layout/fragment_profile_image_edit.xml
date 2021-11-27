@@ -15,7 +15,7 @@
 
         <variable
             name="viewModel"
-            type="com.abouttime.blindcafe.presentation.main.my_page.edit.profile.image.ProfileImageEditViewModel" />
+            type="com.abouttime.blindcafe.presentation.edit.profile.image.ProfileImageEditViewModel" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"

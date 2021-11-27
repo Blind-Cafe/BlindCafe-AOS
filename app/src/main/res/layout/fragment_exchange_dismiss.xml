@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View.OnClickListener" />
+
+        <import type="android.view.View" />
+
+        <import type="androidx.core.content.ContextCompat" />
+
+        <import type="java.util.List" />
+
+        <variable
+            name="viewModel"
+            type="com.abouttime.blindcafe.presentation.profile_exchange.dismiss.ExchangeDismissViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="27dp"
+            android:cropToPadding="true"
+            android:src="@drawable/bt_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:fontFamily="@font/spoqa_han_sans_neo_bold"
+            android:lineSpacingExtra="7sp"
+            android:text="@string/profile_dismiss_title"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_back" />
+
+        <TextView
+            android:id="@id/tv_subtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:text="@string/profile_dismiss_subtitle"
+            android:textColor="@color/gray_300"
+            android:textSize="@dimen/font_size_13"
+            app:layout_constraintEnd_toEndOf="@id/tv_title"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+        <View
+            android:id="@+id/v_divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/divider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_subtitle" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:paddingStart="24dp"
+            android:paddingEnd="35dp"
+            android:paddingTop="28dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v_divider">
+
+            <LinearLayout
+                android:id="@+id/ll_reason_container_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="42dp"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/tv_reason_1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                    android:gravity="center_vertical"
+                    android:text="@string/profile_dismiss_reason_1"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dialog_reason" />
+
+                <ImageView
+                    android:id="@+id/iv_check_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel::onClickCheckButton}"
+                    android:src="@{viewModel.reason == 1 ? @drawable/bt_checked : @drawable/bt_check}"
+                    tools:src="@drawable/bt_check" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_reason_container_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/tv_reason_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                    android:gravity="center_vertical"
+                    android:text="@string/profile_dismiss_reason_2"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dialog_reason" />
+
+                <ImageView
+                    android:id="@+id/iv_check_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel::onClickCheckButton}"
+                    android:src="@{viewModel.reason == 2 ? @drawable/bt_checked : @drawable/bt_check}"
+                    tools:src="@drawable/bt_check" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_reason_container_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/tv_reason_3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                    android:gravity="center_vertical"
+                    android:text="@string/profile_dismiss_reason_3"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dialog_reason" />
+
+                <ImageView
+                    android:id="@+id/iv_check_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel::onClickCheckButton}"
+                    android:src="@{viewModel.reason == 3 ? @drawable/bt_checked : @drawable/bt_check}"
+                    tools:src="@drawable/bt_check" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_reason_container_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/tv_reason_4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                    android:gravity="center_vertical"
+                    android:text="@string/profile_dismiss_reason_4"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dialog_reason" />
+
+                <ImageView
+                    android:id="@+id/iv_check_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{viewModel::onClickCheckButton}"
+                    android:src="@{viewModel.reason == 4 ? @drawable/bt_checked : @drawable/bt_check}"
+                    tools:src="@drawable/bt_check" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_next"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/bg_rounding_3dp"
+            android:backgroundTint="@color/disabled"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:gravity="center"
+            android:paddingHorizontal="13dp"
+            android:text="@string/profile_dismiss_next"
+            android:textColor="@color/white"
+            android:onClick="@{viewModel::onClickNextButton}"
+            android:textSize="@dimen/font_size_16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="328:48"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

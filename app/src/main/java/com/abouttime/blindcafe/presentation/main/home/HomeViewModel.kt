@@ -187,7 +187,7 @@ class HomeViewModel(
     }
 
     fun moveToProfileExchangeFragment() {
-        moveToDirections(MainFragmentDirections.actionMainFragmentToProfileExchangeFragment())
+        moveToDirections(MainFragmentDirections.actionMainFragmentToExchangeAcceptFragment())
     }
 
     private fun moveToExitFragment(partnerNickname: String, reason: String) {

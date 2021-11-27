@@ -13,10 +13,10 @@ import com.abouttime.blindcafe.presentation.main.home.HomeViewModel
 import com.abouttime.blindcafe.presentation.main.home.coffee.CoffeeOrderViewModel
 import com.abouttime.blindcafe.presentation.main.home.exit.ExitViewModel
 import com.abouttime.blindcafe.presentation.main.my_page.MyPageViewModel
-import com.abouttime.blindcafe.presentation.main.my_page.edit.interest.main.InterestEditViewModel
-import com.abouttime.blindcafe.presentation.main.my_page.edit.interest.sub.InterestSubEditViewModel
-import com.abouttime.blindcafe.presentation.main.my_page.edit.profile.image.ProfileImageEditViewModel
-import com.abouttime.blindcafe.presentation.main.my_page.edit.profile.info.ProfileEditViewModel
+import com.abouttime.blindcafe.presentation.edit.interest.main.InterestEditViewModel
+import com.abouttime.blindcafe.presentation.edit.interest.sub.InterestSubEditViewModel
+import com.abouttime.blindcafe.presentation.edit.profile.image.ProfileImageEditViewModel
+import com.abouttime.blindcafe.presentation.edit.profile.info.ProfileEditViewModel
 import com.abouttime.blindcafe.presentation.main.my_page.setting.SettingViewModel
 import com.abouttime.blindcafe.presentation.main.my_page.setting.account_delete.AccountDeleteViewModel
 import com.abouttime.blindcafe.presentation.main.my_page.setting.account_delete.complete.AccountDeleteCompleteViewModel
@@ -32,10 +32,10 @@ import com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest_
 import com.abouttime.blindcafe.presentation.onboarding.rule.RuleViewModel
 import com.abouttime.blindcafe.presentation.onboarding.signin.SigninViewModel
 import com.abouttime.blindcafe.presentation.onboarding.splash.SplashViewModel
-import com.abouttime.blindcafe.presentation.profile_exchange.ProfileExchangeViewModel
-import com.abouttime.blindcafe.presentation.profile_exchange.complete.ProfileExchangeCompleteViewModel
-import com.abouttime.blindcafe.presentation.profile_exchange.dismiss.ProfileDismissViewModel
-import com.abouttime.blindcafe.presentation.profile_exchange.location.LocationViewModel
+import com.abouttime.blindcafe.presentation.profile_exchange.accept.ExchangeAcceptViewModel
+import com.abouttime.blindcafe.presentation.profile_exchange.complete.ExchangeCompleteViewModel
+import com.abouttime.blindcafe.presentation.profile_exchange.dismiss.ExchangeDismissViewModel
+import com.abouttime.blindcafe.presentation.edit.location.LocationViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -99,9 +99,12 @@ internal val viewModelModule = module {
     viewModel { ReportReasonViewModel(get()) }
 
     /** Profile-Exchange **/
-    viewModel { ProfileExchangeViewModel() }
-    viewModel { ProfileExchangeCompleteViewModel() }
-    viewModel { ProfileDismissViewModel() }
+    viewModel { ExchangeAcceptViewModel() }
+    viewModel { ExchangeCompleteViewModel() }
+    viewModel { ExchangeDismissViewModel() }
+
+
+    /** Edit **/
     viewModel { LocationViewModel() }
 
 
