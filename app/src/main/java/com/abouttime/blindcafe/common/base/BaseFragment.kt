@@ -34,6 +34,7 @@ abstract class BaseFragment<VM : BaseViewModel>(layoutId: Int) : Fragment(layout
         observeToastEvent()
         observeNavigationEvent()
         observeSaveNavigationDataEvent()
+        observePopNavigationEvent()
     }
 
     private fun observeLoadingEvent() {

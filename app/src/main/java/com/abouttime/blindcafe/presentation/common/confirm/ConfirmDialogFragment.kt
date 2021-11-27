@@ -68,23 +68,23 @@ class ConfirmDialogFragment :
         handleNoButton {
             Log.e("navigation", "아니요 누름")
             saveNavigationResult(CONFIRM_MATCHING_CANCEL, CONFIRM_NO)
-            popDirections()
+            popOneDirections()
         }
     }
 
     private fun handleProfileDismiss() {
         handleYesButton { } // TODO 프로필 교환 거절 api 추가
-        handleNoButton { popDirections() }
+        handleNoButton { popOneDirections() }
     }
 
     private fun handleLogout() {
         handleYesButton { viewModel.logout() }
-        handleNoButton { popDirections() }
+        handleNoButton { popOneDirections() }
     }
 
     private fun handleDeleteAccount() {
         handleYesButton {  viewModel.deleteAccount(args.reason) }
-        handleNoButton { popDirections() }
+        handleNoButton { popOneDirections() }
     }
 
     private fun handleReport() {
@@ -95,7 +95,7 @@ class ConfirmDialogFragment :
             viewModel.exitChatRoomByReport(true, title)
         }
         handleNoButton {
-            popDirections()
+            popOneDirections()
         }
     }
 
@@ -111,7 +111,7 @@ class ConfirmDialogFragment :
                 showToast(R.string.toast_fail)
             }
         }
-        handleNoButton { popDirections() }
+        handleNoButton { popOneDirections() }
     }
 
 

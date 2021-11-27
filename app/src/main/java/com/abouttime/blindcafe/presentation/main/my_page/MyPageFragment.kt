@@ -1,6 +1,7 @@
 package com.abouttime.blindcafe.presentation.main.my_page
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
@@ -23,39 +24,13 @@ class MyPageFragment : BaseFragment<MyPageViewModel>(R.layout.fragment_my_page) 
 
         initScrollView(fragmentMyPageBinding)
 
-//        observeProfileImageData(fragmentMyPageBinding)
-//        observeNicknameData(fragmentMyPageBinding)
-//
-//        observeSexData(fragmentMyPageBinding)
-//        observeLocationData(fragmentMyPageBinding)
-//        observeAgeData(fragmentMyPageBinding)
-//        observePartnerSexData(fragmentMyPageBinding)
-//
-//        observeInterestsData(fragmentMyPageBinding)
-//        observeDrinkData(fragmentMyPageBinding)
+        observeProfileImageData(fragmentMyPageBinding)
+        observeInterestsData(fragmentMyPageBinding)
+        observeDrinkData(fragmentMyPageBinding)
 
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        binding?.let {
-            val fragmentMyPageBinding = it
-
-
-            observeProfileImageData(fragmentMyPageBinding)
-            observeNicknameData(fragmentMyPageBinding)
-
-            observeSexData(fragmentMyPageBinding)
-            observeLocationData(fragmentMyPageBinding)
-            observeAgeData(fragmentMyPageBinding)
-            observePartnerSexData(fragmentMyPageBinding)
-
-            observeInterestsData(fragmentMyPageBinding)
-            observeDrinkData(fragmentMyPageBinding)
-        }
-
-    }
 
     private fun initScrollView(fragmentMyPageBinding: FragmentMyPageBinding) =
         with(fragmentMyPageBinding) {
@@ -65,6 +40,7 @@ class MyPageFragment : BaseFragment<MyPageViewModel>(R.layout.fragment_my_page) 
     private fun observeProfileImageData(fragmentMyPageBinding: FragmentMyPageBinding) =
         with(fragmentMyPageBinding) {
             viewModel?.profileImageUrl?.observe(viewLifecycleOwner) { url ->
+                Log.e("myPage", url)
                 if (url.isNotEmpty()) {
                     Glide.with(this@MyPageFragment)
                         .load(url)
@@ -75,35 +51,6 @@ class MyPageFragment : BaseFragment<MyPageViewModel>(R.layout.fragment_my_page) 
 
 
         }
-    private fun observeNicknameData(fragmentMyPageBinding: FragmentMyPageBinding) = with(fragmentMyPageBinding) {
-        viewModel?.nickname?.observe(viewLifecycleOwner) { nick ->
-            tvNickname.text = nick
-        }
-    }
-
-    private fun observeSexData(fragmentMyPageBinding: FragmentMyPageBinding) =
-        with(fragmentMyPageBinding) {
-            viewModel?.sex?.observe(viewLifecycleOwner) { sex ->
-                if (sex == "F") {
-                    tvSexValue.text = getStringByResId(R.string.my_page_female)
-                } else {
-                    tvSexValue.text = getStringByResId(R.string.my_page_male)
-                }
-            }
-        }
-    private fun observeLocationData(fragmentMyPageBinding: FragmentMyPageBinding) = with(fragmentMyPageBinding) {
-        viewModel?.location?.observe(viewLifecycleOwner) { loc ->
-            tvLocationValue.text = loc
-        }
-    }
-
-    private fun observeAgeData(fragmentMyPageBinding: FragmentMyPageBinding) =
-        with(fragmentMyPageBinding) {
-            viewModel?.age?.observe(viewLifecycleOwner) { age ->
-                val ageText = age + getStringByResId(R.string.my_page_age_unit)
-                tvAgeValue.text = ageText
-            }
-        }
 
     private fun observeInterestsData(fragmentMyPageBinding: FragmentMyPageBinding) =
         with(fragmentMyPageBinding) {
@@ -113,17 +60,13 @@ class MyPageFragment : BaseFragment<MyPageViewModel>(R.layout.fragment_my_page) 
                 ivInterest3
             )
             viewModel?.interests?.observe(viewLifecycleOwner) { data ->
+                Log.e("myPage", data.toString())
                 interests[0].setImageResource(numToInterestAsset(data[0]))
                 interests[1].setImageResource(numToInterestAsset(data[1]))
                 interests[2].setImageResource(numToInterestAsset(data[2]))
             }
         }
 
-    private fun observePartnerSexData(fragmentMyPageBinding: FragmentMyPageBinding) = with(fragmentMyPageBinding) {
-        viewModel?.partnerSex?.observe(viewLifecycleOwner) { ps ->
-            tvPartnerSexValue.text = ps
-        }
-    }
 
     private fun numToInterestAsset(num: Int): Int {
         when (num) {
@@ -154,6 +97,7 @@ class MyPageFragment : BaseFragment<MyPageViewModel>(R.layout.fragment_my_page) 
                 ivCoffeeBadge9
             )
             viewModel?.badges?.observe(viewLifecycleOwner) { data ->
+                Log.e("myPage", data.toString())
                 for (i in data.indices) {
                     val drinkIdx = data[i] - 1
                     drinks[drinkIdx].setImageResource(numToDrinkAsset(drinkIdx))

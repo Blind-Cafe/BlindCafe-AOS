@@ -18,4 +18,5 @@
         android:left="@dimen/switch_thumb_padding"
         android:right="@dimen/switch_thumb_padding"/>
 
+
 </shape>

@@ -28,7 +28,7 @@ abstract class BaseDialogFragment<VM: BaseViewModel>(layoutId: Int): DialogFragm
         observeToastEvent()
         observeNavigationEvent()
         observeSaveNavigationDataEvent()
-
+        observePopNavigationEvent()
     }
 
     private fun observeToastEvent() {

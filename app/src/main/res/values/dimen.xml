@@ -37,7 +37,7 @@
     <dimen name="chat_popup_window_width">150dp</dimen>
 
     <dimen name="switch_thumb_padding">2dp</dimen>
-    <dimen name="switch_thumb_vertical_padding">4dp</dimen>
+    <dimen name="switch_thumb_vertical_padding">8dp</dimen>
 
 
 </resources>

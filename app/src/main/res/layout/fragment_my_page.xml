@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -73,7 +72,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="13dp"
                         android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                        tools:text="@string/no_value"
+                        android:text="@{viewModel.nickname}"
                         android:textColor="@color/white_2"
                         android:textSize="@dimen/font_size_15"
                         app:layout_constraintBottom_toTopOf="@id/tv_profile_message"
@@ -108,10 +107,9 @@
                         app:drawableStartCompat="@drawable/ic_my_page_sex"
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                        tools:text="@string/no_value"
+                        android:text="@{viewModel.sex}"
                         android:textColor="@color/white_2"
                         android:textSize="@dimen/font_size_15"
-                        android:text="@string/no_value"
                         app:layout_constraintBottom_toTopOf="@id/tv_location_value"
                         app:layout_constraintHorizontal_chainStyle="spread_inside"
                         app:layout_constraintStart_toStartOf="parent"
@@ -124,6 +122,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/spoqa_han_sans_neo_regular"
                         tools:text="@string/no_value"
+                        android:text="@{viewModel.location}"
                         android:drawablePadding="7dp"
                         app:drawableStartCompat="@drawable/ic_my_page_location"
                         android:textColor="@color/white_2"
@@ -139,7 +138,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                        tools:text="@string/no_value"
+                        android:text="@{viewModel.age}"
                         android:textColor="@color/white_2"
                         android:layout_marginTop="15dp"
                         android:layout_marginEnd="13dp"
@@ -157,8 +156,8 @@
                         android:layout_marginTop="15dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                        tools:text="@string/no_value"
                         android:textColor="@color/white_2"
+                        android:text="@{viewModel.partnerSex}"
                         android:layout_marginEnd="13dp"
                         android:drawablePadding="7dp"
                         app:drawableStartCompat="@drawable/ic_my_page_partner_sex"
