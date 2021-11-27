@@ -8,10 +8,9 @@ import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
-import com.abouttime.blindcafe.common.constants.PreferenceKey
 import com.abouttime.blindcafe.common.constants.PreferenceKey.INFO_INPUT
+import com.abouttime.blindcafe.common.constants.PreferenceKey.USER_ID
 import com.abouttime.blindcafe.common.constants.Retrofit.JWT
-import com.abouttime.blindcafe.common.constants.Retrofit.USER_ID
 import com.abouttime.blindcafe.data.server.dto.login.KakaoTokenDto
 import com.abouttime.blindcafe.domain.use_case.server.PostKakaoTokenUseCase
 import com.kakao.sdk.auth.model.OAuthToken

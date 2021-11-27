@@ -6,11 +6,14 @@ import com.abouttime.blindcafe.data.server.dto.user_info.DeleteAccountResponse
 import com.abouttime.blindcafe.data.server.dto.user_info.GetUserInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.PostUserInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.device_token.PostDeviceTokenDto
-import com.abouttime.blindcafe.data.server.dto.user_info.edit.PutProfileInfoDto
-import com.abouttime.blindcafe.data.server.dto.user_info.edit.PutProfileInfoResponse
-import com.abouttime.blindcafe.data.server.dto.user_info.profile.GetProfileInfoDto
+import com.abouttime.blindcafe.data.server.dto.user_info.edit.info.PutProfileInfoDto
+import com.abouttime.blindcafe.data.server.dto.user_info.edit.info.PutProfileInfoResponse
+import com.abouttime.blindcafe.data.server.dto.user_info.profile.image.GetProfileImageDto
+import com.abouttime.blindcafe.data.server.dto.user_info.profile.info.GetProfileInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.report.GetReportsDto
 import com.abouttime.blindcafe.domain.repository.UserInfoRepository
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 class UserInfoRepositoryImpl(
     private val userInfoApi: UserInfoApi
@@ -42,4 +45,13 @@ class UserInfoRepositoryImpl(
     override suspend fun putProfileInfo(putProfileInfoDto: PutProfileInfoDto): PutProfileInfoResponse? {
         return userInfoApi.putProfileInfo(putProfileInfoDto)
     }
+
+    override suspend fun getProfileImage(userId: Int): GetProfileImageDto? {
+        return userInfoApi.getProfileImage(userId)
+    }
+
+    override suspend fun patchProfileImage(priority: RequestBody, image: MultipartBody.Part): BaseResponse? {
+        return userInfoApi.patchProfileImage(priority, image)
+    }
+
 }

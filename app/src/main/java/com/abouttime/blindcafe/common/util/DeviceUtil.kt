@@ -10,6 +10,7 @@ object DeviceUtil {
 
     fun isAndroid11Later() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
     fun isAndroid10Later() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
+    fun isAndroid8Later() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
 
     fun hasExtrernalStoragePermission(context: Context): Boolean {
         return checkSelfPermission(

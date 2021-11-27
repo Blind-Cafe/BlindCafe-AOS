@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.data.server.dto.user_info.profile
+package com.abouttime.blindcafe.data.server.dto.user_info.profile.info
 
 
 import com.google.gson.annotations.SerializedName

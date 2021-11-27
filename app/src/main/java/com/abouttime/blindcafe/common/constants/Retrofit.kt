@@ -1,9 +1,9 @@
 package com.abouttime.blindcafe.common.constants
 
 object Retrofit {
-    const val PROD_BASE_URL = "https://www.blindcafe.me/"
-    const val DEV_BASE_URL = "http://dev.blindcafe.me/"
-    const val BASE_URL = "http://dev.blindcafe.me/"
+    private const val PROD_BASE_URL = "https://www.blindcafe.me/"
+    private const val DEV_BASE_URL = "http://dev.blindcafe.me/"
+    const val BASE_URL = PROD_BASE_URL
 
 
     const val JWT = "jwt"
@@ -29,6 +29,9 @@ object Retrofit {
     const val POST_DEVICE_TOKEN_URL = "api/user/device"
     const val PUT_INTEREST_URL = "api/user/interest"
     const val PUT_PROFILE_INFO_URL = "api/user"
+    const val PATCH_PROFILE_IMAGE_URL = "api/user/image"
+    const val GET_PROFILE_IMAGE_URL = "/api/user/{userId}/image"
+
 
     const val FCM_MESSAGE_TOPIC = "fcm_message_topic"
 

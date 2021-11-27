@@ -2,8 +2,8 @@ package com.abouttime.blindcafe.domain.use_case.server
 
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.ext.parseErrorBody
-import com.abouttime.blindcafe.data.server.dto.user_info.edit.PutProfileInfoDto
-import com.abouttime.blindcafe.data.server.dto.user_info.edit.PutProfileInfoResponse
+import com.abouttime.blindcafe.data.server.dto.user_info.edit.info.PutProfileInfoDto
+import com.abouttime.blindcafe.data.server.dto.user_info.edit.info.PutProfileInfoResponse
 import com.abouttime.blindcafe.domain.repository.UserInfoRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

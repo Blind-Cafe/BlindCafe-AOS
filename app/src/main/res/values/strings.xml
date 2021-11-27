@@ -140,6 +140,8 @@
     <string name="my_page_badge_subtitle">9가지의 뱃지를 모은 후 선물을 받아가세요</string>
 
 
+
+
     <!-- coffee order-->
     <string name="coffee_order_title">메뉴 주문하기</string>
     <string name="coffee_order_subtitle">Blind Cafe menu</string>
@@ -200,6 +202,12 @@
     <string name="profile_edit_location_hint">지역을 설정해주세요.</string>
     <string name="profile_edit_impossible">수정이 불가능합니다.</string>
     <string name="profile_edit_complete">수정하기</string>
+    <string name="profile_image_edit_complete">확인</string>
+    <string name="profile_edit_toast_alert_fill_all">모두 작성해주세요</string>
+    <string name="profile_edit_toast_complete">프로필 수정 완료</string>
+
+    <!-- profile image edit -->
+    <string name="profile_image_edit_toast_success">성공적으로 변경하였습니다</string>
 
 
     <!-- dormancy -->

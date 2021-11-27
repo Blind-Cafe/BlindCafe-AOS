@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.data.server.dto.user_info.edit
+package com.abouttime.blindcafe.data.server.dto.user_info.edit.info
 
 import com.google.gson.annotations.SerializedName
 

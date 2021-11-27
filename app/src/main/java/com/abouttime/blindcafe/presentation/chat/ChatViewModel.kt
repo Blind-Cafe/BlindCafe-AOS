@@ -12,7 +12,7 @@ import com.abouttime.blindcafe.common.constants.LogTag.CHATTING_TAG
 import com.abouttime.blindcafe.common.constants.LogTag.FIRESTORE_TAG
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NICKNAME
-import com.abouttime.blindcafe.common.constants.Retrofit.USER_ID
+import com.abouttime.blindcafe.common.constants.PreferenceKey.USER_ID
 import com.abouttime.blindcafe.data.server.dto.matching.topic.GetTopicDto
 import com.abouttime.blindcafe.data.server.dto.notification.PostFcmDto
 import com.abouttime.blindcafe.domain.model.Message

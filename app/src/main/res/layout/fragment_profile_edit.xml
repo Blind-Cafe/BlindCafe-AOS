@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@id/bt_next"
+            app:layout_constraintBottom_toTopOf="@id/tv_next"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_back"
@@ -74,24 +74,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/transparent"
-                android:enabled="false"
-                android:focusable="false"
+                android:inputType="text"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:hint="@string/profile_edit_nickname_hint"
                 android:includeFontPadding="false"
                 android:paddingHorizontal="6dp"
                 android:paddingVertical="4dp"
+                android:maxLength="10"
+                android:maxLines="1"
                 android:text="@={viewModel.nickname}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_size_15" />
 
             <View
+                android:id="@+id/v_nickname_divider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/white" />
 
 
             <TextView
+                android:id="@+id/tv_nickname_rule"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -224,10 +227,8 @@
                     android:onClick="@{() -> viewModel.onClickLocationEditText()}"
                     android:paddingHorizontal="6dp"
                     android:paddingVertical="4dp"
-                    android:text="@{viewModel.location}"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_size_15"
-                    tools:text="adsf" />
+                    android:textSize="@dimen/font_size_15" />
 
             </FrameLayout>
 
@@ -318,12 +319,12 @@
 
 
         <TextView
-            android:id="@+id/bt_next"
+            android:id="@+id/tv_next"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="32dp"
             android:background="@drawable/bg_rounding_3dp"
-            android:backgroundTint="@color/edit_profile_button_disabled"
+            android:backgroundTint="@{viewModel.canEnableNext ? @color/main : @color/edit_profile_button_disabled}"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:gravity="center"
             android:onClick="@{() -> viewModel.onClickCompleteButton()}"

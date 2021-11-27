@@ -1,14 +1,14 @@
-package com.abouttime.blindcafe.data.server.dto.user_info.edit
+package com.abouttime.blindcafe.data.server.dto.user_info.edit.info
 
 import com.google.gson.annotations.SerializedName
 
 data class PutProfileInfoDto(
     @SerializedName("nickname")
-    val nickname: String?,
+    val nickname: String,
     @SerializedName("partnerGender")
-    val partnerGender: String?,
+    val partnerGender: String,
     @SerializedName("state")
-    val state: String?,
+    val state: String,
     @SerializedName("region")
-    val region: String?,
+    val region: String,
 )

@@ -167,7 +167,7 @@
         android:backgroundTint="@color/main"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:gravity="center"
-        android:text="@string/profile_edit_complete"
+        android:text="@string/profile_image_edit_complete"
         android:onClick="@{() -> viewModel.onClickCompleteButton()}"
         android:textColor="@color/white"
         android:textSize="@dimen/font_size_16"
