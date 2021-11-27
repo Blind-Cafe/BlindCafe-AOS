@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.common
+package com.abouttime.blindcafe.common.util
 
 
 import android.graphics.Rect

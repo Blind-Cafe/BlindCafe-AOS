@@ -1,7 +1,7 @@
 package com.abouttime.blindcafe.di
 
 
-import com.abouttime.blindcafe.common.AuthenticationInterceptor
+import com.abouttime.blindcafe.common.util.AuthenticationInterceptor
 import com.abouttime.blindcafe.common.constants.Retrofit.BASE_URL
 import com.abouttime.blindcafe.data.server.api.*
 import okhttp3.OkHttpClient

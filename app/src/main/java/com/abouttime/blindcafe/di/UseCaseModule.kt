@@ -51,5 +51,6 @@ internal val useCaseModule = module {
 
     /** interests **/
     factory { GetInterestUseCase(get()) }
+    factory { PostInterestsUseCase(get())}
 
 }

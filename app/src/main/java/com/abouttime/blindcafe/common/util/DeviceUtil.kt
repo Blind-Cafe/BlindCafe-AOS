@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.common
+package com.abouttime.blindcafe.common.util
 
 import android.Manifest
 import android.content.Context

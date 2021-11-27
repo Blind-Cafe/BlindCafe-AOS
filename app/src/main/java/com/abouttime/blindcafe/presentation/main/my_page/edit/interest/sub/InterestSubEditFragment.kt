@@ -38,6 +38,9 @@ class InterestSubEditFragment: BaseFragment<InterestSubEditViewModel>(R.layout.f
         val i1 = args.mainInterest1
         val i2 = args.mainInterest2
         val i3 = args.mainInterest3
+        viewModel.i1 = i1
+        viewModel.i2 = i2
+        viewModel.i3 = i3
         getSubInterests(i1, i2, i3)
     }
 

@@ -3,12 +3,10 @@ package com.abouttime.blindcafe.presentation.main.my_page.edit.profile.image
 import android.Manifest
 import android.os.Bundle
 import android.view.View
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.abouttime.blindcafe.R
-import com.abouttime.blindcafe.common.DeviceUtil
+import com.abouttime.blindcafe.common.util.DeviceUtil
 import com.abouttime.blindcafe.common.base.BaseFragment
-import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.databinding.FragmentProfileImageEditBinding
 import com.bumptech.glide.Glide
 import org.koin.android.viewmodel.ext.android.viewModel

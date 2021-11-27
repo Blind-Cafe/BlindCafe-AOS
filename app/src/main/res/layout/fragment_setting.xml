@@ -110,6 +110,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:track="@drawable/selector_switch"
+                android:thumb="@drawable/bg_switch_thumb"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         </LinearLayout>
@@ -150,6 +152,8 @@
                 android:id="@+id/sw_notification_matching_success"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:track="@drawable/selector_switch"
+                android:thumb="@drawable/bg_switch_thumb"
                 android:layout_gravity="center"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
 
@@ -191,6 +195,8 @@
                 android:id="@+id/sw_notification_drink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:track="@drawable/selector_switch"
+                android:thumb="@drawable/bg_switch_thumb"
                 android:layout_gravity="center"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
 

@@ -4,18 +4,23 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
-import com.abouttime.blindcafe.common.SingleLiveData
+import com.abouttime.blindcafe.common.util.SingleLiveData
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag
-import com.abouttime.blindcafe.common.constants.PreferenceKey
+import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.data.server.dto.interest.Interest
+import com.abouttime.blindcafe.data.server.dto.interest.InterestX
+import com.abouttime.blindcafe.data.server.dto.interest.PostInterestDto
 import com.abouttime.blindcafe.domain.use_case.server.GetInterestUseCase
+import com.abouttime.blindcafe.domain.use_case.server.PostInterestsUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 class InterestSubEditViewModel(
-    private val getInterestUseCase: GetInterestUseCase
+    private val getInterestUseCase: GetInterestUseCase,
+    private val postInterestsUseCase: PostInterestsUseCase
 ): BaseViewModel() {
 
 
@@ -26,7 +31,9 @@ class InterestSubEditViewModel(
     val interests: SingleLiveData<List<Interest>> get() = _interests
 
     val selectedSubInterests = Array(3) { mutableListOf<String>() }
-
+    var i1 = 0
+    var i2 = 0
+    var i3 = 0
 
     val interestMap = mapOf(
         1 to "취업",
@@ -41,18 +48,9 @@ class InterestSubEditViewModel(
     )
 
 
-    fun updateNextButton() {
-        _nextButton.value = canEnableNextButton()
-    }
-
-    private fun canEnableNextButton(): Boolean {
-        if (selectedSubInterests[0].isNotEmpty() && selectedSubInterests[1].isNotEmpty() && selectedSubInterests[2].isNotEmpty()) {
-            return true
-        }
-        return false
-    }
 
 
+    /** use cases **/
     fun getInterest(id1 : Int, id2: Int, id3: Int) {
         getInterestUseCase(id1, id2, id3)
             .onEach { result ->
@@ -74,9 +72,66 @@ class InterestSubEditViewModel(
             }.launchIn(viewModelScope)
     }
 
+    private fun postInterests (postInterestDto: PostInterestDto) {
+        postInterestsUseCase(postInterestDto).onEach { result ->
+            when (result) {
+                is Resource.Loading -> { showLoading() }
+                is Resource.Success -> {
+                    Log.e(RETROFIT_TAG, result.data.toString())
+                    if (result.data?.code == "1000") {
+                        popDirections()
+                    } else {
+                        showToast(R.string.temp_error)
+                    }
+                }
+                is Resource.Error -> {
+                    Log.e(RETROFIT_TAG, result.message.toString())
+                    dismissLoading()
+                }
+            }
 
+
+        }.launchIn(viewModelScope)
+
+    }
+
+
+        /** onClick **/
     fun onClickNextButton() {
+        if (canEnableNextButton()) {
+            val dto = PostInterestDto(
+                listOf(
+                    InterestX(
+                        main = i1,
+                        sub = selectedSubInterests[0]
+                    ),
+                    InterestX(
+                        main = i2,
+                        sub = selectedSubInterests[1]
+                    ),
+                    InterestX(
+                        main = i3,
+                        sub = selectedSubInterests[2]
+                    )
+                )
+            )
 
+            postInterests(dto)
+
+
+        } else {
+
+        }
+    }
+    fun updateNextButton() {
+        _nextButton.value = canEnableNextButton()
+    }
+
+    private fun canEnableNextButton(): Boolean {
+        if (selectedSubInterests[0].isNotEmpty() && selectedSubInterests[1].isNotEmpty() && selectedSubInterests[2].isNotEmpty()) {
+            return true
+        }
+        return false
     }
 
 

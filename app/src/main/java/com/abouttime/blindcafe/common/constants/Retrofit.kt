@@ -21,8 +21,9 @@ object Retrofit {
     const val POST_REPORT_URL = "api/report"
     const val GET_REPORTS_URL = "api/report"
     const val POST_CANCEL_MATCHING_URL = "api/matching/cancel"
-    const val GET_PROFILE_INFO = "api/user/profile"
-    const val POST_DEVICE_TOKEN = "api/user/device"
+    const val GET_PROFILE_INFO_URL = "api/user/profile"
+    const val POST_DEVICE_TOKEN_URL = "api/user/device"
+    const val POST_INTEREST_URL = "api/user/interest"
 
     const val FCM_MESSAGE_TOPIC = "fcm_message_topic"
 

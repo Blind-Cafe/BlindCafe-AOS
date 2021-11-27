@@ -1,11 +1,10 @@
 package com.abouttime.blindcafe.common.base
 
-import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDirections
 import com.abouttime.BlindCafeApplication.Companion.sharedPreferences
-import com.abouttime.blindcafe.common.SingleLiveData
+import com.abouttime.blindcafe.common.util.SingleLiveData
 import com.abouttime.blindcafe.common.constants.LogTag
 
 open class BaseViewModel() : ViewModel() {

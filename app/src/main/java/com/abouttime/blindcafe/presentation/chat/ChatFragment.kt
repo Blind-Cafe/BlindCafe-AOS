@@ -3,7 +3,6 @@ package com.abouttime.blindcafe.presentation.chat
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
-import android.media.AudioRecord
 import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.net.Uri
@@ -26,7 +25,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.abouttime.blindcafe.R
-import com.abouttime.blindcafe.common.DeviceUtil
+import com.abouttime.blindcafe.common.util.DeviceUtil
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.common.constants.LogTag.CHATTING_TAG
 import com.abouttime.blindcafe.common.ext.secondToLapseForChat

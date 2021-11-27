@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.GridLayoutManager
-import com.abouttime.blindcafe.common.RvGridDecoration
+import com.abouttime.blindcafe.common.util.RvGridDecoration
 import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.constants.LogTag.BOTTOM_SHEET
 import com.abouttime.blindcafe.databinding.DialogFragmentGalleryBinding

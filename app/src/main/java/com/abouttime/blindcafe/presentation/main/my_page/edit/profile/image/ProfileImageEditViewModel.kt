@@ -4,7 +4,7 @@ import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.common.Resource
-import com.abouttime.blindcafe.common.SingleLiveData
+import com.abouttime.blindcafe.common.util.SingleLiveData
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.domain.use_case.server.GetProfileInfoUseCase

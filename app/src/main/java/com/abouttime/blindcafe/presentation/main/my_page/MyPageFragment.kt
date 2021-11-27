@@ -27,19 +27,27 @@ class MyPageFragment : BaseFragment<MyPageViewModel>(R.layout.fragment_my_page) 
         observeAgeData(fragmentMyPageBinding)
         observeInterestsData(fragmentMyPageBinding)
         observeDrinkData(fragmentMyPageBinding)
+        observePartnerSexData(fragmentMyPageBinding)
 
     }
 
-    private fun initScrollView(fragmentMyPageBinding: FragmentMyPageBinding) = with(fragmentMyPageBinding) {
-        OverScrollDecoratorHelper.setUpOverScroll(svUserInfoContainer)
-    }
+    private fun initScrollView(fragmentMyPageBinding: FragmentMyPageBinding) =
+        with(fragmentMyPageBinding) {
+            OverScrollDecoratorHelper.setUpOverScroll(svUserInfoContainer)
+        }
 
     private fun observeProfileImageData(fragmentMyPageBinding: FragmentMyPageBinding) =
         with(fragmentMyPageBinding) {
-//            Glide.with(this@MyPageFragment)
-//                .load("")
-//                .circleCrop()
-//                .into(ivProfileImage)
+            viewModel?.profileImageUrl?.observe(viewLifecycleOwner) { url ->
+                if (url.isNotEmpty()) {
+                    Glide.with(this@MyPageFragment)
+                        .load(url)
+                        .circleCrop()
+                        .into(ivProfileImage)
+                }
+            }
+
+
         }
 
     private fun observeSexData(fragmentMyPageBinding: FragmentMyPageBinding) =
@@ -74,6 +82,12 @@ class MyPageFragment : BaseFragment<MyPageViewModel>(R.layout.fragment_my_page) 
                 interests[2].setImageResource(numToInterestAsset(data[2] - 1))
             }
         }
+
+    private fun observePartnerSexData(fragmentMyPageBinding: FragmentMyPageBinding) = with(fragmentMyPageBinding) {
+        viewModel?.partenerSex?.observe(viewLifecycleOwner) { ps ->
+            tvPartnerSexValue.text = ps
+        }
+    }
 
     private fun numToInterestAsset(num: Int): Int {
         when (num) {

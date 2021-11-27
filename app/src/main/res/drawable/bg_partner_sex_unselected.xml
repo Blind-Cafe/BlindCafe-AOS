@@ -6,6 +6,7 @@
 
     <corners android:radius="20dp"
         />
-    <stroke android:color="@color/icon_disabled"/>
+    <stroke android:color="@color/icon_disabled"
+        android:width="1dp"/>
 
 </shape>
