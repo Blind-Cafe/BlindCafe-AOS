@@ -16,6 +16,7 @@ internal val useCaseModule = module {
     factory { GetReportsUseCase(get()) }
     factory { GetProfileInfoUseCase(get()) }
     factory { PostDeviceTokenUseCase(get()) }
+    factory { PutProfileInfoUseCase(get())}
 
     /** gallery **/
     factory { FetchImagesUseCase(get()) }

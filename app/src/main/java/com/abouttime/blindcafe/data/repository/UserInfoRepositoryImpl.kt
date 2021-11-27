@@ -6,6 +6,8 @@ import com.abouttime.blindcafe.data.server.dto.user_info.DeleteAccountResponse
 import com.abouttime.blindcafe.data.server.dto.user_info.GetUserInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.PostUserInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.device_token.PostDeviceTokenDto
+import com.abouttime.blindcafe.data.server.dto.user_info.edit.PutProfileInfoDto
+import com.abouttime.blindcafe.data.server.dto.user_info.edit.PutProfileInfoResponse
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.GetProfileInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.report.GetReportsDto
 import com.abouttime.blindcafe.domain.repository.UserInfoRepository
@@ -35,5 +37,9 @@ class UserInfoRepositoryImpl(
 
     override suspend fun postDeviceToken(postDeviceTokenDto: PostDeviceTokenDto): BaseResponse? {
         return userInfoApi.postDeviceToken(postDeviceTokenDto)
+    }
+
+    override suspend fun putProfileInfo(putProfileInfoDto: PutProfileInfoDto): PutProfileInfoResponse? {
+        return userInfoApi.putProfileInfo(putProfileInfoDto)
     }
 }

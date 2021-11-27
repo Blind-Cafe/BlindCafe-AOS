@@ -28,6 +28,7 @@ object Retrofit {
     const val GET_PROFILE_INFO_URL = "api/user/profile"
     const val POST_DEVICE_TOKEN_URL = "api/user/device"
     const val PUT_INTEREST_URL = "api/user/interest"
+    const val PUT_PROFILE_INFO_URL = "api/user"
 
     const val FCM_MESSAGE_TOPIC = "fcm_message_topic"
 

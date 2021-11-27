@@ -78,7 +78,7 @@ internal val viewModelModule = module {
     /** Main - MyPage **/
     viewModel { MyPageViewModel(get()) }
     viewModel { SettingViewModel() }
-    viewModel { ProfileEditViewModel(get()) }
+    viewModel { ProfileEditViewModel(get(), get()) }
     viewModel { ProfileImageEditViewModel(get())}
     viewModel { AccountDeleteViewModel() }
     viewModel { AccountDeleteCompleteViewModel() }
