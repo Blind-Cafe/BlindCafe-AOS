@@ -39,10 +39,18 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_loginFragment_to_termFragment"
-            app:destination="@id/termFragment" />
+            app:destination="@id/termFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_loginFragment_to_policyFragment"
-            app:destination="@id/policyFragment" />
+            app:destination="@id/policyFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/splashFragment"

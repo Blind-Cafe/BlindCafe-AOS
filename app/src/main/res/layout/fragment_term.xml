@@ -44,6 +44,7 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:overScrollMode="never"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="23dp"
         app:layout_constraintBottom_toBottomOf="parent"

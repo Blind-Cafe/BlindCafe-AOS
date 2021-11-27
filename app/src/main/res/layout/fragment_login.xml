@@ -54,7 +54,7 @@
         android:text="@string/login_description_2"
         android:textColor="@color/gray_300"
         android:textSize="@dimen/font_size_11"
-        android:onClick="@{() -> viewModel.onClickPrivacyButton()}"
+        android:onClick="@{() -> viewModel.onClickPolicyButton()}"
         app:layout_constraintBottom_toBottomOf="@id/tv_description_1"
         app:layout_constraintEnd_toStartOf="@id/tv_description_3"
         app:layout_constraintStart_toEndOf="@id/tv_description_1"

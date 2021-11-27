@@ -30,6 +30,8 @@ class LoginFragment : BaseFragment<LoginViewModel>(R.layout.fragment_login) {
 
         val fragmentLoginBinding = FragmentLoginBinding.bind(view)
         binding = fragmentLoginBinding
+        binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
 
         observeData(fragmentLoginBinding)
     }

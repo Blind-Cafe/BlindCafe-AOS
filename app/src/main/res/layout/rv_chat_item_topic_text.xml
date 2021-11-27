@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="message"
+            type="com.abouttime.blindcafe.domain.model.Message" />
+
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/black"
+    android:layout_marginHorizontal="32dp"
+    android:paddingHorizontal="16dp"
+    android:background="@drawable/bg_rounding_3dp">
+
+
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:lineSpacingExtra="6sp"
+        android:text="@string/chat_topic_text_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        android:id="@+id/tv_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="12dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+        android:textSize="12sp"
+        android:lineSpacingExtra="6sp"
+        tools:text="영화관에서 보고 싶은 영화 장르는? 집에서 보는 장르 와 다른가요?"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
