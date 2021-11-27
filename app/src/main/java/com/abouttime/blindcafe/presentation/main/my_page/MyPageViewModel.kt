@@ -26,8 +26,8 @@ class MyPageViewModel(
     val sex: LiveData<String> get() = _sex
     private val _age = MutableLiveData("-")
     val age: LiveData<String> get() = _age
-    private val _location = MutableLiveData("-")
-    val location: LiveData<String> get() = _location
+    private val _location = MutableLiveData<String?>()
+    val location: LiveData<String?> get() = _location
     private val _partnerSex = MutableLiveData("-")
     val partnerSex: LiveData<String> get() = _partnerSex
 
@@ -68,11 +68,17 @@ class MyPageViewModel(
 
                         Log.e("mypage", dto.myGender.toString())
                         dto.myGender?.let {
-                            _sex.postValue(it)
+                            _sex.postValue(
+                                when(it) {
+                                    "M" -> "남자"
+                                    "F" -> "여자"
+                                    else -> ""
+                                }
+                            )
                         }
 
 
-                        Log.e("mypage", dto.age.toString())
+                        Log.e("mypage", "${dto.age}세")
                         dto.age?.let {
                             _age.postValue(it.toString())
                         }
@@ -90,13 +96,12 @@ class MyPageViewModel(
                         }
 
 
-                        dto.region?.let {
-                            _location.postValue(it)
-                        }
+                        _location.postValue(dto.region)
+
 
                         dto.interests?.let {
                             if (!it.isNullOrEmpty()) {
-                                _interests.postValue(it)
+                                _interests.postValue(it.takeLast(3))
                             }
                         }
 

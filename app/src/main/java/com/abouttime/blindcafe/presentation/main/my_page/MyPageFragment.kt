@@ -25,6 +25,9 @@ class MyPageFragment : BaseFragment<MyPageViewModel>(R.layout.fragment_my_page) 
         initScrollView(fragmentMyPageBinding)
 
         observeProfileImageData(fragmentMyPageBinding)
+
+        observeLocationData(fragmentMyPageBinding)
+
         observeInterestsData(fragmentMyPageBinding)
         observeDrinkData(fragmentMyPageBinding)
 
@@ -36,6 +39,19 @@ class MyPageFragment : BaseFragment<MyPageViewModel>(R.layout.fragment_my_page) 
         with(fragmentMyPageBinding) {
             OverScrollDecoratorHelper.setUpOverScroll(svUserInfoContainer)
         }
+
+    private fun observeLocationData(fragmentMyPageBinding: FragmentMyPageBinding) = with(fragmentMyPageBinding) {
+        viewModel?.location?.observe(viewLifecycleOwner) { loc ->
+            loc?.let {
+                tvLocationValue.text = it
+                tvLocationValue.setTextColor(getColorByResId(R.color.white_2))
+            } ?: kotlin.run {
+                tvLocationValue.text = "지역을 설정해주세요"
+                tvLocationValue.setTextColor(getColorByResId(R.color.gray_300))
+            }
+
+        }
+    }
 
     private fun observeProfileImageData(fragmentMyPageBinding: FragmentMyPageBinding) =
         with(fragmentMyPageBinding) {

@@ -41,7 +41,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_bold"
             android:text="@string/profile_edit_title"
             android:textColor="@color/white_2"
-            android:textSize="@dimen/font_size_16"
+            android:textSize="@dimen/font_size_15"
             app:layout_constraintBottom_toBottomOf="@id/iv_back"
             app:layout_constraintStart_toEndOf="@id/iv_back"
             app:layout_constraintTop_toTopOf="@id/iv_back" />
@@ -51,13 +51,14 @@
             android:id="@+id/ll_essential_profile_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@id/bt_next"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_back"
             app:layout_constraintVertical_bias="0"
-            app:layout_constraintVertical_chainStyle="spread">
+            app:layout_constraintVertical_chainStyle="spread_inside">
 
             <TextView
                 android:id="@+id/tv_nickname_title"
@@ -77,11 +78,12 @@
                 android:focusable="false"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:hint="@string/profile_edit_nickname_hint"
+                android:includeFontPadding="false"
                 android:paddingHorizontal="6dp"
-                android:paddingVertical="16dp"
+                android:paddingVertical="4dp"
                 android:text="@={viewModel.nickname}"
                 android:textColor="@color/white"
-                android:textSize="@dimen/font_size_16" />
+                android:textSize="@dimen/font_size_15" />
 
             <View
                 android:layout_width="match_parent"
@@ -103,7 +105,7 @@
                 android:id="@+id/tv_age_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="22dp"
+                android:layout_marginTop="21dp"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:text="@string/profile_edit_age_title"
                 android:textColor="@color/steel"
@@ -119,10 +121,10 @@
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:hint="@string/profile_edit_age_hint"
                 android:paddingHorizontal="6dp"
-                android:paddingVertical="16dp"
+                android:paddingVertical="4dp"
                 android:text="@={viewModel.age}"
                 android:textColor="@color/white"
-                android:textSize="@dimen/font_size_16" />
+                android:textSize="@dimen/font_size_15" />
 
             <View
                 android:layout_width="match_parent"
@@ -159,10 +161,10 @@
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:hint="@string/profile_edit_sex_hint"
                 android:paddingHorizontal="6dp"
-                android:paddingVertical="16dp"
+                android:paddingVertical="4dp"
                 android:text="@={viewModel.sex}"
                 android:textColor="@color/white"
-                android:textSize="@dimen/font_size_16" />
+                android:textSize="@dimen/font_size_15" />
 
             <View
                 android:layout_width="match_parent"
@@ -203,29 +205,29 @@
                     android:background="@color/transparent"
                     android:enabled="false"
                     android:focusable="false"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     android:hint="@string/profile_edit_location_hint"
                     android:paddingHorizontal="6dp"
-                    android:paddingVertical="16dp"
-                  />
+                    android:paddingVertical="4dp"
+                    android:textSize="@dimen/font_size_15"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tv_location_value"
                     android:layout_width="match_parent"
-                    android:text="@{viewModel.location}"
-                    tools:text="adsf"
-                    android:gravity="center_vertical"
-                    android:paddingHorizontal="6dp"
-                    android:paddingVertical="16dp"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/font_size_16"
-                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
                     android:layout_height="match_parent"
+                    android:backgroundTint="@color/transparent"
+                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                    android:gravity="center_vertical"
                     android:onClick="@{() -> viewModel.onClickLocationEditText()}"
-                    android:backgroundTint="@color/transparent"/>
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="4dp"
+                    android:text="@{viewModel.location}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_15"
+                    tools:text="adsf" />
 
             </FrameLayout>
 
@@ -258,56 +260,55 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginTop="8dp"
-                android:weightSum="3"
-                >
-
-                <TextView
-                    android:id="@+id/tv_partner_sex_male"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingVertical="10dp"
-                    android:background="@drawable/bg_partner_sex_unselected"
-                    android:text="@string/female"
-                    android:gravity="center"
-                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                    android:textColor="@color/white"
-                    android:layout_marginEnd="10dp"
-                    android:textSize="@dimen/font_size_13"
-                    />
+                android:orientation="horizontal"
+                android:weightSum="3">
 
                 <TextView
                     android:id="@+id/tv_partner_sex_female"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingVertical="10dp"
                     android:layout_marginEnd="10dp"
-                    android:background="@drawable/bg_partner_sex_unselected"
-                    android:text="@string/male"
-                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:background="@{viewModel.selectedPartnerSex == 1 ? @drawable/bg_partner_sex_selected : @drawable/bg_partner_sex_unselected}"
+                    android:onClick="@{() -> viewModel.onClickFemaleButton()}"
                     android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                    android:gravity="center"
+                    android:paddingVertical="10dp"
+                    android:text="@string/female"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_size_13"
-                    />
+                    android:textSize="@dimen/font_size_13" />
+
+                <TextView
+                    android:id="@+id/tv_partner_sex_male"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:background="@{viewModel.selectedPartnerSex == 2 ? @drawable/bg_partner_sex_selected : @drawable/bg_partner_sex_unselected}"
+                    android:onClick="@{() -> viewModel.onClickMaleButton()}"
+                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                    android:gravity="center"
+                    android:paddingVertical="10dp"
+                    android:text="@string/male"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_13" />
 
 
                 <TextView
                     android:id="@+id/tv_partner_sex_bisexual"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingVertical="10dp"
                     android:layout_marginEnd="10dp"
-                    android:background="@drawable/bg_partner_sex_unselected"
-                    android:text="@string/bisexual"
-                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:background="@{viewModel.selectedPartnerSex == 3 ? @drawable/bg_partner_sex_selected : @drawable/bg_partner_sex_unselected}"
+                    android:onClick="@{() -> viewModel.onClickBisexualButton()}"
                     android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                    android:gravity="center"
+                    android:paddingVertical="10dp"
+                    android:text="@string/bisexual"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_size_13"
-                    />
+                    android:textSize="@dimen/font_size_13" />
 
 
             </LinearLayout>
@@ -320,6 +321,7 @@
             android:id="@+id/bt_next"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginBottom="32dp"
             android:background="@drawable/bg_rounding_3dp"
             android:backgroundTint="@color/edit_profile_button_disabled"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"

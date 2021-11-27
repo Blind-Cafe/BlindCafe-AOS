@@ -122,7 +122,6 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/spoqa_han_sans_neo_regular"
                         tools:text="@string/no_value"
-                        android:text="@{viewModel.location}"
                         android:drawablePadding="7dp"
                         app:drawableStartCompat="@drawable/ic_my_page_location"
                         android:textColor="@color/white_2"

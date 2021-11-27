@@ -30,6 +30,10 @@ class ProfileEditViewModel(
     val _location = MutableLiveData<String>("위치")
     val location: LiveData<String> get() = _location
 
+    private val _selectedPartnerSex = MutableLiveData<Int>(0)
+    val selectedPartnerSex: LiveData<Int> get() = _selectedPartnerSex
+
+
 
     private val _canEnableNext = MutableLiveData<Boolean>()
     val canEnableNext: LiveData<Boolean> get() = _canEnableNext
@@ -89,8 +93,20 @@ class ProfileEditViewModel(
         moveToLocationFragment()
     }
 
+    fun onClickFemaleButton() {
+        _selectedPartnerSex.value = 1
+    }
+    fun onClickMaleButton() {
+        _selectedPartnerSex.value = 2
+    }
+    fun onClickBisexualButton() {
+        _selectedPartnerSex.value = 3
+    }
+
     private fun moveToLocationFragment() {
         moveToDirections(ProfileEditFragmentDirections.actionProfileEditFragmentToLocationFragment())
     }
+
+
 
 }

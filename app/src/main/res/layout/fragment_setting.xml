@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:track="@drawable/selector_switch"
-                android:thumb="@drawable/bg_switch_thumb"
+                android:thumb="@drawable/selector_switch_thumb"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         </LinearLayout>
@@ -153,7 +153,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:track="@drawable/selector_switch"
-                android:thumb="@drawable/bg_switch_thumb"
+                android:thumb="@drawable/selector_switch_thumb"
                 android:layout_gravity="center"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
 
@@ -196,7 +196,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:track="@drawable/selector_switch"
-                android:thumb="@drawable/bg_switch_thumb"
+                android:thumb="@drawable/selector_switch_thumb"
                 android:layout_gravity="center"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
 
