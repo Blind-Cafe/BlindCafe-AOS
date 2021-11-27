@@ -93,6 +93,14 @@ class LoginViewModel(
 
     }
 
+
+    fun onClickPrivacyButton() {
+
+    }
+    fun onClickTermButton() {
+        
+    }
+
     private fun moveToAgreementFragment() {
         moveToDirections(LoginFragmentDirections.actionLoginFragmentToAgreementFragment())
     }

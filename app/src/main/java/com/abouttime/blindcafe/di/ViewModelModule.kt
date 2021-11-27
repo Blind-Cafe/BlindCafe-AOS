@@ -23,6 +23,8 @@ import com.abouttime.blindcafe.presentation.main.my_page.setting.account_delete.
 import com.abouttime.blindcafe.presentation.main.my_page.setting.report_list.ReportListViewModel
 import com.abouttime.blindcafe.presentation.onboarding.agreement.AgreementViewModel
 import com.abouttime.blindcafe.presentation.onboarding.login.LoginViewModel
+import com.abouttime.blindcafe.presentation.onboarding.login.policy.PolicyViewModel
+import com.abouttime.blindcafe.presentation.onboarding.login.term.TermViewModel
 import com.abouttime.blindcafe.presentation.onboarding.profile_setting.essential_first.EssentialFirstViewModel
 import com.abouttime.blindcafe.presentation.onboarding.profile_setting.essential_second.EssentialSecondViewModel
 import com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest.InterestViewModel
@@ -53,6 +55,8 @@ internal val viewModelModule = module {
 
     /** On-Boarding **/
     viewModel { LoginViewModel(get()) }
+    viewModel { PolicyViewModel() }
+    viewModel { TermViewModel() }
     viewModel { RuleViewModel() }
     viewModel { AgreementViewModel() }
     viewModel { EssentialFirstViewModel() }

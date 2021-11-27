@@ -37,6 +37,12 @@
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/ruleFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_termFragment"
+            app:destination="@id/termFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_policyFragment"
+            app:destination="@id/policyFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -604,4 +610,14 @@
 
 
     </fragment>
+    <fragment
+        android:id="@+id/policyFragment"
+        tools:layout="@layout/fragment_policy"
+        android:name="com.abouttime.blindcafe.presentation.onboarding.login.policy.PolicyFragment"
+        android:label="PolicyFragment" />
+    <fragment
+        android:id="@+id/termFragment"
+        tools:layout="@layout/fragment_term"
+        android:name="com.abouttime.blindcafe.presentation.onboarding.login.term.TermFragment"
+        android:label="TermFragment" />
 </navigation>
