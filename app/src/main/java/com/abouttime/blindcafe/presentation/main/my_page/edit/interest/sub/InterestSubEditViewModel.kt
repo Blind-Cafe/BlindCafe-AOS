@@ -79,7 +79,7 @@ class InterestSubEditViewModel(
                 is Resource.Success -> {
                     Log.e(RETROFIT_TAG, result.data.toString())
                     if (result.data?.code == "1000") {
-                        popDirections()
+                        popDirections(R.id.interestEditFragment)
                     } else {
                         showToast(R.string.temp_error)
                     }

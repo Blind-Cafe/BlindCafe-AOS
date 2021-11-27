@@ -22,12 +22,38 @@ class MyPageFragment : BaseFragment<MyPageViewModel>(R.layout.fragment_my_page) 
 
 
         initScrollView(fragmentMyPageBinding)
-        observeProfileImageData(fragmentMyPageBinding)
-        observeSexData(fragmentMyPageBinding)
-        observeAgeData(fragmentMyPageBinding)
-        observeInterestsData(fragmentMyPageBinding)
-        observeDrinkData(fragmentMyPageBinding)
-        observePartnerSexData(fragmentMyPageBinding)
+
+//        observeProfileImageData(fragmentMyPageBinding)
+//        observeNicknameData(fragmentMyPageBinding)
+//
+//        observeSexData(fragmentMyPageBinding)
+//        observeLocationData(fragmentMyPageBinding)
+//        observeAgeData(fragmentMyPageBinding)
+//        observePartnerSexData(fragmentMyPageBinding)
+//
+//        observeInterestsData(fragmentMyPageBinding)
+//        observeDrinkData(fragmentMyPageBinding)
+
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding?.let {
+            val fragmentMyPageBinding = it
+
+
+            observeProfileImageData(fragmentMyPageBinding)
+            observeNicknameData(fragmentMyPageBinding)
+
+            observeSexData(fragmentMyPageBinding)
+            observeLocationData(fragmentMyPageBinding)
+            observeAgeData(fragmentMyPageBinding)
+            observePartnerSexData(fragmentMyPageBinding)
+
+            observeInterestsData(fragmentMyPageBinding)
+            observeDrinkData(fragmentMyPageBinding)
+        }
 
     }
 
@@ -49,6 +75,11 @@ class MyPageFragment : BaseFragment<MyPageViewModel>(R.layout.fragment_my_page) 
 
 
         }
+    private fun observeNicknameData(fragmentMyPageBinding: FragmentMyPageBinding) = with(fragmentMyPageBinding) {
+        viewModel?.nickname?.observe(viewLifecycleOwner) { nick ->
+            tvNickname.text = nick
+        }
+    }
 
     private fun observeSexData(fragmentMyPageBinding: FragmentMyPageBinding) =
         with(fragmentMyPageBinding) {
@@ -60,6 +91,11 @@ class MyPageFragment : BaseFragment<MyPageViewModel>(R.layout.fragment_my_page) 
                 }
             }
         }
+    private fun observeLocationData(fragmentMyPageBinding: FragmentMyPageBinding) = with(fragmentMyPageBinding) {
+        viewModel?.location?.observe(viewLifecycleOwner) { loc ->
+            tvLocationValue.text = loc
+        }
+    }
 
     private fun observeAgeData(fragmentMyPageBinding: FragmentMyPageBinding) =
         with(fragmentMyPageBinding) {
@@ -77,14 +113,14 @@ class MyPageFragment : BaseFragment<MyPageViewModel>(R.layout.fragment_my_page) 
                 ivInterest3
             )
             viewModel?.interests?.observe(viewLifecycleOwner) { data ->
-                interests[0].setImageResource(numToInterestAsset(data[0] - 1))
-                interests[1].setImageResource(numToInterestAsset(data[1] - 1))
-                interests[2].setImageResource(numToInterestAsset(data[2] - 1))
+                interests[0].setImageResource(numToInterestAsset(data[0]))
+                interests[1].setImageResource(numToInterestAsset(data[1]))
+                interests[2].setImageResource(numToInterestAsset(data[2]))
             }
         }
 
     private fun observePartnerSexData(fragmentMyPageBinding: FragmentMyPageBinding) = with(fragmentMyPageBinding) {
-        viewModel?.partenerSex?.observe(viewLifecycleOwner) { ps ->
+        viewModel?.partnerSex?.observe(viewLifecycleOwner) { ps ->
             tvPartnerSexValue.text = ps
         }
     }

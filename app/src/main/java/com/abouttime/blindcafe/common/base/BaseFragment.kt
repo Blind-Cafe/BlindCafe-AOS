@@ -20,15 +20,12 @@ import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.databinding.ToastBinding
 
 
-abstract class BaseFragment<VM: BaseViewModel>(layoutId: Int) : Fragment(layoutId) {
+abstract class BaseFragment<VM : BaseViewModel>(layoutId: Int) : Fragment(layoutId) {
 
     // View Model
     abstract val viewModel: VM
 
     lateinit var loadingDialog: Dialog
-
-
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,6 +45,7 @@ abstract class BaseFragment<VM: BaseViewModel>(layoutId: Int) : Fragment(layoutI
             }
         }
     }
+
     private fun initLoadingDialog() {
         loadingDialog = Dialog(requireContext())
         loadingDialog.setContentView(R.layout.dialog_fragment_loading)
@@ -56,11 +54,11 @@ abstract class BaseFragment<VM: BaseViewModel>(layoutId: Int) : Fragment(layoutI
     }
 
     protected fun showLoadingDialog() {
-        loadingDialog.show()
+        //loadingDialog.show()
     }
 
     protected fun dismissLoadingDialog() {
-        loadingDialog.dismiss()
+        //loadingDialog.dismiss()
     }
 
     private fun observeToastEvent() {
@@ -71,10 +69,16 @@ abstract class BaseFragment<VM: BaseViewModel>(layoutId: Int) : Fragment(layoutI
 
     private fun observeNavigationEvent() {
         viewModel.navigationEvent.observe(viewLifecycleOwner) { directions ->
-            directions?.let {
-                moveToDirections(directions)
+            moveToDirections(directions)
+        }
+    }
+
+    private fun observePopNavigationEvent() {
+        viewModel.popNavigationEvent.observe(viewLifecycleOwner) { id ->
+            id?.let {
+                popUntilDirections(it)
             } ?: kotlin.run {
-                popDirections()
+                popOneDirections()
             }
         }
     }
@@ -84,9 +88,14 @@ abstract class BaseFragment<VM: BaseViewModel>(layoutId: Int) : Fragment(layoutI
         findNavController().navigate(directions)
     }
 
-    fun popDirections() {
+    fun popOneDirections() {
         findNavController().popBackStack()
     }
+
+    fun popUntilDirections(id: Int) {
+        findNavController().popBackStack(id, true)
+    }
+
 
     private fun observeSaveNavigationDataEvent() {
         viewModel.saveNavigationDataEvent.observe(viewLifecycleOwner) { pair ->
@@ -98,11 +107,11 @@ abstract class BaseFragment<VM: BaseViewModel>(layoutId: Int) : Fragment(layoutI
         Log.e("navigation", "getNavigationResult $key")
         return findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(key)
     }
+
     private fun saveNavigationResult(key: String, result: String) {
         Log.e("navigation", "saveNavigationResult $key $result")
         findNavController().previousBackStackEntry?.savedStateHandle?.set(key, result)
     }
-
 
 
     /** Hide Keyboard **/
@@ -115,11 +124,9 @@ abstract class BaseFragment<VM: BaseViewModel>(layoutId: Int) : Fragment(layoutI
             )
         }
     }
-    fun getInputManager(): InputMethodManager =  requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
-
-
-
+    fun getInputManager(): InputMethodManager =
+        requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
 
     /** Util for all fragment **/
@@ -127,6 +134,7 @@ abstract class BaseFragment<VM: BaseViewModel>(layoutId: Int) : Fragment(layoutI
         //Toast.makeText(requireContext(), getString(resId), Toast.LENGTH_SHORT).show()
         createToast(getString(resId))?.show()
     }
+
     fun createToast(content: String): Toast? {
         val inflater = LayoutInflater.from(requireContext())
         val binding: ToastBinding = ToastBinding.inflate(layoutInflater)
@@ -160,7 +168,6 @@ abstract class BaseFragment<VM: BaseViewModel>(layoutId: Int) : Fragment(layoutI
             .getString(key, null)
 
     }
-
 
 
 }

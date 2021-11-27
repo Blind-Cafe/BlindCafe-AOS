@@ -12,8 +12,10 @@ open class BaseViewModel() : ViewModel() {
     val toastEvent: SingleLiveData<Int> get() = _toastEvent
 
 
-    private val _navigationEvent = SingleLiveData<NavDirections?>()
-    val navigationEvent: SingleLiveData<NavDirections?> get() = _navigationEvent
+    private val _navigationEvent = SingleLiveData<NavDirections>()
+    val navigationEvent: SingleLiveData<NavDirections> get() = _navigationEvent
+    private val _popNavigationEvent = SingleLiveData<Int?>()
+    val popNavigationEvent: SingleLiveData<Int?> get() = _popNavigationEvent
 
     private val _saveNavigationDataEvent = SingleLiveData<Pair<String, String>>()
     val saveNavigationDataEvent: SingleLiveData<Pair<String, String>> get() = _saveNavigationDataEvent
@@ -38,8 +40,9 @@ open class BaseViewModel() : ViewModel() {
     fun moveToDirections(directions: NavDirections) {
         _navigationEvent.value = directions
     }
-    fun popDirections() {
-        _navigationEvent.value = null
+
+    fun popDirections(id: Int? = null) {
+        _popNavigationEvent.value = id
     }
 
     fun saveStringData(pair: Pair<String, String?>) {

@@ -1,10 +1,14 @@
 package com.abouttime.blindcafe.common.constants
 
 object Retrofit {
-    const val TEST_BASE_URL = "https://www.blindcafe.me/"
-    const val TEMP = "http://dev.blindcafe.me/"
-    const val BASE_URL = "https://www.blindcafe.me/"
+    const val PROD_BASE_URL = "https://www.blindcafe.me/"
+    const val DEV_BASE_URL = "http://dev.blindcafe.me/"
+    const val BASE_URL = "http://dev.blindcafe.me/"
 
+
+    const val JWT = "jwt"
+    const val HEADER = "X-ACCESS-TOKEN"
+    const val USER_ID = "User ID"
 
     const val POST_KAKAO_LOGIN_URL = "api/kakao"
     const val POST_USER_INFO_URL = "api/user"
@@ -23,11 +27,9 @@ object Retrofit {
     const val POST_CANCEL_MATCHING_URL = "api/matching/cancel"
     const val GET_PROFILE_INFO_URL = "api/user/profile"
     const val POST_DEVICE_TOKEN_URL = "api/user/device"
-    const val POST_INTEREST_URL = "api/user/interest"
+    const val PUT_INTEREST_URL = "api/user/interest"
 
     const val FCM_MESSAGE_TOPIC = "fcm_message_topic"
 
-    const val JWT = "jwt"
-    const val HEADER = "X-ACCESS-TOKEN"
-    const val USER_ID = "User ID"
+
 }

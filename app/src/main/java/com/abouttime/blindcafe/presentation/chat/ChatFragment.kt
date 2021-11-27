@@ -689,7 +689,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                 focusedView.clearFocus()
             } else {
                 remove()
-                popDirections()
+                popOneDirections()
             }
 
         }

@@ -37,12 +37,19 @@ abstract class BaseDialogFragment<VM: BaseViewModel>(layoutId: Int): DialogFragm
         }
     }
 
+
     private fun observeNavigationEvent() {
         viewModel.navigationEvent.observe(viewLifecycleOwner) { directions ->
-            directions?.let {
-                moveToDirections(directions)
+            moveToDirections(directions)
+        }
+    }
+
+    private fun observePopNavigationEvent() {
+        viewModel.popNavigationEvent.observe(viewLifecycleOwner) { id ->
+            id?.let {
+                popUntilDirections(it)
             } ?: kotlin.run {
-                popDirections()
+                popOneDirections()
             }
         }
     }
@@ -52,9 +59,15 @@ abstract class BaseDialogFragment<VM: BaseViewModel>(layoutId: Int): DialogFragm
         findNavController().navigate(directions)
     }
 
-    fun popDirections() {
+    fun popOneDirections() {
         findNavController().popBackStack()
     }
+
+    fun popUntilDirections(id: Int) {
+        findNavController().popBackStack(id, true)
+    }
+
+
 
     private fun observeSaveNavigationDataEvent() {
         viewModel.saveNavigationDataEvent.observe(viewLifecycleOwner) { pair ->

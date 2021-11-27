@@ -568,9 +568,6 @@
         android:label="InterestEditFragment"
         tools:layout="@layout/fragment_interest_edit">
 
-
-
-
         <action
             android:id="@+id/action_interestEditFragment_to_interestSubEditFragment"
             app:destination="@id/interestSubEditFragment"

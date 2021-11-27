@@ -14,6 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MyPageViewModel(
     private val getUserInfoUseCase: GetUserInfoUseCase
@@ -30,8 +31,8 @@ class MyPageViewModel(
     val age: LiveData<String> get() = _age
     private val _location = MutableLiveData("-")
     val location: LiveData<String> get() = _location
-    private val _partenerSex = MutableLiveData("-")
-    val partenerSex: LiveData<String> get() = _partenerSex
+    private val _partnerSex = MutableLiveData("-")
+    val partnerSex: LiveData<String> get() = _partnerSex
 
     private val _interests = SingleLiveData<List<Int>>()
     val interests: SingleLiveData<List<Int>> get() = _interests
@@ -59,27 +60,28 @@ class MyPageViewModel(
                 is Resource.Success -> {
                     Log.d(RETROFIT_TAG, "getUserInfo ${response.data.toString()}")
                     response.data?.let {
-                        _profileImageUrl.postValue(it.profileImage!!)
-                        _nickname.postValue(it.nickname)
-                        _sex.postValue(it.myGender)
-                        _age.postValue(it.age.toString())
-                        _partenerSex.postValue(
-                            when (it.partnerGender) {
-                                "M" -> "남자"
-                                "F" -> "여자"
-                                "N" -> "상관없음"
-                                else -> ""
+                        Log.e("mypage", it.toString())
+                        withContext(Dispatchers.Main) {
+                            _profileImageUrl.value = (it.profileImage!!)
+                            _nickname.value = (it.nickname)
+                            _sex.value = (it.myGender)
+                            _age.value = (it.age.toString())
+                            _partnerSex.value = (
+                                when (it.partnerGender) {
+                                    "M" -> "남자"
+                                    "F" -> "여자"
+                                    "N" -> "상관없음"
+                                    else -> ""
+                                }
+                            )
+                            _location.value = (it.region)
+                            if (!it.interests.isNullOrEmpty()) {
+                                _interests.value = (it.interests!!)
                             }
-                        )
-                        _location.postValue(it.region)
-                        if (!it.interests.isNullOrEmpty()) {
-                            _interests.postValue(it.interests!!)
+                            if (!it.drinks.isNullOrEmpty()) {
+                                _badges.value = (it.drinks!!)
+                            }
                         }
-                        if (!it.drinks.isNullOrEmpty()) {
-                            _badges.postValue(it.drinks!!)
-                        }
-
-
                     }
                 }
                 is Resource.Error -> {
