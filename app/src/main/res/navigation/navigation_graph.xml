@@ -516,13 +516,6 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_exchangeAcceptFragment_to_exchangeWaitFragment"
-            app:destination="@id/exchangeWaitFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <dialog
         android:id="@+id/confirmDialogFragment"
@@ -660,6 +653,11 @@
         android:name="com.abouttime.blindcafe.presentation.profile_exchange.open.ExchangeOpenFragment"
         android:label="ExchangeOpenFragment"
         tools:layout="@layout/fragment_exchange_open">
+
+        <argument
+            android:name="matchingId"
+            app:argType="integer" />
+
         <action
             android:id="@+id/action_exchangeOpenFragment_to_profileImageEditFragment"
             app:destination="@id/profileImageEditFragment"
@@ -677,6 +675,13 @@
         <action
             android:id="@+id/action_exchangeOpenFragment_to_locationFragment"
             app:destination="@id/locationFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_exchangeOpenFragment_to_exchangeWaitFragment"
+            app:destination="@id/exchangeWaitFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"

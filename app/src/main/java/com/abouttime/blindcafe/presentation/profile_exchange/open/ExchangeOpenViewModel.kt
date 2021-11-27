@@ -7,6 +7,7 @@ import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.PreferenceKey
+import com.abouttime.blindcafe.common.constants.PreferenceKey.NICKNAME
 import com.abouttime.blindcafe.common.util.SingleLiveData
 import com.abouttime.blindcafe.data.server.dto.user_info.edit.info.PutProfileInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.GetProfileForOpenDto
@@ -75,10 +76,41 @@ class ExchangeOpenViewModel(
         }
     }
     fun handleProfileData(data: GetProfileForOpenDto) {
-        if (data.fill == true) {
-            moveToExchangeAcceptFragment()
-        } else {
 
+        _age.value = data.age.toString()
+        _nickname.value = data.nickname.toString()
+        _sex.value = data.gender.toString()
+        _location.value = data.region.toString()
+        data.interests.let {
+            _interests.value = it
+        }
+        data.nickname?.let {
+            saveStringData(Pair(NICKNAME, it))
+        }
+
+
+        if (data.fill == true) {
+            /** 바로 postProfileForOpenUseCase */
+
+
+
+            val state = data.region?.split(" ")?.get(0)
+            val region = data.region?.split(" ")?.get(1)
+            if (data.nickname != null && state != null && region != null) {
+                val dto = PostProfileForOpenDto(
+                    nickname = _nickname.value!!,
+                    state = state,
+                    region = region
+                )
+                postProfileForOpen(dto)
+            } else {
+                showToast(R.string.temp_error)
+            }
+
+
+        } else {
+            /** 작성 후 postProfileForOpenUseCase */
+            showToast(R.string.profile_edit_toast_alert_fill_all)
         }
     }
 
@@ -92,9 +124,20 @@ class ExchangeOpenViewModel(
                     result.data?.let { dto ->
                         handlePostResult(dto)
                     }
+
+
+                    _nickname?.value?.let {
+                        saveStringData(Pair(NICKNAME, it))
+                    }
+
                     dismissLoading()
                 }
                 is Resource.Error -> {
+                    if (result.message == "400") {
+                        moveToProfileWaitFragment()
+                    } else {
+                        showToast(R.string.temp_error)
+                    }
                     dismissLoading()
                 }
             }
@@ -102,7 +145,11 @@ class ExchangeOpenViewModel(
 
     }
     private fun handlePostResult(data: PostProfileForOpenResponse) {
-
+        if (data.result == true) {
+            moveToExchangeAcceptFragment()
+        } else {
+            moveToProfileWaitFragment()
+        }
 
     }
 
@@ -119,13 +166,10 @@ class ExchangeOpenViewModel(
                     state = state,
                     region = region
                 )
-                saveStringData(Pair(PreferenceKey.NICKNAME, _nickname.value))
-
                 postProfileForOpen(dto)
             } else {
                 showToast(R.string.temp_error)
             }
-
         } else {
             showToast(R.string.profile_edit_toast_alert_fill_all)
         }
@@ -141,9 +185,12 @@ class ExchangeOpenViewModel(
     }
 
     fun onClickProfileImageEditButton() {
-
+        moveToProfileImageEditFragment()
     }
 
+
+
+    /** navigate **/
     private fun moveToLocationFragment() {
         moveToDirections(ExchangeOpenFragmentDirections.actionExchangeOpenFragmentToLocationFragment())
     }
@@ -155,10 +202,14 @@ class ExchangeOpenViewModel(
     private fun moveToExchangeAcceptFragment() {
         moveToDirections(ExchangeOpenFragmentDirections.actionExchangeOpenFragmentToExchangeAcceptFragment())
     }
+    private fun moveToProfileWaitFragment() {
+        moveToDirections(ExchangeOpenFragmentDirections.actionExchangeOpenFragmentToExchangeWaitFragment())
+    }
 
 
     private fun isCorrectNickname() = _nickname.value?.length in 1..9
-    private fun canEnableNextButton() = isCorrectNickname() && !_sex.value.isNullOrEmpty() && !_age.value.isNullOrEmpty() && !_location.value.isNullOrEmpty()
+    private fun canEnableNextButton() = isCorrectNickname() &&  !_location.value.isNullOrEmpty()
+
     fun updateNextButton() {
         _canEnableNext.value = canEnableNextButton()
     }

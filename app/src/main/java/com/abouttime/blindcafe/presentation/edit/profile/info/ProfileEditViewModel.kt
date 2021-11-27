@@ -98,6 +98,7 @@ class ProfileEditViewModel(
                 }
                 is Resource.Success -> {
                     showToast(R.string.profile_edit_toast_complete)
+                    saveStringData(Pair(NICKNAME, _nickname.value))
                     popDirections()
                     dismissLoading()
                 }
@@ -127,7 +128,7 @@ class ProfileEditViewModel(
                 state = state!!,
                 region = region!!
             )
-            saveStringData(Pair(NICKNAME, _nickname.value))
+
 
             putProfileInfo(dto)
         } else {

@@ -28,7 +28,7 @@ class ExchangeOpenFragment: BaseFragment<ExchangeOpenViewModel>(R.layout.fragmen
         observeSavedNavigationData(fragmentExchangeOpenBinding)
         observeLocationData(fragmentExchangeOpenBinding)
         observeNicknameData(fragmentExchangeOpenBinding)
-
+        observeInterestsData(fragmentExchangeOpenBinding)
     }
 
 
@@ -48,15 +48,7 @@ class ExchangeOpenFragment: BaseFragment<ExchangeOpenViewModel>(R.layout.fragmen
 
         }
     }
-    private fun observeEnableData(fragmentExchangeOpenBinding: FragmentExchangeOpenBinding) = with(fragmentExchangeOpenBinding) {
-        viewModel?.canEnableNext?.observe(viewLifecycleOwner) { isEnable ->
-            if (isEnable) {
-                tvNext.setBackgroundColor(getColorByResId(R.color.edit_profile_button_disabled))
-            } else {
-                tvNext.setBackgroundColor(getColorByResId(R.color.main))
-            }
-        }
-    }
+
     private fun observeNicknameData(fragmentExchangeOpenBinding: FragmentExchangeOpenBinding) = with(fragmentExchangeOpenBinding) {
         viewModel?.nickname?.observe(viewLifecycleOwner) { nick ->
             viewModel?.updateNextButton()
@@ -78,6 +70,19 @@ class ExchangeOpenFragment: BaseFragment<ExchangeOpenViewModel>(R.layout.fragmen
             tvLocationValue.text = loc
             etLocationValue.isGone = loc.isNotEmpty()
             viewModel?.updateNextButton()
+        }
+    }
+
+    private fun observeInterestsData(fragmentExchangeOpenBinding: FragmentExchangeOpenBinding) = with(fragmentExchangeOpenBinding) {
+        val tvList = listOf(tvInterest1, tvInterest2, tvInterest3)
+        viewModel?.interests?.observe(viewLifecycleOwner) { list ->
+            if (list.size >= 3) {
+                list.take(3).forEachIndexed { i, v ->
+                    tvList[i].text = v
+                }
+            }
+
+
         }
     }
 
