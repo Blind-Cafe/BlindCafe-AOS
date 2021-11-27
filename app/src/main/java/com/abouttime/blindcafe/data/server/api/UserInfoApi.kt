@@ -2,11 +2,13 @@ package com.abouttime.blindcafe.data.server.api
 
 import com.abouttime.blindcafe.common.base.BaseResponse
 import com.abouttime.blindcafe.common.constants.Retrofit.DELETE_ACCOUNT_URL
+import com.abouttime.blindcafe.common.constants.Retrofit.GET_PROFILE_FOR_OPEN
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_PROFILE_IMAGE_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_PROFILE_INFO_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_REPORTS_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.PATCH_PROFILE_IMAGE_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_DEVICE_TOKEN_URL
+import com.abouttime.blindcafe.common.constants.Retrofit.POST_PROFILE_FOR_OPEN
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_USER_INFO_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.PUT_PROFILE_INFO_URL
 import com.abouttime.blindcafe.data.server.dto.user_info.DeleteAccountResponse
@@ -15,6 +17,9 @@ import com.abouttime.blindcafe.data.server.dto.user_info.PostUserInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.device_token.PostDeviceTokenDto
 import com.abouttime.blindcafe.data.server.dto.user_info.edit.info.PutProfileInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.edit.info.PutProfileInfoResponse
+import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.GetProfileForOpenDto
+import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.PostProfileForOpenDto
+import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.PostProfileForOpenResponse
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.image.GetProfileImageDto
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.info.GetProfileInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.report.GetReportsDto
@@ -63,5 +68,17 @@ interface UserInfoApi {
         @Part("priority") priority: RequestBody,
         @Part image: MultipartBody.Part
     ): BaseResponse?
+
+
+    @GET(GET_PROFILE_FOR_OPEN)
+    suspend fun getProfileForOpen(
+        @Path("matchingId") matchingId: Int
+    ): GetProfileForOpenDto?
+
+
+    @POST(POST_PROFILE_FOR_OPEN)
+    suspend fun postProfileForOpen(
+        @Body postProfileForOpenDto: PostProfileForOpenDto
+    ): PostProfileForOpenResponse?
 
 }

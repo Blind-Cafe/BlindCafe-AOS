@@ -8,6 +8,9 @@ import com.abouttime.blindcafe.data.server.dto.user_info.PostUserInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.device_token.PostDeviceTokenDto
 import com.abouttime.blindcafe.data.server.dto.user_info.edit.info.PutProfileInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.edit.info.PutProfileInfoResponse
+import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.GetProfileForOpenDto
+import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.PostProfileForOpenDto
+import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.PostProfileForOpenResponse
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.image.GetProfileImageDto
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.info.GetProfileInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.report.GetReportsDto
@@ -54,4 +57,11 @@ class UserInfoRepositoryImpl(
         return userInfoApi.patchProfileImage(priority, image)
     }
 
+    override suspend fun getProfileForOpen(matchingId: Int): GetProfileForOpenDto? {
+        return userInfoApi.getProfileForOpen(matchingId)
+    }
+
+    override suspend fun postProfileForOpen(postProfileForOpenDto: PostProfileForOpenDto): PostProfileForOpenResponse? {
+        return userInfoApi.postProfileForOpen(postProfileForOpenDto)
+    }
 }

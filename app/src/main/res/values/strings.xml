@@ -18,6 +18,8 @@
     <string name="toast_gallery_limit">최대 다섯 장까지 가능합니다</string>
     <string name="toast_select_reason">먼저 이유를 선택해주세요</string>
     <string name="toast_fail">요청에 실패했습니다</string>
+    <string name="interest">관심사</string>
+
 
 
     <!-- rule -->
@@ -192,6 +194,7 @@
     <string name="profile_edit_sex_title">성별</string>
     <string name="profile_edit_location_title">지역</string>
     <string name="profile_edit_partner_sex_title">대화 상대 성별</string>
+
     <string name="profile_edit_nickname_hint">닉네임을 설정해주세요.</string>
     <string name="profile_edit_age_hint">나이를 설정해주세요.</string>
     <string name="profile_edit_sex_hint">성별을 설정해주세요.</string>
@@ -201,6 +204,7 @@
     <string name="profile_image_edit_complete">확인</string>
     <string name="profile_edit_toast_alert_fill_all">모두 작성해주세요</string>
     <string name="profile_edit_toast_complete">프로필 수정 완료</string>
+    <string name="profile_edit_nickname_length">1~9자로 설정해주세요.</string>
 
     <!-- profile image edit -->
     <string name="profile_image_edit_toast_success">성공적으로 변경하였습니다</string>
@@ -215,7 +219,7 @@
     <!-- profile exchange -->
     <string name="profile_exchange_title">매칭테이블</string>
     <string name="profile_exchange_subtitle_1">72시간의 대화가 종료되었습니다.\n그 동안 %s님과의 만남이 즐거우셨나요?</string>
-    <string name="profile_exchange_subtitle_2">내 프로필을 멋지게 채우고 다은님의 프로피을 받아보세요!</string>
+    <string name="profile_exchange_subtitle_2">내 프로필을 멋지게 채우고 다은님의 프로필을 받아보세요!</string>
     <string name="profile_exchange_make_profile">프로필 작성하기</string>
     <string name="profile_exchange_location">지역 설정</string>
     <string name="profile_exchange_bottom_description">7시간 뒤 자동으로 프로필이 발송됩니다. 프로필이 잘 완성될 수록 %s님과 대화할 수 있는 기능이 높아져요!</string>
@@ -224,6 +228,7 @@
     <string name="profile_exchange_publish">공개하기</string>
     <string name="profile_exchange_dismiss">거절하기</string>
     <string name="profile_exchange_accept">수락하기</string>
+    <string name="profile_exchange_wait">%s님이 프로필 작성중입니다. 잠시만 기다려주세요.</string>
 
 
     <!-- profile dismiss -->
@@ -307,6 +312,14 @@
     <string name="location_sub_title">시/구/군</string>
     <string name="location_next">확인</string>
     <string name="toast_alert_select_location">지역을 먼저 선택해주세요</string>
+    
+    <!-- profile exchange -->
+    <string name="exchange_open_title">매칭 테이블</string>
+    <string name="exchange_open_subtitle_1">72시간의 대화가 종료되었습니다.\n그 동안의 %s님과의 만남이 즐거우셨나요?</string>
+    <string name="exchange_open_subtitle_2">내 프로필을 멋지게 채우고 %s님의 프로필을 받아보세요!</string>
+    <string name="exchange_open_next">공개하기</string>
+    <string name="exchange_open_alert">7시간 뒤 자동으로 프로필이 공개됩니다. 프로필이 완성될 수록 %s님과 대화할 수 있는 가능성이 높아져요!</string>
+
 
     <string-array name="location_main">
         <item>서울</item>
