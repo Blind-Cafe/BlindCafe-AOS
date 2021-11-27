@@ -1,4 +1,4 @@
-package com.example.chatexample.presentation.ui.chat.rv_item
+package com.abouttime.blindcafe.presentation.chat.rv_item
 
 import android.view.View
 import com.abouttime.blindcafe.R

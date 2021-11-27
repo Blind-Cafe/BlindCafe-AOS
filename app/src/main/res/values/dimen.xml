@@ -40,4 +40,6 @@
     <dimen name="switch_thumb_vertical_padding">8dp</dimen>
 
 
+    <dimen name="chat_topic_vertical_margin">16dp</dimen>
+
 </resources>

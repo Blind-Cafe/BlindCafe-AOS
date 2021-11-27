@@ -27,7 +27,7 @@ class AudioSendItem(
                 callback = { uri ->
                     viewBinding.root.isClickable = false
 
-                    Log.e("zxcv", "audio uri 도착!")
+
                     val mediaPlayer = MediaPlayer()
                     mediaPlayer.setDataSource(uri.toString())
                     mediaPlayer.setOnPreparedListener { player ->

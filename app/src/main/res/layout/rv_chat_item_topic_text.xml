@@ -14,6 +14,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginVertical="16dp"
     android:backgroundTint="@color/black"
     android:layout_marginHorizontal="32dp"
     android:paddingHorizontal="16dp"
@@ -37,6 +38,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/tv_title"
         android:id="@+id/tv_content"
+        android:text="@{message.contents}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

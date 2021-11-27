@@ -1,9 +1,7 @@
 package com.abouttime.blindcafe.presentation.chat
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Context
-import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.net.Uri
 import android.os.Bundle
@@ -20,30 +18,28 @@ import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isGone
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.abouttime.blindcafe.R
-import com.abouttime.blindcafe.common.util.DeviceUtil
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.common.constants.LogTag.CHATTING_TAG
 import com.abouttime.blindcafe.common.ext.secondToLapseForChat
 import com.abouttime.blindcafe.common.ext.setMarginRight
 import com.abouttime.blindcafe.common.ext.setMarginTop
+import com.abouttime.blindcafe.common.util.DeviceUtil
 import com.abouttime.blindcafe.databinding.FragmentChatBinding
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.presentation.chat.audio.RecorderState
-import com.abouttime.blindcafe.presentation.chat.rv_item.AudioReceiveItem
-import com.abouttime.blindcafe.presentation.chat.rv_item.AudioSendItem
-import com.abouttime.blindcafe.presentation.chat.rv_item.DescriptionItem
-import com.bumptech.glide.Glide
-import com.example.chatexample.presentation.ui.chat.rv_item.*
+import com.abouttime.blindcafe.presentation.chat.rv_item.*
+import com.abouttime.blindcafe.presentation.chat.rv_item.common.AudioTopicItem
+import com.abouttime.blindcafe.presentation.chat.rv_item.common.DescriptionItem
+import com.abouttime.blindcafe.presentation.chat.rv_item.common.ImageTopicItem
+import com.abouttime.blindcafe.presentation.chat.rv_item.common.TextTopicItem
 import com.google.firebase.messaging.FirebaseMessaging
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import me.everything.android.ui.overscroll.IOverScrollState.*
@@ -67,7 +63,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
     private var recorder: MediaRecorder? = null
     private val recordingFilePath: String by lazy {
-        "${requireActivity().externalCacheDir?.absolutePath}/recording.mp4"
+        "${requireActivity().externalCacheDir?.absolutePath}/recording.mp3"
     }
 
 
@@ -101,7 +97,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         observeRecorderState(fragmentChatBinding) // 녹음 상태별 초기화
 
         initTopicButton(fragmentChatBinding) // 토픽요청 버튼 초기화
-        observeTopicData(fragmentChatBinding) // 토픽 데이터 구독
     }
 
 
@@ -219,6 +214,9 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             1 -> chatAdapter.add(TextSendItem(message))
             2 -> chatAdapter.add(ImageSendItem(message, viewModel = viewModel))
             3 -> chatAdapter.add(AudioSendItem(message, viewModel = viewModel))
+            4 -> chatAdapter.add(TextTopicItem(message))
+            5 -> chatAdapter.add(ImageTopicItem(message, viewModel = viewModel))
+            6 -> chatAdapter.add(AudioTopicItem(message, viewModel = viewModel))
             7 -> chatAdapter.add(DescriptionItem(message))
         }
     }
@@ -228,6 +226,9 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             1 -> chatAdapter.add(TextReceiveItem(message))
             2 -> chatAdapter.add(ImageReceiveItem(message, viewModel = viewModel))
             3 -> chatAdapter.add(AudioReceiveItem(message, viewModel = viewModel))
+            4 -> chatAdapter.add(TextTopicItem(message))
+            5 -> chatAdapter.add(ImageTopicItem(message, viewModel = viewModel))
+            6 -> chatAdapter.add(AudioTopicItem(message, viewModel = viewModel))
             7 -> chatAdapter.add(DescriptionItem(message))
 
         }
@@ -421,8 +422,8 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     private fun startRecording() {
         recorder = MediaRecorder().apply {
             setAudioSource(MediaRecorder.AudioSource.MIC)
-            setOutputFormat(MediaRecorder.OutputFormat.DEFAULT)
-            setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT)
+            setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
+            setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
             // 따로 저장하지 않을거라서 캐시에 저장
             // 나중에 다른 곳에 저장할 때는 내부 저장소는 녹음 파일이 얼마나 커질지 모르니 충분한 공간을 제공하지 못할 수 있음에 주의
             // 그러니 여기서도 외부 저장소의 캐시 디렉토리에 접근해서 임시적으로 녹음파일을 저장하되 이 앱이 지워지거나
@@ -556,129 +557,9 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             }
         }
 
-    private fun observeTopicData(fragmentChatBinding: FragmentChatBinding) =
-        with(fragmentChatBinding) {
-            viewModel?.topic?.observe(viewLifecycleOwner) { topic ->
-                clTopicContainer.isGone = false
-                topic.type?.let { t ->
-                    when (t) {
-                        "text" -> handleTextTopic(fragmentChatBinding,
-                            topic.topicText?.content ?: "")
-                        "image" -> handleImageTopic(fragmentChatBinding,
-                            topic.topicImage?.title ?: "",
-                            topic.topicImage?.src ?: "")
-                        "audio" -> handleAudioTopic(fragmentChatBinding,
-                            topic.topicAudio?.title ?: "",
-                            topic.topicAudio?.src ?: "")
-                    }
-                    initFoldButton(fragmentChatBinding)
-                }
-            }
-        }
-
-    private fun handleTextTopic(fragmentChatBinding: FragmentChatBinding, contents: String) =
-        with(fragmentChatBinding) {
-            tvTopicTitle.text = getString(R.string.chat_topic_text_title)
-
-            tvTopicContentsText.isGone = false
-            ivTopicContentsImage.isGone = true
-            clTopicContentsAudioContainer.isGone = true
-
-            tvTopicContentsText.text = contents
-
-        }
-
-    private fun handleImageTopic(
-        fragmentChatBinding: FragmentChatBinding,
-        title: String,
-        contents: String,
-    ) = with(fragmentChatBinding) {
-        tvTopicTitle.text = title
-
-        tvTopicContentsText.isGone = true
-        ivTopicContentsImage.isGone = false
-        clTopicContentsAudioContainer.isGone = true
-
-        Glide.with(requireContext())
-            .load(contents)
-            .into(ivTopicContentsImage)
-    }
-
-    @SuppressLint("SetTextI18n")
-    private fun handleAudioTopic(
-        fragmentChatBinding: FragmentChatBinding,
-        title: String,
-        contents: String,
-    ) = with(fragmentChatBinding) {
-        tvTopicTitle.text = title
-
-        tvTopicContentsText.isGone = true
-        ivTopicContentsImage.isGone = false
-        clTopicContentsAudioContainer.isGone = true
-
-        var duration = 0
-        val initMediaPlayer = MediaPlayer()
-        initMediaPlayer.setDataSource(contents)
-        initMediaPlayer.setOnPreparedListener { player ->
-            duration = player.duration
-            val minutes = (duration / 60) % 60
-            tvTopicContentsAudioDuration.isGone = false
-            tvTopicContentsAudioDuration.text = "/%02d:%02d".format(duration, minutes)
-        }
-        initMediaPlayer.prepareAsync()
-
-        ivTopicContentsAudioPlayController.setOnClickListener {
-            if (ivTopicContentsAudioPlayController.isClickable) {
-
-                ivTopicContentsAudioPlayController.isClickable = false
-                val mediaPlayer = MediaPlayer()
-                var isPlaying = false
-                mediaPlayer.setDataSource(contents)
 
 
 
-                mediaPlayer.setOnPreparedListener { player ->
-                    ivTopicContentsAudioPlayController.setImageResource(R.drawable.bt_pause)
-                    tvTopicContentsAudioPlayTime.startCountUp()
-                    player.start()
-                    isPlaying = true
-
-                    viewModel?.viewModelScope?.launch {
-                        while (isPlaying) {
-                            lpiTopicContentsAudioProgress.progress =
-                                ((mediaPlayer.currentPosition / duration.toFloat()) * 100).toInt()
-                            delay(200)
-                        }
-                    }
-                }
-                mediaPlayer.setOnCompletionListener { player ->
-                    ivTopicContentsAudioPlayController.setImageResource(R.drawable.bt_play)
-                    tvTopicContentsAudioPlayTime.stopCountUp()
-                    tvTopicContentsAudioPlayTime.text = "00:00"
-                    lpiTopicContentsAudioProgress.progress = 0
-                    isPlaying = false
-                    ivTopicContentsAudioPlayController.isClickable = true
-                    mediaPlayer.release()
-                }
-
-                mediaPlayer.prepareAsync()
-            }
-        }
-
-
-    }
-
-    private fun initFoldButton(fragmentChatBinding: FragmentChatBinding) =
-        with(fragmentChatBinding) {
-            ivFoldUnfold.setOnClickListener {
-                val isGone = llTopicUnfoldContainer.isGone
-                llTopicUnfoldContainer.isGone = !isGone
-            }
-            tvTopicUnfold.setOnClickListener {
-                llTopicUnfoldContainer.isGone = true
-                clTopicContainer.isGone = true
-            }
-        }
 
 
     /** BackPressButton **/

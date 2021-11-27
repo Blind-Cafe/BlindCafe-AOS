@@ -5,14 +5,15 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
-import com.abouttime.blindcafe.common.util.SingleLiveData
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.CHATTING_TAG
 import com.abouttime.blindcafe.common.constants.LogTag.FIRESTORE_TAG
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NICKNAME
 import com.abouttime.blindcafe.common.constants.PreferenceKey.USER_ID
+import com.abouttime.blindcafe.common.util.SingleLiveData
 import com.abouttime.blindcafe.data.server.dto.matching.topic.GetTopicDto
 import com.abouttime.blindcafe.data.server.dto.notification.PostFcmDto
 import com.abouttime.blindcafe.domain.model.Message
@@ -40,7 +41,7 @@ class ChatViewModel(
     private val downloadAudioUrlUseCase: DownloadAudioUrlUseCase,
     private val fcmUseCase: PostFcmUseCase,
     private val getChatRoomInfoUseCase: GetChatRoomInfoUseCase,
-    private val getTopicUseCase: GetTopicUseCase
+    private val getTopicUseCase: GetTopicUseCase,
 ) : BaseViewModel() {
 
     private val _isSendButtonEnabled = MutableLiveData(false)
@@ -83,10 +84,10 @@ class ChatViewModel(
     fun postFcm(title: String, path: String, body: String) = viewModelScope.launch(Dispatchers.IO) {
         val token = FirebaseMessaging.getInstance().token.await()
         val dto = PostFcmDto(
-           body = body,
-           path = path,
-           targetToken = token,
-           title = title
+            body = body,
+            path = path,
+            targetToken = token,
+            title = title
         )
         fcmUseCase(dto)
     }
@@ -224,13 +225,13 @@ class ChatViewModel(
     fun getTopic() {
         matchingId?.let { it ->
             getTopicUseCase(it).onEach { result ->
-                when(result) {
+                when (result) {
                     is Resource.Loading -> {
                         showLoading()
                     }
                     is Resource.Success -> {
-                        result.data?.let { topic ->
-                            _topic.value = topic
+                        result.data?.let { dto ->
+                            sendTopicMessage(dto)
                         }
                         dismissLoading()
 
@@ -244,8 +245,50 @@ class ChatViewModel(
         }
     }
 
+    private fun sendTopicMessage(topic: GetTopicDto) {
+        topic.type?.let { t ->
+            var message: Message? = null
 
+            when (t) {
+                "text" -> {
+                    topic.topicText?.content?.let { c ->
+                        message = Message(
+                            contents = c,
+                            type = 4,
+                            roomUid = matchingId.toString()
+                        )
+                    }
+                }
+                "image" -> {
+                    topic.topicImage?.src?.let { src ->
+                        message = Message(
+                            contents = src,
+                            type = 5,
+                            roomUid = matchingId.toString()
+                        )
+                    }
+                }
+                "audio" -> {
+                    topic.topicAudio?.src?.let { src ->
+                        message = Message(
+                            contents = src,
+                            type = 6,
+                            roomUid = matchingId.toString()
+                        )
+                    }
+                }
+                else -> {
+                }
 
+            }
+
+            message?.let { m ->
+                sendMessage(m)
+            } ?: kotlin.run {
+                showToast(R.string.temp_error)
+            }
+        }
+    }
 
 
     /** update button **/
@@ -257,13 +300,14 @@ class ChatViewModel(
     fun onClickRecorderButton() {
         _recorderState.value = RecorderState.START_RECORDING
     }
+
     fun onClickRecorderContainerButton() {
         _recorderState.value = RecorderState.STOP_RECORDING
     }
+
     fun onClickBackButton() {
         popDirections()
     }
-
 
 
     /** navigate **/
@@ -276,6 +320,7 @@ class ChatViewModel(
             popDirections()
         }
     }
+
     fun moveToReportDialogFragment() {
         matchingId?.let {
             moveToDirections(ChatFragmentDirections.actionMatchingFragmentToReportReasonDialogFragment(
@@ -285,10 +330,6 @@ class ChatViewModel(
             popDirections()
         }
     }
-
-
-
-
 
 
 }
