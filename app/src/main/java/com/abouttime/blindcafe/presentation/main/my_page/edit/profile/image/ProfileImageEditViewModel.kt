@@ -57,18 +57,19 @@ class ProfileImageEditViewModel(
         }.launchIn(viewModelScope)
     }
 
-    fun patchProfileImage(priority: RequestBody, image: MultipartBody.Part) {
+    fun patchProfileImage(priority: RequestBody, image: MultipartBody.Part, callback: () -> Unit) {
         patchProfileImageUseCase(priority, image).onEach { result ->
             when (result) {
                 is Resource.Loading -> {
-                    showLoading()
                 }
                 is Resource.Success -> {
-                    showToast(R.string.profile_image_edit_toast_success)
+                   // showToast(R.string.profile_image_edit_toast_success)
+                    callback()
                     dismissLoading()
                 }
                 is Resource.Error -> {
                     Log.e(RETROFIT_TAG, result.message.toString())
+                    showToast(R.string.temp_error)
                     dismissLoading()
                 }
             }

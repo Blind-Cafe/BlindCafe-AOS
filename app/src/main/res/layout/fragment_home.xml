@@ -49,29 +49,29 @@
         <ImageView
             android:id="@+id/iv_bell_on"
             android:layout_width="wrap_content"
-            android:visibility="gone"
             android:layout_height="wrap_content"
-            tools:visibility="visible"
             android:src="@drawable/bt_home_bell_on"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@id/iv_bell"
-            app:layout_constraintTop_toTopOf="@id/iv_bell" />
+            app:layout_constraintTop_toTopOf="@id/iv_bell"
+            tools:visibility="visible" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
-            android:visibility="gone"
-            tools:visibility="visible"
             android:layout_marginEnd="4dp"
             android:background="@color/home_notification_background"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:paddingHorizontal="8dp"
             android:paddingVertical="8dp"
             android:text="@string/home_notification_message"
             android:textColor="@color/gray_300"
             android:textSize="@dimen/font_size_11"
-            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@id/iv_bell"
-            app:layout_constraintTop_toBottomOf="@id/iv_bell" />
+            app:layout_constraintTop_toBottomOf="@id/iv_bell"
+            tools:visibility="visible" />
 
 
         <ImageView
@@ -179,7 +179,7 @@
                 app:layout_constraintStart_toStartOf="@id/iv_home_bg_2"
                 app:layout_constraintTop_toTopOf="@id/iv_home_bg_2"
                 app:layout_constraintVertical_chainStyle="packed"
-                tools:src="@drawable/ic_home_wait" />
+                tools:src="@drawable/ic_home_not_wait" />
 
             <TextView
                 android:id="@+id/tv_time"
@@ -188,7 +188,7 @@
                 android:text="@{viewModel.time}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_size_16"
-                android:visibility="@{viewModel.homeStatusCode == 2 | viewModel.homeStatusCode == 3 ? View.VISIBLE : View.INVISIBLE}"
+                android:visibility="@{viewModel.homeStatusCode == 2 | viewModel.homeStatusCode == 3 ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="@id/iv_home_bg_2"
                 app:layout_constraintEnd_toEndOf="@id/iv_home_bg_2"
                 app:layout_constraintStart_toStartOf="@id/iv_home_bg_2"
@@ -205,9 +205,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:gravity="center"
             android:text="@string/home_title_none"
             android:textColor="@color/white"
-            android:gravity="center"
             android:textSize="@dimen/font_size_15"
             app:layout_constraintBottom_toTopOf="@id/tv_state_sub_title"
             app:layout_constraintEnd_toEndOf="parent"
@@ -220,9 +220,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:gravity="center"
             android:text="@string/home_subtitle_none"
             android:textColor="@color/steel"
-            android:gravity="center"
             android:textSize="@dimen/font_size_13"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/tv_state_title"

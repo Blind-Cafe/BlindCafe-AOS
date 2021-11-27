@@ -1,10 +1,14 @@
 package com.abouttime.blindcafe.presentation.main.my_page.edit.profile.image
 
 import android.Manifest
+import android.graphics.Bitmap
+import android.graphics.Matrix
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
@@ -15,12 +19,8 @@ import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.io.*
-import androidx.core.app.ActivityCompat.startActivityForResult
-
-import android.content.Intent
-import android.graphics.Bitmap
-import android.provider.MediaStore
+import java.io.File
+import java.io.InputStream
 
 
 class ProfileImageEditFragment :
@@ -35,21 +35,14 @@ class ProfileImageEditFragment :
 
     private val galleryCallback1 =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            binding?.ivImage1?.setImageURI(uri)
-
-
-
-
             uploadImage(uri, 1)
         }
     private val galleryCallback2 =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            binding?.ivImage2?.setImageURI(uri)
             uploadImage(uri, 2)
         }
     private val galleryCallback3 =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            binding?.ivImage3?.setImageURI(uri)
             uploadImage(uri, 3)
         }
 
@@ -100,14 +93,21 @@ class ProfileImageEditFragment :
         with(fragmentProfileImageEditBinding) {
             viewModel?.let {
                 Log.d("observeImageUrlsData", "viewModel is not null")
+                val ivList = listOf(ivImage1, ivImage2, ivImage3)
+                val btList = listOf(ivImageAdd1, ivImageAdd2, ivImageAdd3)
                 viewModel?.imageUrls?.observe(viewLifecycleOwner) { urls ->
-                    val ivList = listOf(ivImage1, ivImage2, ivImage3)
+
                     Log.e("observeImageUrlsData", urls.toString())
                     urls.forEachIndexed { i, url ->
                         if (url.isNotEmpty()) {
                             Glide.with(requireContext())
                                 .load(url)
                                 .into(ivList[i])
+                            btList[i].setImageResource(R.drawable.bt_profile_image_delete)
+
+                            btList[i].setOnClickListener {
+                                ivList[i].setImageResource(R.drawable.bg_profile_image) // TODO 삭제 로직 추가
+                            }
                         }
                     }
 
@@ -117,28 +117,42 @@ class ProfileImageEditFragment :
         }
 
 
-    private fun uploadImage(uri: Uri, priority: Int) {
+    private fun uploadImage(uri: Uri, number: Int) {
+        showLoadingDialog()
+        Toast.makeText(requireContext(), "사진 업로드 중...", Toast.LENGTH_SHORT).show()
 
-        val inputStream = requireContext().contentResolver.openInputStream(uri)
+        //val inputStream = requireContext().contentResolver.openInputStream(uri)
         val saveFile = File(filePath)
-        val bitmap : Bitmap? =null
+        var bitmap: Bitmap? = null
         try {
-            MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, uri).compress(Bitmap.CompressFormat.JPEG, 40,  saveFile.outputStream()) //TODO try catch
+            bitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, uri)
+            val matrix = Matrix()
+            matrix.postRotate(90f)
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, false)
+
+
+
+            bitmap!!.compress(Bitmap.CompressFormat.JPEG, 40, saveFile.outputStream()) //TODO try catch
         } catch (e: Exception) {
             e.printStackTrace()
             showToast(R.string.temp_error)
             return
         }
-        Log.e("uploadImage", uri.toString())
-        Log.e("uploadImage", uri.path.toString())
+
 
 
         //val file = File(path)
         val requestBody = RequestBody.create(MediaType.parse("image/*"), saveFile)
         val part = MultipartBody.Part.createFormData("image", saveFile.name, requestBody)
-        val priority = RequestBody.create(MediaType.parse("text/plain"), "$priority")
+        val priority = RequestBody.create(MediaType.parse("text/plain"), "$number")
 
-        viewModel?.patchProfileImage(priority, part)
+        viewModel?.patchProfileImage(priority, part) {
+            when (number) {
+                1 -> binding?.ivImage1?.setImageBitmap(bitmap)
+                2 -> binding?.ivImage2?.setImageBitmap(bitmap)
+                3 -> binding?.ivImage3?.setImageBitmap(bitmap)
+            }
+        }
 
 
     }
@@ -149,7 +163,6 @@ class ProfileImageEditFragment :
             this.copyTo(fileOutput)
         }
     }
-
 
 
 }
