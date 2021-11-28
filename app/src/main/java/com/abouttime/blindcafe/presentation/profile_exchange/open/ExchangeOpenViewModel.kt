@@ -15,6 +15,7 @@ import com.abouttime.blindcafe.data.server.dto.user_info.edit.info.PutProfileInf
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.GetProfileForOpenDto
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.PostProfileForOpenDto
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.PostProfileForOpenResponse
+import com.abouttime.blindcafe.domain.model.Profile
 import com.abouttime.blindcafe.domain.use_case.server.GetProfileForOpenUseCase
 import com.abouttime.blindcafe.domain.use_case.server.PostProfileForOpenUseCase
 import com.abouttime.blindcafe.domain.use_case.server.PutProfileInfoUseCase
@@ -52,6 +53,8 @@ class ExchangeOpenViewModel(
     val profileImage: LiveData<String> get() = _profileImage
 
     var partnerNickname: String? = null
+
+    var matchingId: Int? = null
 
     fun setLocation(location: String) {
         Log.e("profile edit -> setLocation", "setLocation")
@@ -227,7 +230,12 @@ class ExchangeOpenViewModel(
     }
 
     private fun moveToExchangeAcceptFragment() {
-        moveToDirections(ExchangeOpenFragmentDirections.actionExchangeOpenFragmentToExchangeAcceptFragment())
+        matchingId?.let {
+            moveToDirections(ExchangeOpenFragmentDirections.actionExchangeOpenFragmentToExchangeAcceptFragment(
+                matchingId = it
+            ))
+        }
+
     }
     private fun moveToProfileWaitFragment(partnerNickname: String, reason: String) {
         moveToDirections(ExchangeOpenFragmentDirections.actionExchangeOpenFragmentToExchangeWaitFragment(

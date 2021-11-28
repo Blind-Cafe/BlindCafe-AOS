@@ -40,6 +40,7 @@ class ExchangeOpenFragment: BaseFragment<ExchangeOpenViewModel>(R.layout.fragmen
 
     private fun initNavArgs() {
         val matchingId = args.matchingId
+        viewModel.matchingId = args.matchingId
         viewModel.getProfileForOpen(matchingId)
     }
 

@@ -219,10 +219,10 @@
     <!-- profile exchange -->
     <string name="profile_exchange_title">매칭테이블</string>
     <string name="profile_exchange_subtitle_1">72시간의 대화가 종료되었습니다.\n그 동안 %s님과의 만남이 즐거우셨나요?</string>
-    <string name="profile_exchange_subtitle_2">내 프로필을 멋지게 채우고 다은님의 프로필을 받아보세요!</string>
+    <string name="profile_exchange_subtitle_2">내 프로필을 멋지게 채우고 %s님의 프로필을 받아보세요!</string>
     <string name="profile_exchange_make_profile">프로필 작성하기</string>
     <string name="profile_exchange_location">지역 설정</string>
-    <string name="profile_exchange_bottom_description">7시간 뒤 자동으로 프로필이 발송됩니다. 프로필이 잘 완성될 수록 %s님과 대화할 수 있는 기능이 높아져요!</string>
+    <string name="profile_exchange_subtitle_3">7시간 뒤 자동으로 프로필이 발송됩니다. 프로필이 잘 완성될 수록 %s님과 대화할 수 있는 기능이 높아져요!</string>
     <string name="profile_exchange_next">프로필 작성하기</string>
     <string name="profile_exchange_edit">수정하기</string>
     <string name="profile_exchange_publish">공개하기</string>

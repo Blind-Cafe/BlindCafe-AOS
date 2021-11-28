@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View.OnClickListener" />
+
+        <import type="android.view.View" />
+
+        <import type="androidx.core.content.ContextCompat" />
+
+        <import type="java.util.List" />
+
+        <variable
+            name="viewModel"
+            type="com.abouttime.blindcafe.presentation.profile_exchange.accept.ExchangeAcceptViewModel" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black">
@@ -23,7 +41,7 @@
         android:fontFamily="@font/spoqa_han_sans_neo_bold"
         android:text="@string/profile_exchange_title"
         android:textColor="@color/white"
-        android:textSize="@dimen/font_size_16"
+        android:textSize="@dimen/font_size_15"
         app:layout_constraintBottom_toBottomOf="@id/iv_back"
         app:layout_constraintStart_toEndOf="@id/iv_back"
         app:layout_constraintTop_toTopOf="@id/iv_back" />
@@ -68,8 +86,8 @@
 
         <ImageView
             android:id="@+id/iv_add_image"
-            android:layout_width="88dp"
-            android:layout_height="88dp"
+            android:layout_width="83dp"
+            android:layout_height="83dp"
             android:layout_marginTop="12dp"
             android:src="@drawable/bt_profile_image"
             app:layout_constraintEnd_toEndOf="parent"
@@ -77,12 +95,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_profile_edit"
+            android:id="@+id/tv_profile_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/profile_exchange_make_profile"
             android:textColor="@color/gray_300"
-            android:textSize="@dimen/font_size_16"
+            android:textSize="@dimen/font_size_13"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_add_image" />
@@ -97,7 +115,7 @@
             app:layout_constraintEnd_toStartOf="@id/tv_location"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_profile_edit" />
+            app:layout_constraintTop_toBottomOf="@id/tv_profile_nickname" />
 
         <TextView
             android:id="@+id/tv_location"
@@ -111,16 +129,66 @@
             app:layout_constraintTop_toTopOf="@id/iv_location" />
 
 
+        <LinearLayout
+            android:id="@+id/ll_interests_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="17dp"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_location">
+
+            <TextView
+                android:id="@+id/tv_interest_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_15"
+                tools:text="동물" />
+
+            <TextView
+                android:id="@+id/tv_interest_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_15"
+                tools:text="스포츠" />
+
+
+            <TextView
+                android:id="@+id/tv_interest_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_15"
+                tools:text="게임" />
+
+
+        </LinearLayout>
+
+
         <View
             android:id="@+id/v_divider"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginHorizontal="8dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="18dp"
             android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_location" />
+            app:layout_constraintTop_toBottomOf="@id/ll_interests_container" />
 
         <TextView
             android:id="@id/tv_sex_value"
@@ -153,7 +221,7 @@
             android:id="@+id/tv_sex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:layout_marginBottom="18dp"
             android:text="@string/sex"
             android:textColor="@color/steel"
@@ -168,7 +236,7 @@
             android:id="@+id/tv_age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:layout_marginBottom="18dp"
             android:text="@string/age"
             android:textColor="@color/steel"
@@ -181,38 +249,20 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
+        android:id="@+id/tv_subtitle_3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="17dp"
+        android:layout_marginTop="18dp"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:lineSpacingExtra="9sp"
-        android:text="@string/profile_exchange_bottom_description"
+        android:text="@string/profile_exchange_subtitle_3"
         android:textColor="@color/gray_300"
         android:textSize="@dimen/font_size_13"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cl_profile_container" />
 
-
-    <TextView
-        android:id="@+id/tv_next"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/bg_rounding_3dp"
-        android:backgroundTint="@color/main"
-        android:fontFamily="@font/spoqa_han_sans_neo_regular"
-        android:gravity="center"
-        android:paddingHorizontal="13dp"
-        android:text="@string/profile_exchange_next"
-        android:textColor="@color/white"
-        android:textSize="@dimen/font_size_16"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="328:48"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
         android:id="@+id/tv_dismiss"
@@ -225,7 +275,6 @@
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:gravity="center"
         android:paddingVertical="13dp"
-        android:visibility="gone"
         android:text="@string/profile_exchange_dismiss"
         android:textColor="@color/gray_300"
         android:textSize="@dimen/font_size_16"
@@ -244,14 +293,15 @@
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:gravity="center"
         android:paddingVertical="13dp"
-        android:visibility="gone"
         android:text="@string/profile_exchange_accept"
         android:textColor="@color/white"
         android:textSize="@dimen/font_size_16"
         app:layout_constraintBottom_toBottomOf="@id/tv_dismiss"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_dismiss"
-        app:layout_constraintTop_toTopOf="@id/tv_dismiss"/>
+        app:layout_constraintTop_toTopOf="@id/tv_dismiss" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,6 +1,7 @@
 package com.abouttime.blindcafe.data.server.dto.user_info.partner
 
 
+import com.abouttime.blindcafe.domain.model.Profile
 import com.google.gson.annotations.SerializedName
 
 data class GetPartnerProfileDto(
@@ -22,4 +23,18 @@ data class GetPartnerProfileDto(
     val region: String?,
     @SerializedName("userId")
     val userId: Int?
-)
+) {
+
+    fun toProfile(): Profile =
+        Profile(
+            age = age,
+            sex = gender,
+            interests = interests,
+            nickname = nickname,
+            partnerNickname = partnerNickname,
+            profileImage = profileImage,
+            location = region,
+            userId = userId
+        )
+
+}

@@ -502,6 +502,11 @@
         android:name="com.abouttime.blindcafe.presentation.profile_exchange.accept.ExchangeAcceptFragment"
         android:label="ExchangeAcceptFragment"
         tools:layout="@layout/fragment_exchange_accept">
+
+        <argument android:name="matchingId"
+            app:argType="integer"/>
+
+
         <action
             android:id="@+id/exchangeAcceptFragment_to_exchangeCompleteFragment"
             app:destination="@id/exchangeCompleteFragment"

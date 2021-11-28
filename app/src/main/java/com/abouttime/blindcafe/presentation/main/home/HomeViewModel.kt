@@ -11,6 +11,7 @@ import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.ext.secondToLapseForHome
 import com.abouttime.blindcafe.data.server.dto.user_info.partner.GetPartnerProfileDto
+import com.abouttime.blindcafe.domain.model.Profile
 import com.abouttime.blindcafe.domain.use_case.server.GetHomeInfoUseCase
 import com.abouttime.blindcafe.domain.use_case.server.GetPartnerProfileUseCase
 import com.abouttime.blindcafe.domain.use_case.server.PostMatchingRequestUseCase
@@ -285,7 +286,12 @@ class HomeViewModel(
 
 
     private fun moveToExchangeAcceptFragment() {
-        moveToDirections(MainFragmentDirections.actionMainFragmentToExchangeAcceptFragment())
+        matchingId?.let {
+            moveToDirections(MainFragmentDirections.actionMainFragmentToExchangeAcceptFragment(
+                matchingId = it
+            ))
+        }
+
     }
 
     private fun moveToExchangeOpenWaitFragment(partnerNickname: String, reason: String) {
