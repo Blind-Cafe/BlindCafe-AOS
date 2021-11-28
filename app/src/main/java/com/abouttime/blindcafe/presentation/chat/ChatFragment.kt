@@ -24,9 +24,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.common.constants.LogTag.CHATTING_TAG
-import com.abouttime.blindcafe.common.ext.secondToLapseForChat
-import com.abouttime.blindcafe.common.ext.setMarginRight
-import com.abouttime.blindcafe.common.ext.setMarginTop
+import com.abouttime.blindcafe.common.ext.*
 import com.abouttime.blindcafe.common.util.DeviceUtil
 import com.abouttime.blindcafe.databinding.FragmentChatBinding
 import com.abouttime.blindcafe.domain.model.Message
@@ -62,7 +60,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     private var popupWindow: PopupWindow? = null
 
     var isCont = false
-
 
 
     private var recorder: MediaRecorder? = null
@@ -107,7 +104,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     /** init variables  **/
     private fun initNavArgs() {
         viewModel.chatRoomInfo = args.chatRoomInfo
-        viewModel.matchingId =  viewModel.chatRoomInfo.matchingId
+        viewModel.matchingId = viewModel.chatRoomInfo.matchingId
         viewModel.partnerNickname = viewModel.chatRoomInfo.nickname
         viewModel.profileImage = viewModel.chatRoomInfo.profileImage
         viewModel.drink = viewModel.chatRoomInfo.drink
@@ -118,6 +115,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
         initPartnerNciknameTextView() // 상단 닉네임 초기화
         initBackgroundColor()
+        updateIconState()
     }
 
     private fun initPartnerNciknameTextView() {
@@ -134,6 +132,32 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             binding?.clToolbarContainer?.setBackgroundColor(getColorByResId(R.color.chat_room_top_bg))
             binding?.mlInputContainer?.setBackgroundColor(getColorByResId(R.color.chat_room_bottom_bg))
         }
+    }
+
+    private fun updateIconState() {
+        if (isCont) {
+            updateIconState(true, R.color.chat_room_icon_enabled, R.color.chat_room_icon_enabled)
+        } else {
+            val startTime = viewModel?.chatRoomInfo?.startTime?.toLong()
+            startTime?.let { time ->
+                if (time.isOver48Hours()) {
+                    updateIconState(false, R.color.chat_room_icon_enabled, R.color.chat_room_icon_enabled)
+                } else if (time.isOver24Hours()) {
+                    updateIconState(false, R.color.chat_room_icon_disabled, R.color.chat_room_icon_enabled)
+                }
+            }
+        }
+    }
+
+    private fun updateIconState(isGone: Boolean, color1: Int, color2: Int) {
+        binding?.let {
+            with(it) {
+                ivBell.isGone = isGone
+                ivRecord.setColorFilter(getColorByResId(color1))
+                ivGallery.setColorFilter(getColorByResId(color2))
+            }
+        }
+
     }
 
 
@@ -160,8 +184,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                     }
                     STATE_BOUNCE_BACK -> if (oldState === STATE_DRAG_START_SIDE) {
                         // Dragging stopped -- view is starting to bounce back from the *left-end* onto natural position.
-                    }
-                    else { // i.e. (oldState == STATE_DRAG_END_SIDE)
+                    } else { // i.e. (oldState == STATE_DRAG_END_SIDE)
                         // View is starting to bounce back from the *right-end*.
                     }
                 }
@@ -389,7 +412,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     }
 
 
-
     /** Audio Message **/
     private fun observeRecorderState(fragmentChatBinding: FragmentChatBinding) =
         with(fragmentChatBinding) {
@@ -581,10 +603,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                 viewModel?.getTopic()
             }
         }
-
-
-
-
 
 
     /** BackPressButton **/
