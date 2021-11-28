@@ -80,17 +80,23 @@ class ProfileImageEditViewModel(
         }.launchIn(viewModelScope)
     }
 
-    fun deleteProfileImage(priority: Int) {
+    fun deleteProfileImage(priority: Int, callback: () -> Unit) {
         deleteProfileImageUseCase(priority).onEach { result ->
             when (result) {
                 is Resource.Loading -> {
                     showLoading()
                 }
                 is Resource.Success -> {
-
+                    callback()
+                    dismissLoading()
                 }
                 is Resource.Error -> {
-
+                    if (result.message != "400") {
+                        showToast(R.string.profile_edit_toast_alert_fill_all)
+                    } else {
+                        showToast(R.string.temp_error)
+                    }
+                    dismissLoading()
                 }
             }
         }.launchIn(viewModelScope)

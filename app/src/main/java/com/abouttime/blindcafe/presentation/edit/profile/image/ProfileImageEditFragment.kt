@@ -203,10 +203,11 @@ class ProfileImageEditFragment :
     ) {
         showLoadingDialog()
         Toast.makeText(requireContext(), "사진 삭제 중...", Toast.LENGTH_SHORT).show()
-        val priority = RequestBody.create(MediaType.parse("text/plain"), "$number")
+
+
         binding?.let {
             with(it) {
-                viewModel?.patchProfileImage(priority, null) {
+                viewModel?.deleteProfileImage(number) {
                     Toast.makeText(requireContext(), "사진 삭제 완료", Toast.LENGTH_SHORT).show()
                     when (number) {
                         1 -> {
@@ -245,8 +246,6 @@ class ProfileImageEditFragment :
                     }
                     imageCnt.plus(1)
                 }
-
-
             }
         }
 

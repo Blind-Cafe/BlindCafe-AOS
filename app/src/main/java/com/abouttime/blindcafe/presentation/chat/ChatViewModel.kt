@@ -204,17 +204,19 @@ class ChatViewModel(
             downloadAudioUrlUseCase(message).collect { result ->
                 when (result) {
                     is Resource.Loading -> {
-                        Log.e(CHATTING_TAG, "uri 오는중")
+                        showLoading()
                     }
                     is Resource.Success -> {
                         Log.e(CHATTING_TAG, "uri 도착")
                         withContext(Dispatchers.Main) {
                             callback(result.data)
                         }
+                        dismissLoading()
                     }
                     is Resource.Error -> {
                         Log.e(CHATTING_TAG, "uri 에러")
                         Log.e(CHATTING_TAG, result.message ?: "error")
+                        dismissLoading()
                     }
                 }
             }
