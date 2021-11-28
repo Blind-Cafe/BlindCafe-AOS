@@ -2,6 +2,7 @@ package com.abouttime.blindcafe.domain.repository
 
 import com.abouttime.blindcafe.common.base.BaseResponse
 import com.abouttime.blindcafe.data.server.dto.matching.*
+import com.abouttime.blindcafe.data.server.dto.matching.accept.PostAcceptMatchingDto
 import com.abouttime.blindcafe.data.server.dto.matching.report.PostReportDto
 import com.abouttime.blindcafe.data.server.dto.matching.topic.GetTopicDto
 
@@ -15,4 +16,5 @@ interface MatchingRepository {
     suspend fun getTopic(matchingId: Int): GetTopicDto?
     suspend fun postReport(report: PostReportDto): BaseResponse?
     suspend fun postCancelMatching(): BaseResponse?
+    suspend fun postAcceptMatching(matchingId: Int): PostAcceptMatchingDto?
 }

@@ -27,6 +27,7 @@ interface UserInfoRepository {
     suspend fun postDeviceToken(postDeviceTokenDto: PostDeviceTokenDto): BaseResponse?
     suspend fun putProfileInfo(putProfileInfoDto: PutProfileInfoDto): PutProfileInfoResponse?
     suspend fun getProfileImage(userId: Int): GetProfileImageDto?
+    suspend fun getMyProfileImage(): GetProfileImageDto?
     suspend fun patchProfileImage(priority: RequestBody, image: MultipartBody.Part?): Call<Unit>
     suspend fun getProfileForOpen(matchingId: Int): GetProfileForOpenDto?
     suspend fun postProfileForOpen(postProfileForOpenDto: PostProfileForOpenDto): PostProfileForOpenResponse?

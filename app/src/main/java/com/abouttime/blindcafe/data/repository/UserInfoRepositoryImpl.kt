@@ -55,6 +55,10 @@ class UserInfoRepositoryImpl(
         return userInfoApi.getProfileImage(userId)
     }
 
+    override suspend fun getMyProfileImage(): GetProfileImageDto? {
+        return userInfoApi.getMyProfileImage()
+    }
+
     override suspend fun patchProfileImage(priority: RequestBody, image: MultipartBody.Part?): Call<Unit> {
         return userInfoApi.patchProfileImage(priority, image)
     }

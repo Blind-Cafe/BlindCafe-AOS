@@ -30,10 +30,12 @@ object Retrofit {
     const val PUT_INTEREST_URL = "api/user/interest"
     const val PUT_PROFILE_INFO_URL = "api/user"
     const val PATCH_PROFILE_IMAGE_URL = "api/user/image"
-    const val GET_PROFILE_IMAGE_URL = "api/user/{userId}/image"
-    const val GET_PROFILE_FOR_OPEN = "api/matching/{matchingId}/profile"
-    const val POST_PROFILE_FOR_OPEN = "api/matching/{matchingId}/profile"
-    const val GET_PARTNER_PROFILE = "api/matching/{matchingId}/partner"
+    const val GET_PROFILE_IMAGE_URL = "api/user/{userId}/image" // 28
+    const val GET_MY_PROFILE_IMAGE_URL = "api/user/image" // 27
+    const val GET_PROFILE_FOR_OPEN_URL = "api/matching/{matchingId}/profile"
+    const val POST_PROFILE_FOR_OPEN_URL = "api/matching/{matchingId}/profile"
+    const val GET_PARTNER_PROFILE_URL = "api/matching/{matchingId}/partner"
+    const val POST_ACCEPT_URL = "api/matching/{matchingId}/partner"
 
 
     const val FCM_MESSAGE_TOPIC = "fcm_message_topic"

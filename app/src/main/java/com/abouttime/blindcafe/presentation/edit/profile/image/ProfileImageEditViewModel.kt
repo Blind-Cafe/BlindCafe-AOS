@@ -9,8 +9,7 @@ import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
-import com.abouttime.blindcafe.common.constants.PreferenceKey.USER_ID
-import com.abouttime.blindcafe.domain.use_case.server.GetProfileImageUseCase
+import com.abouttime.blindcafe.domain.use_case.server.GetMyProfileImageUseCase
 import com.abouttime.blindcafe.domain.use_case.server.PatchProfileImageUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -18,7 +17,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
 class ProfileImageEditViewModel(
-    private val getProfileImageUseCase: GetProfileImageUseCase,
+    private val getMyProfileImageUseCase: GetMyProfileImageUseCase,
     private val patchProfileImageUseCase: PatchProfileImageUseCase
 ): BaseViewModel() {
 
@@ -32,22 +31,19 @@ class ProfileImageEditViewModel(
 
 
     init {
-        val userId = getStringData(USER_ID)
-        userId?.let {
-            getProfileInfo(it.toInt())
-        }
+        getMyProfileInfo()
 
     }
 
     /** use cases **/
-    private fun getProfileInfo(userId: Int) {
-        getProfileImageUseCase(userId).onEach { result ->
+    private fun getMyProfileInfo() {
+        getMyProfileImageUseCase().onEach { result ->
             when (result) {
                 is Resource.Loading -> { showLoading() }
                 is Resource.Success -> {
                     result.data?.images?.toString()?.let { Log.e("observeImageUrlsData", it) }
 
-                    _imageUrls.value = (result.data?.images ?: listOf("", "", ""))
+                    _imageUrls.value = (result.data?.images ?: listOf())
                     dismissLoading()
                 }
                 is Resource.Error -> {

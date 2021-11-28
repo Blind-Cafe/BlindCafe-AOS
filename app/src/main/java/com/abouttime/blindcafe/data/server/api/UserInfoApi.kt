@@ -2,14 +2,15 @@ package com.abouttime.blindcafe.data.server.api
 
 import com.abouttime.blindcafe.common.base.BaseResponse
 import com.abouttime.blindcafe.common.constants.Retrofit.DELETE_ACCOUNT_URL
-import com.abouttime.blindcafe.common.constants.Retrofit.GET_PARTNER_PROFILE
-import com.abouttime.blindcafe.common.constants.Retrofit.GET_PROFILE_FOR_OPEN
+import com.abouttime.blindcafe.common.constants.Retrofit.GET_MY_PROFILE_IMAGE_URL
+import com.abouttime.blindcafe.common.constants.Retrofit.GET_PARTNER_PROFILE_URL
+import com.abouttime.blindcafe.common.constants.Retrofit.GET_PROFILE_FOR_OPEN_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_PROFILE_IMAGE_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_PROFILE_INFO_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_REPORTS_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.PATCH_PROFILE_IMAGE_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_DEVICE_TOKEN_URL
-import com.abouttime.blindcafe.common.constants.Retrofit.POST_PROFILE_FOR_OPEN
+import com.abouttime.blindcafe.common.constants.Retrofit.POST_PROFILE_FOR_OPEN_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_USER_INFO_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.PUT_PROFILE_INFO_URL
 import com.abouttime.blindcafe.data.server.dto.user_info.DeleteAccountResponse
@@ -65,6 +66,9 @@ interface UserInfoApi {
         @Path("userId") userId: Int
     ): GetProfileImageDto?
 
+    @GET(GET_MY_PROFILE_IMAGE_URL)
+    suspend fun getMyProfileImage(): GetProfileImageDto?
+
     @Multipart
     @PATCH(PATCH_PROFILE_IMAGE_URL)
     suspend fun patchProfileImage(
@@ -73,18 +77,18 @@ interface UserInfoApi {
     ): Call<Unit>
 
 
-    @GET(GET_PROFILE_FOR_OPEN)
+    @GET(GET_PROFILE_FOR_OPEN_URL)
     suspend fun getProfileForOpen(
         @Path("matchingId") matchingId: Int
     ): GetProfileForOpenDto?
 
 
-    @POST(POST_PROFILE_FOR_OPEN)
+    @POST(POST_PROFILE_FOR_OPEN_URL)
     suspend fun postProfileForOpen(
         @Body postProfileForOpenDto: PostProfileForOpenDto
     ): PostProfileForOpenResponse?
 
-    @GET(GET_PARTNER_PROFILE)
+    @GET(GET_PARTNER_PROFILE_URL)
     suspend fun getPartnerProfile(
         @Path("matchingId") matchingId: Int
     ): GetPartnerProfileDto?

@@ -5,11 +5,13 @@ import com.abouttime.blindcafe.common.constants.Retrofit.DELETE_EXIT_CHAT_ROOM_U
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_CHAT_ROOMS_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_CHAT_ROOM_INFO_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_TOPIC_URL
+import com.abouttime.blindcafe.common.constants.Retrofit.POST_ACCEPT_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_CANCEL_MATCHING_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_DRINK_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_MATCHING_REQUEST_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_REPORT_URL
 import com.abouttime.blindcafe.data.server.dto.matching.*
+import com.abouttime.blindcafe.data.server.dto.matching.accept.PostAcceptMatchingDto
 import com.abouttime.blindcafe.data.server.dto.matching.report.PostReportDto
 import com.abouttime.blindcafe.data.server.dto.matching.topic.GetTopicDto
 import retrofit2.http.*
@@ -52,6 +54,11 @@ interface MatchingApi {
 
     @POST(POST_CANCEL_MATCHING_URL)
     suspend fun postCancelMatching(): BaseResponse?
+
+    @POST(POST_ACCEPT_URL)
+    suspend fun postAcceptMatching(
+        @Path("matchingId") matchingId: Int
+    ): PostAcceptMatchingDto?
 
 
 

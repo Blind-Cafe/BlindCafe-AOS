@@ -83,14 +83,9 @@ internal val viewModelModule = module {
     /** Main - MyPage **/
     viewModel { MyPageViewModel(get()) }
     viewModel { SettingViewModel() }
-    viewModel { ProfileEditViewModel(get(), get()) }
-    viewModel { ProfileImageEditViewModel(get(), get())}
     viewModel { AccountDeleteViewModel() }
     viewModel { AccountDeleteCompleteViewModel() }
     viewModel { ReportListViewModel(get()) }
-    viewModel { InterestEditViewModel() }
-    viewModel { InterestSubEditViewModel(get(), get()) }
-
 
 
     /** Chat **/
@@ -108,6 +103,9 @@ internal val viewModelModule = module {
 
     /** Edit **/
     viewModel { LocationViewModel() }
-
+    viewModel { ProfileEditViewModel(get(), get()) }
+    viewModel { ProfileImageEditViewModel(get(), get())}
+    viewModel { InterestEditViewModel() }
+    viewModel { InterestSubEditViewModel(get(), get()) }
 
 }
