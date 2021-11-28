@@ -2,13 +2,16 @@ package com.abouttime.blindcafe.presentation.chat.rv_item.user
 
 import android.media.MediaPlayer
 import android.view.View
+import androidx.core.view.isGone
 import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.ext.millisecondToChatTime
 import com.abouttime.blindcafe.common.ext.secondToChatTime
 import com.abouttime.blindcafe.databinding.RvChatItemReceiveAudioBinding
+import com.abouttime.blindcafe.databinding.RvChatItemReceiveImageBinding
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.presentation.chat.ChatViewModel
+import com.bumptech.glide.Glide
 import com.xwray.groupie.viewbinding.BindableItem
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -17,9 +20,15 @@ import kotlinx.coroutines.launch
 class AudioReceiveItem(
     private val message: Message,
     private val viewModel: ChatViewModel,
+    private val isCont: Boolean,
+    private val nickName: String,
+    private val profileImage: String
 ) : BindableItem<RvChatItemReceiveAudioBinding>() {
 
     override fun bind(viewBinding: RvChatItemReceiveAudioBinding, position: Int) {
+
+        handleContinue(viewBinding)
+
         var isPlaying = false
         viewBinding.ivPlayController.setOnClickListener {
             viewModel.downloadAudioUrl(
@@ -66,6 +75,20 @@ class AudioReceiveItem(
         viewBinding.tvTime.text =
             message.timestamp?.seconds?.secondToChatTime()
                 ?: System.currentTimeMillis().millisecondToChatTime()
+    }
+
+    private fun handleContinue(viewBinding: RvChatItemReceiveAudioBinding) {
+        if (isCont) {
+            viewBinding.tvNickname.apply {
+                isGone = false
+                text = nickName
+            }
+            viewBinding.ivProfileImage.isGone = false
+            Glide.with(viewBinding.ivProfileImage)
+                .load(profileImage)
+                .circleCrop()
+                .into(viewBinding.ivProfileImage)
+        }
     }
 
     override fun getLayout(): Int = R.layout.rv_chat_item_receive_audio

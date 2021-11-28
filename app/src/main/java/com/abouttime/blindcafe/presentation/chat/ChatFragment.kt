@@ -292,9 +292,9 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
     private fun addMessageToPartner(message: Message) {
         when (message.type) {
-            1 -> chatAdapter.add(TextReceiveItem(message))
-            2 -> chatAdapter.add(ImageReceiveItem(message, viewModel = viewModel))
-            3 -> chatAdapter.add(AudioReceiveItem(message, viewModel = viewModel))
+            1 -> chatAdapter.add(TextReceiveItem(message, isCont = isCont,nickName = viewModel.partnerNickname ?: "",profileImage = viewModel.profileImage ?: ""))
+            2 -> chatAdapter.add(ImageReceiveItem(message, viewModel = viewModel, isCont = isCont,nickName = viewModel.partnerNickname ?: "",profileImage = viewModel.profileImage ?: ""))
+            3 -> chatAdapter.add(AudioReceiveItem(message, viewModel = viewModel, isCont = isCont,nickName = viewModel.partnerNickname ?: "",profileImage = viewModel.profileImage ?: ""))
             4 -> chatAdapter.add(TextTopicItem(message))
             5 -> chatAdapter.add(ImageTopicItem(message, viewModel = viewModel))
             6 -> chatAdapter.add(AudioTopicItem(message, viewModel = viewModel))
