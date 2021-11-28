@@ -1,6 +1,7 @@
 package com.abouttime.blindcafe.data.server.api
 
 import com.abouttime.blindcafe.common.base.BaseResponse
+import com.abouttime.blindcafe.common.constants.Retrofit
 import com.abouttime.blindcafe.common.constants.Retrofit.DELETE_ACCOUNT_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_MY_PROFILE_IMAGE_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_PARTNER_PROFILE_URL
@@ -92,5 +93,10 @@ interface UserInfoApi {
     suspend fun getPartnerProfile(
         @Path("matchingId") matchingId: Int
     ): GetPartnerProfileDto?
+
+    @DELETE(Retrofit.DELETE_PROFILE_IMAGE_URL)
+    suspend fun deleteProfileImage(
+        @Query("priority") priority: Int
+    )
 
 }

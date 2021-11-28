@@ -22,6 +22,7 @@ internal val useCaseModule = module {
     factory { GetProfileForOpenUseCase(get()) }
     factory { GetPartnerProfileUseCase(get()) }
     factory { GetMyProfileImageUseCase(get())}
+    factory { DeleteProfileImageUseCase(get()) }
 
     /** gallery **/
     factory { FetchImagesUseCase(get()) }
@@ -53,6 +54,8 @@ internal val useCaseModule = module {
     factory { GetTopicUseCase(get()) }
     factory { PostReportUseCase(get()) }
     factory { PostCancelMatchingUseCase(get()) }
+    factory { PostAcceptMatchingUseCase(get()) }
+    factory { DeleteDismissMatchingUseCase(get()) }
 
 
     /** interests **/

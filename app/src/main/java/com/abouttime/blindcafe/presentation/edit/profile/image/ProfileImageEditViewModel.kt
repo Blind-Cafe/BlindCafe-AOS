@@ -9,6 +9,7 @@ import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
+import com.abouttime.blindcafe.domain.use_case.server.DeleteProfileImageUseCase
 import com.abouttime.blindcafe.domain.use_case.server.GetMyProfileImageUseCase
 import com.abouttime.blindcafe.domain.use_case.server.PatchProfileImageUseCase
 import kotlinx.coroutines.flow.launchIn
@@ -18,7 +19,8 @@ import okhttp3.RequestBody
 
 class ProfileImageEditViewModel(
     private val getMyProfileImageUseCase: GetMyProfileImageUseCase,
-    private val patchProfileImageUseCase: PatchProfileImageUseCase
+    private val patchProfileImageUseCase: PatchProfileImageUseCase,
+    private val deleteProfileImageUseCase: DeleteProfileImageUseCase
 ): BaseViewModel() {
 
 
@@ -58,6 +60,7 @@ class ProfileImageEditViewModel(
         patchProfileImageUseCase(priority, image).onEach { result ->
             when (result) {
                 is Resource.Loading -> {
+                    showLoading()
                 }
                 is Resource.Success -> {
                    // showToast(R.string.profile_image_edit_toast_success)
@@ -72,6 +75,22 @@ class ProfileImageEditViewModel(
                         showToast(R.string.temp_error)
                     }
                     dismissLoading()
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    fun deleteProfileImage(priority: Int) {
+        deleteProfileImageUseCase(priority).onEach { result ->
+            when (result) {
+                is Resource.Loading -> {
+                    showLoading()
+                }
+                is Resource.Success -> {
+
+                }
+                is Resource.Error -> {
+
                 }
             }
         }.launchIn(viewModelScope)

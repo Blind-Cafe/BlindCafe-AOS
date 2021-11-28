@@ -74,4 +74,8 @@ class UserInfoRepositoryImpl(
     override suspend fun getPartnerProfile(matchingId: Int): GetPartnerProfileDto? {
         return userInfoApi.getPartnerProfile(matchingId)
     }
+
+    override suspend fun deleteProfileImage(priority: Int) {
+        userInfoApi.deleteProfileImage(priority)
+    }
 }

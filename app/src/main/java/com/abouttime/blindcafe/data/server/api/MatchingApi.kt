@@ -1,8 +1,9 @@
 package com.abouttime.blindcafe.data.server.api
 
 import com.abouttime.blindcafe.common.base.BaseResponse
-import com.abouttime.blindcafe.common.constants.Retrofit.DELETE_DISMISS_MATCHING
+import com.abouttime.blindcafe.common.constants.Retrofit.DELETE_DISMISS_MATCHING_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.DELETE_EXIT_CHAT_ROOM_URL
+import com.abouttime.blindcafe.common.constants.Retrofit.DELETE_PROFILE_IMAGE_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_CHAT_ROOMS_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_CHAT_ROOM_INFO_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_TOPIC_URL
@@ -61,15 +62,10 @@ interface MatchingApi {
         @Path("matchingId") matchingId: Int
     ): PostAcceptMatchingDto?
 
-    @DELETE(DELETE_DISMISS_MATCHING) // 바디 없음 주의
+    @DELETE(DELETE_DISMISS_MATCHING_URL) // 바디 없음 주의
     suspend fun deleteDismissMatching(
         @Path("matchingId") matchingId: Int,
         @Query("reason") reason: Int
     )
-
-
-
-
-
 
 }
