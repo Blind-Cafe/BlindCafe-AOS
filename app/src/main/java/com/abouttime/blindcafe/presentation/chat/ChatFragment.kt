@@ -103,12 +103,15 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
     /** init variables  **/
     private fun initNavArgs() {
-        viewModel.matchingId = args.matchingId
-        viewModel.startTime = args.startTime
-        viewModel.partnerNickname = args.partnerNickname
-        viewModel.matchingId?.let { id ->
-            viewModel.getChatRoomInfo(id)
-        }
+        viewModel.chatRoomInfo = args.chatRoomInfo
+        viewModel.matchingId =  viewModel.chatRoomInfo.matchingId
+        viewModel.partnerNickname = viewModel.chatRoomInfo.nickname
+        viewModel.profileImage = viewModel.chatRoomInfo.profileImage
+        viewModel.drink = viewModel.chatRoomInfo.drink
+        viewModel.commonInterest = viewModel.chatRoomInfo.interest
+        viewModel.startTime = viewModel.chatRoomInfo.startTime
+        viewModel.interest = viewModel.chatRoomInfo.interest
+
         initPartnerNciknameTextView() // 상단 닉네임 초기화
     }
 
@@ -157,8 +160,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                 val heightDiff = root.rootView.height - root.height
                 Log.e("asdf", heightDiff.toString())
                 if (heightDiff > 100 && !isScrolling) {
-                    scrollRvToLastPosition(fragmentChatBinding
-                    )
+                    scrollRvToLastPosition(fragmentChatBinding)
                 }
             }
             rvChatContainer.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -192,7 +194,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         viewModel?.matchingId?.let {
             viewModel.subscribeMessages(it.toString())
         } ?: kotlin.run {
-            Log.e(CHATTING_TAG, "myNickname is null")
+            Log.e(CHATTING_TAG, "matchingId is null")
         }
     }
 

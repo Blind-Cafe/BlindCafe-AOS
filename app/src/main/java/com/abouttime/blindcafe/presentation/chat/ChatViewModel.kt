@@ -16,6 +16,7 @@ import com.abouttime.blindcafe.common.constants.PreferenceKey.USER_ID
 import com.abouttime.blindcafe.common.util.SingleLiveData
 import com.abouttime.blindcafe.data.server.dto.matching.topic.GetTopicDto
 import com.abouttime.blindcafe.data.server.dto.notification.PostFcmDto
+import com.abouttime.blindcafe.domain.model.ChatRoom
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.use_case.firebase.*
 import com.abouttime.blindcafe.domain.use_case.server.GetChatRoomInfoUseCase
@@ -40,7 +41,6 @@ class ChatViewModel(
     private val downloadImageUrlUseCase: DownloadImageUrlUseCase,
     private val downloadAudioUrlUseCase: DownloadAudioUrlUseCase,
     private val fcmUseCase: PostFcmUseCase,
-    private val getChatRoomInfoUseCase: GetChatRoomInfoUseCase,
     private val getTopicUseCase: GetTopicUseCase,
 ) : BaseViewModel() {
 
@@ -64,6 +64,7 @@ class ChatViewModel(
     var myNickname = getStringData(NICKNAME)
 
     /** room info **/
+    lateinit var chatRoomInfo: ChatRoom
     var matchingId: Int? = null
     var partnerNickname: String? = null
     var profileImage: String? = null
@@ -197,29 +198,7 @@ class ChatViewModel(
         }
 
 
-    fun getChatRoomInfo(mId: Int) {
-        getChatRoomInfoUseCase(mId).onEach { result ->
-            when (result) {
-                is Resource.Loading -> {
-                }
-                is Resource.Success -> {
-                    with(result.data) {
-                        matchingId = matchingId
-                        partnerNickname = partnerNickname
-                        profileImage = profileImage
-                        drink = drink
-                        commonInterest = interest
-                        startTime = startTime
-                        interest = interest
-                    }
-                }
-                is Resource.Error -> {
-                }
-            }
 
-        }.launchIn(viewModelScope)
-
-    }
 
 
     fun getTopic() {

@@ -1,6 +1,7 @@
 package com.abouttime.blindcafe.data.server.dto.matching
 
 
+import com.abouttime.blindcafe.domain.model.ChatRoom
 import com.google.gson.annotations.SerializedName
 
 data class GetChatRoomInfoDto(
@@ -16,4 +17,16 @@ data class GetChatRoomInfoDto(
     val startTime: String?,
     @SerializedName("interest")
     val interest: String?
-)
+) {
+
+    fun toChatRoom(): ChatRoom =
+        ChatRoom(
+            matchingId = matchingId,
+            nickname = nickname,
+            profileImage = profileImage,
+            drink = drink,
+            startTime = startTime,
+            interest = interest
+        )
+
+}

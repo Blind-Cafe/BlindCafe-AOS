@@ -28,7 +28,7 @@ class ExchangeDismissViewModel: BaseViewModel() {
             ExchangeDismissFragmentDirections.actionExchangeDismissFragmentToConfirmDialogFragment(
                 id = R.string.profile_dismiss_confirm_title,
                 title = v.resources.getString(R.string.profile_dismiss_confirm_title),
-                subtitle = v.resources.getString(R.string.profile_dismiss_confirm_subtitle),
+                subtitle = v.resources.getString(R.string.profile_dismiss_confirm_subtitle).format("닉네임"), // TODO 닉네임 넣어
                 no = v.resources.getString(R.string.profile_dismiss_confirm_no),
                 yes = v.resources.getString(R.string.profile_dismiss_confirm_yes)
             )

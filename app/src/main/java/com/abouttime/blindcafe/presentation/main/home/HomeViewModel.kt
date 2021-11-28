@@ -11,7 +11,9 @@ import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.ext.secondToLapseForHome
 import com.abouttime.blindcafe.data.server.dto.user_info.partner.GetPartnerProfileDto
+import com.abouttime.blindcafe.domain.model.ChatRoom
 import com.abouttime.blindcafe.domain.model.Profile
+import com.abouttime.blindcafe.domain.use_case.server.GetChatRoomInfoUseCase
 import com.abouttime.blindcafe.domain.use_case.server.GetHomeInfoUseCase
 import com.abouttime.blindcafe.domain.use_case.server.GetPartnerProfileUseCase
 import com.abouttime.blindcafe.domain.use_case.server.PostMatchingRequestUseCase
@@ -34,6 +36,7 @@ class HomeViewModel(
     private val getHomeInfoUseCase: GetHomeInfoUseCase,
     private val postMatchingRequestUseCase: PostMatchingRequestUseCase,
     private val getPartnerProfileUseCase: GetPartnerProfileUseCase,
+    private val getChatRoomInfoUseCase: GetChatRoomInfoUseCase
 ) : BaseViewModel() {
     private val _homeStatusCode: MutableLiveData<Int> = MutableLiveData<Int>(-1)
     val homeStatusCode: LiveData<Int> get() = _homeStatusCode
@@ -126,6 +129,26 @@ class HomeViewModel(
         }
     }
 
+    private fun getChatRoomInfo(matchingId: Int) {
+        getChatRoomInfoUseCase(matchingId).onEach { result ->
+            when (result) {
+                is Resource.Loading -> {
+                    showLoading()
+                }
+                is Resource.Success -> {
+                    result.data?.toChatRoom()?.let { cr ->
+                        moveToChatFragment(cr)
+                    }
+
+                   dismissLoading()
+                }
+                is Resource.Error -> {
+                    dismissLoading()
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
     /** handler **/
     private fun handleGetPartnerProfileDto(dto: GetPartnerProfileDto) {
         if (dto.fill == true) {
@@ -140,11 +163,9 @@ class HomeViewModel(
                     reason = "프로필 작성"
                 )
             }
-
-
-
         }
     }
+
 
 
     /** mapping status **/
@@ -188,12 +209,8 @@ class HomeViewModel(
                 }
             }
             3 -> { // 매칭 + 음료선택 완료
-                if (matchingId != null && startTime != null && partnerNickname != null) {
-                    moveToChatFragment(
-                        matchingId = matchingId!!,
-                        startTime = startTime!!,
-                        partnerNickname = partnerNickname!!
-                    )
+                matchingId?.let { id ->
+                    getChatRoomInfo(id)
                 }
             }
             4 -> {
@@ -230,11 +247,9 @@ class HomeViewModel(
 
 
     /** navigation **/
-    private fun moveToChatFragment(matchingId: Int, startTime: String, partnerNickname: String) {
+    private fun moveToChatFragment(chatRoom: ChatRoom) {
         moveToDirections(MainFragmentDirections.actionMainFragmentToChatFragment(
-            matchingId = matchingId,
-            startTime = startTime,
-            partnerNickname = partnerNickname
+            chatRoom
         ))
     }
 

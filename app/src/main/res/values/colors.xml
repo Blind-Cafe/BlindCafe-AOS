@@ -60,4 +60,7 @@
 
     <color name="home_notification_background">#48484a</color>
 
+    <color name="matching_room_background">#474747</color>
+
+
 </resources>

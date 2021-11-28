@@ -94,7 +94,6 @@ class ProfileImageEditFragment :
             viewModel?.let {
                 Log.d("observeImageUrlsData", "viewModel is not null")
                 val ivList = listOf(ivImage1, ivImage2, ivImage3)
-                val btList = listOf(ivImageAdd1, ivImageAdd2, ivImageAdd3)
                 viewModel?.imageUrls?.observe(viewLifecycleOwner) { urls ->
 
                     Log.e("observeImageUrlsData", urls.toString())
@@ -103,11 +102,6 @@ class ProfileImageEditFragment :
                             Glide.with(requireContext())
                                 .load(url)
                                 .into(ivList[i])
-                            btList[i].setImageResource(R.drawable.bt_profile_image_delete)
-
-                            btList[i].setOnClickListener {
-                                ivList[i].setImageResource(R.drawable.bg_profile_image) // TODO 삭제 로직 추가
-                            }
                         }
                     }
 

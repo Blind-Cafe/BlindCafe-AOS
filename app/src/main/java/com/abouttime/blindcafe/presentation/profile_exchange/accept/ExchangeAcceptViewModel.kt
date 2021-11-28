@@ -49,9 +49,10 @@ class ExchangeAcceptViewModel(
 
     /** onClick **/
     fun onClickDismissButton() {
-
+        /** 거절이유 화면으로 이동 **/
     }
     fun onClickAcceptButton() {
+        /** 30 번 api 호출 **/
 
     }
     fun onClickProfileImage() {
@@ -61,9 +62,13 @@ class ExchangeAcceptViewModel(
     }
 
     /** navigate **/
-    fun moveToAcceptImageDialogFragment(userId: Int) {
+    private fun moveToAcceptImageDialogFragment(userId: Int) {
         moveToDirections(ExchangeAcceptFragmentDirections.actionExchangeAcceptFragmentToAcceptImageDialogFragment(
             partnerUserId = userId
         ))
+    }
+
+    private fun moveToDismissFragment(matchingId: Int) {
+        moveToDirections(ExchangeAcceptFragmentDirections.exchangeAcceptFragmentToExchangeDismissFragment())
     }
 }

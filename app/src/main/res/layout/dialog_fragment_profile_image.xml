@@ -7,6 +7,7 @@
     android:background="@color/transparent">
 
 
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_image_container"
         android:layout_width="214dp"
@@ -32,5 +33,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/vp_image_container"
         app:selectedDotColor="@color/main" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bt_close"
+        app:layout_constraintTop_toTopOf="@id/vp_image_container"
+        android:elevation="10dp"
+        app:layout_constraintStart_toStartOf="@id/vp_image_container"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,7 @@ import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NICKNAME
 import com.abouttime.blindcafe.data.server.dto.matching.PostDrinkDto
+import com.abouttime.blindcafe.domain.model.ChatRoom
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.use_case.firebase.SendMessageUseCase
 import com.abouttime.blindcafe.domain.use_case.server.GetChatRoomInfoUseCase
@@ -23,8 +24,8 @@ import kotlinx.coroutines.launch
 class CoffeeOrderViewModel(
     private val postDrinkUseCase: PostDrinkUseCase,
     private val sendMessageUseCase: SendMessageUseCase,
-    private val getChatRoomInfoUseCase: GetChatRoomInfoUseCase
-): BaseViewModel() {
+    private val getChatRoomInfoUseCase: GetChatRoomInfoUseCase,
+) : BaseViewModel() {
     private val _nextButton: MutableLiveData<Boolean> = MutableLiveData(false)
     val nextButton: LiveData<Boolean> get() = _nextButton
 
@@ -87,6 +88,7 @@ class CoffeeOrderViewModel(
     fun updateNextButton() {
         _nextButton.value = canClickNextButton()
     }
+
     private fun canClickNextButton(): Boolean {
         for (i in isSelected.indices) {
             if (isSelected[i]) {
@@ -97,31 +99,32 @@ class CoffeeOrderViewModel(
     }
 
 
+    /** use cases **/
     private fun postDrink() {
         matchingId?.let { mId ->
             currentSelect?.let { drink ->
                 postDrinkUseCase(mId, PostDrinkDto(drink)).onEach { response ->
                     when (response) {
                         is Resource.Loading -> {
-                            Log.d(RETROFIT_TAG, "Loading")
+                            showLoading()
                         }
                         is Resource.Success -> {
-                            Log.d(RETROFIT_TAG, response.data.toString())
+
                             response.data?.startTime?.let { time ->
                                 startTime = time
                             }
                             matchingId?.let { roomUid ->
                                 getChatRoomInfo(roomUid)
                             }
+                            dismissLoading()
                         }
                         is Resource.Error -> {
                             Log.d(RETROFIT_TAG, response.message.toString())
                             showToast(R.string.toast_check_internet)
+                            dismissLoading()
                         }
                     }
                 }.launchIn(viewModelScope)
-            } ?: kotlin.run {
-                Log.d(RETROFIT_TAG, "currentSelect 가 null 입니다.")
             }
         } ?: kotlin.run {
             Log.d(RETROFIT_TAG, "matchingId 가 null 입니다.")
@@ -130,7 +133,7 @@ class CoffeeOrderViewModel(
 
     }
 
-    fun getChatRoomInfo(mId: Int) {
+    private fun getChatRoomInfo(mId: Int) {
         getChatRoomInfoUseCase(mId).onEach { result ->
             when (result) {
                 is Resource.Loading -> {
@@ -138,12 +141,9 @@ class CoffeeOrderViewModel(
                 is Resource.Success -> {
                     result.data?.let { dto ->
                         matchingId?.let { mId ->
-                            Log.e("drink", "${dto.drink} 0")
 
-                            Log.e("drink", "${dto.drink} 1")
                             if (dto.drink == "미입력") {
 
-                                Log.e("drink", "${dto.drink} 2")
                                 sendDescriptionMessage(
                                     Message(
                                         contents = "매칭에 성공하였습니다.\n간단한 인사로 반갑게 맞아주세요",
@@ -151,7 +151,7 @@ class CoffeeOrderViewModel(
                                         type = 7
                                     )
                                 )
-                                Log.e("drink", "${dto.drink} 3")
+
                                 sendDescriptionMessage(
                                     Message(
                                         contents = "%s님과 %s님의 공통 관심사는 %s 입니다.".format(
@@ -163,7 +163,6 @@ class CoffeeOrderViewModel(
                                         type = 7
                                     )
                                 )
-                                Log.e("drink", "${dto.drink} 4")
                             }
                         }
                         this@CoffeeOrderViewModel.matchingId = dto.matchingId
@@ -187,16 +186,8 @@ class CoffeeOrderViewModel(
                                 roomUid = id.toString()
                             )
                         )
-
-
-                        startTime?.let { time ->
-                            partnerNickname?.let { pn ->
-                                moveToChatFragment(
-                                    matchingId = mId,
-                                    startTime = time,
-                                    partnerNickname = pn
-                                )
-                            }
+                        result.data?.toChatRoom()?.let { cr ->
+                            moveToChatFragment(cr)
                         }
 
                     }
@@ -210,7 +201,7 @@ class CoffeeOrderViewModel(
 
     }
 
-    fun sendDescriptionMessage(message: Message) = viewModelScope.launch(Dispatchers.IO) {
+    private fun sendDescriptionMessage(message: Message) = viewModelScope.launch(Dispatchers.IO) {
         sendMessageUseCase(message).onEach { result ->
             when (result) {
                 is Resource.Loading -> {
@@ -237,11 +228,9 @@ class CoffeeOrderViewModel(
     }
 
 
-        private fun moveToChatFragment(matchingId: Int, startTime: String, partnerNickname: String) {
+    private fun moveToChatFragment(chatRoomInfo: ChatRoom) {
         moveToDirections(CoffeeOrderFragmentDirections.actionCoffeeOrderFragmentToChatFragment(
-            matchingId = matchingId,
-            startTime = startTime,
-            partnerNickname = partnerNickname
+            chatRoomInfo
         ))
     }
 

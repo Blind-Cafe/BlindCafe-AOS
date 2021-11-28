@@ -36,7 +36,6 @@ import com.abouttime.blindcafe.presentation.profile_exchange.accept.ExchangeAcce
 import com.abouttime.blindcafe.presentation.profile_exchange.complete.ExchangeCompleteViewModel
 import com.abouttime.blindcafe.presentation.profile_exchange.dismiss.ExchangeDismissViewModel
 import com.abouttime.blindcafe.presentation.edit.location.LocationViewModel
-import com.abouttime.blindcafe.presentation.main.chat_list.matching.MatchingViewModel
 import com.abouttime.blindcafe.presentation.profile_exchange.open.ExchangeOpenViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -71,7 +70,7 @@ internal val viewModelModule = module {
     viewModel { MainViewModel(get()) }
 
     /** Main - Home **/
-    viewModel { HomeViewModel(get(), get(), get()) }
+    viewModel { HomeViewModel(get(), get(), get(), get()) }
     viewModel { CoffeeOrderViewModel(get(), get(), get()) }
     viewModel { ExitViewModel() }
 
@@ -80,7 +79,6 @@ internal val viewModelModule = module {
 
     /** Main - ChatList **/
     viewModel { ChatListViewModel(get()) }
-    viewModel { MatchingViewModel() }
 
     /** Main - MyPage **/
     viewModel { MyPageViewModel(get()) }
@@ -96,7 +94,7 @@ internal val viewModelModule = module {
 
 
     /** Chat **/
-    viewModel { ChatViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get(), get()) }
+    viewModel { ChatViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
     viewModel { GalleryViewModel(get()) }
     viewModel { QuitReasonViewModel() }
     viewModel { ReportReasonViewModel(get()) }

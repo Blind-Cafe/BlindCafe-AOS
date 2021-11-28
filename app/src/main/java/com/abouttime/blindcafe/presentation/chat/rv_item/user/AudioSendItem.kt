@@ -24,11 +24,12 @@ class AudioSendItem(
             viewModel.downloadAudioUrl(
                 message = message,
                 callback = { uri ->
-                    viewBinding.root.isClickable = false
+                    viewBinding.lpiProgress.isClickable = false
 
 
                     val mediaPlayer = MediaPlayer()
                     mediaPlayer.setDataSource(uri.toString())
+
                     mediaPlayer.setOnPreparedListener { player ->
                         viewBinding.ivPlayController.setImageResource(R.drawable.bt_pause)
                         viewBinding.tvAudioTime.startCountUp()
@@ -44,13 +45,15 @@ class AudioSendItem(
                             }
                         }
                     }
+
+
                     mediaPlayer.setOnCompletionListener { player ->
                         viewBinding.ivPlayController.setImageResource(R.drawable.bt_play)
                         viewBinding.tvAudioTime.stopCountUp()
                         viewBinding.tvAudioTime.text = "00:00"
                         viewBinding.lpiProgress.progress = 0
                         isPlaying = false
-                        viewBinding.root.isClickable = true
+                        viewBinding.lpiProgress.isClickable = true
                         mediaPlayer.release()
                     }
 
@@ -67,6 +70,9 @@ class AudioSendItem(
             message.timestamp?.seconds?.secondToChatTime()
                 ?: System.currentTimeMillis().millisecondToChatTime()
 
+
+    }
+    private fun startPlay(viewBinding: RvChatItemSendAudioBinding, url: String) {
 
     }
 

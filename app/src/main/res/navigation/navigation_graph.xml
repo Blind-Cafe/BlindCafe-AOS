@@ -182,13 +182,7 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_mainFragment_to_matchingFragment"
-            app:destination="@id/matchingFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+
     </fragment>
     <fragment
         android:id="@+id/ruleFragment"
@@ -273,19 +267,10 @@
         tools:layout="@layout/fragment_chat">
 
         <argument
-            android:name="matchingId"
-            app:argType="integer"
-            app:nullable="false" />
-
-        <argument
-            android:name="startTime"
-            app:argType="string"
-            app:nullable="false" />
-
-        <argument
-            android:name="partnerNickname"
-            app:argType="string"
-            app:nullable="false" />
+            android:name="chatRoomInfo"
+            app:argType="com.abouttime.blindcafe.domain.model.ChatRoom"
+            app:nullable="false"
+            />
 
         <action
             android:id="@+id/action_chatFragment_to_quitReasonDialogFragment"
@@ -719,11 +704,7 @@
 
 
     </fragment>
-    <fragment
-        android:id="@+id/matchingFragment"
-        tools:layout="@layout/fragment_matching"
-        android:name="com.abouttime.blindcafe.presentation.main.chat_list.matching.MatchingFragment"
-        android:label="MatchingFragment" />
+
     <fragment
         tools:layout="@layout/dialog_fragment_profile_image"
         android:id="@+id/acceptImageDialogFragment"
