@@ -95,7 +95,7 @@ internal val viewModelModule = module {
     viewModel { ReportReasonViewModel(get()) }
 
     /** Profile-Exchange **/
-    viewModel { ExchangeAcceptViewModel(get()) }
+    viewModel { ExchangeAcceptViewModel(get(), get()) }
     viewModel { ExchangeCompleteViewModel() }
     viewModel { ExchangeDismissViewModel() }
     viewModel { ExchangeOpenViewModel(get(), get()) }

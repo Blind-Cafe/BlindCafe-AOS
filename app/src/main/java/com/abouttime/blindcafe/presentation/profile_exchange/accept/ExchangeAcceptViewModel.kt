@@ -7,11 +7,13 @@ import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.domain.model.Profile
 import com.abouttime.blindcafe.domain.use_case.server.GetPartnerProfileUseCase
+import com.abouttime.blindcafe.domain.use_case.server.PostAcceptMatchingUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 class ExchangeAcceptViewModel(
-    private val getPartnerProfileUseCase: GetPartnerProfileUseCase
+    private val getPartnerProfileUseCase: GetPartnerProfileUseCase,
+    private val postAcceptMatchingUseCase: PostAcceptMatchingUseCase
 ): BaseViewModel() {
 
     private val _partnerProfile = MutableLiveData<Profile>()
@@ -43,6 +45,12 @@ class ExchangeAcceptViewModel(
 
         }.launchIn(viewModelScope)
 
+    }
+
+    fun postAcceptMatching(matchingId: Int) {
+        postAcceptMatchingUseCase(matchingId).onEach {
+
+        }.launchIn(viewModelScope)
     }
 
 
