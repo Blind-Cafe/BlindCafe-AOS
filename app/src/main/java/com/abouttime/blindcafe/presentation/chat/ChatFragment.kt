@@ -221,9 +221,11 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                         // 페이지네이션 코드
                         isScrolling = true
                         viewModel?.matchingId?.let { id ->
-                            val time = timeStampList.last()
-                            Log.e("paging", "재요청 $time")
-                            viewModel?.receivePagedMessages(id.toString(), time)
+                            if (timeStampList.isNotEmpty()) {
+                                val time = timeStampList.last()
+                                Log.e("paging", "재요청 $time")
+                                viewModel?.receivePagedMessages(id.toString(), time)
+                            }
                         }
                     }
                     STATE_DRAG_END_SIDE -> {

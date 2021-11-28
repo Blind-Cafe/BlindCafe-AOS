@@ -1,11 +1,12 @@
 package com.abouttime.blindcafe.data.server.api
 
 import com.abouttime.blindcafe.common.base.BaseResponse
+import com.abouttime.blindcafe.common.constants.Retrofit.DELETE_DISMISS_MATCHING
 import com.abouttime.blindcafe.common.constants.Retrofit.DELETE_EXIT_CHAT_ROOM_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_CHAT_ROOMS_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_CHAT_ROOM_INFO_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_TOPIC_URL
-import com.abouttime.blindcafe.common.constants.Retrofit.POST_ACCEPT_URL
+import com.abouttime.blindcafe.common.constants.Retrofit.POST_ACCEPT_MATCHING_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_CANCEL_MATCHING_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_DRINK_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_MATCHING_REQUEST_URL
@@ -55,10 +56,18 @@ interface MatchingApi {
     @POST(POST_CANCEL_MATCHING_URL)
     suspend fun postCancelMatching(): BaseResponse?
 
-    @POST(POST_ACCEPT_URL)
+    @POST(POST_ACCEPT_MATCHING_URL)
     suspend fun postAcceptMatching(
         @Path("matchingId") matchingId: Int
     ): PostAcceptMatchingDto?
+
+    @DELETE(DELETE_DISMISS_MATCHING) // 바디 없음 주의
+    suspend fun deleteDismissMatching(
+        @Path("matchingId") matchingId: Int,
+        @Query("reason") reason: Int
+    )
+
+
 
 
 
