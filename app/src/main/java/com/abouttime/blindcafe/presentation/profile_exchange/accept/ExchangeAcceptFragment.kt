@@ -18,7 +18,11 @@ class ExchangeAcceptFragment: BaseFragment<ExchangeAcceptViewModel>(R.layout.fra
         super.onViewCreated(view, savedInstanceState)
         val fragmentExchangeAcceptBinding = FragmentExchangeAcceptBinding.bind(view)
         binding = fragmentExchangeAcceptBinding
+        binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
+
         initArgs()
+        observeProfileData(fragmentExchangeAcceptBinding)
     }
 
     private fun initArgs() {
@@ -28,7 +32,7 @@ class ExchangeAcceptFragment: BaseFragment<ExchangeAcceptViewModel>(R.layout.fra
 
     @SuppressLint("SetTextI18n")
     private fun observeProfileData(fragmentExchangeAcceptBinding: FragmentExchangeAcceptBinding) = with(fragmentExchangeAcceptBinding) {
-        viewModel.partnerProfile.observe(viewLifecycleOwner) { profile ->
+        viewModel?.partnerProfile?.observe(viewLifecycleOwner) { profile ->
             profile.nickname?.let { nick ->
                 tvSubtitle1.text  = getString(R.string.profile_exchange_subtitle_1).format(nick)
                 tvSubtitle2.text  = getString(R.string.profile_exchange_subtitle_2).format(nick)

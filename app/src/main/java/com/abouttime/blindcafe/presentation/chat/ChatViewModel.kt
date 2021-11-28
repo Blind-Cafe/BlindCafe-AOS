@@ -313,7 +313,7 @@ class ChatViewModel(
     /** navigate **/
     fun moveToQuitDialogFragment() {
         matchingId?.let {
-            moveToDirections(ChatFragmentDirections.actionMatchingFragmentToQuitReasonDialogFragment(
+            moveToDirections(ChatFragmentDirections.actionChatFragmentToQuitReasonDialogFragment(
                 matchingId = it
             ))
         } ?: kotlin.run {
@@ -323,7 +323,7 @@ class ChatViewModel(
 
     fun moveToReportDialogFragment() {
         matchingId?.let {
-            moveToDirections(ChatFragmentDirections.actionMatchingFragmentToReportReasonDialogFragment(
+            moveToDirections(ChatFragmentDirections.actionChatFragmentToReportReasonDialogFragment(
                 matchingId = it
             ))
         } ?: kotlin.run {

@@ -253,9 +253,6 @@ class ExchangeOpenViewModel(
     }
 
 
-    fun onClickEditProfileButton() {
-
-    }
 
 
 }

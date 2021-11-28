@@ -36,6 +36,7 @@ import com.abouttime.blindcafe.presentation.profile_exchange.accept.ExchangeAcce
 import com.abouttime.blindcafe.presentation.profile_exchange.complete.ExchangeCompleteViewModel
 import com.abouttime.blindcafe.presentation.profile_exchange.dismiss.ExchangeDismissViewModel
 import com.abouttime.blindcafe.presentation.edit.location.LocationViewModel
+import com.abouttime.blindcafe.presentation.main.chat_list.matching.MatchingViewModel
 import com.abouttime.blindcafe.presentation.profile_exchange.open.ExchangeOpenViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -79,6 +80,7 @@ internal val viewModelModule = module {
 
     /** Main - ChatList **/
     viewModel { ChatListViewModel(get()) }
+    viewModel { MatchingViewModel() }
 
     /** Main - MyPage **/
     viewModel { MyPageViewModel(get()) }
@@ -100,7 +102,7 @@ internal val viewModelModule = module {
     viewModel { ReportReasonViewModel(get()) }
 
     /** Profile-Exchange **/
-    viewModel { ExchangeAcceptViewModel() }
+    viewModel { ExchangeAcceptViewModel(get()) }
     viewModel { ExchangeCompleteViewModel() }
     viewModel { ExchangeDismissViewModel() }
     viewModel { ExchangeOpenViewModel(get(), get()) }

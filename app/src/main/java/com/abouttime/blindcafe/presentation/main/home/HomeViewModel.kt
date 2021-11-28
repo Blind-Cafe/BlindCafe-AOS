@@ -231,7 +231,7 @@ class HomeViewModel(
 
     /** navigation **/
     private fun moveToChatFragment(matchingId: Int, startTime: String, partnerNickname: String) {
-        moveToDirections(MainFragmentDirections.actionMainFragmentToMatchingFragment(
+        moveToDirections(MainFragmentDirections.actionMainFragmentToChatFragment(
             matchingId = matchingId,
             startTime = startTime,
             partnerNickname = partnerNickname

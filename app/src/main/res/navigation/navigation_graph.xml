@@ -92,8 +92,8 @@
         android:label="fragment_main"
         tools:layout="@layout/fragment_main">
         <action
-            android:id="@+id/action_mainFragment_to_matchingFragment"
-            app:destination="@id/matchingFragment"
+            android:id="@+id/action_mainFragment_to_chatFragment"
+            app:destination="@id/chatFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -182,6 +182,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_mainFragment_to_matchingFragment"
+            app:destination="@id/matchingFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/ruleFragment"
@@ -260,9 +267,9 @@
             app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
-        android:id="@+id/matchingFragment"
+        android:id="@+id/chatFragment"
         android:name="com.abouttime.blindcafe.presentation.chat.ChatFragment"
-        android:label="MatchingFragment"
+        android:label="ChatFragment"
         tools:layout="@layout/fragment_chat">
 
         <argument
@@ -281,7 +288,7 @@
             app:nullable="false" />
 
         <action
-            android:id="@+id/action_matchingFragment_to_quitReasonDialogFragment"
+            android:id="@+id/action_chatFragment_to_quitReasonDialogFragment"
             app:destination="@id/quitReasonDialogFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
@@ -289,7 +296,7 @@
             app:popExitAnim="@anim/slide_out_right" />
 
         <action
-            android:id="@+id/action_matchingFragment_to_reportReasonDialogFragment"
+            android:id="@+id/action_chatFragment_to_reportReasonDialogFragment"
             app:destination="@id/reportReasonDialogFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
@@ -324,8 +331,8 @@
             app:nullable="true" />
 
         <action
-            android:id="@+id/action_coffeeOrderFragment_to_matchingFragment"
-            app:destination="@id/matchingFragment"
+            android:id="@+id/action_coffeeOrderFragment_to_chatFragment"
+            app:destination="@id/chatFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -521,6 +528,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_exchangeAcceptFragment_to_acceptImageDialogFragment"
+            app:destination="@id/acceptImageDialogFragment" />
     </fragment>
     <dialog
         android:id="@+id/confirmDialogFragment"
@@ -575,7 +585,7 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/matchingFragment"
+            app:popUpTo="@id/chatFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_confirmDialogFragment_to_loginFragment"
@@ -706,6 +716,25 @@
         <argument android:name="reason"
             app:argType="string"
             app:nullable="false"/>
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/matchingFragment"
+        tools:layout="@layout/fragment_matching"
+        android:name="com.abouttime.blindcafe.presentation.main.chat_list.matching.MatchingFragment"
+        android:label="MatchingFragment" />
+    <fragment
+        tools:layout="@layout/dialog_fragment_profile_image"
+        android:id="@+id/acceptImageDialogFragment"
+        android:name="com.abouttime.blindcafe.presentation.profile_exchange.accept.profile_image.AcceptImageDialogFragment"
+        android:label="AcceptImageDialogFragment">
+
+        <argument android:name="partnerUserId"
+            app:argType="integer"
+            />
+
+
 
 
     </fragment>

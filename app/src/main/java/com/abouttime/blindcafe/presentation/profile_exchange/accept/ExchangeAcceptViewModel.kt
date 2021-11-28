@@ -18,6 +18,7 @@ class ExchangeAcceptViewModel(
     val partnerProfile: LiveData<Profile> get() =  _partnerProfile
 
     var matchingId: Int? = null
+    var partnerUserId: Int? = null
 
 
     /** use cases **/
@@ -30,7 +31,9 @@ class ExchangeAcceptViewModel(
                 is Resource.Success -> {
                     result.data?.let {
                         _partnerProfile.value = it.toProfile()
+                        partnerUserId = it.userId
                     }
+
                     dismissLoading()
                 }
                 is Resource.Error -> {
@@ -50,5 +53,17 @@ class ExchangeAcceptViewModel(
     }
     fun onClickAcceptButton() {
 
+    }
+    fun onClickProfileImage() {
+        partnerUserId?.let {
+            moveToAcceptImageDialogFragment(it)
+        }
+    }
+
+    /** navigate **/
+    fun moveToAcceptImageDialogFragment(userId: Int) {
+        moveToDirections(ExchangeAcceptFragmentDirections.actionExchangeAcceptFragmentToAcceptImageDialogFragment(
+            partnerUserId = userId
+        ))
     }
 }

@@ -91,6 +91,7 @@
             android:layout_marginTop="12dp"
             android:src="@drawable/bt_profile_image"
             app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="@{() -> viewModel.onClickProfileImage()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -98,7 +99,7 @@
             android:id="@+id/tv_profile_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/profile_exchange_make_profile"
+            tools:text="닉네임"
             android:textColor="@color/gray_300"
             android:textSize="@dimen/font_size_13"
             app:layout_constraintEnd_toEndOf="parent"
@@ -125,6 +126,7 @@
             android:text="@string/profile_exchange_location"
             app:layout_constraintBottom_toBottomOf="@id/iv_location"
             app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/main"
             app:layout_constraintStart_toEndOf="@id/iv_location"
             app:layout_constraintTop_toTopOf="@id/iv_location" />
 
@@ -274,6 +276,7 @@
         android:backgroundTint="@color/profile_exchange_edit_button"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:gravity="center"
+        android:onClick="@{() -> viewModel.onClickDismissButton()}"
         android:paddingVertical="13dp"
         android:text="@string/profile_exchange_dismiss"
         android:textColor="@color/gray_300"
@@ -290,6 +293,7 @@
         android:layout_marginEnd="18dp"
         android:background="@drawable/bg_rounding_3dp"
         android:backgroundTint="@color/main"
+        android:onClick="@{() -> viewModel.onClickAcceptButton()}"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:gravity="center"
         android:paddingVertical="13dp"

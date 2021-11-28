@@ -238,7 +238,7 @@ class CoffeeOrderViewModel(
 
 
         private fun moveToChatFragment(matchingId: Int, startTime: String, partnerNickname: String) {
-        moveToDirections(CoffeeOrderFragmentDirections.actionCoffeeOrderFragmentToMatchingFragment(
+        moveToDirections(CoffeeOrderFragmentDirections.actionCoffeeOrderFragmentToChatFragment(
             matchingId = matchingId,
             startTime = startTime,
             partnerNickname = partnerNickname
