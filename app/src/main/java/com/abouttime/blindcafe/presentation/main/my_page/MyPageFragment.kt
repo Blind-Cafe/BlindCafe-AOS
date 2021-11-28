@@ -30,7 +30,7 @@ class MyPageFragment : BaseFragment<MyPageViewModel>(R.layout.fragment_my_page) 
 
         observeInterestsData(fragmentMyPageBinding)
         observeDrinkData(fragmentMyPageBinding)
-
+        observeSexData(fragmentMyPageBinding)
 
     }
 
@@ -50,6 +50,15 @@ class MyPageFragment : BaseFragment<MyPageViewModel>(R.layout.fragment_my_page) 
                 tvLocationValue.setTextColor(getColorByResId(R.color.gray_300))
             }
 
+        }
+    }
+    private fun observeSexData(fragmentMyPageBinding: FragmentMyPageBinding) = with(fragmentMyPageBinding) {
+        viewModel?.sex?.observe(viewLifecycleOwner) { sex ->
+            if (sex == "남자") {
+                tvSexValue.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_my_page_sex_male, 0, 0, 0)
+            } else {
+                tvSexValue.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_my_page_sex_female, 0, 0, 0)
+            }
         }
     }
 
@@ -135,4 +144,5 @@ class MyPageFragment : BaseFragment<MyPageViewModel>(R.layout.fragment_my_page) 
             else -> return R.drawable.ic_drink_none
         }
     }
+
 }
