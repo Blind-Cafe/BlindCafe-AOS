@@ -782,4 +782,11 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+        viewModel?.matchingId?.let { id ->
+            viewModel?.postExitLog(id)
+        }
+    }
+
 }

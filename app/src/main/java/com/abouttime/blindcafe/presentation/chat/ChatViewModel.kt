@@ -21,6 +21,7 @@ import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.use_case.firebase.*
 import com.abouttime.blindcafe.domain.use_case.server.GetChatRoomInfoUseCase
 import com.abouttime.blindcafe.domain.use_case.server.GetTopicUseCase
+import com.abouttime.blindcafe.domain.use_case.server.PostEnteringLogUseCase
 import com.abouttime.blindcafe.domain.use_case.server.PostFcmUseCase
 import com.abouttime.blindcafe.presentation.chat.audio.RecorderState
 import com.google.firebase.Timestamp
@@ -43,6 +44,7 @@ class ChatViewModel(
     private val downloadAudioUrlUseCase: DownloadAudioUrlUseCase,
     private val fcmUseCase: PostFcmUseCase,
     private val getTopicUseCase: GetTopicUseCase,
+    private val postEnteringLogUseCase: PostEnteringLogUseCase
 ) : BaseViewModel() {
 
     private val _isSendButtonEnabled = MutableLiveData(false)
@@ -288,6 +290,25 @@ class ChatViewModel(
                 showToast(R.string.temp_error)
             }
         }
+    }
+
+
+    fun postExitLog(matchingId: Int) {
+        postEnteringLogUseCase(matchingId = matchingId).onEach { result ->
+            when (result) {
+                is Resource.Loading -> {
+                    showLoading()
+                }
+                is Resource.Success -> {
+                    Log.e("postExitLog", "Success")
+                    dismissLoading()
+                }
+                is Resource.Error -> {
+                    Log.e("postExitLog", "Error")
+                    dismissLoading()
+                }
+            }
+        }.launchIn(viewModelScope)
     }
 
 

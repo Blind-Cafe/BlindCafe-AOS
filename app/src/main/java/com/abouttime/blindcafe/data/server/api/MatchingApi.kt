@@ -3,13 +3,13 @@ package com.abouttime.blindcafe.data.server.api
 import com.abouttime.blindcafe.common.base.BaseResponse
 import com.abouttime.blindcafe.common.constants.Retrofit.DELETE_DISMISS_MATCHING_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.DELETE_EXIT_CHAT_ROOM_URL
-import com.abouttime.blindcafe.common.constants.Retrofit.DELETE_PROFILE_IMAGE_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_CHAT_ROOMS_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_CHAT_ROOM_INFO_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_TOPIC_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_ACCEPT_MATCHING_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_CANCEL_MATCHING_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_DRINK_URL
+import com.abouttime.blindcafe.common.constants.Retrofit.POST_ENTERING_LOG_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_MATCHING_REQUEST_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_REPORT_URL
 import com.abouttime.blindcafe.data.server.dto.matching.*
@@ -67,5 +67,11 @@ interface MatchingApi {
         @Path("matchingId") matchingId: Int,
         @Query("reason") reason: Int
     )
+
+    @POST(POST_ENTERING_LOG_URL)
+    suspend fun postEnteringLog(
+        @Path("matchingId") matchingId: Int
+    )
+
 
 }

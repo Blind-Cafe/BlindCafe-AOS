@@ -13,10 +13,7 @@ import com.abouttime.blindcafe.common.ext.secondToLapseForHome
 import com.abouttime.blindcafe.data.server.dto.user_info.partner.GetPartnerProfileDto
 import com.abouttime.blindcafe.domain.model.ChatRoom
 import com.abouttime.blindcafe.domain.model.Profile
-import com.abouttime.blindcafe.domain.use_case.server.GetChatRoomInfoUseCase
-import com.abouttime.blindcafe.domain.use_case.server.GetHomeInfoUseCase
-import com.abouttime.blindcafe.domain.use_case.server.GetPartnerProfileUseCase
-import com.abouttime.blindcafe.domain.use_case.server.PostMatchingRequestUseCase
+import com.abouttime.blindcafe.domain.use_case.server.*
 import com.abouttime.blindcafe.presentation.main.MainFragmentDirections
 import com.abouttime.blindcafe.presentation.main.home.HomeState.FAILED_LEAVE_ROOM
 import com.abouttime.blindcafe.presentation.main.home.HomeState.FAILED_REPORT
@@ -36,7 +33,8 @@ class HomeViewModel(
     private val getHomeInfoUseCase: GetHomeInfoUseCase,
     private val postMatchingRequestUseCase: PostMatchingRequestUseCase,
     private val getPartnerProfileUseCase: GetPartnerProfileUseCase,
-    private val getChatRoomInfoUseCase: GetChatRoomInfoUseCase
+    private val getChatRoomInfoUseCase: GetChatRoomInfoUseCase,
+
 ) : BaseViewModel() {
     private val _homeStatusCode: MutableLiveData<Int> = MutableLiveData<Int>(-1)
     val homeStatusCode: LiveData<Int> get() = _homeStatusCode
@@ -148,6 +146,7 @@ class HomeViewModel(
             }
         }.launchIn(viewModelScope)
     }
+
 
     /** handler **/
     private fun handleGetPartnerProfileDto(dto: GetPartnerProfileDto) {

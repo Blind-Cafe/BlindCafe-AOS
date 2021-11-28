@@ -33,4 +33,5 @@ interface UserInfoRepository {
     suspend fun postProfileForOpen(postProfileForOpenDto: PostProfileForOpenDto): PostProfileForOpenResponse?
     suspend fun getPartnerProfile(matchingId: Int): GetPartnerProfileDto?
     suspend fun deleteProfileImage(priority: Int)
+
 }

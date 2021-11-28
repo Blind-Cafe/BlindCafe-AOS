@@ -50,4 +50,8 @@ class MatchingRepositoryImpl(
     override suspend fun deleteDismissMatching(matchingId: Int, reason: Int) {
         return matchingApi.deleteDismissMatching(matchingId = matchingId, reason = reason)
     }
+
+    override suspend fun postEnteringLog(matchingId: Int) {
+        matchingApi.postEnteringLog(matchingId)
+    }
 }

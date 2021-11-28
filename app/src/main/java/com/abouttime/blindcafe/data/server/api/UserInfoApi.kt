@@ -3,6 +3,7 @@ package com.abouttime.blindcafe.data.server.api
 import com.abouttime.blindcafe.common.base.BaseResponse
 import com.abouttime.blindcafe.common.constants.Retrofit
 import com.abouttime.blindcafe.common.constants.Retrofit.DELETE_ACCOUNT_URL
+import com.abouttime.blindcafe.common.constants.Retrofit.DELETE_PROFILE_IMAGE_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_MY_PROFILE_IMAGE_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_PARTNER_PROFILE_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_PROFILE_FOR_OPEN_URL
@@ -11,6 +12,7 @@ import com.abouttime.blindcafe.common.constants.Retrofit.GET_PROFILE_INFO_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_REPORTS_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.PATCH_PROFILE_IMAGE_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_DEVICE_TOKEN_URL
+import com.abouttime.blindcafe.common.constants.Retrofit.POST_ENTERING_LOG_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_PROFILE_FOR_OPEN_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_USER_INFO_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.PUT_PROFILE_INFO_URL
@@ -94,9 +96,10 @@ interface UserInfoApi {
         @Path("matchingId") matchingId: Int
     ): GetPartnerProfileDto?
 
-    @DELETE(Retrofit.DELETE_PROFILE_IMAGE_URL)
+    @DELETE(DELETE_PROFILE_IMAGE_URL)
     suspend fun deleteProfileImage(
         @Query("priority") priority: Int
     )
+
 
 }

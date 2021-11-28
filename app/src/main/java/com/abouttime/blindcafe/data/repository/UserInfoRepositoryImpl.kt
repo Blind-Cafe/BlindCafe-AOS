@@ -78,4 +78,6 @@ class UserInfoRepositoryImpl(
     override suspend fun deleteProfileImage(priority: Int) {
         userInfoApi.deleteProfileImage(priority)
     }
+
+
 }
