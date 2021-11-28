@@ -272,6 +272,7 @@
             app:nullable="false"
             />
 
+
         <action
             android:id="@+id/action_chatFragment_to_quitReasonDialogFragment"
             app:destination="@id/quitReasonDialogFragment"

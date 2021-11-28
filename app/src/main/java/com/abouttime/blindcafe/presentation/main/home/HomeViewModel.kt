@@ -192,6 +192,9 @@ class HomeViewModel(
         val statusCode = _homeStatusCode.value
 
         when (statusCode) {
+            -1 -> {
+                showToast(R.string.temp_error)
+            }
             0 -> { // 매칭 없음
                 postMatchingRequest()
             }

@@ -20,7 +20,7 @@
         android:id="@+id/cl_chat_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black_2">
+        android:background="@color/chat_room_root_bg">
 
 
 
@@ -37,6 +37,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ll_topic_unfold_container"
                 android:overScrollMode="always"
+                android:background="@color/transparent"
                 tools:listitem="@layout/rv_chat_item_receive_text" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,7 +45,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="@color/black"
+            android:background="@color/chat_room_top_bg"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -273,7 +274,7 @@
             android:id="@+id/ml_input_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/gray_900"
+            android:background="@color/chat_room_bottom_bg"
             android:clickable="false"
             app:layoutDescription="@xml/fragment_chat_xml_chat_edit_container_scene"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -292,7 +293,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/et_message_input"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/et_message_input"
-                app:tint="@color/white" />
+                app:tint="@color/chat_room_icon_disabled" />
 
             <ImageView
                 android:id="@+id/iv_record"
@@ -305,7 +306,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/et_message_input"
                 app:layout_constraintStart_toEndOf="@id/iv_gallery"
                 app:layout_constraintTop_toTopOf="@id/et_message_input"
-                app:tint="@color/white" />
+                app:tint="@color/chat_room_icon_disabled" />
 
 
             <EditText
@@ -372,8 +373,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ml_input_container"
-            tools:visibility="visible">
+            app:layout_constraintTop_toTopOf="@id/ml_input_container">
 
             <com.abouttime.blindcafe.presentation.chat.audio.SoundVisualizerView
                 android:id="@+id/sound_visualizer"

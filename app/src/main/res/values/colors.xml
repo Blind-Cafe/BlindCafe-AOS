@@ -60,7 +60,17 @@
 
     <color name="home_notification_background">#48484a</color>
 
-    <color name="matching_room_background">#474747</color>
+    <color name="matching_room_root_bg">#474747</color>
+    <color name="matching_room_menu_bg">#595959</color>
+    <color name="matching_room_top_bg">#474747</color>
+    <color name="matching_room_bottom_bg">#595959</color>
 
+    <color name="chat_room_root_bg">#2d2d2d</color>
+    <color name="chat_room_menu_bg">#48484a</color>
+    <color name="chat_room_top_bg">#2d2d2d</color>
+    <color name="chat_room_bottom_bg">#373737</color>
+
+    <color name="chat_room_icon_enabled">#fafafa</color>
+    <color name="chat_room_icon_disabled">#454545</color>
 
 </resources>

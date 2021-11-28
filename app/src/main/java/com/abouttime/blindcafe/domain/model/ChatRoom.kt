@@ -10,5 +10,6 @@ data class ChatRoom(
     val profileImage: String?,
     val drink: String?,
     val startTime: String?,
-    val interest: String?
+    val interest: String?,
+    val continuous: Boolean
 ): Parcelable

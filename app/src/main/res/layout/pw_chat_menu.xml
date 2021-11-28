@@ -5,7 +5,7 @@
     android:paddingVertical="12dp"
     android:paddingHorizontal="10dp"
     android:background="@drawable/bg_rounding_3dp"
-    android:backgroundTint="@color/chat_menu_popup"
+    android:backgroundTint="@color/chat_room_menu_bg"
     android:orientation="vertical"
     android:layout_height="wrap_content">
 

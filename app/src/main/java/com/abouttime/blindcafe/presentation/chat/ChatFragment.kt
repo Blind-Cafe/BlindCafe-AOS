@@ -61,6 +61,9 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     private val chatAdapter = GroupAdapter<GroupieViewHolder>()
     private var popupWindow: PopupWindow? = null
 
+    var isCont = false
+
+
 
     private var recorder: MediaRecorder? = null
     private val recordingFilePath: String by lazy {
@@ -111,12 +114,26 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         viewModel.commonInterest = viewModel.chatRoomInfo.interest
         viewModel.startTime = viewModel.chatRoomInfo.startTime
         viewModel.interest = viewModel.chatRoomInfo.interest
+        isCont = args.chatRoomInfo.continuous
 
         initPartnerNciknameTextView() // 상단 닉네임 초기화
+        initBackgroundColor()
     }
 
     private fun initPartnerNciknameTextView() {
         binding?.tvOtherName?.text = viewModel.partnerNickname
+    }
+
+    private fun initBackgroundColor() {
+        if (isCont) {
+            binding?.root?.setBackgroundColor(getColorByResId(R.color.matching_room_root_bg))
+            binding?.clToolbarContainer?.setBackgroundColor(getColorByResId(R.color.matching_room_top_bg))
+            binding?.mlInputContainer?.setBackgroundColor(getColorByResId(R.color.matching_room_bottom_bg))
+        } else {
+            binding?.root?.setBackgroundColor(getColorByResId(R.color.chat_room_root_bg))
+            binding?.clToolbarContainer?.setBackgroundColor(getColorByResId(R.color.chat_room_top_bg))
+            binding?.mlInputContainer?.setBackgroundColor(getColorByResId(R.color.chat_room_bottom_bg))
+        }
     }
 
 
@@ -495,6 +512,11 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         val inflater =
             requireActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.pw_chat_menu, null)
+        if (!isCont) {
+            view.setBackgroundColor(getColorByResId(R.color.chat_room_menu_bg))
+        } else {
+            view.setBackgroundColor(getColorByResId(R.color.matching_room_menu_bg))
+        }
 
 
         val time = view.findViewById<TextView>(R.id.tv_time)

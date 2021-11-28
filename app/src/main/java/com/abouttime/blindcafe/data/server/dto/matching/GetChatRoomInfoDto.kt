@@ -16,7 +16,9 @@ data class GetChatRoomInfoDto(
     @SerializedName("startTime")
     val startTime: String?,
     @SerializedName("interest")
-    val interest: String?
+    val interest: String?,
+    @SerializedName("continuous")
+    val continuous: Boolean
 ) {
 
     fun toChatRoom(): ChatRoom =
@@ -26,7 +28,8 @@ data class GetChatRoomInfoDto(
             profileImage = profileImage,
             drink = drink,
             startTime = startTime,
-            interest = interest
+            interest = interest,
+            continuous = continuous
         )
 
 }
