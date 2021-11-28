@@ -66,7 +66,7 @@
         android:layout_marginEnd="10dp"
         app:layout_constraintHorizontal_weight="1"
         app:cardCornerRadius="10dp"
-        app:layout_constraintDimensionRatio="112:152"
+        app:layout_constraintDimensionRatio="102:136"
         app:layout_constraintEnd_toStartOf="@id/cv_image_2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_image_title">
@@ -96,7 +96,7 @@
         android:layout_marginEnd="10dp"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="@id/cv_image_1"
-        app:layout_constraintDimensionRatio="112:152"
+        app:layout_constraintDimensionRatio="102:136"
         app:layout_constraintEnd_toStartOf="@id/cv_image_3"
         app:layout_constraintStart_toEndOf="@id/cv_image_1"
         app:layout_constraintTop_toTopOf="@id/cv_image_1">
@@ -126,7 +126,7 @@
         app:cardCornerRadius="10dp"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintBottom_toBottomOf="@id/cv_image_1"
-        app:layout_constraintDimensionRatio="112:152"
+        app:layout_constraintDimensionRatio="102:136"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/cv_image_2"
         app:layout_constraintTop_toTopOf="@id/cv_image_1">

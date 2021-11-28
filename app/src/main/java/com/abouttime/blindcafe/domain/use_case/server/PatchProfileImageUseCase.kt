@@ -8,17 +8,18 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.Call
 import retrofit2.HttpException
 import retrofit2.http.Part
 
 class PatchProfileImageUseCase(
     private val repository: UserInfoRepository
 ) {
-    operator fun invoke(priority: RequestBody, image: MultipartBody.Part): Flow<Resource<BaseResponse?>> = flow {
+    operator fun invoke(priority: RequestBody, image: MultipartBody.Part?): Flow<Resource<Call<Unit>>> = flow {
         emit(Resource.Loading())
         try {
             val response = repository.patchProfileImage(priority, image)
-            emit(Resource.Success(data = response))
+            emit(Resource.Success(response))
         } catch (e: Exception) {
             if (e is HttpException) {
                 val message = e.parseErrorBody()

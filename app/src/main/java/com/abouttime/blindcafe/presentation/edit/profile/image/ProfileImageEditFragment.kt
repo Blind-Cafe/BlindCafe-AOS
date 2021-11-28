@@ -29,21 +29,31 @@ class ProfileImageEditFragment :
     private var binding: FragmentProfileImageEditBinding? = null
 
 
+    var imageCnt = 0
+
     private val filePath: String by lazy {
         "${requireActivity().externalCacheDir?.absolutePath}/image.jpeg"
     }
 
     private val galleryCallback1 =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            uploadImage(uri, 1)
+            uri?.let {
+                uploadImage(uri, 1)
+            }
+
         }
     private val galleryCallback2 =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            uploadImage(uri, 2)
+            uri?.let {
+                uploadImage(uri, 2)
+            }
+
         }
     private val galleryCallback3 =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            uploadImage(uri, 3)
+            uri?.let {
+                uploadImage(uri, 3)
+            }
         }
 
     private val callbacks = listOf(
@@ -60,27 +70,32 @@ class ProfileImageEditFragment :
         binding?.lifecycleOwner = this
         binding?.viewModel = viewModel
 
-        initAddImageButton(fragmentProfileImageEditBinding)
+        initAddImageButton()
 
         observeImageUrlsData(fragmentProfileImageEditBinding)
     }
 
 
-    private fun initAddImageButton(fragmentProfileImageEditBinding: FragmentProfileImageEditBinding) =
-        with(fragmentProfileImageEditBinding) {
-            val btList = listOf(ivImageAdd1, ivImageAdd2, ivImageAdd3)
+    private fun initAddImageButton() {
+        binding?.let {
+            with(it) {
+                val btList = listOf(ivImageAdd1, ivImageAdd2, ivImageAdd3)
 
-            btList.forEachIndexed { i, iv ->
-                iv.setOnClickListener {
+                btList.forEachIndexed { i, iv ->
+                    iv.setOnClickListener {
 
-                    if (DeviceUtil.hasExtrernalStoragePermission(requireContext())) {
-                        callbacks[i].launch("*/*")
-                    } else {
-                        galleryPermissionCallback.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+                        if (DeviceUtil.hasExtrernalStoragePermission(requireContext())) {
+                            callbacks[i].launch("*/*")
+                        } else {
+                            galleryPermissionCallback.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+                        }
                     }
                 }
             }
+
         }
+
+    }
 
     private val galleryPermissionCallback =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
@@ -94,6 +109,7 @@ class ProfileImageEditFragment :
             viewModel?.let {
                 Log.d("observeImageUrlsData", "viewModel is not null")
                 val ivList = listOf(ivImage1, ivImage2, ivImage3)
+                val btList = listOf(ivImageAdd1, ivImageAdd2, ivImageAdd3)
                 viewModel?.imageUrls?.observe(viewLifecycleOwner) { urls ->
 
                     Log.e("observeImageUrlsData", urls.toString())
@@ -102,7 +118,19 @@ class ProfileImageEditFragment :
                             Glide.with(requireContext())
                                 .load(url)
                                 .into(ivList[i])
+
+                            btList[i].setImageResource(R.drawable.bt_profile_image_delete)
+
+
+
+
+                            btList[i].setOnClickListener {
+                                deleteFragment(i + 1)
+                            }
+
+                            imageCnt.plus(1)
                         }
+
                     }
 
                 }
@@ -126,13 +154,14 @@ class ProfileImageEditFragment :
 
 
 
-            bitmap!!.compress(Bitmap.CompressFormat.JPEG, 40, saveFile.outputStream()) //TODO try catch
+            bitmap!!.compress(Bitmap.CompressFormat.JPEG,
+                40,
+                saveFile.outputStream()) //TODO try catch
         } catch (e: Exception) {
             e.printStackTrace()
             showToast(R.string.temp_error)
             return
         }
-
 
 
         //val file = File(path)
@@ -142,9 +171,82 @@ class ProfileImageEditFragment :
 
         viewModel?.patchProfileImage(priority, part) {
             when (number) {
-                1 -> binding?.ivImage1?.setImageBitmap(bitmap)
-                2 -> binding?.ivImage2?.setImageBitmap(bitmap)
-                3 -> binding?.ivImage3?.setImageBitmap(bitmap)
+                1 -> {
+                    binding?.ivImage1?.setImageBitmap(bitmap)
+                    binding?.ivImageAdd1?.setImageResource(R.drawable.bt_profile_image_delete)
+                    binding?.ivImageAdd1?.setOnClickListener {
+                        deleteFragment(number = number)
+                    }
+                }
+                2 -> {
+                    binding?.ivImage2?.setImageBitmap(bitmap)
+                    binding?.ivImageAdd2?.setImageResource(R.drawable.bt_profile_image_delete)
+                    binding?.ivImageAdd2?.setOnClickListener {
+                        deleteFragment(number = number)
+                    }
+                }
+                3 -> {
+                    binding?.ivImage3?.setImageBitmap(bitmap)
+                    binding?.ivImageAdd3?.setImageResource(R.drawable.bt_profile_image_delete)
+                    binding?.ivImageAdd3?.setOnClickListener {
+                        deleteFragment(number = number)
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    private fun deleteFragment(
+        number: Int,
+    ) {
+        showLoadingDialog()
+        Toast.makeText(requireContext(), "사진 삭제 중...", Toast.LENGTH_SHORT).show()
+        val priority = RequestBody.create(MediaType.parse("text/plain"), "$number")
+        binding?.let {
+            with(it) {
+                viewModel?.patchProfileImage(priority, null) {
+                    Toast.makeText(requireContext(), "사진 삭제 완료", Toast.LENGTH_SHORT).show()
+                    when (number) {
+                        1 -> {
+                            ivImage1.setImageResource(R.drawable.bg_profile_image)
+                            ivImageAdd1.setImageResource(R.drawable.bt_profile_image_add)
+                            ivImageAdd1.setOnClickListener {
+                                if (DeviceUtil.hasExtrernalStoragePermission(requireContext())) {
+                                    callbacks[0].launch("*/*")
+                                } else {
+                                    galleryPermissionCallback.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+                                }
+                            }
+                        }
+                        2 -> {
+                            ivImage2.setImageResource(R.drawable.bg_profile_image)
+                            ivImageAdd2.setImageResource(R.drawable.bt_profile_image_add)
+                            ivImageAdd2.setOnClickListener {
+                                if (DeviceUtil.hasExtrernalStoragePermission(requireContext())) {
+                                    callbacks[1].launch("*/*")
+                                } else {
+                                    galleryPermissionCallback.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+                                }
+                            }
+                        }
+                        3 -> {
+                            ivImage3.setImageResource(R.drawable.bg_profile_image)
+                            ivImageAdd3.setImageResource(R.drawable.bt_profile_image_add)
+                            ivImageAdd3.setOnClickListener {
+                                if (DeviceUtil.hasExtrernalStoragePermission(requireContext())) {
+                                    callbacks[2].launch("*/*")
+                                } else {
+                                    galleryPermissionCallback.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+                                }
+                            }
+                        }
+                    }
+                    imageCnt.plus(1)
+                }
+
+
             }
         }
 

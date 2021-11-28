@@ -16,6 +16,7 @@ import com.abouttime.blindcafe.data.server.dto.user_info.profile.info.GetProfile
 import com.abouttime.blindcafe.data.server.dto.user_info.report.GetReportsDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.Call
 
 interface UserInfoRepository {
     suspend fun postUserInfo(postUserInfoDto: PostUserInfoDto): BaseResponse?
@@ -26,7 +27,7 @@ interface UserInfoRepository {
     suspend fun postDeviceToken(postDeviceTokenDto: PostDeviceTokenDto): BaseResponse?
     suspend fun putProfileInfo(putProfileInfoDto: PutProfileInfoDto): PutProfileInfoResponse?
     suspend fun getProfileImage(userId: Int): GetProfileImageDto?
-    suspend fun patchProfileImage(priority: RequestBody, image: MultipartBody.Part): BaseResponse?
+    suspend fun patchProfileImage(priority: RequestBody, image: MultipartBody.Part?): Call<Unit>
     suspend fun getProfileForOpen(matchingId: Int): GetProfileForOpenDto?
     suspend fun postProfileForOpen(postProfileForOpenDto: PostProfileForOpenDto): PostProfileForOpenResponse?
     suspend fun getPartnerProfile(matchingId: Int): GetPartnerProfileDto?

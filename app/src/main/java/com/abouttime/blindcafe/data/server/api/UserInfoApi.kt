@@ -27,6 +27,7 @@ import com.abouttime.blindcafe.data.server.dto.user_info.profile.info.GetProfile
 import com.abouttime.blindcafe.data.server.dto.user_info.report.GetReportsDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.Call
 import retrofit2.http.*
 
 interface UserInfoApi {
@@ -68,8 +69,8 @@ interface UserInfoApi {
     @PATCH(PATCH_PROFILE_IMAGE_URL)
     suspend fun patchProfileImage(
         @Part("priority") priority: RequestBody,
-        @Part image: MultipartBody.Part
-    ): BaseResponse?
+        @Part image: MultipartBody.Part?
+    ): Call<Unit>
 
 
     @GET(GET_PROFILE_FOR_OPEN)

@@ -7,6 +7,7 @@ import com.abouttime.blindcafe.data.server.dto.user_info.profile.info.GetProfile
 import com.abouttime.blindcafe.domain.repository.UserInfoRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import okhttp3.Call
 import retrofit2.HttpException
 
 class GetProfileImageUseCase(

@@ -136,25 +136,51 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
     private fun updateIconState() {
         if (isCont) {
-            updateIconState(true, R.color.chat_room_icon_enabled, R.color.chat_room_icon_enabled)
+            updateIconState(true,
+                R.color.chat_room_icon_enabled,
+                R.color.chat_room_icon_enabled,
+                true,
+                true)
         } else {
             val startTime = viewModel?.chatRoomInfo?.startTime?.toLong()
             startTime?.let { time ->
                 if (time.isOver48Hours()) {
-                    updateIconState(false, R.color.chat_room_icon_enabled, R.color.chat_room_icon_enabled)
+                    updateIconState(false,
+                        R.color.chat_room_icon_enabled,
+                        R.color.chat_room_icon_enabled,
+                        true,
+                        true)
                 } else if (time.isOver24Hours()) {
-                    updateIconState(false, R.color.chat_room_icon_disabled, R.color.chat_room_icon_enabled)
+                    updateIconState(false,
+                        R.color.chat_room_icon_enabled,
+                        R.color.chat_room_icon_disabled,
+                        true,
+                        false)
+                } else {
+                    updateIconState(false,
+                        R.color.chat_room_icon_disabled,
+                        R.color.chat_room_icon_disabled,
+                        false,
+                        false)
                 }
             }
         }
     }
 
-    private fun updateIconState(isGone: Boolean, color1: Int, color2: Int) {
+    private fun updateIconState(
+        isGone: Boolean,
+        color1: Int,
+        color2: Int,
+        enable1: Boolean,
+        enable2: Boolean,
+    ) {
         binding?.let {
             with(it) {
                 ivBell.isGone = isGone
-                ivRecord.setColorFilter(getColorByResId(color1))
-                ivGallery.setColorFilter(getColorByResId(color2))
+                ivGallery.setColorFilter(getColorByResId(color1))
+                ivGallery.isEnabled = enable1
+                ivRecord.setColorFilter(getColorByResId(color2))
+                ivRecord.isEnabled = enable2
             }
         }
 
@@ -541,6 +567,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         }
 
 
+
         val time = view.findViewById<TextView>(R.id.tv_time)
         val report = view.findViewById<LinearLayout>(R.id.ll_report_container)
         val notification = view.findViewById<LinearLayout>(R.id.ll_notification_container)
@@ -586,7 +613,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     }
 
     private fun initNotificationContainer(view: View) {
-        view.isGone = true
+        view.isGone = !isCont
     }
 
     private fun initQuitContainer(view: View) {

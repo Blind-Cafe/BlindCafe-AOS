@@ -29,6 +29,8 @@ class ProfileImageEditViewModel(
     val editedUrls = mutableListOf<Uri>()
 
 
+
+
     init {
         val userId = getStringData(USER_ID)
         userId?.let {
@@ -56,7 +58,7 @@ class ProfileImageEditViewModel(
         }.launchIn(viewModelScope)
     }
 
-    fun patchProfileImage(priority: RequestBody, image: MultipartBody.Part, callback: () -> Unit) {
+    fun patchProfileImage(priority: RequestBody, image: MultipartBody.Part?, callback: () -> Unit) {
         patchProfileImageUseCase(priority, image).onEach { result ->
             when (result) {
                 is Resource.Loading -> {
@@ -68,7 +70,11 @@ class ProfileImageEditViewModel(
                 }
                 is Resource.Error -> {
                     Log.e(RETROFIT_TAG, result.message.toString())
-                    showToast(R.string.temp_error)
+                    if (result.message != "400") {
+                        callback()
+                    } else {
+                        showToast(R.string.temp_error)
+                    }
                     dismissLoading()
                 }
             }

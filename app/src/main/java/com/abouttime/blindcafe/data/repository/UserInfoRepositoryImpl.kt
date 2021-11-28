@@ -18,6 +18,7 @@ import com.abouttime.blindcafe.data.server.dto.user_info.report.GetReportsDto
 import com.abouttime.blindcafe.domain.repository.UserInfoRepository
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.Call
 
 class UserInfoRepositoryImpl(
     private val userInfoApi: UserInfoApi
@@ -54,7 +55,7 @@ class UserInfoRepositoryImpl(
         return userInfoApi.getProfileImage(userId)
     }
 
-    override suspend fun patchProfileImage(priority: RequestBody, image: MultipartBody.Part): BaseResponse? {
+    override suspend fun patchProfileImage(priority: RequestBody, image: MultipartBody.Part?): Call<Unit> {
         return userInfoApi.patchProfileImage(priority, image)
     }
 

@@ -73,4 +73,6 @@
     <color name="chat_room_icon_enabled">#fafafa</color>
     <color name="chat_room_icon_disabled">#454545</color>
 
+    <color name="chat_topic_bg">#373737</color>
+
 </resources>
