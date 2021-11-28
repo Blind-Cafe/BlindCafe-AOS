@@ -18,6 +18,8 @@ class ImageSendItem(
     private val viewModel: ChatViewModel,
 ) : BindableItem<RvChatItemSendImageBinding>() {
     override fun bind(viewBinding: RvChatItemSendImageBinding, position: Int) {
+        viewBinding.root.tag = message.timestamp
+
         viewModel.downloadImageUrl(
             message = message,
             callback = { uri ->

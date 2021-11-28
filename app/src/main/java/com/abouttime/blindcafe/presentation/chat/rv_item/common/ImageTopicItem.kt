@@ -15,6 +15,7 @@ class ImageTopicItem(
     private val viewModel: ChatViewModel
 ): BindableItem<RvChatItemTopicImageBinding>() {
     override fun bind(viewBinding: RvChatItemTopicImageBinding, position: Int) {
+        viewBinding.root.tag = message.timestamp
         message.contents?.let { uri ->
             Log.e(LogTag.CHATTING_TAG, uri.toString())
             Glide.with(viewBinding.ivContent)

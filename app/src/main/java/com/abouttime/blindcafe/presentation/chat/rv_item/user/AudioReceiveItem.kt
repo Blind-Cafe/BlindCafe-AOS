@@ -26,7 +26,7 @@ class AudioReceiveItem(
 ) : BindableItem<RvChatItemReceiveAudioBinding>() {
 
     override fun bind(viewBinding: RvChatItemReceiveAudioBinding, position: Int) {
-
+        viewBinding.root.tag = message.timestamp
         handleContinue(viewBinding)
 
         var isPlaying = false

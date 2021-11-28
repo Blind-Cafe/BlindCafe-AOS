@@ -2,10 +2,12 @@ package com.abouttime.blindcafe.data.repository
 
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.constants.FirebaseKey
+import com.abouttime.blindcafe.common.constants.FirebaseKey.CHAT_PAGE_SIZE
 import com.abouttime.blindcafe.common.constants.FirebaseKey.SUB_COLLECTION_MESSAGES
 import com.abouttime.blindcafe.data.firebase.Firestore
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.repository.FirestoreRepository
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.Query
@@ -32,12 +34,14 @@ class FirestoreRepositoryImpl(
     @ExperimentalCoroutinesApi
     override suspend fun subscribeMessages(roomId: String): Flow<Resource<List<Message>>> =
         callbackFlow {
+            val time = Timestamp.now()
             val subscription =
                 firestore
                     .roomCollectionRef
                     .document(roomId)
                     .collection(SUB_COLLECTION_MESSAGES)
-                    .orderBy("timestamp", Query.Direction.ASCENDING)
+                    .whereGreaterThanOrEqualTo("timestamp", time)
+                    .orderBy("timestamp", Query.Direction.DESCENDING)
                     .addSnapshotListener { snapshot, error ->
                         if (snapshot != null) {
                             val messages = mutableListOf<Message>()
@@ -60,19 +64,23 @@ class FirestoreRepositoryImpl(
 
         } as Flow<Resource<List<Message>>>
 
-    override suspend fun receiveMessages(roomId: String, startAt: Int, endAt: Int): List<Message?> {
+    override suspend fun receiveMessages(roomId: String, lastTime: Timestamp): List<Message> {
         return firestore
             .roomCollectionRef
             .document(roomId)
             .collection(SUB_COLLECTION_MESSAGES)
-            .orderBy("timestamp", Query.Direction.ASCENDING)
-            .startAt(startAt)
-            .endAt(endAt)
+            .whereLessThan("timestamp", lastTime) // 인자보다 오래된 메시지 중에
+            .orderBy("timestamp", Query.Direction.DESCENDING) // 최근 순으로
+            .limit(CHAT_PAGE_SIZE) // 페이지 사이즈 만큼 가져와
             .get()
             .await()
             .documents
             .map { doc ->
-                doc.toObject<Message>()
+                doc?.let {
+                    doc.toObject<Message>()
+                }?: kotlin.run {
+                    Message()
+                }
             }
     }
 }

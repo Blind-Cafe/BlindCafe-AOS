@@ -23,6 +23,7 @@ import com.abouttime.blindcafe.domain.use_case.server.GetChatRoomInfoUseCase
 import com.abouttime.blindcafe.domain.use_case.server.GetTopicUseCase
 import com.abouttime.blindcafe.domain.use_case.server.PostFcmUseCase
 import com.abouttime.blindcafe.presentation.chat.audio.RecorderState
+import com.google.firebase.Timestamp
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -54,6 +55,9 @@ class ChatViewModel(
     private val _receivedMessage = MutableLiveData<List<Message>>()
     val receivedMessage: LiveData<List<Message>> get() = _receivedMessage
 
+    private val _receivedPageMessage = MutableLiveData<List<Message>>()
+    val receivedPageMessage: LiveData<List<Message>> get() = _receivedPageMessage
+
     private val _recorderState = MutableLiveData<RecorderState>(RecorderState.BEFORE_RECORDING)
     val recorderState: LiveData<RecorderState> get() = _recorderState
 
@@ -77,9 +81,26 @@ class ChatViewModel(
 
 
     /** use cases **/
-    fun receivePagedMessages(roomId: String, startAt: Int, endAt: Int) {
+    fun receivePagedMessages(roomId: String, lastTime: Timestamp) {
+        receiveMessagesUseCase(roomId, lastTime).onEach { result ->
+            when (result) {
+                is Resource.Loading -> {
+                    showLoading()
+                }
+                is Resource.Success -> {
+                    result.data?.let { list ->
+                        _receivedPageMessage.postValue(list)
+                    }
+                    dismissLoading()
+                }
+                is Resource.Error -> {
+                    dismissLoading()
+                }
+            }
+        }.launchIn(viewModelScope)
 
     }
+
 
 
     fun postFcm(title: String, path: String, body: String) = viewModelScope.launch(Dispatchers.IO) {

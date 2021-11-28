@@ -10,4 +10,7 @@ object FirebaseKey {
     const val STORAGE_IMAGE = "image"
 
 
+    const val CHAT_PAGE_SIZE = 30L
+
+
 }

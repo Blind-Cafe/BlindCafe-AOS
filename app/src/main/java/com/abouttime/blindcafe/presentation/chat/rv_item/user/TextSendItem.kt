@@ -10,6 +10,8 @@ import com.xwray.groupie.viewbinding.BindableItem
 
 class TextSendItem(private val message: Message) : BindableItem<RvChatItemSendTextBinding>() {
     override fun bind(viewBinding: RvChatItemSendTextBinding, position: Int) {
+        viewBinding.root.tag = message.timestamp
+
         viewBinding.message = message
         viewBinding.tvTime.text =
             message.timestamp?.seconds?.secondToChatTime()

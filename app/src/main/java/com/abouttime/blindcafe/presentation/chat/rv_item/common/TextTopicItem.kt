@@ -9,6 +9,7 @@ import com.xwray.groupie.viewbinding.BindableItem
 
 class TextTopicItem(private val message: Message) : BindableItem<RvChatItemTopicTextBinding>() {
     override fun bind(viewBinding: RvChatItemTopicTextBinding, position: Int) {
+        viewBinding.root.tag = message.timestamp
         viewBinding.message = message
     }
 

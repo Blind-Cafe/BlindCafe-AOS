@@ -35,6 +35,7 @@ import com.abouttime.blindcafe.presentation.chat.rv_item.common.DescriptionItem
 import com.abouttime.blindcafe.presentation.chat.rv_item.common.ImageTopicItem
 import com.abouttime.blindcafe.presentation.chat.rv_item.common.TextTopicItem
 import com.abouttime.blindcafe.presentation.chat.rv_item.user.*
+import com.google.firebase.Timestamp
 import com.google.firebase.messaging.FirebaseMessaging
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -60,6 +61,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     private var popupWindow: PopupWindow? = null
 
     var isCont = false
+    private val timeStampList = mutableListOf<Timestamp>()
 
 
     private var recorder: MediaRecorder? = null
@@ -86,7 +88,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         initChatRecyclerView(fragmentChatBinding) // 채팅 리사이클러뷰 초기화
         subscribeMessages()
         observeMessagesData()
-
+        observePagedMessagesData()
 
         initSendButton(fragmentChatBinding) // 전송버튼 초기화
         initInputEditText(fragmentChatBinding) // 텍스트 메시지 작성 뷰 초기화
@@ -112,10 +114,17 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         viewModel.startTime = viewModel.chatRoomInfo.startTime
         viewModel.interest = viewModel.chatRoomInfo.interest
         isCont = args.chatRoomInfo.continuous
-
+        receiveFirstPage()
         initPartnerNciknameTextView() // 상단 닉네임 초기화
         initBackgroundColor()
         updateIconState()
+    }
+
+    private fun receiveFirstPage() {
+        viewModel?.matchingId?.let { id ->
+            Log.e("paging", "첫요청")
+            viewModel?.receivePagedMessages(id.toString(), Timestamp.now())
+        }
     }
 
     private fun initPartnerNciknameTextView() {
@@ -199,28 +208,34 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
             val decor = OverScrollDecoratorHelper.setUpOverScroll(rvChatContainer,
                 OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
+
+            var isScrolling = false
+
             decor.setOverScrollStateListener { decor, oldState, newState ->
                 Log.e("StateListener", "oldState: $oldState, newState: $newState")
                 when (newState) {
                     STATE_IDLE -> {
+                        isScrolling = false
                     }
                     STATE_DRAG_START_SIDE -> {
+                        // 페이지네이션 코드
+                        isScrolling = true
+                        viewModel?.matchingId?.let { id ->
+                            val time = timeStampList.last()
+                            Log.e("paging", "재요청 $time")
+                            viewModel?.receivePagedMessages(id.toString(), time)
+                        }
                     }
                     STATE_DRAG_END_SIDE -> {
+                        isScrolling = true
                     }
                     STATE_BOUNCE_BACK -> if (oldState === STATE_DRAG_START_SIDE) {
-                        // Dragging stopped -- view is starting to bounce back from the *left-end* onto natural position.
-                    } else { // i.e. (oldState == STATE_DRAG_END_SIDE)
-                        // View is starting to bounce back from the *right-end*.
+                        isScrolling = true
+                    } else {
                     }
                 }
             }
-            decor.setOverScrollUpdateListener { decor, state, offset ->
-                Log.e("UpdateListener", "state: $state, $offset")
-            }
 
-
-            var isScrolling = false
 
             root.viewTreeObserver.addOnGlobalLayoutListener {
                 val heightDiff = root.rootView.height - root.height
@@ -268,11 +283,30 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     private fun observeMessagesData() {
         viewModel.receivedMessage.observe(viewLifecycleOwner) { messages ->
             messages.forEach { message ->
+
+                message.timestamp?.let { tp ->
+                    if (message.senderUid == viewModel.userId) {
+                        addMessageToMe(message)
+                    } else {
+                        addMessageToPartner(message)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun observePagedMessagesData() {
+        viewModel?.receivedPageMessage.observe(viewLifecycleOwner) { messages ->
+
+            messages.forEach { message ->
                 Log.e("asdf", message.toString())
-                if (message.senderUid == viewModel.userId) {
-                    addMessageToMe(message)
-                } else {
-                    addMessageToPartner(message)
+                message.timestamp?.let { tp ->
+                    timeStampList.add(tp)
+                    if (message.senderUid == viewModel.userId) {
+                        addPagedMessageToMe2(message)
+                    } else {
+                        addPagedMessageToPartner2(message)
+                    }
                 }
             }
         }
@@ -292,15 +326,116 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
     private fun addMessageToPartner(message: Message) {
         when (message.type) {
-            1 -> chatAdapter.add(TextReceiveItem(message, isCont = isCont,nickName = viewModel.partnerNickname ?: "",profileImage = viewModel.profileImage ?: ""))
-            2 -> chatAdapter.add(ImageReceiveItem(message, viewModel = viewModel, isCont = isCont,nickName = viewModel.partnerNickname ?: "",profileImage = viewModel.profileImage ?: ""))
-            3 -> chatAdapter.add(AudioReceiveItem(message, viewModel = viewModel, isCont = isCont,nickName = viewModel.partnerNickname ?: "",profileImage = viewModel.profileImage ?: ""))
+            1 -> chatAdapter.add(
+                TextReceiveItem(message,
+                    isCont = isCont,
+                    nickName = viewModel.partnerNickname ?: "",
+                    profileImage = viewModel.profileImage ?: ""))
+            2 -> chatAdapter.add(
+                ImageReceiveItem(message,
+                    viewModel = viewModel,
+                    isCont = isCont,
+                    nickName = viewModel.partnerNickname ?: "",
+                    profileImage = viewModel.profileImage ?: ""))
+            3 -> chatAdapter.add(
+                AudioReceiveItem(message,
+                    viewModel = viewModel,
+                    isCont = isCont,
+                    nickName = viewModel.partnerNickname ?: "",
+                    profileImage = viewModel.profileImage ?: ""))
             4 -> chatAdapter.add(TextTopicItem(message))
             5 -> chatAdapter.add(ImageTopicItem(message, viewModel = viewModel))
             6 -> chatAdapter.add(AudioTopicItem(message, viewModel = viewModel))
             7 -> chatAdapter.add(DescriptionItem(message))
+        }
+    }
+
+    private fun addPagedMessageToMe(message: Message) {
+        val cnt = binding?.rvChatContainer?.childCount
+        cnt?.let { c ->
+            when (message.type) {
+                1 -> chatAdapter.add(c, TextSendItem(message))
+                2 -> chatAdapter.add(c, ImageSendItem(message, viewModel = viewModel))
+                3 -> chatAdapter.add(c, AudioSendItem(message, viewModel = viewModel))
+                4 -> chatAdapter.add(c, TextTopicItem(message))
+                5 -> chatAdapter.add(c, ImageTopicItem(message, viewModel = viewModel))
+                6 -> chatAdapter.add(c, AudioTopicItem(message, viewModel = viewModel))
+                7 -> chatAdapter.add(c, DescriptionItem(message))
+            }
 
         }
+
+    }
+
+    private fun addPagedMessageToPartner(message: Message) {
+        var cnt = binding?.rvChatContainer?.childCount
+
+        cnt?.let { c ->
+
+            when (message.type) {
+                1 -> chatAdapter.add(c, TextReceiveItem(message,
+                    isCont = isCont,
+                    nickName = viewModel.partnerNickname ?: "",
+                    profileImage = viewModel.profileImage ?: ""))
+                2 -> chatAdapter.add(c, ImageReceiveItem(message,
+                    viewModel = viewModel,
+                    isCont = isCont,
+                    nickName = viewModel.partnerNickname ?: "",
+                    profileImage = viewModel.profileImage ?: ""))
+                3 -> chatAdapter.add(c, AudioReceiveItem(message,
+                    viewModel = viewModel,
+                    isCont = isCont,
+                    nickName = viewModel.partnerNickname ?: "",
+                    profileImage = viewModel.profileImage ?: ""))
+                4 -> chatAdapter.add(c, TextTopicItem(message))
+                5 -> chatAdapter.add(c, ImageTopicItem(message, viewModel = viewModel))
+                6 -> chatAdapter.add(c, AudioTopicItem(message, viewModel = viewModel))
+                7 -> chatAdapter.add(c, DescriptionItem(message))
+            }
+        }
+
+    }
+
+    private fun addPagedMessageToMe2(message: Message) {
+
+        when (message.type) {
+            1 -> chatAdapter.add(0, TextSendItem(message))
+            2 -> chatAdapter.add(0, ImageSendItem(message, viewModel = viewModel))
+            3 -> chatAdapter.add(0, AudioSendItem(message, viewModel = viewModel))
+            4 -> chatAdapter.add(0, TextTopicItem(message))
+            5 -> chatAdapter.add(0, ImageTopicItem(message, viewModel = viewModel))
+            6 -> chatAdapter.add(0, AudioTopicItem(message, viewModel = viewModel))
+            7 -> chatAdapter.add(0, DescriptionItem(message))
+        }
+
+
+    }
+
+    private fun addPagedMessageToPartner2(message: Message) {
+
+
+        when (message.type) {
+            1 -> chatAdapter.add(0, TextReceiveItem(message,
+                isCont = isCont,
+                nickName = viewModel.partnerNickname ?: "",
+                profileImage = viewModel.profileImage ?: ""))
+            2 -> chatAdapter.add(0, ImageReceiveItem(message,
+                viewModel = viewModel,
+                isCont = isCont,
+                nickName = viewModel.partnerNickname ?: "",
+                profileImage = viewModel.profileImage ?: ""))
+            3 -> chatAdapter.add(0, AudioReceiveItem(message,
+                viewModel = viewModel,
+                isCont = isCont,
+                nickName = viewModel.partnerNickname ?: "",
+                profileImage = viewModel.profileImage ?: ""))
+            4 -> chatAdapter.add(0, TextTopicItem(message))
+            5 -> chatAdapter.add(0, ImageTopicItem(message, viewModel = viewModel))
+            6 -> chatAdapter.add(0, AudioTopicItem(message, viewModel = viewModel))
+            7 -> chatAdapter.add(0, DescriptionItem(message))
+        }
+
+
     }
 
 
@@ -565,7 +700,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         } else {
             view.setBackgroundColor(getColorByResId(R.color.matching_room_menu_bg))
         }
-
 
 
         val time = view.findViewById<TextView>(R.id.tv_time)

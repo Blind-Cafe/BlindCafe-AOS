@@ -21,6 +21,7 @@ class ImageReceiveItem(
     private val profileImage: String
 ): BindableItem<RvChatItemReceiveImageBinding>() {
     override fun bind(viewBinding: RvChatItemReceiveImageBinding, position: Int) {
+        viewBinding.root.tag = message.timestamp
 
         handleContinue(viewBinding)
 

@@ -17,6 +17,7 @@ class TextReceiveItem(
     private val profileImage: String
 ): BindableItem<RvChatItemReceiveTextBinding>() {
     override fun bind(viewBinding: RvChatItemReceiveTextBinding, position: Int) {
+        viewBinding.root.tag = message.timestamp
         if (isCont) {
             viewBinding.tvNickname.apply {
                 isGone = false
