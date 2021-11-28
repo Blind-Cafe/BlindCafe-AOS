@@ -170,7 +170,10 @@ class ExchangeOpenViewModel(
         } else {
             /** 상대방이 작성안했으니 '작성대기' 화면으로 이동 */
             data.nickname?.let {
-                moveToProfileWaitFragment(it)
+                moveToProfileWaitFragment(
+                    partnerNickname = it,
+                    reason = "프로필 작성"
+                )
             }
 
         }
@@ -226,16 +229,19 @@ class ExchangeOpenViewModel(
     private fun moveToExchangeAcceptFragment() {
         moveToDirections(ExchangeOpenFragmentDirections.actionExchangeOpenFragmentToExchangeAcceptFragment())
     }
-    private fun moveToProfileWaitFragment(partnerNickname: String) {
-        moveToDirections(ExchangeOpenFragmentDirections.actionExchangeOpenFragmentToExchangeWaitFragment(partnerNickname))
+    private fun moveToProfileWaitFragment(partnerNickname: String, reason: String) {
+        moveToDirections(ExchangeOpenFragmentDirections.actionExchangeOpenFragmentToExchangeWaitFragment(
+            partnerNickname = partnerNickname,
+            reason = reason
+        ))
     }
 
 
     private fun isCorrectNickname() = _nickname.value?.length in 1..9
     private fun canEnableNextButton() = isCorrectNickname() &&  !_location.value.isNullOrEmpty()
 
-    fun updateNextButton() {
-        _canEnableNext.value = canEnableNextButton()
+    fun updateNextButton(hasImage: Boolean) {
+        _canEnableNext.value = canEnableNextButton() && hasImage
     }
 
 

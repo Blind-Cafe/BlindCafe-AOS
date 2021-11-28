@@ -17,6 +17,7 @@ class ExchangeOpenFragment: BaseFragment<ExchangeOpenViewModel>(R.layout.fragmen
     override val viewModel: ExchangeOpenViewModel by viewModel()
     private var binding: FragmentExchangeOpenBinding? = null
     private val args: ExchangeOpenFragmentArgs by navArgs()
+    private var hasImage = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,7 +63,8 @@ class ExchangeOpenFragment: BaseFragment<ExchangeOpenViewModel>(R.layout.fragmen
 
     private fun observeNicknameData(fragmentExchangeOpenBinding: FragmentExchangeOpenBinding) = with(fragmentExchangeOpenBinding) {
         viewModel?.nickname?.observe(viewLifecycleOwner) { nick ->
-            viewModel?.updateNextButton()
+
+            viewModel?.updateNextButton(hasImage)
             Log.e("nickname", nick)
             if (nick.length in 1..9) {
                 tvNicknameRule.setTextColor(getColorByResId(R.color.gray_300))
@@ -80,7 +82,7 @@ class ExchangeOpenFragment: BaseFragment<ExchangeOpenViewModel>(R.layout.fragmen
             Log.e("profile edit", loc)
             tvLocationValue.text = loc
             etLocationValue.isGone = loc.isNotEmpty()
-            viewModel?.updateNextButton()
+            viewModel?.updateNextButton(hasImage)
         }
     }
 
@@ -102,6 +104,7 @@ class ExchangeOpenFragment: BaseFragment<ExchangeOpenViewModel>(R.layout.fragmen
             Glide.with(requireContext())
                 .load(url)
                 .into(ivProfileImage)
+            hasImage = true
         }
     }
 

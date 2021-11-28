@@ -228,7 +228,7 @@
     <string name="profile_exchange_publish">공개하기</string>
     <string name="profile_exchange_dismiss">거절하기</string>
     <string name="profile_exchange_accept">수락하기</string>
-    <string name="profile_exchange_wait">%s님이 프로필 작성중입니다. 잠시만 기다려주세요.</string>
+    <string name="profile_exchange_wait">%s님이 %s중입니다. 잠시만 기다려주세요.</string>
 
 
     <!-- profile dismiss -->

@@ -698,6 +698,9 @@
             app:argType="string"
             app:nullable="false"
             />
+        <argument android:name="reason"
+            app:argType="string"
+            app:nullable="false"/>
 
 
     </fragment>

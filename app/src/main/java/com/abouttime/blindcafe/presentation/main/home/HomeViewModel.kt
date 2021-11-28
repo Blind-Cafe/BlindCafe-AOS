@@ -133,7 +133,15 @@ class HomeViewModel(
 
         } else {
             /** 나 공개한 상태인데 상대방 작성 안 했으니 '상대 작성 대기' 화면으로 이동 */
-            moveToExchangeOpenWaitFragment()
+            partnerNickname?.let {
+                moveToExchangeOpenWaitFragment(
+                    partnerNickname = it,
+                    reason = "프로필 작성"
+                )
+            }
+
+
+
         }
     }
 
@@ -197,7 +205,12 @@ class HomeViewModel(
             }
             6 -> {
                 /** 나 수락한 상태(즉 상대방 작성 o)이니 '상대 수락 대기' 화면으로 이동 */
-                // TODO
+                partnerNickname?.let {
+                    moveToExchangeOpenWaitFragment(
+                        partnerNickname = it,
+                        reason = "수락 대기"
+                    )
+                }
             }
             7 -> {
                 /** 매칭 성공 -> 내 테이블로 이동 할 때 성공화면 pop 해야한다. */
@@ -275,10 +288,11 @@ class HomeViewModel(
         moveToDirections(MainFragmentDirections.actionMainFragmentToExchangeAcceptFragment())
     }
 
-    private fun moveToExchangeOpenWaitFragment() {
-        partnerNickname?.let {
-            moveToDirections(MainFragmentDirections.actionMainFragmentToExchangeWaitFragment(it))
-        }
+    private fun moveToExchangeOpenWaitFragment(partnerNickname: String, reason: String) {
+        moveToDirections(MainFragmentDirections.actionMainFragmentToExchangeWaitFragment(
+            partnerNickname = partnerNickname,
+            reason = reason
+        ))
 
     }
 
