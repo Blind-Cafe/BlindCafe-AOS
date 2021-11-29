@@ -190,6 +190,8 @@ class HomeViewModel(
     fun onClickCircleImageView(v: View) {
         val statusCode = _homeStatusCode.value
 
+
+        _time.value = startTime?.toLong()?.secondToLapseForHome()
         when (statusCode) {
             -1 -> {
                 showToast(R.string.temp_error)
@@ -236,13 +238,33 @@ class HomeViewModel(
                 /** 매칭 성공 -> 내 테이블로 이동 할 때 성공화면 pop 해야한다. */
                 moveToExchangeCompleteFragment()
             }
-            8, 9, 10 -> { // 방 폭파 or 프로필 교환 거절
-                if (partnerNickname != null && reason != null) {
-                    moveToExitFragment(partnerNickname!!, reason!!)
+            8 -> {
+                /** 방 폭파 by 상대 방 나감 */
+                partnerNickname?.let { nick ->
+                    reason?.let { r ->
+                        moveToExitFragmentByQuit(partnerNickname = nick, reason = r)
+                    }
                 }
-                _time.value = startTime?.toLong()?.secondToLapseForHome()
+
+            }
+            9 -> {
+                /** 방 폭파 by 상대가 나 신고 */
+                partnerNickname?.let { nick ->
+                    moveToExitFragmentByReport(nick)
+                }
+
+            }
+            10 -> {
+                /** 방 폭파 by 상대가 프로필 교환 거절 */
+                partnerNickname?.let { nick ->
+                    reason?.let { r ->
+                        moveToExitFragmentByDismissProfileExchange(partnerNickname = nick, reason = r)
+                    }
+                }
             }
             else -> {
+
+
             }
         }
     }
@@ -267,15 +289,32 @@ class HomeViewModel(
         ))
     }
 
-
-    private fun moveToExitFragment(partnerNickname: String, reason: String) {
+    private fun moveToExitFragmentByReport(partnerNickname: String) {
         moveToDirections(MainFragmentDirections.actionMainFragmentToExitFragment(
+            isAttacker = false,
+            isReport = true,
+            title = "%s님이 불편함을 느껴 대화를 종료했습니다.\n아쉽지만 새로운 손님과 또 다른 추억을 쌓으러 가보죠!".format(partnerNickname)
+        ))
+    }
+    private fun moveToExitFragmentByQuit(partnerNickname: String, reason: String) {
+        moveToDirections(MainFragmentDirections.actionMainFragmentToExitFragment(
+            isAttacker = false,
+            isReport = false,
+            title = "%s 님이 \"%s\" 라는 이유로 대화를 진행하지 못하게되었습니다.\n\n아쉽지만 새로운 손님과 또 다른 추억을 쌓을 수 있습니다.".format(
+                partnerNickname,
+                reason)
+        ))
+    }
+    private fun moveToExitFragmentByDismissProfileExchange(partnerNickname: String, reason: String) {
+        moveToDirections(MainFragmentDirections.actionMainFragmentToExitFragment(
+            isAttacker = false,
             isReport = false,
             title = "%s님이\"%s\"라는 이유로 대화를 진행하지 못하게되었습니다.\n\n아쉽지만 새로운 손님과 또 다른 추억을 쌓을 수 있습니다.".format(
                 partnerNickname,
-                reason) // TODO 리소스로 관리해라
+                reason)
         ))
     }
+
 
     private fun moveToConfirmDialogFragment(v: View) = with(v.resources) {
         moveToDirections(
@@ -298,7 +337,10 @@ class HomeViewModel(
     }
 
     private fun moveToExchangeCompleteFragment() {
-        moveToDirections(MainFragmentDirections.actionMainFragmentToExchangeCompleteFragment())
+        matchingId?.let { id ->
+            moveToDirections(MainFragmentDirections.actionMainFragmentToExchangeCompleteFragment(id))
+        }
+
     }
 
 

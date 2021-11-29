@@ -87,7 +87,7 @@ class ReportReasonViewModel(
                 no = v.resources.getString(R.string.report_confirm_no),
                 yes = v.resources.getString(R.string.report_confirm_yes),
                 reason = reason,
-                matchingId = matchingId
+                matchingId = matchingId,
             )
         )
     }

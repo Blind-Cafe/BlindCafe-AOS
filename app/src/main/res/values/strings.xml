@@ -20,6 +20,8 @@
     <string name="toast_fail">요청에 실패했습니다</string>
     <string name="interest">관심사</string>
 
+    <string name="toast_input_reason">이유를 한 가지 선택해주세요</string>
+
 
 
     <!-- rule -->
@@ -164,7 +166,7 @@
 
 
     <!-- quit complete -->
-    <string name="exit_complete_title">%s님과 3일간의 추억은 즐거우셨나요?\n이제 더 좋은 추억을 쌓으러 가보죠!</string>
+    <string name="exit_complete_title">%s 님과 %d일간의 추억은 즐거우셨나요?\n이제 더 좋은 추억을 쌓으러 가보죠!</string>
     <string name="exit_reported_title">%s님의 불편함을 느낀 대화를 종료했습니다.\n아쉽지만 새로운 손님과 또 다른 추억을 쌓으러 가볼까요?</string>
     <string name="exit_completed_title">%s님이\"%s\"라는 이유로 대화를 진행하지 못하게되었습니다.\n\n아쉽지만 새로운 손님과 또 다른 추억을 쌓을 수 있습니다.</string>
     <string name="exit_complete_next">새로운 손님과 합석하기</string>
@@ -241,9 +243,9 @@
     <string name="profile_dismiss_next">거절하기</string>
 
 
-    <!-- profile dismiss confirm -->
+    <!-- profile exchange dismiss confirm -->
     <string name="profile_dismiss_confirm_title">거절하시겠습니까?</string>
-    <string name="profile_dismiss_confirm_subtitle">지금 나가시면 로즈님과 다시 매칭 될 수 없어요</string>
+    <string name="profile_dismiss_confirm_subtitle">지금 나가시면 %s님과 다시 매칭 될 수 없어요</string>
     <string name="profile_dismiss_confirm_no">취소</string>
     <string name="profile_dismiss_confirm_yes">거절하기</string>
 

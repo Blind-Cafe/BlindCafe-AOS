@@ -171,6 +171,9 @@ dependencies {
     def lottieVersion = "3.4.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
-
+    // scroll bouncing
     implementation 'io.github.everythingme:overscroll-decor-android:1.1.1'
+
+    // loading dialog
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 }

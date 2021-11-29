@@ -38,13 +38,13 @@
 
 
         <TextView
-            android:id="@+id/tv_title_report"
+            android:id="@+id/tv_title_attacker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:gravity="center"
             android:lineSpacingExtra="15sp"
-            android:text="@string/exit_complete_title"
+            tools:text="@string/exit_complete_title"
             android:textColor="@color/white"
             android:textSize="@dimen/font_size_15"
             app:layout_constraintBottom_toBottomOf="@id/iv_background"
@@ -56,7 +56,7 @@
 
 
         <TextView
-            android:id="@+id/tv_title_reported"
+            android:id="@+id/tv_title_victim"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="23dp"

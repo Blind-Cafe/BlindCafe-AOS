@@ -55,3 +55,5 @@ internal fun Long.isOver72Hours(): Boolean {
     val seconds = currentTime - this
     return seconds > (Time.HOUR_72 * 60 * 60).toLong()
 }
+
+internal fun Long.to3RangeDays(): Int = if (!this.isOver24Hours()) 1 else if (!this.isOver48Hours()) 2 else 3

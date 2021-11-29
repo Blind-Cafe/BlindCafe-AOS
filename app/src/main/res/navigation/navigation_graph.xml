@@ -269,8 +269,7 @@
         <argument
             android:name="chatRoomInfo"
             app:argType="com.abouttime.blindcafe.domain.model.ChatRoom"
-            app:nullable="false"
-            />
+            app:nullable="false" />
 
 
         <action
@@ -378,6 +377,14 @@
             android:name="matchingId"
             app:argType="integer"
             app:nullable="false" />
+        <argument
+            android:name="partnerNickname"
+            app:argType="string"
+            />
+
+        <argument android:name="startTime"
+            app:argType="integer"/>
+
         <action
             android:id="@+id/action_quitReasonDialogFragment_to_confirmDialogFragment"
             app:destination="@id/confirmDialogFragment"
@@ -393,6 +400,7 @@
             android:name="matchingId"
             app:argType="integer"
             app:nullable="false" />
+
         <action
             android:id="@+id/action_reportReasonDialogFragment_to_confirmDialogFragment"
             app:destination="@id/confirmDialogFragment"
@@ -423,9 +431,20 @@
         android:name="com.abouttime.blindcafe.presentation.profile_exchange.dismiss.ExchangeDismissFragment"
         android:label="ExchangeDismissFragment"
         tools:layout="@layout/fragment_exchange_dismiss">
+
+        <argument
+            android:name="matchingId"
+            app:argType="integer" />
+
+        <argument android:name="partnerNickname"
+            app:argType="string"/>
+        <argument android:name="startTime"
+            app:argType="integer"/>
+
         <action
             android:id="@+id/action_exchangeDismissFragment_to_confirmDialogFragment"
             app:destination="@id/confirmDialogFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/reportListFragment"
@@ -472,12 +491,20 @@
         android:id="@+id/exchangeCompleteFragment"
         android:name="com.abouttime.blindcafe.presentation.profile_exchange.complete.ExchangeCompleteFragment"
         android:label="ExchangeCompleteFragment"
-        tools:layout="@layout/fragment_exchange_complete" />
+        tools:layout="@layout/fragment_exchange_complete">
+        <argument android:name="matchingId"
+            app:argType="integer"/>
+
+
+    </fragment>
     <fragment
         android:id="@+id/exitFragment"
         android:name="com.abouttime.blindcafe.presentation.main.home.exit.ExitFragment"
         android:label="ExitFragment"
         tools:layout="@layout/fragment_exit">
+        <argument android:name="isAttacker"
+            app:argType="boolean"
+            app:nullable="false"/>
         <argument
             android:name="isReport"
             app:argType="boolean"
@@ -496,13 +523,16 @@
         android:label="ExchangeAcceptFragment"
         tools:layout="@layout/fragment_exchange_accept">
 
-        <argument android:name="matchingId"
-            app:argType="integer"/>
+        <argument
+            android:name="matchingId"
+            app:argType="integer" />
 
 
         <action
             android:id="@+id/exchangeAcceptFragment_to_exchangeCompleteFragment"
             app:destination="@id/exchangeCompleteFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/exchangeAcceptFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -517,6 +547,15 @@
         <action
             android:id="@+id/action_exchangeAcceptFragment_to_acceptImageDialogFragment"
             app:destination="@id/acceptImageDialogFragment" />
+        <action
+            android:id="@+id/action_exchangeAcceptFragment_to_exitFragment"
+            app:popUpTo="@id/exchangeAcceptFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/exitFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <dialog
         android:id="@+id/confirmDialogFragment"
@@ -553,6 +592,16 @@
             android:name="matchingId"
             android:defaultValue="0"
             app:argType="integer" />
+
+        <argument
+            android:name="nickname"
+            android:defaultValue=""
+            app:argType="string"
+            />
+        <argument
+            android:name="startTime"
+            android:defaultValue="0"
+            app:argType="integer"/>
 
 
         <action
@@ -669,24 +718,26 @@
         <action
             android:id="@+id/action_exchangeOpenFragment_to_exchangeAcceptFragment"
             app:destination="@id/exchangeAcceptFragment"
+            app:popUpTo="@id/exchangeOpenFragment"
+            app:popUpToInclusive="true"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_exchangeOpenFragment_to_locationFragment"
             app:destination="@id/locationFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_exchangeOpenFragment_to_exchangeWaitFragment"
             app:destination="@id/exchangeWaitFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
 
@@ -695,28 +746,27 @@
         android:name="com.abouttime.blindcafe.presentation.profile_exchange.wait.ExchangeWaitFragment"
         android:label="ExchangeWaitFragment"
         tools:layout="@layout/fragment_exchange_wait">
-        <argument android:name="partnerNickname"
+        <argument
+            android:name="partnerNickname"
             app:argType="string"
-            app:nullable="false"
-            />
-        <argument android:name="reason"
+            app:nullable="false" />
+        <argument
+            android:name="reason"
             app:argType="string"
-            app:nullable="false"/>
+            app:nullable="false" />
 
 
     </fragment>
 
     <fragment
-        tools:layout="@layout/dialog_fragment_profile_image"
         android:id="@+id/acceptImageDialogFragment"
         android:name="com.abouttime.blindcafe.presentation.profile_exchange.accept.profile_image.AcceptImageDialogFragment"
-        android:label="AcceptImageDialogFragment">
+        android:label="AcceptImageDialogFragment"
+        tools:layout="@layout/dialog_fragment_profile_image">
 
-        <argument android:name="partnerUserId"
-            app:argType="integer"
-            />
-
-
+        <argument
+            android:name="partnerUserId"
+            app:argType="integer" />
 
 
     </fragment>

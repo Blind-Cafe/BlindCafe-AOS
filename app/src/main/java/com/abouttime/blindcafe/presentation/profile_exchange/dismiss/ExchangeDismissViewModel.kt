@@ -11,7 +11,9 @@ class ExchangeDismissViewModel: BaseViewModel() {
     private val _reason = MutableLiveData(0)
     val reason: LiveData<Int> get() = _reason
 
-
+    var matchingId: Int? = null
+    var partnerNickname: String? = null
+    var startTime: Int? = null
 
     fun onClickCheckButton(view: View) {
         when(view.id) {
@@ -24,14 +26,34 @@ class ExchangeDismissViewModel: BaseViewModel() {
     }
 
     fun onClickNextButton(v: View) {
-        moveToDirections(
-            ExchangeDismissFragmentDirections.actionExchangeDismissFragmentToConfirmDialogFragment(
-                id = R.string.profile_dismiss_confirm_title,
-                title = v.resources.getString(R.string.profile_dismiss_confirm_title),
-                subtitle = v.resources.getString(R.string.profile_dismiss_confirm_subtitle).format("닉네임"), // TODO 닉네임 넣어
-                no = v.resources.getString(R.string.profile_dismiss_confirm_no),
-                yes = v.resources.getString(R.string.profile_dismiss_confirm_yes)
-            )
-        )
+        if (_reason.value != 0) {
+            matchingId?.let { id ->
+                _reason.value?.let { r ->
+                    partnerNickname?.let { nick ->
+                        startTime?.let { time ->
+                            moveToDirections(
+                                ExchangeDismissFragmentDirections.actionExchangeDismissFragmentToConfirmDialogFragment(
+                                    id = R.string.profile_dismiss_confirm_title,
+                                    title = v.resources.getString(R.string.profile_dismiss_confirm_title),
+                                    subtitle = v.resources.getString(R.string.profile_dismiss_confirm_subtitle).format(nick),
+                                    no = v.resources.getString(R.string.profile_dismiss_confirm_no),
+                                    yes = v.resources.getString(R.string.profile_dismiss_confirm_yes),
+                                    matchingId = id,
+                                    reason = r,
+                                    nickname = nick,
+                                    startTime = time
+                                )
+                            )
+                        }
+
+                    }
+                }
+
+            }
+
+        } else {
+            showToast(R.string.toast_input_reason)
+        }
+
     }
 }

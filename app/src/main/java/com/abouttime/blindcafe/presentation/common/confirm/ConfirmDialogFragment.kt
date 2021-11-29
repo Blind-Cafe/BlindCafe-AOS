@@ -9,7 +9,6 @@ import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseDialogFragment
 import com.abouttime.blindcafe.common.constants.NavigationKey.CONFIRM_MATCHING_CANCEL
 import com.abouttime.blindcafe.common.constants.NavigationKey.CONFIRM_NO
-import com.abouttime.blindcafe.common.constants.PreferenceKey.NICKNAME
 import com.abouttime.blindcafe.databinding.DialogFragmentConfirmBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -47,7 +46,7 @@ class ConfirmDialogFragment :
                 handleHomeMatchingCancel()
             }
             R.string.profile_dismiss_confirm_title -> {
-                handleProfileDismiss()
+                handleProfileExchangeDismiss()
             }
             R.string.logout_confirm_title -> {
                 handleLogout()
@@ -63,6 +62,7 @@ class ConfirmDialogFragment :
             }
         }
     }
+
     private fun handleHomeMatchingCancel() {
         handleYesButton { viewModel.postCancelMatching() }
         handleNoButton {
@@ -72,8 +72,22 @@ class ConfirmDialogFragment :
         }
     }
 
-    private fun handleProfileDismiss() {
-        handleYesButton { } // TODO 프로필 교환 거절 api 추가
+    private fun handleProfileExchangeDismiss() {
+        val matchingId = args.matchingId
+        val reason = args.reason
+        val partnerNickname = args.nickname
+        val startTime = args.startTime
+
+        handleYesButton {
+            if (matchingId != 0 && reason != 0 && partnerNickname != "" && startTime != 0) {
+                viewModel.dismissMatching(
+                    matchingId = matchingId,
+                    reason = reason,
+                    partnerNickname = partnerNickname,
+                    startTime = startTime
+                )
+            }
+        }
         handleNoButton { popOneDirections() }
     }
 
@@ -83,7 +97,7 @@ class ConfirmDialogFragment :
     }
 
     private fun handleDeleteAccount() {
-        handleYesButton {  viewModel.deleteAccount(args.reason) }
+        handleYesButton { viewModel.deleteAccount(args.reason) }
         handleNoButton { popOneDirections() }
     }
 
@@ -91,8 +105,7 @@ class ConfirmDialogFragment :
         binding?.tvNo?.isGone = true
 
         handleYesButton {
-            val title = getString(R.string.exit_complete_title).format(getStringData(NICKNAME))
-            viewModel.exitChatRoomByReport(true, title)
+            viewModel.exitChatRoomByReport()
         }
         handleNoButton {
             popOneDirections()
@@ -102,18 +115,17 @@ class ConfirmDialogFragment :
     private fun handleQuit() {
         val matchingId = args.matchingId
         val reason = args.reason
-
+        val partnerNickname = args.nickname
+        val startTime = args.startTime
         handleYesButton {
-            if (matchingId != 0 && reason != 0) {
-                val title = getString(R.string.exit_complete_title).format(getStringData(NICKNAME))
-                viewModel.exitChatRoom(matchingId, reason, false, title)
+            if (matchingId != 0 && reason != 0 && partnerNickname != "" && startTime != 0) {
+                viewModel.exitChatRoom(matchingId, reason, partnerNickname, startTime)
             } else {
                 showToast(R.string.toast_fail)
             }
         }
         handleNoButton { popOneDirections() }
     }
-
 
 
     /** yes/no button **/

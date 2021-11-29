@@ -23,23 +23,48 @@ class ExitFragment: BaseFragment<ExitViewModel>(R.layout.fragment_exit) {
         binding?.lifecycleOwner = this
         binding?.viewModel = viewModel
 
+        initArgs()
 
-        initTitleTextView(fragmentExitBinding)
 
     }
+    private fun initArgs() {
+        val isAttacker = args.isAttacker
+        val isReport = args.isReport
+        val title = args.title
 
-    private fun initTitleTextView(fragmentExitBinding: FragmentExitBinding) = with(fragmentExitBinding) {
-        if (args.isReport) {
-            tvTitleReport.isGone = false
-            tvTitleReported.isGone = true
-            tvTitleReport.text = args.title
+        if (isAttacker) {
+            handleAttacker(title)
         } else {
-            tvTitleReport.isGone = true
-            tvTitleReported.isGone = false
-            tvTitleReported.text = args.title // TODO Text Decoration 필요!!
+            handleVictim(isReport, title)
+        }
+    }
+    private fun handleAttacker(title: String) {
+        binding?.let { b ->
+            with(b) {
+                tvTitleAttacker.isGone = false
+                tvTitleVictim.isGone = true
+
+                tvTitleAttacker.text = title
+            }
+        }
+    }
+    private fun handleVictim(isReport: Boolean, title: String) {
+        binding?.let { b ->
+            with(b) {
+                tvTitleAttacker.isGone = true
+                tvTitleVictim.isGone = false
+                tvTitleAttacker.text = title
+
+                if (!isReport) {
+                    // TODO 텍스트 데코레이션 필요!
+                }
+            }
         }
 
     }
+
+
+
 
 
 }

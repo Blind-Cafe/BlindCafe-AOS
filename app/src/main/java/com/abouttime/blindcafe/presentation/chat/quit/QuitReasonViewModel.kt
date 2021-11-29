@@ -12,6 +12,8 @@ class QuitReasonViewModel: BaseViewModel() {
     val reason: LiveData<Int> get() = _reason
 
     var matchingId: Int? = null
+    var partnerNickname: String? = null
+    var startTime: Int? = null
 
 
 

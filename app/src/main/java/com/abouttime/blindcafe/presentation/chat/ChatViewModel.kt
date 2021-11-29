@@ -335,10 +335,18 @@ class ChatViewModel(
 
     /** navigate **/
     fun moveToQuitDialogFragment() {
-        matchingId?.let {
-            moveToDirections(ChatFragmentDirections.actionChatFragmentToQuitReasonDialogFragment(
-                matchingId = it
-            ))
+        matchingId?.let { mId ->
+            partnerNickname?.let { nick ->
+                startTime?.let { time ->
+                    moveToDirections(ChatFragmentDirections.actionChatFragmentToQuitReasonDialogFragment(
+                        matchingId = mId,
+                        partnerNickname = nick,
+                        startTime = time.toInt()
+                    ))
+
+                }
+            }
+
         } ?: kotlin.run {
             popDirections()
         }

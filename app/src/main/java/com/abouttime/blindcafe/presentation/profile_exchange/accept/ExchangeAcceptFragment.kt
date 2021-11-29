@@ -28,6 +28,7 @@ class ExchangeAcceptFragment: BaseFragment<ExchangeAcceptViewModel>(R.layout.fra
     private fun initArgs() {
         viewModel.matchingId = args.matchingId
         viewModel.getPartnerProfile(args.matchingId)
+        viewModel.getChatRoomInfo(args.matchingId)
     }
 
     @SuppressLint("SetTextI18n")
