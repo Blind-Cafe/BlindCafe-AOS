@@ -3,7 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/transparent"
-    android:backgroundTint="@color/transparent"
+    style="@style/DialogStyle"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.airbnb.lottie.LottieAnimationView
@@ -12,10 +12,11 @@
         android:layout_height="120dp"
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:lottie_rawRes="@raw/loading"
+        app:lottie_rawRes="@raw/temp_loading"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"/>
 

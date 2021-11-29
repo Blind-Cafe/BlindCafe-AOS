@@ -26,6 +26,7 @@ class AudioSendItem(
                 message = message,
                 callback = { uri ->
                     viewBinding.lpiProgress.isClickable = false
+                    viewBinding.ivPlayController.isClickable = false
 
 
                     val mediaPlayer = MediaPlayer()
@@ -55,6 +56,7 @@ class AudioSendItem(
                         viewBinding.lpiProgress.progress = 0
                         isPlaying = false
                         viewBinding.lpiProgress.isClickable = true
+                        viewBinding.ivPlayController.isClickable = true
                         mediaPlayer.release()
                     }
 

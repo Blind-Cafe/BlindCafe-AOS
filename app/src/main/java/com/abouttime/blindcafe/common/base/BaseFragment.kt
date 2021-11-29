@@ -50,16 +50,18 @@ abstract class BaseFragment<VM : BaseViewModel>(layoutId: Int) : Fragment(layout
     private fun initLoadingDialog() {
         loadingDialog = Dialog(requireContext())
         loadingDialog.setContentView(R.layout.dialog_fragment_loading)
-        loadingDialog.setCanceledOnTouchOutside(true)
+        loadingDialog.setCanceledOnTouchOutside(false)
         loadingDialog.window?.setGravity(Gravity.CENTER)
     }
 
     protected fun showLoadingDialog() {
-        //loadingDialog.show()
+        loadingDialog.show()
     }
 
     protected fun dismissLoadingDialog() {
-        //loadingDialog.dismiss()
+        if (loadingDialog.isShowing) {
+            loadingDialog.dismiss()
+        }
     }
 
     private fun observeToastEvent() {

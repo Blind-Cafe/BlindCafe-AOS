@@ -27,6 +27,8 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
         binding?.viewModel = viewModel
         binding?.lifecycleOwner = this
 
+
+
         observeHomeStatus()
         observeSavedNavigationData()
     }

@@ -53,6 +53,10 @@
         <item name="behavior_draggable">true</item>
 
     </style>
+    <style name="DialogStyle"
+        parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowBackground">@color/transparent</item>
+    </style>
 
 
 </resources>

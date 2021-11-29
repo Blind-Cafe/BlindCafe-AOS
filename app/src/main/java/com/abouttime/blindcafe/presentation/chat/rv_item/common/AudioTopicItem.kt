@@ -24,7 +24,8 @@ class AudioTopicItem(
         var isPlaying = false
         viewBinding.ivPlayController.setOnClickListener {
             message.contents?.let { uri ->
-                viewBinding.root.isClickable = false
+                viewBinding.lpiProgress.isClickable = false
+                viewBinding.ivPlayController.isClickable = false
 
 
                 val mediaPlayer = MediaPlayer()
@@ -50,7 +51,8 @@ class AudioTopicItem(
                     viewBinding.tvAudioTime.text = "00:00"
                     viewBinding.lpiProgress.progress = 0
                     isPlaying = false
-                    viewBinding.root.isClickable = true
+                    viewBinding.lpiProgress.isClickable = true
+                    viewBinding.ivPlayController.isClickable = true
                     mediaPlayer.release()
                 }
 

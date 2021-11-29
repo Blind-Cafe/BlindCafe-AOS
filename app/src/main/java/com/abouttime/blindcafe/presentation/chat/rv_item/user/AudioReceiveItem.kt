@@ -34,7 +34,8 @@ class AudioReceiveItem(
             viewModel.downloadAudioUrl(
                 message = message,
                 callback = { uri ->
-                    viewBinding.root.isClickable = false
+                    viewBinding.lpiProgress.isClickable = false
+                    viewBinding.ivPlayController.isClickable = false
 
                     val mediaPlayer = MediaPlayer()
                     mediaPlayer.setDataSource(uri.toString())
@@ -59,7 +60,8 @@ class AudioReceiveItem(
                         viewBinding.tvAudioTime.text = "00:00"
                         viewBinding.lpiProgress.progress = 0
                         isPlaying = false
-                        viewBinding.root.isClickable = false
+                        viewBinding.lpiProgress.isClickable = true
+                        viewBinding.ivPlayController.isClickable = true
                         mediaPlayer.release()
                     }
 
