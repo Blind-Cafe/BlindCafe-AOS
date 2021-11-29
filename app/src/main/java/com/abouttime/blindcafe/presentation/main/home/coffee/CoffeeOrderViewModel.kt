@@ -23,7 +23,6 @@ import kotlinx.coroutines.launch
 
 class CoffeeOrderViewModel(
     private val postDrinkUseCase: PostDrinkUseCase,
-    private val sendMessageUseCase: SendMessageUseCase,
     private val getChatRoomInfoUseCase: GetChatRoomInfoUseCase,
 ) : BaseViewModel() {
     private val _nextButton: MutableLiveData<Boolean> = MutableLiveData(false)
@@ -68,21 +67,6 @@ class CoffeeOrderViewModel(
         R.drawable.bt_drink_selected_9,
     )
     val isSelected = Array(9) { false }
-
-    fun mapToDrinkName(idx: Int): String {
-        return when (idx) {
-            1 -> "아메리카노"
-            2 -> "카페라떼"
-            3 -> "카페모카"
-            4 -> "버블티"
-            5 -> "민트초코"
-            6 -> "딸기 스무디"
-            7 -> "블루 레몬 에이드"
-            8 -> "녹차"
-            9 -> "자몽티"
-            else -> ""
-        }
-    }
 
 
     fun updateNextButton() {
@@ -137,19 +121,17 @@ class CoffeeOrderViewModel(
         getChatRoomInfoUseCase(mId).onEach { result ->
             when (result) {
                 is Resource.Loading -> {
+                    showLoading()
                 }
                 is Resource.Success -> {
                     result.data?.let { dto ->
-                        matchingId?.let { mId ->
-
-                        }
                         this@CoffeeOrderViewModel.matchingId = dto.matchingId
                         this@CoffeeOrderViewModel.profileImage = dto.profileImage
                         this@CoffeeOrderViewModel.drink = dto.drink
                         this@CoffeeOrderViewModel.commonInterest = interest
                         this@CoffeeOrderViewModel.startTime = dto.startTime
                         this@CoffeeOrderViewModel.interest = dto.interest
-
+                        dismissLoading()
                     }
 
                     result.data?.toChatRoom()?.let { cr ->
@@ -158,6 +140,7 @@ class CoffeeOrderViewModel(
 
                 }
                 is Resource.Error -> {
+                    dismissLoading()
                 }
             }
 
@@ -165,22 +148,6 @@ class CoffeeOrderViewModel(
 
     }
 
-    private fun sendDescriptionMessage(message: Message) = viewModelScope.launch(Dispatchers.IO) {
-        sendMessageUseCase(message).onEach { result ->
-            when (result) {
-                is Resource.Loading -> {
-                    Log.d(LogTag.FIRESTORE_TAG, "Loading")
-                }
-                is Resource.Success -> {
-                    Log.d(LogTag.FIRESTORE_TAG, "${result.data?.id}")
-                }
-                is Resource.Error -> {
-                    Log.d(LogTag.FIRESTORE_TAG, "Error")
-                }
-            }
-
-        }.launchIn(viewModelScope)
-    }
 
 
     fun onClickNextButton() {

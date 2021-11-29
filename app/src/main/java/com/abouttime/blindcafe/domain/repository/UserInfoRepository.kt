@@ -30,7 +30,7 @@ interface UserInfoRepository {
     suspend fun getMyProfileImage(): GetProfileImageDto?
     suspend fun patchProfileImage(priority: RequestBody, image: MultipartBody.Part?): Call<Unit>
     suspend fun getProfileForOpen(matchingId: Int): GetProfileForOpenDto?
-    suspend fun postProfileForOpen(postProfileForOpenDto: PostProfileForOpenDto): PostProfileForOpenResponse?
+    suspend fun postProfileForOpen(matchingId: Int, postProfileForOpenDto: PostProfileForOpenDto): PostProfileForOpenResponse?
     suspend fun getPartnerProfile(matchingId: Int): GetPartnerProfileDto?
     suspend fun deleteProfileImage(priority: Int)
 

@@ -779,7 +779,7 @@
 
     </fragment>
 
-    <fragment
+    <dialog
         android:id="@+id/acceptImageDialogFragment"
         android:name="com.abouttime.blindcafe.presentation.profile_exchange.accept.profile_image.AcceptImageDialogFragment"
         android:label="AcceptImageDialogFragment"
@@ -790,5 +790,5 @@
             app:argType="integer" />
 
 
-    </fragment>
+    </dialog>
 </navigation>

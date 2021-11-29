@@ -36,7 +36,9 @@ import com.abouttime.blindcafe.presentation.profile_exchange.accept.ExchangeAcce
 import com.abouttime.blindcafe.presentation.profile_exchange.complete.ExchangeCompleteViewModel
 import com.abouttime.blindcafe.presentation.profile_exchange.dismiss.ExchangeDismissViewModel
 import com.abouttime.blindcafe.presentation.edit.location.LocationViewModel
+import com.abouttime.blindcafe.presentation.profile_exchange.accept.profile_image.AcceptImageViewModel
 import com.abouttime.blindcafe.presentation.profile_exchange.open.ExchangeOpenViewModel
+import com.abouttime.blindcafe.presentation.profile_exchange.wait.ExchangeWaitViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -71,7 +73,7 @@ internal val viewModelModule = module {
 
     /** Main - Home **/
     viewModel { HomeViewModel(get(), get(), get(), get()) }
-    viewModel { CoffeeOrderViewModel(get(), get(), get()) }
+    viewModel { CoffeeOrderViewModel(get(), get()) }
     viewModel { ExitViewModel() }
 
     /** Main - Dormancy **/
@@ -99,7 +101,8 @@ internal val viewModelModule = module {
     viewModel { ExchangeCompleteViewModel(get()) }
     viewModel { ExchangeDismissViewModel() }
     viewModel { ExchangeOpenViewModel(get(), get()) }
-
+    viewModel { ExchangeWaitViewModel() }
+    viewModel { AcceptImageViewModel(get()) }
 
     /** Edit **/
     viewModel { LocationViewModel() }

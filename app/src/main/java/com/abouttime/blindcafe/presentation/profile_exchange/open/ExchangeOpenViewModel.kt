@@ -49,10 +49,12 @@ class ExchangeOpenViewModel(
     private val _canEnableNext = MutableLiveData<Boolean>(false)
     val canEnableNext: LiveData<Boolean> get() = _canEnableNext
 
-    private val _profileImage = MutableLiveData<String>()
-    val profileImage: LiveData<String> get() = _profileImage
+    private val _profileImage = MutableLiveData<String?>()
+    val profileImage: LiveData<String?> get() = _profileImage
 
-    var partnerNickname: String? = null
+    private var _partnerNickname = MutableLiveData<String>()
+    val partnerNickname: LiveData<String> get() = _partnerNickname
+
 
     var matchingId: Int? = null
 
@@ -87,27 +89,30 @@ class ExchangeOpenViewModel(
 
 
     private fun postProfileForOpen(postProfileForOpenDto: PostProfileForOpenDto) {
-        postProfileForOpenUseCase(postProfileForOpenDto).onEach { result ->
-            when(result) {
-                is Resource.Loading -> {
-                    showLoading()
-                }
-                is Resource.Success -> {
-                    result.data?.let { dto ->
-                        handlePostResult(dto)
+        matchingId?.let { id ->
+            postProfileForOpenUseCase(id, postProfileForOpenDto).onEach { result ->
+                when(result) {
+                    is Resource.Loading -> {
+                        showLoading()
                     }
-                    _nickname.value?.let {
-                        saveStringData(Pair(NICKNAME, it))
-                    }
+                    is Resource.Success -> {
+                        result.data?.let { dto ->
+                            handlePostResult(dto)
+                        }
+                        _nickname.value?.let {
+                            saveStringData(Pair(NICKNAME, it))
+                        }
 
-                    dismissLoading()
+                        dismissLoading()
+                    }
+                    is Resource.Error -> {
+                        showToast(R.string.temp_error)
+                        dismissLoading()
+                    }
                 }
-                is Resource.Error -> {
-                    showToast(R.string.temp_error)
-                    dismissLoading()
-                }
-            }
-        }.launchIn(viewModelScope)
+            }.launchIn(viewModelScope)
+        }
+
 
     }
 
@@ -129,10 +134,10 @@ class ExchangeOpenViewModel(
             _interests.value = it
         }
         data.profileImage?.let {
-            _profileImage.value = data.profileImage.toString()
+            _profileImage.value = data.profileImage
         }
 
-        partnerNickname = data.partnerNickname
+        _partnerNickname.value = data.partnerNickname!!
 
         data.nickname?.let {
             saveStringData(Pair(NICKNAME, it))
@@ -193,8 +198,8 @@ class ExchangeOpenViewModel(
             if (_nickname.value != null && state != null && region != null) {
                 val dto = PostProfileForOpenDto(
                     nickname = _nickname.value!!,
-                    state = state,
-                    region = region
+                    state = state!!,
+                    region = region!!
                 )
                 postProfileForOpen(dto)
             } else {

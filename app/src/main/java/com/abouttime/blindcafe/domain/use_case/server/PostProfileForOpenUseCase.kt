@@ -12,17 +12,17 @@ import retrofit2.HttpException
 class PostProfileForOpenUseCase(
     private val repository: UserInfoRepository
 ) {
-    operator fun invoke(postProfileForOpenDto: PostProfileForOpenDto): Flow<Resource<PostProfileForOpenResponse?>> = flow {
-        emit(Resource.Loading())
+    operator fun invoke(matchingId: Int, postProfileForOpenDto: PostProfileForOpenDto): Flow<Resource<PostProfileForOpenResponse?>> = flow {
+        emit(Resource.Loading<PostProfileForOpenResponse?>())
         try {
-            val response = repository.postProfileForOpen(postProfileForOpenDto)
+            val response = repository.postProfileForOpen(matchingId, postProfileForOpenDto)
             emit(Resource.Success(response))
         } catch (e: Exception) {
             if (e is HttpException) {
                 val message = e.parseErrorBody()
-                emit(Resource.Error(message = message.code.toString()))
+                emit(Resource.Error<PostProfileForOpenResponse?>(message = message.code.toString()))
             } else {
-                emit(Resource.Error(message = e.message.toString()))
+                emit(Resource.Error<PostProfileForOpenResponse?>(message = e.message.toString()))
             }
         }
     }

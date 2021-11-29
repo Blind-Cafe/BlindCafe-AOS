@@ -14,16 +14,16 @@ class GetProfileImageUseCase(
     private val repository: UserInfoRepository
 ) {
     operator fun invoke(userId: Int): Flow<Resource<GetProfileImageDto?>> = flow {
-        emit(Resource.Loading())
+        emit(Resource.Loading<GetProfileImageDto?>())
         try {
             val response = repository.getProfileImage(userId)
             emit(Resource.Success(response))
         } catch (e: Exception) {
             if (e is HttpException) {
                 val message = e.parseErrorBody()
-                emit(Resource.Error(message = message.code.toString()))
+                emit(Resource.Error<GetProfileImageDto?>(message = message.code.toString()))
             } else {
-                emit(Resource.Error(message = e.message.toString()))
+                emit(Resource.Error<GetProfileImageDto?>(message = e.message.toString()))
             }
         }
     }

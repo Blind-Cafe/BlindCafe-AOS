@@ -67,8 +67,8 @@ class UserInfoRepositoryImpl(
         return userInfoApi.getProfileForOpen(matchingId)
     }
 
-    override suspend fun postProfileForOpen(postProfileForOpenDto: PostProfileForOpenDto): PostProfileForOpenResponse? {
-        return userInfoApi.postProfileForOpen(postProfileForOpenDto)
+    override suspend fun postProfileForOpen(matchingId: Int, postProfileForOpenDto: PostProfileForOpenDto): PostProfileForOpenResponse? {
+        return userInfoApi.postProfileForOpen(matchingId = matchingId, postProfileForOpenDto = postProfileForOpenDto)
     }
 
     override suspend fun getPartnerProfile(matchingId: Int): GetPartnerProfileDto? {

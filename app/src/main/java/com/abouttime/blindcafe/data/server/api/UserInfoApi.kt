@@ -88,6 +88,7 @@ interface UserInfoApi {
 
     @POST(POST_PROFILE_FOR_OPEN_URL)
     suspend fun postProfileForOpen(
+        @Path("matchingId") matchingId: Int,
         @Body postProfileForOpenDto: PostProfileForOpenDto
     ): PostProfileForOpenResponse?
 

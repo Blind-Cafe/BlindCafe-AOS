@@ -36,6 +36,7 @@ class ExchangeOpenFragment: BaseFragment<ExchangeOpenViewModel>(R.layout.fragmen
         observeNicknameData(fragmentExchangeOpenBinding)
         observeInterestsData(fragmentExchangeOpenBinding)
         observeProfileImageData(fragmentExchangeOpenBinding)
+        observePartnerNicknameData()
     }
 
     private fun initNavArgs() {
@@ -64,7 +65,6 @@ class ExchangeOpenFragment: BaseFragment<ExchangeOpenViewModel>(R.layout.fragmen
 
     private fun observeNicknameData(fragmentExchangeOpenBinding: FragmentExchangeOpenBinding) = with(fragmentExchangeOpenBinding) {
         viewModel?.nickname?.observe(viewLifecycleOwner) { nick ->
-
             viewModel?.updateNextButton(hasImage)
             Log.e("nickname", nick)
             if (nick.length in 1..9) {
@@ -102,11 +102,32 @@ class ExchangeOpenFragment: BaseFragment<ExchangeOpenViewModel>(R.layout.fragmen
 
     private fun observeProfileImageData(fragmentExchangeOpenBinding: FragmentExchangeOpenBinding) = with(fragmentExchangeOpenBinding) {
         viewModel?.profileImage?.observe(viewLifecycleOwner) { url ->
-            Glide.with(requireContext())
-                .load(url)
-                .into(ivProfileImage)
-            hasImage = true
+
+            url?.let {
+                Glide.with(requireContext())
+                    .load(url)
+                    .circleCrop()
+                    .into(ivProfileImage)
+                hasImage = true
+            } ?: kotlin.run {
+                ivProfileImage.setImageResource(R.drawable.ic_profile_image_none)
+                hasImage = false
+            }
+
         }
+    }
+
+
+    private fun observePartnerNicknameData() {
+        viewModel?.partnerNickname.observe(viewLifecycleOwner) { pName ->
+            binding?.let { b ->
+                b.tvSubtitle1.text  = getStringByResId(R.string.profile_exchange_subtitle_1).format(pName)
+                b.tvSubtitle2.text = getStringByResId(R.string.profile_exchange_subtitle_2).format(pName)
+                b.tvSubtitle3.text = getStringByResId(R.string.exchange_open_alert).format(pName)
+            }
+
+        }
+
     }
 
 }

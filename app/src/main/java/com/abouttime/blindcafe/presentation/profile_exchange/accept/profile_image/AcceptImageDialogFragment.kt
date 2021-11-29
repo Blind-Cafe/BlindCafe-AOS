@@ -19,9 +19,14 @@ class AcceptImageDialogFragment: BaseDialogFragment<AcceptImageViewModel>(R.layo
         super.onViewCreated(view, savedInstanceState)
         val dialogFragmentProfileImageBinding = DialogFragmentProfileImageBinding.bind(view)
         binding = dialogFragmentProfileImageBinding
+
+
+
+        initArgs()
         observeImageUrlsData()
         initViewPager2(dialogFragmentProfileImageBinding)
-        initArgs()
+        initBackButton()
+
     }
 
     private fun initArgs() {
@@ -39,6 +44,12 @@ class AcceptImageDialogFragment: BaseDialogFragment<AcceptImageViewModel>(R.layo
         adapter = AcceptImageVpAdapter()
         vpImageContainer.adapter = adapter
         diIndicator.setViewPager2(vpImageContainer)
+    }
+
+    private fun initBackButton() {
+        binding?.ivBack?.setOnClickListener {
+            popOneDirections()
+        }
     }
 
 }

@@ -11,6 +11,8 @@ import com.abouttime.blindcafe.data.server.dto.matching.Partner
 import com.abouttime.blindcafe.databinding.RvChatListItemBinding
 import com.bumptech.glide.Glide
 import com.google.gson.annotations.SerializedName
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 
 class ChatListRvAdapter(
@@ -30,7 +32,8 @@ class ChatListRvAdapter(
 
             match?.matchingId?.let { id ->
                 viewModel.subscribeLastMessage(id) { m ->
-                    val lastContent = when (m.type) {
+
+                         val lastContent = when (m.type) {
                         1 -> {
                              m.contents
                         }
@@ -56,6 +59,8 @@ class ChatListRvAdapter(
                     matches.add(0, match)
                     notifyDataSetChanged()
                 }
+
+
             }
 
 

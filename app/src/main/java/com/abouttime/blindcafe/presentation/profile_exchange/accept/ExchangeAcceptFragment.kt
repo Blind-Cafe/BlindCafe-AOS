@@ -7,6 +7,7 @@ import androidx.navigation.fragment.navArgs
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.databinding.FragmentExchangeAcceptBinding
+import com.bumptech.glide.Glide
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ExchangeAcceptFragment: BaseFragment<ExchangeAcceptViewModel>(R.layout.fragment_exchange_accept) {
@@ -54,6 +55,15 @@ class ExchangeAcceptFragment: BaseFragment<ExchangeAcceptViewModel>(R.layout.fra
             }
             profile.age?.let { age ->
                 tvAgeValue.text = "${age}세"
+            }
+
+            profile.profileImage?.let { url ->
+                Glide.with(ivProfileImage.context)
+                    .load(url)
+                    .circleCrop()
+                    .into(ivProfileImage)
+            } ?: kotlin.run {
+                ivProfileImage.setImageResource(R.drawable.ic_profile_image_none)
             }
         }
     }

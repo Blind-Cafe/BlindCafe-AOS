@@ -86,7 +86,7 @@ class AudioReceiveItem(
                 text = nickName
             }
             viewBinding.ivProfileImage.isGone = false
-            Glide.with(viewBinding.ivProfileImage)
+            Glide.with(viewBinding.ivProfileImage.context)
                 .load(profileImage)
                 .circleCrop()
                 .into(viewBinding.ivProfileImage)

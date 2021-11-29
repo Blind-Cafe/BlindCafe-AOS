@@ -11,15 +11,16 @@ class DeleteDismissMatchingUseCase(
     private val repository: MatchingRepository
 ) {
     operator fun invoke(matchingId: Int, reason: Int): Flow<Resource<Unit>> = flow {
-        emit(Resource.Loading())
+        emit(Resource.Loading<Unit>())
         try {
             repository.deleteDismissMatching(matchingId = matchingId, reason = reason)
+            emit(Resource.Success(Unit))
         } catch (e: Exception) {
             if (e is HttpException) {
                 val message = e.parseErrorBody()
-                emit(Resource.Error(message = message.code.toString()))
+                emit(Resource.Error<Unit>(message = message.code.toString()))
             } else {
-                emit(Resource.Error(message = e.message.toString()))
+                emit(Resource.Error<Unit>(message = e.message.toString()))
             }
         }
     }

@@ -84,6 +84,27 @@ class HomeViewModel(
         }.launchIn(viewModelScope)
     }
 
+    private fun getHomeInfoForNavigation(callback: (String) -> Unit) {
+        getHomeInfoUseCase().onEach { resource ->
+            when (resource) {
+                is Resource.Loading -> {
+                    showLoading()
+                }
+                is Resource.Success -> {
+                    resource.data?.matchingStatus?.let { status ->
+                        callback(status)
+                    }
+                    dismissLoading()
+                }
+                is Resource.Error -> {
+                    Log.d(RETROFIT_TAG, resource.message.toString())
+                    dismissLoading()
+                }
+            }
+
+        }.launchIn(viewModelScope)
+    }
+
 
     private fun postMatchingRequest() {
         postMatchingRequestUseCase().onEach { response ->
@@ -192,56 +213,57 @@ class HomeViewModel(
 
     /** onClick **/
     fun onClickCircleImageView(v: View) {
-        val statusCode = _homeStatusCode.value
-
-
-        _time.value = startTime?.toLong()?.secondToLapseForHome()
-        when (statusCode) {
-            -1 -> {
-                showToast(R.string.temp_error)
-            }
-            0 -> { // 매칭 없음
-                postMatchingRequest()
-            }
-            1 -> { // 매칭 대기
-                showToast(R.string.toast_matching_wait)
-                moveToConfirmDialogFragment(v)
-            }
-            2 -> { // 음료수 미선택
-                matchingId?.let { id ->
-                    moveToCoffeeOrderFragment(
-                        matchingId = id,
-                        startTime = startTime,
-                        partnerNickname = partnerNickname
-                    )
+        getHomeInfoForNavigation() { status ->
+            val statusCode = getHomeStatusCode(status)
+            _time.value = startTime?.toLong()?.secondToLapseForHome()
+            when (statusCode) {
+                -1 -> {
+                    showToast(R.string.temp_error)
                 }
-            }
-            3 -> { // 매칭 + 음료선택 완료
-                matchingId?.let { id ->
-                    getChatRoomInfo(id)
+                0 -> { // 매칭 없음
+                    postMatchingRequest()
                 }
-            }
-            4 -> {
-                /** 3일 끝, 나 작성도 했는지 모름, '공개하기' 화면가서 확인해 볼거임 */
-                moveToExchangeOpenFragment()
-            }
-            5 -> {
-                /** 나 일단 프로필 작성만 완료한 상태  */
-                getPartnerProfile()
-            }
-            6 -> {
-                /** 나 수락한 상태(즉 상대방 작성 o)이니 '상대 수락 대기' 화면으로 이동 */
-                partnerNickname?.let {
-                    moveToExchangeOpenWaitFragment(
-                        partnerNickname = it,
-                        reason = "수락 대기"
-                    )
+                1 -> { // 매칭 대기
+                    showToast(R.string.toast_matching_wait)
+                    moveToConfirmDialogFragment(v)
                 }
-            }
-            else -> {
-                showToast(R.string.toast_fail)
+                2 -> { // 음료수 미선택
+                    matchingId?.let { id ->
+                        moveToCoffeeOrderFragment(
+                            matchingId = id,
+                            startTime = startTime,
+                            partnerNickname = partnerNickname
+                        )
+                    }
+                }
+                3 -> { // 매칭 + 음료선택 완료
+                    matchingId?.let { id ->
+                        getChatRoomInfo(id)
+                    }
+                }
+                4 -> {
+                    /** 3일 끝, 나 작성도 했는지 모름, '공개하기' 화면가서 확인해 볼거임 */
+                    moveToExchangeOpenFragment()
+                }
+                5 -> {
+                    /** 나 일단 프로필 작성만 완료한 상태  */
+                    getPartnerProfile()
+                }
+                6 -> {
+                    /** 나 수락한 상태(즉 상대방 작성 o)이니 '상대 수락 대기' 화면으로 이동 */
+                    partnerNickname?.let {
+                        moveToExchangeOpenWaitFragment(
+                            partnerNickname = it,
+                            reason = "수락 대기"
+                        )
+                    }
+                }
+                else -> {
+                    showToast(R.string.toast_fail)
+                }
             }
         }
+
     }
 
 

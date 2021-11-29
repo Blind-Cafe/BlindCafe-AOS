@@ -12,16 +12,16 @@ class GetPartnerProfileUseCase(
     private val repository: UserInfoRepository
 ) {
     operator fun invoke(matchingId: Int): Flow<Resource<GetPartnerProfileDto?>> = flow {
-        emit(Resource.Loading())
+        emit(Resource.Loading<GetPartnerProfileDto?>())
         try {
             val response = repository.getPartnerProfile(matchingId)
             emit(Resource.Success(response))
         } catch (e: Exception) {
             if (e is HttpException) {
                 val message = e.parseErrorBody()
-                emit(Resource.Error(message = message.code.toString()))
+                emit(Resource.Error<GetPartnerProfileDto?>(message = message.code.toString()))
             } else {
-                emit(Resource.Error(message = e.message.toString()))
+                emit(Resource.Error<GetPartnerProfileDto?>(message = e.message.toString()))
             }
         }
     }
