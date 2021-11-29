@@ -4,6 +4,7 @@ import com.abouttime.blindcafe.common.base.BaseResponse
 import com.abouttime.blindcafe.data.server.dto.matching.*
 import com.abouttime.blindcafe.data.server.dto.matching.accept.PostAcceptMatchingDto
 import com.abouttime.blindcafe.data.server.dto.matching.report.PostReportDto
+import com.abouttime.blindcafe.data.server.dto.matching.send.PostMessageDto
 import com.abouttime.blindcafe.data.server.dto.matching.topic.GetTopicDto
 
 interface MatchingRepository {
@@ -19,4 +20,5 @@ interface MatchingRepository {
     suspend fun postAcceptMatching(matchingId: Int): PostAcceptMatchingDto?
     suspend fun deleteDismissMatching(matchingId: Int, reason: Int)
     suspend fun postEnteringLog(matchingId: Int)
+    suspend fun postMessage(postMessageDto: PostMessageDto, matchingId: Int)
 }

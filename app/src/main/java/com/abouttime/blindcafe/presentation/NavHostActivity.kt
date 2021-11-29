@@ -1,5 +1,6 @@
 package com.abouttime.blindcafe.presentation
 
+import android.app.AlertDialog
 import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +21,8 @@ class NavHostActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private val viewModel: NavHostViewModel by viewModel()
 
+    private lateinit var  loadingDialog: AlertDialog
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_BlindCafe)
@@ -28,11 +31,44 @@ class NavHostActivity : AppCompatActivity() {
 
         initNavController()
 
+        initLoadingDialog()
+        observeLoadingEvent()
 
     }
     private fun initNavController() {
         navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
+    }
+
+
+    private fun initLoadingDialog() {
+        val b = AlertDialog.Builder(this)
+        val i = this.layoutInflater
+        b.setView(i.inflate(R.layout.dialog_fragment_loading, null))
+        b.setCancelable(false)
+        loadingDialog = b.create()
+        loadingDialog.window?.setDimAmount(0f)
+        loadingDialog.window?.setBackgroundDrawableResource(R.color.transparent)
+
+    }
+
+
+    private fun observeLoadingEvent() {
+        GlobalLiveData.loadingEvent.observe(this) {
+            if (it) {
+                showLoadingDialog()
+            } else {
+                dismissLoadingDialog()
+            }
+        }
+    }
+
+    private fun showLoadingDialog() {
+        loadingDialog.show()
+    }
+
+    protected fun dismissLoadingDialog() {
+        loadingDialog.dismiss()
     }
 
 

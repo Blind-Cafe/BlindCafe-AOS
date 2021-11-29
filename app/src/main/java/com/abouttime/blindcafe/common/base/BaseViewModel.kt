@@ -6,6 +6,7 @@ import androidx.navigation.NavDirections
 import com.abouttime.BlindCafeApplication.Companion.sharedPreferences
 import com.abouttime.blindcafe.common.util.SingleLiveData
 import com.abouttime.blindcafe.common.constants.LogTag
+import com.abouttime.blindcafe.presentation.GlobalLiveData
 
 open class BaseViewModel() : ViewModel() {
     private val _toastEvent = SingleLiveData<Int>()
@@ -63,11 +64,11 @@ open class BaseViewModel() : ViewModel() {
 
     fun showLoading() {
         Log.e(LogTag.RETROFIT_TAG, "showLoading")
-        _loadingEvent.value = true
+        GlobalLiveData.loadingEvent.value = true
     }
     fun dismissLoading() {
         Log.e(LogTag.RETROFIT_TAG, "dismissLoading")
-        _loadingEvent.value = false
+        GlobalLiveData.loadingEvent.value = false
     }
 
     fun saveNavigationData(pair: Pair<String, String>) {

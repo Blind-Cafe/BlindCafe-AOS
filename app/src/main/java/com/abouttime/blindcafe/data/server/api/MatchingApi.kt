@@ -11,10 +11,12 @@ import com.abouttime.blindcafe.common.constants.Retrofit.POST_CANCEL_MATCHING_UR
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_DRINK_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_ENTERING_LOG_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_MATCHING_REQUEST_URL
+import com.abouttime.blindcafe.common.constants.Retrofit.POST_MESSAGE_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_REPORT_URL
 import com.abouttime.blindcafe.data.server.dto.matching.*
 import com.abouttime.blindcafe.data.server.dto.matching.accept.PostAcceptMatchingDto
 import com.abouttime.blindcafe.data.server.dto.matching.report.PostReportDto
+import com.abouttime.blindcafe.data.server.dto.matching.send.PostMessageDto
 import com.abouttime.blindcafe.data.server.dto.matching.topic.GetTopicDto
 import retrofit2.http.*
 
@@ -71,6 +73,12 @@ interface MatchingApi {
     @POST(POST_ENTERING_LOG_URL)
     suspend fun postEnteringLog(
         @Path("matchingId") matchingId: Int
+    )
+
+    @POST(POST_MESSAGE_URL)
+    suspend fun postMessage(
+        @Path("matchingId") matchingId: Int,
+        @Body postMessageDto: PostMessageDto
     )
 
 

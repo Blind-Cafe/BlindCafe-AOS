@@ -1,11 +1,10 @@
 package com.abouttime.blindcafe.common.base
 
-import android.app.Dialog
+import android.app.AlertDialog
 import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -16,7 +15,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.abouttime.BlindCafeApplication
-import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.databinding.ToastBinding
 
 
@@ -25,13 +23,12 @@ abstract class BaseFragment<VM : BaseViewModel>(layoutId: Int) : Fragment(layout
     // View Model
     abstract val viewModel: VM
 
-    private lateinit var loadingDialog: Dialog
+    private var loadingDialog: AlertDialog? = null
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initLoadingDialog()
-        observeLoadingEvent()
+        //observeLoadingEvent()
 
         observeToastEvent()
         observeNavigationEvent()
@@ -40,36 +37,25 @@ abstract class BaseFragment<VM : BaseViewModel>(layoutId: Int) : Fragment(layout
     }
 
 
-    private fun initLoadingDialog() {
-        loadingDialog = Dialog(requireContext())
-        loadingDialog.setContentView(R.layout.dialog_fragment_loading)
-        loadingDialog.window?.setDimAmount(0f)
-        loadingDialog.window?.setBackgroundDrawableResource(R.color.transparent)
-        loadingDialog.setCanceledOnTouchOutside(false)
-        loadingDialog.window?.setGravity(Gravity.CENTER)
-    }
 
+//    private fun observeLoadingEvent() {
+//        viewModel.loadingEvent.observe(viewLifecycleOwner) {
+//            if (it) {
+//                showLoadingDialog()
+//            } else {
+//                dismissLoadingDialog()
+//            }
+//        }
+//    }
+//
+//    private fun showLoadingDialog() {
+//
+//    }
+//
+//    protected fun dismissLoadingDialog() {
+//
+//    }
 
-    private fun observeLoadingEvent() {
-        viewModel.loadingEvent.observe(viewLifecycleOwner) {
-            if (it) {
-                showLoadingDialog()
-            } else {
-                dismissLoadingDialog()
-            }
-        }
-    }
-
-    protected fun showLoadingDialog() {
-
-            loadingDialog.show()
-
-    }
-
-    protected fun dismissLoadingDialog() {
-        loadingDialog.dismiss()
-
-    }
 
     private fun observeToastEvent() {
         viewModel.toastEvent.observe(viewLifecycleOwner) { resId ->

@@ -5,6 +5,7 @@ import com.abouttime.blindcafe.data.server.api.MatchingApi
 import com.abouttime.blindcafe.data.server.dto.matching.*
 import com.abouttime.blindcafe.data.server.dto.matching.accept.PostAcceptMatchingDto
 import com.abouttime.blindcafe.data.server.dto.matching.report.PostReportDto
+import com.abouttime.blindcafe.data.server.dto.matching.send.PostMessageDto
 import com.abouttime.blindcafe.data.server.dto.matching.topic.GetTopicDto
 import com.abouttime.blindcafe.domain.repository.MatchingRepository
 
@@ -53,5 +54,9 @@ class MatchingRepositoryImpl(
 
     override suspend fun postEnteringLog(matchingId: Int) {
         matchingApi.postEnteringLog(matchingId)
+    }
+
+    override suspend fun postMessage(postMessageDto: PostMessageDto, matchingId: Int) {
+        matchingApi.postMessage(postMessageDto = postMessageDto, matchingId = matchingId)
     }
 }

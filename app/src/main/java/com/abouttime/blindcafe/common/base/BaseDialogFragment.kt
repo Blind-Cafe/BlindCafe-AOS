@@ -1,5 +1,6 @@
 package com.abouttime.blindcafe.common.base
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.res.Resources
@@ -20,12 +21,12 @@ abstract class BaseDialogFragment<VM : BaseViewModel>(layoutId: Int) : DialogFra
     // View Model
     abstract val viewModel: VM
 
-    private lateinit var loadingDialog: Dialog
+    private var loadingDialog: AlertDialog? = null
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initLoadingDialog()
+
         observeLoadingEvent()
 
         observeToastEvent()
@@ -35,14 +36,6 @@ abstract class BaseDialogFragment<VM : BaseViewModel>(layoutId: Int) : DialogFra
     }
 
 
-    private fun initLoadingDialog() {
-        loadingDialog = Dialog(requireContext())
-        loadingDialog.setContentView(R.layout.dialog_fragment_loading)
-        loadingDialog.window?.setDimAmount(0f)
-        loadingDialog.window?.setBackgroundDrawableResource(R.color.transparent)
-        loadingDialog.setCanceledOnTouchOutside(false)
-        loadingDialog.window?.setGravity(Gravity.CENTER)
-    }
 
 
     private fun observeLoadingEvent() {
@@ -56,14 +49,17 @@ abstract class BaseDialogFragment<VM : BaseViewModel>(layoutId: Int) : DialogFra
     }
 
 
-    protected fun showLoadingDialog() {
-
-        loadingDialog.show()
-
+    private fun showLoadingDialog() {
+        val b = AlertDialog.Builder(requireActivity())
+        val i = requireActivity().layoutInflater
+        b.setView(i.inflate(R.layout.dialog_fragment_loading, null))
+        b.setCancelable(false)
+        loadingDialog = b.create()
+        loadingDialog?.show()
     }
 
     protected fun dismissLoadingDialog() {
-        loadingDialog.dismiss()
+        loadingDialog?.dismiss()
     }
 
     private fun observeToastEvent() {

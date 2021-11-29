@@ -82,9 +82,11 @@ class ProfileEditViewModel(
                         _location.postValue(dto.region ?: "")
                         _canEnableNext.postValue(!dto.region.isNullOrEmpty())
                     }
+                    dismissLoading()
                 }
                 is Resource.Error -> {
                     Log.e(RETROFIT_TAG, result.message.toString())
+                    dismissLoading()
                 }
             }
         }.launchIn(viewModelScope)

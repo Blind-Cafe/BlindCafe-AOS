@@ -57,6 +57,7 @@ internal val useCaseModule = module {
     factory { PostAcceptMatchingUseCase(get()) }
     factory { DeleteDismissMatchingUseCase(get()) }
     factory { PostEnteringLogUseCase(get()) }
+    factory { PostMessageUseCase(get())}
 
 
     /** interests **/

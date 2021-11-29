@@ -14,15 +14,13 @@ import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NICKNAME
 import com.abouttime.blindcafe.common.constants.PreferenceKey.USER_ID
 import com.abouttime.blindcafe.common.util.SingleLiveData
+import com.abouttime.blindcafe.data.server.dto.matching.send.PostMessageDto
 import com.abouttime.blindcafe.data.server.dto.matching.topic.GetTopicDto
 import com.abouttime.blindcafe.data.server.dto.notification.PostFcmDto
 import com.abouttime.blindcafe.domain.model.ChatRoom
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.use_case.firebase.*
-import com.abouttime.blindcafe.domain.use_case.server.GetChatRoomInfoUseCase
-import com.abouttime.blindcafe.domain.use_case.server.GetTopicUseCase
-import com.abouttime.blindcafe.domain.use_case.server.PostEnteringLogUseCase
-import com.abouttime.blindcafe.domain.use_case.server.PostFcmUseCase
+import com.abouttime.blindcafe.domain.use_case.server.*
 import com.abouttime.blindcafe.presentation.chat.audio.RecorderState
 import com.google.firebase.Timestamp
 import com.google.firebase.messaging.FirebaseMessaging
@@ -44,7 +42,8 @@ class ChatViewModel(
     private val downloadAudioUrlUseCase: DownloadAudioUrlUseCase,
     private val fcmUseCase: PostFcmUseCase,
     private val getTopicUseCase: GetTopicUseCase,
-    private val postEnteringLogUseCase: PostEnteringLogUseCase
+    private val postEnteringLogUseCase: PostEnteringLogUseCase,
+    private val postMessageUseCase: PostMessageUseCase
 ) : BaseViewModel() {
 
     private val _isSendButtonEnabled = MutableLiveData(false)
@@ -311,6 +310,23 @@ class ChatViewModel(
                 }
             }
         }.launchIn(viewModelScope)
+    }
+
+    fun postMessage(postMessageDto: PostMessageDto, matchingId: Int) {
+        postMessageUseCase(postMessageDto = postMessageDto, matchingId = matchingId)
+            .onEach { result ->
+                when (result) {
+                    is Resource.Loading -> {
+                        showLoading()
+                    }
+                    is Resource.Success ->{
+                        dismissLoading()
+                    }
+                    is Resource.Error -> {
+                        dismissLoading()
+                    }
+                }
+            }.launchIn(viewModelScope)
     }
 
 

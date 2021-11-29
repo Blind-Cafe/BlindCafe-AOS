@@ -39,6 +39,7 @@ object Retrofit {
     const val DELETE_DISMISS_MATCHING_URL ="api/matching/{matchingId}/partner" // 31
     const val DELETE_PROFILE_IMAGE_URL = "api/user/image" // 33
     const val POST_ENTERING_LOG_URL = "api/matching/{matchingId}/log"
+    const val POST_MESSAGE_URL = "api/chat/{matchingId}"
 
 
 
