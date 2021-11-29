@@ -492,9 +492,19 @@
         android:name="com.abouttime.blindcafe.presentation.profile_exchange.complete.ExchangeCompleteFragment"
         android:label="ExchangeCompleteFragment"
         tools:layout="@layout/fragment_exchange_complete">
+
+
         <argument android:name="matchingId"
             app:argType="integer"/>
-
+        <action
+            android:id="@+id/action_exchangeCompleteFragment_to_chatFragment"
+            app:destination="@id/chatFragment"
+            app:popUpTo="@id/exchangeCompleteFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
 
     </fragment>
     <fragment

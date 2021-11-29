@@ -96,7 +96,7 @@ internal val viewModelModule = module {
 
     /** Profile-Exchange **/
     viewModel { ExchangeAcceptViewModel(get(), get(), get()) }
-    viewModel { ExchangeCompleteViewModel() }
+    viewModel { ExchangeCompleteViewModel(get()) }
     viewModel { ExchangeDismissViewModel() }
     viewModel { ExchangeOpenViewModel(get(), get()) }
 
