@@ -24,7 +24,6 @@ class MainViewModel(
 
 
     init {
-        Log.d(LogTag.RETROFIT_TAG, "deviceToken")
         postDeviceToken()
     }
 
@@ -35,11 +34,10 @@ class MainViewModel(
             PostDeviceTokenDto(deviceToken)
         ).onEach { result ->
             when (result) {
-                is Resource.Loading -> { Log.d(LogTag.RETROFIT_TAG, "Loading")}
+                is Resource.Loading -> { Log.d(LogTag.RETROFIT_TAG, "Loading") }
                 is Resource.Success -> { Log.d(LogTag.RETROFIT_TAG, result.data.toString())}
                 is Resource.Error -> { Log.d(LogTag.RETROFIT_TAG, result.message.toString())}
             }
-
         }.launchIn(viewModelScope)
     }
 

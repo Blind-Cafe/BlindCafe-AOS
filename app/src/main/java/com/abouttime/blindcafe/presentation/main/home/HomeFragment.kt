@@ -2,13 +2,10 @@ package com.abouttime.blindcafe.presentation.main.home
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isGone
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
-import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.constants.LogTag.HOME_TAG
 import com.abouttime.blindcafe.common.constants.NavigationKey.CONFIRM_MATCHING_CANCEL
 import com.abouttime.blindcafe.common.ext.secondToLapseForHome
@@ -39,9 +36,13 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
                 1 -> handleStatusWait()
                 2 -> handleStatusFound()
                 3 -> handleStatusMatching()
-                4 -> handleStatusFailedLeaveRoom()
-                5 -> handleStatusFailedReport()
-                6 -> handleWontExchange()
+                4 -> handleOpen()
+                5 -> handleReady()
+                6 -> handleAccept()
+                7 -> handleCont()
+                8 -> handleFailedQuit()
+                9 -> handleFailedReported()
+                10 -> handleFailedExchangeProfile()
             }
         }
     }
@@ -62,7 +63,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
         binding?.let { b ->
             b.tvStateTitle.isGone = true
             b.tvStateSubTitle.text = getString(R.string.home_subtitle_wait)
-            b.tvStateSubTitle.setMarginTop(48)
+            b.tvStateSubTitle.setMarginTop(64)
         }
 
 
@@ -99,36 +100,67 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
         }
     }
 
-    private fun handleStatusFailedLeaveRoom() {
-        binding?.let { b ->
-            b.tvStateTitle.apply {
-                isGone = false
-                text = getString(R.string.home_title_matching)
-            }
-            b.tvStateSubTitle.text = getString(R.string.home_subtitle_matching)
+
+    private fun handleOpen() {
+        binding?.tvStateSubTitle?.apply {
+            isGone = false
+            text = "프로필 교환 중"
         }
     }
 
-    private fun handleStatusFailedReport() {
-        binding?.let { b ->
-            b.tvStateTitle.apply {
-                isGone = false
-                text = getString(R.string.home_title_matching)
-            }
-            b.tvStateSubTitle.text = getString(R.string.home_subtitle_matching)
+    private fun handleReady() {
+        binding?.tvStateSubTitle?.apply {
+            isGone = false
+            text = "프로필 교환 중"
         }
     }
 
-    private fun handleWontExchange() {
-        binding?.let { b ->
-            b.tvStateTitle.apply {
-                isGone = false
-                text = getString(R.string.home_title_matching)
-            }
-            b.tvStateSubTitle.text = getString(R.string.home_subtitle_matching)
+    private fun handleAccept() {
+        binding?.tvStateSubTitle?.apply {
+            isGone = false
+            text = "프로필 교환 중"
         }
     }
 
+    private fun handleCont() {
+        binding?.tvStateSubTitle?.apply {
+            isGone = false
+            text = "프로필 교환 중"
+        }
+
+        /** 매칭 성공 -> 내 테이블로 이동 할 때 성공화면 pop 해야한다. */
+        viewModel.moveToExchangeCompleteFragment()
+    }
+
+
+    private fun handleFailedQuit() {
+        /** 방 폭파 by 상대 방 나감 */
+        viewModel.partnerNickname?.let { nick ->
+            viewModel.reason?.let { r ->
+                viewModel?.moveToExitFragmentByQuit(partnerNickname = nick, reason = r)
+            }
+        }
+    }
+
+    private fun handleFailedReported() {
+        /** 방 폭파 by 상대가 나 신고 */
+        viewModel?.partnerNickname?.let { nick ->
+            viewModel?.moveToExitFragmentByReport(nick)
+        }
+
+    }
+
+    private fun handleFailedExchangeProfile() {
+        /** 방 폭파 by 상대가 프로필 교환 거절 */
+        viewModel?.partnerNickname?.let { nick ->
+            viewModel?.reason?.let { r ->
+                viewModel?.moveToExitFragmentByDismissProfileExchange(
+                    partnerNickname = nick,
+                    reason = r
+                )
+            }
+        }
+    }
 
     private fun observeSavedNavigationData() {
         getNavigationResult(CONFIRM_MATCHING_CANCEL)?.observe(viewLifecycleOwner) { result ->

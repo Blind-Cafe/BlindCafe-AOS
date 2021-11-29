@@ -12,8 +12,10 @@ import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.ext.secondToLapseForHome
 import com.abouttime.blindcafe.data.server.dto.user_info.partner.GetPartnerProfileDto
 import com.abouttime.blindcafe.domain.model.ChatRoom
-import com.abouttime.blindcafe.domain.model.Profile
-import com.abouttime.blindcafe.domain.use_case.server.*
+import com.abouttime.blindcafe.domain.use_case.server.GetChatRoomInfoUseCase
+import com.abouttime.blindcafe.domain.use_case.server.GetHomeInfoUseCase
+import com.abouttime.blindcafe.domain.use_case.server.GetPartnerProfileUseCase
+import com.abouttime.blindcafe.domain.use_case.server.PostMatchingRequestUseCase
 import com.abouttime.blindcafe.presentation.main.MainFragmentDirections
 import com.abouttime.blindcafe.presentation.main.home.HomeState.FAILED_LEAVE_ROOM
 import com.abouttime.blindcafe.presentation.main.home.HomeState.FAILED_REPORT
@@ -42,9 +44,9 @@ class HomeViewModel(
     val time: LiveData<String> get() = _time
 
 
-    private var reason: String? = null
-    private var partnerNickname: String? = null
-    private var matchingId: Int? = null
+    var reason: String? = null
+    var partnerNickname: String? = null
+    var matchingId: Int? = null
     var startTime: String? = null
     private var partnerId: Int? = null
 
@@ -236,37 +238,8 @@ class HomeViewModel(
                     )
                 }
             }
-            7 -> {
-                /** 매칭 성공 -> 내 테이블로 이동 할 때 성공화면 pop 해야한다. */
-                moveToExchangeCompleteFragment()
-            }
-            8 -> {
-                /** 방 폭파 by 상대 방 나감 */
-                partnerNickname?.let { nick ->
-                    reason?.let { r ->
-                        moveToExitFragmentByQuit(partnerNickname = nick, reason = r)
-                    }
-                }
-
-            }
-            9 -> {
-                /** 방 폭파 by 상대가 나 신고 */
-                partnerNickname?.let { nick ->
-                    moveToExitFragmentByReport(nick)
-                }
-
-            }
-            10 -> {
-                /** 방 폭파 by 상대가 프로필 교환 거절 */
-                partnerNickname?.let { nick ->
-                    reason?.let { r ->
-                        moveToExitFragmentByDismissProfileExchange(partnerNickname = nick, reason = r)
-                    }
-                }
-            }
             else -> {
-
-
+                showToast(R.string.toast_fail)
             }
         }
     }
@@ -291,27 +264,27 @@ class HomeViewModel(
         ))
     }
 
-    private fun moveToExitFragmentByReport(partnerNickname: String) {
+    fun moveToExitFragmentByReport(partnerNickname: String) {
         moveToDirections(MainFragmentDirections.actionMainFragmentToExitFragment(
             isAttacker = false,
             isReport = true,
             title = "%s님이 불편함을 느껴 대화를 종료했습니다.\n아쉽지만 새로운 손님과 또 다른 추억을 쌓으러 가보죠!".format(partnerNickname)
         ))
     }
-    private fun moveToExitFragmentByQuit(partnerNickname: String, reason: String) {
+    fun moveToExitFragmentByQuit(partnerNickname: String, reason: String) {
         moveToDirections(MainFragmentDirections.actionMainFragmentToExitFragment(
             isAttacker = false,
             isReport = false,
-            title = "%s 님이 \"%s\" 라는 이유로 대화를 진행하지 못하게되었습니다.\n\n아쉽지만 새로운 손님과 또 다른 추억을 쌓을 수 있습니다.".format(
+            title = "%s 님이[\"%s\"]라는 이유로 대화를 진행하지 못하게되었습니다.\n\n아쉽지만 새로운 손님과 또 다른 추억을 쌓을 수 있습니다.".format(
                 partnerNickname,
                 reason)
         ))
     }
-    private fun moveToExitFragmentByDismissProfileExchange(partnerNickname: String, reason: String) {
+    fun moveToExitFragmentByDismissProfileExchange(partnerNickname: String, reason: String) {
         moveToDirections(MainFragmentDirections.actionMainFragmentToExitFragment(
             isAttacker = false,
             isReport = false,
-            title = "%s님이\"%s\"라는 이유로 대화를 진행하지 못하게되었습니다.\n\n아쉽지만 새로운 손님과 또 다른 추억을 쌓을 수 있습니다.".format(
+            title = "%s님이[\"%s\"]라는 이유로 대화를 진행하지 못하게되었습니다.\n\n아쉽지만 새로운 손님과 또 다른 추억을 쌓을 수 있습니다.".format(
                 partnerNickname,
                 reason)
         ))
@@ -338,11 +311,10 @@ class HomeViewModel(
         }
     }
 
-    private fun moveToExchangeCompleteFragment() {
+    fun moveToExchangeCompleteFragment() {
         matchingId?.let { id ->
             moveToDirections(MainFragmentDirections.actionMainFragmentToExchangeCompleteFragment(id))
         }
-
     }
 
 

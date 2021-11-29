@@ -57,17 +57,26 @@ class ExitFragment: BaseFragment<ExitViewModel>(R.layout.fragment_exit) {
             with(b) {
                 tvTitleAttacker.isGone = true
                 tvTitleVictim.isGone = false
-                tvTitleAttacker.text = title
-
-                val str = getStringByResId(R.string.exit_completed_title)
-                val start = str.indexOf("[")
-                val end = str.indexOf("]")
-
-                if (!isReport) {
-                    val builder = SpannableStringBuilder(str.replace("[", " ").replace("]", " "))
+                tvTitleVictim.text = title
+                if (isReport) {
+                    tvTitleAttacker.isGone = false
+                    tvTitleVictim.isGone = true
+                    tvTitleAttacker.text = title
+                } else {
+                    tvTitleAttacker.isGone = true
+                    tvTitleVictim.isGone = false
+                    val start = title.indexOf("[")
+                    val end = title.indexOf("]")
+                    val builder = SpannableStringBuilder(title.replace("[", " ").replace("]", " "))
                     builder.setSpan(ForegroundColorSpan(getColorByResId(R.color.main)), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     b.tvTitleVictim.append(builder)
                 }
+
+
+
+
+
+
             }
         }
 

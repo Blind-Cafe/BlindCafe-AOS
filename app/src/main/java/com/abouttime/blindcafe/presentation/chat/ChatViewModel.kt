@@ -167,13 +167,10 @@ class ChatViewModel(
             .onEach { result ->
                 when (result) {
                     is Resource.Loading -> {
-                        showLoading()
                     }
                     is Resource.Success ->{
-                        dismissLoading()
                     }
                     is Resource.Error -> {
-                        dismissLoading()
                     }
                 }
             }.launchIn(viewModelScope)

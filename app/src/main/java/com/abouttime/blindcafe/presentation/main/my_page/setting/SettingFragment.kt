@@ -25,6 +25,12 @@ class SettingFragment: BaseFragment<SettingViewModel>(R.layout.fragment_setting)
     }
 
     private fun initSwitchButton() {
+        val isEntire = getStringData(NOTIFICATION_ENTIRE)
+        val isMessage = getStringData(NOTIFICATION_MESSAGE)
+        binding?.swNotificationEntire?.isChecked = (isEntire == null || isEntire == NOTIFICATION_TRUE)
+        binding?.swNotificationMessage?.isChecked = (isMessage == null || isMessage == NOTIFICATION_TRUE)
+
+
         binding?.swNotificationEntire?.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 saveStringData(Pair(
