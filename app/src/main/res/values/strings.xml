@@ -160,7 +160,7 @@
     <string name="quit_reason_no">안나갈래요</string>
     <string name="quit_reason_yes">이젠 안녕!</string>
     <string name="quit_confirm_title">정말 매칭 방을 나가시겠습니까?</string>
-    <string name="quit_confirm_subtitle">지금 나가시면 로즈님과 다시 매칭 될 수 없어요</string>
+    <string name="quit_confirm_subtitle">지금 나가시면 %s님과 다시 매칭 될 수 없어요</string>
     <string name="quit_confirm_no">취소</string>
     <string name="quit_confirm_yes">나가기</string>
 

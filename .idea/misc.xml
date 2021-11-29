@@ -11,7 +11,6 @@
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/drawable/bg_chat_send_text.xml" value="0.5442708333333334" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/drawable/bg_chat_text_other.xml" value="0.31302083333333336" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/drawable/bg_circle_gradation.xml" value="0.5442708333333334" />
-        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/drawable/bg_exchange_interest.xml" value="0.5442708333333334" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/drawable/bg_gallery_select_button.xml" value="0.5442708333333334" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/drawable/bg_interest.xml" value="0.359375" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/drawable/bg_interest_disabled.xml" value="0.5442708333333334" />
@@ -33,7 +32,6 @@
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/drawable/et_bg_rounding_with_no_stroke.xml" value="0.5442708333333334" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/drawable/ic_cursor.xml" value="0.5337078651685393" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/drawable/selector_switch.xml" value="0.5442708333333334" />
-        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/drawable/selector_switch_thumb.xml" value="0.5442708333333334" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/drawable/splash_image.xml" value="0.3567708333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/activity_login.xml" value="0.39003250270855905" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/activity_main.xml" value="0.3109375" />
@@ -42,8 +40,6 @@
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/dialog_fragment_confirm.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/dialog_fragment_dismiss.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/dialog_fragment_gallery.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/dialog_fragment_loading.xml" value="0.5239583333333333" />
-        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/dialog_fragment_profile_image.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/dialog_fragment_quit.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/dialog_fragment_quit_reason.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/dialog_fragment_report.xml" value="0.5239583333333333" />
@@ -58,40 +54,29 @@
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_dormancy.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_essential_first.xml" value="0.3920398009950249" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_essential_second.xml" value="0.5239583333333333" />
-        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_exchagnge_complete.xml" value="0.5239583333333333" />
-        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_exchange_accept.xml" value="0.5239583333333333" />
-        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_exchange_complete.xml" value="0.5239583333333333" />
-        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_exchange_dismiss.xml" value="0.5239583333333333" />
-        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_exchange_open.xml" value="0.4466666666666667" />
-        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_exchange_wait.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_exit.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_home.xml" value="0.5" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_interest.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_interest_detail.xml" value="0.5239583333333333" />
-        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_interest_edit.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_interest_sub.xml" value="0.5239583333333333" />
-        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_interest_sub_edit.xml" value="0.3834281072298944" />
+        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_interest_sub_edit.xml" value="0.6413373860182371" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_location.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_login.xml" value="0.1703125" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_main.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_matching.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_matching.xml" value="0.19288389513108614" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_my_page.xml" value="0.5" />
-        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_policy.xml" value="0.30155875299760193" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_profile_dismiss.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_profile_edit.xml" value="0.3091190108191654" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_profile_exchagnge_complete.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_profile_exchange.xml" value="0.5239583333333333" />
-        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_profile_exchange_accept.xml" value="0.5239583333333333" />
-        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_profile_image_edit.xml" value="0.3716535433070866" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_profile_input.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_profile_setting.xml" value="0.6" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_quit_complete.xml" value="0.5" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_rule.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_second_essential.xml" value="0.5239583333333333" />
-        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_setting.xml" value="0.3931223134036733" />
+        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_setting.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_signin.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_splash.xml" value="0.33645833333333336" />
-        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/fragment_term.xml" value="0.3529824561403509" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/frament_report_list.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/popup_window_chat_menu.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/pw_chat_menu.xml" value="0.5239583333333333" />
@@ -105,9 +90,6 @@
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/rv_chat_item_send_audio.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/rv_chat_item_send_image.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/rv_chat_item_send_text.xml" value="0.4466666666666667" />
-        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/rv_chat_item_topic_audio.xml" value="0.5239583333333333" />
-        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/rv_chat_item_topic_image.xml" value="0.5239583333333333" />
-        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/rv_chat_item_topic_text.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/rv_chat_item_user_audio.xml" value="0.2796875" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/rv_chat_item_user_image.xml" value="0.2796875" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/rv_chat_item_user_text.xml" value="0.2796875" />
@@ -122,10 +104,10 @@
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/spn_item_chat_menu.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/text.xml" value="0.6666666666666666" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/vp_item_coffee.xml" value="0.5239583333333333" />
-        <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/vp_item_profile_image.xml" value="0.5239583333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/layout/vp_item_rule.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/menu/bottom_nav_menu.xml" value="0.43333333333333335" />
         <entry key="..\:/Users/11260/AndroidStudioProjects/BlindCafe/app/src/main/res/menu/chat_room_menu.xml" value="0.5" />
+        <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/drawable/bg_chat_list_gradation.xml" value="0.1" />
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/drawable/bg_partner_sex_selected.xml" value="0.1" />
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/drawable/bg_partner_sex_unselected.xml" value="0.1" />
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/activity_nav_host.xml" value="0.3411458333333333" />
@@ -138,6 +120,7 @@
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_account_delete_complete.xml" value="0.3411458333333333" />
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_agreement.xml" value="0.3411458333333333" />
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_chat.xml" value="0.22037037037037038" />
+        <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_chat_list.xml" value="0.1" />
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_essential_first.xml" value="0.1" />
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_essential_second.xml" value="0.3411458333333333" />
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_exit.xml" value="0.3411458333333333" />
@@ -152,6 +135,7 @@
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_profile_exchange.xml" value="0.3411458333333333" />
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_profile_image_edit.xml" value="0.3411458333333333" />
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_rule.xml" value="0.3411458333333333" />
+        <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/rv_chat_list_item.xml" value="0.3411458333333333" />
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/rv_item_interest_sub.xml" value="0.3411458333333333" />
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/rv_item_location_main.xml" value="0.3411458333333333" />
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/rv_item_location_sub.xml" value="0.3411458333333333" />
@@ -161,7 +145,7 @@
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="13" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_13" default="true" project-jdk-name="13" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

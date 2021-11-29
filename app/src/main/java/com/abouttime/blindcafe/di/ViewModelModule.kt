@@ -78,7 +78,7 @@ internal val viewModelModule = module {
     viewModel { DormancyViewModel() }
 
     /** Main - ChatList **/
-    viewModel { ChatListViewModel(get(), get()) }
+    viewModel { ChatListViewModel(get(), get(), get()) }
 
     /** Main - MyPage **/
     viewModel { MyPageViewModel(get()) }
@@ -89,7 +89,7 @@ internal val viewModelModule = module {
 
 
     /** Chat **/
-    viewModel { ChatViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get()) }
+    viewModel { ChatViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
     viewModel { GalleryViewModel(get()) }
     viewModel { QuitReasonViewModel() }
     viewModel { ReportReasonViewModel(get()) }

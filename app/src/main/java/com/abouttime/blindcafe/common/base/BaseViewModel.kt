@@ -64,11 +64,11 @@ open class BaseViewModel() : ViewModel() {
 
     fun showLoading() {
         Log.e(LogTag.RETROFIT_TAG, "showLoading")
-        GlobalLiveData.loadingEvent.value = true
+        GlobalLiveData.loadingEvent.postValue(true)
     }
     fun dismissLoading() {
         Log.e(LogTag.RETROFIT_TAG, "dismissLoading")
-        GlobalLiveData.loadingEvent.value = false
+        GlobalLiveData.loadingEvent.postValue(false)
     }
 
     fun saveNavigationData(pair: Pair<String, String>) {

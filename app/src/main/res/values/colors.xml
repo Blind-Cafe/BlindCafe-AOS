@@ -75,4 +75,7 @@
 
     <color name="chat_topic_bg">#373737</color>
 
+
+    <color name="chat_list_not_read_content">#9e9e9e</color>
+
 </resources>

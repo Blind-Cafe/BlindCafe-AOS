@@ -33,7 +33,7 @@ class QuitReasonViewModel: BaseViewModel() {
                     QuitReasonDialogFragmentDirections.actionQuitReasonDialogFragmentToConfirmDialogFragment(
                         id = R.string.quit_confirm_title,
                         title = v.resources.getString(R.string.quit_confirm_title),
-                        subtitle = v.resources.getString(R.string.quit_confirm_subtitle),
+                        subtitle = v.resources.getString(R.string.quit_confirm_subtitle).format(partnerNickname),
                         no = v.resources.getString(R.string.quit_confirm_no),
                         yes = v.resources.getString(R.string.quit_confirm_yes),
                         reason = reason.value ?: 0,

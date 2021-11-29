@@ -142,28 +142,6 @@ class CoffeeOrderViewModel(
                     result.data?.let { dto ->
                         matchingId?.let { mId ->
 
-                            if (dto.drink == "미입력") {
-
-                                sendDescriptionMessage(
-                                    Message(
-                                        contents = "매칭에 성공하였습니다.\n간단한 인사로 반갑게 맞아주세요",
-                                        roomUid = mId.toString(),
-                                        type = 7
-                                    )
-                                )
-
-                                sendDescriptionMessage(
-                                    Message(
-                                        contents = "%s님과 %s님의 공통 관심사는 %s 입니다.".format(
-                                            myNickname,
-                                            partnerNickname,
-                                            dto.interest
-                                        ),
-                                        roomUid = mId.toString(),
-                                        type = 7
-                                    )
-                                )
-                            }
                         }
                         this@CoffeeOrderViewModel.matchingId = dto.matchingId
                         this@CoffeeOrderViewModel.profileImage = dto.profileImage
@@ -174,22 +152,8 @@ class CoffeeOrderViewModel(
 
                     }
 
-
-                    matchingId?.let { id ->
-                        sendDescriptionMessage(
-                            Message(
-                                contents = "%s님은 %s을(를) 주문하셨습니다.".format(
-                                    myNickname,
-                                    mapToDrinkName(currentSelect)
-                                ),
-                                type = 7,
-                                roomUid = id.toString()
-                            )
-                        )
-                        result.data?.toChatRoom()?.let { cr ->
-                            moveToChatFragment(cr)
-                        }
-
+                    result.data?.toChatRoom()?.let { cr ->
+                        moveToChatFragment(cr)
                     }
 
                 }

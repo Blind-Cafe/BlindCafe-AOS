@@ -100,7 +100,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
         }
     }
 
-    private fun handleStatusFailedLeaveRoom() { // TODO 어떻게 처리할지 기획 질문할 것!
+    private fun handleStatusFailedLeaveRoom() {
         binding?.let { b ->
             b.tvStateTitle.apply {
                 isGone = false
@@ -110,7 +110,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
         }
     }
 
-    private fun handleStatusFailedReport() { // TODO 어떻게 처리할지 기획 질문할 것!
+    private fun handleStatusFailedReport() {
         binding?.let { b ->
             b.tvStateTitle.apply {
                 isGone = false
@@ -120,7 +120,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
         }
     }
 
-    private fun handleWontExchange() { // TODO 어떻게 처리할지 기획 질문할 것!
+    private fun handleWontExchange() {
         binding?.let { b ->
             b.tvStateTitle.apply {
                 isGone = false
@@ -137,65 +137,4 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
             viewModel.getHomeInfo()
         }
     }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        Log.d(LogTag.LIFECYCLE_TAG, "onCreate")
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        Log.d(LogTag.LIFECYCLE_TAG, "onCreateView")
-        return super.onCreateView(inflater, container, savedInstanceState)
-
-    }
-
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        Log.d(LogTag.LIFECYCLE_TAG, "onViewStateRestored")
-
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d(LogTag.LIFECYCLE_TAG, "onStart")
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d(LogTag.LIFECYCLE_TAG, "onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d(LogTag.LIFECYCLE_TAG, "onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d(LogTag.LIFECYCLE_TAG, "onStop")
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        Log.d(LogTag.LIFECYCLE_TAG, "onSaveInstanceState")
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.d(LogTag.LIFECYCLE_TAG, "onDestroyView")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d(LogTag.LIFECYCLE_TAG, "onDestroy")
-    }
-
-
 }

@@ -28,5 +28,6 @@ class QuitReasonDialogFragment:BaseDialogFragment<QuitReasonViewModel>(R.layout.
         viewModel.matchingId = args.matchingId
         viewModel.partnerNickname = args.partnerNickname
         viewModel.startTime = args.startTime
+        binding?.tvSubtitle?.text = "${viewModel.partnerNickname} ${getStringByResId(R.string.quit_reason_subtitle)}"
     }
 }

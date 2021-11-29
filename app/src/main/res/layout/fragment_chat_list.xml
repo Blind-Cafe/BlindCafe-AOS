@@ -4,15 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/black">
+    android:background="@color/matching_room_root_bg">
 
 
     <TextView
         android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingStart="24dp"
+        android:paddingTop="40dp"
+        android:paddingBottom="42dp"
         android:fontFamily="@font/spoqa_han_sans_neo_bold"
         android:text="@string/chat_list_title"
         android:textColor="@color/white"
@@ -64,14 +66,24 @@
         android:layout_width="0dp"
         android:id="@+id/rv_chat_rooms"
         android:layout_height="0dp"
-        android:background="@color/black"
+        android:background="@color/matching_room_root_bg"
         android:visibility="gone"
         tools:visibility="visible"
+        android:overScrollMode="never"
         tools:listitem="@layout/rv_chat_list_item"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/iv_chat_list_bg_none"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/bg_chat_list_gradation"
+        android:alpha="0.2"/>
 
 
 

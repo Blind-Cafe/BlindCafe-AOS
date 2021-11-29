@@ -26,6 +26,7 @@ import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.common.constants.LogTag.CHATTING_TAG
 import com.abouttime.blindcafe.common.ext.*
 import com.abouttime.blindcafe.common.util.DeviceUtil
+import com.abouttime.blindcafe.data.server.dto.matching.send.PostMessageDto
 import com.abouttime.blindcafe.databinding.FragmentChatBinding
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.presentation.chat.audio.RecorderState
@@ -123,7 +124,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
     private fun receiveFirstPage() {
         viewModel?.matchingId?.let { id ->
-            Log.e("paging", "첫요청")
             viewModel?.receivePagedMessages(id.toString(), Timestamp.now())
         }
     }
@@ -398,33 +398,14 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
     private fun sendTextMessage(textMessage: String) {
         viewModel?.matchingId?.let { matchingId ->
-            viewModel?.userId?.let { userId ->
-                viewModel?.myNickname?.let { nickName ->
-                    viewModel?.sendMessage(
-                        Message(
-                            contents = textMessage,
-                            type = 1,
-                            senderUid = userId,
-                            senderName = nickName,
-                            roomUid = matchingId.toString()
-                        )
-                    )
-
-                    viewModel?.postFcm(
-                        title = "${viewModel?.partnerNickname}",
-                        body = textMessage,
-                        path = ""
-                    )
-                } ?: kotlin.run {
-                    Log.e(CHATTING_TAG, "myNickname is null")
-                }
-            } ?: kotlin.run {
-                Log.e(CHATTING_TAG, "userId is null")
-            }
-        } ?: kotlin.run {
-            Log.e(CHATTING_TAG, "matchingId is null")
+            viewModel?.postMessage(
+                PostMessageDto(
+                    contents = textMessage,
+                    type = 1
+                ),
+                matchingId = matchingId
+            )
         }
-
     }
 
     /** edit text **/

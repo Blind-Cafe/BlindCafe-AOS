@@ -35,12 +35,10 @@ import kotlinx.coroutines.withContext
 class ChatViewModel(
     private val receiveMessagesUseCase: ReceiveMessagesUseCase,
     private val subscribeMessageUseCase: SubscribeMessageUseCase,
-    private val sendMessageUseCase: SendMessageUseCase,
     private val uploadImageUseCase: UploadImageUseCase,
     private val uploadAudioUseCase: UploadAudioUseCase,
     private val downloadImageUrlUseCase: DownloadImageUrlUseCase,
     private val downloadAudioUrlUseCase: DownloadAudioUrlUseCase,
-    private val fcmUseCase: PostFcmUseCase,
     private val getTopicUseCase: GetTopicUseCase,
     private val postEnteringLogUseCase: PostEnteringLogUseCase,
     private val postMessageUseCase: PostMessageUseCase
@@ -81,7 +79,7 @@ class ChatViewModel(
     val userId = getStringData(USER_ID)
 
 
-    /** use cases **/
+    /** use cases - read **/
     fun receivePagedMessages(roomId: String, lastTime: Timestamp) {
         receiveMessagesUseCase(roomId, lastTime).onEach { result ->
             when (result) {
@@ -102,19 +100,6 @@ class ChatViewModel(
 
     }
 
-
-
-    fun postFcm(title: String, path: String, body: String) = viewModelScope.launch(Dispatchers.IO) {
-        val token = FirebaseMessaging.getInstance().token.await()
-        val dto = PostFcmDto(
-            body = body,
-            path = path,
-            targetToken = token,
-            title = title
-        )
-        fcmUseCase(dto)
-    }
-
     fun subscribeMessages(roomId: String) = viewModelScope.launch(Dispatchers.IO) {
         subscribeMessageUseCase(roomId).collect { result ->
             when (result) {
@@ -132,66 +117,22 @@ class ChatViewModel(
         }
     }
 
-
-    fun sendMessage(message: Message) = viewModelScope.launch(Dispatchers.IO) {
-        sendMessageUseCase(message).onEach { result ->
-            when (result) {
-                is Resource.Loading -> {
-                    Log.d(FIRESTORE_TAG, "Loading")
-                }
-                is Resource.Success -> {
-                    Log.d(FIRESTORE_TAG, "${result.data?.id}")
-                }
-                is Resource.Error -> {
-                    Log.d(FIRESTORE_TAG, "Error")
-                }
-            }
-
-        }.launchIn(viewModelScope)
-    }
-
-    fun uploadImage(message: Message, uri: Uri) = viewModelScope.launch(Dispatchers.IO) {
-        uploadImageUseCase(message, uri).collect { result ->
-            when (result) {
-                is Resource.Success -> {
-                    sendMessage(message)
-                }
-                is Resource.Error -> {
-                    Log.e(CHATTING_TAG, result.message ?: "error")
-                }
-            }
-        }
-    }
-
-    fun uploadAudio(message: Message, uri: Uri) = viewModelScope.launch(Dispatchers.IO) {
-        uploadAudioUseCase(message, uri).collect { result ->
-            when (result) {
-                is Resource.Success -> {
-                    sendMessage(message)
-                }
-                is Resource.Error -> {
-                    Log.e(CHATTING_TAG, result.message ?: "error")
-                }
-            }
-        }
-
-    }
-
     fun downloadImageUrl(message: Message, callback: (uri: Uri?) -> Unit) =
         viewModelScope.launch(Dispatchers.IO) {
             downloadImageUrlUseCase(message).collect { result ->
                 when (result) {
                     is Resource.Loading -> {
-
+                        showLoading()
                     }
                     is Resource.Success -> {
 
                         withContext(Dispatchers.Main) {
                             callback(result.data)
                         }
+                        dismissLoading()
                     }
                     is Resource.Error -> {
-
+                        dismissLoading()
                     }
                 }
             }
@@ -206,15 +147,12 @@ class ChatViewModel(
                         showLoading()
                     }
                     is Resource.Success -> {
-                        Log.e(CHATTING_TAG, "uri 도착")
                         withContext(Dispatchers.Main) {
                             callback(result.data)
                         }
                         dismissLoading()
                     }
                     is Resource.Error -> {
-                        Log.e(CHATTING_TAG, "uri 에러")
-                        Log.e(CHATTING_TAG, result.message ?: "error")
                         dismissLoading()
                     }
                 }
@@ -223,95 +161,7 @@ class ChatViewModel(
 
 
 
-
-
-    fun getTopic() {
-        matchingId?.let { it ->
-            getTopicUseCase(it).onEach { result ->
-                when (result) {
-                    is Resource.Loading -> {
-                        showLoading()
-                    }
-                    is Resource.Success -> {
-                        result.data?.let { dto ->
-                            sendTopicMessage(dto)
-                        }
-                        dismissLoading()
-
-                    }
-                    is Resource.Error -> {
-                        Log.e(RETROFIT_TAG, result.message.toString())
-                        dismissLoading()
-                    }
-                }
-            }.launchIn(viewModelScope)
-        }
-    }
-
-    private fun sendTopicMessage(topic: GetTopicDto) {
-        topic.type?.let { t ->
-            var message: Message? = null
-
-            when (t) {
-                "text" -> {
-                    topic.topicText?.content?.let { c ->
-                        message = Message(
-                            contents = c,
-                            type = 4,
-                            roomUid = matchingId.toString()
-                        )
-                    }
-                }
-                "image" -> {
-                    topic.topicImage?.src?.let { src ->
-                        message = Message(
-                            contents = src,
-                            type = 5,
-                            roomUid = matchingId.toString()
-                        )
-                    }
-                }
-                "audio" -> {
-                    topic.topicAudio?.src?.let { src ->
-                        message = Message(
-                            contents = src,
-                            type = 6,
-                            roomUid = matchingId.toString()
-                        )
-                    }
-                }
-                else -> {
-                }
-
-            }
-
-            message?.let { m ->
-                sendMessage(m)
-            } ?: kotlin.run {
-                showToast(R.string.temp_error)
-            }
-        }
-    }
-
-
-    fun postExitLog(matchingId: Int) {
-        postEnteringLogUseCase(matchingId = matchingId).onEach { result ->
-            when (result) {
-                is Resource.Loading -> {
-                    showLoading()
-                }
-                is Resource.Success -> {
-                    Log.e("postExitLog", "Success")
-                    dismissLoading()
-                }
-                is Resource.Error -> {
-                    Log.e("postExitLog", "Error")
-                    dismissLoading()
-                }
-            }
-        }.launchIn(viewModelScope)
-    }
-
+    /** use cases - write **/
     fun postMessage(postMessageDto: PostMessageDto, matchingId: Int) {
         postMessageUseCase(postMessageDto = postMessageDto, matchingId = matchingId)
             .onEach { result ->
@@ -327,6 +177,80 @@ class ChatViewModel(
                     }
                 }
             }.launchIn(viewModelScope)
+    }
+
+    fun uploadImage(message: Message, uri: Uri) = viewModelScope.launch(Dispatchers.IO) {
+        uploadImageUseCase(message, uri).collect { result ->
+            when (result) {
+                is Resource.Success -> {
+                    matchingId?.let { id ->
+                        postMessage(
+                            postMessageDto = PostMessageDto(
+                                contents = message.contents,
+                                type = message.type
+                            ),
+                            matchingId = id
+                        )
+                    }
+
+                }
+                is Resource.Error -> {
+                    Log.e(CHATTING_TAG, result.message ?: "error")
+                }
+            }
+        }
+    }
+
+    fun uploadAudio(message: Message, uri: Uri) = viewModelScope.launch(Dispatchers.IO) {
+        uploadAudioUseCase(message, uri).collect { result ->
+            when (result) {
+                is Resource.Success -> {
+                    matchingId?.let { id ->
+                        postMessage(
+                            postMessageDto = PostMessageDto(
+                                contents = message.contents,
+                                type = message.type
+                            ),
+                            matchingId = id
+                        )
+                    }
+                }
+                is Resource.Error -> {
+                    Log.e(CHATTING_TAG, result.message ?: "error")
+                }
+            }
+        }
+
+    }
+
+
+
+    fun getTopic() {
+        matchingId?.let { it ->
+            getTopicUseCase(it).onEach { result ->
+                when (result) {
+                    is Resource.Loading -> { showLoading() }
+                    is Resource.Success -> { dismissLoading() }
+                    is Resource.Error -> { dismissLoading() }
+                }
+            }.launchIn(viewModelScope)
+        }
+    }
+
+    fun postExitLog(matchingId: Int) {
+        postEnteringLogUseCase(matchingId = matchingId).onEach { result ->
+            when (result) {
+                is Resource.Loading -> {
+                    showLoading()
+                }
+                is Resource.Success -> {
+                    dismissLoading()
+                }
+                is Resource.Error -> {
+                    dismissLoading()
+                }
+            }
+        }.launchIn(viewModelScope)
     }
 
 
