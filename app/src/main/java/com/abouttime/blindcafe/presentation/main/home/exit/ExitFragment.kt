@@ -1,6 +1,10 @@
 package com.abouttime.blindcafe.presentation.main.home.exit
 
+import android.graphics.Color
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.view.View
 import androidx.core.view.isGone
 import androidx.navigation.fragment.navArgs
@@ -55,16 +59,18 @@ class ExitFragment: BaseFragment<ExitViewModel>(R.layout.fragment_exit) {
                 tvTitleVictim.isGone = false
                 tvTitleAttacker.text = title
 
+                val str = getStringByResId(R.string.exit_completed_title)
+                val start = str.indexOf("[")
+                val end = str.indexOf("]")
+
                 if (!isReport) {
-                    // TODO 텍스트 데코레이션 필요!
+                    val builder = SpannableStringBuilder(str.replace("[", " ").replace("]", " "))
+                    builder.setSpan(ForegroundColorSpan(getColorByResId(R.color.main)), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    b.tvTitleVictim.append(builder)
                 }
             }
         }
 
     }
-
-
-
-
 
 }

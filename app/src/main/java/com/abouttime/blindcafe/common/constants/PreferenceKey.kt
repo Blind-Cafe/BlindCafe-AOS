@@ -14,6 +14,10 @@ object PreferenceKey {
 
     const val MATCHING_ID = "matching_id"
 
+    const val NOTIFICATION_ENTIRE = "NOTIFICATION_ENTIRE"
+    const val NOTIFICATION_MESSAGE = "NOTIFICATION_MESSAGE"
+    const val NOTIFICATION_FALSE = "NOTIFICATION_FALSE"
+    const val NOTIFICATION_TRUE = "NOTIFICATION_TRUE"
 
-
+    const val DEVICE_TOKEN = "DEVICE_TOKEN"
 }

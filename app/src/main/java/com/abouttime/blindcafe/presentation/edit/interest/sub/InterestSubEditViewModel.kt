@@ -57,16 +57,19 @@ class InterestSubEditViewModel(
                 when(result) {
                     is Resource.Loading -> {
                         Log.e(LogTag.RETROFIT_TAG, "Loading")
+                        showLoading()
                     }
                     is Resource.Success -> {
                         result.data?.interests?.let {
                             Log.e(LogTag.RETROFIT_TAG, "$it")
                             _interests.postValue(it)
                         }
+                        dismissLoading()
 
                     }
                     is Resource.Error -> {
                         Log.e(LogTag.RETROFIT_TAG, "${result?.message}")
+                        dismissLoading()
                     }
                 }
             }.launchIn(viewModelScope)
@@ -83,6 +86,7 @@ class InterestSubEditViewModel(
                     } else {
                         showToast(R.string.temp_error)
                     }
+                    dismissLoading()
                 }
                 is Resource.Error -> {
                     Log.e(RETROFIT_TAG, result.message.toString())

@@ -45,7 +45,6 @@
             android:gravity="center"
             android:lineSpacingExtra="6sp"
             android:padding="12dp"
-            android:text="@{message.contents}"
             android:textColor="@color/gray_300"
             android:textSize="@dimen/font_size_11"
             android:textStyle="normal"

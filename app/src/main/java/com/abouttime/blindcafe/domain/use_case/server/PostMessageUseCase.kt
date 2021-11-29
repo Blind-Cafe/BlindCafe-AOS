@@ -15,13 +15,15 @@ class PostMessageUseCase(
         emit(Resource.Loading())
         try {
             repository.postMessage(postMessageDto = postMessageDto, matchingId = matchingId)
+            emit(Resource.Success(Unit))
         } catch (e: Exception) {
             if (e is HttpException) {
                 val message = e.parseErrorBody()
-                emit(Resource.Error(message = message.code.toString()))
+                emit(Resource.Error<Unit>(message = message.code.toString()))
             } else {
-                emit(Resource.Error(message = e.message.toString()))
+                emit(Resource.Error<Unit>(message = e.message.toString()))
             }
         }
+
     }
 }

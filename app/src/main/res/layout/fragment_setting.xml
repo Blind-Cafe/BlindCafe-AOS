@@ -67,9 +67,9 @@
         android:layout_marginTop="10dp"
         android:background="@color/gray_900"
         android:orientation="vertical"
-        android:paddingHorizontal="24dp"
-        android:paddingTop="16dp"
-        android:paddingBottom="21dp"
+        android:paddingHorizontal="18dp"
+        android:paddingTop="19dp"
+        android:paddingBottom="19dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_notification_title">
@@ -89,7 +89,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                    android:text="@string/setting_notification_matching_room_title"
+                    android:text="@string/setting_notification_entire_title"
                     android:textColor="@color/white"
                     android:textSize="@dimen/font_size_14" />
 
@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                    android:text="@string/setting_notification_matching_room_subtitle"
+                    android:text="@string/setting_notification_entire_subtitle"
                     android:textColor="@color/gray_300"
                     android:textSize="@dimen/font_size_11" />
 
@@ -106,7 +106,7 @@
             </LinearLayout>
 
             <Switch
-                android:id="@+id/sw_notification_matching_room"
+                android:id="@+id/sw_notification_entire"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -132,7 +132,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                    android:text="@string/setting_notification_matching_success_title"
+                    android:text="@string/setting_notification_message_title"
                     android:textColor="@color/white"
                     android:textSize="@dimen/font_size_14" />
 
@@ -141,7 +141,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                    android:text="@string/setting_notification_matching_success_subtitle"
+                    android:text="@string/setting_notification_message_subtitle"
                     android:textColor="@color/gray_300"
                     android:textSize="@dimen/font_size_11" />
 
@@ -149,7 +149,7 @@
             </LinearLayout>
 
             <Switch
-                android:id="@+id/sw_notification_matching_success"
+                android:id="@+id/sw_notification_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:track="@drawable/selector_switch"
@@ -158,50 +158,6 @@
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                    android:text="@string/setting_notification_drink_title"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/font_size_14" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                    android:text="@string/setting_notification_drink_subtitle"
-                    android:textColor="@color/gray_300"
-                    android:textSize="@dimen/font_size_11" />
-
-
-            </LinearLayout>
-
-            <Switch
-                android:id="@+id/sw_notification_drink"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:track="@drawable/selector_switch"
-                android:thumb="@drawable/selector_switch_thumb"
-                android:layout_gravity="center"
-                tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-        </LinearLayout>
-
 
     </LinearLayout>
 
@@ -217,6 +173,8 @@
         android:paddingVertical="4dp"
         android:paddingStart="24dp"
         android:paddingEnd="18dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="17dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ll_notification_container">
@@ -256,11 +214,9 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:background="@color/gray_900"
         android:orientation="vertical"
-
-
+        android:layout_marginTop="22dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_account_title">
@@ -269,8 +225,9 @@
         <TextView
             android:id="@+id/tv_logout"
             android:layout_width="match_parent"
+            android:paddingTop="15dp"
+            android:paddingBottom="17dp"
             android:paddingStart="24dp"
-            android:paddingEnd="18dp"
             android:layout_height="match_parent"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:paddingVertical="15dp"
@@ -292,9 +249,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:paddingTop="15dp"
+                android:paddingBottom="17dp"
                 android:paddingStart="24dp"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                android:paddingVertical="15dp"
                 android:text="@string/setting_account_delete"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_size_14" />

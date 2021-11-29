@@ -96,7 +96,6 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
             val time = viewModel?.startTime?.toLong()?.secondToLapseForHome()
             b.tvTime.text = time
             Log.e(HOME_TAG, time.toString())
-
         }
     }
 

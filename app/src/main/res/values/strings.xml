@@ -168,7 +168,7 @@
     <!-- quit complete -->
     <string name="exit_complete_title">%s 님과 %d일간의 추억은 즐거우셨나요?\n이제 더 좋은 추억을 쌓으러 가보죠!</string>
     <string name="exit_reported_title">%s님의 불편함을 느낀 대화를 종료했습니다.\n아쉽지만 새로운 손님과 또 다른 추억을 쌓으러 가볼까요?</string>
-    <string name="exit_completed_title">%s님이\"%s\"라는 이유로 대화를 진행하지 못하게되었습니다.\n\n아쉽지만 새로운 손님과 또 다른 추억을 쌓을 수 있습니다.</string>
+    <string name="exit_completed_title">%s님이[\"%s\"]라는 이유로 대화를 진행하지 못하게되었습니다.\n\n아쉽지만 새로운 손님과 또 다른 추억을 쌓을 수 있습니다.</string>
     <string name="exit_complete_next">새로운 손님과 합석하기</string>
 
     <!-- report -->
@@ -278,7 +278,15 @@
     <!-- setting -->
     <string name="setting_title">설정</string>
     <string name="setting_notification_title">알림</string>
+    <string name="setting_notification_entire_title">전체 알림</string>
+    <string name="setting_notification_message_title">메세지 알림</string>
+    <string name="setting_notification_entire_subtitle">블라인드 카페 전체 알림을 설정할 수 있습니다.</string>
+    <string name="setting_notification_message_subtitle">매칭 채팅방의 메세지 알림을 설정할 수 있습니다.</string>
+
+
+
     <string name="setting_notification_matching_room_title">매칭 방 알림</string>
+
     <string name="setting_notification_matching_room_subtitle">매칭 방 메시지 알림을 받습니다.</string>
     <string name="setting_notification_matching_success_title">매칭 성공</string>
     <string name="setting_notification_matching_success_subtitle">매칭에 성공했을 때 알림을 받습니다.</string>

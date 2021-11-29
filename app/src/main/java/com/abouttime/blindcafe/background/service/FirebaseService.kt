@@ -12,8 +12,11 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
+import com.abouttime.BlindCafeApplication
+import com.abouttime.BlindCafeApplication.Companion.sharedPreferences
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.constants.LogTag.FCM_TAG
+import com.abouttime.blindcafe.presentation.GlobalLiveData.UpdateHomeState
 import com.abouttime.blindcafe.presentation.NavHostActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -25,7 +28,7 @@ class FirebaseService(): FirebaseMessagingService() {
 
 
     companion object {
-        var sharedPref: SharedPreferences? = null
+        private var sharedPref: SharedPreferences = sharedPreferences
 
         var token: String?
             get() {
@@ -41,6 +44,7 @@ class FirebaseService(): FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
         Log.e(FCM_TAG, "onMessageReceived 호출")
+        UpdateHomeState.postValue(true)
 
         val intent = Intent(this, NavHostActivity::class.java)
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -49,12 +53,13 @@ class FirebaseService(): FirebaseMessagingService() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel(notificationManager) // 채널 만들기
         }
+        Log.e(FCM_TAG, "${message.toString()}")
 
         val title = message.notification?.title
         val body = message.notification?.body
         val path = message.notification?.channelId
 
-        Log.e(FCM_TAG, "->\ntitle: $title,\nbody: $body\n???: $path")
+
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, FLAG_ONE_SHOT)
@@ -65,7 +70,6 @@ class FirebaseService(): FirebaseMessagingService() {
             .setAutoCancel(true)
             .setContentIntent(pendingIntent)
             .build()
-
 
         notificationManager.notify(notificationId, notification)
 

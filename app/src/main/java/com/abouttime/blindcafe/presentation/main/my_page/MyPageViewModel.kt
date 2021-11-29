@@ -48,25 +48,17 @@ class MyPageViewModel(
             when (response) {
                 is Resource.Loading -> {
                     Log.d(RETROFIT_TAG, "getUserInfo Loading")
+                    showLoading()
                 }
                 is Resource.Success -> {
                     Log.d(RETROFIT_TAG, "getUserInfo ${response.data.toString()}")
                     response.data?.let { dto ->
-                        Log.e("mypage", dto.toString())
-
-                        Log.e("mypage", dto.profileImage.toString())
                         dto.profileImage?.let {
                             _profileImageUrl.postValue(it)
                         }
-
-
-                        Log.e("mypage", dto.nickname.toString())
                         dto.nickname?.let {
                             _nickname.postValue(it)
                         }
-
-
-                        Log.e("mypage", dto.myGender.toString())
                         dto.myGender?.let {
                             _sex.postValue(
                                 when(it) {
@@ -76,14 +68,9 @@ class MyPageViewModel(
                                 }
                             )
                         }
-
-
-                        Log.e("mypage", "${dto.age}세")
                         dto.age?.let {
                             _age.postValue(it.toString())
                         }
-
-                        Log.e("mypage", dto.partnerGender.toString())
                         dto.partnerGender?.let {
                             _partnerSex.postValue(
                                 when (it) {
@@ -94,29 +81,23 @@ class MyPageViewModel(
                                 }
                             )
                         }
-
-
                         _location.postValue(dto.region)
-
-
                         dto.interests?.let {
                             if (!it.isNullOrEmpty()) {
                                 _interests.postValue(it.takeLast(3))
                             }
                         }
-
                         dto.drinks?.let {
                             if (!it.isNullOrEmpty()) {
                                 _badges.postValue(it)
                             }
                         }
-
-                        Log.e("mypage", dto.toString())
-
+                        dismissLoading()
                     }
                 }
                 is Resource.Error -> {
                     Log.d(RETROFIT_TAG, "getUserInfo ${response.message}")
+                    dismissLoading()
                 }
             }
         }.launchIn(viewModelScope)
