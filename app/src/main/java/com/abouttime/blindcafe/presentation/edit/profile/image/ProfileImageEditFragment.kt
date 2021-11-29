@@ -73,6 +73,7 @@ class ProfileImageEditFragment :
         initAddImageButton()
 
         observeImageUrlsData(fragmentProfileImageEditBinding)
+        initBackButton()
     }
 
 
@@ -120,9 +121,6 @@ class ProfileImageEditFragment :
                                 .into(ivList[i])
 
                             btList[i].setImageResource(R.drawable.bt_profile_image_delete)
-
-
-
 
                             btList[i].setOnClickListener {
                                 deleteFragment(i + 1)
@@ -193,6 +191,7 @@ class ProfileImageEditFragment :
                     }
                 }
             }
+            imageCnt.plus(1)
         }
 
 
@@ -243,7 +242,7 @@ class ProfileImageEditFragment :
                             }
                         }
                     }
-                    imageCnt.plus(1)
+                    imageCnt.minus(1)
                 }
             }
         }
@@ -251,10 +250,16 @@ class ProfileImageEditFragment :
 
     }
 
-    /** InputStream 클래스 확장 */
-    fun InputStream.toFile(filePath: String) {
-        File(filePath).outputStream().use { fileOutput ->
-            this.copyTo(fileOutput)
+
+    private fun initBackButton() {
+        binding?.let { b ->
+            b.ivBack.setOnClickListener {
+                if (imageCnt > 0) {
+                    popOneDirections()
+                } else {
+                    showToast(R.string.profile_image_edit_toast_alert_at_least_one)
+                }
+            }
         }
     }
 

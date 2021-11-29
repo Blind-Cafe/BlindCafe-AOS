@@ -51,7 +51,7 @@ class ExchangeAcceptFragment: BaseFragment<ExchangeAcceptViewModel>(R.layout.fra
                 }
             }
             profile.sex?.let {  sex ->
-                tvSexValue.text = sex
+                tvSexValue.text = if (sex =="F") "여자" else "남자"
             }
             profile.age?.let { age ->
                 tvAgeValue.text = "${age}세"

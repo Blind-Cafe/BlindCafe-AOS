@@ -18,6 +18,7 @@ class ExchangeWaitFragment: BaseFragment<ExchangeWaitViewModel>(R.layout.fragmen
         val fragmentExchangeWaitBinding = FragmentExchangeWaitBinding.bind(view)
         binding = fragmentExchangeWaitBinding
         initNavArgs()
+        initBackButton()
 
     }
     private fun initNavArgs() {
@@ -27,5 +28,10 @@ class ExchangeWaitFragment: BaseFragment<ExchangeWaitViewModel>(R.layout.fragmen
     }
     private fun initTitleTextView(nickname: String, reason: String) {
         binding?.tvTitle?.text = getString(R.string.profile_exchange_wait).format(nickname, reason)
+    }
+    private fun initBackButton() {
+        binding?.ivBack?.setOnClickListener {
+            popOneDirections()
+        }
     }
 }

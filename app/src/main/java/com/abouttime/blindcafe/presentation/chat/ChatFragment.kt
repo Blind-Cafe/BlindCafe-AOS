@@ -17,6 +17,7 @@ import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -378,6 +379,8 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             5 -> chatAdapter.add(0, ImageTopicItem(message, viewModel = viewModel))
             6 -> chatAdapter.add(0, AudioTopicItem(message, viewModel = viewModel))
             7 -> chatAdapter.add(0, DescriptionItem(message))
+            8 -> {} // TODO 7일방 첫 description
+            9 -> {} // TODO 5분 뒤 로직
         }
     }
 
@@ -640,8 +643,13 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         popupWindow?.let { pw ->
             pw.isOutsideTouchable = true
             pw.isFocusable = true
-            pw.showAsDropDown(fragmentChatBinding.ivBell)
-            pw.contentView?.setMarginRight(20)
+            if (isCont) {
+                pw.showAsDropDown(fragmentChatBinding.ivMenu)
+                pw.contentView?.setMarginRight(44)
+            } else {
+                pw.showAsDropDown(fragmentChatBinding.ivBell)
+                pw.contentView?.setMarginRight(20)
+            }
             pw.contentView?.setMarginTop(20)
         }
 
@@ -671,7 +679,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     }
 
     private fun initNotificationContainer(view: View) {
-        view.isGone = !isCont
+        view.isVisible = !isCont
     }
 
     private fun initQuitContainer(view: View) {

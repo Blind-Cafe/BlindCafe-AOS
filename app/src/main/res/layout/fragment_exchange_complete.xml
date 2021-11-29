@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View.OnClickListener" />
+
+        <import type="android.view.View" />
+
+        <import type="androidx.core.content.ContextCompat" />
+
+        <import type="java.util.List" />
+
+        <variable
+            name="viewModel"
+            type="com.abouttime.blindcafe.presentation.profile_exchange.complete.ExchangeCompleteViewModel" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black">
@@ -56,6 +74,7 @@
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:gravity="center"
         android:paddingHorizontal="13dp"
+        android:onClick="@{() -> viewModel.onClickNextButton()}"
         android:text="@string/profile_exchange_complete_next"
         android:textColor="@color/white"
         android:textSize="@dimen/font_size_16"
@@ -66,3 +85,5 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
