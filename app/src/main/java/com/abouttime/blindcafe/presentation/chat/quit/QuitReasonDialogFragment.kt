@@ -21,6 +21,12 @@ class QuitReasonDialogFragment:BaseDialogFragment<QuitReasonViewModel>(R.layout.
         binding?.lifecycleOwner = this
         binding?.viewModel = viewModel
 
+
+        initArgs()
+    }
+    private fun initArgs() {
         viewModel.matchingId = args.matchingId
+        viewModel.partnerNickname = args.partnerNickname
+        viewModel.startTime = args.startTime
     }
 }

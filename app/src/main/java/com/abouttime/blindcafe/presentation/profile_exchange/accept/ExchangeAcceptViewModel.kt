@@ -86,19 +86,27 @@ class ExchangeAcceptViewModel(
                             /** 상대도 수락했으니 매칭성공 **/
                             moveToExchangeCompleteFragment(matchingId)
                         } else {
-                            /** 상대가 거절했으니 매칭실패 -> 방나가기 당한 화면 **/
-                            startTime?.let { time ->
-                                val t = time.toLong()
-                                val days = t.to3RangeDays()
-                                /** 상대가 거절했으니 매칭실패 -> 방나가기 당한 화면 **/
-                                _partnerProfile.value?.partnerNickname?.let { nick ->
-                                    moveToExitFragment(
-                                        isAttacker = false,
-                                        isReport = false,
-                                        title = "$nick 님과 ${days}일간의 추억은 즐거우셨나요?\n이제 더 좋은 추억을 쌓으러 가보죠!"
-                                    )
-                                }
+                            /** 상대가 거절한지 선택안한지 모르는 상태 -> 방나가기당함 & 수락대기 화면 나눠야하지만 일단 수락 대기  **/
+                            _partnerProfile.value?.partnerNickname?.let { nick ->
+                                moveToExchangeWaitFragment(
+                                    partnerNickname = nick,
+                                    reason = "수락 여부를 선택"
+                                )
                             }
+
+
+//                            startTime?.let { time ->
+//                                val t = time.toLong()
+//                                val days = t.to3RangeDays()
+//                                /** 상대가 거절했으니 매칭실패 -> 방나가기 당한 화면 **/
+//                                _partnerProfile.value?.partnerNickname?.let { nick ->
+//                                    moveToExitFragment(
+//                                        isAttacker = false,
+//                                        isReport = false,
+//                                        title = "$nick 님과 ${days}일간의 추억은 즐거우셨나요?\n이제 더 좋은 추억을 쌓으러 가보죠!"
+//                                    )
+//                                }
+//                            }
 
                         }
                     }
@@ -170,6 +178,12 @@ class ExchangeAcceptViewModel(
             isAttacker = isAttacker,
             isReport = isReport,
             title = title
+        ))
+    }
+    private fun moveToExchangeWaitFragment(partnerNickname: String, reason: String) {
+        moveToDirections(ExchangeAcceptFragmentDirections.actionExchangeAcceptFragmentToExchangeWaitFragment(
+            partnerNickname = partnerNickname,
+            reason = reason
         ))
     }
 }

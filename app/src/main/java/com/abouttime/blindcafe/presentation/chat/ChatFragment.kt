@@ -69,6 +69,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         "${requireActivity().externalCacheDir?.absolutePath}/recording.mp3"
     }
 
+    var isScrolling = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -209,10 +210,9 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             val decor = OverScrollDecoratorHelper.setUpOverScroll(rvChatContainer,
                 OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
 
-            var isScrolling = false
+
 
             decor.setOverScrollStateListener { decor, oldState, newState ->
-                Log.e("StateListener", "oldState: $oldState, newState: $newState")
                 when (newState) {
                     STATE_IDLE -> {
                         isScrolling = false
@@ -223,17 +223,12 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                         viewModel?.matchingId?.let { id ->
                             if (timeStampList.isNotEmpty()) {
                                 val time = timeStampList.last()
-                                Log.e("paging", "재요청 $time")
                                 viewModel?.receivePagedMessages(id.toString(), time)
                             }
                         }
                     }
-                    STATE_DRAG_END_SIDE -> {
+                    else -> {
                         isScrolling = true
-                    }
-                    STATE_BOUNCE_BACK -> if (oldState === STATE_DRAG_START_SIDE) {
-                        isScrolling = true
-                    } else {
                     }
                 }
             }
@@ -241,7 +236,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
             root.viewTreeObserver.addOnGlobalLayoutListener {
                 val heightDiff = root.rootView.height - root.height
-                Log.e("asdf", heightDiff.toString())
                 if (heightDiff > 100 && !isScrolling) {
                     scrollRvToLastPosition(fragmentChatBinding)
                 }
@@ -249,12 +243,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             rvChatContainer.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
-                    Log.e("asdf", "newState $newState")
-                    if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
-                        isScrolling = true
-                    } else if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                        isScrolling = false
-                    }
+                    isScrolling = newState != RecyclerView.SCROLL_STATE_IDLE
                 }
             }
             )
@@ -267,7 +256,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     ) =
         with(fragmentChatBinding
         ) {
-            if (chatAdapter.itemCount - 1 > 0) {
+            if (chatAdapter.itemCount - 1 > 0 && !isScrolling) {
                 rvChatContainer.smoothScrollToPosition(chatAdapter.itemCount - 1)
             }
         }
@@ -284,8 +273,8 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     /** handle message **/
     private fun observeMessagesData() {
         viewModel.receivedMessage.observe(viewLifecycleOwner) { messages ->
+            isScrolling = true
             messages.forEach { message ->
-
                 message.timestamp?.let { tp ->
                     if (message.senderUid == viewModel.userId) {
                         addMessageToMe(message)
@@ -294,23 +283,25 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                     }
                 }
             }
+            isScrolling = false
         }
     }
 
     private fun observePagedMessagesData() {
         viewModel?.receivedPageMessage.observe(viewLifecycleOwner) { messages ->
-
+            isScrolling = true
             messages.forEach { message ->
                 Log.e("asdf", message.toString())
                 message.timestamp?.let { tp ->
                     timeStampList.add(tp)
                     if (message.senderUid == viewModel.userId) {
-                        addPagedMessageToMe2(message)
+                        addPagedMessageToMe(message)
                     } else {
-                        addPagedMessageToPartner2(message)
+                        addPagedMessageToPartner(message)
                     }
                 }
             }
+            isScrolling = false
         }
     }
 
@@ -353,52 +344,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     }
 
     private fun addPagedMessageToMe(message: Message) {
-        val cnt = binding?.rvChatContainer?.childCount
-        cnt?.let { c ->
-            when (message.type) {
-                1 -> chatAdapter.add(c, TextSendItem(message))
-                2 -> chatAdapter.add(c, ImageSendItem(message, viewModel = viewModel))
-                3 -> chatAdapter.add(c, AudioSendItem(message, viewModel = viewModel))
-                4 -> chatAdapter.add(c, TextTopicItem(message))
-                5 -> chatAdapter.add(c, ImageTopicItem(message, viewModel = viewModel))
-                6 -> chatAdapter.add(c, AudioTopicItem(message, viewModel = viewModel))
-                7 -> chatAdapter.add(c, DescriptionItem(message))
-            }
-
-        }
-
-    }
-
-    private fun addPagedMessageToPartner(message: Message) {
-        var cnt = binding?.rvChatContainer?.childCount
-
-        cnt?.let { c ->
-
-            when (message.type) {
-                1 -> chatAdapter.add(c, TextReceiveItem(message,
-                    isCont = isCont,
-                    nickName = viewModel.partnerNickname ?: "",
-                    profileImage = viewModel.profileImage ?: ""))
-                2 -> chatAdapter.add(c, ImageReceiveItem(message,
-                    viewModel = viewModel,
-                    isCont = isCont,
-                    nickName = viewModel.partnerNickname ?: "",
-                    profileImage = viewModel.profileImage ?: ""))
-                3 -> chatAdapter.add(c, AudioReceiveItem(message,
-                    viewModel = viewModel,
-                    isCont = isCont,
-                    nickName = viewModel.partnerNickname ?: "",
-                    profileImage = viewModel.profileImage ?: ""))
-                4 -> chatAdapter.add(c, TextTopicItem(message))
-                5 -> chatAdapter.add(c, ImageTopicItem(message, viewModel = viewModel))
-                6 -> chatAdapter.add(c, AudioTopicItem(message, viewModel = viewModel))
-                7 -> chatAdapter.add(c, DescriptionItem(message))
-            }
-        }
-
-    }
-
-    private fun addPagedMessageToMe2(message: Message) {
 
         when (message.type) {
             1 -> chatAdapter.add(0, TextSendItem(message))
@@ -413,9 +358,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
     }
 
-    private fun addPagedMessageToPartner2(message: Message) {
-
-
+    private fun addPagedMessageToPartner(message: Message) {
         when (message.type) {
             1 -> chatAdapter.add(0, TextReceiveItem(message,
                 isCont = isCont,
@@ -436,8 +379,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             6 -> chatAdapter.add(0, AudioTopicItem(message, viewModel = viewModel))
             7 -> chatAdapter.add(0, DescriptionItem(message))
         }
-
-
     }
 
 

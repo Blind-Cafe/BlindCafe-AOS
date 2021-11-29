@@ -28,7 +28,7 @@ class QuitReasonViewModel: BaseViewModel() {
 
     fun onClickYesButton(v: View) {
         if (canClickNextButton()) {
-            if (reason.value != null && matchingId != null) {
+            if (reason.value != null && matchingId != null && partnerNickname != null && startTime != null) {
                 moveToDirections(
                     QuitReasonDialogFragmentDirections.actionQuitReasonDialogFragmentToConfirmDialogFragment(
                         id = R.string.quit_confirm_title,
@@ -37,7 +37,9 @@ class QuitReasonViewModel: BaseViewModel() {
                         no = v.resources.getString(R.string.quit_confirm_no),
                         yes = v.resources.getString(R.string.quit_confirm_yes),
                         reason = reason.value ?: 0,
-                        matchingId = matchingId ?: 0
+                        matchingId = matchingId ?: 0,
+                        nickname = partnerNickname!!,
+                        startTime = startTime!!
                     )
                 )
             } else {

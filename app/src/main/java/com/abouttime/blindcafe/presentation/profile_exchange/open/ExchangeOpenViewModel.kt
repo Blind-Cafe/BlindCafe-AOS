@@ -175,7 +175,7 @@ class ExchangeOpenViewModel(
             data.nickname?.let {
                 moveToProfileWaitFragment(
                     partnerNickname = it,
-                    reason = "프로필 작성"
+                    reason = "프로필을 작성"
                 )
             }
 

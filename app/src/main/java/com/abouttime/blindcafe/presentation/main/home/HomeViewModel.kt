@@ -156,9 +156,9 @@ class HomeViewModel(
 
         } else {
             /** 나 공개한 상태인데 상대방 작성 안 했으니 '상대 작성 대기' 화면으로 이동 */
-            partnerNickname?.let {
+            partnerNickname?.let { nick ->
                 moveToExchangeOpenWaitFragment(
-                    partnerNickname = it,
+                    partnerNickname = nick,
                     reason = "프로필 작성"
                 )
             }

@@ -60,7 +60,9 @@ class ConfirmViewModel(
     fun exitChatRoom(matchingId: Int, reason: Int, partnerNickname: String, startTime: Int) {
         exitChatRoomUseCase(matchingId, reason).onEach { result ->
             when(result) {
-                is Resource.Loading -> {}
+                is Resource.Loading -> {
+                    showLoading()
+                }
                 is Resource.Success -> {
 
                     val t = startTime.toLong()
@@ -70,9 +72,11 @@ class ConfirmViewModel(
                         isReport = false,
                         title = "$partnerNickname 님 과 ${days}일간의 추억은 즐거우셨나요?\n이제 더 좋은 추억을 쌓으러 가보죠!"
                     ))
+                    dismissLoading()
                 }
                 is Resource.Error -> {
                     Log.e(RETROFIT_TAG, result.message.toString())
+                    dismissLoading()
                 }
             }
         }.launchIn(viewModelScope)
