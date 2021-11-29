@@ -62,11 +62,12 @@ open class BaseViewModel() : ViewModel() {
     }
 
     fun showLoading() {
-        Log.e(LogTag.RETROFIT_TAG, "Loading")
-        //_loadingEvent.value = true
+        Log.e(LogTag.RETROFIT_TAG, "showLoading")
+        _loadingEvent.value = true
     }
     fun dismissLoading() {
-        //_loadingEvent.value = false
+        Log.e(LogTag.RETROFIT_TAG, "dismissLoading")
+        _loadingEvent.value = false
     }
 
     fun saveNavigationData(pair: Pair<String, String>) {

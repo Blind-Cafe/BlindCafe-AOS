@@ -58,7 +58,6 @@ class HomeViewModel(
             when (resource) {
                 is Resource.Loading -> {
                     showLoading()
-                    Log.d(RETROFIT_TAG, "Loading")
                 }
                 is Resource.Success -> {
                     Log.d(RETROFIT_TAG, resource.data.toString())
@@ -89,15 +88,18 @@ class HomeViewModel(
             when (response) {
                 is Resource.Loading -> {
                     Log.d(RETROFIT_TAG, "Loading")
+                    showLoading()
                 }
                 is Resource.Success -> {
                     Log.d(RETROFIT_TAG, response.data.toString())
                     response.data?.matchingStatus?.let { status ->
                         _homeStatusCode.postValue(getHomeStatusCode(status))
                     }
+                    dismissLoading()
                 }
                 is Resource.Error -> {
                     Log.d(RETROFIT_TAG, response.message.toString())
+                    dismissLoading()
                 }
             }
         }.launchIn(viewModelScope)

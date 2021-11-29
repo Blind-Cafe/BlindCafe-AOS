@@ -25,17 +25,30 @@ abstract class BaseFragment<VM : BaseViewModel>(layoutId: Int) : Fragment(layout
     // View Model
     abstract val viewModel: VM
 
-    lateinit var loadingDialog: Dialog
+    private lateinit var loadingDialog: Dialog
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initLoadingDialog()
+        observeLoadingEvent()
+
         observeToastEvent()
         observeNavigationEvent()
         observeSaveNavigationDataEvent()
         observePopNavigationEvent()
     }
+
+
+    private fun initLoadingDialog() {
+        loadingDialog = Dialog(requireContext())
+        loadingDialog.setContentView(R.layout.dialog_fragment_loading)
+        loadingDialog.window?.setDimAmount(0f)
+        loadingDialog.window?.setBackgroundDrawableResource(R.color.transparent)
+        loadingDialog.setCanceledOnTouchOutside(false)
+        loadingDialog.window?.setGravity(Gravity.CENTER)
+    }
+
 
     private fun observeLoadingEvent() {
         viewModel.loadingEvent.observe(viewLifecycleOwner) {
@@ -47,21 +60,15 @@ abstract class BaseFragment<VM : BaseViewModel>(layoutId: Int) : Fragment(layout
         }
     }
 
-    private fun initLoadingDialog() {
-        loadingDialog = Dialog(requireContext())
-        loadingDialog.setContentView(R.layout.dialog_fragment_loading)
-        loadingDialog.setCanceledOnTouchOutside(false)
-        loadingDialog.window?.setGravity(Gravity.CENTER)
-    }
-
     protected fun showLoadingDialog() {
-        loadingDialog.show()
+
+            loadingDialog.show()
+
     }
 
     protected fun dismissLoadingDialog() {
-        if (loadingDialog.isShowing) {
-            loadingDialog.dismiss()
-        }
+        loadingDialog.dismiss()
+
     }
 
     private fun observeToastEvent() {

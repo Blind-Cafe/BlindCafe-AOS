@@ -15,7 +15,7 @@ class ExchangeCompleteViewModel(
     var matchingId: Int? = null
 
     /** use cases **/
-    fun getChatRoomInfo(matchingId: Int) {
+    private fun getChatRoomInfo(matchingId: Int) {
         getChatRoomInfoUseCase(matchingId).onEach { result ->
             when (result) {
                 is Resource.Loading -> {

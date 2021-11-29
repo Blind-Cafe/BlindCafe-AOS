@@ -140,7 +140,7 @@ class ProfileImageEditFragment :
 
 
     private fun uploadImage(uri: Uri, number: Int) {
-        showLoadingDialog()
+
         Toast.makeText(requireContext(), "사진 업로드 중...", Toast.LENGTH_SHORT).show()
 
         //val inputStream = requireContext().contentResolver.openInputStream(uri)
@@ -201,7 +201,6 @@ class ProfileImageEditFragment :
     private fun deleteFragment(
         number: Int,
     ) {
-        showLoadingDialog()
         Toast.makeText(requireContext(), "사진 삭제 중...", Toast.LENGTH_SHORT).show()
 
 

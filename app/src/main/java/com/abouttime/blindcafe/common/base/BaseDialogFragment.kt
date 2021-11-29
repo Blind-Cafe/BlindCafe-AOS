@@ -1,5 +1,6 @@
 package com.abouttime.blindcafe.common.base
 
+import android.app.Dialog
 import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
@@ -8,8 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
@@ -17,18 +16,54 @@ import com.abouttime.BlindCafeApplication
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.databinding.ToastBinding
 
-abstract class BaseDialogFragment<VM: BaseViewModel>(layoutId: Int): DialogFragment(layoutId) {
+abstract class BaseDialogFragment<VM : BaseViewModel>(layoutId: Int) : DialogFragment(layoutId) {
     // View Model
     abstract val viewModel: VM
 
+    private lateinit var loadingDialog: Dialog
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initLoadingDialog()
+        observeLoadingEvent()
+
         observeToastEvent()
         observeNavigationEvent()
         observeSaveNavigationDataEvent()
         observePopNavigationEvent()
+    }
+
+
+    private fun initLoadingDialog() {
+        loadingDialog = Dialog(requireContext())
+        loadingDialog.setContentView(R.layout.dialog_fragment_loading)
+        loadingDialog.window?.setDimAmount(0f)
+        loadingDialog.window?.setBackgroundDrawableResource(R.color.transparent)
+        loadingDialog.setCanceledOnTouchOutside(false)
+        loadingDialog.window?.setGravity(Gravity.CENTER)
+    }
+
+
+    private fun observeLoadingEvent() {
+        viewModel.loadingEvent.observe(viewLifecycleOwner) {
+            if (it) {
+                showLoadingDialog()
+            } else {
+                dismissLoadingDialog()
+            }
+        }
+    }
+
+
+    protected fun showLoadingDialog() {
+
+        loadingDialog.show()
+
+    }
+
+    protected fun dismissLoadingDialog() {
+        loadingDialog.dismiss()
     }
 
     private fun observeToastEvent() {
@@ -68,7 +103,6 @@ abstract class BaseDialogFragment<VM: BaseViewModel>(layoutId: Int): DialogFragm
     }
 
 
-
     private fun observeSaveNavigationDataEvent() {
         viewModel.saveNavigationDataEvent.observe(viewLifecycleOwner) { pair ->
             saveNavigationResult(pair.first, pair.second)
@@ -81,6 +115,7 @@ abstract class BaseDialogFragment<VM: BaseViewModel>(layoutId: Int): DialogFragm
     protected fun saveNavigationResult(key: String = "result", result: String) {
         findNavController().previousBackStackEntry?.savedStateHandle?.set(key, result)
     }
+
     protected fun saveHomeResult(key: String, result: String) {
         findNavController().getBackStackEntry(R.id.mainFragment).savedStateHandle.set(key, result)
     }
@@ -96,11 +131,9 @@ abstract class BaseDialogFragment<VM: BaseViewModel>(layoutId: Int): DialogFragm
             )
         }
     }
-    fun getInputManager(): InputMethodManager =  requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
-
-
-
+    fun getInputManager(): InputMethodManager =
+        requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
 
     /** Util for all fragment **/
@@ -108,6 +141,7 @@ abstract class BaseDialogFragment<VM: BaseViewModel>(layoutId: Int): DialogFragm
         //Toast.makeText(requireContext(), getString(resId), Toast.LENGTH_SHORT).show()
         createToast(getString(resId))?.show()
     }
+
     fun createToast(content: String): Toast? {
         val inflater = LayoutInflater.from(requireContext())
         val binding: ToastBinding = ToastBinding.inflate(layoutInflater)
@@ -121,6 +155,7 @@ abstract class BaseDialogFragment<VM: BaseViewModel>(layoutId: Int): DialogFragm
 
 
     }
+
     private fun Int.toPx(): Int = (this * Resources.getSystem().displayMetrics.density).toInt()
 
     fun getColorByResId(resId: Int) = resources.getColor(resId, null)

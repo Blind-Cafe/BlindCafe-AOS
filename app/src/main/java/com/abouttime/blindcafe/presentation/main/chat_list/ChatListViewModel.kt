@@ -37,7 +37,6 @@ class ChatListViewModel(
                     result?.data?.matchings?.let { matches ->
                         _chatRooms.value = matches
                     }
-
                 }
                 is Resource.Error -> {
 
