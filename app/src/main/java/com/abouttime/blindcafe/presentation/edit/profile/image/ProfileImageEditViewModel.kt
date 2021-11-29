@@ -102,13 +102,4 @@ class ProfileImageEditViewModel(
         }.launchIn(viewModelScope)
     }
 
-
-    /** onClick **/
-    fun onClickCompleteButton() {
-        // TODO 프로필 수정 api 연결
-        popDirections()
-    }
-    fun onClickBackButton() {
-        popDirections()
-    }
 }

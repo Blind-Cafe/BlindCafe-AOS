@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:background="@drawable/bg_rounding_3dp"
-        android:backgroundTint="@color/gray_900"
+        android:backgroundTint="#48484a"
         android:orientation="vertical"
         android:paddingHorizontal="18dp"
         android:paddingTop="30dp">
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/spoqa_han_sans_neo_bold"
             android:text="@string/report_reason_title"
-            android:textColor="@color/white"
+            android:textColor="@color/white_2"
             android:textSize="@dimen/font_size_15" />
 
         <TextView
@@ -51,7 +51,7 @@
             android:id="@+id/ll_reason_container_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="42dp"
+            android:layout_marginTop="36dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -197,7 +197,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="64dp"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:lineSpacingExtra="6sp"
             android:text="@string/report_reason_email"
@@ -208,39 +208,39 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="9dp"
             android:background="@color/steel" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="13dp"
             android:gravity="center"
             android:orientation="horizontal"
             android:weightSum="2">
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:gravity="center"
                 android:onClick="@{() -> viewModel.onClickNoButton()}"
-                android:paddingVertical="12dp"
+                android:paddingTop="22dp"
+                android:paddingBottom="25dp"
                 android:text="@string/report_reason_no"
                 android:textColor="@color/gray_300"
                 android:textSize="@dimen/font_size_14" />
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:gravity="center"
                 android:onClick="@{viewModel::onClickYesButton}"
-                android:paddingVertical="12dp"
+                android:paddingTop="22dp"
+                android:paddingBottom="25dp"
                 android:text="@string/report_reason_yes"
                 android:textColor="@color/main"
                 android:textSize="@dimen/font_size_14" />

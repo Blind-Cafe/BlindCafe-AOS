@@ -22,6 +22,10 @@ class AcceptImageDialogFragment: BaseDialogFragment<AcceptImageViewModel>(R.layo
 
 
 
+
+
+
+
         initArgs()
         observeImageUrlsData()
         initViewPager2(dialogFragmentProfileImageBinding)

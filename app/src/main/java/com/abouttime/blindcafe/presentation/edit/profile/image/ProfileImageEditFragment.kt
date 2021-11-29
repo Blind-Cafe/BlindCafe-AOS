@@ -127,6 +127,8 @@ class ProfileImageEditFragment :
                             }
 
                             imageCnt.plus(1)
+                            Log.e("imageCnt", "$imageCnt")
+
                         }
 
                     }
@@ -192,6 +194,8 @@ class ProfileImageEditFragment :
                 }
             }
             imageCnt.plus(1)
+            Log.e("imageCnt", "$imageCnt")
+
         }
 
 
@@ -243,6 +247,7 @@ class ProfileImageEditFragment :
                         }
                     }
                     imageCnt.minus(1)
+                    Log.e("imageCnt", "$imageCnt")
                 }
             }
         }

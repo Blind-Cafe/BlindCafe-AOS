@@ -14,7 +14,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:background="@color/black_two">
 
 
 
@@ -220,7 +220,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/bg_rounding_3dp"
-        android:backgroundTint="@{viewModel.enableNextButton ? @color/enabled : @color/button_disabled}"
+        android:backgroundTint="@{viewModel.enableNextButton ? @color/enabled : @color/brownish_grey}"
         android:enabled="@{viewModel.enableNextButton ? true : false}"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:gravity="center"
