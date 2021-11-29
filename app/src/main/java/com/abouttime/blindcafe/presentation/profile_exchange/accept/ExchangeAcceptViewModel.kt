@@ -5,11 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
-import com.abouttime.blindcafe.common.ext.isOver24Hours
-import com.abouttime.blindcafe.common.ext.isOver48Hours
-import com.abouttime.blindcafe.common.ext.to3RangeDays
 import com.abouttime.blindcafe.domain.model.Profile
-import com.abouttime.blindcafe.domain.use_case.server.DeleteDismissMatchingUseCase
 import com.abouttime.blindcafe.domain.use_case.server.GetChatRoomInfoUseCase
 import com.abouttime.blindcafe.domain.use_case.server.GetPartnerProfileUseCase
 import com.abouttime.blindcafe.domain.use_case.server.PostAcceptMatchingUseCase
@@ -87,7 +83,7 @@ class ExchangeAcceptViewModel(
                             moveToExchangeCompleteFragment(matchingId)
                         } else {
                             /** 상대가 거절한지 선택안한지 모르는 상태 -> 방나가기당함 & 수락대기 화면 나눠야하지만 일단 수락 대기  **/
-                            _partnerProfile.value?.partnerNickname?.let { nick ->
+                            _partnerProfile.value?.nickname?.let { nick ->
                                 moveToExchangeWaitFragment(
                                     partnerNickname = nick,
                                     reason = "수락 여부를 선택"
@@ -127,7 +123,7 @@ class ExchangeAcceptViewModel(
     fun onClickDismissButton() {
         /** 거절이유 화면으로 이동 **/
         matchingId?.let { id ->
-            _partnerProfile?.value?.partnerNickname?.let { nick ->
+            _partnerProfile?.value?.nickname?.let { nick ->
                 startTime?.let { time ->
                     moveToDismissFragment(id, nick, time)
                 }

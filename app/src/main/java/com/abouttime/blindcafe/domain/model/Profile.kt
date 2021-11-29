@@ -11,7 +11,6 @@ data class Profile(
     val sex: String?,
     val interests: List<String>?,
     val nickname: String?,
-    val partnerNickname: String?,
     val profileImage: String?,
     val location: String?,
     val userId: Int?
