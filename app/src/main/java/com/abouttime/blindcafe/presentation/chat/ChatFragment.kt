@@ -32,10 +32,7 @@ import com.abouttime.blindcafe.databinding.FragmentChatBinding
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.presentation.chat.audio.RecorderState
 import com.abouttime.blindcafe.presentation.chat.rv_item.*
-import com.abouttime.blindcafe.presentation.chat.rv_item.common.AudioTopicItem
-import com.abouttime.blindcafe.presentation.chat.rv_item.common.DescriptionItem
-import com.abouttime.blindcafe.presentation.chat.rv_item.common.ImageTopicItem
-import com.abouttime.blindcafe.presentation.chat.rv_item.common.TextTopicItem
+import com.abouttime.blindcafe.presentation.chat.rv_item.common.*
 import com.abouttime.blindcafe.presentation.chat.rv_item.user.*
 import com.google.firebase.Timestamp
 import com.google.firebase.messaging.FirebaseMessaging
@@ -354,6 +351,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             5 -> chatAdapter.add(0, ImageTopicItem(message, viewModel = viewModel))
             6 -> chatAdapter.add(0, AudioTopicItem(message, viewModel = viewModel))
             7 -> chatAdapter.add(0, DescriptionItem(message))
+            8 -> chatAdapter.add(0, CongratsItem(message))
         }
 
 

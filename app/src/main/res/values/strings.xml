@@ -103,6 +103,9 @@
     <string name="chat_topic_fold">다신 보지 않기</string>
     <string name="chat_common_interest">%s님과 %s님의 공통 관심사는 %s 입니다.</string>
 
+    <string name="chat_congrats">축하드립니다! 3일간의 대화가 즐거우셨군요. 이 대화방은 지금부터 7일간 유지됩니다.</string>
+    <string name="chat_get_badge">프로필 교환 성공으로[%s]뱃지를 획득하셨습니다. 이제 홈에서 새로운 매칭이 가능합니다.</string>
+
     <!-- gallery -->
     <string name="gallery_title">갤러리</string>
     <string name="gallery_send">보내기</string>
@@ -124,7 +127,7 @@
 
     <string name="home_notification_message">%d건의 메시지가 도착했습니다.</string>
 
-    <string name="matching_error">상대 계정이 유효하지 않습니다. 다시 신청해주세요</string>
+    <string name="matching_error">상대 계정이 유효하지 않습니다. 다시 요청해주세요</string>
 
     <!-- chat list -->
     <string name="chat_list_title">내 테이블</string>

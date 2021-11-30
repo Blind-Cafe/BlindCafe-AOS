@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent"
+    android:paddingBottom="16dp">
+
+    <View
+        android:id="@+id/v_divider"
+        android:layout_width="0dp"
+        android:layout_height="8dp"
+        android:background="@color/black_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_congrats"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="28dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+        android:text="@string/chat_congrats"
+        android:textColor="@color/main"
+        android:textSize="@dimen/font_size_11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v_divider" />
+
+    <TextView
+        android:id="@+id/tv_badge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="@dimen/switch_thumb_padding"
+        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+        android:text="@string/chat_get_badge"
+        android:textColor="@color/gray_300"
+        android:textSize="@dimen/font_size_11"
+        app:layout_constraintEnd_toEndOf="@id/tv_congrats"
+        app:layout_constraintStart_toStartOf="@id/tv_congrats"
+        app:layout_constraintTop_toBottomOf="@id/tv_congrats"
+        app:layout_goneMarginBottom="16dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

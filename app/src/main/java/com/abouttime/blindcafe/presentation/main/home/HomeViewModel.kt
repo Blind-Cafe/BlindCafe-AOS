@@ -77,6 +77,7 @@ class HomeViewModel(
                 }
                 is Resource.Error -> {
                     Log.d(RETROFIT_TAG, resource.message.toString())
+                    postExitChatRoom()
                     dismissLoading()
                 }
             }
@@ -106,6 +107,7 @@ class HomeViewModel(
                     dismissLoading()
                 }
                 is Resource.Error -> {
+                    postExitChatRoom()
                     dismissLoading()
                 }
             }
@@ -184,11 +186,12 @@ class HomeViewModel(
                     result.data?.toChatRoom()?.let { cr ->
                         moveToChatFragment(cr)
                     }
-
                    dismissLoading()
                 }
                 is Resource.Error -> {
                     dismissLoading()
+                    showToast(R.string.matching_error)
+                    postExitChatRoom()
                 }
             }
         }.launchIn(viewModelScope)
