@@ -28,6 +28,10 @@ class EssentialFirstViewModel: BaseViewModel() {
         _enableNextButton.value = false
     }
 
+    fun updateToFirst() {
+
+    }
+
 
 
     fun checkInputAll() {
@@ -76,6 +80,10 @@ class EssentialFirstViewModel: BaseViewModel() {
 
     }
 
+    fun onClickBackButton() {
+        popDirections()
+    }
+
     // boolean ---
 
     fun isCorrectAge(): Boolean {
@@ -93,6 +101,8 @@ class EssentialFirstViewModel: BaseViewModel() {
     }
     fun isAgeEmpty(): Boolean = ageText.value.isNullOrEmpty()
     fun isSexSelected(): Boolean = _selectedSex.value != 0
+
+
 
 
 

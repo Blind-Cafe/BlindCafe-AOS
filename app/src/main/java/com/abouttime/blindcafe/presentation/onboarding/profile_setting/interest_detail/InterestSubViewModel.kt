@@ -163,6 +163,10 @@ class InterestSubViewModel(
         }
     }
 
+    fun onClickBackButton() {
+        popDirections()
+    }
+
 
     private fun moveToSigninFragment() {
         moveToDirections(InterestSubFragmentDirections.actionInterestSubFragmentToSigninFragment())

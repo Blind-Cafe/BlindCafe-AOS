@@ -27,6 +27,8 @@ class InterestEditFragment: BaseFragment<InterestEditViewModel>(R.layout.fragmen
 
 
 
+
+
     private fun initNextButton(fragmentInterestEditBinding: FragmentInterestEditBinding) {
         fragmentInterestEditBinding.tvNext.setOnClickListener {
             viewModel?.onClickNextButton()
@@ -74,4 +76,6 @@ class InterestEditFragment: BaseFragment<InterestEditViewModel>(R.layout.fragmen
             }
 
         }
+
+
 }

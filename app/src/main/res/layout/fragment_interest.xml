@@ -8,7 +8,7 @@
 
 
     <ImageButton
-        android:id="@+id/ib_back"
+        android:id="@+id/iv_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -28,9 +28,9 @@
         android:textColor="#fafafa"
         android:textSize="@dimen/font_size_15"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/ib_back"
-        app:layout_constraintStart_toEndOf="@id/ib_back"
-        app:layout_constraintTop_toTopOf="@id/ib_back" />
+        app:layout_constraintBottom_toBottomOf="@id/iv_back"
+        app:layout_constraintStart_toEndOf="@id/iv_back"
+        app:layout_constraintTop_toTopOf="@id/iv_back" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
@@ -42,7 +42,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ib_back">
+        app:layout_constraintTop_toBottomOf="@id/iv_back">
 
         <TextView
             android:id="@+id/tv_step2"

@@ -163,6 +163,11 @@ class CoffeeOrderViewModel(
     }
 
 
+    fun onClickBackButton() {
+        popDirections()
+    }
+
+
 
     fun onClickNextButton() {
         if (canClickNextButton()) {

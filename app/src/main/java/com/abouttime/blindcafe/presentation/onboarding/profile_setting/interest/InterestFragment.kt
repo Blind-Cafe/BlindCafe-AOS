@@ -17,9 +17,15 @@ class InterestFragment : BaseFragment<InterestViewModel>(R.layout.fragment_inter
         val fragmentInterestBinding = FragmentInterestBinding.bind(view)
         binding = fragmentInterestBinding
 
-
+        initBackButton(fragmentInterestBinding)
         initNextButton(fragmentInterestBinding)
         initInterestsButton(fragmentInterestBinding)
+    }
+
+    private fun initBackButton(fragmentInterestBinding: FragmentInterestBinding) = with(fragmentInterestBinding) {
+        ivBack.setOnClickListener {
+            popOneDirections()
+        }
     }
 
     private fun initNextButton(fragmentInterestBinding: FragmentInterestBinding) {

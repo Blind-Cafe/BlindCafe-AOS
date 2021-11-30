@@ -68,6 +68,10 @@ class EssentialSecondViewModel: BaseViewModel() {
 
     }
 
+    fun onClickBackButton() {
+        popDirections()
+    }
+
     /** check **/
     fun checkInputAll() {
         if (!isCorrectNickname() || !isSexSelected()) {

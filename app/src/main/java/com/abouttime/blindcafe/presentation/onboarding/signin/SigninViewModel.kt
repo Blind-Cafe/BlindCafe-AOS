@@ -4,6 +4,9 @@ import com.abouttime.blindcafe.common.base.BaseViewModel
 
 class SigninViewModel: BaseViewModel() {
 
+    fun onClickBackButton() {
+        popDirections()
+    }
     fun onClickNextButton() {
         moveToMainFragment()
     }

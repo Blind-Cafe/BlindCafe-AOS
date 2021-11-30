@@ -31,5 +31,9 @@ class InterestEditViewModel: BaseViewModel() {
         ))
     }
 
+    fun onClickBackButton() {
+        popDirections()
+    }
+
 
 }

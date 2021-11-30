@@ -145,7 +145,7 @@ class InterestSubEditViewModel(
     }
 
     fun onClickBackButton() {
-
+        popDirections()
     }
 
 
