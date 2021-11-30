@@ -9,27 +9,25 @@ import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.CHATTING_TAG
-import com.abouttime.blindcafe.common.constants.LogTag.FIRESTORE_TAG
-import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
+import com.abouttime.blindcafe.common.constants.PreferenceKey.LAST_READ_MESSAGE
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NICKNAME
 import com.abouttime.blindcafe.common.constants.PreferenceKey.USER_ID
 import com.abouttime.blindcafe.common.util.SingleLiveData
 import com.abouttime.blindcafe.data.server.dto.matching.send.PostMessageDto
 import com.abouttime.blindcafe.data.server.dto.matching.topic.GetTopicDto
-import com.abouttime.blindcafe.data.server.dto.notification.PostFcmDto
 import com.abouttime.blindcafe.domain.model.ChatRoom
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.use_case.firebase.*
-import com.abouttime.blindcafe.domain.use_case.server.*
+import com.abouttime.blindcafe.domain.use_case.server.GetTopicUseCase
+import com.abouttime.blindcafe.domain.use_case.server.PostEnteringLogUseCase
+import com.abouttime.blindcafe.domain.use_case.server.PostMessageUseCase
 import com.abouttime.blindcafe.presentation.chat.audio.RecorderState
 import com.google.firebase.Timestamp
-import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 class ChatViewModel(
@@ -41,7 +39,7 @@ class ChatViewModel(
     private val downloadAudioUrlUseCase: DownloadAudioUrlUseCase,
     private val getTopicUseCase: GetTopicUseCase,
     private val postEnteringLogUseCase: PostEnteringLogUseCase,
-    private val postMessageUseCase: PostMessageUseCase
+    private val postMessageUseCase: PostMessageUseCase,
 ) : BaseViewModel() {
 
     private val _isSendButtonEnabled = MutableLiveData(false)
@@ -104,14 +102,23 @@ class ChatViewModel(
         subscribeMessageUseCase(roomId).collect { result ->
             when (result) {
                 is Resource.Loading -> {
-                    Log.d(FIRESTORE_TAG, "Messages Loading")
+
                 }
                 is Resource.Success -> {
-                    Log.e(FIRESTORE_TAG, "Messages ${result.data}")
-                    _receivedMessage.postValue(result.data!!)
+                    if (result.data?.isEmpty()?.not() == true) {
+                        saveStringData(
+                            Pair(
+                                LAST_READ_MESSAGE,
+                                result.data[0].timestamp?.seconds.toString()
+                            )
+                        )
+                        _receivedMessage.postValue(result.data!!)
+                    }
+
+
                 }
                 is Resource.Error -> {
-                    Log.d(FIRESTORE_TAG, "Messages Loading")
+
                 }
             }
         }
@@ -160,7 +167,6 @@ class ChatViewModel(
         }
 
 
-
     /** use cases - write **/
     fun postMessage(postMessageDto: PostMessageDto, matchingId: Int) {
         postMessageUseCase(postMessageDto = postMessageDto, matchingId = matchingId)
@@ -168,7 +174,7 @@ class ChatViewModel(
                 when (result) {
                     is Resource.Loading -> {
                     }
-                    is Resource.Success ->{
+                    is Resource.Success -> {
                     }
                     is Resource.Error -> {
                         if (result.message == "400") {
@@ -226,13 +232,16 @@ class ChatViewModel(
     }
 
 
-
     fun getTopic() {
         matchingId?.let { it ->
             getTopicUseCase(it).onEach { result ->
                 when (result) {
-                    is Resource.Loading -> { showLoading() }
-                    is Resource.Success -> { dismissLoading() }
+                    is Resource.Loading -> {
+                        showLoading()
+                    }
+                    is Resource.Success -> {
+                        dismissLoading()
+                    }
                     is Resource.Error -> {
                         if (result.message == "400") {
                             showToast(R.string.toast_fail)

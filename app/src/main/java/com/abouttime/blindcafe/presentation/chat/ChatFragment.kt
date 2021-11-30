@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.TextView
@@ -25,6 +26,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.common.constants.LogTag.CHATTING_TAG
+import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_FALSE
+import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_TRUE
 import com.abouttime.blindcafe.common.ext.*
 import com.abouttime.blindcafe.common.util.DeviceUtil
 import com.abouttime.blindcafe.data.server.dto.matching.send.PostMessageDto
@@ -640,10 +643,12 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         val time = view.findViewById<TextView>(R.id.tv_time)
         val report = view.findViewById<LinearLayout>(R.id.ll_report_container)
         val notification = view.findViewById<LinearLayout>(R.id.ll_notification_container)
+        val ivNotification = view.findViewById<ImageView>(R.id.iv_notification)
+        val tvNotification = view.findViewById<TextView>(R.id.tv_notification)
         val quit = view.findViewById<LinearLayout>(R.id.ll_quit_container)
         initTimeContainer(time)
         initReportContainer(report)
-        initNotificationContainer(notification)
+        initNotificationContainer(notification, ivNotification, tvNotification)
         initQuitContainer(quit)
 
         popupWindow = PopupWindow(view, WRAP_CONTENT, WRAP_CONTENT)
@@ -686,12 +691,36 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         }
     }
 
-    private fun initNotificationContainer(view: View) {
-        view.isVisible = isCont
-        if (isCont) {
-            // TODO 알림 로직 작성
-            view.setOnClickListener {
+    private fun initNotificationContainer(container: View, iv: ImageView, tv: TextView) {
+        container.isVisible = isCont
 
+        if (isCont) {
+            viewModel.matchingId?.let { it ->
+                if (getStringData(it.toString()) == NOTIFICATION_FALSE) {
+                    iv.setImageResource(R.drawable.ic_chat_room_notification_off)
+                    tv.text = "알람 꺼짐"
+                } else {
+                    iv.setImageResource(R.drawable.ic_chat_room_notification_on)
+                    tv.text = "알람 켜짐"
+                }
+            }
+
+            view?.setOnClickListener {
+                viewModel.matchingId?.let { it ->
+                    if (getStringData(it.toString()) == NOTIFICATION_FALSE) {
+
+                        saveStringData(Pair(it.toString(), NOTIFICATION_TRUE))
+                        iv.setImageResource(R.drawable.ic_chat_room_notification_on)
+                        tv.text = "알람 켜짐"
+
+                    } else {
+
+                        saveStringData(Pair(it.toString(), NOTIFICATION_FALSE))
+                        iv.setImageResource(R.drawable.ic_chat_room_notification_off)
+                        tv.text = "알람 꺼짐"
+
+                    }
+                }
             }
         }
 
@@ -723,7 +752,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                 remove()
                 popOneDirections()
             }
-
         }
     }
 
