@@ -85,7 +85,11 @@ class ProfileEditViewModel(
                     dismissLoading()
                 }
                 is Resource.Error -> {
-                    Log.e(RETROFIT_TAG, result.message.toString())
+                    if (result.message == "400") {
+                        showToast(R.string.toast_fail)
+                    } else {
+                        showToast(R.string.toast_check_internet)
+                    }
                     dismissLoading()
                 }
             }
@@ -105,7 +109,11 @@ class ProfileEditViewModel(
                     dismissLoading()
                 }
                 is Resource.Error -> {
-                    Log.e(RETROFIT_TAG, result.message.toString())
+                    if (result.message == "400") {
+                        showToast(R.string.toast_fail)
+                    } else {
+                        showToast(R.string.toast_check_internet)
+                    }
                     dismissLoading()
                 }
             }

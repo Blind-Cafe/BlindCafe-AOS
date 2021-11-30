@@ -25,9 +25,10 @@ class GetHomeInfoUseCase(
         } catch (e: Exception) {
             if (e is HttpException) {
                 val message = e.parseErrorBody()
-                emit(Resource.Error<GetHomeInfoDto>(message = message.toString()))
+                emit(Resource.Error(message = message.toString()))
+            } else {
+                emit(Resource.Error(message = e.toString()))
             }
-            emit(Resource.Error<GetHomeInfoDto>(e.toString()))
         }
     }
 }

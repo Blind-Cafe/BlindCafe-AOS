@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag
@@ -54,6 +55,12 @@ class ChatListViewModel(
                     dismissLoading()
                 }
                 is Resource.Error -> {
+                    if (result.message != "400") {
+                        showToast(R.string.toast_check_internet)
+                    } else {
+                        showToast(R.string.toast_fail)
+                    }
+
                     dismissLoading()
                 }
             }
@@ -77,6 +84,11 @@ class ChatListViewModel(
                     dismissLoading()
                 }
                 is Resource.Error -> {
+                    if (result.message != "400") {
+                        showToast(R.string.toast_check_internet)
+                    } else {
+                        showToast(R.string.toast_fail)
+                    }
                     dismissLoading()
                 }
             }
@@ -87,10 +99,8 @@ class ChatListViewModel(
         subscribeMessageUseCase(matchingId.toString()).collect { result ->
             when (result) {
                 is Resource.Loading -> {
-                    Log.d(LogTag.FIRESTORE_TAG, "Messages Loading")
                 }
                 is Resource.Success -> {
-                    Log.e(LogTag.FIRESTORE_TAG, "Messages ${result.data}")
                     if (!result.data.isNullOrEmpty()) {
                         withContext(Dispatchers.Main) {
                             callback(result.data[0])
@@ -98,7 +108,6 @@ class ChatListViewModel(
                     }
                 }
                 is Resource.Error -> {
-                    Log.d(LogTag.FIRESTORE_TAG, "Messages Loading")
                 }
             }
 

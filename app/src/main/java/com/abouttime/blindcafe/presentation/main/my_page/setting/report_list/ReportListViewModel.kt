@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.util.SingleLiveData
 import com.abouttime.blindcafe.common.base.BaseViewModel
@@ -36,7 +37,6 @@ class ReportListViewModel(
                     showLoading()
                 }
                 is Resource.Success -> {
-                    Log.d(RETROFIT_TAG, result.data.toString())
                     result.data?.reports?.let { list ->
                         _reportList.value = list
                         _isNone.value = list.isEmpty()
@@ -44,7 +44,11 @@ class ReportListViewModel(
                     dismissLoading()
                 }
                 is Resource.Error -> {
-                    Log.d(RETROFIT_TAG, result.message.toString())
+                    if (result.message == "400") {
+                        showToast(R.string.toast_fail)
+                    } else {
+                        showToast(R.string.toast_check_internet)
+                    }
                     dismissLoading()
                 }
             }

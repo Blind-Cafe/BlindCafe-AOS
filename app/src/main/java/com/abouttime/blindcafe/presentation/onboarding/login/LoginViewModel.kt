@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
@@ -48,6 +49,7 @@ class LoginViewModel(
         ).onEach { result ->
             when (result) {
                 is Resource.Loading -> {
+                    showLoading()
                     _loginStateEvent.postValue(LoginState.Loading)
                 }
                 is Resource.Success -> {
@@ -82,9 +84,15 @@ class LoginViewModel(
                         }
                     }
 
+                    dismissLoading()
                 }
                 is Resource.Error -> {
-                    Log.d(RETROFIT_TAG, result.message ?: "message null")
+                    dismissLoading()
+                    if (result.message == "400") {
+                        showToast(R.string.toast_fail)
+                    } else {
+                        showToast(R.string.toast_check_internet)
+                    }
                     _loginStateEvent.postValue(LoginState.Error)
                 }
             }

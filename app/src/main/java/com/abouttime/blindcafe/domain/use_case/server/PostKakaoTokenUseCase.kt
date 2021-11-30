@@ -33,8 +33,9 @@ class PostKakaoTokenUseCase(
             if (e is HttpException) {
                 val message = e.parseErrorBody()
                 emit(Resource.Error(message = message.toString()))
+            } else {
+                emit(Resource.Error(message = e.toString()))
             }
-            emit(Resource.Error<KakaoTokenResponse>("에러발생\n $e"))
         }
     }
 }

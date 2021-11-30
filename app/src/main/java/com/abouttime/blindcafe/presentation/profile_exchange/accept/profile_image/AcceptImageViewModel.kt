@@ -3,6 +3,7 @@ package com.abouttime.blindcafe.presentation.profile_exchange.accept.profile_ima
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.domain.use_case.server.GetProfileImageUseCase
@@ -31,6 +32,11 @@ class AcceptImageViewModel(
                     dismissLoading()
                 }
                 is Resource.Error -> {
+                    if (result.message == "400") {
+                        showToast(R.string.toast_fail)
+                    } else {
+                        showToast(R.string.toast_check_internet)
+                    }
                     dismissLoading()
                 }
             }

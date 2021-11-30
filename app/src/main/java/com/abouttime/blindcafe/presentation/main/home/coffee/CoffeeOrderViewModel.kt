@@ -108,8 +108,11 @@ class CoffeeOrderViewModel(
                             dismissLoading()
                         }
                         is Resource.Error -> {
-                            Log.d(RETROFIT_TAG, response.message.toString())
-                            showToast(R.string.toast_check_internet)
+                            if (response.message == "400") {
+                                showToast(R.string.toast_fail)
+                            } else {
+                                showToast(R.string.toast_check_internet)
+                            }
                             dismissLoading()
                         }
                     }
@@ -136,15 +139,21 @@ class CoffeeOrderViewModel(
                         this@CoffeeOrderViewModel.commonInterest = interest
                         this@CoffeeOrderViewModel.startTime = dto.startTime
                         this@CoffeeOrderViewModel.interest = dto.interest
-                        dismissLoading()
+
                     }
 
                     result.data?.toChatRoom()?.let { cr ->
                         moveToChatFragment(cr)
                     }
+                    dismissLoading()
 
                 }
                 is Resource.Error -> {
+                    if (result.message == "400") {
+                        showToast(R.string.toast_fail)
+                    } else {
+                        showToast(R.string.toast_check_internet)
+                    }
                     dismissLoading()
                 }
             }

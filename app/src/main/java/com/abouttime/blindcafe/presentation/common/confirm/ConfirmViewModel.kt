@@ -75,7 +75,11 @@ class ConfirmViewModel(
                     dismissLoading()
                 }
                 is Resource.Error -> {
-                    Log.e(RETROFIT_TAG, result.message.toString())
+                    if (result.message == "400") {
+                        showToast(R.string.toast_fail)
+                    } else {
+                        showToast(R.string.toast_check_internet)
+                    }
                     dismissLoading()
                 }
             }
@@ -114,6 +118,11 @@ class ConfirmViewModel(
 
                 }
                 is Resource.Error -> {
+                    if (result.message == "400") {
+                        showToast(R.string.toast_fail)
+                    } else {
+                        showToast(R.string.toast_check_internet)
+                    }
                     dismissLoading()
                 }
             }
@@ -148,6 +157,11 @@ class ConfirmViewModel(
 
                 }
                 is Resource.Error -> {
+                    if (result.message == "400") {
+                        showToast(R.string.toast_fail)
+                    } else {
+                        showToast(R.string.toast_check_internet)
+                    }
                     Log.e(RETROFIT_TAG, result.message.toString())
                 }
             }

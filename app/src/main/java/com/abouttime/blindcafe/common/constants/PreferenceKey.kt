@@ -20,4 +20,7 @@ object PreferenceKey {
     const val NOTIFICATION_TRUE = "NOTIFICATION_TRUE"
 
     const val DEVICE_TOKEN = "DEVICE_TOKEN"
+
+
+    const val LAST_READ_MESSAGE = "LAST_READ_MESSAGE"
 }

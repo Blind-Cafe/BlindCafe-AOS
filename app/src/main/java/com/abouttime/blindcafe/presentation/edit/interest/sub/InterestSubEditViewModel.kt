@@ -56,7 +56,6 @@ class InterestSubEditViewModel(
             .onEach { result ->
                 when(result) {
                     is Resource.Loading -> {
-                        Log.e(LogTag.RETROFIT_TAG, "Loading")
                         showLoading()
                     }
                     is Resource.Success -> {
@@ -68,7 +67,11 @@ class InterestSubEditViewModel(
 
                     }
                     is Resource.Error -> {
-                        Log.e(LogTag.RETROFIT_TAG, "${result?.message}")
+                        if (result.message == "400") {
+                            showToast(R.string.toast_fail)
+                        } else {
+                            showToast(R.string.toast_check_internet)
+                        }
                         dismissLoading()
                     }
                 }
@@ -80,7 +83,6 @@ class InterestSubEditViewModel(
             when (result) {
                 is Resource.Loading -> { showLoading() }
                 is Resource.Success -> {
-                    Log.e(RETROFIT_TAG, result.data.toString())
                     if (result.data?.code == "1000") {
                         popDirections(R.id.interestEditFragment)
                     } else {
@@ -89,7 +91,11 @@ class InterestSubEditViewModel(
                     dismissLoading()
                 }
                 is Resource.Error -> {
-                    Log.e(RETROFIT_TAG, result.message.toString())
+                    if (result.message == "400") {
+                        showToast(R.string.toast_fail)
+                    } else {
+                        showToast(R.string.toast_check_internet)
+                    }
                     dismissLoading()
                 }
             }

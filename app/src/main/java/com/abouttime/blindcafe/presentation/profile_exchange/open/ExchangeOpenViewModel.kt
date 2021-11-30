@@ -81,6 +81,11 @@ class ExchangeOpenViewModel(
                     dismissLoading()
                 }
                 is Resource.Error -> {
+                    if (result.message == "400") {
+                        showToast(R.string.toast_fail)
+                    } else {
+                        showToast(R.string.toast_check_internet)
+                    }
                     dismissLoading()
                 }
             }
@@ -106,7 +111,11 @@ class ExchangeOpenViewModel(
                         dismissLoading()
                     }
                     is Resource.Error -> {
-                        showToast(R.string.temp_error)
+                        if (result.message == "400") {
+                            showToast(R.string.toast_fail)
+                        } else {
+                            showToast(R.string.toast_check_internet)
+                        }
                         dismissLoading()
                     }
                 }

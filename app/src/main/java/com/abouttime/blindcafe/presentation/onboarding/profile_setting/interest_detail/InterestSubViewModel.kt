@@ -71,17 +71,23 @@ class InterestSubViewModel(
             .onEach { result ->
                 when(result) {
                     is Resource.Loading -> {
-                        Log.e(RETROFIT_TAG, "Loading")
+                        showLoading()
                     }
                     is Resource.Success -> {
                         result.data?.interests?.let {
                             Log.e(RETROFIT_TAG, "$it")
                             _interests.postValue(it)
                         }
+                        dismissLoading()
                     }
 
                     is Resource.Error -> {
-                        Log.e(RETROFIT_TAG, "${result?.message}")
+                        if (result.message == "400") {
+                            showToast(R.string.toast_fail)
+                        } else {
+                            showToast(R.string.toast_check_internet)
+                        }
+                        dismissLoading()
                     }
                 }
             }.launchIn(viewModelScope)
@@ -124,7 +130,7 @@ class InterestSubViewModel(
         ).onEach { response ->
             when (response){
                 is Resource.Loading -> {
-                    Log.d(RETROFIT_TAG, "Loading")
+                    showLoading()
                 }
                 is Resource.Success -> {
                     Log.d(RETROFIT_TAG, "Success ${response.data?.code} ${response.data?.message}")
@@ -133,9 +139,15 @@ class InterestSubViewModel(
                         saveStringData(Pair(INFO_INPUT, response.data.code))
                         moveToSigninFragment()
                     }
+                    dismissLoading()
                 }
                 is Resource.Error -> {
-                    Log.d(RETROFIT_TAG, response.message.toString())
+                    if (response.message == "400") {
+                        showToast(R.string.toast_fail)
+                    } else {
+                        showToast(R.string.toast_check_internet)
+                    }
+                    dismissLoading()
                 }
             }
 

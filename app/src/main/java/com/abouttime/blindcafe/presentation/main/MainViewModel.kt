@@ -34,9 +34,16 @@ class MainViewModel(
             PostDeviceTokenDto(deviceToken)
         ).onEach { result ->
             when (result) {
-                is Resource.Loading -> { Log.d(LogTag.RETROFIT_TAG, "Loading") }
-                is Resource.Success -> { Log.d(LogTag.RETROFIT_TAG, result.data.toString())}
-                is Resource.Error -> { Log.d(LogTag.RETROFIT_TAG, result.message.toString())}
+                is Resource.Loading -> { showLoading() }
+                is Resource.Success -> { dismissLoading() }
+                is Resource.Error -> {
+                    if (result.message == "400") {
+                        showToast(R.string.toast_fail)
+                    } else {
+                        showToast(R.string.toast_check_internet)
+                    }
+                    dismissLoading()
+                }
             }
         }.launchIn(viewModelScope)
     }

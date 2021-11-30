@@ -33,13 +33,15 @@ class ReportReasonViewModel(
                 when (result) {
                     is Resource.Loading -> { showLoading() }
                     is Resource.Success -> {
-                        Log.e(RETROFIT_TAG, result.data.toString())
                         moveToConfirmDialogFragment(v, matchingId, reason)
                         dismissLoading()
                     }
                     is Resource.Error -> {
-                        Log.e(RETROFIT_TAG, result.message.toString())
-                        showToast(R.string.toast_fail)
+                        if (result.message == "400") {
+                            showToast(R.string.toast_fail)
+                        } else {
+                            showToast(R.string.toast_check_internet)
+                        }
                         dismissLoading()
                     }
                 }

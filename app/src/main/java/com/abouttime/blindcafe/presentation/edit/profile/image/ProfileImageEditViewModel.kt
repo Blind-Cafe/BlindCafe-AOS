@@ -49,7 +49,11 @@ class ProfileImageEditViewModel(
                     dismissLoading()
                 }
                 is Resource.Error -> {
-                    Log.e(RETROFIT_TAG, result.message.toString())
+                    if (result.message == "400") {
+                        showToast(R.string.toast_fail)
+                    } else {
+                        showToast(R.string.toast_check_internet)
+                    }
                     dismissLoading()
                 }
             }
@@ -63,7 +67,6 @@ class ProfileImageEditViewModel(
                     showLoading()
                 }
                 is Resource.Success -> {
-                   // showToast(R.string.profile_image_edit_toast_success)
                     callback()
                     dismissLoading()
                 }
@@ -91,10 +94,10 @@ class ProfileImageEditViewModel(
                     dismissLoading()
                 }
                 is Resource.Error -> {
-                    if (result.message != "400") {
-                        showToast(R.string.profile_edit_toast_alert_fill_all)
+                    if (result.message == "400") {
+                        showToast(R.string.toast_fail)
                     } else {
-                        showToast(R.string.temp_error)
+                        showToast(R.string.toast_check_internet)
                     }
                     dismissLoading()
                 }

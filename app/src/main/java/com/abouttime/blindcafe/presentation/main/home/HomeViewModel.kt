@@ -76,7 +76,11 @@ class HomeViewModel(
                     dismissLoading()
                 }
                 is Resource.Error -> {
-                    Log.d(RETROFIT_TAG, resource.message.toString())
+                    if (resource.message != "400") {
+                        showToast(R.string.matching_error)
+                    } else {
+                        showToast(R.string.toast_check_internet)
+                    }
                     postExitChatRoom()
                     dismissLoading()
                 }
@@ -107,6 +111,11 @@ class HomeViewModel(
                     dismissLoading()
                 }
                 is Resource.Error -> {
+                    if (resource.message != "400") {
+                        showToast(R.string.matching_error)
+                    } else {
+                        showToast(R.string.toast_check_internet)
+                    }
                     postExitChatRoom()
                     dismissLoading()
                 }
@@ -145,7 +154,11 @@ class HomeViewModel(
                     dismissLoading()
                 }
                 is Resource.Error -> {
-                    Log.d(RETROFIT_TAG, response.message.toString())
+                    if (response.message != "400") {
+                        showToast(R.string.toast_check_internet)
+                    } else {
+                        showToast(R.string.toast_fail)
+                    }
                     dismissLoading()
                 }
             }
@@ -166,6 +179,11 @@ class HomeViewModel(
                         dismissLoading()
                     }
                     is Resource.Error -> {
+                        if (result.message != "400") {
+                            showToast(R.string.toast_check_internet)
+                        } else {
+                            showToast(R.string.toast_fail)
+                        }
                         dismissLoading()
                     }
                 }
@@ -189,8 +207,13 @@ class HomeViewModel(
                    dismissLoading()
                 }
                 is Resource.Error -> {
+                    if (result.message != "400") {
+                        showToast(R.string.matching_error)
+                    } else {
+                        showToast(R.string.toast_check_internet)
+                    }
                     dismissLoading()
-                    showToast(R.string.matching_error)
+
                     postExitChatRoom()
                 }
             }
@@ -201,13 +224,19 @@ class HomeViewModel(
             exitChatRoomUseCase(id, 1).onEach { result ->
                 when (result) {
                     is Resource.Loading -> {
-
+                        showLoading()
                     }
                     is Resource.Success -> {
+                        dismissLoading()
                         getHomeInfo()
                     }
                     is Resource.Error -> {
-
+                        if (result.message == "400") {
+                            showToast(R.string.toast_fail)
+                        } else {
+                            showToast(R.string.toast_check_internet)
+                        }
+                        dismissLoading()
                     }
                 }
 

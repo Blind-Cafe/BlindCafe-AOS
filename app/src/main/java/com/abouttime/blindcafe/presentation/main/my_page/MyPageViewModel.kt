@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
@@ -47,11 +48,9 @@ class MyPageViewModel(
         getUserInfoUseCase().onEach { response ->
             when (response) {
                 is Resource.Loading -> {
-                    Log.d(RETROFIT_TAG, "getUserInfo Loading")
                     showLoading()
                 }
                 is Resource.Success -> {
-                    Log.d(RETROFIT_TAG, "getUserInfo ${response.data.toString()}")
                     response.data?.let { dto ->
                         dto.profileImage?.let {
                             _profileImageUrl.postValue(it)
@@ -96,7 +95,11 @@ class MyPageViewModel(
                     }
                 }
                 is Resource.Error -> {
-                    Log.d(RETROFIT_TAG, "getUserInfo ${response.message}")
+                    if (response.message == "400") {
+                        showToast(R.string.toast_fail)
+                    } else {
+                        showToast(R.string.toast_check_internet)
+                    }
                     dismissLoading()
                 }
             }

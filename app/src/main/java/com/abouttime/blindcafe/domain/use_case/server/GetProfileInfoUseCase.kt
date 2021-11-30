@@ -20,6 +20,8 @@ class GetProfileInfoUseCase(
             if (e is HttpException) {
                 val message = e.parseErrorBody()
                 emit(Resource.Error(message = message.toString()))
+            } else {
+                emit(Resource.Error(message = e.toString()))
             }
         }
     }

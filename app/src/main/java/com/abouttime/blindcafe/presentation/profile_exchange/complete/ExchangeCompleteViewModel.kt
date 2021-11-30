@@ -1,6 +1,7 @@
 package com.abouttime.blindcafe.presentation.profile_exchange.complete
 
 import androidx.lifecycle.viewModelScope
+import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.domain.model.ChatRoom
@@ -28,6 +29,11 @@ class ExchangeCompleteViewModel(
                     }
                 }
                 is Resource.Error -> {
+                    if (result.message == "400") {
+                        showToast(R.string.toast_fail)
+                    } else {
+                        showToast(R.string.toast_check_internet)
+                    }
                     dismissLoading()
                 }
             }
