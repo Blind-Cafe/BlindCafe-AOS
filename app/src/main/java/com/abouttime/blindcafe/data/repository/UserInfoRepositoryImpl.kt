@@ -43,8 +43,8 @@ class UserInfoRepositoryImpl(
         return userInfoApi.getProfileInfo()
     }
 
-    override suspend fun postDeviceToken(postDeviceTokenDto: PostDeviceTokenDto): BaseResponse? {
-        return userInfoApi.postDeviceToken(postDeviceTokenDto)
+    override suspend fun postDeviceToken(postDeviceTokenDto: PostDeviceTokenDto) {
+        userInfoApi.postDeviceToken(postDeviceTokenDto)
     }
 
     override suspend fun putProfileInfo(putProfileInfoDto: PutProfileInfoDto): PutProfileInfoResponse? {

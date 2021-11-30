@@ -33,12 +33,12 @@ class ProfileImageEditViewModel(
 
 
     init {
-        getMyProfileInfo()
+        getMyProfileImages()
 
     }
 
     /** use cases **/
-    private fun getMyProfileInfo() {
+    private fun getMyProfileImages() {
         getMyProfileImageUseCase().onEach { result ->
             when (result) {
                 is Resource.Loading -> { showLoading() }

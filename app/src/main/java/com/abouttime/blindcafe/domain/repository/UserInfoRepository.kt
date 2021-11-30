@@ -24,7 +24,7 @@ interface UserInfoRepository {
     suspend fun deleteAccount(reason: Int): DeleteAccountResponse?
     suspend fun getReports(): GetReportsDto?
     suspend fun getProfileInfo(): GetProfileInfoDto?
-    suspend fun postDeviceToken(postDeviceTokenDto: PostDeviceTokenDto): BaseResponse?
+    suspend fun postDeviceToken(postDeviceTokenDto: PostDeviceTokenDto)
     suspend fun putProfileInfo(putProfileInfoDto: PutProfileInfoDto): PutProfileInfoResponse?
     suspend fun getProfileImage(userId: Int): GetProfileImageDto?
     suspend fun getMyProfileImage(): GetProfileImageDto?

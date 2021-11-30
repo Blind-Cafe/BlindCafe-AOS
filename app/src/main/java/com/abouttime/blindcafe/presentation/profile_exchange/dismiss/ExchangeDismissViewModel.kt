@@ -15,6 +15,10 @@ class ExchangeDismissViewModel: BaseViewModel() {
     var partnerNickname: String? = null
     var startTime: Int? = null
 
+
+
+
+    /** onClick **/
     fun onClickCheckButton(view: View) {
         when(view.id) {
             R.id.iv_check_1 -> _reason.value = 1
@@ -55,5 +59,9 @@ class ExchangeDismissViewModel: BaseViewModel() {
             showToast(R.string.toast_input_reason)
         }
 
+    }
+
+    fun onClickBackButton() {
+        popDirections()
     }
 }

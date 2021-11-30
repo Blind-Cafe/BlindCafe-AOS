@@ -3,6 +3,7 @@
 
     <!-- common -->
     <string name="app_name">BlindCafe</string>
+    <string name="app_launcher_name">Blind Cafe</string>
     <string name="app_name_title">Blind cafe</string>
     <string name="temp_error">에러</string>
     <string name="no_value">-</string>

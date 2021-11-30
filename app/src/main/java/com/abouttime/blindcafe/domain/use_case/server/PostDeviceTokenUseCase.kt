@@ -12,7 +12,7 @@ import retrofit2.HttpException
 class PostDeviceTokenUseCase(
     private val repository: UserInfoRepository
 ) {
-    operator fun invoke(postDeviceTokenDto: PostDeviceTokenDto): Flow<Resource<BaseResponse?>> = flow {
+    operator fun invoke(postDeviceTokenDto: PostDeviceTokenDto): Flow<Resource<Unit>> = flow {
         emit(Resource.Loading())
         try {
             val response = repository.postDeviceToken(postDeviceTokenDto)

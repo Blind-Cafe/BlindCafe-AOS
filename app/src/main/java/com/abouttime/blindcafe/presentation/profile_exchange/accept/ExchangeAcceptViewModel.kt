@@ -153,8 +153,9 @@ class ExchangeAcceptViewModel(
         matchingId?.let {
             acceptMatching(it)
         }
-
-
+    }
+    fun onClickBackButton() {
+        popDirections()
     }
 
     fun onClickProfileImage() {

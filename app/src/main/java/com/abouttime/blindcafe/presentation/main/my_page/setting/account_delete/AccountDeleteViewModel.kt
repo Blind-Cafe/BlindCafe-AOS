@@ -39,4 +39,8 @@ class AccountDeleteViewModel: BaseViewModel() {
     }
     fun canClickNextButton() = _reason.value != 0
 
+    fun onClickBackButton() {
+        popDirections()
+    }
+
 }

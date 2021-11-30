@@ -57,7 +57,7 @@ interface UserInfoApi {
     @PATCH(POST_DEVICE_TOKEN_URL)
     suspend fun postDeviceToken(
         @Body postDeviceTokenDto: PostDeviceTokenDto
-    ): BaseResponse?
+    )
 
     @PUT(PUT_PROFILE_INFO_URL)
     suspend fun putProfileInfo(
