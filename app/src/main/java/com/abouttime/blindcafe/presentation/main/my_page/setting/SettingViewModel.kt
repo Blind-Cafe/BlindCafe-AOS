@@ -29,5 +29,8 @@ class SettingViewModel: BaseViewModel() {
     fun onClickAccountDeleteContainer() {
         moveToDirections(SettingFragmentDirections.actionSettingFragmentToAccountDeleteFragment())
     }
+    fun onClickBackButton() {
+        popDirections()
+    }
 
 }

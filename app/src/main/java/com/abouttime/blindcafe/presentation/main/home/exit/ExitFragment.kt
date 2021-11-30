@@ -37,18 +37,26 @@ class ExitFragment: BaseFragment<ExitViewModel>(R.layout.fragment_exit) {
         val title = args.title
 
         if (isAttacker) {
-            handleAttacker(title)
+            handleAttacker(isReport, title)
         } else {
             handleVictim(isReport, title)
         }
     }
-    private fun handleAttacker(title: String) {
+    private fun handleAttacker(isReport: Boolean, title: String) {
         binding?.let { b ->
             with(b) {
-                tvTitleAttacker.isGone = false
-                tvTitleVictim.isGone = true
+                if (!isReport) {
+                    tvTitleAttacker.isGone = false
+                    tvTitleVictim.isGone = true
+                    tvTitleAttacker.text = title
+                } else {
+                    tvTitleAttacker.isGone = true
+                    tvTitleVictim.isGone = false
+                    tvTitleVictim.text = title
+                }
 
-                tvTitleAttacker.text = title
+
+
             }
         }
     }

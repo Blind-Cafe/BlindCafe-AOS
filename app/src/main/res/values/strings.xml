@@ -15,8 +15,8 @@
     <string name="age">나이</string>
     <string name="age_hint">20</string>
     <string name="toast_matching_wait">아직 매칭 상대를 찾고 있어요!</string>
-    <string name="toast_gallery_limit">최대 다섯 장까지 가능합니다</string>
-    <string name="toast_select_reason">먼저 이유를 선택해주세요</string>
+    <string name="toast_gallery_limit">최대 5장까지 전송이 가능합니다.</string>
+    <string name="toast_select_reason">사유를 먼저 선택해주세요</string>
     <string name="toast_fail">요청에 실패했습니다</string>
     <string name="interest">관심사</string>
 
@@ -41,9 +41,11 @@
     <string name="agreement_2">모두가 성적 농담을 즐기는 건 아닙니다!</string>
     <string name="agreement_sub_2">성추행 및 성희롱 등의 발언은 삼가해주세요.</string>
     <string name="agreement_3">화내기 전 한번만 더 생각해주세요!</string>
-    <string name="agreement_sub_3">대화 상대에게 개인정보 및 만남 강요는 안됩니다.</string>
+    <string name="agreement_sub_3">욕설 및 비하발언은 삼가주세요</string>
     <string name="agreement_4">부드럽게, 매너있는 대회해주세요!</string>
+    <string name="agreement_sub_4">즐겁게 대화해주세요</string>
     <string name="agreement_next">동의 후 계속하기</string>
+    <string name="agreement_toast_alert_select_all">모두 동의해주세요.</string>
 
 
     <!-- login -->
@@ -75,8 +77,8 @@
     <string name="profile_setting_toast_input_sex">성별을 먼저 선택해주세요</string>
     <string name="profile_setting_toast_input_nickname">닉네임을 먼저 작성해주세요</string>
     <string name="profile_setting_toast_input_again_nickname">닉네임을 다시 작성해주세요</string>
-    <string name="profile_setting_toast_select_interest">관심사를 먼저 선택해주세요.</string>
-    <string name="profile_setting_toast_select_sub_interest">관심사 당 세부관심사 하나 이상을 선택해주세요</string>
+    <string name="profile_setting_toast_select_interest">3가지의 관심사를 선택해주세요.</string>
+    <string name="profile_setting_toast_select_sub_interest">1개 이상을 선택해주세요</string>
 
 
     <!-- sign in complete -->
@@ -173,7 +175,7 @@
 
     <!-- report -->
     <string name="report_reason_title">신고</string>
-    <string name="report_reason_subtitle">신고사유를 체크해주시면 확인 후 운영진에서해당유저에게 제제하겠습니다. 회원님의 신고는 익명으로 처리됩니다.</string>
+    <string name="report_reason_subtitle">신고사유를 체크해주시면 확인 후 운영진에서 해당유저를 제제하겠습니다. 회원님의 신고는 익명으로 처리됩니다.</string>
     <string name="report_reason_1">욕설, 모욕등의 불쾌한 발언</string>
     <string name="report_reason_2">과도한 성적 발언</string>
     <string name="report_reason_3">개인정보 요구 및 만남 강요</string>
@@ -215,8 +217,8 @@
 
 
     <!-- dormancy -->
-    <string name="dormancy_title">휴면 회원 계정 전환</string>
-    <string name="dormancy_description">%s님은 5번 이상의 신고를 받아 현재 휴면계정으로 전환되었습니다.\n\n계정을 활성화하려면 블라인드카페 이메일로 문의주시길 바랍니다.</string>
+    <string name="dormancy_title">정지 회원 계정 전환</string>
+    <string name="dormancy_description">%s님은 5번 이상의 신고를 받아 현재 정지 계정으로 전환되었습니다.\n\n계정을 활성화하려면 블라인드카페 이메일로 문의주시길 바랍니다.</string>
     <string name="dormancy_time">%s 님과 매칭시간이 100시간 남았습니다.</string>
 
 
@@ -253,7 +255,7 @@
 
 
     <!-- profile exchange complete -->
-    <string name="profile_exchange_complete_title">축하드립니다.\n두 분의 마음이 맞았어요. 밝은 곳으로 안대해드릴게요.</string>
+    <string name="profile_exchange_complete_title">축하드립니다. 프로필 교환에 성공하였습니다.\n 밝은 방에서 대화를 이어가세요.</string>
     <string name="profile_exchange_complete_next">매칭 대화방으로 이동하기</string>
 
 

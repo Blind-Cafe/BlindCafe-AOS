@@ -53,6 +53,7 @@ class EssentialFirstFragment :
         val alertAgeTextView = fragmentEssentialFirstBinding.tvAlertAge
 
         ageEditText.setOnFocusChangeListener { view, isFocused ->
+            ageEditText.isCursorVisible = isFocused
             if (isFocused) {
                 view.setBackgroundResource(R.drawable.et_bg_rouding_with_green_stroke)
             } else {

@@ -9,6 +9,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
@@ -29,7 +30,7 @@ class ProfileImageEditFragment :
     private var binding: FragmentProfileImageEditBinding? = null
 
 
-    var imageCnt = 0
+    private var imageCnt = 0
 
     private val filePath: String by lazy {
         "${requireActivity().externalCacheDir?.absolutePath}/image.jpeg"
@@ -74,6 +75,7 @@ class ProfileImageEditFragment :
 
         observeImageUrlsData(fragmentProfileImageEditBinding)
         initBackButton()
+        addBackPressButtonListener()
     }
 
 
@@ -126,7 +128,7 @@ class ProfileImageEditFragment :
                                 deleteFragment(i + 1)
                             }
 
-                            imageCnt.plus(1)
+                            imageCnt += 1
                             Log.e("imageCnt", "$imageCnt")
 
                         }
@@ -193,7 +195,7 @@ class ProfileImageEditFragment :
                     }
                 }
             }
-            imageCnt.plus(1)
+            imageCnt += 1
             Log.e("imageCnt", "$imageCnt")
 
         }
@@ -246,7 +248,7 @@ class ProfileImageEditFragment :
                             }
                         }
                     }
-                    imageCnt.minus(1)
+                    imageCnt -= 1
                     Log.e("imageCnt", "$imageCnt")
                 }
             }
@@ -264,6 +266,17 @@ class ProfileImageEditFragment :
                 } else {
                     showToast(R.string.profile_image_edit_toast_alert_at_least_one)
                 }
+            }
+        }
+    }
+
+    /** BackPressButton **/
+    private fun addBackPressButtonListener() {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            if (imageCnt > 0) {
+                popOneDirections()
+            } else {
+                showToast(R.string.profile_image_edit_toast_alert_at_least_one)
             }
         }
     }

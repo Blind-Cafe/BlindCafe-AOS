@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -137,7 +138,7 @@ abstract class BaseFragment<VM : BaseViewModel>(layoutId: Int) : Fragment(layout
         binding.textView.text = content
 
         return Toast(requireContext()).apply {
-            //setGravity(Gravity.BOTTOM or Gravity.CENTER, 0, 16.toPx())
+            setGravity(Gravity.BOTTOM or Gravity.CENTER, 0, 102.toPx())
             duration = Toast.LENGTH_SHORT
             view = binding.root
         }

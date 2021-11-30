@@ -679,7 +679,14 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     }
 
     private fun initNotificationContainer(view: View) {
-        view.isVisible = !isCont
+        view.isVisible = isCont
+        if (isCont) {
+            // TODO 알림 로직 작성
+            view.setOnClickListener {
+
+            }
+        }
+
     }
 
     private fun initQuitContainer(view: View) {

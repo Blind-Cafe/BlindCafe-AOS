@@ -2,6 +2,7 @@ package com.abouttime.blindcafe.presentation.onboarding.agreement
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.PreferenceKey.INFO_INPUT
 
@@ -9,7 +10,11 @@ class AgreementViewModel : BaseViewModel() {
     private val _enableNextButton = MutableLiveData(false)
     val enableNextButton: LiveData<Boolean> get() = _enableNextButton
 
-    val checks = mutableListOf(false, false, false, false)
+    var checks = mutableListOf(false, false, false, false)
+
+    init {
+        checks = mutableListOf(false, false, false, false)
+    }
 
     fun isAllChecked() {
         for (i in checks.indices) {
@@ -22,11 +27,15 @@ class AgreementViewModel : BaseViewModel() {
     }
 
     fun onClickNextButton() {
-        val infoInput = getStringData(INFO_INPUT)
-        if (infoInput.isNullOrEmpty()) {
-            moveToProfileInput()
+        if (_enableNextButton.value == true) {
+            val infoInput = getStringData(INFO_INPUT)
+            if (infoInput.isNullOrEmpty()) {
+                moveToProfileInput()
+            } else {
+                moveToMainFragment()
+            }
         } else {
-            moveToMainFragment()
+            showToast(R.string.agreement_toast_alert_select_all)
         }
     }
 

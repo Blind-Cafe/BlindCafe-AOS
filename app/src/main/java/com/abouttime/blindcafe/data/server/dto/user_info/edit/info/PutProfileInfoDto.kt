@@ -8,7 +8,7 @@ data class PutProfileInfoDto(
     @SerializedName("partnerGender")
     val partnerGender: String,
     @SerializedName("state")
-    val state: String,
+    val state: String?,
     @SerializedName("region")
-    val region: String,
+    val region: String?,
 )

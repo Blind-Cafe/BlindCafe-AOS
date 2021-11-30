@@ -116,9 +116,9 @@ class ProfileEditViewModel(
 
     /** onClick **/
     fun onClickCompleteButton() {
-        if (canEnableNextButton()) {
-            val state = _location.value?.split(" ")?.get(0)
-            val region = _location.value?.split(" ")?.get(1)
+        if (isCorrectNickname()) {
+            val state = if (_location.value.isNullOrEmpty()) null else _location.value?.split(" ")?.get(0)
+            val region = if (_location.value.isNullOrEmpty()) null else _location.value?.split(" ")?.get(1)
             val dto = PutProfileInfoDto(
                 nickname = _nickname.value!!,
                 partnerGender = when(_selectedPartnerSex.value) {
@@ -127,10 +127,9 @@ class ProfileEditViewModel(
                     3 -> "N"
                     else -> ""
                 },
-                state = state!!,
-                region = region!!
+                state = state,
+                region = region
             )
-
 
             putProfileInfo(dto)
         } else {
@@ -168,7 +167,7 @@ class ProfileEditViewModel(
     private fun isCorrectNickname() = _nickname.value?.length in 1..9
     private fun canEnableNextButton() = isCorrectNickname() && !_sex.value.isNullOrEmpty() && !_age.value.isNullOrEmpty() && !_location.value.isNullOrEmpty() && _selectedPartnerSex.value != 0
     fun updateNextButton() {
-        _canEnableNext.value = canEnableNextButton()
+        _canEnableNext.value = isCorrectNickname()
     }
 
 

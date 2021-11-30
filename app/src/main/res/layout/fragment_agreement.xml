@@ -184,18 +184,25 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                    android:gravity="center_vertical"
                     android:text="@string/agreement_4"
                     android:textColor="@color/white"
                     android:textSize="@dimen/font_size_16" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/agreement_sub_4"
+                    android:textColor="@color/gray_300"
+                    android:textSize="@dimen/font_size_13" />
 
 
             </LinearLayout>
@@ -221,7 +228,6 @@
         android:layout_marginBottom="32dp"
         android:background="@drawable/bg_rounding_3dp"
         android:backgroundTint="@{viewModel.enableNextButton ? @color/enabled : @color/brownish_grey}"
-        android:enabled="@{viewModel.enableNextButton ? true : false}"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:gravity="center"
         android:paddingVertical="16dp"

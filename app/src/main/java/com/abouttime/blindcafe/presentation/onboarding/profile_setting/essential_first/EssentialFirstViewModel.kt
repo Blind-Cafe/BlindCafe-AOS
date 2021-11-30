@@ -20,6 +20,16 @@ class EssentialFirstViewModel: BaseViewModel() {
     private val _enableNextButton = MutableLiveData(false)
     val enableNextButton: LiveData<Boolean> get() = _enableNextButton
 
+
+
+    init {
+        _ageText.value = ""
+        _selectedSex.value = 0
+        _enableNextButton.value = false
+    }
+
+
+
     fun checkInputAll() {
         if (isAgeEmpty() || !isCorrectAge() || !isSexSelected()) {
             _enableNextButton.value = false

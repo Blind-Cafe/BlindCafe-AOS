@@ -124,7 +124,7 @@ class InterestSubEditViewModel(
 
 
         } else {
-
+            showToast(R.string.profile_setting_toast_select_sub_interest)
         }
     }
     fun updateNextButton() {

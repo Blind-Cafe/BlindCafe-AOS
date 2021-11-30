@@ -63,6 +63,7 @@ class EssentialSecondFragment :
         val alertNicknameText2 = fragmentEssentialSecondBinding.tvAlertNickname2
 
         nicknameEditText.setOnFocusChangeListener { view, isFocused ->
+            nicknameEditText.isCursorVisible = isFocused
             if (isFocused) {
                 view.setBackgroundResource(R.drawable.et_bg_rouding_with_green_stroke)
             } else {
