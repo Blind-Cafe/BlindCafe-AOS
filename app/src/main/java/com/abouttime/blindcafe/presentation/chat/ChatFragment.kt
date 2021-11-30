@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
@@ -28,6 +29,7 @@ import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.common.constants.LogTag.CHATTING_TAG
 import com.abouttime.blindcafe.common.constants.PreferenceKey.LAST_READ_MESSAGE
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_FALSE
+import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_ROOM
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_TRUE
 import com.abouttime.blindcafe.common.ext.*
 import com.abouttime.blindcafe.common.util.DeviceUtil
@@ -366,6 +368,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             6 -> chatAdapter.add(0, AudioTopicItem(message, viewModel = viewModel))
             7 -> chatAdapter.add(0, DescriptionItem(message))
             8 -> {
+                Log.e("asdf", message.toString())
                 chatAdapter.add(0, CongratsItem(message))
             }
         }
@@ -699,7 +702,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
         if (isCont) {
             viewModel.matchingId?.let { it ->
-                if (getStringData(it.toString()) == NOTIFICATION_FALSE) {
+                if (getStringData("${it}${NOTIFICATION_ROOM}") == NOTIFICATION_FALSE) {
                     iv.setImageResource(R.drawable.ic_chat_room_notification_off)
                     tv.text = "알람 꺼짐"
                 } else {
@@ -708,17 +711,17 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                 }
             }
 
-            view?.setOnClickListener {
+            container.setOnClickListener {
                 viewModel.matchingId?.let { it ->
-                    if (getStringData(it.toString()) == NOTIFICATION_FALSE) {
+                    if (getStringData("${it}${NOTIFICATION_ROOM}") == NOTIFICATION_FALSE) {
 
-                        saveStringData(Pair(it.toString(), NOTIFICATION_TRUE))
+                        saveStringData(Pair("${it}${NOTIFICATION_ROOM}", NOTIFICATION_TRUE))
                         iv.setImageResource(R.drawable.ic_chat_room_notification_on)
                         tv.text = "알람 켜짐"
 
                     } else {
 
-                        saveStringData(Pair(it.toString(), NOTIFICATION_FALSE))
+                        saveStringData(Pair("${it}${NOTIFICATION_ROOM}", NOTIFICATION_FALSE))
                         iv.setImageResource(R.drawable.ic_chat_room_notification_off)
                         tv.text = "알람 꺼짐"
 
@@ -758,8 +761,21 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         }
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        return super.onCreateView(inflater, container, savedInstanceState)
+
+
+    }
+
     override fun onStop() {
         super.onStop()
+
+
         viewModel.matchingId?.let { mId ->
             saveStringData(Pair("${mId}${LAST_READ_MESSAGE}", (System.currentTimeMillis() / 1000).toString()))
         }

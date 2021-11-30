@@ -45,7 +45,6 @@ class ChatListViewModel(
             when(result) {
                 is Resource.Loading -> {
                     showLoading()
-                    Log.e(RETROFIT_TAG, "Loading")
                 }
                 is Resource.Success -> {
                     Log.e(RETROFIT_TAG, result.data.toString())

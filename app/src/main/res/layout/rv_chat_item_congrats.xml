@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/transparent"
     android:paddingBottom="16dp">
 
@@ -36,7 +37,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginBottom="@dimen/switch_thumb_padding"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
-        android:text="@string/chat_get_badge"
+        tools:text="@string/chat_get_badge"
         android:textColor="@color/gray_300"
         android:textSize="@dimen/font_size_11"
         app:layout_constraintEnd_toEndOf="@id/tv_congrats"

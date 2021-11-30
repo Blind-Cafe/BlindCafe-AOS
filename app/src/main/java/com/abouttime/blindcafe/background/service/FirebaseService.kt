@@ -18,6 +18,7 @@ import com.abouttime.blindcafe.common.constants.LogTag.FCM_TAG
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_ENTIRE
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_FALSE
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_MESSAGE
+import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_ROOM
 import com.abouttime.blindcafe.presentation.GlobalLiveData.updateHomeState
 import com.abouttime.blindcafe.presentation.NavHostActivity
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -72,7 +73,7 @@ class FirebaseService(): FirebaseMessagingService() {
 
         val blockEntireNotification = sharedPreferences.getString(NOTIFICATION_ENTIRE, null)
         val blockMessageNotification = sharedPreferences.getString(NOTIFICATION_MESSAGE, null)
-        val blockSpecificNotification = sharedPreferences.getString(matchingId, null)
+        val blockSpecificNotification = sharedPreferences.getString("${matchingId}${NOTIFICATION_ROOM}", null)
 
 
         if (blockEntireNotification == NOTIFICATION_FALSE) return

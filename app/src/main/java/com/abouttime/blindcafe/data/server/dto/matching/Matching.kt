@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Matching(
     @SerializedName("expiryTime")
-    val expiryDay: Int?,
+    val expiryTime: String?,
     @SerializedName("latestMessage")
     val latestMessage: String?,
     @SerializedName("matchingId")

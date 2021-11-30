@@ -14,6 +14,7 @@
         android:layout_height="286dp"
         android:clipToPadding="false"
         android:orientation="horizontal"
+        android:overScrollMode="never"
         android:background="@drawable/bg_rounding_3dp"
         android:backgroundTint="@color/button_disabled"
         app:layout_constraintEnd_toEndOf="parent"

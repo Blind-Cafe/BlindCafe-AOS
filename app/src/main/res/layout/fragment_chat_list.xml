@@ -7,20 +7,7 @@
     android:background="@color/matching_room_root_bg">
 
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:paddingStart="24dp"
-        android:paddingTop="40dp"
-        android:paddingBottom="42dp"
-        android:fontFamily="@font/spoqa_han_sans_neo_bold"
-        android:text="@string/chat_list_title"
-        android:textColor="@color/white"
-        android:textSize="@dimen/font_size_15"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
 
     <ImageView
@@ -30,6 +17,7 @@
         android:src="@drawable/bg_chat_list_none"
         app:layout_constraintBottom_toTopOf="@id/tv_title_none"
         app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title"
         app:layout_constraintVertical_bias="0.1"
@@ -39,6 +27,7 @@
         android:id="@+id/tv_title_none"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_marginTop="48dp"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:text="@string/chat_list_title_none"
@@ -57,6 +46,7 @@
         android:text="@string/chat_list_subtitle_none"
         android:textColor="@color/gray_300"
         android:textSize="@dimen/font_size_11"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@id/tv_title_none"
         app:layout_constraintStart_toStartOf="@id/tv_title_none"
         app:layout_constraintTop_toBottomOf="@id/tv_title_none" />
@@ -85,6 +75,22 @@
         android:background="@drawable/bg_chat_list_gradation"
         android:alpha="0.2"/>
 
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingStart="24dp"
+        android:paddingTop="40dp"
+        android:paddingBottom="42dp"
+        android:background="@color/matching_room_root_bg"
+        android:fontFamily="@font/spoqa_han_sans_neo_bold"
+        android:text="@string/chat_list_title"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size_15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 

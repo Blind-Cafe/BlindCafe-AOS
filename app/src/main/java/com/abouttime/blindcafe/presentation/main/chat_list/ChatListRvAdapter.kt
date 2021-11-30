@@ -24,15 +24,14 @@ class ChatListRvAdapter(
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bindData(match: Matching, position: Int) = with(binding)  {
-            vRead.isGone = match.received != true
+            vRead.isGone = (match.received == true)
             setColorByRead()
 
             tvLastMessage.text = match.latestMessage
-            tvTimeRemaining.text = "${match.expiryDay}일 남음"
+            tvTimeRemaining.text = "${match.expiryTime}"
 
             match?.matchingId?.let { id ->
                 viewModel.subscribeLastMessage(id) { m ->
-
                          val lastContent = when (m.type) {
                         1 -> {
                              m.contents
@@ -50,7 +49,7 @@ class ChatListRvAdapter(
                     }
                     matches.removeAt(position)
                     Matching(
-                        expiryDay = match.expiryDay,
+                        expiryTime = match.expiryTime,
                         latestMessage = lastContent,
                         matchingId = match.matchingId,
                         partner = match.partner,

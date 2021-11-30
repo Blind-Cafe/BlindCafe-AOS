@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
+import com.abouttime.blindcafe.common.constants.PreferenceKey
 import com.abouttime.blindcafe.domain.model.ChatRoom
 import com.abouttime.blindcafe.domain.use_case.server.GetChatRoomInfoUseCase
 import kotlinx.coroutines.flow.launchIn
@@ -25,6 +26,7 @@ class ExchangeCompleteViewModel(
                 is Resource.Success -> {
                     dismissLoading()
                     result.data?.let { dto ->
+                        saveStringData(Pair("${matchingId}${PreferenceKey.LAST_READ_MESSAGE}", null))
                         moveToChatRoomFragment(dto.toChatRoom())
                     }
                 }
