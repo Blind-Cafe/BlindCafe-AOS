@@ -1,7 +1,6 @@
 package com.abouttime.blindcafe.common.ext
 
 import android.annotation.SuppressLint
-import android.icu.text.DateFormat
 import com.abouttime.blindcafe.common.constants.Time
 import java.text.SimpleDateFormat
 import java.util.*
@@ -18,6 +17,12 @@ internal fun Long.secondToChatTime(): String {
     val ms = this * 1000
     val simpleDataFormat = SimpleDateFormat("a hh:mm")
     return simpleDataFormat.format(Date(ms))
+}
+
+
+internal fun Long.laps(): Long {
+    val currentTime = System.currentTimeMillis() / 1000
+    return currentTime - this
 }
 
 
@@ -38,6 +43,10 @@ internal fun Long.secondToLapseForHome(): String {
 }
 
 
+internal fun Long.isOver5Minutes(): Boolean =
+    this.laps() > (5 * 60)
+
+
 internal fun Long.isOver24Hours(): Boolean {
     val currentTime = System.currentTimeMillis() / 1000
     val seconds = currentTime - this
@@ -56,4 +65,5 @@ internal fun Long.isOver72Hours(): Boolean {
     return seconds > (Time.HOUR_72 * 60 * 60).toLong()
 }
 
-internal fun Long.to3RangeDays(): Int = if (!this.isOver24Hours()) 1 else if (!this.isOver48Hours()) 2 else 3
+internal fun Long.to3RangeDays(): Int =
+    if (!this.isOver24Hours()) 1 else if (!this.isOver48Hours()) 2 else 3

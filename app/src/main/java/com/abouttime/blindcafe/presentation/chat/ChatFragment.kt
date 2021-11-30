@@ -338,6 +338,16 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             5 -> chatAdapter.add(ImageTopicItem(message, viewModel = viewModel))
             6 -> chatAdapter.add(AudioTopicItem(message, viewModel = viewModel))
             7 -> chatAdapter.add(DescriptionItem(message))
+            9 -> {
+                /**
+                 * 사실 토픽은 무조건 이 ToPartner 함수로 옴
+                 * 왜냐함녀 userId 가 null 이니까
+                 * 서버에서 미리 넣어주고, 클라는 5분이 넘었을 때만 읽어온다
+                 */
+                if (message.timestamp?.seconds?.isOver5Minutes() == true) {
+                    chatAdapter.add(TextTopicItem(message))
+                }
+            }
         }
     }
 
