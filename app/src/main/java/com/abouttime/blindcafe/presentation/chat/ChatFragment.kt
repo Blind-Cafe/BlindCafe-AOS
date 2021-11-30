@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.common.constants.LogTag.CHATTING_TAG
+import com.abouttime.blindcafe.common.constants.PreferenceKey.LAST_READ_MESSAGE
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_FALSE
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_TRUE
 import com.abouttime.blindcafe.common.ext.*
@@ -319,6 +320,13 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     }
 
     private fun addMessageToPartner(message: Message) {
+        when (message.type) {
+            1, 2, 3, 4, 5, 6 -> {
+                viewModel.matchingId?.let { mId ->
+                    saveStringData(Pair("${mId}$LAST_READ_MESSAGE", message.timestamp?.seconds.toString()))
+                }
+            }
+        }
         when (message.type) {
             1 -> chatAdapter.add(
                 TextReceiveItem(message,
@@ -757,6 +765,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
     override fun onStop() {
         super.onStop()
+
         viewModel?.matchingId?.let { id ->
             viewModel?.postExitLog(id)
         }

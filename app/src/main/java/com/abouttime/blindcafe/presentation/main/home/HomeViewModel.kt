@@ -42,6 +42,8 @@ class HomeViewModel(
     private val _time: MutableLiveData<String> = MutableLiveData("00:00")
     val time: LiveData<String> get() = _time
 
+    private val _notReadMessageCnt: MutableLiveData<Int> = MutableLiveData(0)
+    val notReadMessageCnt: LiveData<Int> get() = _notReadMessageCnt
 
     var reason: String? = null
     var partnerNickname: String? = null
@@ -52,6 +54,12 @@ class HomeViewModel(
     init {
         getHomeInfo()
     }
+
+    fun getMessageForNotReadMessageCnt() {
+
+    }
+
+
 
     /** use cases **/
     fun getHomeInfo() {

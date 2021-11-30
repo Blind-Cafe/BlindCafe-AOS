@@ -13,6 +13,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 import android.view.MotionEvent
 import android.view.View
+import androidx.navigation.findNavController
 
 
 class NavHostActivity : AppCompatActivity() {
@@ -33,6 +34,7 @@ class NavHostActivity : AppCompatActivity() {
 
         initLoadingDialog()
         observeLoadingEvent()
+        observeSuspendEvent()
 
     }
     private fun initNavController() {
@@ -62,13 +64,20 @@ class NavHostActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun showLoadingDialog() {
         loadingDialog.show()
     }
 
-    protected fun dismissLoadingDialog() {
+    private fun dismissLoadingDialog() {
         loadingDialog.dismiss()
+    }
+
+    private fun observeSuspendEvent() {
+        GlobalLiveData.suspendUserEvent.observe(this) { isSuspend ->
+            if (isSuspend) {
+                navController.navigate(R.id.dormancyFragment)
+            }
+        }
     }
 
 
