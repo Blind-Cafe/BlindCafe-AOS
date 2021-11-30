@@ -293,7 +293,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         viewModel?.receivedPageMessage.observe(viewLifecycleOwner) { messages ->
             isScrolling = true
             messages.forEach { message ->
-                Log.e("asdf", message.toString())
                 message.timestamp?.let { tp ->
                     timeStampList.add(tp)
                     if (message.senderUid == viewModel.userId) {
@@ -320,13 +319,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     }
 
     private fun addMessageToPartner(message: Message) {
-        when (message.type) {
-            1, 2, 3, 4, 5, 6 -> {
-                viewModel.matchingId?.let { mId ->
-                    saveStringData(Pair("${mId}${LAST_READ_MESSAGE}", message.timestamp?.seconds.toString()))
-                }
-            }
-        }
+
         when (message.type) {
             1 -> chatAdapter.add(
                 TextReceiveItem(message,
@@ -765,7 +758,9 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
     override fun onStop() {
         super.onStop()
-
+        viewModel.matchingId?.let { mId ->
+            saveStringData(Pair("${mId}${LAST_READ_MESSAGE}", (System.currentTimeMillis() / 1000).toString()))
+        }
         viewModel?.matchingId?.let { id ->
             viewModel?.postExitLog(id)
         }

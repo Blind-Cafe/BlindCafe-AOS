@@ -71,7 +71,6 @@ class HomeViewModel(
         val roomCollectionRef = Firebase.firestore.collection(COLLECTION_ROOMS)
         try {
             val time = getStringData("${matchingId}${LAST_READ_MESSAGE}")?.toLong()
-
             roomCollectionRef
                 .document(matchingId.toString())
                 .collection(FirebaseKey.SUB_COLLECTION_MESSAGES)
@@ -86,15 +85,12 @@ class HomeViewModel(
                             val mTime = m.timestamp?.seconds
                             mTime?.let { mt ->
                                 time?.let { t ->
-
                                     if (dc.type == DocumentChange.Type.ADDED && t < mt && mType in 1..6) {
-                                        Log.e("messages", m.toString())
                                         messages.add(dc.document.toObject<Message>())
                                     }
                                 }
                             }
                         }
-
                         _notReadMessageCnt.value?.let {
                             _notReadMessageCnt.postValue(it + messages.size)
                         }
@@ -132,10 +128,10 @@ class HomeViewModel(
                 is Resource.Error -> {
                     if (resource.message != "400") {
                         showToast(R.string.matching_error)
-                    } else {
+                    } else if (resource.message != "1000") {
+                        postExitChatRoom()
                         showToast(R.string.toast_check_internet)
                     }
-                    postExitChatRoom()
                     dismissLoading()
                 }
             }

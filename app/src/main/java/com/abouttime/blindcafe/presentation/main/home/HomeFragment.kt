@@ -37,8 +37,11 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
     private fun initBellImageView() {
         binding?.ivBell?.setOnClickListener {
             if (binding?.ivBellOn?.visibility == View.VISIBLE) {
-                binding?.tvNotReadCnt?.visibility = View.VISIBLE
-                binding?.ivBellOn?.visibility = View.INVISIBLE
+                if (binding?.tvNotReadCnt?.visibility == View.INVISIBLE) {
+                    binding?.tvNotReadCnt?.visibility = View.VISIBLE
+                } else {
+                    binding?.tvNotReadCnt?.visibility = View.INVISIBLE
+                }
             } else {
                 showToast(R.string.home_not_read_cnt_none)
             }
