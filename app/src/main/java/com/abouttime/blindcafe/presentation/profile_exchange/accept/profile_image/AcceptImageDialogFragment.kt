@@ -2,6 +2,7 @@ package com.abouttime.blindcafe.presentation.profile_exchange.accept.profile_ima
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.navArgs
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseDialogFragment
@@ -15,11 +16,16 @@ class AcceptImageDialogFragment: BaseDialogFragment<AcceptImageViewModel>(R.layo
     private val args: AcceptImageDialogFragmentArgs by navArgs()
     private lateinit var adapter: AcceptImageVpAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(STYLE_NO_FRAME, android.R.style.Theme_Translucent);
+
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val dialogFragmentProfileImageBinding = DialogFragmentProfileImageBinding.bind(view)
         binding = dialogFragmentProfileImageBinding
-
 
 
 

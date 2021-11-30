@@ -13,7 +13,10 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 import android.view.MotionEvent
 import android.view.View
-import androidx.navigation.findNavController
+import com.abouttime.BlindCafeApplication
+import com.abouttime.blindcafe.common.constants.PreferenceKey.BACKGROUND
+import com.abouttime.blindcafe.common.constants.PreferenceKey.FOREGROUND
+import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_CURRENT_ROOM
 
 
 class NavHostActivity : AppCompatActivity() {
@@ -105,12 +108,6 @@ class NavHostActivity : AppCompatActivity() {
         }
         return super.dispatchTouchEvent(event)
     }
-
-
-
-
-
-
 
 
 }

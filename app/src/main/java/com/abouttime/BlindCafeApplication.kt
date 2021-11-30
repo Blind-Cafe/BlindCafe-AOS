@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import com.abouttime.blindcafe.BuildConfig
 import com.abouttime.blindcafe.common.constants.LogTag
+import com.abouttime.blindcafe.common.constants.PreferenceKey.PREFERENCES_NAME
 import com.abouttime.blindcafe.common.constants.Retrofit
 import com.abouttime.blindcafe.di.*
 import com.abouttime.blindcafe.di.remoteModule
@@ -27,7 +28,7 @@ class BlindCafeApplication: Application() {
 
         KakaoSdk.init(this, BuildConfig.KAKAO_API_KEY)
 
-        sharedPreferences = getSharedPreferences("BLIND_CAFE", Context.MODE_PRIVATE)
+        sharedPreferences = getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
         var keyHash = Utility.getKeyHash(this)
         Log.e("keyHash", keyHash)
 
@@ -54,6 +55,8 @@ class BlindCafeApplication: Application() {
 
 
     }
+
+
 
     companion object {
         lateinit var sharedPreferences: SharedPreferences

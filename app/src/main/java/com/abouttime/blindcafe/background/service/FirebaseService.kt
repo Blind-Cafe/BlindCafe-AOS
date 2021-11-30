@@ -15,6 +15,7 @@ import androidx.core.app.NotificationCompat
 import com.abouttime.BlindCafeApplication.Companion.sharedPreferences
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.constants.LogTag.FCM_TAG
+import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_CURRENT_ROOM
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_ENTIRE
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_FALSE
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_MESSAGE
@@ -27,7 +28,7 @@ import kotlin.random.Random
 
 private const val CHANNEL_ID = "FCM Message Channel"
 
-class FirebaseService(): FirebaseMessagingService() {
+class FirebaseService() : FirebaseMessagingService() {
 
 
     companion object {
@@ -52,7 +53,8 @@ class FirebaseService(): FirebaseMessagingService() {
         updateHomeState.postValue(true)
 
         val intent = Intent(this, NavHostActivity::class.java)
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notificationId = Random.nextInt()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -70,14 +72,17 @@ class FirebaseService(): FirebaseMessagingService() {
 
 
         Log.e(FCM_TAG, "$type, $path, $matchingId")
-
+        val blockCurrentRoomNotification =
+            sharedPreferences.getString("${matchingId}${NOTIFICATION_CURRENT_ROOM}", null)
         val blockEntireNotification = sharedPreferences.getString(NOTIFICATION_ENTIRE, null)
         val blockMessageNotification = sharedPreferences.getString(NOTIFICATION_MESSAGE, null)
-        val blockSpecificNotification = sharedPreferences.getString("${matchingId}${NOTIFICATION_ROOM}", null)
+        val blockSpecificNotification =
+            sharedPreferences.getString("${matchingId}${NOTIFICATION_ROOM}", null)
 
 
+        if (blockCurrentRoomNotification == NOTIFICATION_FALSE) return // 현재 채팅방에 있다면 푸시를 받지 않는다
         if (blockEntireNotification == NOTIFICATION_FALSE) return
-        if (blockMessageNotification == NOTIFICATION_FALSE && type =="T") return
+        if (blockMessageNotification == NOTIFICATION_FALSE && type == "T") return
         if (blockSpecificNotification == NOTIFICATION_FALSE && matchingId != null) return
 
         intent.putExtra(FCM_PATH, path)

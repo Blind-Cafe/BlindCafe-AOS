@@ -27,7 +27,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.common.constants.LogTag.CHATTING_TAG
+import com.abouttime.blindcafe.common.constants.PreferenceKey
 import com.abouttime.blindcafe.common.constants.PreferenceKey.LAST_READ_MESSAGE
+import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_CURRENT_ROOM
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_FALSE
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_ROOM
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_TRUE
@@ -766,7 +768,9 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        viewModel.matchingId?.let { mId ->
+            saveStringData(Pair("${mId}${NOTIFICATION_CURRENT_ROOM}", NOTIFICATION_FALSE))
+        }
         return super.onCreateView(inflater, container, savedInstanceState)
 
 
@@ -778,6 +782,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
         viewModel.matchingId?.let { mId ->
             saveStringData(Pair("${mId}${LAST_READ_MESSAGE}", (System.currentTimeMillis() / 1000).toString()))
+            saveStringData(Pair("${mId}${NOTIFICATION_CURRENT_ROOM}", NOTIFICATION_TRUE))
         }
         viewModel?.matchingId?.let { id ->
             viewModel?.postExitLog(id)
