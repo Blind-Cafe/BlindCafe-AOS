@@ -46,9 +46,18 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
     }
     private fun setCurrentFragmentById(id: Int) {
         when(id) {
-            R.id.menu_home -> setCurrentFragment(HomeFragment())
-            R.id.menu_chat -> setCurrentFragment(ChatListFragment())
-            R.id.menu_my_page -> setCurrentFragment(MyPageFragment())
+            R.id.menu_home -> {
+                binding?.bnTab?.setBackgroundResource(R.color.black_2)
+                setCurrentFragment(HomeFragment())
+            }
+            R.id.menu_chat -> {
+                binding?.bnTab?.setBackgroundResource(R.color.matching_room_root_bg)
+                setCurrentFragment(ChatListFragment())
+            }
+            R.id.menu_my_page -> {
+                binding?.bnTab?.setBackgroundResource(R.color.black_2)
+                setCurrentFragment(MyPageFragment())
+            }
         }
     }
 

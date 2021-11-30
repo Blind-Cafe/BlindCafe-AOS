@@ -258,6 +258,9 @@ class HomeViewModel(
                         )
                     }
                 }
+                8,9,10 -> {
+
+                }
                 else -> {
                     showToast(R.string.toast_fail)
                 }

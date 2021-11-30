@@ -70,7 +70,7 @@ class ConfirmViewModel(
                     moveToDirections(ConfirmDialogFragmentDirections.actionConfirmDialogFragmentToExitFragment(
                         isAttacker = true,
                         isReport = false,
-                        title = "$partnerNickname 님 과 ${days}일간의 추억은 즐거우셨나요?\n이제 더 좋은 추억을 쌓으러 가보죠!"
+                        title = "$partnerNickname 님과 ${days}일간의 추억은 즐거우셨나요?\n이제 더 좋은 추억을 쌓으러 가보죠!"
                     ))
                     dismissLoading()
                 }
