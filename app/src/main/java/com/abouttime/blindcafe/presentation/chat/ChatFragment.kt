@@ -365,7 +365,9 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             5 -> chatAdapter.add(0, ImageTopicItem(message, viewModel = viewModel))
             6 -> chatAdapter.add(0, AudioTopicItem(message, viewModel = viewModel))
             7 -> chatAdapter.add(0, DescriptionItem(message))
-            8 -> chatAdapter.add(0, CongratsItem(message))
+            8 -> {
+                chatAdapter.add(0, CongratsItem(message))
+            }
         }
 
 

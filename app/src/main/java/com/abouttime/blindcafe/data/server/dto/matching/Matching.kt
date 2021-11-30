@@ -4,7 +4,7 @@ package com.abouttime.blindcafe.data.server.dto.matching
 import com.google.gson.annotations.SerializedName
 
 data class Matching(
-    @SerializedName("expiryDay")
+    @SerializedName("expiryTime")
     val expiryDay: Int?,
     @SerializedName("latestMessage")
     val latestMessage: String?,

@@ -8,6 +8,7 @@ import androidx.navigation.fragment.navArgs
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.common.constants.NavigationKey
+import com.abouttime.blindcafe.common.constants.NavigationKey.SELECT_LOCATION
 import com.abouttime.blindcafe.databinding.FragmentExchangeOpenBinding
 import com.abouttime.blindcafe.databinding.FragmentProfileEditBinding
 import com.bumptech.glide.Glide
@@ -56,12 +57,13 @@ class ExchangeOpenFragment: BaseFragment<ExchangeOpenViewModel>(R.layout.fragmen
     }
 
     private fun observeSavedNavigationData(fragmentProfileEditBinding: FragmentExchangeOpenBinding) = with(fragmentProfileEditBinding) {
-        getNavigationResult(NavigationKey.SELECT_LOCATION)?.observe(viewLifecycleOwner) { result ->
+        getNavigationResult(SELECT_LOCATION)?.observe(viewLifecycleOwner) { result ->
             Log.e("location -> profile edit", result)
             viewModel?.setLocation(result)
-
         }
     }
+
+
 
     private fun observeNicknameData(fragmentExchangeOpenBinding: FragmentExchangeOpenBinding) = with(fragmentExchangeOpenBinding) {
         viewModel?.nickname?.observe(viewLifecycleOwner) { nick ->
@@ -80,12 +82,16 @@ class ExchangeOpenFragment: BaseFragment<ExchangeOpenViewModel>(R.layout.fragmen
 
     private fun observeLocationData(fragmentExchangeOpenBinding: FragmentExchangeOpenBinding) = with(fragmentExchangeOpenBinding) {
         viewModel?.location?.observe(viewLifecycleOwner) { loc ->
-            Log.e("profile edit", loc)
+            repeat(100) {
+                Log.e("profile edit", loc)
+            }
+
             tvLocationValue.text = loc
             etLocationValue.isGone = loc.isNotEmpty()
             viewModel?.updateNextButton(hasImage)
         }
     }
+
 
     private fun observeInterestsData(fragmentExchangeOpenBinding: FragmentExchangeOpenBinding) = with(fragmentExchangeOpenBinding) {
         val tvList = listOf(tvInterest1, tvInterest2, tvInterest3)

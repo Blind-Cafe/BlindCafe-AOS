@@ -40,7 +40,7 @@ class ExchangeOpenViewModel(
     private val _age = SingleLiveData<String>()
     val age: SingleLiveData<String> get() = _age
 
-    val _location = MutableLiveData<String>("위치")
+    private val _location = MutableLiveData<String>()
     val location: LiveData<String> get() = _location
 
     private val _interests = MutableLiveData<List<String>>()
@@ -138,7 +138,10 @@ class ExchangeOpenViewModel(
             }
         }
 
-        _location.value = data.region ?: ""
+        data.region?.let { l ->
+            _location.value = l
+        }
+
         data.interests.let {
             _interests.value = it
         }

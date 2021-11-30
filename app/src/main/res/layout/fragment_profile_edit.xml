@@ -211,17 +211,13 @@
                     android:hint="@string/profile_edit_location_hint"
                     android:paddingHorizontal="6dp"
                     android:paddingVertical="4dp"
-                    android:textSize="@dimen/font_size_15"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="@dimen/font_size_15" />
 
                 <TextView
                     android:id="@+id/tv_location_value"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:backgroundTint="@color/transparent"
+                    android:background="@color/transparent"
                     android:fontFamily="@font/spoqa_han_sans_neo_regular"
                     android:gravity="center_vertical"
                     android:onClick="@{() -> viewModel.onClickLocationEditText()}"

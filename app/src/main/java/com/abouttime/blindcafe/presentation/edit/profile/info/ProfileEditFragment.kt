@@ -7,6 +7,7 @@ import androidx.core.view.isGone
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.common.constants.NavigationKey.SELECT_LOCATION
+import com.abouttime.blindcafe.databinding.FragmentExchangeOpenBinding
 import com.abouttime.blindcafe.databinding.FragmentProfileEditBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -41,15 +42,9 @@ class ProfileEditFragment: BaseFragment<ProfileEditViewModel>(R.layout.fragment_
 
         }
     }
-    private fun observeEnableData(fragmentProfileEditBinding: FragmentProfileEditBinding) = with(fragmentProfileEditBinding) {
-        viewModel?.canEnableNext?.observe(viewLifecycleOwner) { isEnable ->
-            if (isEnable) {
-                tvNext.setBackgroundColor(getColorByResId(R.color.edit_profile_button_disabled))
-            } else {
-                tvNext.setBackgroundColor(getColorByResId(R.color.main))
-            }
-        }
-    }
+
+
+
     private fun observeNicknameData(fragmentProfileEditBinding: FragmentProfileEditBinding) = with(fragmentProfileEditBinding) {
         viewModel?.nickname?.observe(viewLifecycleOwner) { nick ->
             viewModel?.updateNextButton()
@@ -73,6 +68,9 @@ class ProfileEditFragment: BaseFragment<ProfileEditViewModel>(R.layout.fragment_
            viewModel?.updateNextButton()
        }
     }
+
+
+
 
 
 }

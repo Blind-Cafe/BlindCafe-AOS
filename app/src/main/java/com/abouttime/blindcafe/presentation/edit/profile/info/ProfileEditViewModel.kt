@@ -32,7 +32,7 @@ class ProfileEditViewModel(
     private val _age = SingleLiveData<String>()
     val age: SingleLiveData<String> get() = _age
 
-    val _location = MutableLiveData<String>("위치")
+    private val _location = MutableLiveData<String>("위치")
     val location: LiveData<String> get() = _location
 
     private val _selectedPartnerSex = MutableLiveData<Int>(0)
@@ -79,7 +79,10 @@ class ProfileEditViewModel(
                                 else -> 0
                             }
                         )
-                        _location.postValue(dto.region ?: "")
+                        dto.region?.let {
+                            _location.postValue(dto.region)
+                        }
+
                         _canEnableNext.postValue(!dto.region.isNullOrEmpty())
                     }
                     dismissLoading()

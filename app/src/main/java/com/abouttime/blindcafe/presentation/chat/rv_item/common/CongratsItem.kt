@@ -12,18 +12,20 @@ import com.xwray.groupie.viewbinding.BindableItem
 class CongratsItem(private val message: Message) : BindableItem<RvChatItemCongratsBinding>() {
     override fun bind(viewBinding: RvChatItemCongratsBinding, position: Int) {
         viewBinding.root.tag = message.timestamp
-        val badge = viewBinding.tvCongrats.resources.getString(R.string.chat_get_badge).format(message.contents)
 
+        viewBinding.tvCongrats.text = viewBinding.tvCongrats.resources.getString(R.string.chat_congrats)
+
+        val badge = viewBinding.tvCongrats.resources.getString(R.string.chat_get_badge).format(message.contents)
         val start = badge.indexOf("[")
         val end = badge.indexOf("]")
-        val builder = SpannableStringBuilder(message.contents.replace("[", " ").replace("]", " "))
+        val builder = SpannableStringBuilder(badge.replace("[", " ").replace("]", " "))
         builder.setSpan(
-            ForegroundColorSpan(viewBinding.tvCongrats.context.getColor(R.color.main)),
+            ForegroundColorSpan(viewBinding.tvBadge.context.getColor(R.color.main)),
             start,
             end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         );
-        viewBinding.tvCongrats.append(builder)
+        viewBinding.tvBadge.append(builder)
 
     }
 
