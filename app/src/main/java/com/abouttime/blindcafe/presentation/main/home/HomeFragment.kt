@@ -12,6 +12,7 @@ import com.abouttime.blindcafe.common.constants.Time
 import com.abouttime.blindcafe.common.ext.secondToLapseForHome
 import com.abouttime.blindcafe.common.ext.setMarginTop
 import com.abouttime.blindcafe.databinding.FragmentHomeBinding
+import com.abouttime.blindcafe.presentation.GlobalLiveData
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
@@ -27,6 +28,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
 
         observeHomeStatus()
         observeSavedNavigationData()
+        observeGlobalHomeUpdateData()
     }
 
 
@@ -165,6 +167,12 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
     private fun observeSavedNavigationData() {
         getNavigationResult(CONFIRM_MATCHING_CANCEL)?.observe(viewLifecycleOwner) { result ->
             Log.e("navigation", "observeSavedNavigationData Home")
+            viewModel.getHomeInfo()
+        }
+    }
+
+    private fun observeGlobalHomeUpdateData() {
+        GlobalLiveData.updateHomeState.observe(viewLifecycleOwner) {
             viewModel.getHomeInfo()
         }
     }

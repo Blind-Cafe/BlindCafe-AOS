@@ -5,6 +5,6 @@ import com.abouttime.blindcafe.common.util.SingleLiveData
 
 object GlobalLiveData {
     val loadingEvent = SingleLiveData<Boolean>()
-    val UpdateHomeState = SingleLiveData<Boolean>()
+    val updateHomeState = SingleLiveData<Boolean>()
 
 }

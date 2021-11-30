@@ -18,7 +18,7 @@ import com.abouttime.blindcafe.common.constants.LogTag.FCM_TAG
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_ENTIRE
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_FALSE
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_MESSAGE
-import com.abouttime.blindcafe.presentation.GlobalLiveData.UpdateHomeState
+import com.abouttime.blindcafe.presentation.GlobalLiveData.updateHomeState
 import com.abouttime.blindcafe.presentation.NavHostActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -48,7 +48,7 @@ class FirebaseService(): FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
         Log.e(FCM_TAG, "onMessageReceived 호출")
-        UpdateHomeState.postValue(true)
+        updateHomeState.postValue(true)
 
         val intent = Intent(this, NavHostActivity::class.java)
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

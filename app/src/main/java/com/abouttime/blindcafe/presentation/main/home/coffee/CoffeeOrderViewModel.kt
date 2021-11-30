@@ -93,13 +93,18 @@ class CoffeeOrderViewModel(
                             showLoading()
                         }
                         is Resource.Success -> {
+                            if (response.data?.code != "1000") {
+                                showToast(R.string.matching_error)
+                                popDirections()
+                            } else {
+                                response.data?.startTime?.let { time ->
+                                    startTime = time
+                                }
+                                matchingId?.let { roomUid ->
+                                    getChatRoomInfo(roomUid)
+                                }
+                            }
 
-                            response.data?.startTime?.let { time ->
-                                startTime = time
-                            }
-                            matchingId?.let { roomUid ->
-                                getChatRoomInfo(roomUid)
-                            }
                             dismissLoading()
                         }
                         is Resource.Error -> {

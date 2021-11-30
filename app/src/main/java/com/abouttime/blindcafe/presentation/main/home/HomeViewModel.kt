@@ -10,12 +10,10 @@ import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.ext.secondToLapseForHome
+import com.abouttime.blindcafe.data.server.dto.home.GetHomeInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.partner.GetPartnerProfileDto
 import com.abouttime.blindcafe.domain.model.ChatRoom
-import com.abouttime.blindcafe.domain.use_case.server.GetChatRoomInfoUseCase
-import com.abouttime.blindcafe.domain.use_case.server.GetHomeInfoUseCase
-import com.abouttime.blindcafe.domain.use_case.server.GetPartnerProfileUseCase
-import com.abouttime.blindcafe.domain.use_case.server.PostMatchingRequestUseCase
+import com.abouttime.blindcafe.domain.use_case.server.*
 import com.abouttime.blindcafe.presentation.main.MainFragmentDirections
 import com.abouttime.blindcafe.presentation.main.home.HomeState.FAILED_LEAVE_ROOM
 import com.abouttime.blindcafe.presentation.main.home.HomeState.FAILED_REPORT
@@ -36,6 +34,7 @@ class HomeViewModel(
     private val postMatchingRequestUseCase: PostMatchingRequestUseCase,
     private val getPartnerProfileUseCase: GetPartnerProfileUseCase,
     private val getChatRoomInfoUseCase: GetChatRoomInfoUseCase,
+    private val exitChatRoomUseCase: DeleteExitChatRoomUseCase
 
 ) : BaseViewModel() {
     private val _homeStatusCode: MutableLiveData<Int> = MutableLiveData<Int>(-1)
@@ -62,17 +61,18 @@ class HomeViewModel(
                     showLoading()
                 }
                 is Resource.Success -> {
-                    Log.d(RETROFIT_TAG, resource.data.toString())
-                    resource.data?.matchingStatus?.let { status ->
-                        _homeStatusCode.postValue(getHomeStatusCode(status))
+                    if (resource.data?.code != "1000") {
+                        showToast(R.string.matching_error)
+                        postExitChatRoom()
+                    } else {
+                        resource.data?.let { dto ->
+                            handleHomeInfo(dto)
+                        }
+                        resource.data?.matchingStatus?.let { status ->
+                            _homeStatusCode.postValue(getHomeStatusCode(status))
+                        }
                     }
-                    resource.data?.let {
-                        matchingId = it.matchingId
-                        startTime = it.startTime
-                        reason = it.reason
-                        partnerNickname = it.partnerNickname
-                        partnerId = it.partnerId
-                    }
+
                     dismissLoading()
                 }
                 is Resource.Error -> {
@@ -91,18 +91,33 @@ class HomeViewModel(
                     showLoading()
                 }
                 is Resource.Success -> {
-                    resource.data?.matchingStatus?.let { status ->
-                        callback(status)
+                    if (resource.data?.code != "1000") {
+                        showToast(R.string.matching_error)
+                        postExitChatRoom()
+                    } else {
+                        resource.data?.let { dto ->
+                            handleHomeInfo(dto)
+                        }
+                        resource.data?.matchingStatus?.let { status ->
+                            callback(status)
+                        }
                     }
+
                     dismissLoading()
                 }
                 is Resource.Error -> {
-                    Log.d(RETROFIT_TAG, resource.message.toString())
                     dismissLoading()
                 }
             }
 
         }.launchIn(viewModelScope)
+    }
+    private fun handleHomeInfo(dto: GetHomeInfoDto) {
+        matchingId = dto.matchingId
+        startTime = dto.startTime
+        reason = dto.reason
+        partnerNickname = dto.partnerNickname
+        partnerId = dto.partnerId
     }
 
 
@@ -110,13 +125,20 @@ class HomeViewModel(
         postMatchingRequestUseCase().onEach { response ->
             when (response) {
                 is Resource.Loading -> {
-                    Log.d(RETROFIT_TAG, "Loading")
                     showLoading()
                 }
                 is Resource.Success -> {
-                    Log.d(RETROFIT_TAG, response.data.toString())
-                    response.data?.matchingStatus?.let { status ->
-                        _homeStatusCode.postValue(getHomeStatusCode(status))
+                    if (response.data?.code == "1060") {
+                        showToast(R.string.toast_alert_input_info)
+                    } else {
+                        response.data?.let { dto ->
+                            matchingId = dto.matchingId
+                            partnerId = dto.partnerId
+                            partnerNickname = dto.partnerNickname
+                        }
+                        response.data?.matchingStatus?.let { status ->
+                            _homeStatusCode.postValue(getHomeStatusCode(status))
+                        }
                     }
                     dismissLoading()
                 }
@@ -171,6 +193,25 @@ class HomeViewModel(
             }
         }.launchIn(viewModelScope)
     }
+    private fun postExitChatRoom() {
+        matchingId?.let { id ->
+            exitChatRoomUseCase(id, 1).onEach { result ->
+                when (result) {
+                    is Resource.Loading -> {
+
+                    }
+                    is Resource.Success -> {
+                        getHomeInfo()
+                    }
+                    is Resource.Error -> {
+
+                    }
+                }
+
+            }.launchIn(viewModelScope)
+        }
+
+    }
 
 
     /** handler **/
@@ -215,6 +256,7 @@ class HomeViewModel(
     fun onClickCircleImageView(v: View) {
         getHomeInfoForNavigation() { status ->
             val statusCode = getHomeStatusCode(status)
+            Log.e("HOME", status)
             _time.value = startTime?.toLong()?.secondToLapseForHome()
             when (statusCode) {
                 -1 -> {

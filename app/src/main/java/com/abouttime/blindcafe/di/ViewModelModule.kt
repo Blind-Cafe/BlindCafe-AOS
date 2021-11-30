@@ -72,7 +72,7 @@ internal val viewModelModule = module {
     viewModel { MainViewModel(get()) }
 
     /** Main - Home **/
-    viewModel { HomeViewModel(get(), get(), get(), get()) }
+    viewModel { HomeViewModel(get(), get(), get(), get(), get()) }
     viewModel { CoffeeOrderViewModel(get(), get()) }
     viewModel { ExitViewModel() }
 

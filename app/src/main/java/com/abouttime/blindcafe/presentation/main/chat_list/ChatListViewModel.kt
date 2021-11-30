@@ -21,6 +21,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ChatListViewModel(
     private val getChatRoomsUseCase: GetChatRoomsUseCase,
@@ -91,7 +92,9 @@ class ChatListViewModel(
                 is Resource.Success -> {
                     Log.e(LogTag.FIRESTORE_TAG, "Messages ${result.data}")
                     if (!result.data.isNullOrEmpty()) {
-                        callback(result.data[0])
+                        withContext(Dispatchers.Main) {
+                            callback(result.data[0])
+                        }
                     }
                 }
                 is Resource.Error -> {
