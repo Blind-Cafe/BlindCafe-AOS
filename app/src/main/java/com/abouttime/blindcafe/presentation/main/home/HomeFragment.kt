@@ -25,12 +25,25 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
         binding = fragmentHomeBinding
         binding?.viewModel = viewModel
         binding?.lifecycleOwner = this
+        initBellImageView()
 
         observeHomeStatus()
         observeSavedNavigationData()
         observeGlobalHomeUpdateData()
+        observeNotReadMessageCntData()
+
     }
 
+    private fun initBellImageView() {
+        binding?.ivBell?.setOnClickListener {
+            if (binding?.ivBellOn?.visibility == View.VISIBLE) {
+                binding?.tvNotReadCnt?.visibility = View.VISIBLE
+                binding?.ivBellOn?.visibility = View.INVISIBLE
+            } else {
+                showToast(R.string.home_not_read_cnt_none)
+            }
+        }
+    }
 
     private fun observeHomeStatus() {
         viewModel.homeStatusCode.observe(viewLifecycleOwner) { statusCode ->
@@ -174,6 +187,12 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
     private fun observeGlobalHomeUpdateData() {
         GlobalLiveData.updateHomeState.observe(viewLifecycleOwner) {
             viewModel.getHomeInfo()
+        }
+    }
+
+    private fun observeNotReadMessageCntData() {
+        viewModel?.notReadMessageCnt.observe(viewLifecycleOwner) { cnt ->
+            binding?.tvNotReadCnt?.text = getString(R.string.home_notification_message).format(cnt)
         }
     }
 }

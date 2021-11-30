@@ -323,7 +323,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         when (message.type) {
             1, 2, 3, 4, 5, 6 -> {
                 viewModel.matchingId?.let { mId ->
-                    saveStringData(Pair("${mId}$LAST_READ_MESSAGE", message.timestamp?.seconds.toString()))
+                    saveStringData(Pair("${mId}${LAST_READ_MESSAGE}", message.timestamp?.seconds.toString()))
                 }
             }
         }

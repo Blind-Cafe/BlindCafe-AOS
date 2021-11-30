@@ -8,11 +8,14 @@ import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
-import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
+import com.abouttime.blindcafe.common.constants.FirebaseKey
+import com.abouttime.blindcafe.common.constants.FirebaseKey.COLLECTION_ROOMS
+import com.abouttime.blindcafe.common.constants.PreferenceKey.LAST_READ_MESSAGE
 import com.abouttime.blindcafe.common.ext.secondToLapseForHome
 import com.abouttime.blindcafe.data.server.dto.home.GetHomeInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.partner.GetPartnerProfileDto
 import com.abouttime.blindcafe.domain.model.ChatRoom
+import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.use_case.server.*
 import com.abouttime.blindcafe.presentation.main.MainFragmentDirections
 import com.abouttime.blindcafe.presentation.main.home.HomeState.FAILED_LEAVE_ROOM
@@ -26,6 +29,11 @@ import com.abouttime.blindcafe.presentation.main.home.HomeState.PROFILE_ACCEPT
 import com.abouttime.blindcafe.presentation.main.home.HomeState.PROFILE_OPEN
 import com.abouttime.blindcafe.presentation.main.home.HomeState.PROFILE_READY
 import com.abouttime.blindcafe.presentation.main.home.HomeState.WAIT
+import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -34,9 +42,9 @@ class HomeViewModel(
     private val postMatchingRequestUseCase: PostMatchingRequestUseCase,
     private val getPartnerProfileUseCase: GetPartnerProfileUseCase,
     private val getChatRoomInfoUseCase: GetChatRoomInfoUseCase,
-    private val exitChatRoomUseCase: DeleteExitChatRoomUseCase
+    private val exitChatRoomUseCase: DeleteExitChatRoomUseCase,
 
-) : BaseViewModel() {
+    ) : BaseViewModel() {
     private val _homeStatusCode: MutableLiveData<Int> = MutableLiveData<Int>(-1)
     val homeStatusCode: LiveData<Int> get() = _homeStatusCode
     private val _time: MutableLiveData<String> = MutableLiveData("00:00")
@@ -51,14 +59,52 @@ class HomeViewModel(
     var startTime: String? = null
     private var partnerId: Int? = null
 
+    private var isFirstListening: Boolean = true
+
     init {
         getHomeInfo()
     }
 
-    fun getMessageForNotReadMessageCnt() {
+    private fun getMessageForNotReadMessageCnt(matchingId: Int) {
+        if (isFirstListening.not()) return
+        isFirstListening = false
+        val roomCollectionRef = Firebase.firestore.collection(COLLECTION_ROOMS)
+        try {
+            val time = getStringData("${matchingId}${LAST_READ_MESSAGE}")?.toLong()
 
+            roomCollectionRef
+                .document(matchingId.toString())
+                .collection(FirebaseKey.SUB_COLLECTION_MESSAGES)
+                .orderBy("timestamp", Query.Direction.DESCENDING)
+                .addSnapshotListener { snapshot, error ->
+                    if (snapshot != null) {
+                        val messages = mutableListOf<Message>()
+
+                        snapshot.documentChanges.forEach { dc ->
+                            val m = dc.document.toObject<Message>()
+                            val mType = m.type
+                            val mTime = m.timestamp?.seconds
+                            mTime?.let { mt ->
+                                time?.let { t ->
+
+                                    if (dc.type == DocumentChange.Type.ADDED && t < mt && mType in 1..6) {
+                                        Log.e("messages", m.toString())
+                                        messages.add(dc.document.toObject<Message>())
+                                    }
+                                }
+                            }
+                        }
+
+                        _notReadMessageCnt.value?.let {
+                            _notReadMessageCnt.postValue(it + messages.size)
+                        }
+                    }
+                }
+
+        } catch (e: Exception) {
+
+        }
     }
-
 
 
     /** use cases **/
@@ -131,8 +177,13 @@ class HomeViewModel(
 
         }.launchIn(viewModelScope)
     }
+
     private fun handleHomeInfo(dto: GetHomeInfoDto) {
         matchingId = dto.matchingId
+        matchingId?.let { mId ->
+            getMessageForNotReadMessageCnt(mId)
+        }
+
         startTime = dto.startTime
         reason = dto.reason
         partnerNickname = dto.partnerNickname
@@ -212,7 +263,7 @@ class HomeViewModel(
                     result.data?.toChatRoom()?.let { cr ->
                         moveToChatFragment(cr)
                     }
-                   dismissLoading()
+                    dismissLoading()
                 }
                 is Resource.Error -> {
                     if (result.message != "400") {
@@ -227,6 +278,7 @@ class HomeViewModel(
             }
         }.launchIn(viewModelScope)
     }
+
     private fun postExitChatRoom() {
         matchingId?.let { id ->
             exitChatRoomUseCase(id, 1).onEach { result ->
@@ -270,7 +322,6 @@ class HomeViewModel(
             }
         }
     }
-
 
 
     /** mapping status **/
@@ -340,7 +391,7 @@ class HomeViewModel(
                         )
                     }
                 }
-                8,9,10 -> {
+                8, 9, 10 -> {
 
                 }
                 else -> {
@@ -375,9 +426,11 @@ class HomeViewModel(
         moveToDirections(MainFragmentDirections.actionMainFragmentToExitFragment(
             isAttacker = false,
             isReport = true,
-            title = "%s님이 불편함을 느껴 대화를 종료했습니다.\n아쉽지만 새로운 손님과 또 다른 추억을 쌓으러 가보죠!".format(partnerNickname)
+            title = "%s님이 불편함을 느껴 대화를 종료했습니다.\n아쉽지만 새로운 손님과 또 다른 추억을 쌓으러 가보죠!".format(
+                partnerNickname)
         ))
     }
+
     fun moveToExitFragmentByQuit(partnerNickname: String, reason: String) {
         moveToDirections(MainFragmentDirections.actionMainFragmentToExitFragment(
             isAttacker = false,
@@ -387,6 +440,7 @@ class HomeViewModel(
                 reason)
         ))
     }
+
     fun moveToExitFragmentByDismissProfileExchange(partnerNickname: String, reason: String) {
         moveToDirections(MainFragmentDirections.actionMainFragmentToExitFragment(
             isAttacker = false,
