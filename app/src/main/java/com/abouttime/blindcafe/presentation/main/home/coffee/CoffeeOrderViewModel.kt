@@ -7,19 +7,14 @@ import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
-import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NICKNAME
 import com.abouttime.blindcafe.data.server.dto.matching.PostDrinkDto
 import com.abouttime.blindcafe.domain.model.ChatRoom
-import com.abouttime.blindcafe.domain.model.Message
-import com.abouttime.blindcafe.domain.use_case.firebase.SendMessageUseCase
 import com.abouttime.blindcafe.domain.use_case.server.GetChatRoomInfoUseCase
 import com.abouttime.blindcafe.domain.use_case.server.PostDrinkUseCase
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 
 class CoffeeOrderViewModel(
     private val postDrinkUseCase: PostDrinkUseCase,
@@ -93,19 +88,14 @@ class CoffeeOrderViewModel(
                             showLoading()
                         }
                         is Resource.Success -> {
-                            if (response.data?.code != "1000") {
-                                showToast(R.string.matching_error)
-                                popDirections()
-                            } else {
-                                response.data?.startTime?.let { time ->
-                                    startTime = time
-                                }
-                                matchingId?.let { roomUid ->
-                                    getChatRoomInfo(roomUid)
-                                }
+                            dismissLoading()
+                            response.data?.startTime?.let { time ->
+                                startTime = time
+                            }
+                            matchingId?.let { roomUid ->
+                                getChatRoomInfo(roomUid)
                             }
 
-                            dismissLoading()
                         }
                         is Resource.Error -> {
                             if (response.message == "400") {
@@ -166,7 +156,6 @@ class CoffeeOrderViewModel(
     fun onClickBackButton() {
         popDirections()
     }
-
 
 
     fun onClickNextButton() {

@@ -352,7 +352,6 @@ class HomeViewModel(
                     postMatchingRequest()
                 }
                 1 -> { // 매칭 대기
-                    showToast(R.string.toast_matching_wait)
                     moveToConfirmDialogFragment(v)
                 }
                 2 -> { // 음료수 미선택

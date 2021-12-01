@@ -18,7 +18,6 @@ class PostDrinkUseCase(
         try {
             val response = repository.postDrink(matchingId, drink)
             emit(Resource.Success(data = response))
-
         } catch (e: Exception) {
             if (e is HttpException) {
                 val message = e.parseErrorBody()
