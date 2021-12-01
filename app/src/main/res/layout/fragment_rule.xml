@@ -51,19 +51,38 @@
     <TextView
         android:id="@+id/tv_cafe_rule_description"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="6dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="27dp"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:gravity="center"
         android:lineSpacingExtra="7sp"
         android:text="@string/rule_1"
         android:textSize="@dimen/font_size_15"
-        app:layout_constraintBottom_toTopOf="@id/tv_skip"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/tv_cafe_rule_sub_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintTop_toBottomOf="@id/di_indicator"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.1" />
+
+    <TextView
+        android:id="@+id/tv_cafe_rule_sub_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_cafe_rule_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="@dimen/font_size_13"
+        android:visibility="gone"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@id/tv_skip"
+        android:textColor="@color/gray_300"
+        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+        android:text="@string/rule_3_1"
+        android:layout_marginTop="6dp"
+        android:layout_marginHorizontal="16dp"/>
 
     <TextView
         android:id="@+id/tv_skip"

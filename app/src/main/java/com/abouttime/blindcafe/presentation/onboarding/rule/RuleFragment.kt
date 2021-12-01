@@ -2,6 +2,7 @@ package com.abouttime.blindcafe.presentation.onboarding.rule
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isGone
 import androidx.viewpager2.widget.ViewPager2
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
@@ -15,6 +16,7 @@ class RuleFragment : BaseFragment<RuleViewModel>(R.layout.fragment_rule) {
     private val viewPagerCallback = object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
             binding?.tvCafeRuleDescription?.setText(viewModel.rules[position])
+            binding?.tvCafeRuleSubDescription?.isGone = (position != 2)
             super.onPageSelected(position)
         }
     }
@@ -36,7 +38,6 @@ class RuleFragment : BaseFragment<RuleViewModel>(R.layout.fragment_rule) {
             vpImageContainer.adapter = adapter
             diIndicator.setViewPager2(vpImageContainer)
         }
-
 
 
     private fun initNextButtons(fragmentRuleBinding: FragmentRuleBinding) {
@@ -61,7 +62,6 @@ class RuleFragment : BaseFragment<RuleViewModel>(R.layout.fragment_rule) {
     private fun moveToLoginFragment() {
         moveToDirections(RuleFragmentDirections.actionRuleFragmentToLoginFragment())
     }
-
 
 
     override fun onStart() {

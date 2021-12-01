@@ -30,8 +30,9 @@
     <string name="rule_skip">Skip</string>
     <string name="rule_next">다음</string>
     <string name="rule_1">한번에 한 사람과 대화가 가능합니다.\n언제든지 새로운 상대를 만날 수 있습니다.\n\n미지의 상대와 3일간 대화를 해보세요</string>
-    <string name="rule_2">첫째날이 지나면 사진을\n둘째날이 지나면 음성을 전송할 수 있습니다.</string>
-    <string name="rule_3">첫째날이 지나면 사진을\n둘째날이 지나면 음성을 전송할 수 있습니다.</string>
+    <string name="rule_2">내가 선택한 관심사를 기반으로 매칭됩니다.\n즐거운 대화가 되도록 다양한 토픽이 전송됩니다.</string>
+    <string name="rule_3">시간이 지날수록 제한이 풀려갑니다.</string>
+    <string name="rule_3_1">첫째날이 지나면 사진을. 둘째날이 지나면 음성을 전송할 수 있습니다. 3일이 지나면 내 프로필을 교환할 수 있습니다.</string>
     <string name="rule_4">프로필을 교환한 그 분과 밝은 곳에서 대화하세요</string>
 
 
