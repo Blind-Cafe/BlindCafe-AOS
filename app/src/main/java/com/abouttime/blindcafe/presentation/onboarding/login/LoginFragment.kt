@@ -12,6 +12,7 @@ import com.abouttime.blindcafe.databinding.FragmentLoginBinding
 import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.util.Utility
+import com.kakao.sdk.user.UserApiClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -22,7 +23,6 @@ class LoginFragment : BaseFragment<LoginViewModel>(R.layout.fragment_login) {
 
     private var binding: FragmentLoginBinding? = null
     override val viewModel: LoginViewModel by viewModel()
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,7 +38,7 @@ class LoginFragment : BaseFragment<LoginViewModel>(R.layout.fragment_login) {
 
     private fun observeData(fragmentLoginBinding: FragmentLoginBinding) {
         viewModel.loginStateEvent.observe(viewLifecycleOwner) { state ->
-            when(state) {
+            when (state) {
                 LoginState.Uninitialized -> {
                     initKakaoLoginButton(fragmentLoginBinding)
                 }
@@ -63,10 +63,12 @@ class LoginFragment : BaseFragment<LoginViewModel>(R.layout.fragment_login) {
 
     private fun loginWithKakao() = lifecycleScope.launch(Dispatchers.Main) {
         val deviceId = FirebaseMessaging.getInstance().token.await()
-        val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
+
+        val callback2: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
                 val keyHash: String = Utility.getKeyHash(requireActivity() /* context */)
-                Log.e(LogTag.LOGIN_TAG, "로그인 실패 ${keyHash}", error)
+                Log.e(LogTag.LOGIN_TAG, "로그인 실패 $keyHash", error)
+
             } else if (token != null) {
                 Log.i(LogTag.LOGIN_TAG, "로그인 성공 ${token.accessToken}")
                 viewModel.postKakaoToken(
@@ -77,7 +79,25 @@ class LoginFragment : BaseFragment<LoginViewModel>(R.layout.fragment_login) {
                 )
             }
         }
-        viewModel.loginWithKakao(context = requireActivity(),callback = callback)
+
+
+        val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
+            if (error != null) {
+                val keyHash: String = Utility.getKeyHash(requireActivity() /* context */)
+                Log.e(LogTag.LOGIN_TAG, "로그인 실패 ${keyHash}", error)
+                UserApiClient.instance.loginWithKakaoAccount(requireContext(), callback = callback2)
+
+            } else if (token != null) {
+                Log.i(LogTag.LOGIN_TAG, "로그인 성공 ${token.accessToken}")
+                viewModel.postKakaoToken(
+                    KakaoTokenDto(
+                        token.accessToken,
+                        deviceId
+                    )
+                )
+            }
+        }
+        viewModel.loginWithKakao(context = requireActivity(), callback = callback)
     }
 
     private fun moveToAgreementFragment() {

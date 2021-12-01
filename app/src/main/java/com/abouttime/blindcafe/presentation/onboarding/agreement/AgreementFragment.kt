@@ -24,8 +24,8 @@ class AgreementFragment : BaseFragment<AgreementViewModel>(R.layout.fragment_agr
 
 
 
-        initCheckButtons(fragmentAgreementBinding)
-        initNextButton(fragmentAgreementBinding)
+        //initCheckButtons(fragmentAgreementBinding)
+        //initNextButton(fragmentAgreementBinding)
     }
 
     private fun initCheckButtons(fragmentAgreementBinding: FragmentAgreementBinding) =
@@ -36,18 +36,18 @@ class AgreementFragment : BaseFragment<AgreementViewModel>(R.layout.fragment_agr
                 ivCheck3,
                 ivCheck4
             )
-            checkImageViews.forEachIndexed { i, ivCheck ->
-                ivCheck.setOnClickListener {
-                    if (viewModel!!.checks[i]) {
-                        viewModel!!.checks[i] = false
-                        ivCheck.setColorFilter(resources.getColor(R.color.check_color, null))
-                    } else {
-                        viewModel!!.checks[i] = true
-                        ivCheck.setColorFilter(resources.getColor(R.color.checked_color, null))
-                    }
-                    viewModel?.isAllChecked()
-                }
-            }
+//            checkImageViews.forEachIndexed { i, ivCheck ->
+//                ivCheck.setOnClickListener {
+//                    if (viewModel!!.checks[i]) {
+//                        viewModel!!.checks[i] = false
+//                        ivCheck.setColorFilter(resources.getColor(R.color.check_color, null))
+//                    } else {
+//                        viewModel!!.checks[i] = true
+//                        ivCheck.setColorFilter(resources.getColor(R.color.checked_color, null))
+//                    }
+//                    viewModel?.isAllChecked()
+//                }
+//            }
         }
 
 
@@ -56,7 +56,6 @@ class AgreementFragment : BaseFragment<AgreementViewModel>(R.layout.fragment_agr
             tvNext.setOnClickListener {
                 viewModel?.onClickNextButton()
             }
-
         }
 
 

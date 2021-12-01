@@ -24,7 +24,7 @@
         android:backgroundTint="@color/gray_900"
         android:orientation="vertical"
         android:paddingHorizontal="18dp"
-        android:paddingTop="30dp">
+        android:paddingTop="28dp">
 
         <TextView
             android:id="@+id/tv_title"
@@ -49,15 +49,13 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="27dp"
             android:background="@color/steel" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="13dp"
             android:gravity="center"
             android:orientation="horizontal"
             android:weightSum="2">
@@ -69,7 +67,8 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:gravity="center"
-                android:paddingVertical="11dp"
+                android:paddingTop="25dp"
+                android:paddingBottom="25dp"
                 android:text="@string/report_confirm_no"
                 android:textColor="@color/gray_300"
                 android:textSize="@dimen/dialog_reason" />
@@ -81,7 +80,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:gravity="center"
-                android:paddingVertical="11dp"
+                android:paddingVertical="25dp"
                 android:text="@string/report_confirm_yes"
                 android:textColor="@color/main"
                 android:textSize="@dimen/dialog_reason" />

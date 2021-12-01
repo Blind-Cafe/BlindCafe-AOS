@@ -32,7 +32,9 @@ class InterestSubViewModel(
     private val _interests = SingleLiveData<List<Interest>>()
     val interests: SingleLiveData<List<Interest>> get() = _interests
 
-    val selectedSubInterests = Array(3) { mutableListOf<String>() }
+    var selectedSubInterests = Array(3) { mutableListOf<String>() }
+
+
 
     var i1 = 0
     var i2 = 0
@@ -75,7 +77,8 @@ class InterestSubViewModel(
                     }
                     is Resource.Success -> {
                         result.data?.interests?.let {
-                            Log.e(RETROFIT_TAG, "$it")
+                            selectedSubInterests = Array(3) { mutableListOf<String>() }
+                            _nextButton.value = false
                             _interests.postValue(it)
                         }
                         dismissLoading()

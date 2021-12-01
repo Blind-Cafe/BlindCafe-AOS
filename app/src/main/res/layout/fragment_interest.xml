@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View.OnClickListener" />
+        <import type="android.view.View"/>
+        <import type="androidx.core.content.ContextCompat" />
+        <variable
+            name="viewModel"
+            type="com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest.InterestViewModel" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black">
@@ -13,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="27dp"
+        android:onClick="@{() -> viewModel.onClickBackButton()}"
         android:background="@color/transparent"
         android:src="@drawable/bt_back"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,6 +111,7 @@
                 app:layout_constraintEnd_toStartOf="@id/fl_interest_container_2"
                 app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="parent"
+                android:onClick="@{viewModel::onClickInterestItem}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="spread">
 
@@ -108,7 +120,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/bt_interest_1" />
+                    android:src="@drawable/bt_interest_large_1"
+                    />
             </FrameLayout>
 
 
@@ -117,6 +130,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginEnd="@dimen/interest_horizontal_margin"
+                android:onClick="@{viewModel::onClickInterestItem}"
                 android:background="@drawable/bg_interest_disabled"
                 app:layout_constraintBottom_toBottomOf="@id/fl_interest_container_1"
                 app:layout_constraintDimensionRatio="1:1"
@@ -129,7 +143,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/bt_interest_2"
+                    android:src="@drawable/bt_interest_large_2"
                     app:tint="@color/disabled" />
             </FrameLayout>
 
@@ -138,6 +152,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/bg_interest_disabled"
+                android:onClick="@{viewModel::onClickInterestItem}"
                 app:layout_constraintBottom_toBottomOf="@id/fl_interest_container_1"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -149,7 +164,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/bt_interest_3"
+                    android:src="@drawable/bt_interest_large_3"
                     app:tint="@color/disabled" />
             </FrameLayout>
 
@@ -161,6 +176,7 @@
                 android:layout_marginEnd="@dimen/interest_horizontal_margin"
                 android:layout_marginBottom="@dimen/interest_vertical_margin"
                 android:background="@drawable/bg_interest_disabled"
+                android:onClick="@{viewModel::onClickInterestItem}"
                 app:layout_constraintBottom_toTopOf="@id/fl_interest_container_7"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@id/fl_interest_container_5"
@@ -172,7 +188,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/bt_interest_4"
+                    android:src="@drawable/bt_interest_large_4"
                     app:tint="@color/disabled" />
             </FrameLayout>
 
@@ -183,6 +199,7 @@
                 android:layout_height="0dp"
                 android:layout_marginEnd="@dimen/interest_horizontal_margin"
                 android:background="@drawable/bg_interest_disabled"
+                android:onClick="@{viewModel::onClickInterestItem}"
                 app:layout_constraintBottom_toBottomOf="@id/fl_interest_container_4"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@id/fl_interest_container_6"
@@ -194,7 +211,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/bt_interest_5"
+                    android:src="@drawable/bt_interest_large_5"
                     app:tint="@color/disabled" />
             </FrameLayout>
 
@@ -204,6 +221,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/bg_interest_disabled"
+                android:onClick="@{viewModel::onClickInterestItem}"
                 app:layout_constraintBottom_toBottomOf="@id/fl_interest_container_4"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -215,7 +233,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/bt_interest_6"
+                    android:src="@drawable/bt_interest_large_6"
                     app:tint="@color/disabled" />
             </FrameLayout>
 
@@ -228,6 +246,7 @@
                 android:background="@drawable/bg_interest_disabled"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="1:1"
+                android:onClick="@{viewModel::onClickInterestItem}"
                 app:layout_constraintEnd_toStartOf="@id/fl_interest_container_8"
                 app:layout_constraintStart_toStartOf="@id/fl_interest_container_1"
                 app:layout_constraintTop_toBottomOf="@id/fl_interest_container_4">
@@ -237,7 +256,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/bt_interest_7"
+                    android:src="@drawable/bt_interest_large_7"
                     app:tint="@color/disabled" />
             </FrameLayout>
 
@@ -250,6 +269,7 @@
                 android:background="@drawable/bg_interest_disabled"
                 app:layout_constraintBottom_toBottomOf="@id/fl_interest_container_7"
                 app:layout_constraintDimensionRatio="1:1"
+                android:onClick="@{viewModel::onClickInterestItem}"
                 app:layout_constraintEnd_toStartOf="@id/fl_interest_container_9"
                 app:layout_constraintStart_toEndOf="@id/fl_interest_container_7"
                 app:layout_constraintTop_toTopOf="@id/fl_interest_container_7">
@@ -259,7 +279,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/bt_interest_8"
+                    android:src="@drawable/bt_interest_large_8"
                     app:tint="@color/disabled" />
             </FrameLayout>
 
@@ -271,6 +291,7 @@
                 android:background="@drawable/bg_interest_disabled"
                 app:layout_constraintBottom_toBottomOf="@id/fl_interest_container_7"
                 app:layout_constraintDimensionRatio="1:1"
+                android:onClick="@{viewModel::onClickInterestItem}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/fl_interest_container_8"
                 app:layout_constraintTop_toTopOf="@id/fl_interest_container_7">
@@ -280,7 +301,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/bt_interest_9"
+                    android:src="@drawable/bt_interest_large_9"
                     app:tint="@color/disabled" />
             </FrameLayout>
 
@@ -295,6 +316,7 @@
             android:gravity="center"
             android:text="@string/profile_setting_next"
             android:textSize="@dimen/font_size_15"
+            android:onClick="@{() -> viewModel.onClickNextButton()}"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="32dp"
             app:layout_constraintDimensionRatio="296:48"
@@ -306,3 +328,5 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

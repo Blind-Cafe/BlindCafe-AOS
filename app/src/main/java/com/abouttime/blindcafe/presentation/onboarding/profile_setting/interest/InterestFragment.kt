@@ -16,24 +16,57 @@ class InterestFragment : BaseFragment<InterestViewModel>(R.layout.fragment_inter
         super.onViewCreated(view, savedInstanceState)
         val fragmentInterestBinding = FragmentInterestBinding.bind(view)
         binding = fragmentInterestBinding
+        binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
 
-        initBackButton(fragmentInterestBinding)
-        initNextButton(fragmentInterestBinding)
-        initInterestsButton(fragmentInterestBinding)
+        observeSelectedInterestIdxData(fragmentInterestBinding)
     }
 
-    private fun initBackButton(fragmentInterestBinding: FragmentInterestBinding) = with(fragmentInterestBinding) {
-        ivBack.setOnClickListener {
-            popOneDirections()
+    private fun observeSelectedInterestIdxData(fragmentInterestBinding: FragmentInterestBinding) =
+        with(fragmentInterestBinding) {
+            val containers = arrayOf(
+                flInterestContainer1,
+                flInterestContainer2,
+                flInterestContainer3,
+                flInterestContainer4,
+                flInterestContainer5,
+                flInterestContainer6,
+                flInterestContainer7,
+                flInterestContainer8,
+                flInterestContainer9
+            )
+            val icons = arrayOf(
+                ivInterest1,
+                ivInterest2,
+                ivInterest3,
+                ivInterest4,
+                ivInterest5,
+                ivInterest6,
+                ivInterest7,
+                ivInterest8,
+                ivInterest9,
+            )
+            viewModel?.selectedItem?.observe(viewLifecycleOwner) { selectedItemIdx ->
+
+                for (i in 0..8) {
+                    if (selectedItemIdx.contains(i)) {
+                        containers[i].setBackgroundResource(R.drawable.bg_interest_enabled)
+                        icons[i].setColorFilter(getColorByResId(R.color.interest_icon_enabled))
+                    } else {
+                        containers[i].setBackgroundResource(R.drawable.bg_interest_disabled)
+                        icons[i].setColorFilter(getColorByResId(R.color.interest_icon_disabled))
+                    }
+                }
+                if (viewModel?.canEnableNextButton() == true) {
+                    tvNext.setBackgroundResource(R.color.main)
+                } else {
+                    tvNext.setBackgroundResource(R.color.button_disabled)
+                }
+            }
         }
-    }
 
-    private fun initNextButton(fragmentInterestBinding: FragmentInterestBinding) {
-        fragmentInterestBinding.tvNext.setOnClickListener {
-            viewModel.onClickNextButton()
-        }
-    }
 
+/*
     private fun initInterestsButton(fragmentInterestBinding: FragmentInterestBinding) =
         with(fragmentInterestBinding) {
             val containers = arrayOf(
@@ -69,8 +102,7 @@ class InterestFragment : BaseFragment<InterestViewModel>(R.layout.fragment_inter
                             if (selectedItemIdx.size < 3) {
                                 selectedItemIdx.add(i)
                                 containers[i].setBackgroundResource(R.drawable.bg_interest_enabled)
-                                icons[i].setColorFilter(getColorByResId(R.color.interest_icon_enabled))
-                            } else {
+                                icons[i].setColorFilter(getColorByResId(R.color.interest_icon_enabled) else {
                                 showToast(R.string.interest_toast_up_to_3)
                             }
                         }
@@ -85,5 +117,8 @@ class InterestFragment : BaseFragment<InterestViewModel>(R.layout.fragment_inter
                 }
             }
         }
+
+
+ */
 
 }

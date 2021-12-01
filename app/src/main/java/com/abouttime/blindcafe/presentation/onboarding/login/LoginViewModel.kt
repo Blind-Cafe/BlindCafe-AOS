@@ -41,7 +41,7 @@ class LoginViewModel(
     }
 
 
-    fun postKakaoToken(kakaoTokenDto: KakaoTokenDto) = viewModelScope.launch(Dispatchers.IO) {
+    fun postKakaoToken(kakaoTokenDto: KakaoTokenDto) {
 
 
         postKakaoTokenUseCase(
@@ -87,13 +87,13 @@ class LoginViewModel(
                     dismissLoading()
                 }
                 is Resource.Error -> {
-                    dismissLoading()
                     if (result.message == "400") {
                         showToast(R.string.toast_fail)
                     } else {
                         showToast(R.string.toast_check_internet)
                     }
                     _loginStateEvent.postValue(LoginState.Error)
+                    dismissLoading()
                 }
             }
         }.launchIn(viewModelScope)

@@ -92,7 +92,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|center_vertical"
-                android:src="@drawable/bt_agreement_check" />
+                android:onClick="@{viewModel::onClickCheckButton}"
+                android:src="@{viewModel.checks[0] ?  @drawable/bt_checked : @drawable/bt_check}" />
 
         </LinearLayout>
 
@@ -103,7 +104,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -131,8 +132,10 @@
                 android:id="@+id/iv_check_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{viewModel::onClickCheckButton}"
+                android:src="@{viewModel.checks[1] ?  @drawable/bt_checked : @drawable/bt_check}"
                 android:layout_gravity="end|center_vertical"
-                android:src="@drawable/bt_agreement_check" />
+               />
 
         </LinearLayout>
 
@@ -143,7 +146,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -172,7 +175,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|center_vertical"
-                android:src="@drawable/bt_agreement_check" />
+                android:onClick="@{viewModel::onClickCheckButton}"
+                android:src="@{viewModel.checks[2] ?  @drawable/bt_checked : @drawable/bt_check}" />
 
         </LinearLayout>
 
@@ -183,7 +187,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -212,7 +216,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|center_vertical"
-                android:src="@drawable/bt_agreement_check" />
+                android:onClick="@{viewModel::onClickCheckButton}"
+                android:src="@{viewModel.checks[3] ?  @drawable/bt_checked : @drawable/bt_check}" />
 
         </LinearLayout>
 
@@ -227,6 +232,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/bg_rounding_3dp"
+        android:onClick="@{() -> viewModel.onClickNextButton()}"
         android:backgroundTint="@{viewModel.enableNextButton ? @color/enabled : @color/brownish_grey}"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:gravity="center"
