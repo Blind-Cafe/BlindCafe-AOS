@@ -330,6 +330,7 @@
         android:name="com.abouttime.blindcafe.presentation.onboarding.signin.SigninFragment"
         android:label="SigninFragment"
         tools:layout="@layout/fragment_signin">
+
         <action
             android:id="@+id/action_signinFragment_to_mainFragment"
             app:destination="@id/mainFragment"

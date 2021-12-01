@@ -343,6 +343,7 @@
     <string name="exchange_open_alert">7시간 뒤 자동으로 프로필이 공개됩니다. 프로필이 완성될 수록 %s님과 대화할 수 있는 가능성이 높아져요!</string>
 
     <string name="toast_alert_input_info">매칭 요청하기에 충분한 정보가 입력되어 있지 않습니다.</string>
+    <string name="toast_alert_input_first_info">가입하기에 충분한 정보가 입력되어 있지 않습니다.</string>
 
 
     <string-array name="location_main">

@@ -75,7 +75,6 @@
             android:backgroundTint="@color/enabled"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:gravity="center"
-            android:onClick="@{() -> viewModel.onClickNextButton()}"
             android:paddingVertical="16dp"
             android:text="@string/signin_next"
             android:textColor="@color/white"

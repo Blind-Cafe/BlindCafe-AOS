@@ -62,6 +62,7 @@ class LoginFragment : BaseFragment<LoginViewModel>(R.layout.fragment_login) {
     }
 
     private fun loginWithKakao() = lifecycleScope.launch(Dispatchers.Main) {
+
         val deviceId = FirebaseMessaging.getInstance().token.await()
 
         val callback2: (OAuthToken?, Throwable?) -> Unit = { token, error ->

@@ -39,23 +39,6 @@ abstract class BaseFragment<VM : BaseViewModel>(layoutId: Int) : Fragment(layout
 
 
 
-//    private fun observeLoadingEvent() {
-//        viewModel.loadingEvent.observe(viewLifecycleOwner) {
-//            if (it) {
-//                showLoadingDialog()
-//            } else {
-//                dismissLoadingDialog()
-//            }
-//        }
-//    }
-//
-//    private fun showLoadingDialog() {
-//
-//    }
-//
-//    protected fun dismissLoadingDialog() {
-//
-//    }
 
 
     private fun observeToastEvent() {

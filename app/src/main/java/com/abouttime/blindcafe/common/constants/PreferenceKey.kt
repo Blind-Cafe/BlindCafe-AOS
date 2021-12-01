@@ -9,6 +9,10 @@ object PreferenceKey {
     const val MATCHING_SEX = "matching_sex"
     const val USER_ID ="user_id"
     const val INFO_INPUT = "info_input"
+    const val MAIN_INTEREST = "MAIN_INTEREST"
+    const val SUB_INTEREST1 = "SUB_INTEREST1"
+    const val SUB_INTEREST2 = "SUB_INTEREST2"
+    const val SUB_INTEREST3 = "SUB_INTEREST3"
 
     const val MATCHING_ID = "matching_id"
 

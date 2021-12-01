@@ -1,6 +1,5 @@
 package com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest_detail
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -8,22 +7,20 @@ import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.util.SingleLiveData
 import com.abouttime.blindcafe.common.base.BaseViewModel
-import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.constants.PreferenceKey
-import com.abouttime.blindcafe.common.constants.PreferenceKey.INFO_INPUT
+import com.abouttime.blindcafe.common.constants.PreferenceKey.MAIN_INTEREST
+import com.abouttime.blindcafe.common.constants.PreferenceKey.SUB_INTEREST1
+import com.abouttime.blindcafe.common.constants.PreferenceKey.SUB_INTEREST2
+import com.abouttime.blindcafe.common.constants.PreferenceKey.SUB_INTEREST3
 import com.abouttime.blindcafe.data.server.dto.interest.Interest
 import com.abouttime.blindcafe.data.server.dto.user_info.UserInterest
 import com.abouttime.blindcafe.data.server.dto.user_info.PostUserInfoDto
 import com.abouttime.blindcafe.domain.use_case.server.GetInterestUseCase
-import com.abouttime.blindcafe.domain.use_case.server.PostUserInfoUseCase
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 
 class InterestSubViewModel(
     private val getInterestUseCase: GetInterestUseCase,
-    private val postUserInfoUseCase: PostUserInfoUseCase
 ): BaseViewModel() {
 
     private val _nextButton = MutableLiveData(false)
@@ -97,70 +94,9 @@ class InterestSubViewModel(
     }
 
 
-
-    fun postUserInfo() = viewModelScope.launch(Dispatchers.IO) {
-
-        val age = getStringData(PreferenceKey.AGE)?.toInt()
-        val myGender = getStringData(PreferenceKey.SEX)
-        val nickname = getStringData(PreferenceKey.NICKNAME)
-        val partnerGender = getStringData(PreferenceKey.MATCHING_SEX)
-
-        val dto =  PostUserInfoDto(
-            age = age,
-            myGender = myGender,
-            nickname = nickname,
-            partnerGender = partnerGender,
-            userInterests = listOf(
-                UserInterest(
-                    main = i1,
-                    sub = selectedSubInterests[0]
-                ),
-                UserInterest(
-                    main = i2,
-                    sub =  selectedSubInterests[1]
-                ),
-                UserInterest(
-                    main = i3,
-                    sub =  selectedSubInterests[2]
-                )
-            )
-        )
-
-        Log.d(RETROFIT_TAG, dto.toString())
-
-        postUserInfoUseCase(
-            dto
-        ).onEach { response ->
-            when (response){
-                is Resource.Loading -> {
-                    showLoading()
-                }
-                is Resource.Success -> {
-                    Log.d(RETROFIT_TAG, "Success ${response.data?.code} ${response.data?.message}")
-                    val code = response.data?.code?.toInt()
-                    if (code == 1000) {
-                        saveStringData(Pair(INFO_INPUT, response.data.code))
-                        moveToSigninFragment()
-                    }
-                    dismissLoading()
-                }
-                is Resource.Error -> {
-                    if (response.message == "400") {
-                        showToast(R.string.toast_fail)
-                    } else {
-                        showToast(R.string.toast_check_internet)
-                    }
-                    dismissLoading()
-                }
-            }
-
-        }.launchIn(viewModelScope)
-
-    }
-
     fun onClickNextButton() {
         if (canEnableNextButton()) {
-            postUserInfo()
+            moveToSigninFragment()
         } else {
             showToast(R.string.profile_setting_toast_select_sub_interest)
         }
@@ -172,6 +108,18 @@ class InterestSubViewModel(
 
 
     private fun moveToSigninFragment() {
-        moveToDirections(InterestSubFragmentDirections.actionInterestSubFragmentToSigninFragment())
+        if (i1 != 0 && i2 != 0 && i3 != 0) {
+            val mainString = "$i1,$i2,$i3"
+            saveStringData(Pair(MAIN_INTEREST, mainString))
+
+            val subInterest1 = selectedSubInterests[0].joinToString(",") { it }
+            val subInterest2 = selectedSubInterests[1].joinToString(",") { it }
+            val subInterest3 = selectedSubInterests[2].joinToString(",") { it }
+            saveStringData(Pair(SUB_INTEREST1, subInterest1))
+            saveStringData(Pair(SUB_INTEREST2, subInterest2))
+            saveStringData(Pair(SUB_INTEREST3, subInterest3))
+            moveToDirections(InterestSubFragmentDirections.actionInterestSubFragmentToSigninFragment())
+        }
+
     }
 }
