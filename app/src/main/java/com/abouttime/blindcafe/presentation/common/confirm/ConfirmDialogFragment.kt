@@ -37,7 +37,6 @@ class ConfirmDialogFragment :
             tvSubtitle.text = args.subtitle ?: ""
             tvNo.text = args.no ?: "취소"
             tvYes.text = args.yes ?: "확인"
-
         }
 
     private fun bindData() {
@@ -92,6 +91,7 @@ class ConfirmDialogFragment :
     }
 
     private fun handleLogout() {
+        binding?.tvSubtitle?.isGone = true
         handleYesButton { viewModel.logout() }
         handleNoButton { popOneDirections() }
     }

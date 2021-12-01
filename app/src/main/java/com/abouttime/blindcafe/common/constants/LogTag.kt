@@ -8,6 +8,7 @@ object LogTag {
     const val FIRESTORE_TAG = "fire_store"
     const val CHATTING_TAG = "chatting_tag"
     const val RETROFIT_TAG = "retrofit_tag"
+    const val ERROR_TAG =  "ERROR_TAG\n"
     const val BOTTOM_SHEET = "bottom_sheet"
     const val PAGING_TAG = "paging_tag"
     const val LIFECYCLE_TAG = "lifecylce_tag"

@@ -35,16 +35,13 @@ class ConfirmViewModel(
                     showLoading()
                 }
                 is Resource.Success -> {
-                    Log.e(RETROFIT_TAG, result.data.toString())
                     dismissLoading()
                     popDirections()
                 }
                 is Resource.Error -> {
-                    Log.e(RETROFIT_TAG, result.message.toString())
-                    if (result.message == "400") {
+                    if (result.data?.code == "400") {
                         showToast(R.string.toast_fail)
                     } else {
-                        Log.e("navigation", "취소하기 누름")
                         saveNavigationData(Pair(CONFIRM_MATCHING_CANCEL, CONFIRM_YES))
                         popDirections()
                     }
@@ -75,7 +72,7 @@ class ConfirmViewModel(
                     dismissLoading()
                 }
                 is Resource.Error -> {
-                    if (result.message == "400") {
+                    if (result.data?.code == "400") {
                         showToast(R.string.toast_fail)
                     } else {
                         showToast(R.string.toast_check_internet)
@@ -95,6 +92,7 @@ class ConfirmViewModel(
         ))
     }
 
+    /** 프로필 교환 거절 **/
     fun dismissMatching(matchingId: Int, reason: Int, partnerNickname: String, startTime: Int) {
         deleteDismissMatchingUseCase(
             matchingId = matchingId,

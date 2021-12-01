@@ -3,6 +3,7 @@ package com.abouttime.blindcafe.background.service
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.NotificationManager.IMPORTANCE_HIGH
+import android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_ONE_SHOT
 import android.content.Context
@@ -80,7 +81,7 @@ class FirebaseService() : FirebaseMessagingService() {
             sharedPreferences.getString("${matchingId}${NOTIFICATION_ROOM}", null)
 
 
-        if (blockCurrentRoomNotification == NOTIFICATION_FALSE) return // 현재 채팅방에 있다면 푸시를 받지 않는다
+        if (blockCurrentRoomNotification == NOTIFICATION_FALSE && type == "T") return // 현재 채팅방에 있다면 푸시를 받지 않는다
         if (blockEntireNotification == NOTIFICATION_FALSE) return
         if (blockMessageNotification == NOTIFICATION_FALSE && type == "T") return
         if (blockSpecificNotification == NOTIFICATION_FALSE && matchingId != null) return
@@ -91,7 +92,7 @@ class FirebaseService() : FirebaseMessagingService() {
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle(title)
             .setContentText(body)
-            .setSmallIcon(R.drawable.ic_logo)
+            .setSmallIcon(R.mipmap.ic_launcher_blind_cafe_round)
             .setAutoCancel(true)
             .setContentIntent(pendingIntent)
             .build()

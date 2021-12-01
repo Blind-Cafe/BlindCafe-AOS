@@ -20,6 +20,7 @@
     <string name="toast_select_reason">사유를 먼저 선택해주세요</string>
     <string name="toast_fail">요청에 실패했습니다</string>
     <string name="interest">관심사</string>
+    <string name="toast_topic_exhaust">준비된 토픽이 다 소진되었습니다.</string>
 
     <string name="toast_input_reason">이유를 한 가지 선택해주세요</string>
 

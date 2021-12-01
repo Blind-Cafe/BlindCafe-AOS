@@ -147,7 +147,7 @@ class HomeViewModel(
                 is Resource.Success -> {
                     if (resource.data?.code != "1000") {
                         showToast(R.string.matching_error)
-                        postExitChatRoom()
+                        //postExitChatRoom()
                     } else {
                         resource.data?.let { dto ->
                             handleHomeInfo(dto)
@@ -248,6 +248,7 @@ class HomeViewModel(
         }
     }
 
+    /** 3 - Matching 상태에서 클릭하면 호출 **/
     private fun getChatRoomInfo(matchingId: Int) {
         getChatRoomInfoUseCase(matchingId).onEach { result ->
             when (result) {

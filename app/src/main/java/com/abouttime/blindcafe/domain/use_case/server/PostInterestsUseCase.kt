@@ -21,7 +21,7 @@ class PostInterestsUseCase(
         } catch (e: Exception) {
             if (e is HttpException) {
                 val message = e.parseErrorBody()
-                emit(Resource.Error(message = message.toString()))
+                emit(Resource.Error(message = message.code.toString()))
             } else {
                 emit(Resource.Error<BaseResponse?>("예상치 못한 에러발생\n $e"))
             }

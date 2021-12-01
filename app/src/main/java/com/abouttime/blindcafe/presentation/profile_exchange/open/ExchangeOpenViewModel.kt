@@ -121,8 +121,6 @@ class ExchangeOpenViewModel(
                 }
             }.launchIn(viewModelScope)
         }
-
-
     }
 
     /** handler **/
