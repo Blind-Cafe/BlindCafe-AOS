@@ -126,10 +126,9 @@ class HomeViewModel(
                     dismissLoading()
                 }
                 is Resource.Error -> {
-                    if (resource.message != "400") {
+                    if (resource.message == "400") {
                         showToast(R.string.matching_error)
                     } else if (resource.message != "1000") {
-                        postExitChatRoom()
                         showToast(R.string.toast_check_internet)
                     }
                     dismissLoading()
@@ -161,7 +160,7 @@ class HomeViewModel(
                     dismissLoading()
                 }
                 is Resource.Error -> {
-                    if (resource.message != "400") {
+                    if (resource.message == "400") {
                         showToast(R.string.matching_error)
                     } else {
                         showToast(R.string.toast_check_internet)

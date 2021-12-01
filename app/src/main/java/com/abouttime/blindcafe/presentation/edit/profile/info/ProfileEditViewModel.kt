@@ -6,10 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
-import com.abouttime.blindcafe.common.util.SingleLiveData
 import com.abouttime.blindcafe.common.base.BaseViewModel
-import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NICKNAME
+import com.abouttime.blindcafe.common.util.SingleLiveData
 import com.abouttime.blindcafe.data.server.dto.user_info.edit.info.PutProfileInfoDto
 import com.abouttime.blindcafe.domain.use_case.server.GetProfileInfoUseCase
 import com.abouttime.blindcafe.domain.use_case.server.PutProfileInfoUseCase
@@ -18,9 +17,8 @@ import kotlinx.coroutines.flow.onEach
 
 class ProfileEditViewModel(
     private val getProfileInfoUseCase: GetProfileInfoUseCase,
-    private val putProfileInfoUseCase: PutProfileInfoUseCase
-): BaseViewModel() {
-
+    private val putProfileInfoUseCase: PutProfileInfoUseCase,
+) : BaseViewModel() {
 
 
     private val _nickname = MutableLiveData<String>()
@@ -37,7 +35,6 @@ class ProfileEditViewModel(
 
     private val _selectedPartnerSex = MutableLiveData<Int>(0)
     val selectedPartnerSex: LiveData<Int> get() = _selectedPartnerSex
-
 
 
     private val _canEnableNext = MutableLiveData<Boolean>(false)
@@ -57,7 +54,9 @@ class ProfileEditViewModel(
     private fun getProfileInfo() {
         getProfileInfoUseCase().onEach { result ->
             when (result) {
-                is Resource.Loading -> { showLoading() }
+                is Resource.Loading -> {
+                    showLoading()
+                }
                 is Resource.Success -> {
                     result.data?.let { dto ->
                         _nickname.postValue(dto.nickname ?: "")
@@ -72,15 +71,15 @@ class ProfileEditViewModel(
                             }
                         )
                         _selectedPartnerSex.postValue(
-                            when(dto.partnerGender) {
+                            when (dto.partnerGender) {
                                 "M" -> 2
                                 "F" -> 1
                                 "N" -> 3
                                 else -> 0
                             }
                         )
-                        dto.region?.let {
-                            _location.postValue(dto.region)
+                        dto.region?.let { region ->
+                            _location.postValue(region)
                         }
 
                         _canEnableNext.postValue(!dto.region.isNullOrEmpty())
@@ -101,7 +100,7 @@ class ProfileEditViewModel(
 
     private fun putProfileInfo(putProfileInfoDto: PutProfileInfoDto) {
         putProfileInfoUseCase(putProfileInfoDto).onEach { result ->
-            when(result) {
+            when (result) {
                 is Resource.Loading -> {
                     showLoading()
                 }
@@ -124,25 +123,30 @@ class ProfileEditViewModel(
     }
 
 
-
     /** onClick **/
     fun onClickCompleteButton() {
         if (isCorrectNickname()) {
-            val state = if (_location.value.isNullOrEmpty()) null else _location.value?.split(" ")?.get(0)
-            val region = if (_location.value.isNullOrEmpty()) null else _location.value?.split(" ")?.get(1)
-            val dto = PutProfileInfoDto(
-                nickname = _nickname.value!!,
-                partnerGender = when(_selectedPartnerSex.value) {
-                    1 -> "F"
-                    2 -> "M"
-                    3 -> "N"
-                    else -> ""
-                },
-                state = state,
-                region = region
-            )
+            _location.value?.let { value ->
+                val state =
+                    if (value.split(" ").size < 2) null else _location.value?.split(" ")
+                        ?.get(0)
+                val region =
+                    if (value.split(" ").size < 2) null else _location.value?.split(" ")
+                        ?.get(1)
+                val dto = PutProfileInfoDto(
+                    nickname = _nickname.value!!,
+                    partnerGender = when (_selectedPartnerSex.value) {
+                        1 -> "F"
+                        2 -> "M"
+                        3 -> "N"
+                        else -> ""
+                    },
+                    state = state,
+                    region = region
+                )
 
-            putProfileInfo(dto)
+                putProfileInfo(dto)
+            }
         } else {
             showToast(R.string.profile_edit_toast_alert_fill_all)
         }
@@ -161,10 +165,12 @@ class ProfileEditViewModel(
         _selectedPartnerSex.value = 1
         updateNextButton()
     }
+
     fun onClickMaleButton() {
         _selectedPartnerSex.value = 2
         updateNextButton()
     }
+
     fun onClickBisexualButton() {
         _selectedPartnerSex.value = 3
         updateNextButton()
@@ -176,7 +182,9 @@ class ProfileEditViewModel(
 
 
     private fun isCorrectNickname() = _nickname.value?.length in 1..9
-    private fun canEnableNextButton() = isCorrectNickname() && !_sex.value.isNullOrEmpty() && !_age.value.isNullOrEmpty() && !_location.value.isNullOrEmpty() && _selectedPartnerSex.value != 0
+    private fun canEnableNextButton() =
+        isCorrectNickname() && !_sex.value.isNullOrEmpty() && !_age.value.isNullOrEmpty() && !_location.value.isNullOrEmpty() && _selectedPartnerSex.value != 0
+
     fun updateNextButton() {
         _canEnableNext.value = isCorrectNickname()
     }

@@ -39,7 +39,7 @@ internal fun buildOkHttpClient(): OkHttpClient {
     if (BuildConfig.DEBUG) {
         interceptor.level = HttpLoggingInterceptor.Level.BODY
     } else {
-        interceptor.level = HttpLoggingInterceptor.Level.NONE
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
     }
 
     return OkHttpClient.Builder()
