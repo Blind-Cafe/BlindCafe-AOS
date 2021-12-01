@@ -14,4 +14,7 @@ object LogTag {
     const val LIFECYCLE_TAG = "lifecylce_tag"
     const val USER_INFO_TAG = "user_info_tag"
     const val HOME_TAG = "home_tag"
+
+
+    const val RELEASE = "RELEASE_LOG_TAG"
 }

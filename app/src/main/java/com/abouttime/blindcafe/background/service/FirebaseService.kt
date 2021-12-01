@@ -16,6 +16,7 @@ import androidx.core.app.NotificationCompat
 import com.abouttime.BlindCafeApplication.Companion.sharedPreferences
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.constants.LogTag.FCM_TAG
+import com.abouttime.blindcafe.common.constants.LogTag.RELEASE
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_CURRENT_ROOM
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_ENTIRE
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_FALSE
@@ -47,10 +48,9 @@ class FirebaseService() : FirebaseMessagingService() {
     }
 
 
-    // 메세지 받을 때마다 호출됨
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
-        Log.e(FCM_TAG, "onMessageReceived 호출")
+        Log.e(RELEASE, "onMessageReceived 호출")
         updateHomeState.postValue(true)
 
         val intent = Intent(this, NavHostActivity::class.java)

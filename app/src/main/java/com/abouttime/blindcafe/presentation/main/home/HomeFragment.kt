@@ -25,28 +25,23 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
         binding = fragmentHomeBinding
         binding?.viewModel = viewModel
         binding?.lifecycleOwner = this
+
+
         initBellImageView()
 
         observeHomeStatus()
+
+
+
         observeSavedNavigationData()
         observeGlobalHomeUpdateData()
         observeNotReadMessageCntData()
 
     }
 
-    private fun initBellImageView() {
-        binding?.ivBell?.setOnClickListener {
-            if (binding?.ivBellOn?.visibility == View.VISIBLE) {
-                if (binding?.tvNotReadCnt?.visibility == View.INVISIBLE) {
-                    binding?.tvNotReadCnt?.visibility = View.VISIBLE
-                } else {
-                    binding?.tvNotReadCnt?.visibility = View.INVISIBLE
-                }
-            } else {
-                showToast(R.string.home_not_read_cnt_none)
-            }
-        }
-    }
+
+
+    //----------------------------------------------------------------------------------------
 
     private fun observeHomeStatus() {
         viewModel.homeStatusCode.observe(viewLifecycleOwner) { statusCode ->
@@ -82,7 +77,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
         binding?.let { b ->
             b.tvStateTitle.isGone = true
             b.tvStateSubTitle.text = getString(R.string.home_subtitle_wait)
-            b.tvStateSubTitle.setMarginTop(64)
+            b.tvStateSubTitle.setMarginTop(80)
         }
 
 
@@ -180,22 +175,47 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
         }
     }
 
+
+    //--------------------------------------------------------------------------------------------
+
     private fun observeSavedNavigationData() {
         getNavigationResult(CONFIRM_MATCHING_CANCEL)?.observe(viewLifecycleOwner) { result ->
-            Log.e("navigation", "observeSavedNavigationData Home")
+            /** 매칭 취소하고 오면 다시 최신화 한다. **/
             viewModel.getHomeInfo()
         }
     }
 
     private fun observeGlobalHomeUpdateData() {
         GlobalLiveData.updateHomeState.observe(viewLifecycleOwner) {
+            /** 푸시메시지가 전송되면 업데이트 **/
             viewModel.getHomeInfo()
         }
     }
 
     private fun observeNotReadMessageCntData() {
+        /** 몇건의 안읽은 메시지? **/
         viewModel?.notReadMessageCnt.observe(viewLifecycleOwner) { cnt ->
             binding?.tvNotReadCnt?.text = getString(R.string.home_notification_message).format(cnt)
         }
+    }
+
+    private fun initBellImageView() {
+        binding?.ivBell?.setOnClickListener {
+            /** ivBellOn 은 0이 아니면 보인다. **/
+            if (binding?.ivBellOn?.visibility == View.VISIBLE) {
+                if (binding?.tvNotReadCnt?.visibility == View.INVISIBLE) {
+                    binding?.tvNotReadCnt?.visibility = View.VISIBLE
+                } else {
+                    binding?.tvNotReadCnt?.visibility = View.INVISIBLE
+                }
+            } else {
+                showToast(R.string.home_not_read_cnt_none)
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel?.listenerRegistration?.remove()
     }
 }

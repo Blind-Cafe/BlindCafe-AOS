@@ -44,7 +44,7 @@ class ReportListViewModel(
                     dismissLoading()
                 }
                 is Resource.Error -> {
-                    if (result.data.code == "400") {
+                    if (result.message == "400") {
                         showToast(R.string.toast_fail)
                     } else {
                         showToast(R.string.toast_check_internet)

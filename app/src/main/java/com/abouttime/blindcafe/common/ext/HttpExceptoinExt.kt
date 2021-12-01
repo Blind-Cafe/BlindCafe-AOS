@@ -24,6 +24,7 @@ internal fun HttpException.parseErrorBody(): BaseResponse {
 
             BaseResponse(code = code, message = message)
         } catch (e: Exception) {
+            Log.e(ERROR_TAG, e.toString())
             BaseResponse(code = "-1", message = "$e")
         }
     } ?: kotlin.run {

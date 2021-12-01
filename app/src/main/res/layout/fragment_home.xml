@@ -151,12 +151,13 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:src="@drawable/bg_home_1_1"
+                tools:visibility="visible"
                 android:visibility="@{viewModel.homeStatusCode == 2 ? View.VISIBLE : View.INVISIBLE}"
                 app:layout_constraintBottom_toBottomOf="@id/iv_home_bg_1"
                 app:layout_constraintEnd_toEndOf="@id/iv_home_bg_1"
                 app:layout_constraintStart_toStartOf="@id/iv_home_bg_1"
                 app:layout_constraintTop_toTopOf="@id/iv_home_bg_1"
-                tools:visibility="gone" />
+                 />
 
 
             <ImageView

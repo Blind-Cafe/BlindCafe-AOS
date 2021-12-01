@@ -7,7 +7,7 @@
     <string name="app_name_title">Blind cafe</string>
     <string name="temp_error">에러</string>
     <string name="no_value">-</string>
-    <string name="toast_check_internet">인터넷 연결을 확인해주세요</string>
+    <string name="toast_check_internet">에러발생. 앱을 재실행 해주세요</string>
     <string name="zero_time">00:00</string>
     <string name="male">남자</string>
     <string name="female">여자</string>

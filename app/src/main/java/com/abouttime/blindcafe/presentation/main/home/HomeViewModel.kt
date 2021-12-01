@@ -30,6 +30,7 @@ import com.abouttime.blindcafe.presentation.main.home.HomeState.PROFILE_OPEN
 import com.abouttime.blindcafe.presentation.main.home.HomeState.PROFILE_READY
 import com.abouttime.blindcafe.presentation.main.home.HomeState.WAIT
 import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
@@ -59,19 +60,92 @@ class HomeViewModel(
     var startTime: String? = null
     private var partnerId: Int? = null
 
-    private var isFirstListening: Boolean = true
+    var listenerRegistration: ListenerRegistration? = null
 
     init {
         getHomeInfo()
     }
 
+
+    /** use cases **/
+
+    /** 첫 home 상태 업데이트 **/
+    fun getHomeInfo() {
+        getHomeInfoUseCase().onEach { resource ->
+            when (resource) {
+                is Resource.Loading -> {
+                    showLoading()
+                }
+                is Resource.Success -> {
+                    resource.data?.let { dto ->
+                        handleHomeInfo(dto)
+                    }
+                    dismissLoading()
+                }
+                is Resource.Error -> {
+                    when (resource.message) {
+                        "1007", "1032" -> showToast(R.string.matching_error)
+                        else -> showToast(R.string.toast_check_internet)
+                    }
+                    dismissLoading()
+                }
+            }
+
+        }.launchIn(viewModelScope)
+    }
+
+    /** 두 번째 이후 home 상태 업데이트 **/
+    private fun getHomeInfoForNavigation(callback: (String) -> Unit) {
+        getHomeInfoUseCase().onEach { resource ->
+            when (resource) {
+                is Resource.Loading -> {
+                    showLoading()
+                }
+                is Resource.Success -> {
+                    resource.data?.let { dto ->
+                        handleHomeInfo(dto)
+                    }
+                    resource.data?.matchingStatus?.let { status ->
+                        callback(status)
+                    }
+                    dismissLoading()
+                }
+                is Resource.Error -> {
+                    when (resource.message) {
+                        "1007", "1032" -> showToast(R.string.matching_error)
+                        else -> showToast(R.string.toast_check_internet)
+                    }
+                    dismissLoading()
+                }
+            }
+
+        }.launchIn(viewModelScope)
+    }
+
+    private fun handleHomeInfo(dto: GetHomeInfoDto) {
+        matchingId = dto.matchingId
+        matchingId?.let { mId ->
+            /** 안 읽은 메시지 개수 세는 기능 **/
+            getMessageForNotReadMessageCnt(mId)
+        }
+        dto.matchingStatus?.let { status ->
+            _homeStatusCode.postValue(getHomeStatusCode(status))
+        }
+        startTime = dto.startTime
+        reason = dto.reason
+        partnerNickname = dto.partnerNickname
+        partnerId = dto.partnerId
+    }
+
+
     private fun getMessageForNotReadMessageCnt(matchingId: Int) {
-        if (isFirstListening.not()) return
-        isFirstListening = false
+        listenerRegistration?.remove()
+        listenerRegistration = null
+
         val roomCollectionRef = Firebase.firestore.collection(COLLECTION_ROOMS)
         try {
-            val time = getStringData("${matchingId}${LAST_READ_MESSAGE}")?.toLong()
-            roomCollectionRef
+            val time = getStringData("${matchingId}${LAST_READ_MESSAGE}")?.toLong() // 이걸로 Timestamp 만들어서 쿼리 넣어
+            listenerRegistration = roomCollectionRef
                 .document(matchingId.toString())
                 .collection(FirebaseKey.SUB_COLLECTION_MESSAGES)
                 .orderBy("timestamp", Query.Direction.DESCENDING)
@@ -103,89 +177,7 @@ class HomeViewModel(
     }
 
 
-    /** use cases **/
-    fun getHomeInfo() {
-        getHomeInfoUseCase().onEach { resource ->
-            when (resource) {
-                is Resource.Loading -> {
-                    showLoading()
-                }
-                is Resource.Success -> {
-                    if (resource.data?.code != "1000") {
-                        showToast(R.string.matching_error)
-                        postExitChatRoom()
-                    } else {
-                        resource.data?.let { dto ->
-                            handleHomeInfo(dto)
-                        }
-                        resource.data?.matchingStatus?.let { status ->
-                            _homeStatusCode.postValue(getHomeStatusCode(status))
-                        }
-                    }
-
-                    dismissLoading()
-                }
-                is Resource.Error -> {
-                    if (resource.message == "400") {
-                        showToast(R.string.matching_error)
-                    } else if (resource.message != "1000") {
-                        showToast(R.string.toast_check_internet)
-                    }
-                    dismissLoading()
-                }
-            }
-
-        }.launchIn(viewModelScope)
-    }
-
-    private fun getHomeInfoForNavigation(callback: (String) -> Unit) {
-        getHomeInfoUseCase().onEach { resource ->
-            when (resource) {
-                is Resource.Loading -> {
-                    showLoading()
-                }
-                is Resource.Success -> {
-                    if (resource.data?.code != "1000") {
-                        showToast(R.string.matching_error)
-                        //postExitChatRoom()
-                    } else {
-                        resource.data?.let { dto ->
-                            handleHomeInfo(dto)
-                        }
-                        resource.data?.matchingStatus?.let { status ->
-                            callback(status)
-                        }
-                    }
-
-                    dismissLoading()
-                }
-                is Resource.Error -> {
-                    if (resource.message == "400") {
-                        showToast(R.string.matching_error)
-                    } else {
-                        showToast(R.string.toast_check_internet)
-                    }
-                    postExitChatRoom()
-                    dismissLoading()
-                }
-            }
-
-        }.launchIn(viewModelScope)
-    }
-
-    private fun handleHomeInfo(dto: GetHomeInfoDto) {
-        matchingId = dto.matchingId
-        matchingId?.let { mId ->
-            getMessageForNotReadMessageCnt(mId)
-        }
-
-        startTime = dto.startTime
-        reason = dto.reason
-        partnerNickname = dto.partnerNickname
-        partnerId = dto.partnerId
-    }
-
-
+    /** 0 - NONE  **/
     private fun postMatchingRequest() {
         postMatchingRequestUseCase().onEach { response ->
             when (response) {
@@ -193,25 +185,24 @@ class HomeViewModel(
                     showLoading()
                 }
                 is Resource.Success -> {
-                    if (response.data?.code == "1060") {
-                        showToast(R.string.toast_alert_input_info)
-                    } else {
-                        response.data?.let { dto ->
-                            matchingId = dto.matchingId
-                            partnerId = dto.partnerId
-                            partnerNickname = dto.partnerNickname
-                        }
-                        response.data?.matchingStatus?.let { status ->
-                            _homeStatusCode.postValue(getHomeStatusCode(status))
-                        }
+
+                    response.data?.let { dto ->
+                        matchingId = dto.matchingId
+                        partnerId = dto.partnerId
+                        partnerNickname = dto.partnerNickname
+                    }
+                    response.data?.matchingStatus?.let { status ->
+                        _homeStatusCode.postValue(getHomeStatusCode(status))
                     }
                     dismissLoading()
                 }
                 is Resource.Error -> {
-                    if (response.message != "400") {
-                        showToast(R.string.toast_check_internet)
-                    } else {
-                        showToast(R.string.toast_fail)
+                    when(response.message) {
+                        "1008", "1060" -> {
+                            getHomeInfo() //새로고침
+                            showToast(R.string.matching_error)
+                        }
+                        else ->  showToast(R.string.toast_check_internet)
                     }
                     dismissLoading()
                 }
@@ -219,6 +210,34 @@ class HomeViewModel(
         }.launchIn(viewModelScope)
     }
 
+    /** 3 - Matching **/
+    private fun getChatRoomInfo(matchingId: Int) {
+        getChatRoomInfoUseCase(matchingId).onEach { result ->
+            when (result) {
+                is Resource.Loading -> {
+                    showLoading()
+                }
+                is Resource.Success -> {
+                    result.data?.toChatRoom()?.let { cr ->
+                        moveToChatFragment(cr)
+                    }
+                    dismissLoading()
+                }
+                is Resource.Error -> {
+                    when(result.message) {
+                        "1008", "1030", "1032" -> {
+                            getHomeInfo() //새로고침
+                            showToast(R.string.matching_error)
+                        }
+                        else ->  showToast(R.string.toast_check_internet)
+                    }
+                    dismissLoading()
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    /** 5 - ACCEPT **/
     private fun getPartnerProfile() {
         matchingId?.let { id ->
             getPartnerProfileUseCase(id).onEach { result ->
@@ -233,10 +252,12 @@ class HomeViewModel(
                         dismissLoading()
                     }
                     is Resource.Error -> {
-                        if (result.message != "400") {
-                            showToast(R.string.toast_check_internet)
-                        } else {
-                            showToast(R.string.toast_fail)
+                        when(result.message) {
+                            "1008", "1030", "1032" -> {
+                                getHomeInfo() //새로고침
+                                showToast(R.string.matching_error)
+                            }
+                            else ->  showToast(R.string.toast_check_internet)
                         }
                         dismissLoading()
                     }
@@ -248,32 +269,7 @@ class HomeViewModel(
         }
     }
 
-    /** 3 - Matching 상태에서 클릭하면 호출 **/
-    private fun getChatRoomInfo(matchingId: Int) {
-        getChatRoomInfoUseCase(matchingId).onEach { result ->
-            when (result) {
-                is Resource.Loading -> {
-                    showLoading()
-                }
-                is Resource.Success -> {
-                    result.data?.toChatRoom()?.let { cr ->
-                        moveToChatFragment(cr)
-                    }
-                    dismissLoading()
-                }
-                is Resource.Error -> {
-                    if (result.message != "400") {
-                        showToast(R.string.matching_error)
-                    } else {
-                        showToast(R.string.toast_check_internet)
-                    }
-                    dismissLoading()
 
-                    postExitChatRoom()
-                }
-            }
-        }.launchIn(viewModelScope)
-    }
 
     private fun postExitChatRoom() {
         matchingId?.let { id ->
@@ -346,9 +342,6 @@ class HomeViewModel(
             Log.e("HOME", status)
             _time.value = startTime?.toLong()?.secondToLapseForHome()
             when (statusCode) {
-                -1 -> {
-                    showToast(R.string.temp_error)
-                }
                 0 -> { // 매칭 없음
                     postMatchingRequest()
                 }

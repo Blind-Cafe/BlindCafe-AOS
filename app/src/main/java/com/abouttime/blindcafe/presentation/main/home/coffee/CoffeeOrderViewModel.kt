@@ -29,11 +29,8 @@ class CoffeeOrderViewModel(
     /** room info **/
     var matchingId: Int? = null
     var partnerNickname: String? = null
-    var profileImage: String? = null
-    var drink: String? = null
-    var commonInterest: String? = null
     var startTime: String? = null
-    var interest: String? = null
+
 
 
     var currentSelect: Int = -1
@@ -98,10 +95,9 @@ class CoffeeOrderViewModel(
 
                         }
                         is Resource.Error -> {
-                            if (response.message == "400") {
-                                showToast(R.string.toast_fail)
-                            } else {
-                                showToast(R.string.toast_check_internet)
+                            when(response.message) {
+                                "1020","1030", "1031" -> showToast(R.string.matching_error)
+                                else -> showToast(R.string.toast_check_internet)
                             }
                             dismissLoading()
                         }
@@ -122,16 +118,6 @@ class CoffeeOrderViewModel(
                     showLoading()
                 }
                 is Resource.Success -> {
-                    result.data?.let { dto ->
-                        this@CoffeeOrderViewModel.matchingId = dto.matchingId
-                        this@CoffeeOrderViewModel.profileImage = dto.profileImage
-                        this@CoffeeOrderViewModel.drink = dto.drink
-                        this@CoffeeOrderViewModel.commonInterest = interest
-                        this@CoffeeOrderViewModel.startTime = dto.startTime
-                        this@CoffeeOrderViewModel.interest = dto.interest
-
-                    }
-
                     result.data?.toChatRoom()?.let { cr ->
                         moveToChatFragment(cr)
                     }
@@ -139,10 +125,15 @@ class CoffeeOrderViewModel(
 
                 }
                 is Resource.Error -> {
-                    if (result.message == "400") {
-                        showToast(R.string.toast_fail)
-                    } else {
-                        showToast(R.string.toast_check_internet)
+                    when (result.message) {
+                        "1008", "1030", "1032" -> {
+                            showToast(R.string.matching_error)
+                            popDirections()
+                        }
+                        else -> {
+                            showToast(R.string.toast_check_internet)
+
+                        }
                     }
                     dismissLoading()
                 }
