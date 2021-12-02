@@ -49,7 +49,7 @@
             android:scaleType="fitCenter"
             android:visibility="invisible"
             motion:layout_constraintBottom_toBottomOf="@id/et_message_input"
-            motion:layout_constraintDimensionRatio="1.5:1"
+            motion:layout_constraintDimensionRatio="56:44"
             motion:layout_constraintEnd_toEndOf="@id/et_message_input"
             motion:layout_constraintTop_toTopOf="@id/et_message_input" />
 
@@ -95,7 +95,7 @@
             android:scaleType="fitCenter"
             android:visibility="visible"
             motion:layout_constraintBottom_toBottomOf="@id/et_message_input"
-            motion:layout_constraintDimensionRatio="1.5:1"
+            motion:layout_constraintDimensionRatio="56:44"
             motion:layout_constraintEnd_toEndOf="@id/et_message_input"
             motion:layout_constraintTop_toTopOf="@id/et_message_input" />
 

@@ -347,7 +347,7 @@
                 android:src="@drawable/bt_send"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@id/et_message_input"
-                app:layout_constraintDimensionRatio="1.4:1"
+                app:layout_constraintDimensionRatio="56:44"
                 app:layout_constraintEnd_toEndOf="@id/et_message_input"
                 app:layout_constraintTop_toTopOf="@id/et_message_input"
                 app:tint="@color/white" />
