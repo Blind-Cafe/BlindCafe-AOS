@@ -17,4 +17,5 @@ object LogTag {
 
 
     const val RELEASE = "RELEASE_LOG_TAG"
+    const val RELEASE_HOME_TAG= "RELEASE_HOME_TAG"
 }

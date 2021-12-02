@@ -10,7 +10,9 @@ import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.FirebaseKey
 import com.abouttime.blindcafe.common.constants.FirebaseKey.COLLECTION_ROOMS
+import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.constants.PreferenceKey.LAST_READ_MESSAGE
+import com.abouttime.blindcafe.common.constants.PreferenceKey.NICKNAME
 import com.abouttime.blindcafe.common.ext.secondToLapseForHome
 import com.abouttime.blindcafe.data.server.dto.home.GetHomeInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.partner.GetPartnerProfileDto
@@ -42,9 +44,7 @@ class HomeViewModel(
     private val getHomeInfoUseCase: GetHomeInfoUseCase,
     private val postMatchingRequestUseCase: PostMatchingRequestUseCase,
     private val getPartnerProfileUseCase: GetPartnerProfileUseCase,
-    private val getChatRoomInfoUseCase: GetChatRoomInfoUseCase,
-    private val exitChatRoomUseCase: DeleteExitChatRoomUseCase,
-
+    private val getChatRoomInfoUseCase: GetChatRoomInfoUseCase
     ) : BaseViewModel() {
     private val _homeStatusCode: MutableLiveData<Int> = MutableLiveData<Int>(-1)
     val homeStatusCode: LiveData<Int> get() = _homeStatusCode
@@ -54,6 +54,11 @@ class HomeViewModel(
     private val _notReadMessageCnt: MutableLiveData<Int> = MutableLiveData(0)
     val notReadMessageCnt: LiveData<Int> get() = _notReadMessageCnt
 
+    private val _isHomeButtonClickable = MutableLiveData(true)
+    val isHomeButtonClickable: LiveData<Boolean> get() = _isHomeButtonClickable
+
+
+    val myNickname = getStringData(NICKNAME)
     var reason: String? = null
     var partnerNickname: String? = null
     var matchingId: Int? = null
@@ -62,9 +67,11 @@ class HomeViewModel(
 
     var listenerRegistration: ListenerRegistration? = null
 
-    init {
-        getHomeInfo()
-    }
+//    init {
+//        getHomeInfo()
+//    }
+
+    // http status code, 400이상이면 서버에서 핸들링 하지 못한
 
 
     /** use cases **/
@@ -185,7 +192,6 @@ class HomeViewModel(
                     showLoading()
                 }
                 is Resource.Success -> {
-
                     response.data?.let { dto ->
                         matchingId = dto.matchingId
                         partnerId = dto.partnerId
@@ -195,16 +201,22 @@ class HomeViewModel(
                         _homeStatusCode.postValue(getHomeStatusCode(status))
                     }
                     dismissLoading()
+                    _isHomeButtonClickable.postValue(true)
                 }
                 is Resource.Error -> {
                     when(response.message) {
                         "1008", "1060" -> {
+                            Log.e(LogTag.RELEASE_HOME_TAG, "postMatchingRequest")
                             getHomeInfo() //새로고침
                             showToast(R.string.matching_error)
+                        }
+                        "1180" -> {
+                            showToast(R.string.toast_already_post_matching_request)
                         }
                         else ->  showToast(R.string.toast_check_internet)
                     }
                     dismissLoading()
+                    _isHomeButtonClickable.postValue(true)
                 }
             }
         }.launchIn(viewModelScope)
@@ -226,6 +238,7 @@ class HomeViewModel(
                 is Resource.Error -> {
                     when(result.message) {
                         "1008", "1030", "1032" -> {
+                            Log.e(LogTag.RELEASE_HOME_TAG, "getChatRoomInfo")
                             getHomeInfo() //새로고침
                             showToast(R.string.matching_error)
                         }
@@ -254,6 +267,7 @@ class HomeViewModel(
                     is Resource.Error -> {
                         when(result.message) {
                             "1008", "1030", "1032" -> {
+                                Log.e(LogTag.RELEASE_HOME_TAG, "getPartnerProfile")
                                 getHomeInfo() //새로고침
                                 showToast(R.string.matching_error)
                             }
@@ -271,31 +285,7 @@ class HomeViewModel(
 
 
 
-    private fun postExitChatRoom() {
-        matchingId?.let { id ->
-            exitChatRoomUseCase(id, 1).onEach { result ->
-                when (result) {
-                    is Resource.Loading -> {
-                        showLoading()
-                    }
-                    is Resource.Success -> {
-                        dismissLoading()
-                        getHomeInfo()
-                    }
-                    is Resource.Error -> {
-                        if (result.message == "400") {
-                            showToast(R.string.toast_fail)
-                        } else {
-                            showToast(R.string.toast_check_internet)
-                        }
-                        dismissLoading()
-                    }
-                }
 
-            }.launchIn(viewModelScope)
-        }
-
-    }
 
 
     /** handler **/
@@ -343,6 +333,7 @@ class HomeViewModel(
             _time.value = startTime?.toLong()?.secondToLapseForHome()
             when (statusCode) {
                 0 -> { // 매칭 없음
+                    _isHomeButtonClickable.postValue(false)
                     postMatchingRequest()
                 }
                 1 -> { // 매칭 대기

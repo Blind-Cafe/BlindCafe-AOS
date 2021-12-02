@@ -84,12 +84,10 @@ abstract class BaseFragment<VM : BaseViewModel>(layoutId: Int) : Fragment(layout
     }
 
     protected fun getNavigationResult(key: String): MutableLiveData<String>? {
-        Log.e("navigation", "getNavigationResult $key")
         return findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(key)
     }
 
     private fun saveNavigationResult(key: String, result: String) {
-        Log.e("navigation", "saveNavigationResult $key $result")
         findNavController().previousBackStackEntry?.savedStateHandle?.set(key, result)
     }
 
@@ -111,7 +109,6 @@ abstract class BaseFragment<VM : BaseViewModel>(layoutId: Int) : Fragment(layout
 
     /** Util for all fragment **/
     fun showToast(resId: Int) {
-        //Toast.makeText(requireContext(), getString(resId), Toast.LENGTH_SHORT).show()
         createToast(getString(resId))?.show()
     }
 

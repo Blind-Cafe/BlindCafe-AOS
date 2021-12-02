@@ -18,6 +18,8 @@ class ExchangeCompleteFragment: BaseFragment<ExchangeCompleteViewModel>(R.layout
         super.onViewCreated(view, savedInstanceState)
         val fragmentExchangeCompleteBinding = FragmentExchangeCompleteBinding.bind(view)
         binding = fragmentExchangeCompleteBinding
+        binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
 
         initArgs()
         initBackButton()

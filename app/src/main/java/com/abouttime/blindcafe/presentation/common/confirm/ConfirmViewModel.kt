@@ -11,8 +11,6 @@ import com.abouttime.blindcafe.common.constants.NavigationKey.CONFIRM_YES
 import com.abouttime.blindcafe.common.constants.PreferenceKey
 import com.abouttime.blindcafe.common.constants.PreferenceKey.INFO_INPUT
 import com.abouttime.blindcafe.common.constants.Retrofit.JWT
-import com.abouttime.blindcafe.common.ext.isOver24Hours
-import com.abouttime.blindcafe.common.ext.isOver48Hours
 import com.abouttime.blindcafe.common.ext.to3RangeDays
 import com.abouttime.blindcafe.domain.use_case.server.DeleteAccountUseCase
 import com.abouttime.blindcafe.domain.use_case.server.DeleteDismissMatchingUseCase

@@ -1,5 +1,6 @@
 package com.abouttime.blindcafe.presentation.main.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -7,6 +8,7 @@ import androidx.core.view.isGone
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.common.constants.LogTag.HOME_TAG
+import com.abouttime.blindcafe.common.constants.LogTag.RELEASE_HOME_TAG
 import com.abouttime.blindcafe.common.constants.NavigationKey.CONFIRM_MATCHING_CANCEL
 import com.abouttime.blindcafe.common.constants.Time
 import com.abouttime.blindcafe.common.ext.secondToLapseForHome
@@ -114,28 +116,34 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun handleOpen() {
+        binding?.tvTitle?.text = "프로필 교환 중"
         binding?.tvStateSubTitle?.apply {
             isGone = false
-            text = "프로필 교환 중"
+            text = "${viewModel.myNickname}님의 프로필을 공개해주세요!"
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun handleReady() {
+        binding?.tvTitle?.text = "프로필 교환 중"
         binding?.tvStateSubTitle?.apply {
             isGone = false
-            text = "프로필 교환 중"
+            text = "${viewModel.myNickname}님과 ${viewModel.partnerNickname}님 모두 수락해야 매칭됩니다."
         }
     }
 
     private fun handleAccept() {
+        binding?.tvTitle?.text = "프로필 교환 중"
         binding?.tvStateSubTitle?.apply {
             isGone = false
-            text = "프로필 교환 중"
+            text = "상대방 수락하기"
         }
     }
 
     private fun handleCont() {
+        binding?.tvTitle?.text = "프로필 교환성공!"
         binding?.tvStateSubTitle?.apply {
             isGone = false
             text = "프로필 교환 중"
@@ -181,13 +189,21 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
     private fun observeSavedNavigationData() {
         getNavigationResult(CONFIRM_MATCHING_CANCEL)?.observe(viewLifecycleOwner) { result ->
             /** 매칭 취소하고 오면 다시 최신화 한다. **/
+            Log.e(RELEASE_HOME_TAG, "observeSavedNavigationData")
             viewModel.getHomeInfo()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.e(RELEASE_HOME_TAG, "observeSavedNavigationData")
+        viewModel.getHomeInfo()
     }
 
     private fun observeGlobalHomeUpdateData() {
         GlobalLiveData.updateHomeState.observe(viewLifecycleOwner) {
             /** 푸시메시지가 전송되면 업데이트 **/
+            Log.e(RELEASE_HOME_TAG, "observeGlobalHomeUpdateData")
             viewModel.getHomeInfo()
         }
     }

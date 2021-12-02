@@ -1,17 +1,11 @@
 package com.abouttime.blindcafe.domain.use_case.server
 
-import android.util.Log
 import com.abouttime.blindcafe.common.Resource
-import com.abouttime.blindcafe.common.base.BaseResponse
-import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.ext.parseErrorBody
 import com.abouttime.blindcafe.data.server.dto.home.GetHomeInfoDto
 import com.abouttime.blindcafe.domain.repository.HomeRepository
-import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import okhttp3.ResponseBody
-import org.json.JSONObject
 import retrofit2.HttpException
 
 class GetHomeInfoUseCase(

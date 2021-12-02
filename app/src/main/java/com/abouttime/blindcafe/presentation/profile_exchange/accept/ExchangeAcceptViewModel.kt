@@ -1,5 +1,6 @@
 package com.abouttime.blindcafe.presentation.profile_exchange.accept
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -43,6 +44,7 @@ class ExchangeAcceptViewModel(
                     dismissLoading()
                 }
                 is Resource.Error -> {
+
                     if (result.message == "400") {
                         showToast(R.string.toast_fail)
                     } else {
@@ -80,7 +82,7 @@ class ExchangeAcceptViewModel(
     }
 
 
-    fun acceptMatching(matchingId: Int) {
+    private fun acceptMatching(matchingId: Int) {
         postAcceptMatchingUseCase(matchingId).onEach { result ->
             when (result) {
                 is Resource.Loading -> {

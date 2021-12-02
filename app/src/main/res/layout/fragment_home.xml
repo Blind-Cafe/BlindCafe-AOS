@@ -91,8 +91,9 @@
             android:id="@+id/cl_home_bg_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:clickable="@{viewModel.isHomeButtonClickable ? true : false}"
             android:onClick="@{viewModel::onClickCircleImageView}"
-            app:layout_constraintBottom_toTopOf="@+id/tv_state_title"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
@@ -211,8 +212,10 @@
             android:text="@string/home_title_none"
             android:textColor="@color/white"
             android:textSize="@dimen/font_size_15"
+            app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintBottom_toTopOf="@id/tv_state_sub_title"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cl_home_bg_container" />
 

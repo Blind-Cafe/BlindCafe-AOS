@@ -63,11 +63,9 @@ open class BaseViewModel() : ViewModel() {
     }
 
     fun showLoading() {
-        Log.e(LogTag.RETROFIT_TAG, "showLoading")
         GlobalLiveData.loadingEvent.postValue(true)
     }
     fun dismissLoading() {
-        Log.e(LogTag.RETROFIT_TAG, "dismissLoading")
         GlobalLiveData.loadingEvent.postValue(false)
     }
 
