@@ -127,7 +127,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
 
     @SuppressLint("SetTextI18n")
     private fun handleOpen() {
-        binding?.tvTitle?.text = "프로필 교환 중"
+        binding?.tvStateTitle?.text = "프로필 교환 중"
         binding?.tvStateSubTitle?.apply {
             isGone = false
             text = "${viewModel.myNickname}님의 프로필을 공개해주세요!"
@@ -136,23 +136,24 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
 
     @SuppressLint("SetTextI18n")
     private fun handleReady() {
-        binding?.tvTitle?.text = "프로필 교환 중"
+        binding?.tvStateTitle?.text = "프로필 교환 중"
         binding?.tvStateSubTitle?.apply {
             isGone = false
             text = "${viewModel.myNickname}님과 ${viewModel.partnerNickname}님 모두 수락해야 매칭됩니다."
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun handleAccept() {
-        binding?.tvTitle?.text = "프로필 교환 중"
+        binding?.tvStateTitle?.text = "프로필 교환 중"
         binding?.tvStateSubTitle?.apply {
             isGone = false
-            text = "상대방 수락하기"
+            text = "${viewModel.partnerNickname}님의 수락을 기다립니다"
         }
     }
 
     private fun handleCont() {
-        binding?.tvTitle?.text = "프로필 교환성공!"
+        binding?.tvStateTitle?.text = "프로필 교환성공!"
         binding?.tvStateSubTitle?.apply {
             isGone = false
             text = "프로필 교환 중"

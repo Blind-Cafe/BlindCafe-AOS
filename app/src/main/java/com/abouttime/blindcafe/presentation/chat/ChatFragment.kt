@@ -94,10 +94,13 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         initChatRecyclerView(fragmentChatBinding) // 채팅 리사이클러뷰 초기화
         initNavArgs() // NavArgs 변수 초기화 (맨 위에 와야함!)
 
+
         observeMessagesData()
+        subscribeMessages()
+
         observePagedMessagesData()
         receiveFirstPage()
-        subscribeMessages()
+
 
         initSendButton(fragmentChatBinding) // 전송버튼 초기화
         initInputEditText(fragmentChatBinding) // 텍스트 메시지 작성 뷰 초기화
