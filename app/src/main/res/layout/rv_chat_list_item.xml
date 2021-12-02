@@ -7,10 +7,10 @@
 
     <ImageView
         android:id="@+id/iv_profile_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
         android:layout_marginStart="18dp"
         android:src="@drawable/ic_profile_image_none"
         app:layout_constraintBottom_toBottomOf="parent"

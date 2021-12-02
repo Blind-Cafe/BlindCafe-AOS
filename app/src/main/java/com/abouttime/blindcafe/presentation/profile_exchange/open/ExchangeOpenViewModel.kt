@@ -158,25 +158,23 @@ class ExchangeOpenViewModel(
 
 
 
-//        if (data.fill == true) {
-//            /** 바로 postProfileForOpenUseCase */
-//            val state = data.region?.split(" ")?.get(0)
-//            val region = data.region?.split(" ")?.get(1)
-//            if (data.nickname != null && state != null && region != null) {
-//                val dto = PostProfileForOpenDto(
-//                    nickname = _nickname.value!!,
-//                    state = state,
-//                    region = region
-//                )
-//                postProfileForOpen(dto)
-//            } else {
-//                showToast(R.string.temp_error)
-//            }
-//
-//
-//        } else {
+        if (data.fill == true) {
+            /** 바로 postProfileForOpenUseCase */
+            val state = data.region?.split(" ")?.get(0)
+            val region = data.region?.split(" ")?.get(1)
+            if (data.nickname != null && state != null && region != null) {
+                val dto = PostProfileForOpenDto(
+                    nickname = _nickname.value!!,
+                    state = state,
+                    region = region
+                )
+                postProfileForOpen(dto)
+            } else {
+                showToast(R.string.temp_error)
+            }
 
-        if (data.fill == false) {
+
+        } else {
             /** 작성 후 postProfileForOpenUseCase */
             showToast(R.string.profile_edit_toast_alert_fill_all)
         }

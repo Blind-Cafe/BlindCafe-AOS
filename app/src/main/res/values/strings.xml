@@ -219,7 +219,7 @@
     <string name="profile_edit_open">공개하기</string>
     <string name="profile_image_edit_complete">확인</string>
     <string name="profile_image_edit_toast_alert_at_least_one">1장 이상의 프로필 사진을 등록해주세요.</string>
-    <string name="profile_edit_toast_alert_fill_all">프로필을 모두 작성해야 공개할 수 있습니다.</string>
+    <string name="profile_edit_toast_alert_fill_all">모두 작성해주세요</string>
     <string name="profile_edit_toast_complete">프로필 수정 완료</string>
     <string name="profile_edit_nickname_length">1~9자로 설정해주세요.</string>
 

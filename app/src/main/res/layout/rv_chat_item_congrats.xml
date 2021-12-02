@@ -5,7 +5,6 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/transparent"
-    android:layout_marginTop="16dp"
     android:paddingBottom="16dp">
 
     <View
@@ -41,10 +40,10 @@
         tools:text="@string/chat_get_badge"
         android:textColor="@color/gray_300"
         android:textSize="@dimen/font_size_11"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/tv_congrats"
         app:layout_constraintStart_toStartOf="@id/tv_congrats"
-        app:layout_constraintTop_toBottomOf="@id/tv_congrats" />
+        app:layout_constraintTop_toBottomOf="@id/tv_congrats"
+        app:layout_goneMarginBottom="16dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
