@@ -91,12 +91,13 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         }
 
 
+        initChatRecyclerView(fragmentChatBinding) // 채팅 리사이클러뷰 초기화
         initNavArgs() // NavArgs 변수 초기화 (맨 위에 와야함!)
 
-        initChatRecyclerView(fragmentChatBinding) // 채팅 리사이클러뷰 초기화
-        subscribeMessages()
         observeMessagesData()
         observePagedMessagesData()
+        receiveFirstPage()
+        subscribeMessages()
 
         initSendButton(fragmentChatBinding) // 전송버튼 초기화
         initInputEditText(fragmentChatBinding) // 텍스트 메시지 작성 뷰 초기화
@@ -122,10 +123,10 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         viewModel.startTime = viewModel.chatRoomInfo.startTime
         viewModel.interest = viewModel.chatRoomInfo.interest
         isCont = args.chatRoomInfo.continuous
-        receiveFirstPage()
         initPartnerNciknameTextView() // 상단 닉네임 초기화
         initBackgroundColor()
         updateIconState()
+        blockCurrentRoomNotification()
     }
 
     private fun receiveFirstPage() {
@@ -765,23 +766,17 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+
+    private fun blockCurrentRoomNotification() {
         viewModel.matchingId?.let { mId ->
             saveStringData(Pair("${mId}${NOTIFICATION_CURRENT_ROOM}", NOTIFICATION_FALSE))
         }
-        return super.onCreateView(inflater, container, savedInstanceState)
-
-
     }
+
+
 
     override fun onStop() {
         super.onStop()
-
-
         viewModel.matchingId?.let { mId ->
             saveStringData(Pair("${mId}${LAST_READ_MESSAGE}", (System.currentTimeMillis() / 1000).toString()))
             saveStringData(Pair("${mId}${NOTIFICATION_CURRENT_ROOM}", NOTIFICATION_TRUE))

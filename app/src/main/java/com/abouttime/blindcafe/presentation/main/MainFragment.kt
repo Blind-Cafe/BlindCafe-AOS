@@ -39,7 +39,7 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
             setCurrentFragmentById(menuItem.itemId)
             true
         }
-        setCurrentFragmentById(viewModel.lastPageId)
+        //setCurrentFragmentById(viewModel.lastPageId)
         fragmentMainBinding.bnTab.selectedItemId = viewModel.lastPageId
 
 

@@ -51,7 +51,7 @@ class FirebaseService() : FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
         Log.e(RELEASE, "onMessageReceived 호출")
-        updateHomeState.postValue(true)
+
 
         val intent = Intent(this, NavHostActivity::class.java)
         val notificationManager =
@@ -70,18 +70,21 @@ class FirebaseService() : FirebaseMessagingService() {
         val path = message.data["path"]
         val matchingId = message.data["matchingId"]
 
+        if (path == "HOME") {
+            updateHomeState.postValue(true)
+        }
+
+
 
 
         Log.e(FCM_TAG, "$type, $path, $matchingId")
-        val blockCurrentRoomNotification =
-            sharedPreferences.getString("${matchingId}${NOTIFICATION_CURRENT_ROOM}", null)
+        val blockCurrentRoomNotification = sharedPreferences.getString("${matchingId}${NOTIFICATION_CURRENT_ROOM}", null)
         val blockEntireNotification = sharedPreferences.getString(NOTIFICATION_ENTIRE, null)
         val blockMessageNotification = sharedPreferences.getString(NOTIFICATION_MESSAGE, null)
-        val blockSpecificNotification =
-            sharedPreferences.getString("${matchingId}${NOTIFICATION_ROOM}", null)
+        val blockSpecificNotification = sharedPreferences.getString("${matchingId}${NOTIFICATION_ROOM}", null)
 
 
-        if (blockCurrentRoomNotification == NOTIFICATION_FALSE && type == "T") return // 현재 채팅방에 있다면 푸시를 받지 않는다
+        if (blockCurrentRoomNotification == NOTIFICATION_FALSE) return // 현재 채팅방에 있다면 푸시를 받지 않는다
         if (blockEntireNotification == NOTIFICATION_FALSE) return
         if (blockMessageNotification == NOTIFICATION_FALSE && type == "T") return
         if (blockSpecificNotification == NOTIFICATION_FALSE && matchingId != null) return

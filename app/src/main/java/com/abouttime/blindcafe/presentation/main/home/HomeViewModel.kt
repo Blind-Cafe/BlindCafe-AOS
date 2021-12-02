@@ -67,9 +67,10 @@ class HomeViewModel(
 
     var listenerRegistration: ListenerRegistration? = null
 
-//    init {
-//        getHomeInfo()
-//    }
+   init {
+
+       Log.e(LogTag.RELEASE_HOME_TAG, "init")
+    }
 
     // http status code, 400이상이면 서버에서 핸들링 하지 못한
 
@@ -142,6 +143,7 @@ class HomeViewModel(
         }
         dto.matchingStatus?.let { status ->
             /** 홈 상태 업데이트 **/
+            Log.e("HOME", status)
             _homeStatusCode.postValue(getHomeStatusCode(status))
         }
     }
@@ -331,7 +333,7 @@ class HomeViewModel(
     fun onClickCircleImageView(v: View) {
         getHomeInfoForNavigation() { status ->
             val statusCode = getHomeStatusCode(status)
-            Log.e("HOME", status)
+
             _time.value = startTime?.toLong()?.secondToLapseForHome()
             when (statusCode) {
                 0 -> { // 매칭 없음

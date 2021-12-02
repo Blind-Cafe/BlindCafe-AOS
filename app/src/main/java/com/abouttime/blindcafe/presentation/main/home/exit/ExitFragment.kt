@@ -36,6 +36,9 @@ class ExitFragment: BaseFragment<ExitViewModel>(R.layout.fragment_exit) {
         val isReport = args.isReport
         val title = args.title
 
+        binding?.tvTitleAttacker?.text = ""
+        binding?.tvTitleVictim?.text = ""
+
         if (isAttacker) {
             handleAttacker(isReport, title)
         } else {
@@ -67,6 +70,7 @@ class ExitFragment: BaseFragment<ExitViewModel>(R.layout.fragment_exit) {
                 } else {
                     tvTitleAttacker.isGone = true
                     tvTitleVictim.isGone = false
+
                     val start = title.indexOf("[")
                     val end = title.indexOf("]")
                     val builder = SpannableStringBuilder(title.replace("[", " ").replace("]", " "))
