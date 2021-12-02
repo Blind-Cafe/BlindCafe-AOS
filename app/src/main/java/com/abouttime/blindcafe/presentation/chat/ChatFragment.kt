@@ -671,12 +671,12 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             pw.isFocusable = true
             if (isCont) {
                 pw.showAsDropDown(fragmentChatBinding.ivMenu)
-                pw.contentView?.setMarginRight(44)
+                pw.contentView?.setMarginRight(60)
             } else {
                 pw.showAsDropDown(fragmentChatBinding.ivBell)
-                pw.contentView?.setMarginRight(20)
+                pw.contentView?.setMarginRight(40)
             }
-            pw.contentView?.setMarginTop(20)
+            pw.contentView?.setMarginTop(4)
         }
 
 
