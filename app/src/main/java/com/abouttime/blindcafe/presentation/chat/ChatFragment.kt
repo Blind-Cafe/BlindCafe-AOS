@@ -641,10 +641,11 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         val inflater =
             requireActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.pw_chat_menu, null)
+        val root = view.findViewById<LinearLayout>(R.id.ll_menu_container)
         if (!isCont) {
-            view.setBackgroundColor(getColorByResId(R.color.chat_room_menu_bg))
+            root.setBackgroundColor(getColorByResId(R.color.chat_room_menu_bg))
         } else {
-            view.setBackgroundColor(getColorByResId(R.color.matching_room_menu_bg))
+            root.setBackgroundColor(getColorByResId(R.color.matching_room_menu_bg))
         }
 
 
@@ -701,6 +702,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
     private fun initNotificationContainer(container: View, iv: ImageView, tv: TextView) {
         container.isVisible = isCont
+
 
         if (isCont) {
             viewModel.matchingId?.let { it ->

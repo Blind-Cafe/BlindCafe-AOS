@@ -196,7 +196,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
 
     override fun onResume() {
         super.onResume()
-        Log.e(RELEASE_HOME_TAG, "observeSavedNavigationData")
+        Log.e(RELEASE_HOME_TAG, "onResume")
         viewModel.getHomeInfo()
     }
 

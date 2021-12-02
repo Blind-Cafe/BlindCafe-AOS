@@ -131,17 +131,19 @@ class HomeViewModel(
 
     private fun handleHomeInfo(dto: GetHomeInfoDto) {
         matchingId = dto.matchingId
+
+        startTime = dto.startTime
+        reason = dto.reason
+        partnerNickname = dto.partnerNickname
+        partnerId = dto.partnerId
         matchingId?.let { mId ->
             /** 안 읽은 메시지 개수 세는 기능 **/
             getMessageForNotReadMessageCnt(mId)
         }
         dto.matchingStatus?.let { status ->
+            /** 홈 상태 업데이트 **/
             _homeStatusCode.postValue(getHomeStatusCode(status))
         }
-        startTime = dto.startTime
-        reason = dto.reason
-        partnerNickname = dto.partnerNickname
-        partnerId = dto.partnerId
     }
 
 

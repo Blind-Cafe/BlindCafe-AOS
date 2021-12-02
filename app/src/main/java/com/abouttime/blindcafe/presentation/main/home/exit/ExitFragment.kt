@@ -54,18 +54,12 @@ class ExitFragment: BaseFragment<ExitViewModel>(R.layout.fragment_exit) {
                     tvTitleVictim.isGone = false
                     tvTitleVictim.text = title
                 }
-
-
-
             }
         }
     }
     private fun handleVictim(isReport: Boolean, title: String) {
         binding?.let { b ->
             with(b) {
-                tvTitleAttacker.isGone = true
-                tvTitleVictim.isGone = false
-                tvTitleVictim.text = title
                 if (isReport) {
                     tvTitleAttacker.isGone = false
                     tvTitleVictim.isGone = true
@@ -79,12 +73,6 @@ class ExitFragment: BaseFragment<ExitViewModel>(R.layout.fragment_exit) {
                     builder.setSpan(ForegroundColorSpan(getColorByResId(R.color.main)), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     b.tvTitleVictim.append(builder)
                 }
-
-
-
-
-
-
             }
         }
 
