@@ -201,6 +201,17 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                 ivGallery.isEnabled = enable1
                 ivRecord.setColorFilter(getColorByResId(color2))
                 ivRecord.isEnabled = enable2
+
+                if (enable1.not()) {
+                    ivGallery.setOnClickListener {
+                        showToast(R.string.chat_enable_24_hours_later)
+                    }
+                }
+                if (enable2.not()) {
+                    ivRecord.setOnClickListener {
+                        showToast(R.string.chat_enable_48_hours_later)
+                    }
+                }
             }
         }
 

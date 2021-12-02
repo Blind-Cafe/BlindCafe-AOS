@@ -110,6 +110,9 @@
     <string name="chat_congrats">축하드립니다! 3일간의 대화가 즐거우셨군요. 이 대화방은 지금부터 7일간 유지됩니다.</string>
     <string name="chat_get_badge">프로필 교환 성공으로[%s]뱃지를 획득하셨습니다. 이제 홈에서 새로운 매칭이 가능합니다.</string>
 
+    <string name="chat_enable_24_hours_later">사진전송은 24시간 후에 사용 가능합니다.</string>
+    <string name="chat_enable_48_hours_later">음성전송은 48시간 후에 사용 가능합니다.</string>
+
     <!-- gallery -->
     <string name="gallery_title">갤러리</string>
     <string name="gallery_send">보내기</string>
