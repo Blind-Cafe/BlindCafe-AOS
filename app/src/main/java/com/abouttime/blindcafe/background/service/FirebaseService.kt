@@ -17,6 +17,7 @@ import com.abouttime.BlindCafeApplication.Companion.sharedPreferences
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.constants.LogTag.FCM_TAG
 import com.abouttime.blindcafe.common.constants.LogTag.RELEASE
+import com.abouttime.blindcafe.common.constants.PreferenceKey.DEVICE_TOKEN
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_CURRENT_ROOM
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_ENTIRE
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_FALSE
@@ -38,10 +39,10 @@ class FirebaseService() : FirebaseMessagingService() {
 
         var token: String?
             get() {
-                return sharedPref?.getString("token", "")
+                return sharedPref.getString(DEVICE_TOKEN, "")
             }
             set(value) {
-                sharedPref?.edit()?.putString("token", value)?.apply()
+                sharedPref.edit()?.putString(DEVICE_TOKEN, value)?.apply()
             }
 
         const val FCM_PATH = "FCM_PATH"

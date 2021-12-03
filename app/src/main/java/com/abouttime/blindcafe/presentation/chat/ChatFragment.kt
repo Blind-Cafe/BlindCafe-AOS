@@ -62,7 +62,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
     private val args: ChatFragmentArgs by navArgs()
 
-    lateinit var token: String
+
 
     private val chatAdapter = GroupAdapter<GroupieViewHolder>()
     private var popupWindow: PopupWindow? = null
@@ -85,10 +85,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         binding?.lifecycleOwner = this
         binding?.viewModel = viewModel
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-
-        lifecycleScope.launch(Dispatchers.IO) {
-            token = FirebaseMessaging.getInstance().token.await()
-        }
 
 
         initChatRecyclerView(fragmentChatBinding) // 채팅 리사이클러뷰 초기화

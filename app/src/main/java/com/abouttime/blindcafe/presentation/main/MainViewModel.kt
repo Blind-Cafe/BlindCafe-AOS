@@ -3,6 +3,7 @@ package com.abouttime.blindcafe.presentation.main
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.R
+import com.abouttime.blindcafe.background.service.FirebaseService
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag
@@ -28,17 +29,19 @@ class MainViewModel(
     }
 
     private fun postDeviceToken() = viewModelScope.launch(Dispatchers.IO) {
-        val deviceToken = FirebaseMessaging.getInstance().token.await()
-        Log.d(LogTag.RETROFIT_TAG, deviceToken)
-        postDeviceTokenUseCase(
-            PostDeviceTokenDto(deviceToken)
-        ).onEach { result ->
-            when (result) {
-                is Resource.Loading -> { showLoading() }
-                is Resource.Success -> { dismissLoading() }
-                is Resource.Error -> { dismissLoading() }
-            }
-        }.launchIn(viewModelScope)
+        val deviceToken = FirebaseService.token
+        deviceToken?.let {
+            postDeviceTokenUseCase(
+                PostDeviceTokenDto(deviceToken)
+            ).onEach { result ->
+                when (result) {
+                    is Resource.Loading -> { showLoading() }
+                    is Resource.Success -> { dismissLoading() }
+                    is Resource.Error -> { dismissLoading() }
+                }
+            }.launchIn(viewModelScope)
+        }
+
     }
 
 
