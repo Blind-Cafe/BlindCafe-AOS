@@ -86,6 +86,7 @@ class ChatViewModel(
                 }
                 is Resource.Success -> {
                     result.data?.let { list ->
+                        Log.e("isScroll", "$list 도착!!")
                         _receivedPageMessage.postValue(list)
                     }
                     dismissLoading()

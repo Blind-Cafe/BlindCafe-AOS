@@ -231,21 +231,16 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
             decor.setOverScrollStateListener { decor, oldState, newState ->
                 when (newState) {
-                    STATE_IDLE -> {
-                        isScrolling = false
-                    }
                     STATE_DRAG_START_SIDE -> {
                         // 페이지네이션 코드
                         isScrolling = true
                         viewModel?.matchingId?.let { id ->
                             if (timeStampList.isNotEmpty()) {
                                 val time = timeStampList.last()
+                                Log.e("isScroll", "STATE_DRAG_START_SIDE : $isScrolling")
                                 viewModel?.receivePagedMessages(id.toString(), time)
                             }
                         }
-                    }
-                    else -> {
-                        isScrolling = true
                     }
                 }
             }
@@ -261,6 +256,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
                     isScrolling = newState != RecyclerView.SCROLL_STATE_IDLE
+                    Log.e("isScroll", "onScrollStateChanged : $isScrolling")
                 }
             }
             )

@@ -30,6 +30,7 @@ class AudioTopicItem(
 
                 val mediaPlayer = MediaPlayer()
                 mediaPlayer.setDataSource(uri.toString())
+
                 mediaPlayer.setOnPreparedListener { player ->
                     viewBinding.ivPlayController.setImageResource(R.drawable.bt_pause)
                     viewBinding.tvAudioTime.startCountUp()
@@ -45,6 +46,7 @@ class AudioTopicItem(
                         }
                     }
                 }
+
                 mediaPlayer.setOnCompletionListener { player ->
                     viewBinding.ivPlayController.setImageResource(R.drawable.bt_play)
                     viewBinding.tvAudioTime.stopCountUp()

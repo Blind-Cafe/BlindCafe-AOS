@@ -29,7 +29,6 @@ class CountUpTextView(context: Context, attrs: AttributeSet) :AppCompatTextView(
     private fun updateCountTime(countTimeSeconds: Int) {
         val minutes = countTimeSeconds / 60
         val seconds = countTimeSeconds % 60
-        // TextView 를 상속 받았기 때문에 이렇게 속성을 넣어줄 수 있다.
         text = "%02d:%02d".format(minutes, seconds)
     }
 }
