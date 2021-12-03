@@ -31,7 +31,7 @@
                 android:isScrollContainer="true"
                 android:clickable="true"
                 android:clipToPadding="false"
-                android:paddingVertical="16dp"
+                android:paddingVertical="8dp"
                 android:focusable="true"
                 app:layout_constraintBottom_toTopOf="@id/ml_input_container"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -24,7 +24,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="@dimen/chat_message_bottom_margin"
+        android:layout_marginTop="@dimen/chat_message_top_margin"
         app:cardCornerRadius="16dp"
         android:id="@+id/cv_content_container">
 

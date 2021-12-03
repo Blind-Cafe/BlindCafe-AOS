@@ -14,6 +14,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/chat_message_bottom_margin"
+        android:layout_marginTop="@dimen/chat_message_top_margin"
         android:paddingEnd="@dimen/chat_content_padding"
         tools:ignore="RtlSymmetry">
 
@@ -21,7 +23,6 @@
             android:id="@+id/cl_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
             android:background="@drawable/bg_rounding_16dp"
             android:backgroundTint="@color/main"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -230,10 +230,10 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
 
             decor.setOverScrollStateListener { decor, oldState, newState ->
+                isScrolling = true
                 when (newState) {
                     STATE_DRAG_START_SIDE -> {
                         // 페이지네이션 코드
-                        isScrolling = true
                         viewModel?.matchingId?.let { id ->
                             if (timeStampList.isNotEmpty()) {
                                 val time = timeStampList.last()
@@ -255,7 +255,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             rvChatContainer.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
-                    isScrolling = newState != RecyclerView.SCROLL_STATE_IDLE
+                    isScrolling = true
                     Log.e("isScroll", "onScrollStateChanged : $isScrolling")
                 }
             }
