@@ -14,6 +14,7 @@ class DescriptionItem(private val message: Message): BindableItem<RvChatItemDesc
     override fun bind(viewBinding: RvChatItemDescriptionBinding, position: Int) {
         viewBinding.root.tag = message.timestamp
 
+        viewBinding.tvDescription.text = ""
         viewBinding.message = message
         if (message.contents.contains("<")) {
             val start = message.contents.indexOf("<")

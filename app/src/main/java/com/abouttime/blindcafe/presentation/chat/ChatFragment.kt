@@ -129,6 +129,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     }
 
     private fun receiveFirstPage() {
+        isScrolling = false
         viewModel?.matchingId?.let { id ->
             viewModel?.receivePagedMessages(id.toString(), Timestamp.now())
         }
@@ -296,13 +297,12 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                     }
                 }
             }
-            isScrolling = false
+
         }
     }
 
     private fun observePagedMessagesData() {
         viewModel?.receivedPageMessage.observe(viewLifecycleOwner) { messages ->
-            isScrolling = true
             messages.forEach { message ->
                 message.timestamp?.let { tp ->
                     timeStampList.add(tp)
@@ -313,7 +313,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                     }
                 }
             }
-            isScrolling = false
         }
     }
 
@@ -444,9 +443,11 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
             etMessageInput.setOnFocusChangeListener { view, isFocused ->
                 if (isFocused) {
+                    isScrolling = false
                     etMessageInput.isCursorVisible = true
                     mlInputContainer.transitionToEnd()
                 } else {
+                    isScrolling = true
                     etMessageInput.isCursorVisible = false
                     val imm: InputMethodManager = getInputManager()
                     imm.hideSoftInputFromWindow(etMessageInput.windowToken, 0)
