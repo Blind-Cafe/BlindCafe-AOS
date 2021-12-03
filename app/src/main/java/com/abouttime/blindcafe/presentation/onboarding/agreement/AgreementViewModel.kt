@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseViewModel
-import com.abouttime.blindcafe.common.constants.PreferenceKey.INFO_INPUT
 
 class AgreementViewModel : BaseViewModel() {
     private val _enableNextButton = MutableLiveData(false)
@@ -42,12 +41,7 @@ class AgreementViewModel : BaseViewModel() {
 
     fun onClickNextButton() {
         if (_enableNextButton.value == true) {
-            val infoInput = getStringData(INFO_INPUT)
-            if (infoInput.isNullOrEmpty()) {
-                moveToProfileInput()
-            } else {
-                moveToMainFragment()
-            }
+            moveToProfileInput()
         } else {
             showToast(R.string.agreement_toast_alert_select_all)
         }

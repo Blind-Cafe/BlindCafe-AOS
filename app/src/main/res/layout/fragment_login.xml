@@ -23,6 +23,7 @@
         android:id="@+id/bt_kakao_login"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/cd_login"
         android:layout_marginHorizontal="12dp"
         android:src="@drawable/kakao_login_large_wide"
         app:layout_constraintBottom_toTopOf="@id/tv_description_1"

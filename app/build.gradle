@@ -14,8 +14,8 @@ android {
         applicationId "com.abouttime.blindcafe"
         minSdk 24
         targetSdk 31
-        versionCode 4
-        versionName "1.1.1"
+        versionCode 5
+        versionName "1.1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -129,6 +129,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage-ktx'
     // cloud message
     implementation 'com.google.firebase:firebase-messaging'
+    //implementation 'com.google.firebase:firebase-messaging-directboot:23.0.0'
 
     // authentification
 //    implementation 'com.google.firebase:firebase-auth'
