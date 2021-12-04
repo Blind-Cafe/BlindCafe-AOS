@@ -2,6 +2,7 @@ package com.abouttime.blindcafe.presentation.chat.rv_item.user
 
 import android.util.Log
 import android.view.View
+import androidx.core.view.isGone
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.ext.millisecondToChatTime
@@ -16,6 +17,7 @@ import com.xwray.groupie.viewbinding.BindableItem
 class ImageSendItem(
     private val message: Message,
     private val viewModel: ChatViewModel,
+    private val lastIn1Minute: Boolean = true
 ) : BindableItem<RvChatItemSendImageBinding>() {
     override fun bind(viewBinding: RvChatItemSendImageBinding, position: Int) {
         viewBinding.root.tag = message.timestamp
@@ -29,9 +31,8 @@ class ImageSendItem(
                     .into(viewBinding.ivContent)
             }
         )
-        viewBinding.tvTime.text =
-            message.timestamp?.seconds?.secondToChatTime()
-                ?: System.currentTimeMillis().millisecondToChatTime()
+        viewBinding.tvTime.text =  message.timestamp?.seconds?.secondToChatTime() ?: System.currentTimeMillis().millisecondToChatTime()
+        viewBinding.tvTime.isGone = !lastIn1Minute
 
     }
 

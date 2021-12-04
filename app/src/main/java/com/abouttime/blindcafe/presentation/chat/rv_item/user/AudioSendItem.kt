@@ -2,6 +2,7 @@ package com.abouttime.blindcafe.presentation.chat.rv_item.user
 
 import android.media.MediaPlayer
 import android.view.View
+import androidx.core.view.isGone
 import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.ext.millisecondToChatTime
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
 class AudioSendItem(
     private val message: Message,
     private val viewModel: ChatViewModel,
+    private val lastIn1Minute: Boolean = true
 ) : BindableItem<RvChatItemSendAudioBinding>() {
 
     override fun bind(viewBinding: RvChatItemSendAudioBinding, position: Int) {
@@ -69,9 +71,8 @@ class AudioSendItem(
             )
         }
 
-        viewBinding.tvTime.text =
-            message.timestamp?.seconds?.secondToChatTime()
-                ?: System.currentTimeMillis().millisecondToChatTime()
+        viewBinding.tvTime.text =  message.timestamp?.seconds?.secondToChatTime() ?: System.currentTimeMillis().millisecondToChatTime()
+        viewBinding.tvTime.isGone = !lastIn1Minute
 
 
     }

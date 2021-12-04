@@ -23,30 +23,29 @@
         android:background="@color/chat_room_root_bg">
 
 
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_chat_container"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:isScrollContainer="true"
-                android:clickable="true"
-                android:clipToPadding="false"
-                android:paddingVertical="8dp"
-                android:focusable="true"
-                app:layout_constraintBottom_toTopOf="@id/ml_input_container"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ll_topic_unfold_container"
-                android:overScrollMode="always"
-                android:background="@color/transparent"
-                tools:listitem="@layout/rv_chat_item_receive_text" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_chat_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/transparent"
+            android:clickable="true"
+            android:clipToPadding="false"
+            android:focusable="true"
+            android:isScrollContainer="true"
+            android:overScrollMode="always"
+            android:paddingVertical="8dp"
+            app:layout_constraintBottom_toTopOf="@id/ml_input_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_topic_unfold_container"
+            tools:listitem="@layout/rv_chat_item_receive_text" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_toolbar_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
             android:background="@color/chat_room_top_bg"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -287,13 +286,16 @@
                 android:id="@+id/iv_gallery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="8dp"
                 android:backgroundTint="#5555ff"
                 android:cropToPadding="true"
                 android:src="@drawable/bt_gallery"
-                app:layout_constraintBottom_toBottomOf="@id/et_message_input"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/et_message_input"
+                app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/chat_room_icon_disabled" />
 
             <ImageView
@@ -304,53 +306,73 @@
                 android:cropToPadding="true"
                 android:onClick="@{() -> viewModel.onClickRecorderButton()}"
                 android:src="@drawable/bt_recording"
-                app:layout_constraintBottom_toBottomOf="@id/et_message_input"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@id/iv_gallery"
                 app:layout_constraintStart_toEndOf="@id/iv_gallery"
-                app:layout_constraintTop_toTopOf="@id/et_message_input"
+                app:layout_constraintTop_toTopOf="@id/iv_gallery"
                 app:tint="@color/chat_room_icon_disabled" />
 
 
-            <EditText
-                android:id="@+id/et_message_input"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginEnd="18dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/bg_chat_et"
-                android:hint="@string/chat_et_hint"
-                android:inputType="textMultiLine"
-                android:paddingHorizontal="18dp"
-                android:paddingVertical="12dp"
-                android:scrollbars="vertical"
-                android:singleLine="false"
-                android:text="@={viewModel.messageEditText}"
-                android:textColorHint="@color/gray_300"
-                android:textCursorDrawable="@drawable/ic_cursor"
-                android:textSize="@dimen/font_size_15"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/iv_record"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/bt_send"
+            <LinearLayout
+                android:id="@+id/ll_text_et_bt_container"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="@drawable/bg_chat_send_bt"
-                android:backgroundTint="@{viewModel.isSendButtonEnabled ? @color/enabled : @color/button_disabled}"
-                android:clickable="@{viewModel.isSendButtonEnabled ? true : false}"
-                android:focusable="true"
-                android:paddingHorizontal="24dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/bt_send"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@id/et_message_input"
-                app:layout_constraintDimensionRatio="56:44"
-                app:layout_constraintEnd_toEndOf="@id/et_message_input"
-                app:layout_constraintTop_toTopOf="@id/et_message_input"
-                app:tint="@color/white" />
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/bg_chat_et"
+                android:orientation="horizontal"
+                android:weightSum="41"
+                app:layout_constraintBottom_toBottomOf="@id/iv_gallery"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_record"
+                app:layout_constraintTop_toTopOf="@id/iv_gallery">
+
+
+                <EditText
+                    android:id="@+id/et_message_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="34"
+                    android:background="@color/transparent"
+                    android:hint="@string/chat_et_hint"
+                    android:includeFontPadding="false"
+                    android:inputType="textMultiLine"
+                    android:maxLines="4"
+                    android:overScrollMode="never"
+                    android:paddingHorizontal="18dp"
+                    android:paddingVertical="12dp"
+                    android:scrollbars="vertical"
+                    android:singleLine="false"
+                    android:text="@={viewModel.messageEditText}"
+                    android:textColorHint="@color/gray_300"
+                    android:textCursorDrawable="@drawable/ic_cursor"
+                    android:textSize="@dimen/font_size_15" />
+
+
+                <FrameLayout
+                    android:id="@+id/fl_bt_container"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7"
+                    android:background="@drawable/bg_chat_send_bt"
+                    android:backgroundTint="@{viewModel.isSendButtonEnabled ? @color/enabled : @color/button_disabled}"
+                    android:clickable="@{viewModel.isSendButtonEnabled ? true : false}"
+                    android:focusable="true"
+                    android:visibility="invisible"
+                    tools:visibility="visible">
+
+
+                    <ImageView
+                        android:id="@+id/bt_send"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center_horizontal"
+                        android:layout_marginBottom="8dp"
+                        android:src="@drawable/bt_send"
+                        app:tint="@color/white" />
+
+                </FrameLayout>
+
+            </LinearLayout>
 
 
         </androidx.constraintlayout.motion.widget.MotionLayout>

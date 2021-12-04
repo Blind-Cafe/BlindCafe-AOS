@@ -14,7 +14,8 @@ class TextReceiveItem(
     private val message: Message,
     private val isCont: Boolean,
     private val nickName: String,
-    private val profileImage: String
+    private val profileImage: String,
+    private val lastIn1Minute: Boolean = true
 ): BindableItem<RvChatItemReceiveTextBinding>() {
     override fun bind(viewBinding: RvChatItemReceiveTextBinding, position: Int) {
         viewBinding.root.tag = message.timestamp
@@ -30,9 +31,8 @@ class TextReceiveItem(
                 .into(viewBinding.ivProfileImage)
         }
         viewBinding.message = message
-        viewBinding.tvTime.text =
-            message.timestamp?.seconds?.secondToChatTime()
-            ?: System.currentTimeMillis().millisecondToChatTime()
+        viewBinding.tvTime.text =  message.timestamp?.seconds?.secondToChatTime() ?: System.currentTimeMillis().millisecondToChatTime()
+        viewBinding.tvTime.isGone = !lastIn1Minute
     }
 
     override fun getLayout(): Int = R.layout.rv_chat_item_receive_text

@@ -15,6 +15,8 @@ class CongratsItem(private val message: Message) : BindableItem<RvChatItemCongra
 
         viewBinding.tvCongrats.text = viewBinding.tvCongrats.resources.getString(R.string.chat_congrats)
 
+
+        viewBinding.tvBadge.text = ""
         val badge = viewBinding.tvCongrats.resources.getString(R.string.chat_get_badge).format(message.contents)
         val start = badge.indexOf("[")
         val end = badge.indexOf("]")

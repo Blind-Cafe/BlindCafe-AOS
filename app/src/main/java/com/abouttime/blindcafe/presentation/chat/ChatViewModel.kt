@@ -49,8 +49,8 @@ class ChatViewModel(
     private val _messageEditText = MutableLiveData<String>()
     val messageEditText: MutableLiveData<String> get() = _messageEditText
 
-    private val _receivedMessage = MutableLiveData<List<Message>>()
-    val receivedMessage: LiveData<List<Message>> get() = _receivedMessage
+    private val _receivedNewMessage = MutableLiveData<List<Message>>()
+    val receivedNewMessage: LiveData<List<Message>> get() = _receivedNewMessage
 
     private val _receivedPageMessage = MutableLiveData<List<Message>>()
     val receivedPageMessage: LiveData<List<Message>> get() = _receivedPageMessage
@@ -113,7 +113,7 @@ class ChatViewModel(
                                 result.data[0].timestamp?.seconds.toString()
                             )
                         )
-                        _receivedMessage.postValue(result.data!!)
+                        _receivedNewMessage.postValue(result.data!!)
                     }
 
 
@@ -276,7 +276,8 @@ class ChatViewModel(
 
     /** update button **/
     fun updateSendButton() {
-        _isSendButtonEnabled.value = !messageEditText.value.isNullOrEmpty()
+
+        _isSendButtonEnabled.value = !messageEditText.value?.trim().isNullOrEmpty()
     }
 
     /** onClick **/

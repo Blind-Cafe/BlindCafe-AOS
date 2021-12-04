@@ -18,7 +18,8 @@ class ImageReceiveItem(
     private val viewModel: ChatViewModel,
     private val isCont: Boolean,
     private val nickName: String,
-    private val profileImage: String
+    private val profileImage: String,
+    private val lastIn1Minute: Boolean = true
 ): BindableItem<RvChatItemReceiveImageBinding>() {
     override fun bind(viewBinding: RvChatItemReceiveImageBinding, position: Int) {
         viewBinding.root.tag = message.timestamp
@@ -35,9 +36,8 @@ class ImageReceiveItem(
                     .into(viewBinding.ivContent)
             }
         )
-        viewBinding.tvTime.text =
-            message.timestamp?.seconds?.secondToChatTime()
-                ?: System.currentTimeMillis().millisecondToChatTime()
+        viewBinding.tvTime.text =  message.timestamp?.seconds?.secondToChatTime() ?: System.currentTimeMillis().millisecondToChatTime()
+        viewBinding.tvTime.isGone = !lastIn1Minute
     }
 
     private fun handleContinue(viewBinding: RvChatItemReceiveImageBinding) {

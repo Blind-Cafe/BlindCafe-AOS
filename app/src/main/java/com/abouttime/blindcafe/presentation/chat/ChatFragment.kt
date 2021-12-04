@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
@@ -18,16 +17,14 @@ import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.get
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.common.constants.LogTag.CHATTING_TAG
-import com.abouttime.blindcafe.common.constants.PreferenceKey
 import com.abouttime.blindcafe.common.constants.PreferenceKey.LAST_READ_MESSAGE
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_CURRENT_ROOM
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_FALSE
@@ -43,12 +40,8 @@ import com.abouttime.blindcafe.presentation.chat.rv_item.*
 import com.abouttime.blindcafe.presentation.chat.rv_item.common.*
 import com.abouttime.blindcafe.presentation.chat.rv_item.user.*
 import com.google.firebase.Timestamp
-import com.google.firebase.messaging.FirebaseMessaging
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 import me.everything.android.ui.overscroll.IOverScrollState.*
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -63,12 +56,12 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     private val args: ChatFragmentArgs by navArgs()
 
 
-
     private val chatAdapter = GroupAdapter<GroupieViewHolder>()
     private var popupWindow: PopupWindow? = null
 
     var isCont = false
     private val timeStampList = mutableListOf<Timestamp>()
+    private val messageList = mutableListOf<Message>()
 
 
     private var recorder: MediaRecorder? = null
@@ -91,11 +84,11 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         initNavArgs() // NavArgs 변수 초기화 (맨 위에 와야함!)
 
 
-        observeMessagesData()
+        observeNewMessagesData(fragmentChatBinding)
         subscribeMessages()
 
         observePagedMessagesData()
-        receiveFirstPage()
+        receiveFirstPage(fragmentChatBinding)
 
 
         initSendButton(fragmentChatBinding) // 전송버튼 초기화
@@ -128,11 +121,12 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         blockCurrentRoomNotification()
     }
 
-    private fun receiveFirstPage() {
+    private fun receiveFirstPage(fragmentChatBinding: FragmentChatBinding) {
         isScrolling = false
         viewModel?.matchingId?.let { id ->
             viewModel?.receivePagedMessages(id.toString(), Timestamp.now())
         }
+        scrollRvToLastPosition(fragmentChatBinding)
     }
 
     private fun initPartnerNciknameTextView() {
@@ -238,7 +232,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                         viewModel?.matchingId?.let { id ->
                             if (timeStampList.isNotEmpty()) {
                                 val time = timeStampList.last()
-                                Log.e("isScroll", "STATE_DRAG_START_SIDE : $isScrolling")
                                 viewModel?.receivePagedMessages(id.toString(), time)
                             }
                         }
@@ -249,22 +242,34 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
             root.viewTreeObserver.addOnGlobalLayoutListener {
                 val heightDiff = root.rootView.height - root.height
-                if (heightDiff > 100 && !isScrolling) {
+                if (heightDiff > 100) {
                     scrollRvToLastPosition(fragmentChatBinding)
                 }
             }
-            rvChatContainer.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                    super.onScrollStateChanged(recyclerView, newState)
-                    isScrolling = true
-                    Log.e("isScroll", "onScrollStateChanged : $isScrolling")
-                }
-            }
-            )
+//            rvChatContainer.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+//                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+//                    super.onScrollStateChanged(recyclerView, newState)
+//                    isScrolling = true
+//                    Log.e("isScroll", "onScrollStateChanged : $isScrolling")
+//                }
+//            }
+//            )
 
         }
 
     private fun scrollRvToLastPosition(
+        fragmentChatBinding
+        : FragmentChatBinding,
+    ) =
+        with(fragmentChatBinding
+        ) {
+            if (chatAdapter.itemCount - 1 > 0 && !isScrolling) {
+                rvChatContainer.scrollToPosition(chatAdapter.itemCount - 1)
+            }
+        }
+
+
+    private fun smoothScrollRvToLastPosition(
         fragmentChatBinding
         : FragmentChatBinding,
     ) =
@@ -285,9 +290,9 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     }
 
     /** handle message **/
-    private fun observeMessagesData() {
-        viewModel.receivedMessage.observe(viewLifecycleOwner) { messages ->
-            isScrolling = true
+    private fun observeNewMessagesData(fragmentChatBinding: FragmentChatBinding) {
+        viewModel.receivedNewMessage.observe(viewLifecycleOwner) { messages ->
+            isScrolling = false
             messages.forEach { message ->
                 message.timestamp?.let { tp ->
                     if (message.senderUid == viewModel.userId) {
@@ -297,6 +302,8 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                     }
                 }
             }
+            scrollRvToLastPosition(fragmentChatBinding)
+            //isScrolling = true
 
         }
     }
@@ -317,14 +324,63 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     }
 
     private fun addMessageToMe(message: Message) {
+        addMessageToMeCheckLastIn1Minute(message)
         when (message.type) {
-            1 -> chatAdapter.add(TextSendItem(message))
-            2 -> chatAdapter.add(ImageSendItem(message, viewModel = viewModel))
-            3 -> chatAdapter.add(AudioSendItem(message, viewModel = viewModel))
+            1 -> chatAdapter.add(TextSendItem(message, lastIn1Minute = true))
+            2 -> chatAdapter.add(ImageSendItem(message, viewModel = viewModel, lastIn1Minute = true))
+            3 -> chatAdapter.add(AudioSendItem(message, viewModel = viewModel, lastIn1Minute = true))
             4 -> chatAdapter.add(TextTopicItem(message))
             5 -> chatAdapter.add(ImageTopicItem(message, viewModel = viewModel))
             6 -> chatAdapter.add(AudioTopicItem(message, viewModel = viewModel))
             7 -> chatAdapter.add(DescriptionItem(message))
+        }
+        if (message.type in 1..7) messageList.add(message)
+    }
+
+    private fun addMessageToMeCheckLastIn1Minute(message: Message) {
+
+        binding?.let { b ->
+            val lastIdx = b.rvChatContainer.childCount - 1
+            if (lastIdx >= 0) {
+                val timeTextView: TextView? =
+                    b.rvChatContainer[lastIdx].findViewById(R.id.tv_time) // null 이면 시간 없는 topic or description
+                val lastMessageTime = timeTextView?.text?.toString()
+
+                val newMessageTime =
+                    message.timestamp?.seconds?.secondToChatTime()
+                        ?: System.currentTimeMillis().millisecondToChatTime()
+
+                Log.e("messageList", "${messageList.size}")
+                Log.e("messageList", "$lastMessageTime $newMessageTime")
+                if (lastMessageTime == newMessageTime) {
+
+
+
+                    val item = chatAdapter.getItem(lastIdx)
+                    val lastMessageItem = messageList.last()
+                    when (lastMessageItem.type) {
+                        1 -> {
+                            item.notifyChanged(TextSendItem(lastMessageItem, lastIn1Minute = false))
+                        }
+                        2 -> {
+
+                            item.notifyChanged(TextSendItem(lastMessageItem, lastIn1Minute = false))
+//                            item.notifyChanged(ImageSendItem(lastMessageItem,
+//                                viewModel = viewModel,
+//                                lastIn1Minute = false))
+
+                        }
+                        3 -> {
+                            item.notifyChanged(TextSendItem(lastMessageItem, lastIn1Minute = false))
+//                            item.notifyChanged(AudioSendItem(lastMessageItem,
+//                                viewModel = viewModel,
+//                                lastIn1Minute = false))
+                        }
+                    }
+
+                }
+
+            }
         }
     }
 
@@ -335,52 +391,45 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                 TextReceiveItem(message,
                     isCont = isCont,
                     nickName = viewModel.partnerNickname ?: "",
-                    profileImage = viewModel.profileImage ?: ""))
+                    profileImage = viewModel.profileImage ?: "",
+                    lastIn1Minute = true))
             2 -> chatAdapter.add(
                 ImageReceiveItem(message,
                     viewModel = viewModel,
                     isCont = isCont,
                     nickName = viewModel.partnerNickname ?: "",
-                    profileImage = viewModel.profileImage ?: ""))
+                    profileImage = viewModel.profileImage ?: "",
+                    lastIn1Minute = true))
             3 -> chatAdapter.add(
                 AudioReceiveItem(message,
                     viewModel = viewModel,
                     isCont = isCont,
                     nickName = viewModel.partnerNickname ?: "",
-                    profileImage = viewModel.profileImage ?: ""))
+                    profileImage = viewModel.profileImage ?: "",
+                    lastIn1Minute = true))
             4 -> chatAdapter.add(TextTopicItem(message))
             5 -> chatAdapter.add(ImageTopicItem(message, viewModel = viewModel))
             6 -> chatAdapter.add(AudioTopicItem(message, viewModel = viewModel))
             7 -> chatAdapter.add(DescriptionItem(message))
-            9 -> {
-                /**
-                 * 사실 토픽은 무조건 이 ToPartner 함수로 옴
-                 * 왜냐함녀 userId 가 null 이니까
-                 * 서버에서 미리 넣어주고, 클라는 5분이 넘었을 때만 읽어온다
-                 */
-                if (message.timestamp?.seconds?.isOver5Minutes() == true) {
-                    chatAdapter.add(TextTopicItem(message))
-                }
-            }
         }
+        if (message.type in 1..7) messageList.add(message)
     }
 
     private fun addPagedMessageToMe(message: Message) {
 
         when (message.type) {
-            1 -> chatAdapter.add(0, TextSendItem(message))
-            2 -> chatAdapter.add(0, ImageSendItem(message, viewModel = viewModel))
-            3 -> chatAdapter.add(0, AudioSendItem(message, viewModel = viewModel))
+            1 -> chatAdapter.add(0, TextSendItem(message, lastIn1Minute = true))
+            2 -> chatAdapter.add(0, ImageSendItem(message, viewModel = viewModel, lastIn1Minute = true))
+            3 -> chatAdapter.add(0, AudioSendItem(message, viewModel = viewModel, lastIn1Minute = true))
             4 -> chatAdapter.add(0, TextTopicItem(message))
             5 -> chatAdapter.add(0, ImageTopicItem(message, viewModel = viewModel))
             6 -> chatAdapter.add(0, AudioTopicItem(message, viewModel = viewModel))
             7 -> chatAdapter.add(0, DescriptionItem(message))
             8 -> {
-                Log.e("asdf", message.toString())
                 chatAdapter.add(0, CongratsItem(message))
             }
         }
-
+        if (message.type in 1..8) messageList.add(message)
 
     }
 
@@ -389,22 +438,26 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             1 -> chatAdapter.add(0, TextReceiveItem(message,
                 isCont = isCont,
                 nickName = viewModel.partnerNickname ?: "",
-                profileImage = viewModel.profileImage ?: ""))
+                profileImage = viewModel.profileImage ?: "",
+                lastIn1Minute = true))
             2 -> chatAdapter.add(0, ImageReceiveItem(message,
                 viewModel = viewModel,
                 isCont = isCont,
                 nickName = viewModel.partnerNickname ?: "",
-                profileImage = viewModel.profileImage ?: ""))
+                profileImage = viewModel.profileImage ?: "",
+                lastIn1Minute = true))
             3 -> chatAdapter.add(0, AudioReceiveItem(message,
                 viewModel = viewModel,
                 isCont = isCont,
                 nickName = viewModel.partnerNickname ?: "",
-                profileImage = viewModel.profileImage ?: ""))
+                profileImage = viewModel.profileImage ?: "",
+                lastIn1Minute = true))
             4 -> chatAdapter.add(0, TextTopicItem(message))
             5 -> chatAdapter.add(0, ImageTopicItem(message, viewModel = viewModel))
             6 -> chatAdapter.add(0, AudioTopicItem(message, viewModel = viewModel))
             7 -> chatAdapter.add(0, DescriptionItem(message))
         }
+        if (message.type in 1..7) messageList.add(message)
     }
 
 
@@ -415,7 +468,8 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     ) =
         with(fragmentChatBinding
         ) {
-            btSend.setOnClickListener {
+            flBtContainer.setOnClickListener {
+
                 sendTextMessage(etMessageInput.text.toString())
                 btSend.requestFocus()
                 etMessageInput.text.clear()
@@ -442,13 +496,13 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         with(fragmentChatBinding) {
 
             etMessageInput.setOnFocusChangeListener { view, isFocused ->
+                isScrolling = !isFocused
+                etMessageInput.isCursorVisible = isFocused
+                flBtContainer.isGone = !isFocused
                 if (isFocused) {
-                    isScrolling = false
-                    etMessageInput.isCursorVisible = true
+
                     mlInputContainer.transitionToEnd()
                 } else {
-                    isScrolling = true
-                    etMessageInput.isCursorVisible = false
                     val imm: InputMethodManager = getInputManager()
                     imm.hideSoftInputFromWindow(etMessageInput.windowToken, 0)
                     mlInputContainer.transitionToStart()
@@ -458,7 +512,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             viewModel!!.messageEditText.observe(viewLifecycleOwner) {
                 viewModel!!.updateSendButton()
             }
-
         }
 
     /** Image Message **/
@@ -779,11 +832,11 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     }
 
 
-
     override fun onStop() {
         super.onStop()
         viewModel.matchingId?.let { mId ->
-            saveStringData(Pair("${mId}${LAST_READ_MESSAGE}", (System.currentTimeMillis() / 1000).toString()))
+            saveStringData(Pair("${mId}${LAST_READ_MESSAGE}",
+                (System.currentTimeMillis() / 1000).toString()))
             saveStringData(Pair("${mId}${NOTIFICATION_CURRENT_ROOM}", NOTIFICATION_TRUE))
         }
         viewModel?.matchingId?.let { id ->
