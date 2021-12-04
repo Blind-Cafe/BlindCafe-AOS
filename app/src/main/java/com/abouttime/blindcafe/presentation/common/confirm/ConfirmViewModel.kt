@@ -133,6 +133,7 @@ class ConfirmViewModel(
     /** 로그아웃 **/
     fun logout() {
         saveStringData(Pair(JWT, null))
+        saveStringData(Pair(INFO_INPUT, null))
         moveToDirections(ConfirmDialogFragmentDirections.actionConfirmDialogFragmentToLoginFragment())
     }
 

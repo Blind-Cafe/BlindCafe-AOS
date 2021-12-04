@@ -178,10 +178,16 @@ class ChatViewModel(
                     is Resource.Success -> {
                     }
                     is Resource.Error -> {
-                        if (result.message == "400") {
-                            showToast(R.string.toast_fail)
-                        } else {
-                            showToast(R.string.toast_check_internet)
+                        when(result.message) {
+                            "1008", "1030" -> {
+                                showToast(R.string.toast_gone)
+                            }
+                            "1150" -> {
+                                showToast(R.string.toast_not_appropriate_message)
+                            }
+                            else -> {
+                                showToast(R.string.toast_check_internet)
+                            }
                         }
                     }
                 }

@@ -4,19 +4,15 @@ import android.app.AlertDialog
 import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isGone
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.databinding.ActivityNavHostBinding
 import org.koin.android.viewmodel.ext.android.viewModel
-
-import android.view.MotionEvent
-import android.view.View
-import com.abouttime.BlindCafeApplication
-import com.abouttime.blindcafe.common.constants.PreferenceKey.BACKGROUND
-import com.abouttime.blindcafe.common.constants.PreferenceKey.FOREGROUND
-import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_CURRENT_ROOM
 
 
 class NavHostActivity : AppCompatActivity() {
@@ -25,7 +21,7 @@ class NavHostActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private val viewModel: NavHostViewModel by viewModel()
 
-    private lateinit var  loadingDialog: AlertDialog
+    private lateinit var loadingDialog: AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,13 +31,14 @@ class NavHostActivity : AppCompatActivity() {
 
         initNavController()
 
-        initLoadingDialog()
         observeLoadingEvent()
         observeSuspendEvent()
 
     }
+
     private fun initNavController() {
-        navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
     }
 
@@ -60,6 +57,7 @@ class NavHostActivity : AppCompatActivity() {
 
     private fun observeLoadingEvent() {
         GlobalLiveData.loadingEvent.observe(this) {
+            Log.e("loading", it.toString())
             if (it) {
                 showLoadingDialog()
             } else {
@@ -67,12 +65,19 @@ class NavHostActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun showLoadingDialog() {
-        loadingDialog.show()
+        if (binding.spinKit.isGone) {
+            binding.clSpinKitContainer.isGone = false
+            binding.spinKit.isGone = false
+        }
     }
 
     private fun dismissLoadingDialog() {
-        loadingDialog.dismiss()
+        if (binding.spinKit.isGone.not()) {
+            binding.clSpinKitContainer.isGone = true
+            binding.spinKit.isGone = true
+        }
     }
 
     private fun observeSuspendEvent() {
@@ -82,7 +87,6 @@ class NavHostActivity : AppCompatActivity() {
             }
         }
     }
-
 
 
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
@@ -99,9 +103,10 @@ class NavHostActivity : AppCompatActivity() {
                 v.getGlobalVisibleRect(outRect)
                 //v.getFocusedRect(outRect)
 
-                Log.e("asdf", "->\noutRect.top ${outRect.top}\nevent.rawY ${event.rawY}\noutRect.bottom ${outRect.bottom}\nevent.rawX ${event.rawX}")
+                Log.e("asdf",
+                    "->\noutRect.top ${outRect.top}\nevent.rawY ${event.rawY}\noutRect.bottom ${outRect.bottom}\nevent.rawX ${event.rawX}")
                 if (outRect.top > event.rawY.toInt()) {
-                //if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt()) ) {
+                    //if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt()) ) {
                     v.clearFocus()
                 }
             }

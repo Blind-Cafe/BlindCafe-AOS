@@ -354,29 +354,30 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                 Log.e("messageList", "$lastMessageTime $newMessageTime")
                 if (lastMessageTime == newMessageTime) {
 
-
-
                     val item = chatAdapter.getItem(lastIdx)
+                    chatAdapter.remove(item)
+                    chatAdapter.notifyDataSetChanged()
+                    chatAdapter.notifyItemRemoved(lastIdx)
                     val lastMessageItem = messageList.last()
-                    when (lastMessageItem.type) {
-                        1 -> {
-                            item.notifyChanged(TextSendItem(lastMessageItem, lastIn1Minute = false))
-                        }
-                        2 -> {
-
-                            item.notifyChanged(TextSendItem(lastMessageItem, lastIn1Minute = false))
-//                            item.notifyChanged(ImageSendItem(lastMessageItem,
-//                                viewModel = viewModel,
-//                                lastIn1Minute = false))
-
-                        }
-                        3 -> {
-                            item.notifyChanged(TextSendItem(lastMessageItem, lastIn1Minute = false))
-//                            item.notifyChanged(AudioSendItem(lastMessageItem,
-//                                viewModel = viewModel,
-//                                lastIn1Minute = false))
-                        }
-                    }
+//                    when (lastMessageItem.type) {
+//                        1 -> {
+//                            chatAdapter.add(lastIdx, TextSendItem(lastMessageItem, lastIn1Minute = false))
+//                        }
+//                        2 -> {
+//
+//                            chatAdapter.add(lastIdx, TextSendItem(lastMessageItem, lastIn1Minute = false))
+////                            item.notifyChanged(ImageSendItem(lastMessageItem,
+////                                viewModel = viewModel,
+////                                lastIn1Minute = false))
+//
+//                        }
+//                        3 -> {
+//                            chatAdapter.add(lastIdx, TextSendItem(lastMessageItem, lastIn1Minute = false))
+////                            item.notifyChanged(AudioSendItem(lastMessageItem,
+////                                viewModel = viewModel,
+////                                lastIn1Minute = false))
+//                        }
+//                    }
 
                 }
 

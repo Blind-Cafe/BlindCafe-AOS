@@ -24,6 +24,9 @@
 
     <string name="toast_input_reason">이유를 한 가지 선택해주세요</string>
     <string name="toast_already_post_matching_request">이미 매칭 요청중입니다. 매칭을 기다려주세요!</string>
+    
+    <string name="toast_gone">상대 계정이 더이상 유효하지 않습니다.</string>
+    <string name="toast_not_appropriate_message">지원하지 않는 메시지 형식</string>
 
 
 
