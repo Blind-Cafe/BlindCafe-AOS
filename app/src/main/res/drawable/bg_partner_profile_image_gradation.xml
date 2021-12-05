@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <gradient
+        android:startColor="@color/partner_profile_image_gradation_start"
+        android:endColor="@color/partner_profile_image_gradation_end"
+        android:angle="270"/>
+
+</shape>

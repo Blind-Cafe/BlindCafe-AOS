@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <corners android:radius="6dp"
+        />
+
+    <solid
+        android:color="@color/partner_profile_image_indicator_selected"
+        />
+
+</shape>

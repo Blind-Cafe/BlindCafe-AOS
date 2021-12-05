@@ -287,6 +287,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_chatFragment_to_partnerProfileFragment"
+            app:destination="@id/partnerProfileFragment" />
 
     </fragment>
     <fragment
@@ -368,47 +371,8 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
-    <dialog
-        android:id="@+id/quitReasonDialogFragment"
-        android:name="com.abouttime.blindcafe.presentation.chat.quit.QuitReasonDialogFragment"
-        android:label="QuitReasonDialogFragment"
-        tools:layout="@layout/dialog_fragment_quit_reason">
 
-        <argument
-            android:name="matchingId"
-            app:argType="integer"
-            app:nullable="false" />
-        <argument
-            android:name="partnerNickname"
-            app:argType="string"
-            />
 
-        <argument android:name="startTime"
-            app:argType="integer"/>
-
-        <action
-            android:id="@+id/action_quitReasonDialogFragment_to_confirmDialogFragment"
-            app:destination="@id/confirmDialogFragment"
-            app:popUpTo="@id/quitReasonDialogFragment"
-            app:popUpToInclusive="true" />
-    </dialog>
-    <dialog
-        android:id="@+id/reportReasonDialogFragment"
-        android:name="com.abouttime.blindcafe.presentation.chat.report.ReportReasonDialogFragment"
-        android:label="ReportReasonDialogFragment"
-        tools:layout="@layout/dialog_fragment_report_reason">
-        <argument
-            android:name="matchingId"
-            app:argType="integer"
-            app:nullable="false" />
-
-        <action
-            android:id="@+id/action_reportReasonDialogFragment_to_confirmDialogFragment"
-            app:destination="@id/confirmDialogFragment"
-            app:popUpTo="@id/reportReasonDialogFragment"
-            app:popUpToInclusive="true" />
-
-    </dialog>
     <fragment
         android:id="@+id/accountDeleteFragment"
         android:name="com.abouttime.blindcafe.presentation.main.my_page.setting.account_delete.AccountDeleteFragment"
@@ -577,90 +541,7 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
-    <dialog
-        android:id="@+id/confirmDialogFragment"
-        android:name="com.abouttime.blindcafe.presentation.common.confirm.ConfirmDialogFragment"
-        android:label="ConfirmDialogFragment"
-        tools:layout="@layout/dialog_fragment_confirm">
-        <!-- 꼭 보낼 5 가지 -->
-        <argument
-            android:name="id"
-            app:argType="integer"
-            app:nullable="false" />
-        <argument
-            android:name="title"
-            app:argType="string"
-            app:nullable="true" />
-        <argument
-            android:name="subtitle"
-            app:argType="string"
-            app:nullable="true" />
-        <argument
-            android:name="no"
-            app:argType="string" />
-        <argument
-            android:name="yes"
-            app:argType="string" />
 
-
-        <!-- 채팅방 나가기에 쓰이는 두 가지 -->
-        <argument
-            android:name="reason"
-            android:defaultValue="0"
-            app:argType="integer" />
-        <argument
-            android:name="matchingId"
-            android:defaultValue="0"
-            app:argType="integer" />
-
-        <argument
-            android:name="nickname"
-            android:defaultValue=""
-            app:argType="string"
-            />
-        <argument
-            android:name="startTime"
-            android:defaultValue="0"
-            app:argType="integer"/>
-
-
-        <action
-            android:id="@+id/action_confirmDialogFragment_to_accountDeleteCompleteFragment"
-            app:destination="@id/accountDeleteCompleteFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/mainFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_confirmDialogFragment_to_exitFragment"
-            app:destination="@id/exitFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/chatFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_confirmDialogFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/mainFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_confirmDialogFragment_to_mainFragment"
-            app:destination="@id/mainFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/mainFragment"
-            app:popUpToInclusive="true" />
-    </dialog>
     <fragment
         android:id="@+id/accountDeleteCompleteFragment"
         android:name="com.abouttime.blindcafe.presentation.main.my_page.setting.account_delete.complete.AccountDeleteCompleteFragment"
@@ -780,6 +661,22 @@
 
     </fragment>
 
+
+    <fragment
+        tools:layout="@layout/fragment_partner_profile"
+        android:id="@+id/partnerProfileFragment"
+        android:name="com.abouttime.blindcafe.presentation.chat.partner_profile.PartnerProfileFragment"
+        android:label="PartnerProfileFragment">
+
+        <argument android:name="partnerUserId"
+            app:argType="integer"
+            />
+        <argument android:name="matchingId"
+            app:argType="integer"/>
+
+    </fragment>
+
+
     <dialog
         android:id="@+id/acceptImageDialogFragment"
         android:name="com.abouttime.blindcafe.presentation.profile_exchange.accept.profile_image.AcceptImageDialogFragment"
@@ -789,7 +686,133 @@
         <argument
             android:name="partnerUserId"
             app:argType="integer" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/confirmDialogFragment"
+        android:name="com.abouttime.blindcafe.presentation.common.confirm.ConfirmDialogFragment"
+        android:label="ConfirmDialogFragment"
+        tools:layout="@layout/dialog_fragment_confirm">
+        <!-- 꼭 보낼 5 가지 -->
+        <argument
+            android:name="id"
+            app:argType="integer"
+            app:nullable="false" />
+        <argument
+            android:name="title"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="subtitle"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="no"
+            app:argType="string" />
+        <argument
+            android:name="yes"
+            app:argType="string" />
 
 
+        <!-- 채팅방 나가기에 쓰이는 두 가지 -->
+        <argument
+            android:name="reason"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <argument
+            android:name="matchingId"
+            android:defaultValue="0"
+            app:argType="integer" />
+
+        <argument
+            android:name="nickname"
+            android:defaultValue=""
+            app:argType="string"
+            />
+        <argument
+            android:name="startTime"
+            android:defaultValue="0"
+            app:argType="integer"/>
+
+
+        <action
+            android:id="@+id/action_confirmDialogFragment_to_accountDeleteCompleteFragment"
+            app:destination="@id/accountDeleteCompleteFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_confirmDialogFragment_to_exitFragment"
+            app:destination="@id/exitFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/chatFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_confirmDialogFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_confirmDialogFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/reportReasonDialogFragment"
+        android:name="com.abouttime.blindcafe.presentation.chat.report.ReportReasonDialogFragment"
+        android:label="ReportReasonDialogFragment"
+        tools:layout="@layout/dialog_fragment_report_reason">
+        <argument
+            android:name="matchingId"
+            app:argType="integer"
+            app:nullable="false" />
+
+        <action
+            android:id="@+id/action_reportReasonDialogFragment_to_confirmDialogFragment"
+            app:destination="@id/confirmDialogFragment"
+            app:popUpTo="@id/reportReasonDialogFragment"
+            app:popUpToInclusive="true" />
+
+    </dialog>
+
+    <dialog
+        android:id="@+id/quitReasonDialogFragment"
+        android:name="com.abouttime.blindcafe.presentation.chat.quit.QuitReasonDialogFragment"
+        android:label="QuitReasonDialogFragment"
+        tools:layout="@layout/dialog_fragment_quit_reason">
+
+        <argument
+            android:name="matchingId"
+            app:argType="integer"
+            app:nullable="false" />
+        <argument
+            android:name="partnerNickname"
+            app:argType="string"
+            />
+
+        <argument android:name="startTime"
+            app:argType="integer"/>
+
+        <action
+            android:id="@+id/action_quitReasonDialogFragment_to_confirmDialogFragment"
+            app:destination="@id/confirmDialogFragment"
+            app:popUpTo="@id/quitReasonDialogFragment"
+            app:popUpToInclusive="true" />
     </dialog>
 </navigation>

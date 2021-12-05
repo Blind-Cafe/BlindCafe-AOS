@@ -82,4 +82,14 @@
     <color name="black_two">#2d2d2d</color>
     <color name="brownish_grey">#616161</color>
 
+
+    <color name="partner_profile_image_bg">#373737</color>
+    <color name="partner_profile_image_gradation_start">#b22d2d2d</color>
+    <color name="partner_profile_image_gradation_end">#00727272</color>
+    <color name="partner_profile_info_bg">#2d2d2d</color>
+    <color name="partner_profile_image_indicator_selected">#b3ffffff</color>
+    <color name="partner_profile_image_indicator_unselected">#b3616161</color>
+
+
+
 </resources>

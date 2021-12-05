@@ -655,4 +655,5 @@
 
 
     <string name="cd_login">로그인 버튼</string>
+    <string name="cd_close">close</string>
 </resources>
