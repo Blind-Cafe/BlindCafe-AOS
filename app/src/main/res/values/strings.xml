@@ -166,7 +166,7 @@
     <!-- coffee order-->
     <string name="coffee_order_title">메뉴 주문하기</string>
     <string name="coffee_order_subtitle">Blind Cafe menu</string>
-    <string name="coffee_order_description">누군가 당님과 함석하고 싶어해요 음료수를 고르시면 테이블로 안내해드릴게요</string>
+    <string name="coffee_order_description">누군가 %s님과 함석하고 싶어해요 음료수를 고르시면 테이블로 안내해드릴게요</string>
     <string name="coffee_order_next_alert">음료를 먼저 선택해주세요</string>
 
     <!-- quit -->

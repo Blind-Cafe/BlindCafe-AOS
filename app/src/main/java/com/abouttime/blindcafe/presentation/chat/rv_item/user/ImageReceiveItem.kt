@@ -1,12 +1,11 @@
 package com.abouttime.blindcafe.presentation.chat.rv_item.user
 
-import android.util.Log
 import android.view.View
 import androidx.core.view.isGone
 import com.abouttime.blindcafe.R
-import com.abouttime.blindcafe.common.constants.LogTag.CHATTING_TAG
 import com.abouttime.blindcafe.common.ext.millisecondToChatTime
 import com.abouttime.blindcafe.common.ext.secondToChatTime
+import com.abouttime.blindcafe.common.ext.setChatImage
 import com.abouttime.blindcafe.databinding.RvChatItemReceiveImageBinding
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.presentation.chat.ChatViewModel
@@ -26,16 +25,14 @@ class ImageReceiveItem(
 
         handleContinue(viewBinding)
 
-
         viewModel.downloadImageUrl(
             message = message,
             callback = { uri ->
-                Log.e(CHATTING_TAG, uri.toString())
-                Glide.with(viewBinding.ivContent)
-                    .load(uri)
-                    .into(viewBinding.ivContent)
+                viewBinding.ivContent.setChatImage(uri)
             }
         )
+
+
         viewBinding.tvTime.text =  message.timestamp?.seconds?.secondToChatTime() ?: System.currentTimeMillis().millisecondToChatTime()
         viewBinding.tvTime.isGone = !lastIn1Minute
     }

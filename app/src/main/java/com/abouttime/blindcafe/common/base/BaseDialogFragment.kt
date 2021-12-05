@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.abouttime.BlindCafeApplication
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.databinding.ToastBinding
+import com.abouttime.blindcafe.presentation.GlobalLiveData
 
 abstract class BaseDialogFragment<VM : BaseViewModel>(layoutId: Int) : DialogFragment(layoutId) {
     // View Model
@@ -173,4 +174,6 @@ abstract class BaseDialogFragment<VM : BaseViewModel>(layoutId: Int) : DialogFra
             .getString(key, null)
 
     }
+
+
 }

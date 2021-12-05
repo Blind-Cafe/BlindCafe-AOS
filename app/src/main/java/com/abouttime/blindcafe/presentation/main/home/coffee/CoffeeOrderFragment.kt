@@ -35,6 +35,7 @@ class CoffeeOrderFragment : BaseFragment<CoffeeOrderViewModel>(R.layout.fragment
         initArgsData()
 
 
+
     }
 
 
@@ -44,6 +45,11 @@ class CoffeeOrderFragment : BaseFragment<CoffeeOrderViewModel>(R.layout.fragment
         viewModel.matchingId = args.matchingId
         viewModel.startTime = args.startTime
         viewModel.partnerNickname = args.partnerNickname
+        initPartnerNickName()
+    }
+
+    private fun initPartnerNickName() {
+        binding?.tvDescription?.text = getString(R.string.coffee_order_description).format(viewModel.partnerNickname)
     }
 
     override fun onResume() {

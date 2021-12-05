@@ -17,6 +17,7 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.abouttime.BlindCafeApplication
 import com.abouttime.blindcafe.databinding.ToastBinding
+import com.abouttime.blindcafe.presentation.GlobalLiveData
 
 
 abstract class BaseFragment<VM : BaseViewModel>(layoutId: Int) : Fragment(layoutId) {
@@ -144,6 +145,13 @@ abstract class BaseFragment<VM : BaseViewModel>(layoutId: Int) : Fragment(layout
         return BlindCafeApplication.sharedPreferences
             .getString(key, null)
 
+    }
+
+    fun showLoading() {
+        GlobalLiveData.loadingEvent.postValue(true)
+    }
+    fun dismissLoading() {
+        GlobalLiveData.loadingEvent.postValue(false)
     }
 
 

@@ -79,7 +79,7 @@
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
-        android:text="@string/coffee_order_description"
+        tools:text="@string/coffee_order_description"
         android:textColor="@color/gray_300"
         android:textSize="@dimen/font_size_12"
         app:layout_constraintEnd_toEndOf="parent"

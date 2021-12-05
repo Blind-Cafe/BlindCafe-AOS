@@ -310,6 +310,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
     private fun observePagedMessagesData() {
         viewModel?.receivedPageMessage.observe(viewLifecycleOwner) { messages ->
+            showLoading()
             messages.forEach { message ->
                 message.timestamp?.let { tp ->
                     timeStampList.add(tp)
@@ -320,6 +321,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                     }
                 }
             }
+            dismissLoading()
         }
     }
 
