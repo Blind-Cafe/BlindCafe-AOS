@@ -27,85 +27,81 @@
             tools:src="@drawable/bg_barista" />
 
         <View
+            android:id="@+id/v_bg_gradation"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:clickable="false"
             android:alpha="0.7"
+            android:background="@drawable/bg_partner_profile_image_gradation"
+            android:clickable="false"
             android:focusable="false"
             app:layout_constraintBottom_toTopOf="@id/v_bg_bottom_space"
-            app:layout_constraintVertical_weight="29"
-            android:background="@drawable/bg_partner_profile_image_gradation"
-            android:id="@+id/v_bg_gradation"
-            />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_weight="29" />
 
         <View
+            android:id="@+id/v_bg_bottom_space"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintVertical_weight="26"
-            app:layout_constraintStart_toStartOf="parent"
             android:background="@color/transparent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/v_bg_gradation"
-            android:id="@+id/v_bg_bottom_space"
             android:clickable="false"
             android:focusable="false"
-            />
-        
-        
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v_bg_gradation"
+            app:layout_constraintVertical_weight="26" />
+
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="8dp"
-            android:weightSum="3"
-            android:gravity="center"
             android:layout_marginHorizontal="18dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="24dp"
-            >
+            android:gravity="center"
+            android:weightSum="3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <View
+                android:id="@+id/v_indicator_1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:id="@+id/v_indicator_1"
                 android:layout_weight="1"
                 android:background="@drawable/bg_partner_profile_image_indicator_unselected" />
 
             <View
+                android:id="@+id/v_indicator_2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:id="@+id/v_indicator_2"
+                android:layout_marginStart="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/bg_partner_profile_image_indicator_unselected"
-                android:layout_marginStart="10dp"/>
+                android:background="@drawable/bg_partner_profile_image_indicator_unselected" />
 
 
             <View
+                android:id="@+id/v_indicator_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:id="@+id/v_indicator_3"
+                android:layout_marginStart="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/bg_partner_profile_image_indicator_unselected"
-                android:layout_marginStart="10dp"/>
+                android:background="@drawable/bg_partner_profile_image_indicator_unselected" />
 
 
         </LinearLayout>
 
         <ImageView
-            android:contentDescription="@string/cd_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/bt_close"
-            android:layout_marginTop="27dp"
             android:layout_marginStart="4dp"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="27dp"
+            android:contentDescription="@string/cd_close"
+            android:src="@drawable/bt_close"
             app:layout_constraintStart_toStartOf="parent"
-            />
-        
+            app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -127,11 +123,11 @@
             android:layout_marginStart="18dp"
             android:layout_marginTop="19dp"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:includeFontPadding="false"
             android:textColor="@color/white_2"
             android:textSize="@dimen/font_size_15"
             app:layout_constraintBottom_toTopOf="@id/tv_location"
             app:layout_constraintStart_toStartOf="parent"
-            android:includeFontPadding="false"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0"
             app:layout_constraintVertical_chainStyle="packed"
@@ -154,15 +150,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:drawablePadding="4dp"
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
-            android:textColor="main"
+            android:textColor="@color/main"
+            tools:text="location"
             android:textSize="@dimen/font_size_13"
+            android:drawablePadding="4dp"
             app:drawableStartCompat="@drawable/ic_location"
             app:layout_constraintBottom_toTopOf="@id/tv_title_interest"
             app:layout_constraintStart_toStartOf="@id/tv_nickname"
-            app:layout_constraintTop_toBottomOf="@id/tv_nickname"
-            tools:text="location" />
+            app:layout_constraintTop_toBottomOf="@id/tv_nickname" />
 
         <TextView
             android:id="@+id/tv_title_interest"
