@@ -29,6 +29,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.*
 
 class ChatViewModel(
     private val receiveMessagesUseCase: ReceiveMessagesUseCase,
@@ -75,6 +76,13 @@ class ChatViewModel(
     var interest: String? = null
 
     val userId = getStringData(USER_ID)
+
+
+    /** check last message in a minute  **/
+    val sendLastIn1Minute = LinkedList<Boolean>()
+    val messages = LinkedList<Message>()
+    val receiveLastIn1Minute = mutableListOf<Boolean>()
+
 
 
     /** use cases - read **/

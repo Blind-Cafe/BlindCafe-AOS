@@ -22,13 +22,12 @@ class AudioReceiveItem(
     private val viewModel: ChatViewModel,
     private val isCont: Boolean,
     private val nickName: String,
-    private val profileImage: String,
-    private val lastIn1Minute: Boolean = true
+    private val profileImage: String
 ) : BindableItem<RvChatItemReceiveAudioBinding>() {
 
     override fun bind(viewBinding: RvChatItemReceiveAudioBinding, position: Int) {
         viewBinding.root.tag = message.timestamp
-        handleContinue(viewBinding)
+        handleContinue(viewBinding, position)
 
         var isPlaying = false
         viewBinding.ivPlayController.setOnClickListener {
@@ -76,10 +75,13 @@ class AudioReceiveItem(
 
 
         viewBinding.tvTime.text =  message.timestamp?.seconds?.secondToChatTime() ?: System.currentTimeMillis().millisecondToChatTime()
-        viewBinding.tvTime.isGone = !lastIn1Minute
+        viewBinding.tvTime.isGone = !viewModel.sendLastIn1Minute[position]
     }
 
-    private fun handleContinue(viewBinding: RvChatItemReceiveAudioBinding) {
+    private fun handleContinue(viewBinding: RvChatItemReceiveAudioBinding, position: Int) {
+        if (viewModel.sendLastIn1Minute[position])
+
+
         if (isCont) {
             viewBinding.tvNickname.apply {
                 isGone = false

@@ -16,8 +16,7 @@ import kotlinx.coroutines.launch
 
 class AudioSendItem(
     private val message: Message,
-    private val viewModel: ChatViewModel,
-    private val lastIn1Minute: Boolean = true
+    private val viewModel: ChatViewModel
 ) : BindableItem<RvChatItemSendAudioBinding>() {
 
     override fun bind(viewBinding: RvChatItemSendAudioBinding, position: Int) {
@@ -72,7 +71,7 @@ class AudioSendItem(
         }
 
         viewBinding.tvTime.text =  message.timestamp?.seconds?.secondToChatTime() ?: System.currentTimeMillis().millisecondToChatTime()
-        viewBinding.tvTime.isGone = !lastIn1Minute
+        viewBinding.tvTime.isGone = !viewModel.sendLastIn1Minute[position]
 
 
     }

@@ -17,7 +17,6 @@ import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.view.get
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
@@ -239,21 +238,13 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                 }
             }
 
-
             root.viewTreeObserver.addOnGlobalLayoutListener {
                 val heightDiff = root.rootView.height - root.height
                 if (heightDiff > 100) {
                     scrollRvToLastPosition(fragmentChatBinding)
                 }
             }
-//            rvChatContainer.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-//                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-//                    super.onScrollStateChanged(recyclerView, newState)
-//                    isScrolling = true
-//                    Log.e("isScroll", "onScrollStateChanged : $isScrolling")
-//                }
-//            }
-//            )
+
 
         }
 
@@ -325,105 +316,74 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         }
     }
 
+    /** handle each message **/
     private fun addMessageToMe(message: Message) {
-        addMessageToMeCheckLastIn1Minute(message)
+        viewModel.sendLastIn1Minute.add(true)
+        viewModel.messages.add(message)
+        checkLastIn1MinuteForNewMessage(message)
+
+
         when (message.type) {
-            1 -> chatAdapter.add(TextSendItem(message, lastIn1Minute = true))
-            2 -> chatAdapter.add(ImageSendItem(message, viewModel = viewModel, lastIn1Minute = true))
-            3 -> chatAdapter.add(AudioSendItem(message, viewModel = viewModel, lastIn1Minute = true))
+            1 -> chatAdapter.add(TextSendItem(message, viewModel = viewModel))
+            2 -> chatAdapter.add(ImageSendItem(message, viewModel = viewModel))
+            3 -> chatAdapter.add(AudioSendItem(message, viewModel = viewModel))
             4 -> chatAdapter.add(TextTopicItem(message))
             5 -> chatAdapter.add(ImageTopicItem(message, viewModel = viewModel))
             6 -> chatAdapter.add(AudioTopicItem(message, viewModel = viewModel))
             7 -> chatAdapter.add(DescriptionItem(message))
         }
-        if (message.type in 1..7) messageList.add(message)
-    }
 
-    private fun addMessageToMeCheckLastIn1Minute(message: Message) {
-
-        binding?.let { b ->
-            val lastIdx = b.rvChatContainer.childCount - 1
-            if (lastIdx >= 0) {
-                val timeTextView: TextView? =
-                    b.rvChatContainer[lastIdx].findViewById(R.id.tv_time) // null 이면 시간 없는 topic or description
-                val lastMessageTime = timeTextView?.text?.toString()
-
-                val newMessageTime =
-                    message.timestamp?.seconds?.secondToChatTime()
-                        ?: System.currentTimeMillis().millisecondToChatTime()
-
-                Log.e("messageList", "${messageList.size}")
-                Log.e("messageList", "$lastMessageTime $newMessageTime")
-                if (lastMessageTime == newMessageTime) {
-
-                    val item = chatAdapter.getItem(lastIdx)
-                    chatAdapter.remove(item)
-                    chatAdapter.notifyDataSetChanged()
-                    chatAdapter.notifyItemRemoved(lastIdx)
-                    val lastMessageItem = messageList.last()
-//                    when (lastMessageItem.type) {
-//                        1 -> {
-//                            chatAdapter.add(lastIdx, TextSendItem(lastMessageItem, lastIn1Minute = false))
-//                        }
-//                        2 -> {
-//
-//                            chatAdapter.add(lastIdx, TextSendItem(lastMessageItem, lastIn1Minute = false))
-////                            item.notifyChanged(ImageSendItem(lastMessageItem,
-////                                viewModel = viewModel,
-////                                lastIn1Minute = false))
-//
-//                        }
-//                        3 -> {
-//                            chatAdapter.add(lastIdx, TextSendItem(lastMessageItem, lastIn1Minute = false))
-////                            item.notifyChanged(AudioSendItem(lastMessageItem,
-////                                viewModel = viewModel,
-////                                lastIn1Minute = false))
-//                        }
-//                    }
-
-                }
-
-            }
-        }
     }
 
     private fun addMessageToPartner(message: Message) {
+        viewModel.sendLastIn1Minute.add(true)
+        viewModel.messages.add(message)
+        checkLastIn1MinuteForNewMessage(message)
 
         when (message.type) {
             1 -> chatAdapter.add(
-                TextReceiveItem(message,
+                TextReceiveItem(
+                    viewModel = viewModel,
+                    message = message,
                     isCont = isCont,
                     nickName = viewModel.partnerNickname ?: "",
                     profileImage = viewModel.profileImage ?: "",
-                    lastIn1Minute = true))
+                ))
             2 -> chatAdapter.add(
-                ImageReceiveItem(message,
+                ImageReceiveItem(
+                    message,
                     viewModel = viewModel,
                     isCont = isCont,
                     nickName = viewModel.partnerNickname ?: "",
                     profileImage = viewModel.profileImage ?: "",
-                    lastIn1Minute = true))
+                ))
             3 -> chatAdapter.add(
-                AudioReceiveItem(message,
+                AudioReceiveItem(
+                    message,
                     viewModel = viewModel,
                     isCont = isCont,
                     nickName = viewModel.partnerNickname ?: "",
                     profileImage = viewModel.profileImage ?: "",
-                    lastIn1Minute = true))
+                ))
             4 -> chatAdapter.add(TextTopicItem(message))
             5 -> chatAdapter.add(ImageTopicItem(message, viewModel = viewModel))
             6 -> chatAdapter.add(AudioTopicItem(message, viewModel = viewModel))
             7 -> chatAdapter.add(DescriptionItem(message))
         }
-        if (message.type in 1..7) messageList.add(message)
+
     }
 
     private fun addPagedMessageToMe(message: Message) {
+        viewModel.sendLastIn1Minute.addFirst(true)
+        viewModel.messages.addFirst(message)
+        checkLastIn1MinuteForPagedMessage(message)
 
         when (message.type) {
-            1 -> chatAdapter.add(0, TextSendItem(message, lastIn1Minute = true))
-            2 -> chatAdapter.add(0, ImageSendItem(message, viewModel = viewModel, lastIn1Minute = true))
-            3 -> chatAdapter.add(0, AudioSendItem(message, viewModel = viewModel, lastIn1Minute = true))
+            1 -> chatAdapter.add(0, TextSendItem(message, viewModel))
+            2 -> chatAdapter.add(0,
+                ImageSendItem(message, viewModel = viewModel))
+            3 -> chatAdapter.add(0,
+                AudioSendItem(message, viewModel = viewModel))
             4 -> chatAdapter.add(0, TextTopicItem(message))
             5 -> chatAdapter.add(0, ImageTopicItem(message, viewModel = viewModel))
             6 -> chatAdapter.add(0, AudioTopicItem(message, viewModel = viewModel))
@@ -432,36 +392,87 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                 chatAdapter.add(0, CongratsItem(message))
             }
         }
-        if (message.type in 1..8) messageList.add(message)
+
 
     }
 
     private fun addPagedMessageToPartner(message: Message) {
+        viewModel.sendLastIn1Minute.addFirst(true)
+        viewModel.messages.addFirst(message)
+        checkLastIn1MinuteForPagedMessage(message)
+
         when (message.type) {
-            1 -> chatAdapter.add(0, TextReceiveItem(message,
-                isCont = isCont,
-                nickName = viewModel.partnerNickname ?: "",
-                profileImage = viewModel.profileImage ?: "",
-                lastIn1Minute = true))
-            2 -> chatAdapter.add(0, ImageReceiveItem(message,
+            1 -> chatAdapter.add(0, TextReceiveItem(
                 viewModel = viewModel,
+                message = message,
                 isCont = isCont,
                 nickName = viewModel.partnerNickname ?: "",
                 profileImage = viewModel.profileImage ?: "",
-                lastIn1Minute = true))
-            3 -> chatAdapter.add(0, AudioReceiveItem(message,
-                viewModel = viewModel,
-                isCont = isCont,
-                nickName = viewModel.partnerNickname ?: "",
-                profileImage = viewModel.profileImage ?: "",
-                lastIn1Minute = true))
+            ))
+            2 -> chatAdapter.add(0,
+                ImageReceiveItem(
+                    message,
+                    viewModel = viewModel,
+                    isCont = isCont,
+                    nickName = viewModel.partnerNickname ?: "",
+                    profileImage = viewModel.profileImage ?: "",
+                ))
+            3 -> chatAdapter.add(0,
+                AudioReceiveItem(
+                    message,
+                    viewModel = viewModel,
+                    isCont = isCont,
+                    nickName = viewModel.partnerNickname ?: "",
+                    profileImage = viewModel.profileImage ?: "",
+                ))
             4 -> chatAdapter.add(0, TextTopicItem(message))
             5 -> chatAdapter.add(0, ImageTopicItem(message, viewModel = viewModel))
             6 -> chatAdapter.add(0, AudioTopicItem(message, viewModel = viewModel))
             7 -> chatAdapter.add(0, DescriptionItem(message))
         }
-        if (message.type in 1..7) messageList.add(message)
     }
+
+    private fun checkLastIn1MinuteForNewMessage(message: Message) {
+        val lastIdx = chatAdapter.itemCount - 1
+
+        if (lastIdx < 0) return
+        if (message.type !in 1..3) return
+        if (viewModel.messages[lastIdx].senderUid != message.senderUid) return
+
+        val lastMessageTime =
+            viewModel.messages[lastIdx].timestamp?.seconds?.secondToChatTime()
+        val newMessageTime =
+            message.timestamp?.seconds?.secondToChatTime() ?: System.currentTimeMillis()
+                .millisecondToChatTime()
+
+        if (lastMessageTime != newMessageTime) return
+
+
+        viewModel.sendLastIn1Minute.removeAt(lastIdx)
+        viewModel.sendLastIn1Minute.add(lastIdx, false)
+        //chatAdapter.notifyDataSetChanged()
+        chatAdapter.notifyItemChanged(lastIdx)
+
+    }
+
+    private fun checkLastIn1MinuteForPagedMessage(message: Message) {
+        if (chatAdapter.itemCount == 0) return
+        if (message.type !in 1..3) return
+        if (viewModel.messages[0].senderUid != message.senderUid) return
+
+
+        val lastMessageTime =
+            viewModel.messages[1].timestamp?.seconds?.secondToChatTime()
+        val newMessageTime =
+            message.timestamp?.seconds?.secondToChatTime() ?: System.currentTimeMillis()
+                .millisecondToChatTime()
+
+        if (lastMessageTime != newMessageTime) return
+
+        viewModel.sendLastIn1Minute.removeFirst()
+        viewModel.sendLastIn1Minute.addFirst(false)
+    }
+
 
 
     /** Text Message **/
@@ -845,6 +856,12 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         viewModel?.matchingId?.let { id ->
             viewModel?.postExitLog(id)
         }
+    }
+
+    override fun onDestroy() {
+        viewModel?.sendLastIn1Minute.clear()
+        super.onDestroy()
+
     }
 
 }

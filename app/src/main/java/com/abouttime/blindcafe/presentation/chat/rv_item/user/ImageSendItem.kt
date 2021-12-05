@@ -15,7 +15,6 @@ import com.xwray.groupie.viewbinding.BindableItem
 class ImageSendItem(
     private val message: Message,
     private val viewModel: ChatViewModel,
-    private val lastIn1Minute: Boolean = true
 ) : BindableItem<RvChatItemSendImageBinding>() {
     override fun bind(viewBinding: RvChatItemSendImageBinding, position: Int) {
         viewBinding.root.tag = message.timestamp
@@ -27,7 +26,7 @@ class ImageSendItem(
             }
         )
         viewBinding.tvTime.text =  message.timestamp?.seconds?.secondToChatTime() ?: System.currentTimeMillis().millisecondToChatTime()
-        viewBinding.tvTime.isGone = !lastIn1Minute
+        viewBinding.tvTime.isGone = !viewModel.sendLastIn1Minute[position]
 
     }
 
