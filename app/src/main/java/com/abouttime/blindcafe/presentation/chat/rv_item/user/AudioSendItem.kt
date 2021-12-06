@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.ext.millisecondToChatTime
 import com.abouttime.blindcafe.common.ext.secondToChatTime
+import com.abouttime.blindcafe.common.ext.setMarginTop
+import com.abouttime.blindcafe.databinding.RvChatItemReceiveAudioBinding
 import com.abouttime.blindcafe.databinding.RvChatItemSendAudioBinding
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.presentation.chat.ChatViewModel
@@ -20,7 +22,7 @@ class AudioSendItem(
 ) : BindableItem<RvChatItemSendAudioBinding>() {
 
     override fun bind(viewBinding: RvChatItemSendAudioBinding, position: Int) {
-
+        handleSendFirstIn1Minute(viewBinding, position)
         var isPlaying = false
         viewBinding.ivPlayController.setOnClickListener {
             viewModel.downloadAudioUrl(
@@ -75,6 +77,13 @@ class AudioSendItem(
 
 
     }
+
+    private fun handleSendFirstIn1Minute(viewBinding: RvChatItemSendAudioBinding, position: Int) {
+        if (viewModel.sendFirstIn1Minute[position].not()) {
+            viewBinding.root.setMarginTop(0)
+        }
+    }
+
     private fun startPlay(viewBinding: RvChatItemSendAudioBinding, url: String) {
 
     }

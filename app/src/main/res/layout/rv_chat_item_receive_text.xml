@@ -26,10 +26,10 @@
             android:layout_height="36dp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_profile_image_none"
-            android:visibility="gone"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible" />
+             />
 
 
         <TextView

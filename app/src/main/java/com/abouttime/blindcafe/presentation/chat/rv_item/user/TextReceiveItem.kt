@@ -5,7 +5,9 @@ import androidx.core.view.isGone
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.ext.millisecondToChatTime
 import com.abouttime.blindcafe.common.ext.secondToChatTime
+import com.abouttime.blindcafe.common.ext.setMarginTop
 import com.abouttime.blindcafe.databinding.RvChatItemReceiveTextBinding
+import com.abouttime.blindcafe.databinding.RvChatItemSendImageBinding
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.presentation.chat.ChatViewModel
 import com.bumptech.glide.Glide
@@ -21,6 +23,7 @@ class TextReceiveItem(
 ): BindableItem<RvChatItemReceiveTextBinding>() {
     override fun bind(viewBinding: RvChatItemReceiveTextBinding, position: Int) {
         handleContinue(viewBinding, position)
+        handleSendFirstIn1Minute(viewBinding, position)
 
         viewBinding.message = message
         viewBinding.tvTime.text =  message.timestamp?.seconds?.secondToChatTime() ?: System.currentTimeMillis().millisecondToChatTime()
@@ -31,23 +34,34 @@ class TextReceiveItem(
         if (viewModel.sendFirstIn1Minute[position].not()) {
             viewBinding.ivProfileImage.visibility = View.INVISIBLE
             viewBinding.tvNickname.visibility = View.GONE
+
             return
         }
 
 
-        if (isCont|| isCont.not()) {
+        if (isCont) {
             viewBinding.tvNickname.apply {
                 isGone = false
                 text = nickName
             }
             viewBinding.ivProfileImage.isGone = false
-            Glide.with(viewBinding.ivProfileImage)
-                .load(profileImage)
-                .circleCrop()
-                .into(viewBinding.ivProfileImage)
-
-            if (profileImage.isEmpty())
+            if (profileImage.isNotEmpty()) {
+                Glide.with(viewBinding.ivProfileImage)
+                    .load(profileImage)
+                    .circleCrop()
+                    .into(viewBinding.ivProfileImage)
+            } else {
                 viewBinding.ivProfileImage.setImageResource(R.drawable.ic_profile_image_none)
+            }
+        }
+    }
+
+    private fun handleSendFirstIn1Minute(viewBinding: RvChatItemReceiveTextBinding, position: Int) {
+        if (viewModel.sendFirstIn1Minute[position].not()) {
+            viewBinding.root.setMarginTop(0)
+            viewBinding.tvContentText.setBackgroundResource(R.drawable.bg_chat_receive_text_round)
+        } else {
+            viewBinding.tvContentText.setBackgroundResource(R.drawable.bg_chat_receive_text)
         }
     }
 

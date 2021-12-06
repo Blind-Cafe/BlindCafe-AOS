@@ -6,6 +6,8 @@ import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.ext.millisecondToChatTime
 import com.abouttime.blindcafe.common.ext.secondToChatTime
 import com.abouttime.blindcafe.common.ext.setChatImage
+import com.abouttime.blindcafe.common.ext.setMarginTop
+import com.abouttime.blindcafe.databinding.RvChatItemReceiveImageBinding
 import com.abouttime.blindcafe.databinding.RvChatItemSendImageBinding
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.presentation.chat.ChatViewModel
@@ -17,7 +19,7 @@ class ImageSendItem(
     private val viewModel: ChatViewModel,
 ) : BindableItem<RvChatItemSendImageBinding>() {
     override fun bind(viewBinding: RvChatItemSendImageBinding, position: Int) {
-
+        handleSendFirstIn1Minute(viewBinding, position)
         viewModel.downloadImageUrl(
             message = message,
             callback = { uri ->
@@ -27,6 +29,12 @@ class ImageSendItem(
         viewBinding.tvTime.text =  message.timestamp?.seconds?.secondToChatTime() ?: System.currentTimeMillis().millisecondToChatTime()
         viewBinding.tvTime.isGone = !viewModel.sendLastIn1Minute[position]
 
+    }
+
+    private fun handleSendFirstIn1Minute(viewBinding: RvChatItemSendImageBinding, position: Int) {
+        if (viewModel.sendFirstIn1Minute[position].not()) {
+            viewBinding.root.setMarginTop(0)
+        }
     }
 
     override fun getLayout(): Int = R.layout.rv_chat_item_send_image

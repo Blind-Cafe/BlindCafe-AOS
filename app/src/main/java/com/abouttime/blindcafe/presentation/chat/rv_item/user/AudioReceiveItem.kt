@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.ext.millisecondToChatTime
 import com.abouttime.blindcafe.common.ext.secondToChatTime
+import com.abouttime.blindcafe.common.ext.setMarginTop
 import com.abouttime.blindcafe.databinding.RvChatItemReceiveAudioBinding
 import com.abouttime.blindcafe.databinding.RvChatItemReceiveImageBinding
 import com.abouttime.blindcafe.domain.model.Message
@@ -28,6 +29,7 @@ class AudioReceiveItem(
     override fun bind(viewBinding: RvChatItemReceiveAudioBinding, position: Int) {
 
         handleContinue(viewBinding, position)
+        handleSendFirstIn1Minute(viewBinding, position)
 
         var isPlaying = false
         viewBinding.ivPlayController.setOnClickListener {
@@ -85,20 +87,26 @@ class AudioReceiveItem(
             return
         }
 
-
-        if (isCont || isCont.not()) {
+        if (isCont) {
             viewBinding.tvNickname.apply {
                 isGone = false
                 text = nickName
             }
             viewBinding.ivProfileImage.isGone = false
-            Glide.with(viewBinding.ivProfileImage.context)
-                .load(profileImage)
-                .circleCrop()
-                .into(viewBinding.ivProfileImage)
-
-            if (profileImage.isEmpty())
+            if (profileImage.isNotEmpty()) {
+                Glide.with(viewBinding.ivProfileImage.context)
+                    .load(profileImage)
+                    .circleCrop()
+                    .into(viewBinding.ivProfileImage)
+            } else {
                 viewBinding.ivProfileImage.setImageResource(R.drawable.ic_profile_image_none)
+            }
+        }
+    }
+
+    private fun handleSendFirstIn1Minute(viewBinding: RvChatItemReceiveAudioBinding, position: Int) {
+        if (viewModel.sendFirstIn1Minute[position].not()) {
+            viewBinding.root.setMarginTop(0)
         }
     }
 
