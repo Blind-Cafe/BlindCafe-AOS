@@ -80,6 +80,7 @@ class ChatViewModel(
 
     /** check last message in a minute  **/
     val sendLastIn1Minute = LinkedList<Boolean>()
+    val sendFirstIn1Minute = LinkedList<Boolean>()
     val messages = LinkedList<Message>()
     val receiveLastIn1Minute = mutableListOf<Boolean>()
 

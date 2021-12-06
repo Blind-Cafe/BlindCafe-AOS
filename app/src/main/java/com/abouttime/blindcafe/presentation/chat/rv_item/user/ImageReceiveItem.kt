@@ -22,7 +22,7 @@ class ImageReceiveItem(
     override fun bind(viewBinding: RvChatItemReceiveImageBinding, position: Int) {
         viewBinding.root.tag = message.timestamp
 
-        handleContinue(viewBinding)
+        handleContinue(viewBinding, position)
 
         viewModel.downloadImageUrl(
             message = message,
@@ -36,8 +36,15 @@ class ImageReceiveItem(
         viewBinding.tvTime.isGone = !viewModel.sendLastIn1Minute[position]
     }
 
-    private fun handleContinue(viewBinding: RvChatItemReceiveImageBinding) {
-        if (isCont) {
+    private fun handleContinue(viewBinding: RvChatItemReceiveImageBinding, position: Int) {
+        if (viewModel.sendFirstIn1Minute[position].not()) {
+            viewBinding.ivProfileImage.visibility = View.INVISIBLE
+            viewBinding.tvNickname.visibility = View.GONE
+            return
+        }
+
+
+        if (isCont || isCont.not()) {
             viewBinding.tvNickname.apply {
                 isGone = false
                 text = nickName
@@ -47,6 +54,9 @@ class ImageReceiveItem(
                 .load(profileImage)
                 .circleCrop()
                 .into(viewBinding.ivProfileImage)
+
+            if (profileImage.isEmpty())
+                viewBinding.ivProfileImage.setImageResource(R.drawable.ic_profile_image_none)
         }
     }
 

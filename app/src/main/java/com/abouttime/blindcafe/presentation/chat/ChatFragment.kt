@@ -255,7 +255,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         with(fragmentChatBinding
         ) {
             if (chatAdapter.itemCount - 1 > 0 && !isScrolling) {
-                rvChatContainer.scrollToPosition(chatAdapter.itemCount - 1)
+                rvChatContainer.smoothScrollToPosition(chatAdapter.itemCount - 1)
             }
         }
 
@@ -319,6 +319,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     /** handle each message **/
     private fun addMessageToMe(message: Message) {
         viewModel.sendLastIn1Minute.add(true)
+        viewModel.sendFirstIn1Minute.add(true)
         viewModel.messages.add(message)
         checkLastIn1MinuteForNewMessage(message)
 
@@ -337,6 +338,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
     private fun addMessageToPartner(message: Message) {
         viewModel.sendLastIn1Minute.add(true)
+        viewModel.sendFirstIn1Minute.add(true)
         viewModel.messages.add(message)
         checkLastIn1MinuteForNewMessage(message)
 
@@ -375,6 +377,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
     private fun addPagedMessageToMe(message: Message) {
         viewModel.sendLastIn1Minute.addFirst(true)
+        viewModel.sendFirstIn1Minute.addFirst(true)
         viewModel.messages.addFirst(message)
         checkLastIn1MinuteForPagedMessage(message)
 
@@ -398,6 +401,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
     private fun addPagedMessageToPartner(message: Message) {
         viewModel.sendLastIn1Minute.addFirst(true)
+        viewModel.sendFirstIn1Minute.addFirst(true)
         viewModel.messages.addFirst(message)
         checkLastIn1MinuteForPagedMessage(message)
 
@@ -450,15 +454,17 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
         viewModel.sendLastIn1Minute.removeAt(lastIdx)
         viewModel.sendLastIn1Minute.add(lastIdx, false)
-        //chatAdapter.notifyDataSetChanged()
         chatAdapter.notifyItemChanged(lastIdx)
+
+        viewModel.sendFirstIn1Minute.removeLast()
+        viewModel.sendFirstIn1Minute.add(false)
 
     }
 
     private fun checkLastIn1MinuteForPagedMessage(message: Message) {
         if (chatAdapter.itemCount == 0) return
         if (message.type !in 1..3) return
-        if (viewModel.messages[0].senderUid != message.senderUid) return
+        if (viewModel.messages[1].senderUid != message.senderUid) return
 
 
         val lastMessageTime =
@@ -471,6 +477,15 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
         viewModel.sendLastIn1Minute.removeFirst()
         viewModel.sendLastIn1Minute.addFirst(false)
+
+
+        viewModel.sendFirstIn1Minute.removeFirst()
+        viewModel.sendFirstIn1Minute.removeFirst()
+        viewModel.sendFirstIn1Minute.addFirst(false)
+        chatAdapter.notifyItemChanged(0)
+        viewModel.sendFirstIn1Minute.addFirst(true)
+
+
     }
 
 
@@ -514,7 +529,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                 etMessageInput.isCursorVisible = isFocused
                 flBtContainer.isGone = !isFocused
                 if (isFocused) {
-
                     mlInputContainer.transitionToEnd()
                 } else {
                     val imm: InputMethodManager = getInputManager()

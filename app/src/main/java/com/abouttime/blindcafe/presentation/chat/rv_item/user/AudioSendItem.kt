@@ -20,7 +20,7 @@ class AudioSendItem(
 ) : BindableItem<RvChatItemSendAudioBinding>() {
 
     override fun bind(viewBinding: RvChatItemSendAudioBinding, position: Int) {
-        viewBinding.root.tag = message.timestamp
+
         var isPlaying = false
         viewBinding.ivPlayController.setOnClickListener {
             viewModel.downloadAudioUrl(

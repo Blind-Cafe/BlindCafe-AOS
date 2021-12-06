@@ -20,8 +20,22 @@ class TextReceiveItem(
 
 ): BindableItem<RvChatItemReceiveTextBinding>() {
     override fun bind(viewBinding: RvChatItemReceiveTextBinding, position: Int) {
-        viewBinding.root.tag = message.timestamp
-        if (isCont) {
+        handleContinue(viewBinding, position)
+
+        viewBinding.message = message
+        viewBinding.tvTime.text =  message.timestamp?.seconds?.secondToChatTime() ?: System.currentTimeMillis().millisecondToChatTime()
+        viewBinding.tvTime.isGone = !viewModel.sendLastIn1Minute[position]
+    }
+
+    private fun handleContinue(viewBinding: RvChatItemReceiveTextBinding, position: Int) {
+        if (viewModel.sendFirstIn1Minute[position].not()) {
+            viewBinding.ivProfileImage.visibility = View.INVISIBLE
+            viewBinding.tvNickname.visibility = View.GONE
+            return
+        }
+
+
+        if (isCont|| isCont.not()) {
             viewBinding.tvNickname.apply {
                 isGone = false
                 text = nickName
@@ -31,10 +45,10 @@ class TextReceiveItem(
                 .load(profileImage)
                 .circleCrop()
                 .into(viewBinding.ivProfileImage)
+
+            if (profileImage.isEmpty())
+                viewBinding.ivProfileImage.setImageResource(R.drawable.ic_profile_image_none)
         }
-        viewBinding.message = message
-        viewBinding.tvTime.text =  message.timestamp?.seconds?.secondToChatTime() ?: System.currentTimeMillis().millisecondToChatTime()
-        viewBinding.tvTime.isGone = !viewModel.sendLastIn1Minute[position]
     }
 
     override fun getLayout(): Int = R.layout.rv_chat_item_receive_text

@@ -26,7 +26,7 @@ class AudioReceiveItem(
 ) : BindableItem<RvChatItemReceiveAudioBinding>() {
 
     override fun bind(viewBinding: RvChatItemReceiveAudioBinding, position: Int) {
-        viewBinding.root.tag = message.timestamp
+
         handleContinue(viewBinding, position)
 
         var isPlaying = false
@@ -79,10 +79,14 @@ class AudioReceiveItem(
     }
 
     private fun handleContinue(viewBinding: RvChatItemReceiveAudioBinding, position: Int) {
-        if (viewModel.sendLastIn1Minute[position])
+        if (viewModel.sendFirstIn1Minute[position].not()) {
+            viewBinding.ivProfileImage.visibility = View.INVISIBLE
+            viewBinding.tvNickname.visibility = View.GONE
+            return
+        }
 
 
-        if (isCont) {
+        if (isCont || isCont.not()) {
             viewBinding.tvNickname.apply {
                 isGone = false
                 text = nickName
@@ -92,6 +96,9 @@ class AudioReceiveItem(
                 .load(profileImage)
                 .circleCrop()
                 .into(viewBinding.ivProfileImage)
+
+            if (profileImage.isEmpty())
+                viewBinding.ivProfileImage.setImageResource(R.drawable.ic_profile_image_none)
         }
     }
 

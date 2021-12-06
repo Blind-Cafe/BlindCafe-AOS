@@ -20,10 +20,6 @@ class TextSendItem(
 
 
         viewBinding.tvTime.text =  message.timestamp?.seconds?.secondToChatTime() ?: System.currentTimeMillis().millisecondToChatTime()
-
-        if (viewModel.sendLastIn1Minute[position].not())
-            Log.e("messageList", "$position : ${viewModel.sendLastIn1Minute[position]}")
-
         viewBinding.tvTime.isGone = !viewModel.sendLastIn1Minute[position]
     }
 

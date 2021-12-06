@@ -156,7 +156,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
         binding?.tvStateTitle?.text = "프로필 교환성공!"
         binding?.tvStateSubTitle?.apply {
             isGone = false
-            text = "프로필 교환 중"
+            text = "7일 동안 추가로 대화하실 수 있습니다!"
         }
 
         /** 매칭 성공 -> 내 테이블로 이동 할 때 성공화면 pop 해야한다. */
