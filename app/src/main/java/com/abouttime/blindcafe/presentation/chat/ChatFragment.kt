@@ -19,6 +19,7 @@ import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abouttime.blindcafe.R
@@ -41,6 +42,8 @@ import com.abouttime.blindcafe.presentation.chat.rv_item.user.*
 import com.google.firebase.Timestamp
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import me.everything.android.ui.overscroll.IOverScrollState.*
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -668,8 +671,13 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             prepare()
         }
         recorder?.start()
+        lifecycleScope.launch {
+            delay(1000*60)
+            showToast(R.string.chat_record_limit)
+            stopRecording()
+            sendImageMessage()
+        }
         binding?.let {
-            Log.e("record", "Start 에서 binding 이 null 인가?")
             it.ivRecord.isClickable = false
             it.llRecorderContainer.visibility = View.VISIBLE
             it.soundVisualizer.startVisualizing(false)
@@ -695,7 +703,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
     private fun sendImageMessage() {
         val uri = Uri.fromFile(File(recordingFilePath))
-        val id = System.currentTimeMillis().toString()
 
         uri?.let {
             val id = System.currentTimeMillis().toString()

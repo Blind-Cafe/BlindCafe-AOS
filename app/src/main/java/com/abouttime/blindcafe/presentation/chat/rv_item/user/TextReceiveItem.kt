@@ -7,7 +7,6 @@ import com.abouttime.blindcafe.common.ext.millisecondToChatTime
 import com.abouttime.blindcafe.common.ext.secondToChatTime
 import com.abouttime.blindcafe.common.ext.setMarginTop
 import com.abouttime.blindcafe.databinding.RvChatItemReceiveTextBinding
-import com.abouttime.blindcafe.databinding.RvChatItemSendImageBinding
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.presentation.chat.ChatViewModel
 import com.bumptech.glide.Glide
@@ -31,15 +30,17 @@ class TextReceiveItem(
     }
 
     private fun handleContinue(viewBinding: RvChatItemReceiveTextBinding, position: Int) {
-        if (viewModel.sendFirstIn1Minute[position].not()) {
-            viewBinding.ivProfileImage.visibility = View.INVISIBLE
-            viewBinding.tvNickname.visibility = View.GONE
-
-            return
-        }
 
 
         if (isCont) {
+
+            if (viewModel.sendFirstIn1Minute[position].not()) {
+                viewBinding.ivProfileImage.visibility = View.INVISIBLE
+                viewBinding.tvNickname.visibility = View.GONE
+                return
+            }
+
+
             viewBinding.tvNickname.apply {
                 isGone = false
                 text = nickName

@@ -40,14 +40,14 @@ class ImageReceiveItem(
     }
 
     private fun handleContinue(viewBinding: RvChatItemReceiveImageBinding, position: Int) {
-        if (viewModel.sendFirstIn1Minute[position].not()) {
-            viewBinding.ivProfileImage.visibility = View.INVISIBLE
-            viewBinding.tvNickname.visibility = View.GONE
-            return
-        }
-
-
         if (isCont) {
+            if (viewModel.sendFirstIn1Minute[position].not()) {
+                viewBinding.ivProfileImage.visibility = View.INVISIBLE
+                viewBinding.tvNickname.visibility = View.GONE
+                return
+            }
+
+
             viewBinding.tvNickname.apply {
                 isGone = false
                 text = nickName

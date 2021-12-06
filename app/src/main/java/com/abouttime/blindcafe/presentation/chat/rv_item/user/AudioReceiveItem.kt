@@ -9,7 +9,6 @@ import com.abouttime.blindcafe.common.ext.millisecondToChatTime
 import com.abouttime.blindcafe.common.ext.secondToChatTime
 import com.abouttime.blindcafe.common.ext.setMarginTop
 import com.abouttime.blindcafe.databinding.RvChatItemReceiveAudioBinding
-import com.abouttime.blindcafe.databinding.RvChatItemReceiveImageBinding
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.presentation.chat.ChatViewModel
 import com.bumptech.glide.Glide
@@ -23,7 +22,7 @@ class AudioReceiveItem(
     private val viewModel: ChatViewModel,
     private val isCont: Boolean,
     private val nickName: String,
-    private val profileImage: String
+    private val profileImage: String,
 ) : BindableItem<RvChatItemReceiveAudioBinding>() {
 
     override fun bind(viewBinding: RvChatItemReceiveAudioBinding, position: Int) {
@@ -76,18 +75,22 @@ class AudioReceiveItem(
         }
 
 
-        viewBinding.tvTime.text =  message.timestamp?.seconds?.secondToChatTime() ?: System.currentTimeMillis().millisecondToChatTime()
+        viewBinding.tvTime.text =
+            message.timestamp?.seconds?.secondToChatTime() ?: System.currentTimeMillis()
+                .millisecondToChatTime()
         viewBinding.tvTime.isGone = !viewModel.sendLastIn1Minute[position]
     }
 
     private fun handleContinue(viewBinding: RvChatItemReceiveAudioBinding, position: Int) {
-        if (viewModel.sendFirstIn1Minute[position].not()) {
-            viewBinding.ivProfileImage.visibility = View.INVISIBLE
-            viewBinding.tvNickname.visibility = View.GONE
-            return
-        }
 
         if (isCont) {
+
+            if (viewModel.sendFirstIn1Minute[position].not()) {
+                viewBinding.ivProfileImage.visibility = View.INVISIBLE
+                viewBinding.tvNickname.visibility = View.GONE
+                return
+            }
+
             viewBinding.tvNickname.apply {
                 isGone = false
                 text = nickName
@@ -104,7 +107,10 @@ class AudioReceiveItem(
         }
     }
 
-    private fun handleSendFirstIn1Minute(viewBinding: RvChatItemReceiveAudioBinding, position: Int) {
+    private fun handleSendFirstIn1Minute(
+        viewBinding: RvChatItemReceiveAudioBinding,
+        position: Int,
+    ) {
         if (viewModel.sendFirstIn1Minute[position].not()) {
             viewBinding.root.setMarginTop(0)
         }
