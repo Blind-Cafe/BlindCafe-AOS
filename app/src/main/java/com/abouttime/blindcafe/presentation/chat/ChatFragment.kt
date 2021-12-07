@@ -72,7 +72,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         "${requireActivity().externalCacheDir?.absolutePath}/recording.mp3"
     }
 
-    var isFirstPage = false
+    var isFirstPage = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -257,14 +257,14 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             }
         }
 
-    private fun scrollRvToTopPosition(
+    private fun smoothScrollRvToBottomPosition(
         fragmentChatBinding
         : FragmentChatBinding,
     ) =
         with(fragmentChatBinding
         ) {
             if (chatAdapter.itemCount - 1 > 0) {
-                rvChatContainer.scrollToPosition(0)
+                rvChatContainer.smoothScrollToPosition(chatAdapter.itemCount - 1)
             }
         }
 
@@ -297,6 +297,15 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     private fun observePagedMessagesData(fragmentChatBinding: FragmentChatBinding) {
         viewModel?.receivedPageMessage.observe(viewLifecycleOwner) { messages ->
             showLoading()
+            binding?.let { b ->
+                b.root.viewTreeObserver.addOnGlobalLayoutListener {
+                    val heightDiff = b.root.rootView.height - b.root.height
+                    if (heightDiff > 100  && isFirstPage) {
+                        scrollRvToBottomPosition(fragmentChatBinding)
+                        isFirstPage = false
+                    }
+                }
+            }
 
             messages.forEach { message ->
                 message.timestamp?.let { tp ->
@@ -308,11 +317,9 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                     }
                 }
             }
-            if (isFirstPage) {
-               scrollRvToBottomPosition(fragmentChatBinding)
-            }
-            dismissLoading()
 
+
+            dismissLoading()
         }
     }
 

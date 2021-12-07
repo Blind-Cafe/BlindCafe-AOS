@@ -57,7 +57,6 @@ class TextReceiveItem(
             }
 
             viewBinding.ivProfileImage.setOnClickListener {
-                Log.e("senderUid", message.senderUid.toString())
                 viewModel.moveToPartnerProfileFragment()
             }
         }
