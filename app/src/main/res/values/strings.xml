@@ -34,6 +34,8 @@
 
 
 
+
+
     <!-- rule -->
     <string name="rule_title">블라인드 카페 규칙</string>
     <string name="rule_skip">Skip</string>
@@ -121,6 +123,8 @@
     <string name="chat_enable_48_hours_later">음성전송은 48시간 후에 사용 가능합니다.</string>
 
     <string name="chat_record_limit">음성메시지는 최대 60초까지만 가능합니다.</string>
+
+    <string name="chat_matched_profile_no_image">프로필 사진이 없습니다.</string>
 
     <!-- gallery -->
     <string name="gallery_title">갤러리</string>

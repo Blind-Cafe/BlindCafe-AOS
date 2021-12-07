@@ -74,6 +74,7 @@ class ChatViewModel(
     var commonInterest: String? = null
     var startTime: String? = null
     var interest: String? = null
+    var partnerId: Int = 0
 
     val userId = getStringData(USER_ID)
 
@@ -335,6 +336,14 @@ class ChatViewModel(
             ))
         } ?: kotlin.run {
             popDirections()
+        }
+    }
+
+    fun moveToPartnerProfileFragment() {
+        if (partnerId != 0) {
+            moveToDirections(ChatFragmentDirections.actionChatFragmentToPartnerProfileFragment(
+                partnerUserId = partnerId
+            ))
         }
     }
 

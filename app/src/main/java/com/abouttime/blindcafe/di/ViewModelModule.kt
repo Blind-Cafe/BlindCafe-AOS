@@ -3,6 +3,7 @@ package com.abouttime.blindcafe.di
 import com.abouttime.blindcafe.presentation.NavHostViewModel
 import com.abouttime.blindcafe.presentation.chat.ChatViewModel
 import com.abouttime.blindcafe.presentation.chat.gallery.GalleryViewModel
+import com.abouttime.blindcafe.presentation.chat.partner_profile.PartnerProfileViewModel
 import com.abouttime.blindcafe.presentation.chat.quit.QuitReasonViewModel
 import com.abouttime.blindcafe.presentation.chat.report.ReportReasonViewModel
 import com.abouttime.blindcafe.presentation.common.confirm.ConfirmViewModel
@@ -95,6 +96,7 @@ internal val viewModelModule = module {
     viewModel { GalleryViewModel(get()) }
     viewModel { QuitReasonViewModel() }
     viewModel { ReportReasonViewModel(get()) }
+    viewModel { PartnerProfileViewModel(get())}
 
     /** Profile-Exchange **/
     viewModel { ExchangeAcceptViewModel(get(), get(), get()) }

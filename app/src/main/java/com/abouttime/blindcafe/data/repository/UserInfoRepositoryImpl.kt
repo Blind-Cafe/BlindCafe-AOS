@@ -9,6 +9,7 @@ import com.abouttime.blindcafe.data.server.dto.user_info.device_token.PostDevice
 import com.abouttime.blindcafe.data.server.dto.user_info.edit.info.PutProfileInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.edit.info.PutProfileInfoResponse
 import com.abouttime.blindcafe.data.server.dto.user_info.partner.GetPartnerProfileDto
+import com.abouttime.blindcafe.data.server.dto.user_info.partner.matched.GetMatchingProfileDto
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.GetProfileForOpenDto
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.PostProfileForOpenDto
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.PostProfileForOpenResponse
@@ -18,7 +19,6 @@ import com.abouttime.blindcafe.data.server.dto.user_info.report.GetReportsDto
 import com.abouttime.blindcafe.domain.repository.UserInfoRepository
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.Call
 
 class UserInfoRepositoryImpl(
     private val userInfoApi: UserInfoApi
@@ -79,5 +79,7 @@ class UserInfoRepositoryImpl(
         userInfoApi.deleteProfileImage(priority)
     }
 
-
+    override suspend fun getMatchingProfile(userId: Int): GetMatchingProfileDto? {
+        return userInfoApi.getMatchingProfile(userId)
+    }
 }

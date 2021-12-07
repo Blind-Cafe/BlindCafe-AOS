@@ -8,6 +8,7 @@ import com.abouttime.blindcafe.data.server.dto.user_info.device_token.PostDevice
 import com.abouttime.blindcafe.data.server.dto.user_info.edit.info.PutProfileInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.edit.info.PutProfileInfoResponse
 import com.abouttime.blindcafe.data.server.dto.user_info.partner.GetPartnerProfileDto
+import com.abouttime.blindcafe.data.server.dto.user_info.partner.matched.GetMatchingProfileDto
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.GetProfileForOpenDto
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.PostProfileForOpenDto
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.PostProfileForOpenResponse
@@ -16,7 +17,6 @@ import com.abouttime.blindcafe.data.server.dto.user_info.profile.info.GetProfile
 import com.abouttime.blindcafe.data.server.dto.user_info.report.GetReportsDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.Call
 
 interface UserInfoRepository {
     suspend fun postUserInfo(postUserInfoDto: PostUserInfoDto): BaseResponse?
@@ -33,5 +33,6 @@ interface UserInfoRepository {
     suspend fun postProfileForOpen(matchingId: Int, postProfileForOpenDto: PostProfileForOpenDto): PostProfileForOpenResponse?
     suspend fun getPartnerProfile(matchingId: Int): GetPartnerProfileDto?
     suspend fun deleteProfileImage(priority: Int)
+    suspend fun getMatchingProfile(userId: Int): GetMatchingProfileDto?
 
 }

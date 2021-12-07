@@ -70,7 +70,7 @@ class ChatListViewModel(
     }
 
 
-    fun getChatRoomInfo(matchingId: Int) {
+    fun getChatRoomInfo(matchingId: Int, partnerId: Int) {
         getChatRoomInfoUseCase(matchingId).onEach { result ->
             when (result) {
                 is Resource.Loading -> {
@@ -78,7 +78,7 @@ class ChatListViewModel(
                 }
                 is Resource.Success -> {
                     result.data?.toChatRoom()?.let { cr ->
-                        moveToChatFragment(cr)
+                        moveToChatFragment(cr, partnerId)
                     }
                     dismissLoading()
                 }
@@ -113,9 +113,10 @@ class ChatListViewModel(
         }
     }
 
-    private fun moveToChatFragment(chatRoom: ChatRoom) {
+    private fun moveToChatFragment(chatRoom: ChatRoom, partnerId: Int) {
         moveToDirections(MainFragmentDirections.actionMainFragmentToChatFragment(
-            chatRoomInfo = chatRoom
+            chatRoomInfo = chatRoom,
+            partnerId = partnerId
         ))
 
     }

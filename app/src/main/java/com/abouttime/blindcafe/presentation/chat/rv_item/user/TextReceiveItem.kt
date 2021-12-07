@@ -1,5 +1,6 @@
 package com.abouttime.blindcafe.presentation.chat.rv_item.user
 
+import android.util.Log
 import android.view.View
 import androidx.core.view.isGone
 import com.abouttime.blindcafe.R
@@ -53,6 +54,11 @@ class TextReceiveItem(
                     .into(viewBinding.ivProfileImage)
             } else {
                 viewBinding.ivProfileImage.setImageResource(R.drawable.ic_profile_image_none)
+            }
+
+            viewBinding.ivProfileImage.setOnClickListener {
+                Log.e("senderUid", message.senderUid.toString())
+                viewModel.moveToPartnerProfileFragment()
             }
         }
     }

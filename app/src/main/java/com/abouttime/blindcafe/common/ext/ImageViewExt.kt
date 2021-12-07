@@ -25,7 +25,6 @@ internal fun ImageView.setImageUrl(url: String) {
     val progressDrawable = CircularProgressDrawable(this.context)
     progressDrawable.strokeWidth = 15f
     progressDrawable.centerRadius = 30f
-    progressDrawable.backgroundColor = this.context.resources.getColor(R.color.main, null)
     progressDrawable.start()
 
     Glide.with(this.context)

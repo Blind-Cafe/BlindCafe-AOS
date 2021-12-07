@@ -271,6 +271,11 @@
             app:argType="com.abouttime.blindcafe.domain.model.ChatRoom"
             app:nullable="false" />
 
+        <argument android:name="partnerId"
+            app:argType="integer"
+            android:defaultValue="0"/>
+
+
 
         <action
             android:id="@+id/action_chatFragment_to_quitReasonDialogFragment"
@@ -289,7 +294,11 @@
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_chatFragment_to_partnerProfileFragment"
-            app:destination="@id/partnerProfileFragment" />
+            app:destination="@id/partnerProfileFragment"
+            app:exitAnim="@anim/fade_out"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_bottom"/>
 
     </fragment>
     <fragment
@@ -671,9 +680,6 @@
         <argument android:name="partnerUserId"
             app:argType="integer"
             />
-        <argument android:name="matchingId"
-            app:argType="integer"/>
-
     </fragment>
 
 

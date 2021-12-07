@@ -1,6 +1,7 @@
 package com.abouttime.blindcafe.presentation.chat.rv_item.user
 
 import android.media.MediaPlayer
+import android.util.Log
 import android.view.View
 import androidx.core.view.isGone
 import androidx.lifecycle.viewModelScope
@@ -104,6 +105,14 @@ class AudioReceiveItem(
             } else {
                 viewBinding.ivProfileImage.setImageResource(R.drawable.ic_profile_image_none)
             }
+
+
+            viewBinding.ivProfileImage.setOnClickListener {
+                Log.e("senderUid", message.senderUid.toString())
+                viewModel.moveToPartnerProfileFragment()
+            }
+
+
         }
     }
 

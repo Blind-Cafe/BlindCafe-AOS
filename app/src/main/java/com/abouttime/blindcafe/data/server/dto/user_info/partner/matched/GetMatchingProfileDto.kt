@@ -3,7 +3,7 @@ package com.abouttime.blindcafe.data.server.dto.user_info.partner.matched
 
 import com.google.gson.annotations.SerializedName
 
-data class GetMatchedProfileDto(
+data class GetMatchingProfileDto(
     @SerializedName("age")
     val age: Int?,
     @SerializedName("images")

@@ -75,7 +75,9 @@ class ChatListRvAdapter(
         fun bindView(match: Matching) = with(binding) {
             root.setOnClickListener {
                 match.matchingId?.let {
-                    viewModel.getChatRoomInfo(match.matchingId)
+                    match?.partner?.userId?.let { pId ->
+                        viewModel.getChatRoomInfo(match.matchingId, pId)
+                    }
                 }
             }
         }

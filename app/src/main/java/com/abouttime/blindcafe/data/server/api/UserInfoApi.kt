@@ -1,9 +1,9 @@
 package com.abouttime.blindcafe.data.server.api
 
 import com.abouttime.blindcafe.common.base.BaseResponse
-import com.abouttime.blindcafe.common.constants.Retrofit
 import com.abouttime.blindcafe.common.constants.Retrofit.DELETE_ACCOUNT_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.DELETE_PROFILE_IMAGE_URL
+import com.abouttime.blindcafe.common.constants.Retrofit.GET_MATCHING_PROFILE
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_MY_PROFILE_IMAGE_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_PARTNER_PROFILE_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_PROFILE_FOR_OPEN_URL
@@ -12,7 +12,6 @@ import com.abouttime.blindcafe.common.constants.Retrofit.GET_PROFILE_INFO_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.GET_REPORTS_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.PATCH_PROFILE_IMAGE_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_DEVICE_TOKEN_URL
-import com.abouttime.blindcafe.common.constants.Retrofit.POST_ENTERING_LOG_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_PROFILE_FOR_OPEN_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.POST_USER_INFO_URL
 import com.abouttime.blindcafe.common.constants.Retrofit.PUT_PROFILE_INFO_URL
@@ -23,6 +22,7 @@ import com.abouttime.blindcafe.data.server.dto.user_info.device_token.PostDevice
 import com.abouttime.blindcafe.data.server.dto.user_info.edit.info.PutProfileInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.edit.info.PutProfileInfoResponse
 import com.abouttime.blindcafe.data.server.dto.user_info.partner.GetPartnerProfileDto
+import com.abouttime.blindcafe.data.server.dto.user_info.partner.matched.GetMatchingProfileDto
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.GetProfileForOpenDto
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.PostProfileForOpenDto
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.PostProfileForOpenResponse
@@ -31,7 +31,6 @@ import com.abouttime.blindcafe.data.server.dto.user_info.profile.info.GetProfile
 import com.abouttime.blindcafe.data.server.dto.user_info.report.GetReportsDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.Call
 import retrofit2.http.*
 
 interface UserInfoApi {
@@ -101,6 +100,11 @@ interface UserInfoApi {
     suspend fun deleteProfileImage(
         @Query("priority") priority: Int
     )
+
+    @GET(GET_MATCHING_PROFILE)
+    suspend fun getMatchingProfile(
+        @Path("userId") userId: Int
+    ): GetMatchingProfileDto?
 
 
 }

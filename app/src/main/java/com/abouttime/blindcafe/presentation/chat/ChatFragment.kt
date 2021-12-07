@@ -116,6 +116,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         viewModel.commonInterest = viewModel.chatRoomInfo.interest
         viewModel.startTime = viewModel.chatRoomInfo.startTime
         viewModel.interest = viewModel.chatRoomInfo.interest
+        viewModel.partnerId = args.partnerId
         isCont = args.chatRoomInfo.continuous
         initPartnerNciknameTextView() // 상단 닉네임 초기화
         initBackgroundColor()
@@ -258,7 +259,8 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         with(fragmentChatBinding
         ) {
             if (chatAdapter.itemCount - 1 > 0 && !isScrolling) {
-                rvChatContainer.smoothScrollToPosition(chatAdapter.itemCount - 1)
+                rvChatContainer.scrollToPosition(chatAdapter.itemCount - 1)
+                isScrolling = true
             }
         }
 
