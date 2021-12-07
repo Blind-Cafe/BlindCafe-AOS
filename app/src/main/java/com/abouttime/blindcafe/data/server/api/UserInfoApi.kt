@@ -77,7 +77,7 @@ interface UserInfoApi {
     suspend fun patchProfileImage(
         @Part("priority") priority: RequestBody,
         @Part image: MultipartBody.Part?
-    ): Call<Unit>
+    )
 
 
     @GET(GET_PROFILE_FOR_OPEN_URL)

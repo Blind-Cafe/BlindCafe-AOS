@@ -132,9 +132,7 @@ class ProfileImageEditFragment :
                             Log.e("imageCnt", "$imageCnt")
 
                         }
-
                     }
-
                 }
             }
 
@@ -143,7 +141,8 @@ class ProfileImageEditFragment :
 
     private fun uploadImage(uri: Uri, number: Int) {
 
-        Toast.makeText(requireContext(), "사진 업로드 중...", Toast.LENGTH_SHORT).show()
+
+        showToast(R.string.toast_upload_image)
 
         //val inputStream = requireContext().contentResolver.openInputStream(uri)
         val saveFile = File(filePath)
@@ -158,7 +157,7 @@ class ProfileImageEditFragment :
 
             bitmap!!.compress(Bitmap.CompressFormat.JPEG,
                 40,
-                saveFile.outputStream()) //TODO try catch
+                saveFile.outputStream())
         } catch (e: Exception) {
             e.printStackTrace()
             showToast(R.string.temp_error)
@@ -196,7 +195,6 @@ class ProfileImageEditFragment :
                 }
             }
             imageCnt += 1
-            Log.e("imageCnt", "$imageCnt")
 
         }
 

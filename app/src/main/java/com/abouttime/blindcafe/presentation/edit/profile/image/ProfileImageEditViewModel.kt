@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
-import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.domain.use_case.server.DeleteProfileImageUseCase
 import com.abouttime.blindcafe.domain.use_case.server.GetMyProfileImageUseCase
 import com.abouttime.blindcafe.domain.use_case.server.PatchProfileImageUseCase
@@ -20,16 +19,14 @@ import okhttp3.RequestBody
 class ProfileImageEditViewModel(
     private val getMyProfileImageUseCase: GetMyProfileImageUseCase,
     private val patchProfileImageUseCase: PatchProfileImageUseCase,
-    private val deleteProfileImageUseCase: DeleteProfileImageUseCase
-): BaseViewModel() {
+    private val deleteProfileImageUseCase: DeleteProfileImageUseCase,
+) : BaseViewModel() {
 
 
     private val _imageUrls = MutableLiveData<List<String>>(listOf<String>())
     val imageUrls: LiveData<List<String>> get() = _imageUrls
 
     val editedUrls = mutableListOf<Uri>()
-
-
 
 
     init {
@@ -41,7 +38,9 @@ class ProfileImageEditViewModel(
     private fun getMyProfileImages() {
         getMyProfileImageUseCase().onEach { result ->
             when (result) {
-                is Resource.Loading -> { showLoading() }
+                is Resource.Loading -> {
+                    showLoading()
+                }
                 is Resource.Success -> {
                     result.data?.images?.toString()?.let { Log.e("observeImageUrlsData", it) }
 
@@ -71,12 +70,7 @@ class ProfileImageEditViewModel(
                     dismissLoading()
                 }
                 is Resource.Error -> {
-                    Log.e(RETROFIT_TAG, result.message.toString())
-                    if (result.message != "400") {
-                        callback()
-                    } else {
-                        showToast(R.string.temp_error)
-                    }
+                    showToast(R.string.toast_fail)
                     dismissLoading()
                 }
             }
@@ -94,11 +88,7 @@ class ProfileImageEditViewModel(
                     dismissLoading()
                 }
                 is Resource.Error -> {
-                    if (result.message == "400") {
-                        showToast(R.string.toast_fail)
-                    } else {
-                        showToast(R.string.toast_check_internet)
-                    }
+                    showToast(R.string.toast_fail)
                     dismissLoading()
                 }
             }

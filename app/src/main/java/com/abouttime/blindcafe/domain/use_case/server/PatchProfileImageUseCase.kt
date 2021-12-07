@@ -15,11 +15,11 @@ import retrofit2.http.Part
 class PatchProfileImageUseCase(
     private val repository: UserInfoRepository
 ) {
-    operator fun invoke(priority: RequestBody, image: MultipartBody.Part?): Flow<Resource<Call<Unit>>> = flow {
+    operator fun invoke(priority: RequestBody, image: MultipartBody.Part?): Flow<Resource<Unit>> = flow {
         emit(Resource.Loading())
         try {
-            val response = repository.patchProfileImage(priority, image)
-            emit(Resource.Success(response))
+            repository.patchProfileImage(priority, image)
+            emit(Resource.Success(data = Unit))
         } catch (e: Exception) {
             if (e is HttpException) {
                 val message = e.parseErrorBody()
