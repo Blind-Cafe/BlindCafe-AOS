@@ -502,7 +502,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         ) {
             flBtContainer.setOnClickListener {
 
-                sendTextMessage(etMessageInput.text.toString())
+                sendTextMessage(etMessageInput.text.toString().trim())
                 btSend.requestFocus()
                 etMessageInput.text.clear()
             }
