@@ -193,4 +193,5 @@ dependencies {
 
     // exif
     implementation "androidx.exifinterface:exifinterface:1.3.3"
+
 }

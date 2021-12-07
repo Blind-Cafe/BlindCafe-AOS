@@ -50,14 +50,15 @@ class ChatViewModel(
     private val _messageEditText = MutableLiveData<String>()
     val messageEditText: MutableLiveData<String> get() = _messageEditText
 
-    private val _receivedNewMessage = MutableLiveData<List<Message>>()
-    val receivedNewMessage: LiveData<List<Message>> get() = _receivedNewMessage
-
-    private val _receivedPageMessage = MutableLiveData<List<Message>>()
-    val receivedPageMessage: LiveData<List<Message>> get() = _receivedPageMessage
-
     private val _recorderState = MutableLiveData<RecorderState>(RecorderState.BEFORE_RECORDING)
     val recorderState: LiveData<RecorderState> get() = _recorderState
+
+
+    private val _receivedNewMessage = SingleLiveData<List<Message>>()
+    val receivedNewMessage: SingleLiveData<List<Message>> get() = _receivedNewMessage
+
+    private val _receivedPageMessage = SingleLiveData<List<Message>>()
+    val receivedPageMessage: SingleLiveData<List<Message>> get() = _receivedPageMessage
 
     private val _topic = SingleLiveData<GetTopicDto>()
     val topic: SingleLiveData<GetTopicDto> get() = _topic

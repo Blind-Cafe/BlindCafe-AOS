@@ -32,6 +32,7 @@ import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_ROOM
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_TRUE
 import com.abouttime.blindcafe.common.ext.*
 import com.abouttime.blindcafe.common.util.DeviceUtil
+import com.abouttime.blindcafe.common.util.KeyboardVisibility
 import com.abouttime.blindcafe.data.server.dto.matching.send.PostMessageDto
 import com.abouttime.blindcafe.databinding.FragmentChatBinding
 import com.abouttime.blindcafe.domain.model.Message
@@ -71,7 +72,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         "${requireActivity().externalCacheDir?.absolutePath}/recording.mp3"
     }
 
-    var isScrolling = false
+    var isFirstPage = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -89,7 +90,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         observeNewMessagesData(fragmentChatBinding)
         subscribeMessages()
 
-        observePagedMessagesData()
+        observePagedMessagesData(fragmentChatBinding)
         receiveFirstPage(fragmentChatBinding)
 
 
@@ -125,11 +126,10 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     }
 
     private fun receiveFirstPage(fragmentChatBinding: FragmentChatBinding) {
-        isScrolling = false
+        isFirstPage = true
         viewModel?.matchingId?.let { id ->
             viewModel?.receivePagedMessages(id.toString(), Timestamp.now())
         }
-        scrollRvToLastPosition(fragmentChatBinding)
     }
 
     private fun initPartnerNciknameTextView() {
@@ -228,10 +228,10 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
 
             decor.setOverScrollStateListener { decor, oldState, newState ->
-                isScrolling = true
                 when (newState) {
                     STATE_DRAG_START_SIDE -> {
                         // 페이지네이션 코드
+                        isFirstPage = false
                         viewModel?.matchingId?.let { id ->
                             if (timeStampList.isNotEmpty()) {
                                 val time = timeStampList.last()
@@ -242,39 +242,32 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                 }
             }
 
-            root.viewTreeObserver.addOnGlobalLayoutListener {
-                val heightDiff = root.rootView.height - root.height
-                if (heightDiff > 100) {
-                    scrollRvToLastPosition(fragmentChatBinding)
-                }
-            }
 
 
         }
 
-    private fun scrollRvToLastPosition(
+    private fun scrollRvToBottomPosition(
         fragmentChatBinding
         : FragmentChatBinding,
     ) =
         with(fragmentChatBinding
         ) {
-            if (chatAdapter.itemCount - 1 > 0 && !isScrolling) {
+            if (chatAdapter.itemCount - 1 > 0) {
                 rvChatContainer.scrollToPosition(chatAdapter.itemCount - 1)
-                isScrolling = true
             }
         }
 
-
-    private fun smoothScrollRvToLastPosition(
+    private fun scrollRvToTopPosition(
         fragmentChatBinding
         : FragmentChatBinding,
     ) =
         with(fragmentChatBinding
         ) {
-            if (chatAdapter.itemCount - 1 > 0 && !isScrolling) {
-                rvChatContainer.smoothScrollToPosition(chatAdapter.itemCount - 1)
+            if (chatAdapter.itemCount - 1 > 0) {
+                rvChatContainer.scrollToPosition(0)
             }
         }
+
 
     /** subscribe messages**/
     private fun subscribeMessages() {
@@ -288,7 +281,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     /** handle message **/
     private fun observeNewMessagesData(fragmentChatBinding: FragmentChatBinding) {
         viewModel.receivedNewMessage.observe(viewLifecycleOwner) { messages ->
-            isScrolling = false
             messages.forEach { message ->
                 message.timestamp?.let { tp ->
                     if (message.senderUid == viewModel.userId) {
@@ -298,15 +290,14 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                     }
                 }
             }
-            scrollRvToLastPosition(fragmentChatBinding)
-            //isScrolling = true
-
+            scrollRvToBottomPosition(fragmentChatBinding)
         }
     }
 
-    private fun observePagedMessagesData() {
+    private fun observePagedMessagesData(fragmentChatBinding: FragmentChatBinding) {
         viewModel?.receivedPageMessage.observe(viewLifecycleOwner) { messages ->
             showLoading()
+
             messages.forEach { message ->
                 message.timestamp?.let { tp ->
                     timeStampList.add(tp)
@@ -317,7 +308,11 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                     }
                 }
             }
+            if (isFirstPage) {
+               scrollRvToBottomPosition(fragmentChatBinding)
+            }
             dismissLoading()
+
         }
     }
 
@@ -397,6 +392,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             6 -> chatAdapter.add(0, AudioTopicItem(message, viewModel = viewModel))
             7 -> chatAdapter.add(0, DescriptionItem(message))
             8 -> {
+                Log.e("zxcv", "${message.toString()}")
                 chatAdapter.add(0, CongratsItem(message))
             }
         }
@@ -530,7 +526,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         with(fragmentChatBinding) {
 
             etMessageInput.setOnFocusChangeListener { view, isFocused ->
-                isScrolling = !isFocused
                 etMessageInput.isCursorVisible = isFocused
                 flBtContainer.isGone = !isFocused
                 if (isFocused) {
@@ -545,6 +540,18 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             viewModel!!.messageEditText.observe(viewLifecycleOwner) {
                 viewModel!!.updateSendButton()
             }
+
+            KeyboardVisibility(
+                window = requireActivity().window,
+                onShowKeyboard = {
+                    Log.e("zxcv", "show")
+                    scrollRvToBottomPosition(fragmentChatBinding)
+                },
+                onHideKeyboard = {
+                    Log.e("zxcv", "show")
+                    scrollRvToBottomPosition(fragmentChatBinding)
+                }
+            )
         }
 
     /** Image Message **/
