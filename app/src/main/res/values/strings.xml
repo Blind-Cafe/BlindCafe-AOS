@@ -21,7 +21,10 @@
     <string name="toast_fail">요청에 실패했습니다</string>
     <string name="interest">관심사</string>
     <string name="toast_topic_exhaust">준비된 토픽이 다 소진되었습니다.</string>
-    <string name="toast_upload_image">사진 업로드 중...</string>
+    <string name="toast_upload_image">사진 업로드 중…</string>
+    <string name="toast_upload_image_complete">사진 업로드 완료</string>
+    <string name="toast_delete_image">사진 삭제 중…</string>
+    <string name="toast_delete_image_complete">사진 삭제 완료</string>
 
     <string name="toast_input_reason">이유를 한 가지 선택해주세요</string>
     <string name="toast_already_post_matching_request">이미 매칭 요청중입니다. 매칭을 기다려주세요!</string>

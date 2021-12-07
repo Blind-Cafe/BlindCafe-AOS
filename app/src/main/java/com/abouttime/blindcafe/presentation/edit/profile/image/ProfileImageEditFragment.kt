@@ -2,15 +2,16 @@ package com.abouttime.blindcafe.presentation.edit.profile.image
 
 import android.Manifest
 import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.graphics.Matrix
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.exifinterface.media.ExifInterface
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.common.util.DeviceUtil
@@ -21,7 +22,6 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.io.File
-import java.io.InputStream
 
 
 class ProfileImageEditFragment :
@@ -148,16 +148,16 @@ class ProfileImageEditFragment :
         val saveFile = File(filePath)
         var bitmap: Bitmap? = null
         try {
-            bitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, uri)
-            val matrix = Matrix()
-            matrix.postRotate(90f)
-            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, false)
+            bitmap = if (DeviceUtil.isAndroid9Later()) {
+                val source = ImageDecoder.createSource(requireContext().contentResolver, uri)
+                ImageDecoder.decodeBitmap(source)
+            } else {
+                MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, uri)
+            }
 
+            //bitmap = rotateImage(uri, bitmap!!)
 
-
-            bitmap!!.compress(Bitmap.CompressFormat.JPEG,
-                40,
-                saveFile.outputStream())
+            bitmap!!.compress(Bitmap.CompressFormat.JPEG, 40, saveFile.outputStream())
         } catch (e: Exception) {
             e.printStackTrace()
             showToast(R.string.temp_error)
@@ -171,6 +171,7 @@ class ProfileImageEditFragment :
         val priority = RequestBody.create(MediaType.parse("text/plain"), "$number")
 
         viewModel?.patchProfileImage(priority, part) {
+            showToast(R.string.toast_upload_image_complete)
             when (number) {
                 1 -> {
                     binding?.ivImage1?.setImageBitmap(bitmap)
@@ -201,16 +202,37 @@ class ProfileImageEditFragment :
 
     }
 
+    private fun rotateImage(uri: Uri, bitmap: Bitmap): Bitmap {
+        val input = requireContext().contentResolver.openInputStream(uri)
+        val exif = input?.let { ExifInterface(it) }
+        input?.close()
+
+        val orientation =
+            exif?.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
+//        val matrix = Matrix()
+//        matrix.postRotate(90f)
+//        bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, false)
+        val matrix = Matrix()
+        Log.e("asdf", orientation.toString())
+        when (orientation) {
+            ExifInterface.ORIENTATION_ROTATE_90 -> matrix.postRotate(90f)
+            ExifInterface.ORIENTATION_ROTATE_180 -> matrix.postRotate(180f)
+            ExifInterface.ORIENTATION_ROTATE_270 -> matrix.postRotate(270f)
+        }
+
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, false)
+    }
+
     private fun deleteFragment(
         number: Int,
     ) {
-        Toast.makeText(requireContext(), "사진 삭제 중...", Toast.LENGTH_SHORT).show()
+        showToast(R.string.toast_delete_image)
 
 
         binding?.let {
             with(it) {
                 viewModel?.deleteProfileImage(number) {
-                    Toast.makeText(requireContext(), "사진 삭제 완료", Toast.LENGTH_SHORT).show()
+                    showToast(R.string.toast_delete_image_complete)
                     when (number) {
                         1 -> {
                             ivImage1.setImageResource(R.drawable.bg_profile_image)
@@ -247,7 +269,6 @@ class ProfileImageEditFragment :
                         }
                     }
                     imageCnt -= 1
-                    Log.e("imageCnt", "$imageCnt")
                 }
             }
         }
