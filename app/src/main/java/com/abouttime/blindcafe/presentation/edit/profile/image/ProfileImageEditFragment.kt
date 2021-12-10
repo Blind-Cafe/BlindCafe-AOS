@@ -156,7 +156,6 @@ class ProfileImageEditFragment :
             }
 
             //bitmap = rotateImage(uri, bitmap!!)
-
             bitmap!!.compress(Bitmap.CompressFormat.JPEG, 40, saveFile.outputStream())
         } catch (e: Exception) {
             e.printStackTrace()
@@ -207,11 +206,7 @@ class ProfileImageEditFragment :
         val exif = input?.let { ExifInterface(it) }
         input?.close()
 
-        val orientation =
-            exif?.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
-//        val matrix = Matrix()
-//        matrix.postRotate(90f)
-//        bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, false)
+        val orientation = exif?.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
         val matrix = Matrix()
         Log.e("asdf", orientation.toString())
         when (orientation) {

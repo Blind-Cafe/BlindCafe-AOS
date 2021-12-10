@@ -51,11 +51,9 @@ class FirestoreRepositoryImpl(
                                  }
                              }
                             trySend(Resource.Success(messages))
-
                         } else {
                             trySend(Error(error?.message ?: error.toString()))
                         }
-
                     }
             awaitClose {
                 subscription.remove()
@@ -71,8 +69,8 @@ class FirestoreRepositoryImpl(
             .collection(SUB_COLLECTION_MESSAGES)
             .whereLessThan("timestamp", lastTime) // 인자보다 오래된 메시지 중에
             .orderBy("timestamp", Query.Direction.DESCENDING) // 최근 순으로
-            .limit(CHAT_PAGE_SIZE) // 페이지 사이즈 만큼 가져와
-            .get()
+            .limit(CHAT_PAGE_SIZE) // 페이지 사이즈 만큼
+            .get() // 가져와
             .await()
             .documents
             .map { doc ->

@@ -30,39 +30,6 @@ class ChatListRvAdapter(
             tvLastMessage.text = match.latestMessage
             tvTimeRemaining.text = "${match.expiryTime}"
 
-            match?.matchingId?.let { id ->
-                viewModel.subscribeLastMessage(id) { m ->
-                         val lastContent = when (m.type) {
-                        1 -> {
-                             m.contents
-                        }
-                        2 -> {
-                            "사진을 보냈습니다."
-                        }
-                        3 -> {
-                            "음성메시지를 보냈습니다."
-                        }
-                        4, 5, 6 -> {
-                            "토픽이 도착했습니다."
-                        }
-                        else -> tvLastMessage.text.toString()
-                    }
-                    matches.removeAt(position)
-                    Matching(
-                        expiryTime = match.expiryTime,
-                        latestMessage = lastContent,
-                        matchingId = match.matchingId,
-                        partner = match.partner,
-                        received = true
-                    )
-                    matches.add(0, match)
-                    notifyDataSetChanged()
-                }
-
-
-            }
-
-
             tvNickname.text = match.partner?.nickname
 
             match.partner?.profileImage?.let { url ->
@@ -72,6 +39,8 @@ class ChatListRvAdapter(
                     .into(ivProfileImage)
             }
         }
+
+
         fun bindView(match: Matching) = with(binding) {
             root.setOnClickListener {
                 match.matchingId?.let {
