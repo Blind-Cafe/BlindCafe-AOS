@@ -308,6 +308,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             }
 
             messages.forEach { message ->
+                Log.e("message", "$message")
                 message.timestamp?.let { tp ->
                     timeStampList.add(tp)
                     if (message.senderUid == viewModel.userId) {
