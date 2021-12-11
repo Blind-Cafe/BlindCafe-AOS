@@ -11,7 +11,6 @@ import com.xwray.groupie.viewbinding.BindableItem
 
 class CongratsItem(private val message: Message) : BindableItem<RvChatItemCongratsBinding>() {
     override fun bind(viewBinding: RvChatItemCongratsBinding, position: Int) {
-        viewBinding.root.tag = message.timestamp
 
         viewBinding.tvCongrats.text = viewBinding.tvCongrats.resources.getString(R.string.chat_congrats)
 

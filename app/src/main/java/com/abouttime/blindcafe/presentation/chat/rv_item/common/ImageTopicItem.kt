@@ -13,7 +13,7 @@ class ImageTopicItem(
     private val viewModel: ChatViewModel
 ): BindableItem<RvChatItemTopicImageBinding>() {
     override fun bind(viewBinding: RvChatItemTopicImageBinding, position: Int) {
-        viewBinding.root.tag = message.timestamp
+
         message.contents?.let { uri ->
             viewBinding.ivContent.setImageUrl(uri)
         }

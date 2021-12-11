@@ -12,10 +12,10 @@ import com.xwray.groupie.viewbinding.BindableItem
 
 class DescriptionItem(private val message: Message): BindableItem<RvChatItemDescriptionBinding>() {
     override fun bind(viewBinding: RvChatItemDescriptionBinding, position: Int) {
-        viewBinding.root.tag = message.timestamp
-
         viewBinding.tvDescription.text = ""
         viewBinding.message = message
+
+
         if (message.contents.contains("<")) {
             val start = message.contents.indexOf("<")
             val end = message.contents.indexOf(">")

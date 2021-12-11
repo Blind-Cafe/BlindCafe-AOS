@@ -18,8 +18,6 @@ class AudioTopicItem(
 ) : BindableItem<RvChatItemTopicAudioBinding>() {
 
     override fun bind(viewBinding: RvChatItemTopicAudioBinding, position: Int) {
-        viewBinding.root.tag = message.timestamp
-
 
         var isPlaying = false
         viewBinding.ivPlayController.setOnClickListener {

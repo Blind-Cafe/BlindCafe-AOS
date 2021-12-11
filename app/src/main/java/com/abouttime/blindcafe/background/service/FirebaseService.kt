@@ -9,6 +9,8 @@ import android.app.PendingIntent.FLAG_ONE_SHOT
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.media.AudioAttributes
+import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
@@ -84,12 +86,14 @@ class FirebaseService() : FirebaseMessagingService() {
         val blockMessageNotification = sharedPreferences.getString(NOTIFICATION_MESSAGE, null)
         val blockSpecificNotification = sharedPreferences.getString("${matchingId}${NOTIFICATION_ROOM}", null)
 
+        if (blockEntireNotification == NOTIFICATION_FALSE) return // 모든 푸시
+        if (blockMessageNotification == NOTIFICATION_FALSE && type == "T") return // 모든 메시지 푸시
+        if (blockCurrentRoomNotification == NOTIFICATION_FALSE) return // 현재 채팅방에 있을 때 푸시
+        if (blockSpecificNotification == NOTIFICATION_FALSE && matchingId != null) return // 특정 방 푸시
 
-        if (blockCurrentRoomNotification == NOTIFICATION_FALSE) return // 현재 채팅방에 있다면 푸시를 받지 않는다
-        if (blockEntireNotification == NOTIFICATION_FALSE) return
-        if (blockMessageNotification == NOTIFICATION_FALSE && type == "T") return
-        if (blockSpecificNotification == NOTIFICATION_FALSE && matchingId != null) return
 
+        val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+        val attr = AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_NOTIFICATION).build()
         intent.putExtra(FCM_PATH, path)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, FLAG_ONE_SHOT)
@@ -98,6 +102,7 @@ class FirebaseService() : FirebaseMessagingService() {
             .setContentText(body)
             .setSmallIcon(R.mipmap.ic_launcher_blind_cafe_round)
             .setAutoCancel(true)
+            .setSound(alarmSound)
             .setContentIntent(pendingIntent)
             .build()
 
@@ -117,8 +122,12 @@ class FirebaseService() : FirebaseMessagingService() {
             description = "FCM Message"
             enableLights(true)
             lightColor = resources.getColor(R.color.main, null)
+            vibrationPattern = longArrayOf(200L, 300L)
+            enableVibration(true)
         }
         notificationManager.createNotificationChannel(channel)
     }
+
+
 
 }
