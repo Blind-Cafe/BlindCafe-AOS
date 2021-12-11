@@ -60,6 +60,7 @@
                         android:src="@drawable/bt_add_profile_image"
                         app:layout_constraintBottom_toBottomOf="@id/iv_profile_image"
                         app:layout_constraintEnd_toEndOf="@id/iv_profile_image"
+                        android:background="?selectableItemBackgroundBorderless"
                         android:onClick="@{() -> viewModel.onClickEditProfileImageButton()}"
                         app:layout_constraintTop_toTopOf="@id/iv_profile_image"
                         app:layout_constraintStart_toStartOf="@id/iv_profile_image"
@@ -181,6 +182,7 @@
                         android:paddingVertical="12dp"
                         android:text="@string/my_page_profile_edit"
                         android:textColor="@color/white_2"
+                        android:foreground="?selectableItemBackgroundBorderless"
                         android:onClick="@{() -> viewModel.onClickEditProfileButton()}"
                         android:textSize="@dimen/font_size_13"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -220,6 +222,7 @@
                         android:text="@string/my_page_interest_edit"
                         android:gravity="center"
                         android:textColor="@color/gray_300"
+                        android:background="?selectableItemBackgroundBorderless"
                         android:textSize="@dimen/font_size_11"
                         android:onClick="@{() -> viewModel.onClickEditInterestButton()}"
                         app:layout_constraintBottom_toBottomOf="@id/tv_interest_title"
@@ -455,6 +458,7 @@
                 android:onClick="@{() -> viewModel.onClickSettingButton()}"
                 app:layout_constraintBottom_toBottomOf="@id/tv_title"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:background="?selectableItemBackgroundBorderless"
                 app:layout_constraintTop_toTopOf="@id/tv_title" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

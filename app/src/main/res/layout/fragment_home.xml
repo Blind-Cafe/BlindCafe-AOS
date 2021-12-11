@@ -42,6 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="26dp"
             android:src="@drawable/bt_home_bell"
+            android:background="?selectableItemBackgroundBorderless"
             app:layout_constraintBottom_toBottomOf="@id/tv_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_title" />
