@@ -18,7 +18,7 @@
         android:textSize="@dimen/font_size_15"
         android:textStyle="bold"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="@dimen/default_top_margin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

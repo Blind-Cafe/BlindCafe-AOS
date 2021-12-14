@@ -7,10 +7,8 @@ import androidx.core.view.isGone
 import androidx.navigation.fragment.navArgs
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
-import com.abouttime.blindcafe.common.constants.NavigationKey
 import com.abouttime.blindcafe.common.constants.NavigationKey.SELECT_LOCATION
 import com.abouttime.blindcafe.databinding.FragmentExchangeOpenBinding
-import com.abouttime.blindcafe.databinding.FragmentProfileEditBinding
 import com.bumptech.glide.Glide
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -82,10 +80,6 @@ class ExchangeOpenFragment: BaseFragment<ExchangeOpenViewModel>(R.layout.fragmen
 
     private fun observeLocationData(fragmentExchangeOpenBinding: FragmentExchangeOpenBinding) = with(fragmentExchangeOpenBinding) {
         viewModel?.location?.observe(viewLifecycleOwner) { loc ->
-            repeat(100) {
-                Log.e("profile edit", loc)
-            }
-
             tvLocationValue.text = loc
             etLocationValue.isGone = loc.isNotEmpty()
             viewModel?.updateNextButton(hasImage)

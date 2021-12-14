@@ -55,7 +55,7 @@ class PartnerProfileViewModel(
 
     private fun handleMatchingProfileDto(dto: GetMatchingProfileDto) {
         _nickname.postValue(dto.nickname ?: "")
-        _age.postValue(dto.age?.toString() ?: "")
+        _age.postValue(dto.age?.toString()+"살" ?: "")
         _location.postValue(dto.region ?: "")
         _interest1.postValue(dto.interests?.get(0) ?: "")
         _interest2.postValue(dto.interests?.get(1) ?: "")

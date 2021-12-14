@@ -11,6 +11,8 @@
     <dimen name="font_size_21">21sp</dimen>
 
 
+    <dimen name="default_top_margin">24dp</dimen>
+
     <dimen name="dialog_title">15sp</dimen>
     <dimen name="dialog_reason">15sp</dimen>
 

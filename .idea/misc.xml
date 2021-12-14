@@ -164,12 +164,19 @@
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_interest_sub.xml" value="0.25" />
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_interest_sub_edit.xml" value="0.3411458333333333" />
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_my_page.xml" value="0.3411458333333333" />
+        <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_partner_profile.xml" value="0.3411458333333333" />
+        <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_policy.xml" value="0.3411458333333333" />
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_profile_dismiss.xml" value="0.3411458333333333" />
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_profile_edit.xml" value="0.26112759643916916" />
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_profile_exchange.xml" value="0.3411458333333333" />
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_profile_image_edit.xml" value="0.3411458333333333" />
-        <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_rule.xml" value="0.3411458333333333" />
+        <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_quit_complete.xml" value="0.3411458333333333" />
+        <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_report_list.xml" value="0.3411458333333333" />
+        <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_rule.xml" value="0.33" />
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_setting.xml" value="0.30985915492957744" />
+        <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_signin.xml" value="0.3411458333333333" />
+        <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/fragment_term.xml" value="0.3411458333333333" />
+        <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/pw_chat_menu.xml" value="0.3411458333333333" />
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/rv_chat_list_item.xml" value="0.3411458333333333" />
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/rv_item_interest_sub.xml" value="0.3411458333333333" />
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/rv_item_location_main.xml" value="0.3411458333333333" />
@@ -180,7 +187,7 @@
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="13" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_13" default="true" project-jdk-name="13" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -21,7 +21,7 @@ class GetPartnerProfileUseCase(
                 val message = e.parseErrorBody()
                 emit(Resource.Error<GetPartnerProfileDto?>(message = message.code.toString()))
             } else {
-                emit(Resource.Error<GetPartnerProfileDto?>(message = e.message.toString()))
+               // emit(Resource.Error<GetPartnerProfileDto?>(message = e.message.toString()))
             }
         }
     }

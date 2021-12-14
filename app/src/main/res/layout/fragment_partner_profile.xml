@@ -174,7 +174,8 @@
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:text="@{viewModel.age}"
                 android:textColor="@color/gray_300"
-                android:textSize="@dimen/font_size_11"
+                android:textSize="@dimen/font_size_13"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/tv_nickname"
                 app:layout_constraintStart_toEndOf="@id/tv_nickname"
                 tools:text="age" />

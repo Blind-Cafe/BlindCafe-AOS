@@ -7,19 +7,14 @@ import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
-import com.abouttime.blindcafe.common.constants.PreferenceKey
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NICKNAME
 import com.abouttime.blindcafe.common.constants.PreferenceKey.USER_ID
 import com.abouttime.blindcafe.common.util.SingleLiveData
-import com.abouttime.blindcafe.data.server.dto.user_info.edit.info.PutProfileInfoDto
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.GetProfileForOpenDto
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.PostProfileForOpenDto
 import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.PostProfileForOpenResponse
-import com.abouttime.blindcafe.domain.model.Profile
 import com.abouttime.blindcafe.domain.use_case.server.GetProfileForOpenUseCase
 import com.abouttime.blindcafe.domain.use_case.server.PostProfileForOpenUseCase
-import com.abouttime.blindcafe.domain.use_case.server.PutProfileInfoUseCase
-import com.abouttime.blindcafe.presentation.edit.profile.info.ProfileEditFragmentDirections
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 

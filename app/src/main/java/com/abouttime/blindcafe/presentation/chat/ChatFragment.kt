@@ -118,6 +118,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         viewModel.startTime = viewModel.chatRoomInfo.startTime
         viewModel.interest = viewModel.chatRoomInfo.interest
         viewModel.partnerId = args.partnerId
+
         isCont = args.chatRoomInfo.continuous
         initPartnerNciknameTextView() // 상단 닉네임 초기화
         initBackgroundColor()
@@ -756,7 +757,8 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         if (!isCont) {
             root.setBackgroundColor(getColorByResId(R.color.chat_room_menu_bg))
         } else {
-            root.setBackgroundColor(getColorByResId(R.color.matching_room_menu_bg))
+           // root.setBackgroundColor(getColorByResId(R.color.matching_room_menu_bg))
+            root.setBackgroundColor(getColorByResId(R.color.white))
         }
 
 
