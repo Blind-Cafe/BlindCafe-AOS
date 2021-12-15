@@ -52,7 +52,6 @@ class LoginViewModel(
             when (result) {
                 is Resource.Loading -> {
                     showLoading()
-                    _loginStateEvent.postValue(LoginState.Loading)
                 }
                 is Resource.Success -> {
                     val jwt = result.data?.jwt
@@ -62,10 +61,12 @@ class LoginViewModel(
                     Log.d(RETROFIT_TAG, "-> \n${result.data?.message}\n ${result.data?.code}" )
 
 
+
+
+
                     if (jwt != null && id != null) {
                         saveStringData(Pair(JWT, jwt))
                         saveStringData(Pair(USER_ID, id.toString()))
-                        _loginStateEvent.postValue(LoginState.Success)
                     }
                     if (nick != null) {
                         saveStringData(Pair(INFO_INPUT, nick))
@@ -94,7 +95,6 @@ class LoginViewModel(
                     } else {
                         showToast(R.string.toast_check_internet)
                     }
-                    _loginStateEvent.postValue(LoginState.Error)
                     dismissLoading()
                 }
             }

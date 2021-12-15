@@ -1,6 +1,9 @@
 package com.abouttime.blindcafe.presentation.onboarding.rule
 
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.view.View
 import androidx.core.view.isGone
 import androidx.viewpager2.widget.ViewPager2
@@ -15,8 +18,21 @@ class RuleFragment : BaseFragment<RuleViewModel>(R.layout.fragment_rule) {
 
     private val viewPagerCallback = object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
-            binding?.tvCafeRuleDescription?.setText(viewModel.rules[position])
-            binding?.tvCafeRuleSubDescription?.isGone = (position != 2)
+            binding?.tvCafeRuleDescription?.text = ""
+
+            val phrases = getString(viewModel.rules[position])
+            if (phrases.contains("[")) {
+                val start = phrases.indexOf("[")
+                val end = phrases.indexOf("]")
+                val builder = SpannableStringBuilder(phrases.replace("[", "").replace("]", ""))
+                builder.setSpan(ForegroundColorSpan(getColorByResId(R.color.main)),
+                    start,
+                    end - 1,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                binding?.tvCafeRuleDescription?.append(builder)
+            } else {
+                binding?.tvCafeRuleDescription?.text = phrases
+            }
             super.onPageSelected(position)
         }
     }

@@ -35,25 +35,7 @@ class LoginFragment : BaseFragment<LoginViewModel>(R.layout.fragment_login) {
         binding?.lifecycleOwner = this
         binding?.viewModel = viewModel
 
-        observeData(fragmentLoginBinding)
-    }
-
-    private fun observeData(fragmentLoginBinding: FragmentLoginBinding) {
-        viewModel.loginStateEvent.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                LoginState.Uninitialized -> {
-                    initKakaoLoginButton(fragmentLoginBinding)
-                }
-                LoginState.Loading -> {
-
-                }
-                LoginState.Success -> {
-                }
-                LoginState.Error -> {
-                    showToast(R.string.login_toast_error)
-                }
-            }
-        }
+        initKakaoLoginButton(fragmentLoginBinding)
     }
 
     private fun initKakaoLoginButton(fragmentLoginBinding: FragmentLoginBinding) {
@@ -104,10 +86,6 @@ class LoginFragment : BaseFragment<LoginViewModel>(R.layout.fragment_login) {
         }
 
 
-    }
-
-    private fun moveToAgreementFragment() {
-        moveToDirections(LoginFragmentDirections.actionLoginFragmentToAgreementFragment())
     }
 
 
