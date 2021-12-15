@@ -537,16 +537,19 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             etMessageInput.setOnFocusChangeListener { view, isFocused ->
                 etMessageInput.isCursorVisible = isFocused
                 flBtContainer.isGone = !isFocused
-                if (isFocused) {
-                    mlInputContainer.transitionToEnd()
-                } else {
+                if (!isFocused) {
                     val imm: InputMethodManager = getInputManager()
                     imm.hideSoftInputFromWindow(etMessageInput.windowToken, 0)
                     mlInputContainer.transitionToStart()
                 }
             }
 
-            viewModel!!.messageEditText.observe(viewLifecycleOwner) {
+            viewModel!!.messageEditText.observe(viewLifecycleOwner) { input ->
+                if (input.isNotEmpty()) {
+                    mlInputContainer.transitionToEnd()
+                } else {
+                    mlInputContainer.transitionToStart()
+                }
                 viewModel!!.updateSendButton()
             }
 

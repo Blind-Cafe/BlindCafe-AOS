@@ -31,6 +31,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintVertical_bias="0.0"
         android:clipToPadding="false"
+        android:overScrollMode="never"
         android:orientation="horizontal"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +61,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="32dp"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:lineSpacingExtra="8sp"
         android:text="@string/rule_1"
@@ -71,7 +71,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintTop_toBottomOf="@id/di_indicator"
-        app:layout_constraintVertical_bias="0.0" />
+        />
 
 
     <TextView
