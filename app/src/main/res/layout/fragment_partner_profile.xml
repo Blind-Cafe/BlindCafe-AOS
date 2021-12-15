@@ -127,7 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:layout_marginTop="27dp"
+                android:layout_marginTop="@dimen/default_top_margin"
                 android:contentDescription="@string/cd_close"
                 android:onClick="@{() -> viewModel.onClickBackButton()}"
                 android:src="@drawable/bt_close"

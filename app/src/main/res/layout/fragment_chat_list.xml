@@ -83,7 +83,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:paddingStart="24dp"
         android:paddingTop="40dp"
-        android:paddingBottom="42dp"
+        android:paddingBottom="24dp"
         android:background="@color/matching_room_root_bg"
         android:fontFamily="@font/spoqa_han_sans_neo_bold"
         android:text="@string/chat_list_title"

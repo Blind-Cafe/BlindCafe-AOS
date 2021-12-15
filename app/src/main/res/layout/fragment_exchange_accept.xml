@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="@dimen/default_top_margin"
         android:onClick="@{() -> viewModel.onClickBackButton()}"
         android:src="@drawable/bt_back"
         app:layout_constraintStart_toStartOf="parent"
