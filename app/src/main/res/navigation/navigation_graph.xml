@@ -299,6 +299,13 @@
             app:enterAnim="@anim/slide_in_bottom"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_out_bottom"/>
+        <action
+            android:id="@+id/action_chatFragment_to_chatImageFragment"
+            app:destination="@id/chatImageFragment"
+            app:exitAnim="@anim/fade_out"
+            app:enterAnim="@anim/slide_in_left"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_left"/>
 
     </fragment>
     <fragment
@@ -847,5 +854,23 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/chatImageFragment"
+        tools:layout="@layout/fragment_chat_image"
+        android:name="com.abouttime.blindcafe.presentation.chat.chat_image.ChatImageFragment"
+        android:label="ChatImageFragment">
+        <argument android:name="imageUrl"
+            app:argType="string"
+            />
+
+        <argument android:name="nickname"
+            app:argType="string"
+            />
+
+        <argument android:name="date"
+            app:argType="string"
+            />
+
     </fragment>
 </navigation>

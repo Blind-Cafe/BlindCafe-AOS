@@ -19,6 +19,13 @@ internal fun Long.secondToChatTime(): String {
     return simpleDataFormat.format(Date(ms))
 }
 
+@SuppressLint("SimpleDateFormat")
+internal fun Long.secondToChatImageTime(): String {
+    val ms = this * 1000
+    val simpleDataFormat = SimpleDateFormat("yyyy/MM/dd")
+    return simpleDataFormat.format(Date(ms))
+}
+
 
 internal fun Long.laps(): Long {
     val currentTime = System.currentTimeMillis() / 1000

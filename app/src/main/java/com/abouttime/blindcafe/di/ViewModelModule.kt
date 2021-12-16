@@ -2,6 +2,7 @@ package com.abouttime.blindcafe.di
 
 import com.abouttime.blindcafe.presentation.NavHostViewModel
 import com.abouttime.blindcafe.presentation.chat.ChatViewModel
+import com.abouttime.blindcafe.presentation.chat.chat_image.ChatImageViewModel
 import com.abouttime.blindcafe.presentation.chat.gallery.GalleryViewModel
 import com.abouttime.blindcafe.presentation.chat.partner_profile.PartnerProfileViewModel
 import com.abouttime.blindcafe.presentation.chat.quit.QuitReasonViewModel
@@ -37,6 +38,7 @@ import com.abouttime.blindcafe.presentation.profile_exchange.accept.ExchangeAcce
 import com.abouttime.blindcafe.presentation.profile_exchange.complete.ExchangeCompleteViewModel
 import com.abouttime.blindcafe.presentation.profile_exchange.dismiss.ExchangeDismissViewModel
 import com.abouttime.blindcafe.presentation.edit.location.LocationViewModel
+import com.abouttime.blindcafe.presentation.main.my_page.setting.customer_center.CustomerCenterViewModel
 import com.abouttime.blindcafe.presentation.profile_exchange.accept.profile_image.AcceptImageViewModel
 import com.abouttime.blindcafe.presentation.profile_exchange.open.ExchangeOpenViewModel
 import com.abouttime.blindcafe.presentation.profile_exchange.wait.ExchangeWaitViewModel
@@ -89,6 +91,7 @@ internal val viewModelModule = module {
     viewModel { AccountDeleteViewModel() }
     viewModel { AccountDeleteCompleteViewModel() }
     viewModel { ReportListViewModel(get()) }
+    viewModel { CustomerCenterViewModel()}
 
 
     /** Chat **/
@@ -97,6 +100,7 @@ internal val viewModelModule = module {
     viewModel { QuitReasonViewModel() }
     viewModel { ReportReasonViewModel(get()) }
     viewModel { PartnerProfileViewModel(get())}
+    viewModel { ChatImageViewModel() }
 
     /** Profile-Exchange **/
     viewModel { ExchangeAcceptViewModel(get(), get(), get()) }

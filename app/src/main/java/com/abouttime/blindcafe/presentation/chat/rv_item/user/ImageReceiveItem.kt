@@ -4,10 +4,10 @@ import android.util.Log
 import android.view.View
 import androidx.core.view.isGone
 import com.abouttime.blindcafe.R
+import com.abouttime.blindcafe.common.ext.*
 import com.abouttime.blindcafe.common.ext.millisecondToChatTime
 import com.abouttime.blindcafe.common.ext.secondToChatTime
 import com.abouttime.blindcafe.common.ext.setChatImage
-import com.abouttime.blindcafe.common.ext.setMarginTop
 import com.abouttime.blindcafe.databinding.RvChatItemReceiveImageBinding
 import com.abouttime.blindcafe.databinding.RvChatItemSendAudioBinding
 import com.abouttime.blindcafe.domain.model.Message
@@ -34,6 +34,15 @@ class ImageReceiveItem(
                 viewBinding.ivContent.setChatImage(uri)
             }
         )
+
+        viewBinding.cvContentContainer.setOnClickListener {
+            viewModel.moveToChatImageFragment(
+                imageUrl = message.contents,
+                nick = message.senderName,
+                date = message.timestamp?.seconds?.secondToChatImageTime() ?: ""
+            )
+        }
+
 
 
         viewBinding.tvTime.text =  message.timestamp?.seconds?.secondToChatTime() ?: System.currentTimeMillis().millisecondToChatTime()

@@ -348,5 +348,13 @@ class ChatViewModel(
         }
     }
 
+    fun moveToChatImageFragment(imageUrl: String, nick: String, date: String) {
+        moveToDirections(ChatFragmentDirections.actionChatFragmentToChatImageFragment(
+            imageUrl = imageUrl,
+            nickname = nick,
+            date = date
+        ))
+    }
+
 
 }
