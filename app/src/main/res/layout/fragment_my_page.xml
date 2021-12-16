@@ -122,7 +122,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                        tools:text="@string/no_value"
                         android:drawablePadding="7dp"
                         app:drawableStartCompat="@drawable/ic_my_page_location"
                         android:textColor="@color/white_2"
@@ -218,6 +217,8 @@
                         android:id="@+id/tv_interest_edit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingVertical="18dp"
+                        android:paddingHorizontal="13dp"
                         android:fontFamily="@font/spoqa_han_sans_neo_regular"
                         android:text="@string/my_page_interest_edit"
                         android:gravity="center"
@@ -230,52 +231,61 @@
                         app:layout_constraintTop_toTopOf="@id/tv_interest_title" />
 
 
-                    <ImageView
-                        android:id="@+id/iv_interest_1"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintDimensionRatio="104:84"
-                        android:layout_marginTop="32dp"
-                        android:layout_marginBottom="32dp"
-                        app:layout_constraintHorizontal_weight="1"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="8dp"
-                        android:src="@drawable/bt_interest_2"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/iv_interest_2"
-                        app:layout_constraintHorizontal_chainStyle="spread"
-                        app:layout_constraintStart_toStartOf="parent"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="11dp"
                         app:layout_constraintTop_toBottomOf="@id/tv_interest_title"
-                        app:tint="@color/gray_300" />
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginBottom="17dp"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
 
-                    <ImageView
-                        android:id="@+id/iv_interest_2"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintHorizontal_weight="1"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="8dp"
-                        app:layout_constraintDimensionRatio="104:84"
-                        android:src="@drawable/bt_interest_2"
-                        app:layout_constraintEnd_toStartOf="@id/iv_interest_3"
-                        app:layout_constraintStart_toEndOf="@id/iv_interest_1"
-                        app:layout_constraintTop_toTopOf="@id/iv_interest_1"
-                        app:tint="@color/gray_300" />
+                        <TextView
+                            android:id="@+id/tv_interest_1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                            android:gravity="center"
+                            android:background="@drawable/bg_exchange_interest"
+                            android:paddingVertical="10dp"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_size_13"
+                            tools:text="여행" />
+
+                        <TextView
+                            android:id="@+id/tv_interest_2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_exchange_interest"                                android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                            android:gravity="center"
+                            android:paddingVertical="10dp"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_size_13"
+                            tools:text="음식" />
 
 
-                    <ImageView
-                        android:id="@+id/iv_interest_3"
-                        android:layout_width="0dp"
-                        app:layout_constraintHorizontal_weight="1"
-                        android:layout_height="0dp"
-                        app:layout_constraintDimensionRatio="104:84"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="8dp"
-                        android:src="@drawable/bt_interest_2"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/iv_interest_2"
-                        app:layout_constraintTop_toTopOf="@id/iv_interest_1"
-                        app:tint="@color/gray_300" />
+                        <TextView
+                            android:id="@+id/tv_interest_3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_exchange_interest"                                android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                            android:gravity="center"
+                            android:paddingVertical="10dp"
+                            android:text="@string/bisexual"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_size_13"
+                            tools:text="게임" />
+
+
+                    </LinearLayout>
+
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

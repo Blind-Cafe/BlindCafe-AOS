@@ -80,31 +80,46 @@ class MyPageFragment : BaseFragment<MyPageViewModel>(R.layout.fragment_my_page) 
     private fun observeInterestsData(fragmentMyPageBinding: FragmentMyPageBinding) =
         with(fragmentMyPageBinding) {
             val interests = arrayOf(
-                ivInterest1,
-                ivInterest2,
-                ivInterest3
+                tvInterest1,
+                tvInterest2,
+                tvInterest3
             )
             viewModel?.interests?.observe(viewLifecycleOwner) { data ->
                 Log.e("myPage", data.toString())
-                interests[0].setImageResource(numToInterestAsset(data[0]))
-                interests[1].setImageResource(numToInterestAsset(data[1]))
-                interests[2].setImageResource(numToInterestAsset(data[2]))
+                interests[0].text = numToString(data[0])
+                interests[1].text = numToString(data[1])
+                interests[2].text = numToString(data[2])
             }
         }
 
 
     private fun numToInterestAsset(num: Int): Int {
-        when (num) {
-            1 -> return R.drawable.bt_interest_1
-            2 -> return R.drawable.bt_interest_2
-            3 -> return R.drawable.bt_interest_3
-            4 -> return R.drawable.bt_interest_4
-            5 -> return R.drawable.bt_interest_5
-            6 -> return R.drawable.bt_interest_6
-            7 -> return R.drawable.bt_interest_7
-            8 -> return R.drawable.bt_interest_8
-            9 -> return R.drawable.bt_interest_9
-            else -> return R.drawable.bt_interest_1 // TODO 삭제하는 방식 생각해보자
+        return when (num) {
+            1 -> R.drawable.bt_interest_1
+            2 -> R.drawable.bt_interest_2
+            3 -> R.drawable.bt_interest_3
+            4 -> R.drawable.bt_interest_4
+            5 -> R.drawable.bt_interest_5
+            6 -> R.drawable.bt_interest_6
+            7 -> R.drawable.bt_interest_7
+            8 -> R.drawable.bt_interest_8
+            9 -> R.drawable.bt_interest_9
+            else -> R.drawable.bt_interest_1 // TODO 삭제하는 방식 생각해보자
+        }
+    }
+
+    private fun numToString(num: Int): String {
+        return when (num) {
+            1 -> "취업"
+            2 -> "작품"
+            3 -> "동물"
+            4 -> "음식"
+            5 -> "여행"
+            6 -> "게임"
+            7 -> "연예"
+            8 -> "스포츠"
+            9 -> "제테크"
+            else -> "" // TODO 삭제하는 방식 생각해보자
         }
     }
 
