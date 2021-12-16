@@ -65,6 +65,8 @@
             android:text="@string/signin_subtitle"
             android:textColor="@color/white_2"
             android:textSize="@dimen/font_size_15"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:gravity="center"
             app:layout_constraintBottom_toTopOf="@id/tv_next"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

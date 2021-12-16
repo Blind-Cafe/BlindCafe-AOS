@@ -41,7 +41,6 @@ class ChatListFragment: BaseFragment<ChatListViewModel>(R.layout.fragment_chat_l
 
                 }
                 IOverScrollState.STATE_DRAG_START_SIDE -> {
-                    // 페이지네이션 코드
                     viewModel.getChatRooms()
                 }
                 else -> {
@@ -56,9 +55,18 @@ class ChatListFragment: BaseFragment<ChatListViewModel>(R.layout.fragment_chat_l
     private fun observeChatRoomsData() {
         viewModel.chatRooms.observe(viewLifecycleOwner) {
             binding?.rvChatRooms?.isGone = it.isEmpty()
+            binding?.rvChatRooms?.isGone = it.isEmpty()
             binding?.ivChatListBgNone?.isGone = it.isNotEmpty()
             binding?.tvSubtitleNone?.isGone = it.isNotEmpty()
             binding?.tvTitleNone?.isGone = it.isNotEmpty()
+
+            if (it.isEmpty()) {
+                binding?.clRoot?.setBackgroundResource(R.color.black)
+                binding?.tvTitle?.setBackgroundResource(R.color.black)
+            } else {
+                binding?.clRoot?.setBackgroundResource(R.color.matching_room_root_bg)
+                binding?.tvTitle?.setBackgroundResource(R.color.matching_room_root_bg)
+            }
 
             chatListRvAdapter.submitList(it)
         }
