@@ -66,6 +66,7 @@
     <color name="matching_room_menu_bg">#595959</color>
     <color name="matching_room_top_bg">#474747</color>
     <color name="matching_room_bottom_bg">#595959</color>
+    <color name="matching_room_text_bg">#8E8E93</color>
 
     <color name="chat_room_root_bg">#2d2d2d</color>
     <color name="chat_room_menu_bg">#48484a</color>

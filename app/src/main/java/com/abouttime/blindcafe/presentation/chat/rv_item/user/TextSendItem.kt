@@ -15,7 +15,8 @@ import com.xwray.groupie.viewbinding.BindableItem
 
 class TextSendItem(
     private val message: Message,
-    private val viewModel: ChatViewModel
+    private val viewModel: ChatViewModel,
+    private val isCont: Boolean
 ) : BindableItem<RvChatItemSendTextBinding>() {
     override fun bind(viewBinding: RvChatItemSendTextBinding, position: Int) {
         handleSendFirstIn1Minute(viewBinding, position)
@@ -23,7 +24,11 @@ class TextSendItem(
 
 
         viewBinding.tvTime.text =  message.timestamp?.seconds?.secondToChatTime() ?: System.currentTimeMillis().millisecondToChatTime()
+        Log.e("zxcv", "$position : ${viewBinding.tvTime.text} 이게 왜 안나와 ${viewModel.sendLastIn1Minute[position]}" )
         viewBinding.tvTime.isGone = !viewModel.sendLastIn1Minute[position]
+        if (isCont) {
+            viewBinding.tvTime.setTextColor(viewBinding.tvTime.resources.getColor(R.color.main, null))
+        }
     }
 
 

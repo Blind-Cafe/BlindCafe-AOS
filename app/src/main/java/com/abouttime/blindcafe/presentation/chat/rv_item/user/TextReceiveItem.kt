@@ -27,7 +27,11 @@ class TextReceiveItem(
 
         viewBinding.message = message
         viewBinding.tvTime.text =  message.timestamp?.seconds?.secondToChatTime() ?: System.currentTimeMillis().millisecondToChatTime()
+        Log.e("zxcv", "$position : ${viewBinding.tvTime.text} 이게 왜 안나와 ${viewModel.sendLastIn1Minute[position]}}" )
         viewBinding.tvTime.isGone = !viewModel.sendLastIn1Minute[position]
+        if (isCont) {
+            viewBinding.tvTime.setTextColor(viewBinding.tvTime.resources.getColor(R.color.main, null))
+        }
     }
 
     private fun handleContinue(viewBinding: RvChatItemReceiveTextBinding, position: Int) {
@@ -65,9 +69,18 @@ class TextReceiveItem(
     private fun handleSendFirstIn1Minute(viewBinding: RvChatItemReceiveTextBinding, position: Int) {
         if (viewModel.sendFirstIn1Minute[position].not()) {
             viewBinding.root.setMarginTop(0)
-            viewBinding.tvContentText.setBackgroundResource(R.drawable.bg_chat_receive_text_round)
+            if (isCont) {
+                viewBinding.tvContentText.setBackgroundResource(R.drawable.bg_matching_receive_text_round)
+            } else {
+                viewBinding.tvContentText.setBackgroundResource(R.drawable.bg_chat_receive_text_round)
+            }
         } else {
-            viewBinding.tvContentText.setBackgroundResource(R.drawable.bg_chat_receive_text)
+            if (isCont) {
+                viewBinding.tvContentText.setBackgroundResource(R.drawable.bg_matching_receive_text)
+            } else {
+                viewBinding.tvContentText.setBackgroundResource(R.drawable.bg_chat_receive_text)
+            }
+
         }
     }
 

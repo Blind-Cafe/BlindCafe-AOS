@@ -334,9 +334,9 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
 
         when (message.type) {
-            1 -> chatAdapter.add(TextSendItem(message, viewModel = viewModel))
-            2 -> chatAdapter.add(ImageSendItem(message, viewModel = viewModel))
-            3 -> chatAdapter.add(AudioSendItem(message, viewModel = viewModel))
+            1 -> chatAdapter.add(TextSendItem(message, viewModel = viewModel, isCont))
+            2 -> chatAdapter.add(ImageSendItem(message, viewModel = viewModel, isCont))
+            3 -> chatAdapter.add(AudioSendItem(message, viewModel = viewModel, isCont))
             4 -> chatAdapter.add(TextTopicItem(message))
             5 -> chatAdapter.add(ImageTopicItem(message, viewModel = viewModel))
             6 -> chatAdapter.add(AudioTopicItem(message, viewModel = viewModel))
@@ -391,11 +391,11 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         checkLastIn1MinuteForPagedMessage(message)
 
         when (message.type) {
-            1 -> chatAdapter.add(0, TextSendItem(message, viewModel))
+            1 -> chatAdapter.add(0, TextSendItem(message, viewModel, isCont))
             2 -> chatAdapter.add(0,
-                ImageSendItem(message, viewModel = viewModel))
+                ImageSendItem(message, viewModel = viewModel, isCont))
             3 -> chatAdapter.add(0,
-                AudioSendItem(message, viewModel = viewModel))
+                AudioSendItem(message, viewModel = viewModel, isCont))
             4 -> chatAdapter.add(0, TextTopicItem(message))
             5 -> chatAdapter.add(0, ImageTopicItem(message, viewModel = viewModel))
             6 -> chatAdapter.add(0, AudioTopicItem(message, viewModel = viewModel))

@@ -47,6 +47,9 @@ class ImageReceiveItem(
             message.timestamp?.seconds?.secondToChatTime() ?: System.currentTimeMillis()
                 .millisecondToChatTime()
         viewBinding.tvTime.isGone = !viewModel.sendLastIn1Minute[position]
+        if (isCont) {
+            viewBinding.tvTime.setTextColor(viewBinding.tvTime.resources.getColor(R.color.main, null))
+        }
     }
 
     private fun handleContinue(viewBinding: RvChatItemReceiveImageBinding, position: Int) {
