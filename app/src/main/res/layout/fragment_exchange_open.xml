@@ -411,6 +411,7 @@
             android:onClick="@{() -> viewModel.onClickCompleteButton()}"
             android:text="@string/profile_edit_open"
             android:textColor="@color/white"
+            android:foreground="?selectableItemBackgroundBorderless"
             android:textSize="@dimen/font_size_16"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="356:50"

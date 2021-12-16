@@ -262,6 +262,7 @@
     <string name="profile_exchange_dismiss">거절하기</string>
     <string name="profile_exchange_accept">수락하기</string>
     <string name="profile_exchange_wait">%s님이 %s중입니다. 잠시만 기다려주세요.</string>
+    <string name="profile_exchange_cancel"><u>프로필 교환 요청 취소하기</u></string>
 
 
     <!-- profile dismiss -->
@@ -324,9 +325,19 @@
     <string name="setting_notification_drink_title">음료수 선택 알림</string>
     <string name="setting_notification_drink_subtitle">매칭 상대를 찾았을 때 알림을 받습니다.</string>
     <string name="setting_report_list">신고내역</string>
+    <string name="setting_report_title">신고</string>
     <string name="setting_account_title">계정</string>
     <string name="setting_account_logout"><u>로그아웃</u></string>
     <string name="setting_account_delete">계정삭제</string>
+    <string name="setting_customer_center">고객센터</string>
+    <string name="setting_term_title">약관</string>
+    <string name="setting_term_policy">개인정보처리 방침</string>
+    <string name="setting_term">이용약관</string>
+    <string name="setting_firm_intro">회사소개</string>
+    <string name="setting_ceo_title">대표</string>
+    <string name="setting_ceo_value">이혜지</string>
+    <string name="setting_email_title">이메일</string>
+    <string name="setting_email_value">Blindcafeapp@gmail.com</string>
 
     <!-- setting confirm -->
     <string name="logout_confirm_title">정말 로그아웃 하시겠습니까?</string>

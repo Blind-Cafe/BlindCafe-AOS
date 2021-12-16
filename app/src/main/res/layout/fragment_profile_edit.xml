@@ -324,6 +324,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="356:50"
             app:layout_constraintEnd_toEndOf="parent"
+            android:foreground="?selectableItemBackgroundBorderless"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ll_essential_profile_container"
             app:layout_constraintVertical_bias="1" />

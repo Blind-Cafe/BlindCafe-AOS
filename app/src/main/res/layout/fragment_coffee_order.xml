@@ -111,6 +111,7 @@
         android:onClick="@{() -> viewModel.onClickNextButton()}"
         android:gravity="center"
         android:layout_marginHorizontal="36dp"
+        android:foreground="?selectableItemBackgroundBorderless"
         android:text="@string/profile_setting_next"
         android:textSize="@dimen/font_size_16"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"

@@ -74,6 +74,7 @@
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:gravity="center"
         android:paddingHorizontal="13dp"
+        android:foreground="?selectableItemBackgroundBorderless"
         android:onClick="@{() -> viewModel.onClickNextButton()}"
         android:text="@string/profile_exchange_complete_next"
         android:textColor="@color/white"

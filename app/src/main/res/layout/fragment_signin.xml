@@ -82,6 +82,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:gravity="center"
             android:paddingVertical="16dp"
+            android:foreground="?selectableItemBackgroundBorderless"
             android:text="@string/signin_next"
             android:textColor="@color/white"
             android:textSize="@dimen/font_size_15"

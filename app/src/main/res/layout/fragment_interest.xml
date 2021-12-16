@@ -318,6 +318,7 @@
             android:textSize="@dimen/font_size_15"
             android:onClick="@{() -> viewModel.onClickNextButton()}"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:foreground="?selectableItemBackgroundBorderless"
             android:layout_marginBottom="32dp"
             app:layout_constraintDimensionRatio="296:48"
             app:layout_constraintEnd_toEndOf="parent"

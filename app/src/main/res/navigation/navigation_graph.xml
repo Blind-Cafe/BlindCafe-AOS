@@ -447,6 +447,13 @@
         <action
             android:id="@+id/action_settingFragment_to_confirmDialogFragment"
             app:destination="@id/confirmDialogFragment" />
+        <action
+            android:id="@+id/action_settingFragment_to_customerCenterFragment"
+            app:destination="@id/customerCenterFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/profileEditFragment"
@@ -821,4 +828,24 @@
             app:popUpTo="@id/quitReasonDialogFragment"
             app:popUpToInclusive="true" />
     </dialog>
+    <fragment
+        android:id="@+id/customerCenterFragment"
+        tools:layout="@layout/fragment_customer_center"
+        android:name="com.abouttime.blindcafe.presentation.main.my_page.setting.customer_center.CustomerCenterFragment"
+        android:label="CustomerCenterFragment" >
+        <action
+            android:id="@+id/action_customerCenterFragment_to_termFragment"
+            app:destination="@id/termFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_customerCenterFragment_to_policyFragment"
+            app:destination="@id/policyFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 </navigation>

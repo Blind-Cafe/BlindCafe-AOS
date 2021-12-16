@@ -218,6 +218,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:gravity="center"
             android:paddingHorizontal="13dp"
+            android:foreground="?selectableItemBackgroundBorderless"
             android:text="@string/profile_dismiss_next"
             android:textColor="@color/white"
             android:onClick="@{viewModel::onClickNextButton}"

@@ -225,6 +225,7 @@
         android:text="@string/interest_main_edit_next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="296:48"
+        android:foreground="?selectableItemBackgroundBorderless"
         android:layout_marginHorizontal="18dp"
         android:layout_marginBottom="32dp"
         app:layout_constraintEnd_toEndOf="parent"

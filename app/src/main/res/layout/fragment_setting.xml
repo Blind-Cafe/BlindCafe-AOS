@@ -19,7 +19,6 @@
             type="com.abouttime.blindcafe.presentation.main.my_page.setting.SettingViewModel" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black">
@@ -162,12 +161,26 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tv_report_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="13dp"
+        android:fontFamily="@font/spoqa_han_sans_neo_regular"
+        android:text="@string/setting_report_title"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_notification_container"
+        android:textSize="@dimen/font_size_15" />
+
+
 
     <LinearLayout
         android:id="@+id/ll_report_list_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:background="@color/gray_900"
         android:onClick="@{() -> viewModel.onClickReportListContainer()}"
         android:orientation="horizontal"
@@ -178,7 +191,7 @@
         android:paddingBottom="17dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_notification_container">
+        app:layout_constraintTop_toBottomOf="@id/tv_report_title">
 
 
         <TextView
@@ -213,11 +226,12 @@
         app:layout_constraintTop_toBottomOf="@id/ll_report_list_container" />
 
     <LinearLayout
+        android:id="@+id/ll_account_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/gray_900"
         android:orientation="vertical"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_account_title">
@@ -271,6 +285,42 @@
 
 
     </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_customer_center_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> viewModel.onClickCustomerCenterButton()}"
+        app:layout_constraintTop_toBottomOf="@id/ll_account_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/gray_900"
+        android:layout_marginTop="18dp"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:paddingVertical="16dp"
+            android:paddingStart="24dp"
+            android:text="@string/setting_customer_center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_14"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="16dp"
+            android:src="@drawable/bt_next"/>
+
+    </LinearLayout>
+
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

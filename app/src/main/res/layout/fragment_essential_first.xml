@@ -231,9 +231,11 @@
                 android:onClick="@{()->viewModel.onClickNextButton()}"
                 android:text="@string/profile_setting_next"
                 android:textSize="@dimen/font_size_15"
+                android:foreground="?selectableItemBackgroundBorderless"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="288:48"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.4"
                 app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

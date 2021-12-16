@@ -541,6 +541,10 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                     val imm: InputMethodManager = getInputManager()
                     imm.hideSoftInputFromWindow(etMessageInput.windowToken, 0)
                     mlInputContainer.transitionToStart()
+                } else {
+                    if (etMessageInput.text.isNotEmpty()) {
+                        mlInputContainer.transitionToEnd()
+                    }
                 }
             }
 
@@ -757,12 +761,10 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             requireActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.pw_chat_menu, null)
         val root = view.findViewById<LinearLayout>(R.id.ll_menu_container)
-        if (!isCont) {
-            root.setBackgroundColor(getColorByResId(R.color.chat_room_menu_bg))
-        } else {
-           // root.setBackgroundColor(getColorByResId(R.color.matching_room_menu_bg))
-            root.setBackgroundColor(getColorByResId(R.color.white))
+        if (isCont) {
+            root.setBackgroundResource(R.drawable.bg_matching_menu)
         }
+
 
 
         val time = view.findViewById<TextView>(R.id.tv_time)

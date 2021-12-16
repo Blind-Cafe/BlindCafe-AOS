@@ -182,6 +182,7 @@
         android:onClick="@{() -> viewModel.onClickNextButton()}"
         android:fontFamily="@font/spoqa_han_sans_neo_regular"
         android:text="@string/location_next"
+        android:foreground="?selectableItemBackgroundBorderless"
         android:textColor="@color/main"
         android:textSize="@dimen/font_size_15"
         app:layout_constraintBottom_toBottomOf="parent"

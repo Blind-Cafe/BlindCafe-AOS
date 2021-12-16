@@ -32,5 +32,8 @@ class SettingViewModel: BaseViewModel() {
     fun onClickBackButton() {
         popDirections()
     }
+    fun onClickCustomerCenterButton() {
+        moveToDirections(SettingFragmentDirections.actionSettingFragmentToCustomerCenterFragment())
+    }
 
 }

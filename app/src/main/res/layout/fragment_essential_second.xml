@@ -243,6 +243,7 @@
                 android:gravity="center"
                 android:onClick="@{()->viewModel.onClickNextButton()}"
                 android:text="@string/profile_setting_next"
+                android:foreground="?selectableItemBackgroundBorderless"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="288:48"
                 app:layout_constraintEnd_toEndOf="parent"
