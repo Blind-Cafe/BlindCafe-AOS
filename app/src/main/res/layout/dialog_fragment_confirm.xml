@@ -63,12 +63,12 @@
             <TextView
                 android:id="@+id/tv_no"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:gravity="center"
-                android:paddingTop="25dp"
-                android:paddingBottom="25dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
                 android:text="@string/report_confirm_no"
                 android:textColor="@color/gray_300"
                 android:textSize="@dimen/dialog_reason" />
@@ -76,11 +76,11 @@
             <TextView
                 android:id="@+id/tv_yes"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:gravity="center"
-                android:paddingVertical="25dp"
+                android:paddingVertical="8dp"
                 android:text="@string/report_confirm_yes"
                 android:textColor="@color/main"
                 android:textSize="@dimen/dialog_reason" />
