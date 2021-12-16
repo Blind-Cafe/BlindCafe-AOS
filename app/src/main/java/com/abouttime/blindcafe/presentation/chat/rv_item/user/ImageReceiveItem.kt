@@ -5,11 +5,7 @@ import android.view.View
 import androidx.core.view.isGone
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.ext.*
-import com.abouttime.blindcafe.common.ext.millisecondToChatTime
-import com.abouttime.blindcafe.common.ext.secondToChatTime
-import com.abouttime.blindcafe.common.ext.setChatImage
 import com.abouttime.blindcafe.databinding.RvChatItemReceiveImageBinding
-import com.abouttime.blindcafe.databinding.RvChatItemSendAudioBinding
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.presentation.chat.ChatViewModel
 import com.bumptech.glide.Glide
@@ -20,8 +16,8 @@ class ImageReceiveItem(
     private val viewModel: ChatViewModel,
     private val isCont: Boolean,
     private val nickName: String,
-    private val profileImage: String
-): BindableItem<RvChatItemReceiveImageBinding>() {
+    private val profileImage: String,
+) : BindableItem<RvChatItemReceiveImageBinding>() {
     override fun bind(viewBinding: RvChatItemReceiveImageBinding, position: Int) {
         viewBinding.root.tag = message.timestamp
 
@@ -32,20 +28,24 @@ class ImageReceiveItem(
             message = message,
             callback = { uri ->
                 viewBinding.ivContent.setChatImage(uri)
+                viewBinding.cvContentContainer.setOnClickListener {
+                    viewModel.moveToChatImageFragment(
+                        imageUrl = uri.toString(),
+                        nick = message.senderName,
+                        date = message.timestamp?.seconds?.secondToChatImageTime() ?: ""
+                    )
+                }
+
             }
         )
 
-        viewBinding.cvContentContainer.setOnClickListener {
-            viewModel.moveToChatImageFragment(
-                imageUrl = message.contents,
-                nick = message.senderName,
-                date = message.timestamp?.seconds?.secondToChatImageTime() ?: ""
-            )
-        }
 
 
 
-        viewBinding.tvTime.text =  message.timestamp?.seconds?.secondToChatTime() ?: System.currentTimeMillis().millisecondToChatTime()
+
+        viewBinding.tvTime.text =
+            message.timestamp?.seconds?.secondToChatTime() ?: System.currentTimeMillis()
+                .millisecondToChatTime()
         viewBinding.tvTime.isGone = !viewModel.sendLastIn1Minute[position]
     }
 
@@ -79,7 +79,10 @@ class ImageReceiveItem(
         }
     }
 
-    private fun handleSendFirstIn1Minute(viewBinding: RvChatItemReceiveImageBinding, position: Int) {
+    private fun handleSendFirstIn1Minute(
+        viewBinding: RvChatItemReceiveImageBinding,
+        position: Int,
+    ) {
         if (viewModel.sendFirstIn1Minute[position].not()) {
             viewBinding.root.setMarginTop(0)
         }

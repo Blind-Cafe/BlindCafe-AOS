@@ -303,9 +303,9 @@
             android:id="@+id/action_chatFragment_to_chatImageFragment"
             app:destination="@id/chatImageFragment"
             app:exitAnim="@anim/fade_out"
-            app:enterAnim="@anim/slide_in_left"
+            app:enterAnim="@anim/slide_in_right"
             app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/slide_out_left"/>
+            app:popExitAnim="@anim/slide_out_right"/>
 
     </fragment>
     <fragment
