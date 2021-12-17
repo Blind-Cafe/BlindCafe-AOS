@@ -401,7 +401,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             6 -> chatAdapter.add(0, AudioTopicItem(message, viewModel = viewModel))
             7 -> chatAdapter.add(0, DescriptionItem(message))
             8 -> {
-                Log.e("zxcv", "${message.toString()}")
                 chatAdapter.add(0, CongratsItem(message))
             }
         }
@@ -410,6 +409,8 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     }
 
     private fun addPagedMessageToPartner(message: Message) {
+        if (message.type == 8) return
+
         viewModel.sendLastIn1Minute.addFirst(true)
         viewModel.sendFirstIn1Minute.addFirst(true)
         viewModel.messages.addFirst(message)
