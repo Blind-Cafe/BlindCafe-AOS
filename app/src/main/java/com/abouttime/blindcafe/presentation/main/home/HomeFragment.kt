@@ -199,7 +199,6 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
         getNavigationResult(CONFIRM_MATCHING_CANCEL)?.observe(viewLifecycleOwner) { result ->
             /** 매칭 취소하고 오면 다시 최신화 한다. **/
             if (result == NavigationKey.CONFIRM_YES) {
-                Log.e(RELEASE_HOME_TAG, "observeSavedNavigationData")
                 viewModel.getHomeInfo()
             }
 
@@ -210,71 +209,12 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
     private fun observeGlobalHomeUpdateData() {
         GlobalLiveData.updateHomeState.observe(viewLifecycleOwner) {
             /** 푸시메시지가 전송되면 업데이트 **/
-            Log.e(RELEASE_HOME_TAG, "observeGlobalHomeUpdateData")
             viewModel.getHomeInfo()
         }
     }
 
-    override fun onAttach(context: Context) {
-        Log.e(RELEASE_HOME_TAG, "onAttach")
-        super.onAttach(context)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        Log.e(RELEASE_HOME_TAG, "onCreate")
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        Log.e(RELEASE_HOME_TAG, "onCreateView")
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        Log.e(RELEASE_HOME_TAG, "onActivityCreated")
-        super.onActivityCreated(savedInstanceState)
-
-
-    }
-
-    override fun onStart() {
-        Log.e(RELEASE_HOME_TAG, "onStart")
-        super.onStart()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.e(RELEASE_HOME_TAG, "onResume")
-    }
-
-    override fun onPause() {
-        Log.e(RELEASE_HOME_TAG, "onPause")
-        super.onPause()
-    }
-
-    override fun onStop() {
-        Log.e(RELEASE_HOME_TAG, "onStop")
-        super.onStop()
-
-    }
-
-    override fun onDestroyView() {
-        Log.e(RELEASE_HOME_TAG, "onDestroyView")
-        super.onDestroyView()
-    }
-
-    override fun onDetach() {
-        Log.e(RELEASE_HOME_TAG, "onDetach")
-        super.onDetach()
-    }
-
-
     private fun observeNotReadMessageCntData() {
-        /** 몇건의 안읽은 메시지? **/
+        /** 몇건의 안읽은 메시지인지 **/
         viewModel?.notReadMessageCnt.observe(viewLifecycleOwner) { cnt ->
             binding?.tvNotReadCnt?.text = getString(R.string.home_notification_message).format(cnt)
         }
@@ -296,7 +236,6 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
     }
 
     override fun onDestroy() {
-        Log.e(RELEASE_HOME_TAG, "onDestroy")
         super.onDestroy()
         viewModel?.listenerRegistration?.remove()
     }
