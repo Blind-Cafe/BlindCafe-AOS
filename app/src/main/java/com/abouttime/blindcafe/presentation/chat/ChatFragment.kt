@@ -270,7 +270,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         }
 
 
-    /** subscribe messages**/
+    /** subscribe messages **/
     private fun subscribeMessages() {
         viewModel?.matchingId?.let {
             viewModel.subscribeMessages(it.toString())

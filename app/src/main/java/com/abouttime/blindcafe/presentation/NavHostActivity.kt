@@ -49,18 +49,6 @@ class NavHostActivity : AppCompatActivity() {
     }
 
 
-    private fun initLoadingDialog() {
-        val b = AlertDialog.Builder(this)
-        val i = this.layoutInflater
-        b.setView(i.inflate(R.layout.dialog_fragment_loading, null))
-        b.setCancelable(false)
-        loadingDialog = b.create()
-        loadingDialog.window?.setDimAmount(0f)
-        loadingDialog.window?.setBackgroundDrawableResource(R.color.transparent)
-
-    }
-
-
     private fun observeLoadingEvent() {
         GlobalLiveData.loadingEvent.observe(this) {
             Log.e("loading", it.toString())
@@ -100,19 +88,10 @@ class NavHostActivity : AppCompatActivity() {
         if (event.action == MotionEvent.ACTION_UP) {
             val v: View? = currentFocus
 
-            //Log.d("asdf", " ->\nView\n top : ${v?.top}, bottom : ${v?.bottom}, height : ${v?.height}\n left : ${v?.left}, right : ${v?.right}, width : ${v?.width}")
-            //Log.d("asdf", " ->\nView\n x : ${v?.x}, y : ${v?.y}\n pivotX : ${v?.pivotX}, pivotY : ${v?.pivotY}")
-            //Log.d("asdf", " ->\nEvent\n x : ${event.x}, y : ${event.y}\n rawX : ${event.rawX}, rawY : ${event.rawY}\n xPrecision : ${event.xPrecision}, yPrecision : ${event.yPrecision}")
-
             if (v?.id == R.id.et_message_input) {
                 val outRect = Rect()
                 v.getGlobalVisibleRect(outRect)
-                //v.getFocusedRect(outRect)
-
-                Log.e("asdf",
-                    "->\noutRect.top ${outRect.top}\nevent.rawY ${event.rawY}\noutRect.bottom ${outRect.bottom}\nevent.rawX ${event.rawX}")
                 if (outRect.top > event.rawY.toInt()) {
-                    //if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt()) ) {
                     v.clearFocus()
                 }
             } else if (v is EditText) {
