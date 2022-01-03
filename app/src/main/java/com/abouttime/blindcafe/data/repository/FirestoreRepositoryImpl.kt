@@ -2,8 +2,8 @@ package com.abouttime.blindcafe.data.repository
 
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.constants.FirebaseKey
-import com.abouttime.blindcafe.common.constants.FirebaseKey.CHAT_PAGE_SIZE
 import com.abouttime.blindcafe.common.constants.FirebaseKey.SUB_COLLECTION_MESSAGES
+import com.abouttime.blindcafe.common.constants.PageSize.CHAT_PAGE_SIZE
 import com.abouttime.blindcafe.data.firebase.Firestore
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.repository.FirestoreRepository

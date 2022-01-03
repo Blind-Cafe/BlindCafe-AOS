@@ -14,8 +14,6 @@ object PreferenceKey {
     const val SUB_INTEREST2 = "SUB_INTEREST2"
     const val SUB_INTEREST3 = "SUB_INTEREST3"
 
-    const val MATCHING_ID = "matching_id"
-
     const val NOTIFICATION_ENTIRE = "NOTIFICATION_ENTIRE"
     const val NOTIFICATION_MESSAGE = "NOTIFICATION_MESSAGE"
     const val NOTIFICATION_ROOM = "NOTIFICATION_ROOM"
