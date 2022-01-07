@@ -1,14 +1,10 @@
 package com.abouttime.blindcafe.presentation.main
 
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
-import com.abouttime.blindcafe.common.constants.LogTag.LIFECYCLE_TAG
 import com.abouttime.blindcafe.databinding.FragmentMainBinding
 import com.abouttime.blindcafe.presentation.main.chat_list.ChatListFragment
 import com.abouttime.blindcafe.presentation.main.home.HomeFragment

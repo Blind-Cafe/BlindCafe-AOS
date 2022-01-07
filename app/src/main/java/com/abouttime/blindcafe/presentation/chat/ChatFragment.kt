@@ -472,6 +472,10 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
     }
 
+    private fun checkLastMessageIn1Minute(message: Message) {
+
+    }
+
     private fun checkLastIn1MinuteForPagedMessage(message: Message) {
         if (chatAdapter.itemCount == 0) return
         if (message.type !in 1..3) return

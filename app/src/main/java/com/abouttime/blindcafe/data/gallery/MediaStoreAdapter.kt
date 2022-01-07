@@ -3,8 +3,6 @@ package com.abouttime.blindcafe.data.gallery
 import android.content.Context
 import android.database.Cursor
 import android.provider.MediaStore
-import android.util.Log
-import com.abouttime.blindcafe.common.constants.LogTag
 
 class MediaStoreAdapter() {
     val projection = arrayOf(
@@ -17,7 +15,6 @@ class MediaStoreAdapter() {
     )
 
     fun getCursor(context: Context): Cursor? {
-        Log.d(LogTag.PAGING_TAG, "getCursor")
         return context.contentResolver.query(
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
             projection,

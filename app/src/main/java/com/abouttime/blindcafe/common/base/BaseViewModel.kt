@@ -2,11 +2,16 @@ package com.abouttime.blindcafe.common.base
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavDirections
 import com.abouttime.BlindCafeApplication.Companion.sharedPreferences
+import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.util.SingleLiveData
 import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.presentation.GlobalLiveData
+import com.google.firebase.Timestamp
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 open class BaseViewModel() : ViewModel() {
     private val _toastEvent = SingleLiveData<Int>()

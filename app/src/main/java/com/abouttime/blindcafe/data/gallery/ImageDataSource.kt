@@ -15,7 +15,6 @@ class ImageDataSource(
     private var cursor: Cursor? = null
 
     init {
-        Log.d(PAGING_TAG, "ImageDataSource")
         cursor = MediaStoreAdapter().getCursor(context)
         cursor?.moveToFirst()
     }

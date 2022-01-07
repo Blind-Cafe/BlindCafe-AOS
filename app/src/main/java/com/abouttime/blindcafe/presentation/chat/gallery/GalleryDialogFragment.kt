@@ -1,7 +1,10 @@
 package com.abouttime.blindcafe.presentation.chat.gallery
 
 import android.annotation.SuppressLint
+import android.content.ContentUris
+import android.database.Cursor
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,9 +12,11 @@ import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.GridLayoutManager
-import com.abouttime.blindcafe.common.util.RvGridDecoration
 import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.constants.LogTag.BOTTOM_SHEET
+import com.abouttime.blindcafe.common.util.RvGridDecoration
+import com.abouttime.blindcafe.data.gallery.Image
+import com.abouttime.blindcafe.data.gallery.MediaStoreAdapter
 import com.abouttime.blindcafe.databinding.DialogFragmentGalleryBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -21,6 +26,7 @@ class GalleryDialogFragment: BottomSheetDialogFragment() {
     private var binding: DialogFragmentGalleryBinding? = null
     private val rvAdapter: GalleryRvAdapter = GalleryRvAdapter()
     private val viewModel: GalleryViewModel by viewModel()
+    private var cursor: Cursor? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,7 +44,10 @@ class GalleryDialogFragment: BottomSheetDialogFragment() {
 
         initImageRecyclerView()
         initBottomSheetDialog()
-        observeImageItems()
+
+        initCursor()
+        loadNextImages()
+        //observeImageItems()
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -50,14 +59,39 @@ class GalleryDialogFragment: BottomSheetDialogFragment() {
         }
     }
 
-    @SuppressLint("Range")
-    private fun observeImageItems() {
-       viewModel.images.observe(viewLifecycleOwner) {
-           Log.d(LogTag.PAGING_TAG, "$it")
-           rvAdapter.submitImageList(it)
-       }
-
+    private fun initCursor() {
+        cursor = MediaStoreAdapter().getCursor(requireActivity())
+        cursor?.moveToFirst()
     }
+    private fun loadNextImages() {
+        rvAdapter.submitImageList(getMediaList(20))
+    }
+
+    @SuppressLint("Range")
+    private fun getMediaList(loadSize: Int): ArrayList<Image?> {
+        val imageList = ArrayList<Image?>()
+        cursor?.let { c ->
+            repeat(loadSize) {
+                if (c.moveToNext()) {
+                    val id = c.getLong(c.getColumnIndex(MediaStore.Images.ImageColumns._ID)) ?: 0L
+                    val uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
+                    imageList.add(Image(uri = uri))
+                }
+            }
+        }
+        return imageList
+    }
+
+
+
+//    @SuppressLint("Range")
+//    private fun observeImageItems() {
+//       viewModel.images.observe(viewLifecycleOwner) {
+//           Log.d(LogTag.PAGING_TAG, "$it")
+//           rvAdapter.submitImageList(it)
+//       }
+//
+//    }
 
 
 
@@ -116,18 +150,5 @@ class GalleryDialogFragment: BottomSheetDialogFragment() {
             param.verticalBias = bias
         }
     }
-
-
-    fun setMargins(v: View, l: Int, t: Int, r: Int, b: Int) {
-        if (v.layoutParams is MarginLayoutParams) {
-            val p = v.layoutParams as MarginLayoutParams
-            p.setMargins(l, t, r, b)
-            v.requestLayout()
-        }
-    }
-
-
-
-
 
 }
