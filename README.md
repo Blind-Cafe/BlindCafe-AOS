@@ -1,5 +1,6 @@
 # 블라인드 카페 - Android 
 
+<img width="30%" src="https://user-images.githubusercontent.com/62280009/148400675-8c1eef5f-93b9-48cd-8bbf-f15addbec711.png"/>
 
 ## 어떤 앱인가요?
 어둠속의 카페 가보셨나요? 맞은 편 상대의 얼굴도 나이도 알 순 없지만 그저 대화합니다. 
