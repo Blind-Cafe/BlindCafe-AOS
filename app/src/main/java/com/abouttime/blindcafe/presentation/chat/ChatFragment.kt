@@ -37,6 +37,7 @@ import com.abouttime.blindcafe.data.server.dto.matching.send.PostMessageDto
 import com.abouttime.blindcafe.databinding.FragmentChatBinding
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.presentation.chat.audio.RecorderState
+import com.abouttime.blindcafe.presentation.chat.gallery.GalleryDialogFragment
 import com.abouttime.blindcafe.presentation.chat.rv_item.*
 import com.abouttime.blindcafe.presentation.chat.rv_item.common.*
 import com.abouttime.blindcafe.presentation.chat.rv_item.user.*
@@ -590,7 +591,8 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
     private fun openGalleryIfPermissionGranted() {
         if (DeviceUtil.hasExtrernalStoragePermission(requireContext())) {
-            galleryCallback.launch("image/*")
+            //galleryCallback.launch("image/*")
+            GalleryDialogFragment().show(requireActivity().supportFragmentManager, null)
         } else {
             galleryPermissionCallback.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
         }
@@ -608,8 +610,8 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     private val galleryPermissionCallback =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
-                //GalleryDialogFragment().show(requireActivity().supportFragmentManager, null)
-                galleryCallback.launch("image/*")
+                GalleryDialogFragment().show(requireActivity().supportFragmentManager, null)
+                //galleryCallback.launch("image/*")
             } else {
                 showToast(R.string.chat_toast_permission)
             }
