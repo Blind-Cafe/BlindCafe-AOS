@@ -43,19 +43,16 @@ class CoffeeOrderVpAdapter(
         }
     }
 
-    // 어떤 뷰를 만들 것인가
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
             VpItemCoffeeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
 
-    // 어떤 뷰를 바인드할 것인가
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindData(position)
         holder.bindView(position)
     }
 
-    // 몇개의 뷰를 보여줄 것인가
     override fun getItemCount(): Int = viewModel.resIds.size
 
 
