@@ -24,7 +24,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class GalleryDialogFragment: BottomSheetDialogFragment() {
     private var binding: DialogFragmentGalleryBinding? = null
-    private val rvAdapter: GalleryRvAdapter = GalleryRvAdapter()
+    private lateinit var rvAdapter: GalleryRvAdapter
     private val viewModel: GalleryViewModel by viewModel()
     private var cursor: Cursor? = null
 
@@ -53,6 +53,7 @@ class GalleryDialogFragment: BottomSheetDialogFragment() {
 
     private fun initImageRecyclerView() {
         binding?.rvPictureContainer?.let {
+            rvAdapter = GalleryRvAdapter(viewModel)
             it.adapter = rvAdapter
             it.layoutManager = GridLayoutManager(context, 3)
             it.addItemDecoration(RvGridDecoration(3, 6, false))

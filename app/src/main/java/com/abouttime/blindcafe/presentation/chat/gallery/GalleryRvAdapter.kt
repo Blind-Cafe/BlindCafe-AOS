@@ -4,20 +4,42 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.data.gallery.Image
 import com.abouttime.blindcafe.databinding.RvGalleryItemBinding
 import com.bumptech.glide.Glide
 
 class GalleryRvAdapter(
-
+    private val viewModel: GalleryViewModel
 ): RecyclerView.Adapter<GalleryRvAdapter.ViewHolder>() {
     private var list = mutableListOf<Image?>()
     inner class ViewHolder(private val binding: RvGalleryItemBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(data: Image?) {
+        fun bindData(data: Image?) {
             Glide.with(binding.ivGalleryImage)
                 .load(data?.uri)
                 .into(binding.ivGalleryImage)
+        }
+        fun bindView(data: Image?, position: Int) {
+            binding.ivGalleryImage.setOnClickListener {
+                val size = viewModel.selectedImages.size
+
+                if (size >= 5) {
+                    viewModel.showToast(R.string.toast_gallery_limit)
+                    return@setOnClickListener
+                }
+                data?.let { image ->
+                    if (viewModel.isSelected.contains(position)) {
+                        viewModel.isSelected.minus(position)
+                        viewModel.selectedImages.remove(image.uri)
+                    } else {
+                        viewModel.isSelected.plus(position)
+                        viewModel.selectedImages.add(image.uri)
+                        binding.tvGallerySelect.text = (size + 1).toString()
+                    }
+                }
+
+            }
         }
     }
 
@@ -26,7 +48,8 @@ class GalleryRvAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         list[position]?.let {
-            holder.bind(list[position])
+            holder.bindData(list[position])
+            holder.bindView(list[position], position)
         } ?: kotlin.run {
             Log.e("image", "image is null!\n ${list}")
         }
