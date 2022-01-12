@@ -70,7 +70,7 @@ class FirestoreRepositoryImpl(
             .whereLessThan(TIME_STAMP, lastTime) // 인자보다 오래된 메시지 중에
             .orderBy(TIME_STAMP, Query.Direction.DESCENDING) // 최근 순으로
             .limit(CHAT_PAGE_SIZE) // 페이지 사이즈 만큼
-            .get() // 가져와
+            .get()
             .await()
             .documents
             .map { doc ->

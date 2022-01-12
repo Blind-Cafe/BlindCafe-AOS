@@ -30,16 +30,27 @@ class GalleryRvAdapter(
                 }
                 data?.let { image ->
                     if (viewModel.isSelected.contains(position)) {
-                        viewModel.isSelected.minus(position)
-                        viewModel.selectedImages.remove(image.uri)
+                        unselectImage(image, position)
                     } else {
-                        viewModel.isSelected.plus(position)
-                        viewModel.selectedImages.add(image.uri)
-                        binding.tvGallerySelect.text = (size + 1).toString()
+                        selectImage(image, size, position)
                     }
+                    notifyDataSetChanged()
                 }
 
             }
+        }
+
+
+        private fun unselectImage(image:Image, position: Int) {
+            viewModel.isSelected.minus(position)
+            viewModel.selectedImages.remove(image.uri)
+            binding.tvGallerySelect.text = ""
+        }
+
+        private fun selectImage(image: Image, size: Int, position: Int) {
+            viewModel.isSelected.plus(position)
+            viewModel.selectedImages.add(image.uri)
+            binding.tvGallerySelect.text = (size + 1).toString()
         }
     }
 
