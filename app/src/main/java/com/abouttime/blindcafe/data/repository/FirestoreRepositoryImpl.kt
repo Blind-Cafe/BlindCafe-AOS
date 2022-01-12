@@ -3,6 +3,7 @@ package com.abouttime.blindcafe.data.repository
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.constants.FirebaseKey
 import com.abouttime.blindcafe.common.constants.FirebaseKey.SUB_COLLECTION_MESSAGES
+import com.abouttime.blindcafe.common.constants.FirebaseKey.TIME_STAMP
 import com.abouttime.blindcafe.common.constants.PageSize.CHAT_PAGE_SIZE
 import com.abouttime.blindcafe.data.firebase.Firestore
 import com.abouttime.blindcafe.domain.model.Message
@@ -67,10 +68,10 @@ class FirestoreRepositoryImpl(
             .roomCollectionRef
             .document(roomId)
             .collection(SUB_COLLECTION_MESSAGES)
-            .whereLessThan("timestamp", lastTime) // 인자보다 오래된 메시지 중에
-            .orderBy("timestamp", Query.Direction.DESCENDING) // 최근 순으로
+            .whereLessThan(TIME_STAMP, lastTime) // 인자보다 오래된 메시지 중에
+            .orderBy(TIME_STAMP, Query.Direction.DESCENDING) // 최근 순으로
             .limit(CHAT_PAGE_SIZE) // 페이지 사이즈 만큼
-            .get() // 가져와
+            .get()
             .await()
             .documents
             .map { doc ->

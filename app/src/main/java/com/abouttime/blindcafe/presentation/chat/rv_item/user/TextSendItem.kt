@@ -24,7 +24,7 @@ class TextSendItem(
 
 
         viewBinding.tvTime.text =  message.timestamp?.seconds?.secondToChatTime() ?: System.currentTimeMillis().millisecondToChatTime()
-        Log.e("zxcv", "$position : ${viewBinding.tvTime.text} 이게 왜 안나와 ${viewModel.sendLastIn1Minute[position]}" )
+
         viewBinding.tvTime.isGone = !viewModel.sendLastIn1Minute[position]
         if (isCont) {
             viewBinding.tvTime.setTextColor(viewBinding.tvTime.resources.getColor(R.color.main, null))
