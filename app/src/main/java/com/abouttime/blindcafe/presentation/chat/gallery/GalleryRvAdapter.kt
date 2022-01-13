@@ -15,10 +15,12 @@ class GalleryRvAdapter(
     private var list = mutableListOf<Image?>()
     inner class ViewHolder(private val binding: RvGalleryItemBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(data: Image?) {
+        fun bindData(data: Image?, position: Int) {
             Glide.with(binding.ivGalleryImage)
                 .load(data?.uri)
                 .into(binding.ivGalleryImage)
+
+            binding.tvGallerySelect.text = (viewModel.isSelected[position] ?: "").toString()
         }
         fun bindView(data: Image?, position: Int) {
             binding.ivGalleryImage.setOnClickListener {
@@ -44,13 +46,12 @@ class GalleryRvAdapter(
         private fun unselectImage(image:Image, position: Int) {
             viewModel.isSelected.minus(position)
             viewModel.selectedImages.remove(image.uri)
-            binding.tvGallerySelect.text = ""
+
         }
 
         private fun selectImage(image: Image, size: Int, position: Int) {
-            viewModel.isSelected.plus(position)
+            viewModel.isSelected.plus(Pair(position, size + 1))
             viewModel.selectedImages.add(image.uri)
-            binding.tvGallerySelect.text = (size + 1).toString()
         }
     }
 
@@ -59,7 +60,7 @@ class GalleryRvAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         list[position]?.let {
-            holder.bindData(list[position])
+            holder.bindData(list[position], position)
             holder.bindView(list[position], position)
         } ?: kotlin.run {
             Log.e("image", "image is null!\n ${list}")

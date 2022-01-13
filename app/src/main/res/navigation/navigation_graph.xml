@@ -312,7 +312,18 @@
         android:id="@+id/galleryDialogFragment"
         android:name="com.abouttime.blindcafe.presentation.chat.gallery.GalleryDialogFragment"
         android:label="GalleryDialogFragment"
-        tools:layout="@layout/dialog_fragment_gallery" />
+        tools:layout="@layout/dialog_fragment_gallery">
+        <argument
+            android:name="userId"
+            app:argType="string"
+            />
+
+        <argument
+            android:name="matchingId"
+            app:argType="integer"/>
+
+
+    </fragment>
     <fragment
         android:id="@+id/coffeeOrderFragment"
         android:name="com.abouttime.blindcafe.presentation.main.home.coffee.CoffeeOrderFragment"
