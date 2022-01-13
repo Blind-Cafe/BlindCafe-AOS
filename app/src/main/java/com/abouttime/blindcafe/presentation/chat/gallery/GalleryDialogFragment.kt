@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.constants.LogTag.BOTTOM_SHEET
@@ -28,6 +29,8 @@ class GalleryDialogFragment: BottomSheetDialogFragment() {
     private val viewModel: GalleryViewModel by viewModel()
     private var cursor: Cursor? = null
 
+    private val args: GalleryDialogFragmentArgs by navArgs()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,20 +39,28 @@ class GalleryDialogFragment: BottomSheetDialogFragment() {
         val dialogFragmentGalleryBinding = DialogFragmentGalleryBinding.inflate(inflater, container, false)
         binding = dialogFragmentGalleryBinding
 
+
         return dialogFragmentGalleryBinding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        initArgs()
         initImageRecyclerView()
         initBottomSheetDialog()
 
         initCursor()
+
         loadNextImages()
         //observeImageItems()
         super.onViewCreated(view, savedInstanceState)
     }
+
+    private fun initArgs() {
+        viewModel.userId = args.userId
+        viewModel.matchingId = args.matchingId
+    }
+
 
     private fun initImageRecyclerView() {
         binding?.rvPictureContainer?.let {
