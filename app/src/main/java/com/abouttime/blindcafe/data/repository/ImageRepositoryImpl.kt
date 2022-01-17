@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.abouttime.blindcafe.common.constants.LogTag
-import com.abouttime.blindcafe.data.gallery.Image
-import com.abouttime.blindcafe.data.gallery.ImageDataSourceFactory
+import com.abouttime.blindcafe.data.local.gallery.Image
+import com.abouttime.blindcafe.data.local.gallery.ImageDataSourceFactory
 import com.abouttime.blindcafe.domain.repository.ImageRepository
 
 class ImageRepositoryImpl(

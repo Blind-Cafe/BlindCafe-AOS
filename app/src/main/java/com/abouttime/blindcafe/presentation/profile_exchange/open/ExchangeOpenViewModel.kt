@@ -10,9 +10,9 @@ import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NICKNAME
 import com.abouttime.blindcafe.common.constants.PreferenceKey.USER_ID
 import com.abouttime.blindcafe.common.util.SingleLiveData
-import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.GetProfileForOpenDto
-import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.PostProfileForOpenDto
-import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.PostProfileForOpenResponse
+import com.abouttime.blindcafe.data.remote.server.dto.user_info.profile.exchange.GetProfileForOpenDto
+import com.abouttime.blindcafe.data.remote.server.dto.user_info.profile.exchange.PostProfileForOpenDto
+import com.abouttime.blindcafe.data.remote.server.dto.user_info.profile.exchange.PostProfileForOpenResponse
 import com.abouttime.blindcafe.domain.use_case.server.GetProfileForOpenUseCase
 import com.abouttime.blindcafe.domain.use_case.server.PostProfileForOpenUseCase
 import kotlinx.coroutines.flow.launchIn

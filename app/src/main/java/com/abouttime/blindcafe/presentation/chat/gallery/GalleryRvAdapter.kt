@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.abouttime.blindcafe.R
-import com.abouttime.blindcafe.data.gallery.Image
+import com.abouttime.blindcafe.data.local.gallery.Image
 import com.abouttime.blindcafe.databinding.RvGalleryItemBinding
 import com.bumptech.glide.Glide
 

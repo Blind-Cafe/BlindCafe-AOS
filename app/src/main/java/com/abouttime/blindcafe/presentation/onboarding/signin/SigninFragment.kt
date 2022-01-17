@@ -2,11 +2,8 @@ package com.abouttime.blindcafe.presentation.onboarding.signin
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.navArgs
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
-import com.abouttime.blindcafe.data.server.dto.user_info.PostUserInfoDto
 import com.abouttime.blindcafe.databinding.FragmentSigninBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 

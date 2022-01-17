@@ -2,7 +2,7 @@ package com.abouttime.blindcafe.presentation.main.my_page.setting.report_list
 
 import android.view.View
 import com.abouttime.blindcafe.R
-import com.abouttime.blindcafe.data.server.dto.user_info.report.Report
+import com.abouttime.blindcafe.data.remote.server.dto.user_info.report.Report
 import com.abouttime.blindcafe.databinding.RvItemReportBinding
 import com.xwray.groupie.viewbinding.BindableItem
 

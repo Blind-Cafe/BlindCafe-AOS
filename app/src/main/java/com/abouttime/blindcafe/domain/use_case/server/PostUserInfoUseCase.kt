@@ -1,17 +1,12 @@
 package com.abouttime.blindcafe.domain.use_case.server
 
-import android.util.Log
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseResponse
-import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.ext.parseErrorBody
-import com.abouttime.blindcafe.data.server.dto.user_info.PostUserInfoDto
+import com.abouttime.blindcafe.data.remote.server.dto.user_info.PostUserInfoDto
 import com.abouttime.blindcafe.domain.repository.UserInfoRepository
-import com.google.gson.Gson
-import com.google.gson.JsonObject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import org.json.JSONObject
 import retrofit2.HttpException
 
 class PostUserInfoUseCase(

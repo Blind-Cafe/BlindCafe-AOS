@@ -6,13 +6,9 @@ import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.recyclerview.widget.RecyclerView
 import com.abouttime.blindcafe.R
-import com.abouttime.blindcafe.data.server.dto.matching.Matching
-import com.abouttime.blindcafe.data.server.dto.matching.Partner
+import com.abouttime.blindcafe.data.remote.server.dto.matching.Matching
 import com.abouttime.blindcafe.databinding.RvChatListItemBinding
 import com.bumptech.glide.Glide
-import com.google.gson.annotations.SerializedName
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 
 class ChatListRvAdapter(

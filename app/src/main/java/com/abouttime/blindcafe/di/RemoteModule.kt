@@ -3,7 +3,7 @@ package com.abouttime.blindcafe.di
 
 import com.abouttime.blindcafe.common.util.AuthenticationInterceptor
 import com.abouttime.blindcafe.common.constants.Retrofit.BASE_URL
-import com.abouttime.blindcafe.data.server.api.*
+import com.abouttime.blindcafe.data.remote.server.api.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.BuildConfig

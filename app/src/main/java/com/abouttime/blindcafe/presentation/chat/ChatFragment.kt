@@ -33,7 +33,7 @@ import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_TRUE
 import com.abouttime.blindcafe.common.ext.*
 import com.abouttime.blindcafe.common.util.DeviceUtil
 import com.abouttime.blindcafe.common.util.KeyboardVisibility
-import com.abouttime.blindcafe.data.server.dto.matching.send.PostMessageDto
+import com.abouttime.blindcafe.data.remote.server.dto.matching.send.PostMessageDto
 import com.abouttime.blindcafe.databinding.FragmentChatBinding
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.presentation.chat.audio.RecorderState

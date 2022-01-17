@@ -2,7 +2,7 @@ package com.abouttime.blindcafe.domain.use_case.server
 
 import android.util.Log
 import com.abouttime.blindcafe.common.constants.LogTag.FCM_TAG
-import com.abouttime.blindcafe.data.server.dto.notification.PostFcmDto
+import com.abouttime.blindcafe.data.remote.server.dto.notification.PostFcmDto
 import com.abouttime.blindcafe.domain.repository.FcmRepository
 
 /**

@@ -10,9 +10,8 @@ import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag
-import com.abouttime.blindcafe.data.server.dto.matching.send.PostMessageDto
+import com.abouttime.blindcafe.data.remote.server.dto.matching.send.PostMessageDto
 import com.abouttime.blindcafe.domain.model.Message
-import com.abouttime.blindcafe.domain.use_case.firebase.FetchImagesUseCase
 import com.abouttime.blindcafe.domain.use_case.firebase.UploadImageUseCase
 import com.abouttime.blindcafe.domain.use_case.server.PostMessageUseCase
 import kotlinx.coroutines.Dispatchers
