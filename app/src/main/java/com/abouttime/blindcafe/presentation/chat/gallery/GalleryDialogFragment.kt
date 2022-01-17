@@ -9,15 +9,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewGroup.MarginLayoutParams
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
-import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.constants.LogTag.BOTTOM_SHEET
 import com.abouttime.blindcafe.common.util.RvGridDecoration
-import com.abouttime.blindcafe.data.gallery.Image
-import com.abouttime.blindcafe.data.gallery.MediaStoreAdapter
+import com.abouttime.blindcafe.data.local.gallery.Image
+import com.abouttime.blindcafe.data.local.gallery.MediaStoreAdapter
 import com.abouttime.blindcafe.databinding.DialogFragmentGalleryBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -52,6 +50,8 @@ class GalleryDialogFragment: BottomSheetDialogFragment() {
         initCursor()
 
         loadNextImages()
+
+        initSendButton()
         //observeImageItems()
         super.onViewCreated(view, savedInstanceState)
     }
@@ -75,8 +75,10 @@ class GalleryDialogFragment: BottomSheetDialogFragment() {
         cursor = MediaStoreAdapter().getCursor(requireActivity())
         cursor?.moveToFirst()
     }
+
     private fun loadNextImages() {
         rvAdapter.submitImageList(getMediaList(20))
+
     }
 
     @SuppressLint("Range")
@@ -94,16 +96,14 @@ class GalleryDialogFragment: BottomSheetDialogFragment() {
         return imageList
     }
 
+    private fun initSendButton() {
+        binding?.tvSend?.setOnClickListener {
+            viewModel.onClickSendButton()
+            dismiss()
+        }
+    }
 
 
-//    @SuppressLint("Range")
-//    private fun observeImageItems() {
-//       viewModel.images.observe(viewLifecycleOwner) {
-//           Log.d(LogTag.PAGING_TAG, "$it")
-//           rvAdapter.submitImageList(it)
-//       }
-//
-//    }
 
 
 

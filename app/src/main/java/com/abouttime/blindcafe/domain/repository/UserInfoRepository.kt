@@ -1,20 +1,20 @@
 package com.abouttime.blindcafe.domain.repository
 
 import com.abouttime.blindcafe.common.base.BaseResponse
-import com.abouttime.blindcafe.data.server.dto.user_info.DeleteAccountResponse
-import com.abouttime.blindcafe.data.server.dto.user_info.GetUserInfoDto
-import com.abouttime.blindcafe.data.server.dto.user_info.PostUserInfoDto
-import com.abouttime.blindcafe.data.server.dto.user_info.device_token.PostDeviceTokenDto
-import com.abouttime.blindcafe.data.server.dto.user_info.edit.info.PutProfileInfoDto
-import com.abouttime.blindcafe.data.server.dto.user_info.edit.info.PutProfileInfoResponse
-import com.abouttime.blindcafe.data.server.dto.user_info.partner.GetPartnerProfileDto
-import com.abouttime.blindcafe.data.server.dto.user_info.partner.matched.GetMatchingProfileDto
-import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.GetProfileForOpenDto
-import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.PostProfileForOpenDto
-import com.abouttime.blindcafe.data.server.dto.user_info.profile.exchange.PostProfileForOpenResponse
-import com.abouttime.blindcafe.data.server.dto.user_info.profile.image.GetProfileImageDto
-import com.abouttime.blindcafe.data.server.dto.user_info.profile.info.GetProfileInfoDto
-import com.abouttime.blindcafe.data.server.dto.user_info.report.GetReportsDto
+import com.abouttime.blindcafe.data.remote.server.dto.user_info.DeleteAccountResponse
+import com.abouttime.blindcafe.data.remote.server.dto.user_info.GetUserInfoDto
+import com.abouttime.blindcafe.data.remote.server.dto.user_info.PostUserInfoDto
+import com.abouttime.blindcafe.data.remote.server.dto.user_info.device_token.PostDeviceTokenDto
+import com.abouttime.blindcafe.data.remote.server.dto.user_info.edit.info.PutProfileInfoDto
+import com.abouttime.blindcafe.data.remote.server.dto.user_info.edit.info.PutProfileInfoResponse
+import com.abouttime.blindcafe.data.remote.server.dto.user_info.partner.GetPartnerProfileDto
+import com.abouttime.blindcafe.data.remote.server.dto.user_info.partner.matched.GetMatchingProfileDto
+import com.abouttime.blindcafe.data.remote.server.dto.user_info.profile.exchange.GetProfileForOpenDto
+import com.abouttime.blindcafe.data.remote.server.dto.user_info.profile.exchange.PostProfileForOpenDto
+import com.abouttime.blindcafe.data.remote.server.dto.user_info.profile.exchange.PostProfileForOpenResponse
+import com.abouttime.blindcafe.data.remote.server.dto.user_info.profile.image.GetProfileImageDto
+import com.abouttime.blindcafe.data.remote.server.dto.user_info.profile.info.GetProfileInfoDto
+import com.abouttime.blindcafe.data.remote.server.dto.user_info.report.GetReportsDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 

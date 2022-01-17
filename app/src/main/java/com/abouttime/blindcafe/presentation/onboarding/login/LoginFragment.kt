@@ -9,15 +9,13 @@ import com.abouttime.blindcafe.background.service.FirebaseService
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.constants.PreferenceKey.DEVICE_TOKEN
-import com.abouttime.blindcafe.data.server.dto.login.KakaoTokenDto
+import com.abouttime.blindcafe.data.remote.server.dto.login.KakaoTokenDto
 import com.abouttime.blindcafe.databinding.FragmentLoginBinding
-import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 import org.koin.android.viewmodel.ext.android.viewModel
 
 

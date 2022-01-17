@@ -14,8 +14,8 @@ import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.constants.PreferenceKey.LAST_READ_MESSAGE
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NICKNAME
 import com.abouttime.blindcafe.common.ext.secondToLapseForHome
-import com.abouttime.blindcafe.data.server.dto.home.GetHomeInfoDto
-import com.abouttime.blindcafe.data.server.dto.user_info.partner.GetPartnerProfileDto
+import com.abouttime.blindcafe.data.remote.server.dto.home.GetHomeInfoDto
+import com.abouttime.blindcafe.data.remote.server.dto.user_info.partner.GetPartnerProfileDto
 import com.abouttime.blindcafe.domain.model.ChatRoom
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.use_case.server.*

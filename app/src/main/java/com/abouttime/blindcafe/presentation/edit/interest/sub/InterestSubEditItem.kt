@@ -3,7 +3,7 @@ package com.abouttime.blindcafe.presentation.edit.interest.sub
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.abouttime.blindcafe.R
-import com.abouttime.blindcafe.data.server.dto.interest.Interest
+import com.abouttime.blindcafe.data.remote.server.dto.interest.Interest
 import com.abouttime.blindcafe.databinding.RvItemInterestSubBinding
 import com.xwray.groupie.viewbinding.BindableItem
 

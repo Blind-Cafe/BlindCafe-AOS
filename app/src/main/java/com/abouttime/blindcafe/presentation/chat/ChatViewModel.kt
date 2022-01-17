@@ -13,8 +13,8 @@ import com.abouttime.blindcafe.common.constants.PreferenceKey.LAST_READ_MESSAGE
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NICKNAME
 import com.abouttime.blindcafe.common.constants.PreferenceKey.USER_ID
 import com.abouttime.blindcafe.common.util.SingleLiveData
-import com.abouttime.blindcafe.data.server.dto.matching.send.PostMessageDto
-import com.abouttime.blindcafe.data.server.dto.matching.topic.GetTopicDto
+import com.abouttime.blindcafe.data.remote.server.dto.matching.send.PostMessageDto
+import com.abouttime.blindcafe.data.remote.server.dto.matching.topic.GetTopicDto
 import com.abouttime.blindcafe.domain.model.ChatRoom
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.use_case.firebase.*

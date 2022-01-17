@@ -1,11 +1,10 @@
 package com.abouttime.blindcafe.data.repository
 
 import com.abouttime.blindcafe.common.Resource
-import com.abouttime.blindcafe.common.constants.FirebaseKey
 import com.abouttime.blindcafe.common.constants.FirebaseKey.SUB_COLLECTION_MESSAGES
 import com.abouttime.blindcafe.common.constants.FirebaseKey.TIME_STAMP
 import com.abouttime.blindcafe.common.constants.PageSize.CHAT_PAGE_SIZE
-import com.abouttime.blindcafe.data.firebase.Firestore
+import com.abouttime.blindcafe.data.remote.firebase.Firestore
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.repository.FirestoreRepository
 import com.google.firebase.Timestamp

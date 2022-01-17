@@ -3,7 +3,7 @@ package com.abouttime.blindcafe.domain.use_case.server
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseResponse
 import com.abouttime.blindcafe.common.ext.parseErrorBody
-import com.abouttime.blindcafe.data.server.dto.matching.report.PostReportDto
+import com.abouttime.blindcafe.data.remote.server.dto.matching.report.PostReportDto
 import com.abouttime.blindcafe.domain.repository.MatchingRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

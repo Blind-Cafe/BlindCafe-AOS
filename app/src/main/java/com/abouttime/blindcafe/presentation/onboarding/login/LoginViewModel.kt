@@ -12,14 +12,12 @@ import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.constants.PreferenceKey.INFO_INPUT
 import com.abouttime.blindcafe.common.constants.PreferenceKey.USER_ID
 import com.abouttime.blindcafe.common.constants.Retrofit.JWT
-import com.abouttime.blindcafe.data.server.dto.login.KakaoTokenDto
+import com.abouttime.blindcafe.data.remote.server.dto.login.KakaoTokenDto
 import com.abouttime.blindcafe.domain.use_case.server.PostKakaoTokenUseCase
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 
 class LoginViewModel(
     private val postKakaoTokenUseCase: PostKakaoTokenUseCase

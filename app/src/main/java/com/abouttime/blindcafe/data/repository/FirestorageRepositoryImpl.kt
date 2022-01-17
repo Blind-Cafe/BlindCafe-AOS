@@ -1,7 +1,7 @@
 package com.abouttime.blindcafe.data.repository
 
 import android.net.Uri
-import com.abouttime.blindcafe.data.firebase.Firestorage
+import com.abouttime.blindcafe.data.remote.firebase.Firestorage
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.repository.FirestorageRepository
 import com.google.firebase.storage.UploadTask
