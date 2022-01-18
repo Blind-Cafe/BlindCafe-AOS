@@ -6,7 +6,7 @@ import com.abouttime.blindcafe.background.service.FirebaseService
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.data.remote.server.dto.user_info.device_token.PostDeviceTokenDto
-import com.abouttime.blindcafe.domain.use_case.server.PostDeviceTokenUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.PostDeviceTokenUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

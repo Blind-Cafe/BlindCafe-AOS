@@ -1,7 +1,8 @@
 package com.abouttime.blindcafe.di
 
-import com.abouttime.blindcafe.domain.use_case.firebase.*
-import com.abouttime.blindcafe.domain.use_case.server.*
+import com.abouttime.blindcafe.domain.use_case.local.media_store.GetGalleryImagesUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.firebase.*
+import com.abouttime.blindcafe.domain.use_case.remote.server.*
 import org.koin.dsl.module
 
 internal val useCaseModule = module {
@@ -27,7 +28,7 @@ internal val useCaseModule = module {
     factory { GetMatchingProfileUseCase(get()) }
 
     /** gallery **/
-    factory { FetchImagesUseCase(get()) }
+    factory { GetGalleryImagesUseCase(get()) }
 
     /** fire store **/
     factory { SendMessageUseCase(get()) }

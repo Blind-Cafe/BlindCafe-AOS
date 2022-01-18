@@ -11,8 +11,8 @@ import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NICKNAME
 import com.abouttime.blindcafe.data.remote.server.dto.matching.PostDrinkDto
 import com.abouttime.blindcafe.domain.model.ChatRoom
-import com.abouttime.blindcafe.domain.use_case.server.GetChatRoomInfoUseCase
-import com.abouttime.blindcafe.domain.use_case.server.PostDrinkUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.GetChatRoomInfoUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.PostDrinkUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 

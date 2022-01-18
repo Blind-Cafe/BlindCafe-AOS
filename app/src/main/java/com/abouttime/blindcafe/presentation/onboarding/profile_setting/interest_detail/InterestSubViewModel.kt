@@ -12,7 +12,7 @@ import com.abouttime.blindcafe.common.constants.PreferenceKey.SUB_INTEREST1
 import com.abouttime.blindcafe.common.constants.PreferenceKey.SUB_INTEREST2
 import com.abouttime.blindcafe.common.constants.PreferenceKey.SUB_INTEREST3
 import com.abouttime.blindcafe.data.remote.server.dto.interest.Interest
-import com.abouttime.blindcafe.domain.use_case.server.GetInterestUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.GetInterestUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 

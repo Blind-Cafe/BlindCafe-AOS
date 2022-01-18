@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
-import com.abouttime.blindcafe.domain.use_case.server.GetProfileImageUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.GetProfileImageUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 

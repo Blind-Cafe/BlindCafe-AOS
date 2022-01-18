@@ -13,7 +13,7 @@ import com.abouttime.blindcafe.common.constants.PreferenceKey.INFO_INPUT
 import com.abouttime.blindcafe.common.constants.PreferenceKey.USER_ID
 import com.abouttime.blindcafe.common.constants.Retrofit.JWT
 import com.abouttime.blindcafe.data.remote.server.dto.login.KakaoTokenDto
-import com.abouttime.blindcafe.domain.use_case.server.PostKakaoTokenUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.PostKakaoTokenUseCase
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import kotlinx.coroutines.flow.launchIn

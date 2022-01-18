@@ -12,8 +12,8 @@ import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.data.remote.server.dto.matching.send.PostMessageDto
 import com.abouttime.blindcafe.domain.model.Message
-import com.abouttime.blindcafe.domain.use_case.firebase.UploadImageUseCase
-import com.abouttime.blindcafe.domain.use_case.server.PostMessageUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.firebase.UploadImageUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.PostMessageUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn

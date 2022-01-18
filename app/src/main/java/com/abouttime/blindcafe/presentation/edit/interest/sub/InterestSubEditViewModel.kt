@@ -12,8 +12,8 @@ import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.data.remote.server.dto.interest.Interest
 import com.abouttime.blindcafe.data.remote.server.dto.interest.InterestX
 import com.abouttime.blindcafe.data.remote.server.dto.interest.PostInterestDto
-import com.abouttime.blindcafe.domain.use_case.server.GetInterestUseCase
-import com.abouttime.blindcafe.domain.use_case.server.PostInterestsUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.GetInterestUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.PostInterestsUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 

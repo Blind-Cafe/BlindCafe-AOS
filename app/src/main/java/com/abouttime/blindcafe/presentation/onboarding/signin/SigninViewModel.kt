@@ -11,7 +11,7 @@ import com.abouttime.blindcafe.common.constants.PreferenceKey.SUB_INTEREST2
 import com.abouttime.blindcafe.common.constants.PreferenceKey.SUB_INTEREST3
 import com.abouttime.blindcafe.data.remote.server.dto.user_info.PostUserInfoDto
 import com.abouttime.blindcafe.data.remote.server.dto.user_info.UserInterest
-import com.abouttime.blindcafe.domain.use_case.server.PostUserInfoUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.PostUserInfoUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 

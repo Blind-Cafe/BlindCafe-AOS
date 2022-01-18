@@ -18,7 +18,7 @@ import com.abouttime.blindcafe.data.remote.server.dto.home.GetHomeInfoDto
 import com.abouttime.blindcafe.data.remote.server.dto.user_info.partner.GetPartnerProfileDto
 import com.abouttime.blindcafe.domain.model.ChatRoom
 import com.abouttime.blindcafe.domain.model.Message
-import com.abouttime.blindcafe.domain.use_case.server.*
+import com.abouttime.blindcafe.domain.use_case.remote.server.*
 import com.abouttime.blindcafe.presentation.main.MainFragmentDirections
 import com.abouttime.blindcafe.presentation.main.home.HomeState.FAILED_LEAVE_ROOM
 import com.abouttime.blindcafe.presentation.main.home.HomeState.FAILED_REPORT

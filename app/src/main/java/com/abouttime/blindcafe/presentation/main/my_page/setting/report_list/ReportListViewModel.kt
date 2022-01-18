@@ -8,7 +8,7 @@ import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.util.SingleLiveData
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.data.remote.server.dto.user_info.report.Report
-import com.abouttime.blindcafe.domain.use_case.server.GetReportsUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.GetReportsUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
