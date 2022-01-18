@@ -8,9 +8,9 @@ import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
-import com.abouttime.blindcafe.domain.use_case.server.DeleteProfileImageUseCase
-import com.abouttime.blindcafe.domain.use_case.server.GetMyProfileImageUseCase
-import com.abouttime.blindcafe.domain.use_case.server.PatchProfileImageUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.DeleteProfileImageUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.GetMyProfileImageUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.PatchProfileImageUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import okhttp3.MultipartBody

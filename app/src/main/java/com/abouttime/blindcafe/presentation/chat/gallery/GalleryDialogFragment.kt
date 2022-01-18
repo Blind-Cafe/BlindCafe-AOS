@@ -44,10 +44,11 @@ class GalleryDialogFragment: BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initArgs()
+        initCursor()
         initImageRecyclerView()
         initBottomSheetDialog()
 
-        initCursor()
+
 
         loadNextImages()
 
@@ -64,10 +65,12 @@ class GalleryDialogFragment: BottomSheetDialogFragment() {
 
     private fun initImageRecyclerView() {
         binding?.rvPictureContainer?.let {
-            rvAdapter = GalleryRvAdapter(viewModel)
+            rvAdapter = GalleryRvAdapter(viewModel, cursor)
             it.adapter = rvAdapter
             it.layoutManager = GridLayoutManager(context, 3)
             it.addItemDecoration(RvGridDecoration(3, 6, false))
+
+
         }
     }
 

@@ -13,8 +13,8 @@ import com.abouttime.blindcafe.common.util.SingleLiveData
 import com.abouttime.blindcafe.data.remote.server.dto.user_info.profile.exchange.GetProfileForOpenDto
 import com.abouttime.blindcafe.data.remote.server.dto.user_info.profile.exchange.PostProfileForOpenDto
 import com.abouttime.blindcafe.data.remote.server.dto.user_info.profile.exchange.PostProfileForOpenResponse
-import com.abouttime.blindcafe.domain.use_case.server.GetProfileForOpenUseCase
-import com.abouttime.blindcafe.domain.use_case.server.PostProfileForOpenUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.GetProfileForOpenUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.PostProfileForOpenUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 

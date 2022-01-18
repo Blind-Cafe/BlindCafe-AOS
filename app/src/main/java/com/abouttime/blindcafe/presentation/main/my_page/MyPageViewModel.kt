@@ -1,15 +1,13 @@
 package com.abouttime.blindcafe.presentation.main.my_page
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
-import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.common.util.SingleLiveData
-import com.abouttime.blindcafe.domain.use_case.server.GetUserInfoUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.GetUserInfoUseCase
 import com.abouttime.blindcafe.presentation.main.MainFragmentDirections
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

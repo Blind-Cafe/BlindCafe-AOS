@@ -6,7 +6,7 @@ import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.PreferenceKey
 import com.abouttime.blindcafe.domain.model.ChatRoom
-import com.abouttime.blindcafe.domain.use_case.server.GetChatRoomInfoUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.GetChatRoomInfoUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 

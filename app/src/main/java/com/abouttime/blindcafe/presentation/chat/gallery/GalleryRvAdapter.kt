@@ -1,5 +1,9 @@
 package com.abouttime.blindcafe.presentation.chat.gallery
 
+import android.annotation.SuppressLint
+import android.content.ContentUris
+import android.database.Cursor
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,9 +14,11 @@ import com.abouttime.blindcafe.databinding.RvGalleryItemBinding
 import com.bumptech.glide.Glide
 
 class GalleryRvAdapter(
-    private val viewModel: GalleryViewModel
+    private val viewModel: GalleryViewModel,
+    private var cursor: Cursor?
 ): RecyclerView.Adapter<GalleryRvAdapter.ViewHolder>() {
     private var list = mutableListOf<Image?>()
+
     inner class ViewHolder(private val binding: RvGalleryItemBinding): RecyclerView.ViewHolder(binding.root) {
 
         fun bindData(data: Image?, position: Int) {
@@ -68,6 +74,7 @@ class GalleryRvAdapter(
 
     }
 
+
     override fun getItemCount(): Int = list.size
 
     fun submitImageList(list: MutableList<Image?>) {
@@ -75,8 +82,20 @@ class GalleryRvAdapter(
         notifyDataSetChanged()
     }
 
-    fun addImageItem(image: Image) {
-        list.add(image)
-        notifyItemChanged(list.size - 1)
+
+
+    @SuppressLint("Range")
+    private fun getMediaList(loadSize: Int): ArrayList<Image?> {
+        val imageList = ArrayList<Image?>()
+        cursor?.let { c ->
+            repeat(loadSize) {
+                if (c.moveToNext()) {
+                    val id = c.getLong(c.getColumnIndex(MediaStore.Images.ImageColumns._ID)) ?: 0L
+                    val uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
+                    imageList.add(Image(uri = uri))
+                }
+            }
+        }
+        return imageList
     }
 }

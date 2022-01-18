@@ -1,6 +1,5 @@
 package com.abouttime.blindcafe.presentation.profile_exchange.accept
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -8,9 +7,9 @@ import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.domain.model.Profile
-import com.abouttime.blindcafe.domain.use_case.server.GetChatRoomInfoUseCase
-import com.abouttime.blindcafe.domain.use_case.server.GetPartnerProfileUseCase
-import com.abouttime.blindcafe.domain.use_case.server.PostAcceptMatchingUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.GetChatRoomInfoUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.GetPartnerProfileUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.PostAcceptMatchingUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 

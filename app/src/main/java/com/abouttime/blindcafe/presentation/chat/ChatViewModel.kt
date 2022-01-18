@@ -17,10 +17,10 @@ import com.abouttime.blindcafe.data.remote.server.dto.matching.send.PostMessageD
 import com.abouttime.blindcafe.data.remote.server.dto.matching.topic.GetTopicDto
 import com.abouttime.blindcafe.domain.model.ChatRoom
 import com.abouttime.blindcafe.domain.model.Message
-import com.abouttime.blindcafe.domain.use_case.firebase.*
-import com.abouttime.blindcafe.domain.use_case.server.GetTopicUseCase
-import com.abouttime.blindcafe.domain.use_case.server.PostEnteringLogUseCase
-import com.abouttime.blindcafe.domain.use_case.server.PostMessageUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.firebase.*
+import com.abouttime.blindcafe.domain.use_case.remote.server.GetTopicUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.PostEnteringLogUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.PostMessageUseCase
 import com.abouttime.blindcafe.presentation.chat.audio.RecorderState
 import com.google.firebase.Timestamp
 import kotlinx.coroutines.Dispatchers

@@ -12,10 +12,10 @@ import com.abouttime.blindcafe.common.constants.PreferenceKey
 import com.abouttime.blindcafe.common.constants.PreferenceKey.INFO_INPUT
 import com.abouttime.blindcafe.common.constants.Retrofit.JWT
 import com.abouttime.blindcafe.common.ext.to3RangeDays
-import com.abouttime.blindcafe.domain.use_case.server.DeleteAccountUseCase
-import com.abouttime.blindcafe.domain.use_case.server.DeleteDismissMatchingUseCase
-import com.abouttime.blindcafe.domain.use_case.server.DeleteExitChatRoomUseCase
-import com.abouttime.blindcafe.domain.use_case.server.PostCancelMatchingUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.DeleteAccountUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.DeleteDismissMatchingUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.DeleteExitChatRoomUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.PostCancelMatchingUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 

@@ -11,9 +11,9 @@ import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.data.remote.server.dto.matching.Matching
 import com.abouttime.blindcafe.domain.model.ChatRoom
 import com.abouttime.blindcafe.domain.model.Message
-import com.abouttime.blindcafe.domain.use_case.firebase.SubscribeMessageUseCase
-import com.abouttime.blindcafe.domain.use_case.server.GetChatRoomInfoUseCase
-import com.abouttime.blindcafe.domain.use_case.server.GetChatRoomsUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.firebase.SubscribeMessageUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.GetChatRoomInfoUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.GetChatRoomsUseCase
 import com.abouttime.blindcafe.presentation.main.MainFragmentDirections
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect

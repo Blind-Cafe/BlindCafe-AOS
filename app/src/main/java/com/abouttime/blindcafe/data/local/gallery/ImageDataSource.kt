@@ -25,19 +25,22 @@ class ImageDataSource(
             val requestedSize = params.requestedLoadSize
             val pageSize = params.pageSize
             val imageCount = c.count
-            Log.d(PAGING_TAG, "loadInitial $imageCount $requestedSize ${params.requestedLoadSize}")
-            if (imageCount > requestedSize) {
-                val list: List<Image?> = getMediaList(c, params.requestedLoadSize)
-                callback.onResult(list, 0, c.count)
-            } else if (imageCount > pageSize) {
-                val list: List<Image?> = getMediaList(c, params.requestedLoadSize)
-                callback.onResult(list, 0, c.count)
-            }
+
+            val list: List<Image?> = getMediaList(c, params.requestedLoadSize)
+            callback.onResult(list, 0, c.count)
+
+
+//            if (imageCount > requestedSize) {
+//                val list: List<Image?> = getMediaList(c, params.requestedLoadSize)
+//                callback.onResult(list, 0, c.count)
+//            } else if (imageCount > pageSize) {
+//                val list: List<Image?> = getMediaList(c, params.requestedLoadSize)
+//                callback.onResult(list, 0, c.count)
+//            }
         }
     }
 
     override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<Image?>) {
-        Log.d(PAGING_TAG, "loadRange")
         val list: List<Image?> = getMediaList(cursor, params.loadSize)
         callback.onResult(list)
     }
@@ -50,7 +53,10 @@ class ImageDataSource(
                 if (c.moveToNext()) {
                     val id = c.getLong(c.getColumnIndex(MediaStore.Images.ImageColumns._ID)) ?: 0L
                     val uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
-                    imageList.add(Image(uri = uri))
+                    imageList.add(Image(
+                        id = id,
+                        uri = uri
+                    ))
                 }
             }
         }

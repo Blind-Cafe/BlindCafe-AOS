@@ -10,8 +10,8 @@ import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NICKNAME
 import com.abouttime.blindcafe.common.util.SingleLiveData
 import com.abouttime.blindcafe.data.remote.server.dto.user_info.edit.info.PutProfileInfoDto
-import com.abouttime.blindcafe.domain.use_case.server.GetProfileInfoUseCase
-import com.abouttime.blindcafe.domain.use_case.server.PutProfileInfoUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.GetProfileInfoUseCase
+import com.abouttime.blindcafe.domain.use_case.remote.server.PutProfileInfoUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
