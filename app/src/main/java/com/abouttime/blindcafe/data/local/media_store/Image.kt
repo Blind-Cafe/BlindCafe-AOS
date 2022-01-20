@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.data.local.gallery
+package com.abouttime.blindcafe.data.local.media_store
 
 import android.net.Uri
 

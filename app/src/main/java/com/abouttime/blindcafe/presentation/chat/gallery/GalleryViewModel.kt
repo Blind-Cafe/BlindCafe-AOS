@@ -6,12 +6,15 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagedList
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
 import com.abouttime.blindcafe.common.constants.LogTag
+import com.abouttime.blindcafe.data.local.media_store.Image
 import com.abouttime.blindcafe.data.remote.server.dto.matching.send.PostMessageDto
 import com.abouttime.blindcafe.domain.model.Message
+import com.abouttime.blindcafe.domain.use_case.local.media_store.GetGalleryImagesUseCase
 import com.abouttime.blindcafe.domain.use_case.remote.firebase.UploadImageUseCase
 import com.abouttime.blindcafe.domain.use_case.remote.server.PostMessageUseCase
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +26,8 @@ import java.util.*
 
 class GalleryViewModel(
     private val uploadImageUseCase: UploadImageUseCase,
-    private val postMessageUseCase: PostMessageUseCase
+    private val postMessageUseCase: PostMessageUseCase,
+    private val getGalleryImagesUseCase: GetGalleryImagesUseCase
 ): BaseViewModel() {
     private val _cursor = MutableLiveData<Cursor?> ()
     val cursor: LiveData<Cursor?> get() = _cursor
@@ -34,9 +38,9 @@ class GalleryViewModel(
     var userId: String? = null
     var matchingId: Int? = null
 
-//    val images: LiveData<PagedList<Image?>> by lazy {
-//        fetchImagesUseCase()
-//    }
+    val images: LiveData<PagedList<Image?>> by lazy {
+        getGalleryImagesUseCase()
+    }
 
 
 
@@ -114,6 +118,7 @@ class GalleryViewModel(
             }
         }
     }
+
 
 
 
