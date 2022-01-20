@@ -14,20 +14,21 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.abouttime.blindcafe.common.constants.LogTag.BOTTOM_SHEET
 import com.abouttime.blindcafe.common.util.RvGridDecoration
-import com.abouttime.blindcafe.data.local.gallery.Image
-import com.abouttime.blindcafe.data.local.gallery.MediaStoreAdapter
+import com.abouttime.blindcafe.data.local.media_store.Image
+import com.abouttime.blindcafe.data.local.media_store.MediaStoreAdapter
 import com.abouttime.blindcafe.databinding.DialogFragmentGalleryBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class GalleryDialogFragment: BottomSheetDialogFragment() {
+class GalleryDialogFragment(
+    private val userId: String,
+    private val matchingId: Int
+): BottomSheetDialogFragment() {
     private var binding: DialogFragmentGalleryBinding? = null
     private lateinit var rvAdapter: GalleryRvAdapter
     private val viewModel: GalleryViewModel by viewModel()
     private var cursor: Cursor? = null
-
-    private val args: GalleryDialogFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,22 +45,24 @@ class GalleryDialogFragment: BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initArgs()
-        initCursor()
+        //initCursor()
         initImageRecyclerView()
         initBottomSheetDialog()
 
 
 
-        loadNextImages()
+        //loadNextImages()
 
+
+        observePagedImageList()
         initSendButton()
         //observeImageItems()
         super.onViewCreated(view, savedInstanceState)
     }
 
     private fun initArgs() {
-        viewModel.userId = args.userId
-        viewModel.matchingId = args.matchingId
+        viewModel.userId = userId
+        viewModel.matchingId = matchingId
     }
 
 
@@ -69,8 +72,6 @@ class GalleryDialogFragment: BottomSheetDialogFragment() {
             it.adapter = rvAdapter
             it.layoutManager = GridLayoutManager(context, 3)
             it.addItemDecoration(RvGridDecoration(3, 6, false))
-
-
         }
     }
 
@@ -80,8 +81,7 @@ class GalleryDialogFragment: BottomSheetDialogFragment() {
     }
 
     private fun loadNextImages() {
-        rvAdapter.submitImageList(getMediaList(20))
-
+        //rvAdapter.submitImageList(getMediaList(20))
     }
 
     @SuppressLint("Range")
@@ -103,6 +103,12 @@ class GalleryDialogFragment: BottomSheetDialogFragment() {
         binding?.tvSend?.setOnClickListener {
             viewModel.onClickSendButton()
             dismiss()
+        }
+    }
+
+    private fun observePagedImageList() {
+        viewModel.images.observe(viewLifecycleOwner) { pagedList ->
+            rvAdapter.submitList(pagedList)
         }
     }
 

@@ -1,13 +1,11 @@
-package com.abouttime.blindcafe.data.local.gallery
+package com.abouttime.blindcafe.data.local.media_store
 
 import android.annotation.SuppressLint
 import android.content.ContentUris
 import android.content.Context
 import android.database.Cursor
 import android.provider.MediaStore
-import android.util.Log
 import androidx.paging.PositionalDataSource
-import com.abouttime.blindcafe.common.constants.LogTag.PAGING_TAG
 
 class ImageDataSource(
     private val context: Context
@@ -22,12 +20,12 @@ class ImageDataSource(
     override fun loadInitial(params: LoadInitialParams, callback: LoadInitialCallback<Image?>) {
 
         cursor?.let { c ->
-            val requestedSize = params.requestedLoadSize
+            val requestedSize = params .requestedLoadSize
             val pageSize = params.pageSize
             val imageCount = c.count
 
-            val list: List<Image?> = getMediaList(c, params.requestedLoadSize)
-            callback.onResult(list, 0, c.count)
+            val list: List<Image?> = getMediaList(c, pageSize*2)
+            callback.onResult(list, 0, imageCount)
 
 
 //            if (imageCount > requestedSize) {

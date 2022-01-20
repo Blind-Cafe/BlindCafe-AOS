@@ -592,7 +592,17 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     private fun openGalleryIfPermissionGranted() {
         if (DeviceUtil.hasExtrernalStoragePermission(requireContext())) {
             //galleryCallback.launch("image/*")
-            GalleryDialogFragment().show(requireActivity().supportFragmentManager, null)
+
+            viewModel.userId?.let { uId ->
+                viewModel.matchingId?.let { mId ->
+                    GalleryDialogFragment(
+                        userId = uId,
+                        matchingId = mId
+                    ).show(requireActivity().supportFragmentManager, null)
+                }
+            }
+
+            //viewModel.moveToGalleryDialogFragment()
         } else {
             galleryPermissionCallback.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
         }
@@ -610,7 +620,14 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     private val galleryPermissionCallback =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
-                GalleryDialogFragment().show(requireActivity().supportFragmentManager, null)
+                viewModel.userId?.let { uId ->
+                    viewModel.matchingId?.let { mId ->
+                        GalleryDialogFragment(
+                            userId = uId,
+                            matchingId = mId
+                        ).show(requireActivity().supportFragmentManager, null)
+                    }
+                }
                 //galleryCallback.launch("image/*")
             } else {
                 showToast(R.string.chat_toast_permission)
