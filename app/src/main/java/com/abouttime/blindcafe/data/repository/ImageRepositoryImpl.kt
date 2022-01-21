@@ -18,6 +18,10 @@ class ImageRepositoryImpl(
         Log.d(LogTag.PAGING_TAG, "ImageRepositoryImpl queryImageList")
         val factory = ImageDataSourceFactory(context)
         val pageSize = 30
-        return LivePagedListBuilder(factory, pageSize).build()
+        val pagedListConfig = PagedList.Config.Builder()
+            .setPageSize(pageSize)
+            .setEnablePlaceholders(false)
+            .build()
+        return LivePagedListBuilder(factory, pagedListConfig).build()
     }
 }
