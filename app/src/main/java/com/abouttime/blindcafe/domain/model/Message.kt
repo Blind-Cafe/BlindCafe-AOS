@@ -1,7 +1,9 @@
 package com.abouttime.blindcafe.domain.model
 
+import androidx.room.Entity
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.ServerTimestamp
+
 
 data class Message(
     val contents: String = "-",
@@ -10,5 +12,5 @@ data class Message(
     val roomUid: String = "-",
     val type: Int = 0,
     @ServerTimestamp
-    val timestamp: Timestamp? = null
+    val timestamp: Timestamp? = null,
 )
