@@ -32,6 +32,7 @@ class BlindCafeApplication: Application() {
             modules(sharedPreferencesModule)
             modules(firebaseModule)
             modules(backgroundModule)
+            modules(localModule)
         }
     }
 
