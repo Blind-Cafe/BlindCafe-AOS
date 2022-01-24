@@ -20,6 +20,7 @@ class ImageRepositoryImpl(
         val pageSize = 30
         val pagedListConfig = PagedList.Config.Builder()
             .setPageSize(pageSize)
+            .setInitialLoadSizeHint(30)
             .setEnablePlaceholders(false)
             .build()
         return LivePagedListBuilder(factory, pagedListConfig).build()

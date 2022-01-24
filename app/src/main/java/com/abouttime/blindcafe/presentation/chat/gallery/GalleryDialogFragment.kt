@@ -68,21 +68,14 @@ class GalleryDialogFragment(
 
     private fun initImageRecyclerView() {
         binding?.rvPictureContainer?.let {
-            rvAdapter = GalleryRvAdapter(viewModel, cursor)
+            rvAdapter = GalleryRvAdapter(viewModel)
             it.adapter = rvAdapter
             it.layoutManager = GridLayoutManager(context, 3)
             it.addItemDecoration(RvGridDecoration(3, 6, false))
         }
     }
 
-    private fun initCursor() {
-        cursor = MediaStoreAdapter().getCursor(requireActivity())
-        cursor?.moveToFirst()
-    }
 
-    private fun loadNextImages() {
-        //rvAdapter.submitImageList(getMediaList(20))
-    }
 
     @SuppressLint("Range")
     private fun getMediaList(loadSize: Int): ArrayList<Image?> {
@@ -128,7 +121,6 @@ class GalleryDialogFragment(
 //            true
 //        }
 
-
         behavior.isDraggable = false
 
         behavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
@@ -157,6 +149,16 @@ class GalleryDialogFragment(
             }
         })
 
+    }
+
+
+    private fun initCursor() {
+        cursor = MediaStoreAdapter().getCursor(requireActivity())
+        cursor?.moveToFirst()
+    }
+
+    private fun loadNextImages() {
+        //rvAdapter.submitImageList(getMediaList(20))
     }
 
 
