@@ -29,7 +29,7 @@ class ImageDataSource(
             val list: List<Image?> = if (imageCount > requestedSize) {
                 getMediaList(c, requestedSize)
             } else if (imageCount > pageSize) {
-                getMediaList(c, requestedSize)
+                getMediaList(c, pageSize)
             } else {
                 getMediaList(c, imageCount)
             }

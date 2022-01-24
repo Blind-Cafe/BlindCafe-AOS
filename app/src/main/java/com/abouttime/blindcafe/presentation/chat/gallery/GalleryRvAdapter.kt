@@ -8,13 +8,13 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.abouttime.blindcafe.R
+import com.abouttime.blindcafe.data.local.database.entity.MessageEntity
 import com.abouttime.blindcafe.data.local.media_store.Image
 import com.abouttime.blindcafe.databinding.RvGalleryItemBinding
 import com.bumptech.glide.Glide
 
 class GalleryRvAdapter(
     private val viewModel: GalleryViewModel,
-    private var cursor: Cursor?,
 ) : PagedListAdapter<Image, GalleryRvAdapter.ViewHolder>(diffUtil) {
 
 
@@ -27,25 +27,28 @@ class GalleryRvAdapter(
                 .into(binding.ivGalleryImage)
 
             binding.tvGallerySelect.text = (viewModel.isSelected[position] ?: "").toString()
+
         }
 
         fun bindView(data: Image?, position: Int) {
             binding.ivGalleryImage.setOnClickListener {
+                 Log.d("asdf", "클릭")
                 val size = viewModel.selectedImages.size
 
-                if (size >= 5) {
-                    viewModel.showToast(R.string.toast_gallery_limit)
-                    return@setOnClickListener
-                }
                 data?.let { image ->
                     if (viewModel.isSelected.contains(position)) {
                         unselectImage(image, position)
                     } else {
+                        if (size >= 5) {
+                            viewModel.showToast(R.string.toast_gallery_limit)
+                            return@setOnClickListener
+                        }
                         selectImage(image, size, position)
                     }
                     notifyDataSetChanged()
+                    Log.d("asdf", viewModel.isSelected.toString())
+                    Log.d("asdf", viewModel.selectedImages.toString())
                 }
-
             }
         }
 
@@ -66,11 +69,16 @@ class GalleryRvAdapter(
         ViewHolder(RvGalleryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (position < currentList!!.size) {
-            val image: Image? = currentList!![position]
-            holder.bindData(image, position)
-            holder.bindView(image, position)
+        try {
+            val image: Image? = getItem(position)
+            image?.let { im ->
+                holder.bindData(im, position)
+                holder.bindView(im, position)
+            }
+        } catch (e: Exception) {
+            Log.d("image tag", e.toString())
         }
+
     }
 
     companion object {
