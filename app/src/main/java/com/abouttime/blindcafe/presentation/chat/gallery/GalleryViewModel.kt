@@ -23,6 +23,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import java.util.*
+import kotlin.collections.HashMap
 
 class GalleryViewModel(
     private val uploadImageUseCase: UploadImageUseCase,
@@ -33,7 +34,7 @@ class GalleryViewModel(
     val cursor: LiveData<Cursor?> get() = _cursor
 
     val selectedImages = LinkedList<Uri>()
-    val isSelected = mapOf<Int, Int>() // key : 인덱스, value : 몇 번째 선택된 이미지인지
+    val isSelected = mutableMapOf<Int, Int>() // key : 인덱스, value : 몇 번째 선택된 이미지인지
 
     var userId: String? = null
     var matchingId: Int? = null

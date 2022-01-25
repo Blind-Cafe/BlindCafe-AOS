@@ -1,22 +1,16 @@
 package com.abouttime.blindcafe.presentation.chat.gallery
 
-import android.annotation.SuppressLint
-import android.content.ContentUris
-import android.database.Cursor
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.abouttime.blindcafe.common.constants.LogTag.BOTTOM_SHEET
 import com.abouttime.blindcafe.common.util.RvGridDecoration
-import com.abouttime.blindcafe.data.local.media_store.Image
-import com.abouttime.blindcafe.data.local.media_store.MediaStoreAdapter
 import com.abouttime.blindcafe.databinding.DialogFragmentGalleryBinding
+import com.abouttime.blindcafe.presentation.chat.gallery.adapter.GalleryRvAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -28,7 +22,6 @@ class GalleryDialogFragment(
     private var binding: DialogFragmentGalleryBinding? = null
     private lateinit var rvAdapter: GalleryRvAdapter
     private val viewModel: GalleryViewModel by viewModel()
-    private var cursor: Cursor? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,18 +38,11 @@ class GalleryDialogFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initArgs()
-        //initCursor()
         initImageRecyclerView()
         initBottomSheetDialog()
 
-
-
-        //loadNextImages()
-
-
         observePagedImageList()
         initSendButton()
-        //observeImageItems()
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -69,27 +55,11 @@ class GalleryDialogFragment(
     private fun initImageRecyclerView() {
         binding?.rvPictureContainer?.let {
             rvAdapter = GalleryRvAdapter(viewModel)
+            it.clearAnimation()
             it.adapter = rvAdapter
             it.layoutManager = GridLayoutManager(context, 3)
             it.addItemDecoration(RvGridDecoration(3, 6, false))
         }
-    }
-
-
-
-    @SuppressLint("Range")
-    private fun getMediaList(loadSize: Int): ArrayList<Image?> {
-        val imageList = ArrayList<Image?>()
-        cursor?.let { c ->
-            repeat(loadSize) {
-                if (c.moveToNext()) {
-                    val id = c.getLong(c.getColumnIndex(MediaStore.Images.ImageColumns._ID)) ?: 0L
-                    val uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
-                    imageList.add(Image(uri = uri))
-                }
-            }
-        }
-        return imageList
     }
 
     private fun initSendButton() {
@@ -104,9 +74,6 @@ class GalleryDialogFragment(
             rvAdapter.submitList(pagedList)
         }
     }
-
-
-
 
 
     private fun initBottomSheetDialog() {
@@ -150,17 +117,6 @@ class GalleryDialogFragment(
         })
 
     }
-
-
-    private fun initCursor() {
-        cursor = MediaStoreAdapter().getCursor(requireActivity())
-        cursor?.moveToFirst()
-    }
-
-    private fun loadNextImages() {
-        //rvAdapter.submitImageList(getMediaList(20))
-    }
-
 
     override fun onDestroy() {
         super.onDestroy()

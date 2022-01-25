@@ -1,16 +1,16 @@
-package com.abouttime.blindcafe.presentation.chat.gallery
+package com.abouttime.blindcafe.presentation.chat.gallery.adapter
 
-import android.database.Cursor
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.abouttime.blindcafe.R
-import com.abouttime.blindcafe.data.local.database.entity.MessageEntity
 import com.abouttime.blindcafe.data.local.media_store.Image
 import com.abouttime.blindcafe.databinding.RvGalleryItemBinding
+import com.abouttime.blindcafe.presentation.chat.gallery.GalleryViewModel
 import com.bumptech.glide.Glide
 
 class GalleryRvAdapter(
@@ -26,13 +26,20 @@ class GalleryRvAdapter(
                 .load(data?.uri)
                 .into(binding.ivGalleryImage)
 
+            viewModel.isSelected[position]?.let { num ->
+                binding.tvGallerySelect.setBackgroundResource(R.drawable.bg_gallery_select_image)
+                binding.tvGallerySelect.text = num.toString()
+            } ?: kotlin.run {
+                binding.tvGallerySelect.setBackgroundResource(R.drawable.bg_gallery_unselect_image)
+                binding.tvGallerySelect.text = ""
+            }
+
             binding.tvGallerySelect.text = (viewModel.isSelected[position] ?: "").toString()
 
         }
 
         fun bindView(data: Image?, position: Int) {
             binding.ivGalleryImage.setOnClickListener {
-                 Log.d("asdf", "클릭")
                 val size = viewModel.selectedImages.size
 
                 data?.let { image ->
@@ -40,30 +47,44 @@ class GalleryRvAdapter(
                         unselectImage(image, position)
                     } else {
                         if (size >= 5) {
-                            viewModel.showToast(R.string.toast_gallery_limit)
+                            showAlertImageCntLimitToast()
                             return@setOnClickListener
                         }
                         selectImage(image, size, position)
                     }
                     notifyDataSetChanged()
-                    Log.d("asdf", viewModel.isSelected.toString())
-                    Log.d("asdf", viewModel.selectedImages.toString())
+                }
+            }
+        }
+        private fun selectImage(image: Image, size: Int, position: Int) {
+            viewModel.isSelected[position] = size + 1
+            viewModel.selectedImages.add(image.uri)
+        }
+
+        private fun showAlertImageCntLimitToast() {
+            Toast.makeText(binding.root.context, binding.root.resources.getString(R.string.toast_gallery_limit), Toast.LENGTH_SHORT).show()
+        }
+
+        private fun unselectImage(image: Image, position: Int) {
+            updateAllByUnselect(position)
+            viewModel.isSelected.remove(position)
+            viewModel.selectedImages.remove(image.uri)
+        }
+
+        private fun updateAllByUnselect(position: Int) {
+            viewModel.apply {
+                isSelected.keys.forEach { key ->
+                    if (isSelected[key]!! > isSelected[position]!!) {
+                        val num = isSelected[key]
+                        isSelected[key] = (num!! - 1)
+                    }
                 }
             }
         }
 
-
-        private fun unselectImage(image: Image, position: Int) {
-            viewModel.isSelected.minus(position)
-            viewModel.selectedImages.remove(image.uri)
-
-        }
-
-        private fun selectImage(image: Image, size: Int, position: Int) {
-            viewModel.isSelected.plus(Pair(position, size + 1))
-            viewModel.selectedImages.add(image.uri)
-        }
     }
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(RvGalleryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
