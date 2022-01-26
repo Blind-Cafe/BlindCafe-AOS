@@ -26,64 +26,33 @@ class GalleryRvAdapter(
                 .load(data?.uri)
                 .into(binding.ivGalleryImage)
 
-            viewModel.isSelected[position]?.let { num ->
+            viewModel.imageSelector.getNumberByIndex(position)?.let { num ->
                 binding.tvGallerySelect.setBackgroundResource(R.drawable.bg_gallery_select_image)
                 binding.tvGallerySelect.text = num.toString()
             } ?: kotlin.run {
                 binding.tvGallerySelect.setBackgroundResource(R.drawable.bg_gallery_unselect_image)
                 binding.tvGallerySelect.text = ""
             }
-
-            binding.tvGallerySelect.text = (viewModel.isSelected[position] ?: "").toString()
-
         }
 
         fun bindView(data: Image?, position: Int) {
             binding.ivGalleryImage.setOnClickListener {
-                val size = viewModel.selectedImages.size
-
                 data?.let { image ->
-                    if (viewModel.isSelected.contains(position)) {
-                        unselectImage(image, position)
-                    } else {
-                        if (size >= 5) {
-                            showAlertImageCntLimitToast()
-                            return@setOnClickListener
-                        }
-                        selectImage(image, size, position)
+                    val result = viewModel.imageSelector.clickItem(image, position)
+                    if (result.not()) {
+                        showAlertImageCntLimitToast()
                     }
                     notifyDataSetChanged()
                 }
             }
         }
-        private fun selectImage(image: Image, size: Int, position: Int) {
-            viewModel.isSelected[position] = size + 1
-            viewModel.selectedImages.add(image.uri)
-        }
 
         private fun showAlertImageCntLimitToast() {
-            Toast.makeText(binding.root.context, binding.root.resources.getString(R.string.toast_gallery_limit), Toast.LENGTH_SHORT).show()
+            Toast.makeText(binding.root.context,
+                binding.root.resources.getString(R.string.toast_gallery_limit),
+                Toast.LENGTH_SHORT).show()
         }
-
-        private fun unselectImage(image: Image, position: Int) {
-            updateAllByUnselect(position)
-            viewModel.isSelected.remove(position)
-            viewModel.selectedImages.remove(image.uri)
-        }
-
-        private fun updateAllByUnselect(position: Int) {
-            viewModel.apply {
-                isSelected.keys.forEach { key ->
-                    if (isSelected[key]!! > isSelected[position]!!) {
-                        val num = isSelected[key]
-                        isSelected[key] = (num!! - 1)
-                    }
-                }
-            }
-        }
-
     }
-
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =

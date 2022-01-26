@@ -1,10 +1,8 @@
 package com.abouttime.blindcafe.presentation.chat.gallery
 
-import android.database.Cursor
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagedList
 import com.abouttime.blindcafe.R
@@ -22,19 +20,14 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import java.util.*
-import kotlin.collections.HashMap
 
 class GalleryViewModel(
     private val uploadImageUseCase: UploadImageUseCase,
     private val postMessageUseCase: PostMessageUseCase,
-    private val getGalleryImagesUseCase: GetGalleryImagesUseCase
-): BaseViewModel() {
-    private val _cursor = MutableLiveData<Cursor?> ()
-    val cursor: LiveData<Cursor?> get() = _cursor
+    private val getGalleryImagesUseCase: GetGalleryImagesUseCase,
+) : BaseViewModel() {
 
-    val selectedImages = LinkedList<Uri>()
-    val isSelected = mutableMapOf<Int, Int>() // key : 인덱스, value : 몇 번째 선택된 이미지인지
+    val imageSelector: Selector<Image> = Selector<Image>(5)
 
     var userId: String? = null
     var matchingId: Int? = null
@@ -44,39 +37,30 @@ class GalleryViewModel(
     }
 
 
-
     fun onClickSendButton() {
-        // selectedImages 에 있는 이미지 전송
-        sendImageMessage(selectedImages)
+        sendImageMessage(imageSelector.getItems().map { it.uri })
     }
 
-
-    fun postMessage(postMessageDto: PostMessageDto, matchingId: Int) {
-        postMessageUseCase(postMessageDto = postMessageDto, matchingId = matchingId)
-            .onEach { result ->
-                when (result) {
-                    is Resource.Loading -> {
-                    }
-                    is Resource.Success -> {
-                    }
-                    is Resource.Error -> {
-                        when(result.message) {
-                            "1008", "1030" -> {
-                                showToast(R.string.toast_gone)
-                            }
-                            "1150" -> {
-                                showToast(R.string.toast_not_appropriate_message)
-                            }
-                            else -> {
-                                showToast(R.string.toast_check_internet)
-                            }
-                        }
-                    }
+    private fun sendImageMessage(uris: List<Uri>) {
+        uris.forEach { uri ->
+            val id = System.currentTimeMillis().toString()
+            userId?.let { userId ->
+                matchingId?.let { matchingId ->
+                    uploadImage(
+                        message = Message(
+                            senderUid = userId,
+                            contents = id,
+                            roomUid = matchingId.toString(),
+                            type = 2
+                        ),
+                        uri = uri
+                    )
                 }
-            }.launchIn(viewModelScope)
+            }
+        }
     }
 
-    fun uploadImage(message: Message, uri: Uri) = viewModelScope.launch(Dispatchers.IO) {
+    private fun uploadImage(message: Message, uri: Uri) = viewModelScope.launch(Dispatchers.IO) {
         uploadImageUseCase(message, uri).collect { result ->
             when (result) {
                 is Resource.Success -> {
@@ -98,26 +82,31 @@ class GalleryViewModel(
         }
     }
 
-    private fun sendImageMessage(uris: List<Uri>) {
-        uris.forEach { uri ->
-            uri?.let {
-                val id = System.currentTimeMillis().toString()
-                userId?.let { userId ->
-                    matchingId?.let { matchingId ->
-                        uploadImage(
-                            message = Message(
-                                senderUid = userId,
-                                contents = id,
-                                roomUid = matchingId.toString(),
-                                type = 2
-                            ),
-                            uri = it
-                        )
+
+
+    fun postMessage(postMessageDto: PostMessageDto, matchingId: Int) {
+        postMessageUseCase(postMessageDto = postMessageDto, matchingId = matchingId)
+            .onEach { result ->
+                when (result) {
+                    is Resource.Loading -> {
+                    }
+                    is Resource.Success -> {
+                    }
+                    is Resource.Error -> {
+                        when (result.message) {
+                            "1008", "1030" -> {
+                                showToast(R.string.toast_gone)
+                            }
+                            "1150" -> {
+                                showToast(R.string.toast_not_appropriate_message)
+                            }
+                            else -> {
+                                showToast(R.string.toast_check_internet)
+                            }
+                        }
                     }
                 }
-
-            }
-        }
+            }.launchIn(viewModelScope)
     }
 
 
