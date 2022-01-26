@@ -47,6 +47,7 @@ class GalleryDialogFragment(
     }
 
     private fun initArgs() {
+        Log.d("asdf", "$userId $matchingId")
         viewModel.userId = userId
         viewModel.matchingId = matchingId
     }
