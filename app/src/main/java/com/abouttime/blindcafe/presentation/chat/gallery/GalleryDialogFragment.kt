@@ -50,6 +50,7 @@ class GalleryDialogFragment(
         Log.d("asdf", "$userId $matchingId")
         viewModel.userId = userId
         viewModel.matchingId = matchingId
+        viewModel.dismissCallback = { dismiss() }
     }
 
 
@@ -66,7 +67,7 @@ class GalleryDialogFragment(
     private fun initSendButton() {
         binding?.tvSend?.setOnClickListener {
             viewModel.onClickSendButton()
-            dismiss()
+            //dismiss()
         }
     }
 

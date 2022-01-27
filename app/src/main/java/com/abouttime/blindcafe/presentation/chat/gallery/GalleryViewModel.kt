@@ -27,6 +27,7 @@ class GalleryViewModel(
     private val getGalleryImagesUseCase: GetGalleryImagesUseCase,
 ) : BaseViewModel() {
 
+    var dismissCallback: () -> Unit = {  }
     val imageSelector: Selector<Image> = Selector<Image>(5)
 
     var userId: String? = null
@@ -42,8 +43,10 @@ class GalleryViewModel(
     }
 
     private fun sendImageMessage(uris: List<Uri>) {
+
         uris.forEach { uri ->
             val id = System.currentTimeMillis().toString()
+            Log.d("asdf", "sendImageMessage $userId $matchingId")
             userId?.let { userId ->
                 matchingId?.let { matchingId ->
                     uploadImage(
@@ -91,6 +94,7 @@ class GalleryViewModel(
                     is Resource.Loading -> {
                     }
                     is Resource.Success -> {
+                        dismissCallback()
                     }
                     is Resource.Error -> {
                         when (result.message) {
