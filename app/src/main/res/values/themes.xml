@@ -44,6 +44,7 @@
 
     <style name="AppBottomSheetDialogTheme"
         parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:background">@color/transparent</item>
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
     </style>
 
@@ -51,8 +52,11 @@
         parent="Widget.Design.BottomSheet.Modal">
         <item name="behavior_peekHeight">@dimen/gallery_behavior_peek_height</item>
         <item name="behavior_draggable">true</item>
-
+        <item name="android:background">@color/transparent</item>
     </style>
+
+
+
     <style name="DialogStyle"
         parent="Theme.MaterialComponents.NoActionBar">
         <item name="android:windowBackground">@color/transparent</item>

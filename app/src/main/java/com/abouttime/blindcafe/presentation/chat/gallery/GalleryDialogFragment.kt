@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import com.abouttime.blindcafe.common.constants.LogTag.BOTTOM_SHEET
@@ -31,9 +32,7 @@ class GalleryDialogFragment(
         val dialogFragmentGalleryBinding = DialogFragmentGalleryBinding.inflate(inflater, container, false)
         binding = dialogFragmentGalleryBinding
 
-
         return dialogFragmentGalleryBinding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,10 +46,9 @@ class GalleryDialogFragment(
     }
 
     private fun initArgs() {
-        Log.d("asdf", "$userId $matchingId")
         viewModel.userId = userId
         viewModel.matchingId = matchingId
-        viewModel.dismissCallback = { dismiss() }
+
     }
 
 
@@ -66,8 +64,8 @@ class GalleryDialogFragment(
 
     private fun initSendButton() {
         binding?.tvSend?.setOnClickListener {
+            viewModel.dismissCallback = { dismiss() }
             viewModel.onClickSendButton()
-            //dismiss()
         }
     }
 
@@ -80,8 +78,8 @@ class GalleryDialogFragment(
 
     private fun initBottomSheetDialog() {
 
-        val bottomSheet = binding?.nsGalleryContainer
-        val behavior = BottomSheetBehavior.from<View>(bottomSheet!!)
+        val bottomSheet = binding?.llGalleryContainer
+        val behavior = BottomSheetBehavior.from<LinearLayout>(bottomSheet!!)
         behavior.state = BottomSheetBehavior.STATE_EXPANDED
 
 //        binding?.rvPictureContainer?.setOnTouchListener { view, motionEvent ->
@@ -90,11 +88,21 @@ class GalleryDialogFragment(
 //            true
 //        }
 
-        behavior.isDraggable = false
+        behavior.isDraggable = true
+
 
         behavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                Log.e(BOTTOM_SHEET, newState.toString())
+                val state = when (newState) {
+                    1 -> "DRAGGING"
+                    2 -> "SETTLING"
+                    3 -> "EXPANDED"
+                    4 -> "COLLAPSED"
+                    5 -> "HIDDEN"
+                    6 -> "HALF EXPANDED"
+                    else -> "NOTTING"
+                }
+                Log.e(BOTTOM_SHEET, "newState $state")
                 if (newState == BottomSheetBehavior.STATE_EXPANDED) {
                     binding?.tvSend?.let { setBias(it,  1.0f) }
                 } else if (newState == BottomSheetBehavior.STATE_HALF_EXPANDED) {
@@ -102,7 +110,7 @@ class GalleryDialogFragment(
                 }
             }
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                Log.e(BOTTOM_SHEET, slideOffset.toString())
+                Log.e(BOTTOM_SHEET, "slideOffset $slideOffset")
                 //behavior.state = BottomSheetBehavior.STATE_EXPANDED
                 binding?.tvSend?.let {
                     if (slideOffset <= 0) {
