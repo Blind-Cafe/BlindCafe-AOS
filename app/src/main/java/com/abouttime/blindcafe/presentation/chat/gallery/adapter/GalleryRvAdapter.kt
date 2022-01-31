@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide
 
 class GalleryRvAdapter(
     private val viewModel: GalleryViewModel,
+    private val onClickItem: (Int) -> Unit
 ) : PagedListAdapter<Image, GalleryRvAdapter.ViewHolder>(diffUtil) {
 
 
@@ -37,6 +38,7 @@ class GalleryRvAdapter(
 
         fun bindView(data: Image?, position: Int) {
             binding.ivGalleryImage.setOnClickListener {
+
                 data?.let { image ->
                     val result = viewModel.imageSelector.clickItem(image, position)
                     if (result.not()) {
@@ -44,6 +46,7 @@ class GalleryRvAdapter(
                     }
                     notifyDataSetChanged()
                 }
+                onClickItem(viewModel.imageSelector.size)
             }
         }
 

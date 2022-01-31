@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isGone
 import androidx.recyclerview.widget.GridLayoutManager
 import com.abouttime.blindcafe.common.constants.LogTag.BOTTOM_SHEET
 import com.abouttime.blindcafe.common.util.RvGridDecoration
@@ -54,7 +55,9 @@ class GalleryDialogFragment(
 
     private fun initImageRecyclerView() {
         binding?.rvPictureContainer?.let {
-            rvAdapter = GalleryRvAdapter(viewModel)
+            rvAdapter = GalleryRvAdapter(viewModel) { size ->
+                binding?.tvSend?.isGone = size == 0
+            }
             it.clearAnimation()
             it.adapter = rvAdapter
             it.layoutManager = GridLayoutManager(context, 3)
@@ -82,17 +85,18 @@ class GalleryDialogFragment(
         val behavior = BottomSheetBehavior.from<LinearLayout>(bottomSheet!!)
         behavior.state = BottomSheetBehavior.STATE_EXPANDED
 
-//        binding?.rvPictureContainer?.setOnTouchListener { view, motionEvent ->
-//            view.parent.requestDisallowInterceptTouchEvent(true)
-//            view.onTouchEvent(motionEvent)
-//            true
-//        }
+        binding?.rvPictureContainer?.setOnTouchListener { view, motionEvent ->
+            view.parent.requestDisallowInterceptTouchEvent(true)
+            view.onTouchEvent(motionEvent)
+            true
+        }
 
         behavior.isDraggable = true
 
 
         behavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
+
                 val state = when (newState) {
                     1 -> "DRAGGING"
                     2 -> "SETTLING"
@@ -102,6 +106,7 @@ class GalleryDialogFragment(
                     6 -> "HALF EXPANDED"
                     else -> "NOTTING"
                 }
+
                 Log.e(BOTTOM_SHEET, "newState $state")
                 if (newState == BottomSheetBehavior.STATE_EXPANDED) {
                     binding?.tvSend?.let { setBias(it,  1.0f) }
