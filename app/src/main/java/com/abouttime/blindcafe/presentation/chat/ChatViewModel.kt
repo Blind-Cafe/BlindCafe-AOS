@@ -13,10 +13,12 @@ import com.abouttime.blindcafe.common.constants.PreferenceKey.LAST_READ_MESSAGE
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NICKNAME
 import com.abouttime.blindcafe.common.constants.PreferenceKey.USER_ID
 import com.abouttime.blindcafe.common.util.SingleLiveData
+import com.abouttime.blindcafe.data.local.database.entity.MessageEntity
 import com.abouttime.blindcafe.data.remote.server.dto.matching.send.PostMessageDto
 import com.abouttime.blindcafe.data.remote.server.dto.matching.topic.GetTopicDto
 import com.abouttime.blindcafe.domain.model.ChatRoom
 import com.abouttime.blindcafe.domain.model.Message
+import com.abouttime.blindcafe.domain.use_case.local.database.InsertMessageUseCase
 import com.abouttime.blindcafe.domain.use_case.remote.firebase.*
 import com.abouttime.blindcafe.domain.use_case.remote.server.GetTopicUseCase
 import com.abouttime.blindcafe.domain.use_case.remote.server.PostEnteringLogUseCase
@@ -41,6 +43,7 @@ class ChatViewModel(
     private val getTopicUseCase: GetTopicUseCase,
     private val postEnteringLogUseCase: PostEnteringLogUseCase,
     private val postMessageUseCase: PostMessageUseCase,
+    private val insertMessageUseCase: InsertMessageUseCase
 ) : BaseViewModel() {
 
     private val _isSendButtonEnabled = MutableLiveData(false)
@@ -203,6 +206,14 @@ class ChatViewModel(
                     }
                 }
             }.launchIn(viewModelScope)
+    }
+
+    fun insertMessage(messageEntity: MessageEntity) {
+        insertMessageUseCase(messageEntity).onEach { result ->
+            if (result is Resource.Success) {
+
+            }
+        }.launchIn(viewModelScope)
     }
 
     fun uploadImage(message: Message, uri: Uri) = viewModelScope.launch(Dispatchers.IO) {
