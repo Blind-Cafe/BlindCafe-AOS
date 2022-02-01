@@ -33,6 +33,7 @@ import com.abouttime.blindcafe.common.constants.PreferenceKey.NOTIFICATION_TRUE
 import com.abouttime.blindcafe.common.ext.*
 import com.abouttime.blindcafe.common.util.DeviceUtil
 import com.abouttime.blindcafe.common.util.KeyboardVisibility
+import com.abouttime.blindcafe.data.local.database.entity.MessageEntity
 import com.abouttime.blindcafe.data.remote.server.dto.matching.send.PostMessageDto
 import com.abouttime.blindcafe.databinding.FragmentChatBinding
 import com.abouttime.blindcafe.domain.model.Message
@@ -285,9 +286,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         viewModel.receivedNewMessage.observe(viewLifecycleOwner) { messages ->
             messages.forEach { message ->
                 message.timestamp?.let { tp ->
-                    if (message.senderUid == viewModel.userId) {
-                        addMessageToMe(message)
-                    } else {
+                    if (message.senderUid != viewModel.userId) {
                         addMessageToPartner(message)
                     }
                 }
@@ -523,6 +522,14 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
     private fun sendTextMessage(textMessage: String) {
         viewModel?.matchingId?.let { matchingId ->
+            viewModel?.insertMessage(
+                MessageEntity(
+                    contents = textMessage,
+                    type = 1,
+                    matchingId = matchingId,
+                    timestamp = Timestamp.now()
+                )
+            )
             viewModel?.postMessage(
                 PostMessageDto(
                     contents = textMessage,
