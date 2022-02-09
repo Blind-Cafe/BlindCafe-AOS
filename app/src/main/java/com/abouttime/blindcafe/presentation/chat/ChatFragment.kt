@@ -92,7 +92,8 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         observeNewMessagesData(fragmentChatBinding)
         subscribeMessages()
 
-        observePagedMessagesData(fragmentChatBinding)
+        //observePagedMessagesData(fragmentChatBinding)
+        observeAllDBMessage() // TODO 삭제 및 observePagedMessagesData 를 local paging 데이터로 교체할 것
         receiveFirstPage(fragmentChatBinding)
 
 
@@ -260,16 +261,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             }
         }
 
-    private fun smoothScrollRvToBottomPosition(
-        fragmentChatBinding
-        : FragmentChatBinding,
-    ) =
-        with(fragmentChatBinding
-        ) {
-            if (chatAdapter.itemCount - 1 > 0) {
-                rvChatContainer.smoothScrollToPosition(chatAdapter.itemCount - 1)
-            }
-        }
 
 
     /** subscribe messages **/
@@ -295,7 +286,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
         }
     }
 
-    private fun observePagedMessagesData(fragmentChatBinding: FragmentChatBinding) {
+    private fun observePagedMessagesData(fragmentChatBinding: FragmentChatBinding) { // TODO Local Paging 데이터로 변경
         viewModel?.receivedPageMessage.observe(viewLifecycleOwner) { messages ->
             showLoading()
             binding?.let { b ->
@@ -309,7 +300,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
             }
 
             messages.forEach { message ->
-                Log.e("message", "$message")
                 message.timestamp?.let { tp ->
                     timeStampList.add(tp)
                     if (message.senderUid == viewModel.userId) {
@@ -322,6 +312,16 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
 
 
             dismissLoading()
+        }
+    }
+
+    private fun observeAllDBMessage() {
+        viewModel.loadMessage.observe(viewLifecycleOwner) { messages ->
+            messages
+                .map { it.toMessage() }
+                .forEach { message ->
+                    chatAdapter.add(TextSendItem(message, viewModel = viewModel, true))
+                }
         }
     }
 
@@ -530,7 +530,7 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                     timestamp = Timestamp.now()
                 )
             )
-            viewModel?.postMessage(
+            viewModel?.postMessage( // TODO 소켓 write 로 교체
                 PostMessageDto(
                     contents = textMessage,
                     type = 1

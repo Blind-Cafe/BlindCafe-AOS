@@ -19,6 +19,7 @@ import com.abouttime.blindcafe.data.remote.server.dto.matching.topic.GetTopicDto
 import com.abouttime.blindcafe.domain.model.ChatRoom
 import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.use_case.local.database.InsertMessageUseCase
+import com.abouttime.blindcafe.domain.use_case.local.database.LoadMessageUseCase
 import com.abouttime.blindcafe.domain.use_case.remote.firebase.*
 import com.abouttime.blindcafe.domain.use_case.remote.server.GetTopicUseCase
 import com.abouttime.blindcafe.domain.use_case.remote.server.PostEnteringLogUseCase
@@ -43,7 +44,8 @@ class ChatViewModel(
     private val getTopicUseCase: GetTopicUseCase,
     private val postEnteringLogUseCase: PostEnteringLogUseCase,
     private val postMessageUseCase: PostMessageUseCase,
-    private val insertMessageUseCase: InsertMessageUseCase
+    private val insertMessageUseCase: InsertMessageUseCase,
+    private val loadMessageUseCase: LoadMessageUseCase
 ) : BaseViewModel() {
 
     private val _isSendButtonEnabled = MutableLiveData(false)
@@ -65,6 +67,10 @@ class ChatViewModel(
 
     private val _topic = SingleLiveData<GetTopicDto>()
     val topic: SingleLiveData<GetTopicDto> get() = _topic
+
+
+    private val _loadMessage = SingleLiveData<List<MessageEntity>>()
+    val loadMessage: SingleLiveData<List<MessageEntity>> get() = _loadMessage
 
 
     var myNickname = getStringData(NICKNAME)
@@ -90,6 +96,11 @@ class ChatViewModel(
     val receiveLastIn1Minute = mutableListOf<Boolean>()
 
 
+    init { // TODO 삭제 예정
+        loadMessages()
+    }
+
+
 
     /** use cases - read **/
     fun receivePagedMessages(roomId: String, lastTime: Timestamp) {
@@ -100,7 +111,6 @@ class ChatViewModel(
                 }
                 is Resource.Success -> {
                     result.data?.let { list ->
-                        Log.e("isScroll", "$list 도착!!")
                         _receivedPageMessage.postValue(list)
                     }
                     dismissLoading()
@@ -208,12 +218,34 @@ class ChatViewModel(
             }.launchIn(viewModelScope)
     }
 
+
+    /** local insert, write **/
     fun insertMessage(messageEntity: MessageEntity) {
         insertMessageUseCase(messageEntity).onEach { result ->
             if (result is Resource.Success) {
 
             }
         }.launchIn(viewModelScope)
+    }
+
+    fun loadMessages() {
+        matchingId?.let {
+            loadMessageUseCase(it).onEach { result ->
+                when(result) {
+                    is Resource.Loading -> {
+
+                    }
+                    is Resource.Success -> {
+                        result.data?.let { messages ->
+                            _loadMessage.value = messages
+                        }
+                    }
+                    is Resource.Error -> {
+
+                    }
+                }
+            }
+        }
     }
 
     fun uploadImage(message: Message, uri: Uri) = viewModelScope.launch(Dispatchers.IO) {
