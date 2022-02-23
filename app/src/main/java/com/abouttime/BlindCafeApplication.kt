@@ -26,13 +26,13 @@ class BlindCafeApplication: Application() {
         startKoin {
             androidContext((this@BlindCafeApplication))
             modules(remoteModule)
+            modules(localModule)
             modules(viewModelModule)
             modules(repositoryModule)
             modules(useCaseModule)
             modules(sharedPreferencesModule)
             modules(firebaseModule)
             modules(backgroundModule)
-            modules(localModule)
         }
     }
 

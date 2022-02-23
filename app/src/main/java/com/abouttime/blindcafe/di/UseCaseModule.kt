@@ -1,5 +1,7 @@
 package com.abouttime.blindcafe.di
 
+import com.abouttime.blindcafe.domain.use_case.local.database.InsertMessageUseCase
+import com.abouttime.blindcafe.domain.use_case.local.database.LoadMessageUseCase
 import com.abouttime.blindcafe.domain.use_case.local.media_store.GetGalleryImagesUseCase
 import com.abouttime.blindcafe.domain.use_case.remote.firebase.*
 import com.abouttime.blindcafe.domain.use_case.remote.server.*
@@ -66,5 +68,10 @@ internal val useCaseModule = module {
     /** interests **/
     factory { GetInterestUseCase(get()) }
     factory { PostInterestsUseCase(get())}
+
+
+    /** local **/
+    factory { InsertMessageUseCase(get())}
+    factory { LoadMessageUseCase(get()) }
 
 }
