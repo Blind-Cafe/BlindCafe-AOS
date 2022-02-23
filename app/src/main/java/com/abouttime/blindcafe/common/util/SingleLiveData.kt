@@ -28,7 +28,6 @@ class SingleLiveData<T> : MutableLiveData<T>() {
         super.setValue(t)
     }
 
-
     @MainThread
     fun call() {
         value = null

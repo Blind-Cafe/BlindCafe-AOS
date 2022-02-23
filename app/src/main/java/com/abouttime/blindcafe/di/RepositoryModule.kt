@@ -19,4 +19,6 @@ internal val repositoryModule = module {
 
     single<InterestRepository> { InterestRepositoryImpl(get())}
 
+    single<LocalMessageRepository> { LocalMessageRepositoryImpl(get())}
+
 }

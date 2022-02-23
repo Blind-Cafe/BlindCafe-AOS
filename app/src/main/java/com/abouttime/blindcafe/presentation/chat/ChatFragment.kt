@@ -318,7 +318,14 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
     private fun observeAllDBMessage() {
         viewModel.loadMessage.observe(viewLifecycleOwner) { messages ->
             messages
-                .map { it.toMessage() }
+                .map {
+                    Message(
+                        contents = it.contents,
+                        roomUid = it.matchingId.toString(),
+                        type = it.type,
+                        timestamp = it.timestamp
+                    )
+                }
                 .forEach { message ->
                     chatAdapter.add(TextSendItem(message, viewModel = viewModel, true))
                 }
