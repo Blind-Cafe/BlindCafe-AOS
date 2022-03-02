@@ -626,7 +626,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                             message = Message(
                                 senderUid = userId,
                                 contents = id,
-                                roomUid = matchingId.toString(),
                                 type = 2
                             ),
                             uri = it
@@ -742,7 +741,6 @@ class ChatFragment : BaseFragment<ChatViewModel>(R.layout.fragment_chat) {
                         message = Message(
                             senderUid = userId,
                             contents = id,
-                            roomUid = matchingId.toString(),
                             type = 3
                         ),
                         uri = it
