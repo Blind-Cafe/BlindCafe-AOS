@@ -29,7 +29,7 @@ class ImageSendItem(
                 viewBinding.cvContentContainer.setOnClickListener {
                         viewModel.moveToChatImageFragment(
                             imageUrl = uri.toString(),
-                            nick = message.senderName,
+                            nick = viewModel.myNickname ?: "",
                             date = message.timestamp?.seconds?.secondToChatImageTime() ?: ""
                         )
                 }

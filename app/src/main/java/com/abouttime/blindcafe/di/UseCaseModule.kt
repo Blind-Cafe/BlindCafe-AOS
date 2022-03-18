@@ -27,7 +27,7 @@ internal val useCaseModule = module {
     factory { GetMatchingProfileUseCase(get()) }
 
     /** gallery **/
-    factory { FetchImagesUseCase(get()) }
+
 
     /** fire store **/
     factory { SendMessageUseCase(get()) }

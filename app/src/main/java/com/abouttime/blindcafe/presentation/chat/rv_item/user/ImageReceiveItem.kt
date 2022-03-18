@@ -31,7 +31,7 @@ class ImageReceiveItem(
                 viewBinding.cvContentContainer.setOnClickListener {
                     viewModel.moveToChatImageFragment(
                         imageUrl = uri.toString(),
-                        nick = message.senderName,
+                        nick = nickName,
                         date = message.timestamp?.seconds?.secondToChatImageTime() ?: ""
                     )
                 }
