@@ -5,27 +5,27 @@ import android.view.View
 import androidx.core.view.isGone
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
-import com.abouttime.blindcafe.databinding.FragmentEssentialFirstBinding
+import com.abouttime.blindcafe.databinding.FragmentOnBoardNickNameBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class EssentialFirstFragment :
-    BaseFragment<EssentialFirstViewModel>(R.layout.fragment_essential_first) {
+class OnBoardNickNameFragment :
+    BaseFragment<OnBoardNickNameViewModel>(R.layout.fragment_on_board_nick_name) {
 
-    private var binding: FragmentEssentialFirstBinding? = null
-    override val viewModel: EssentialFirstViewModel by viewModel()
+    private var binding: FragmentOnBoardNickNameBinding? = null
+    override val viewModel: OnBoardNickNameViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val fragmentEssentialFirstBinding = FragmentEssentialFirstBinding.bind(view)
-        binding = fragmentEssentialFirstBinding
+        val fragmentOnBoardNickNameBinding = FragmentOnBoardNickNameBinding.bind(view)
+        binding = fragmentOnBoardNickNameBinding
         binding?.viewModel = viewModel
         binding?.lifecycleOwner = this
 
-        initAgeEditText(fragmentEssentialFirstBinding)
-        observeData(fragmentEssentialFirstBinding)
+        initAgeEditText(fragmentOnBoardNickNameBinding)
+        observeData(fragmentOnBoardNickNameBinding)
     }
 
-    private fun observeData(fragmentEssentialFirstBinding: FragmentEssentialFirstBinding) = with(fragmentEssentialFirstBinding) {
+    private fun observeData(fragmentOnBoardNickNameBinding: FragmentOnBoardNickNameBinding) = with(fragmentOnBoardNickNameBinding) {
         val sexDisabledColor = getColorByResId(R.color.disabled)
         val sexEnabledColor = getColorByResId(R.color.sex_enabled)
         viewModel?.selectedSex?.observe(viewLifecycleOwner) { selectedSex ->
@@ -48,9 +48,9 @@ class EssentialFirstFragment :
     }
 
 
-    private fun initAgeEditText(fragmentEssentialFirstBinding: FragmentEssentialFirstBinding) {
-        val ageEditText = fragmentEssentialFirstBinding.etAge
-        val alertAgeTextView = fragmentEssentialFirstBinding.tvAlertAge
+    private fun initAgeEditText(FragmentOnBoardNickNameBinding: FragmentOnBoardNickNameBinding) {
+        val ageEditText = FragmentOnBoardNickNameBinding.etAge
+        val alertAgeTextView = FragmentOnBoardNickNameBinding.tvAlertAge
 
         ageEditText.setOnFocusChangeListener { view, isFocused ->
             ageEditText.isCursorVisible = isFocused

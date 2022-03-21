@@ -27,7 +27,7 @@ import com.abouttime.blindcafe.presentation.onboarding.agreement.AgreementViewMo
 import com.abouttime.blindcafe.presentation.onboarding.login.LoginViewModel
 import com.abouttime.blindcafe.presentation.onboarding.login.policy.PolicyViewModel
 import com.abouttime.blindcafe.presentation.onboarding.login.term.TermViewModel
-import com.abouttime.blindcafe.presentation.onboarding.profile_setting.essential_first.EssentialFirstViewModel
+import com.abouttime.blindcafe.presentation.onboarding.profile_setting.essential_first.OnBoardNickNameViewModel
 import com.abouttime.blindcafe.presentation.onboarding.profile_setting.essential_second.EssentialSecondViewModel
 import com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest.InterestViewModel
 import com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest_detail.InterestSubViewModel
@@ -65,7 +65,7 @@ internal val viewModelModule = module {
     viewModel { TermViewModel() }
     viewModel { RuleViewModel() }
     viewModel { AgreementViewModel() }
-    viewModel { EssentialFirstViewModel() }
+    viewModel { OnBoardNickNameViewModel() }
     viewModel { EssentialSecondViewModel() }
     viewModel { InterestViewModel() }
     viewModel { InterestSubViewModel(get()) }

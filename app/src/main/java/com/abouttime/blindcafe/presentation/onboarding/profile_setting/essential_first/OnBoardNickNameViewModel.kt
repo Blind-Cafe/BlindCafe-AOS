@@ -8,7 +8,7 @@ import com.abouttime.blindcafe.common.constants.PreferenceKey.AGE
 import com.abouttime.blindcafe.common.constants.PreferenceKey.SEX
 import java.lang.Exception
 
-class EssentialFirstViewModel: BaseViewModel() {
+class OnBoardNickNameViewModel: BaseViewModel() {
 
     private val _ageText = MutableLiveData<String>()
     val ageText: MutableLiveData<String> get() = _ageText
@@ -76,7 +76,7 @@ class EssentialFirstViewModel: BaseViewModel() {
         saveStringData(Pair(AGE, _ageText.value ?: ""))
         saveStringData(Pair(SEX, sex))
 
-        moveToDirections(EssentialFirstFragmentDirections.actionProfileSettingFragmentToEssentialSecondFragment())
+        moveToDirections(OnBoardNickNameFragmentDirections.actionProfileSettingFragmentToEssentialSecondFragment())
 
     }
 

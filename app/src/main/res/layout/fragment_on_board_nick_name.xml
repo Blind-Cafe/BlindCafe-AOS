@@ -13,7 +13,7 @@
 
         <variable
             name="viewModel"
-            type="com.abouttime.blindcafe.presentation.onboarding.profile_setting.essential_first.EssentialFirstViewModel" />
+            type="com.abouttime.blindcafe.presentation.onboarding.profile_setting.essential_first.OnBoardNickNameViewModel" />
     </data>
 
 
