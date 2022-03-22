@@ -3,8 +3,10 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
     id 'kotlin-parcelize'
     id("androidx.navigation.safeargs.kotlin")
+
 }
 
 android {
@@ -121,6 +123,7 @@ dependencies {
 
     //Firebase Android BoM을 사용하면 앱에서 항상 호환되는 Firebase Android 라이브러리 버전을 사용할 수 있음
     implementation platform('com.google.firebase:firebase-bom:29.0.0')//    // cloud firestore
+    implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-analytics'
     // firestore
     implementation 'com.google.firebase:firebase-core'
