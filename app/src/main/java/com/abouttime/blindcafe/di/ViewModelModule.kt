@@ -33,7 +33,7 @@ import com.abouttime.blindcafe.presentation.onboarding.interest.InterestViewMode
 import com.abouttime.blindcafe.presentation.onboarding.partner_gender.PartnerGenderViewModel
 import com.abouttime.blindcafe.presentation.login.rule.RuleViewModel
 import com.abouttime.blindcafe.presentation.onboarding.signin.SigninViewModel
-import com.abouttime.blindcafe.presentation.onboarding.splash.SplashViewModel
+import com.abouttime.blindcafe.presentation.splash.SplashViewModel
 import com.abouttime.blindcafe.presentation.profile_exchange.accept.ExchangeAcceptViewModel
 import com.abouttime.blindcafe.presentation.profile_exchange.complete.ExchangeCompleteViewModel
 import com.abouttime.blindcafe.presentation.profile_exchange.dismiss.ExchangeDismissViewModel

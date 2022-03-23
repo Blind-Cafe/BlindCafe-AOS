@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.abouttime.blindcafe.presentation.onboarding.splash.SplashFragment"
+        android:name="com.abouttime.blindcafe.presentation.splash.SplashFragment"
         android:label="SplashFragment"
         tools:layout="@layout/fragment_splash">
 

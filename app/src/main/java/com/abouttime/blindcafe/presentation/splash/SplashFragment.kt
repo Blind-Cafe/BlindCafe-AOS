@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.presentation.onboarding.splash
+package com.abouttime.blindcafe.presentation.splash
 
 import android.os.Bundle
 import android.view.View
