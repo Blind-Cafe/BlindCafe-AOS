@@ -39,6 +39,7 @@ import com.abouttime.blindcafe.presentation.profile_exchange.complete.ExchangeCo
 import com.abouttime.blindcafe.presentation.profile_exchange.dismiss.ExchangeDismissViewModel
 import com.abouttime.blindcafe.presentation.edit.location.LocationViewModel
 import com.abouttime.blindcafe.presentation.main.my_page.setting.customer_center.CustomerCenterViewModel
+import com.abouttime.blindcafe.presentation.onboarding.phone.PhoneNumberViewModel
 import com.abouttime.blindcafe.presentation.profile_exchange.accept.profile_image.AcceptImageViewModel
 import com.abouttime.blindcafe.presentation.profile_exchange.open.ExchangeOpenViewModel
 import com.abouttime.blindcafe.presentation.profile_exchange.wait.ExchangeWaitViewModel
@@ -70,6 +71,7 @@ internal val viewModelModule = module {
     viewModel { InterestViewModel() }
     viewModel { PartnerGenderViewModel() }
     viewModel { SigninViewModel(get()) }
+    viewModel { PhoneNumberViewModel() }
 
     /** Main **/
     viewModel { MainViewModel(get()) }
