@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View.OnClickListener" />
+
+        <import type="android.view.View" />
+
+        <import type="androidx.core.content.ContextCompat" />
+
+        <variable
+            name="viewModel"
+            type="com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest_detail.PartnerGenderViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+
+        <ImageButton
+            android:id="@+id/ib_back"
+            android:onClick="@{() -> viewModel.onClickBackButton()}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="@dimen/default_top_margin"
+            android:background="@color/transparent"
+            android:src="@drawable/bt_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

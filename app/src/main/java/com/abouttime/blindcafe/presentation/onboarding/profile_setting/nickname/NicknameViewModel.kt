@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.presentation.onboarding.profile_setting.essential_first
+package com.abouttime.blindcafe.presentation.onboarding.profile_setting.nickname
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,7 +8,7 @@ import com.abouttime.blindcafe.common.constants.PreferenceKey.AGE
 import com.abouttime.blindcafe.common.constants.PreferenceKey.SEX
 import java.lang.Exception
 
-class OnBoardNickNameViewModel: BaseViewModel() {
+class NicknameViewModel: BaseViewModel() {
 
     private val _ageText = MutableLiveData<String>()
     val ageText: MutableLiveData<String> get() = _ageText
@@ -76,7 +76,7 @@ class OnBoardNickNameViewModel: BaseViewModel() {
         saveStringData(Pair(AGE, _ageText.value ?: ""))
         saveStringData(Pair(SEX, sex))
 
-        moveToDirections(OnBoardNickNameFragmentDirections.actionProfileSettingFragmentToEssentialSecondFragment())
+        moveToDirections(NicknameFragmentDirections.actionNicknameFragmentToGenderAgeFragment())
 
     }
 

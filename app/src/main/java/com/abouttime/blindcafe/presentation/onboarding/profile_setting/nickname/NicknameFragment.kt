@@ -1,31 +1,31 @@
-package com.abouttime.blindcafe.presentation.onboarding.profile_setting.essential_first
+package com.abouttime.blindcafe.presentation.onboarding.profile_setting.nickname
 
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isGone
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
-import com.abouttime.blindcafe.databinding.FragmentOnBoardNickNameBinding
+import com.abouttime.blindcafe.databinding.FragmentNicknameBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class OnBoardNickNameFragment :
-    BaseFragment<OnBoardNickNameViewModel>(R.layout.fragment_on_board_nick_name) {
+class NicknameFragment :
+    BaseFragment<NicknameViewModel>(R.layout.fragment_nickname) {
 
-    private var binding: FragmentOnBoardNickNameBinding? = null
-    override val viewModel: OnBoardNickNameViewModel by viewModel()
+    private var binding: FragmentNicknameBinding? = null
+    override val viewModel: NicknameViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val fragmentOnBoardNickNameBinding = FragmentOnBoardNickNameBinding.bind(view)
-        binding = fragmentOnBoardNickNameBinding
+        val fragmentNicknameBinding = FragmentNicknameBinding.bind(view)
+        binding = fragmentNicknameBinding
         binding?.viewModel = viewModel
         binding?.lifecycleOwner = this
 
-        initAgeEditText(fragmentOnBoardNickNameBinding)
-        observeData(fragmentOnBoardNickNameBinding)
+        initAgeEditText(fragmentNicknameBinding)
+        observeData(fragmentNicknameBinding)
     }
 
-    private fun observeData(fragmentOnBoardNickNameBinding: FragmentOnBoardNickNameBinding) = with(fragmentOnBoardNickNameBinding) {
+    private fun observeData(fragmentNicknameBinding: FragmentNicknameBinding) = with(fragmentNicknameBinding) {
         val sexDisabledColor = getColorByResId(R.color.disabled)
         val sexEnabledColor = getColorByResId(R.color.sex_enabled)
         viewModel?.selectedSex?.observe(viewLifecycleOwner) { selectedSex ->
@@ -48,9 +48,9 @@ class OnBoardNickNameFragment :
     }
 
 
-    private fun initAgeEditText(FragmentOnBoardNickNameBinding: FragmentOnBoardNickNameBinding) {
-        val ageEditText = FragmentOnBoardNickNameBinding.etAge
-        val alertAgeTextView = FragmentOnBoardNickNameBinding.tvAlertAge
+    private fun initAgeEditText(fragmentNicknameBinding: FragmentNicknameBinding) {
+        val ageEditText = fragmentNicknameBinding.etAge
+        val alertAgeTextView = fragmentNicknameBinding.tvAlertAge
 
         ageEditText.setOnFocusChangeListener { view, isFocused ->
             ageEditText.isCursorVisible = isFocused

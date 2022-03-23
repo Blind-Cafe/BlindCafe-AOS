@@ -19,7 +19,7 @@ class SplashViewModel: BaseViewModel() {
             moveToRuleFragment()
         } else if (infoInput == null) {
             Log.e(INFO_INPUT, "$infoInput")
-            moveToAgreementFragment()
+            moveToNicknameFragment()
         } else {
             moveToMainFragment()
         }
@@ -30,8 +30,8 @@ class SplashViewModel: BaseViewModel() {
     private fun moveToRuleFragment() {
         moveToDirections(SplashFragmentDirections.actionSplashFragmentToRuleFragment())
     }
-    private fun moveToAgreementFragment() {
-        moveToDirections(SplashFragmentDirections.actionSplashFragmentToAgreementFragment())
+    private fun moveToNicknameFragment() {
+        moveToDirections(SplashFragmentDirections.actionSplashFragmentToEssentialFirstFragment())
     }
     private fun moveToMainFragment() {
         moveToDirections(SplashFragmentDirections.actionSplashFragmentToMainFragment())

@@ -27,10 +27,10 @@ import com.abouttime.blindcafe.presentation.onboarding.agreement.AgreementViewMo
 import com.abouttime.blindcafe.presentation.onboarding.login.LoginViewModel
 import com.abouttime.blindcafe.presentation.onboarding.login.policy.PolicyViewModel
 import com.abouttime.blindcafe.presentation.onboarding.login.term.TermViewModel
-import com.abouttime.blindcafe.presentation.onboarding.profile_setting.essential_first.OnBoardNickNameViewModel
-import com.abouttime.blindcafe.presentation.onboarding.profile_setting.essential_second.EssentialSecondViewModel
+import com.abouttime.blindcafe.presentation.onboarding.profile_setting.nickname.NicknameViewModel
+import com.abouttime.blindcafe.presentation.onboarding.profile_setting.gender_age.EssentialSecondViewModel
 import com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest.InterestViewModel
-import com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest_detail.InterestSubViewModel
+import com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest_detail.PartnerGenderViewModel
 import com.abouttime.blindcafe.presentation.onboarding.rule.RuleViewModel
 import com.abouttime.blindcafe.presentation.onboarding.signin.SigninViewModel
 import com.abouttime.blindcafe.presentation.onboarding.splash.SplashViewModel
@@ -65,10 +65,10 @@ internal val viewModelModule = module {
     viewModel { TermViewModel() }
     viewModel { RuleViewModel() }
     viewModel { AgreementViewModel() }
-    viewModel { OnBoardNickNameViewModel() }
+    viewModel { NicknameViewModel() }
     viewModel { EssentialSecondViewModel() }
     viewModel { InterestViewModel() }
-    viewModel { InterestSubViewModel(get()) }
+    viewModel { PartnerGenderViewModel() }
     viewModel { SigninViewModel(get()) }
 
     /** Main **/

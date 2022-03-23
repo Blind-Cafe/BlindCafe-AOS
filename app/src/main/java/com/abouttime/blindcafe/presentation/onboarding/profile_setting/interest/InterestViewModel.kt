@@ -59,11 +59,11 @@ class InterestViewModel(
         if (canEnableNextButton()) {
             _selectedItem.value?.let { list ->
                 val selectedItemIdx = list.sorted().toMutableList()
-                moveToDirections(InterestFragmentDirections.actionInterestFragmentToInterestSubFragment(
-                    i1 = selectedItemIdx[0] + 1,
-                    i2 = selectedItemIdx[1] + 1,
-                    i3 = selectedItemIdx[2] + 1
-                ))
+//                moveToDirections(InterestFragmentDirections.actionInterestFragmentToInterestSubFragment(
+//                    i1 = selectedItemIdx[0] + 1,
+//                    i2 = selectedItemIdx[1] + 1,
+//                    i3 = selectedItemIdx[2] + 1
+//                ))
             }
         } else {
             showToast(R.string.profile_setting_toast_select_interest)

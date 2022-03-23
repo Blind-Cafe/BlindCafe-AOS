@@ -14,7 +14,7 @@
 
         <variable
             name="viewModel"
-            type="com.abouttime.blindcafe.presentation.onboarding.profile_setting.essential_second.EssentialSecondViewModel" />
+            type="com.abouttime.blindcafe.presentation.onboarding.profile_setting.gender_age.EssentialSecondViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -44,7 +44,7 @@
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_loginFragment_to_essentialFirstFragment"
-            app:destination="@id/essentialFirstFragment" />
+            app:destination="@id/nicknameFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -72,7 +72,7 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_splashFragment_to_essentialFirstFragment"
-            app:destination="@id/essentialFirstFragment" />
+            app:destination="@id/nicknameFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
@@ -194,22 +194,24 @@
             android:id="@+id/action_agreementFragment_to_signinFragment"
             app:destination="@id/signinFragment" />
     </fragment>
+
     <fragment
-        android:id="@+id/essentialFirstFragment"
-        android:name="com.abouttime.blindcafe.presentation.onboarding.profile_setting.essential_first.OnBoardNickNameFragment"
+        android:id="@+id/nicknameFragment"
+        android:name="com.abouttime.blindcafe.presentation.onboarding.profile_setting.nickname.NicknameFragment"
         android:label="ProfileSettingFragment"
-        tools:layout="@layout/fragment_on_board_nick_name">
+        tools:layout="@layout/fragment_nickname">
         <action
-            android:id="@+id/action_profileSettingFragment_to_essentialSecondFragment"
+            android:id="@+id/action_nicknameFragment_to_genderAgeFragment"
             app:destination="@id/essentialSecondFragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
     </fragment>
+
     <fragment
         android:id="@+id/essentialSecondFragment"
-        android:name="com.abouttime.blindcafe.presentation.onboarding.profile_setting.essential_second.EssentialSecondFragment"
+        android:name="com.abouttime.blindcafe.presentation.onboarding.profile_setting.gender_age.EssentialSecondFragment"
         android:label="EssentialSecondFragment"
         tools:layout="@layout/fragment_essential_second">
         <action
