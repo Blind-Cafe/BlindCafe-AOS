@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -16,12 +17,10 @@
             type="com.abouttime.blindcafe.presentation.onboarding.nickname.NicknameViewModel" />
     </data>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black">
-
 
         <ImageButton
             android:id="@+id/ib_back"
@@ -78,7 +77,7 @@
                 android:layout_marginTop="25dp"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
                 android:text="@string/profile_setting_step_1"
-                android:textSize="@dimen/font_size_11"
+                android:textSize="@dimen/font_size_13"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -88,55 +87,57 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                android:text="@string/profile_setting_age"
+                android:text="@string/profile_setting_nickname"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_size_15"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_step1" />
 
-            <TextView
-                android:id="@+id/tv_sub_age"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
+
+            <EditText
+                android:id="@+id/et_nickname"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="7dp"
-                android:textSize="@dimen/font_size_13"
+                android:background="@drawable/et_bg_rounding_with_default_stroke"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                android:text="@string/profile_setting_age_hint"
+                android:inputType="text"
+                android:maxLength="9"
+                android:padding="8dp"
+                android:textSize="@dimen/font_size_13"
+                android:text="@={viewModel.nickNameText}"
+                android:textCursorDrawable="@drawable/ic_cursor"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_age" />
 
-            <EditText
-                android:id="@+id/et_age"
-                android:layout_width="0dp"
-                android:layout_height="44dp"
-                android:gravity="center"
-                android:layout_marginTop="2dp"
-                android:hint="@string/age_hint"
-                android:background="@drawable/et_bg_rounding_with_default_stroke"
-                android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                android:inputType="number"
-                android:maxLength="2"
-                android:padding="8dp"
-                android:text="@={viewModel.ageText}"
-                android:textCursorDrawable="@drawable/ic_cursor"
-                app:layout_constraintDimensionRatio="60:44"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_sub_age"
-                tools:ignore="SpeakableTextPresentCheck" />
-
             <TextView
-                android:id="@+id/tv_alert_age"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:id="@+id/tv_alert_nickname_1"
+                android:layout_marginTop="4dp"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                android:text="@string/profile_setting_alert_age"
-                android:textColor="@color/et_bg_stroke_red"
+                android:text="@string/profile_setting_nickname_rule_1"
+                android:textColor="@color/main"
                 android:textSize="@dimen/font_size_11"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/et_age"
+                app:layout_constraintTop_toBottomOf="@id/et_nickname"
+                tools:visibility="visible"/>
+
+
+            <TextView
+                android:id="@+id/tv_alert_nickname_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/spoqa_han_sans_neo_regular"
+                android:text="@string/profile_setting_nickname_rule_2"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_11"
+                android:visibility="visible"
+                app:layout_constraintStart_toEndOf="@id/tv_alert_nickname_1"
+                app:layout_constraintTop_toBottomOf="@id/et_nickname"
                 tools:visibility="visible" />
 
             <TextView
@@ -145,79 +146,90 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="45dp"
                 android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                android:text="@string/profile_setting_sex"
+                android:text="@string/profile_setting_matching_sex"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_size_15"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_alert_age" />
+                app:layout_constraintTop_toBottomOf="@id/tv_alert_nickname_2" />
 
             <FrameLayout
                 android:id="@+id/fl_female_container"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="10dp"
+                android:onClick="@{()->viewModel.onClickFemaleButton()}"
                 android:background="@drawable/bg_rounding_3dp"
                 android:backgroundTint="@{viewModel.selectedSex == 1 ? @color/sex_container_enabled : @color/sex_container_disabled}"
-                android:onClick="@{() -> viewModel.onClickFemaleButton()}"
-                app:layout_constraintVertical_bias="0"
-                app:layout_constraintBottom_toTopOf="@+id/tv_alert_age_sex"
-                app:layout_constraintDimensionRatio="135:85"
+                tools:backgroundTint="@color/sex_container_disabled"
+                app:layout_constraintBottom_toTopOf="@id/tv_next"
+                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@id/fl_male_container"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_sex"
-                tools:backgroundTint="@color/sex_container_disabled">
-
+                app:layout_constraintVertical_bias="0">
 
                 <ImageView
                     android:id="@+id/iv_female"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/bt_female"
+                    android:src="@drawable/bt_female_small"
                     app:tint="@color/disabled" />
-            </FrameLayout>
 
+            </FrameLayout>
 
             <FrameLayout
                 android:id="@+id/fl_male_container"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginEnd="10dp"
+                android:onClick="@{()->viewModel.onClickMaleButton()}"
                 android:background="@drawable/bg_rounding_3dp"
                 android:backgroundTint="@{viewModel.selectedSex == 2 ? @color/sex_container_enabled : @color/sex_container_disabled}"
-                android:onClick="@{()->viewModel.onClickMaleButton()}"
+                tools:backgroundTint="@color/sex_container_disabled"
                 app:layout_constraintBottom_toBottomOf="@+id/fl_female_container"
-                app:layout_constraintDimensionRatio="135:85"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/fl_bisexual_container"
                 app:layout_constraintStart_toEndOf="@+id/fl_female_container"
-                app:layout_constraintTop_toTopOf="@id/fl_female_container"
-                tools:backgroundTint="@color/sex_container_disabled">
+                app:layout_constraintTop_toTopOf="@id/fl_female_container">
 
                 <ImageView
                     android:id="@+id/iv_male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/bt_male"
-                    app:tint="@color/disabled" />
-
+                    android:src="@drawable/bt_male_small"
+                    app:tint="@color/disabled"
+                    />
 
             </FrameLayout>
 
 
-            <TextView
-                android:id="@+id/tv_alert_age_sex"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:text="@string/profile_setting_alert_age_sex"
-                android:textColor="@color/alert_red"
-                android:textSize="@dimen/font_size_11"
-                app:layout_constraintBottom_toTopOf="@id/tv_next"
+            <FrameLayout
+                android:id="@+id/fl_bisexual_container"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:onClick="@{()->viewModel.onClickBisexualButton()}"
+                android:background="@drawable/bg_rounding_3dp"
+                android:backgroundTint="@{viewModel.selectedSex == 3 ? @color/sex_container_enabled : @color/sex_container_disabled}"
+                tools:backgroundTint="@color/sex_container_disabled"
+                app:layout_constraintBottom_toBottomOf="@id/fl_male_container"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toEndOf="@id/fl_male_container"
+                app:layout_constraintTop_toTopOf="@id/fl_male_container">
+
+                <ImageView
+                    android:id="@+id/iv_bisexual"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/bt_bisexual_small"
+                    app:tint="@color/disabled"
+                     />
+
+
+            </FrameLayout>
 
 
             <TextView
@@ -225,21 +237,20 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginBottom="32dp"
+                android:textSize="@dimen/font_size_15"
                 android:background="@drawable/bg_rounding_3dp"
                 android:backgroundTint="@{viewModel.enableNextButton ? @color/enabled : @color/steel}"
                 android:gravity="center"
                 android:onClick="@{()->viewModel.onClickNextButton()}"
                 android:text="@string/profile_setting_next"
-                android:textSize="@dimen/font_size_15"
                 android:foreground="?selectableItemBackgroundBorderless"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="288:48"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.4"
                 app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

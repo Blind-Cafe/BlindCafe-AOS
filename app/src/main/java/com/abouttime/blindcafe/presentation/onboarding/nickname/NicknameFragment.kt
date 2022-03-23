@@ -2,7 +2,6 @@ package com.abouttime.blindcafe.presentation.onboarding.nickname
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isGone
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.databinding.FragmentNicknameBinding
@@ -10,19 +9,21 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class NicknameFragment :
     BaseFragment<NicknameViewModel>(R.layout.fragment_nickname) {
-
     private var binding: FragmentNicknameBinding? = null
     override val viewModel: NicknameViewModel by viewModel()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val fragmentNicknameBinding = FragmentNicknameBinding.bind(view)
         binding = fragmentNicknameBinding
-        binding?.viewModel = viewModel
         binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
 
-        initAgeEditText(fragmentNicknameBinding)
+
         observeData(fragmentNicknameBinding)
+        initAgeEditText(fragmentNicknameBinding)
+
     }
 
     private fun observeData(fragmentNicknameBinding: FragmentNicknameBinding) = with(fragmentNicknameBinding) {
@@ -33,14 +34,22 @@ class NicknameFragment :
                 1 -> {
                     ivFemale.setColorFilter(sexEnabledColor)
                     ivMale.setColorFilter(sexDisabledColor)
+                    ivBisexual.setColorFilter(sexDisabledColor)
                 }
                 2 -> {
                     ivFemale.setColorFilter(sexDisabledColor)
                     ivMale.setColorFilter(sexEnabledColor)
+                    ivBisexual.setColorFilter(sexDisabledColor)
+                }
+                3 -> {
+                    ivFemale.setColorFilter(sexDisabledColor)
+                    ivMale.setColorFilter(sexDisabledColor)
+                    ivBisexual.setColorFilter(sexEnabledColor)
                 }
                 else -> {
                     ivFemale.setColorFilter(sexDisabledColor)
                     ivMale.setColorFilter(sexDisabledColor)
+                    ivBisexual.setColorFilter(sexDisabledColor)
                 }
             }
 
@@ -49,11 +58,12 @@ class NicknameFragment :
 
 
     private fun initAgeEditText(fragmentNicknameBinding: FragmentNicknameBinding) {
-        val ageEditText = fragmentNicknameBinding.etAge
-        val alertAgeTextView = fragmentNicknameBinding.tvAlertAge
+        val nicknameEditText = fragmentNicknameBinding.etNickname
+        val alertNicknameText1 = fragmentNicknameBinding.tvAlertNickname1
+        val alertNicknameText2 = fragmentNicknameBinding.tvAlertNickname2
 
-        ageEditText.setOnFocusChangeListener { view, isFocused ->
-            ageEditText.isCursorVisible = isFocused
+        nicknameEditText.setOnFocusChangeListener { view, isFocused ->
+            nicknameEditText.isCursorVisible = isFocused
             if (isFocused) {
                 view.setBackgroundResource(R.drawable.et_bg_rouding_with_green_stroke)
             } else {
@@ -61,25 +71,24 @@ class NicknameFragment :
             }
         }
 
-        viewModel.ageText.observe(viewLifecycleOwner) { input ->
-            if (input.length < 2) return@observe
-
-            if (viewModel.isCorrectAge()) {
-                ageEditText.setBackgroundResource(R.drawable.et_bg_rouding_with_green_stroke)
-                hideKeyboard()
-                ageEditText.clearFocus()
-                alertAgeTextView.isGone = true
+        viewModel.nickNameText.observe(viewLifecycleOwner) {
+            if (viewModel.isCorrectNickname()) {
+                nicknameEditText.setBackgroundResource(R.drawable.et_bg_rouding_with_green_stroke)
+                alertNicknameText1.setTextColor(getColorByResId(R.color.main))
+                alertNicknameText2.setTextColor(getColorByResId(R.color.white))
             } else {
-                showToast(R.string.profile_setting_toast_input_correct_age)
-                ageEditText.setBackgroundResource(R.drawable.et_bg_rouding_with_red_stroke)
-                alertAgeTextView.isGone = false
+                nicknameEditText.setBackgroundResource(R.drawable.et_bg_rouding_with_red_stroke)
+                alertNicknameText1.setTextColor(getColorByResId(R.color.alert_red))
+                alertNicknameText2.setTextColor(getColorByResId(R.color.alert_red))
+
+                showToast(R.string.profile_setting_toast_input_again_nickname)
             }
+
             viewModel.checkInputAll()
         }
 
 
     }
-
 
 
 }

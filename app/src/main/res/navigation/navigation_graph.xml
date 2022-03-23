@@ -43,7 +43,7 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_loginFragment_to_essentialFirstFragment"
+            android:id="@+id/action_loginFragment_to_nicknameFragment"
             app:destination="@id/nicknameFragment" />
     </fragment>
     <fragment
@@ -70,9 +70,10 @@
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
+
         <action
-            android:id="@+id/action_splashFragment_to_essentialFirstFragment"
-            app:destination="@id/nicknameFragment" />
+            android:id="@+id/action_splashFragment_to_nicknameFragment"
+            app:destination="@id/nicknameFragment"/>
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
@@ -196,38 +197,34 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nicknameFragment"
-        android:name="com.abouttime.blindcafe.presentation.onboarding.nickname.NicknameFragment"
+        android:id="@+id/genderAgeFragment"
+        android:name="com.abouttime.blindcafe.presentation.onboarding.gender_age.GenderAgeFragment"
         android:label="ProfileSettingFragment"
-        tools:layout="@layout/fragment_nickname">
+        tools:layout="@layout/fragment_gender_age">
         <action
-            android:id="@+id/action_nicknameFragment_to_genderAgeFragment"
-            app:destination="@id/essentialSecondFragment"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
+            android:id="@+id/action_genderAgeFragment_to_partnerGenderFragment"
+            app:destination="@id/partnerGenderFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/essentialSecondFragment"
-        android:name="com.abouttime.blindcafe.presentation.onboarding.gender_age.EssentialSecondFragment"
+        android:id="@+id/nicknameFragment"
+        android:name="com.abouttime.blindcafe.presentation.onboarding.nickname.NicknameFragment"
         android:label="EssentialSecondFragment"
-        tools:layout="@layout/fragment_essential_second">
+        tools:layout="@layout/fragment_nickname">
         <action
-            android:id="@+id/action_essentialSecondFragment_to_interestFragment"
-            app:destination="@id/interestFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            android:id="@+id/action_nicknameFragment_to_genderAgeFragment"
+            app:destination="@id/genderAgeFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/interestFragment"
         android:name="com.abouttime.blindcafe.presentation.onboarding.interest.InterestFragment"
         android:label="InterestFragment"
-        tools:layout="@layout/fragment_interest"/>
+        tools:layout="@layout/fragment_interest">
+        <action
+            android:id="@+id/action_interestFragment_to_agreementFragment"
+            app:destination="@id/agreementFragment" />
+    </fragment>
     <fragment
         android:id="@+id/chatFragment"
         android:name="com.abouttime.blindcafe.presentation.chat.ChatFragment"
@@ -813,5 +810,23 @@
             app:argType="string"
             />
 
+    </fragment>
+    <fragment
+        android:id="@+id/partnerGenderFragment"
+        tools:layout="@layout/fragment_partner_gender"
+        android:name="com.abouttime.blindcafe.presentation.onboarding.partner_gender.PartnerGenderFragment"
+        android:label="PartnerGenderFragment" >
+        <action
+            android:id="@+id/action_partnerGenderFragment_to_phoneNumberFragment"
+            app:destination="@id/phoneNumberFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/phoneNumberFragment"
+        tools:layout="@layout/fragment_phone_number"
+        android:name="com.abouttime.blindcafe.presentation.onboarding.phone.PhoneNumberFragment"
+        android:label="PhoneNumberFragment" >
+        <action
+            android:id="@+id/action_phoneNumberFragment_to_interestFragment"
+            app:destination="@id/interestFragment" />
     </fragment>
 </navigation>
