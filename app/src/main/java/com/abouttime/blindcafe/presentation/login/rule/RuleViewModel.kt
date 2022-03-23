@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.presentation.onboarding.rule
+package com.abouttime.blindcafe.presentation.login.rule
 
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseViewModel

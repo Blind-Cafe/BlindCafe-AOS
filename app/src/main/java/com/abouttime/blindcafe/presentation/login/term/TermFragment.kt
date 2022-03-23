@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.presentation.onboarding.login.term
+package com.abouttime.blindcafe.presentation.login.term
 
 import android.os.Bundle
 import android.view.View

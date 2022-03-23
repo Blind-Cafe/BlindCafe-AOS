@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.presentation.onboarding.login
+package com.abouttime.blindcafe.presentation.login
 
 import android.content.Context
 import android.util.Log
@@ -16,10 +16,8 @@ import com.abouttime.blindcafe.data.server.dto.login.KakaoTokenDto
 import com.abouttime.blindcafe.domain.use_case.server.PostKakaoTokenUseCase
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 
 class LoginViewModel(
     private val postKakaoTokenUseCase: PostKakaoTokenUseCase

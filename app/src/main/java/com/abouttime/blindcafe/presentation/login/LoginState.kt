@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.presentation.onboarding.login
+package com.abouttime.blindcafe.presentation.login
 
 sealed class LoginState {
     object Uninitialized: LoginState()

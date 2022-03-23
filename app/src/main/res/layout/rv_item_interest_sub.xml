@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest_detail.PartnerGenderViewModel" />
+            type="com.abouttime.blindcafe.presentation.onboarding.profile_setting.partner_gender.PartnerGenderViewModel" />
 
     </data>
 

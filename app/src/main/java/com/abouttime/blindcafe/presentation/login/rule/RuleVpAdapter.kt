@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.presentation.onboarding.rule
+package com.abouttime.blindcafe.presentation.login.rule
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

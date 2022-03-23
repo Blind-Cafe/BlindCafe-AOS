@@ -1,14 +1,11 @@
 package com.abouttime.blindcafe.presentation.profile_exchange.accept.profile_image
 
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
-import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.navArgs
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseDialogFragment
 import com.abouttime.blindcafe.databinding.DialogFragmentProfileImageBinding
-import com.abouttime.blindcafe.presentation.onboarding.rule.RuleVpAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class AcceptImageDialogFragment: BaseDialogFragment<AcceptImageViewModel>(R.layout.dialog_fragment_profile_image) {

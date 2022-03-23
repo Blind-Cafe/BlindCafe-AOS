@@ -1,11 +1,10 @@
-package com.abouttime.blindcafe.presentation.onboarding.rule
+package com.abouttime.blindcafe.presentation.login.rule
 
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.view.View
-import androidx.core.view.isGone
 import androidx.viewpager2.widget.ViewPager2
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment

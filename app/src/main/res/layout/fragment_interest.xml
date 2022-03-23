@@ -8,7 +8,7 @@
         <import type="androidx.core.content.ContextCompat" />
         <variable
             name="viewModel"
-            type="com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest.InterestViewModel" />
+            type="com.abouttime.blindcafe.presentation.onboarding.interest.InterestViewModel" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
 

@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.presentation.onboarding.profile_setting.gender_age
+package com.abouttime.blindcafe.presentation.onboarding.gender_age
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

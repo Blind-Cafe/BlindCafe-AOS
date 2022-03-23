@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.abouttime.blindcafe.presentation.onboarding.login.LoginFragment"
+        android:name="com.abouttime.blindcafe.presentation.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
@@ -174,7 +174,7 @@
     </fragment>
     <fragment
         android:id="@+id/ruleFragment"
-        android:name="com.abouttime.blindcafe.presentation.onboarding.rule.RuleFragment"
+        android:name="com.abouttime.blindcafe.presentation.login.rule.RuleFragment"
         android:label="RuleFragment"
         tools:layout="@layout/fragment_rule">
         <action
@@ -197,7 +197,7 @@
 
     <fragment
         android:id="@+id/nicknameFragment"
-        android:name="com.abouttime.blindcafe.presentation.onboarding.profile_setting.nickname.NicknameFragment"
+        android:name="com.abouttime.blindcafe.presentation.onboarding.nickname.NicknameFragment"
         android:label="ProfileSettingFragment"
         tools:layout="@layout/fragment_nickname">
         <action
@@ -211,7 +211,7 @@
 
     <fragment
         android:id="@+id/essentialSecondFragment"
-        android:name="com.abouttime.blindcafe.presentation.onboarding.profile_setting.gender_age.EssentialSecondFragment"
+        android:name="com.abouttime.blindcafe.presentation.onboarding.gender_age.EssentialSecondFragment"
         android:label="EssentialSecondFragment"
         tools:layout="@layout/fragment_essential_second">
         <action
@@ -225,7 +225,7 @@
 
     <fragment
         android:id="@+id/interestFragment"
-        android:name="com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest.InterestFragment"
+        android:name="com.abouttime.blindcafe.presentation.onboarding.interest.InterestFragment"
         android:label="InterestFragment"
         tools:layout="@layout/fragment_interest"/>
     <fragment
@@ -555,12 +555,12 @@
     </fragment>
     <fragment
         android:id="@+id/policyFragment"
-        android:name="com.abouttime.blindcafe.presentation.onboarding.login.policy.PolicyFragment"
+        android:name="com.abouttime.blindcafe.presentation.login.policy.PolicyFragment"
         android:label="PolicyFragment"
         tools:layout="@layout/fragment_policy" />
     <fragment
         android:id="@+id/termFragment"
-        android:name="com.abouttime.blindcafe.presentation.onboarding.login.term.TermFragment"
+        android:name="com.abouttime.blindcafe.presentation.login.term.TermFragment"
         android:label="TermFragment"
         tools:layout="@layout/fragment_term" />
     <fragment

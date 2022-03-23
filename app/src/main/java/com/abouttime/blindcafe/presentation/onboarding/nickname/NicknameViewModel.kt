@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.presentation.onboarding.profile_setting.nickname
+package com.abouttime.blindcafe.presentation.onboarding.nickname
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

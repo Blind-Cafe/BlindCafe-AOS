@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.presentation.onboarding.login.policy
+package com.abouttime.blindcafe.presentation.login.policy
 
 
 import android.os.Bundle

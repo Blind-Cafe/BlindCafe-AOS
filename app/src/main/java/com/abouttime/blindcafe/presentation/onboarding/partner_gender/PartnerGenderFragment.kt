@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest_detail
+package com.abouttime.blindcafe.presentation.onboarding.partner_gender
 
 import android.os.Bundle
 import android.view.View

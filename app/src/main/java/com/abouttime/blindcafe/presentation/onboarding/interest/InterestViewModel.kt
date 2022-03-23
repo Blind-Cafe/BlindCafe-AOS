@@ -1,4 +1,4 @@
-package com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest
+package com.abouttime.blindcafe.presentation.onboarding.interest
 
 import android.view.View
 import androidx.lifecycle.LiveData

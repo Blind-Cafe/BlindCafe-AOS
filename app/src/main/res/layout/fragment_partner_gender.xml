@@ -14,7 +14,7 @@
 
         <variable
             name="viewModel"
-            type="com.abouttime.blindcafe.presentation.onboarding.profile_setting.interest_detail.PartnerGenderViewModel" />
+            type="com.abouttime.blindcafe.presentation.onboarding.partner_gender.PartnerGenderViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +25,6 @@
 
         <ImageButton
             android:id="@+id/ib_back"
-            android:onClick="@{() -> viewModel.onClickBackButton()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
