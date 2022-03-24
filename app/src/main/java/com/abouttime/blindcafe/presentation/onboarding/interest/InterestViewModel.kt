@@ -58,6 +58,7 @@ class InterestViewModel(
     fun onClickNextButton() {
         if (canEnableNextButton()) {
             _selectedItem.value?.let { list ->
+                moveToDirections(InterestFragmentDirections.actionInterestFragmentToAgreementFragment())
                 val selectedItemIdx = list.sorted().toMutableList()
 //                moveToDirections(InterestFragmentDirections.actionInterestFragmentToInterestSubFragment(
 //                    i1 = selectedItemIdx[0] + 1,

@@ -49,12 +49,9 @@ class AgreementViewModel : BaseViewModel() {
 
 
     private fun moveToProfileInput() {
-        moveToDirections(AgreementFragmentDirections.actionAgreementFragmentToProfileSettingFragment())
+        moveToDirections(AgreementFragmentDirections.actionAgreementFragmentToSigninFragment())
     }
 
-    private fun moveToMainFragment() {
-        moveToDirections(AgreementFragmentDirections.actionAgreementFragmentToMainFragment())
-    }
 
 
 }

@@ -16,7 +16,6 @@ import com.abouttime.blindcafe.presentation.main.home.coffee.CoffeeOrderViewMode
 import com.abouttime.blindcafe.presentation.main.home.exit.ExitViewModel
 import com.abouttime.blindcafe.presentation.main.my_page.MyPageViewModel
 import com.abouttime.blindcafe.presentation.edit.interest.main.InterestEditViewModel
-import com.abouttime.blindcafe.presentation.edit.interest.sub.InterestSubEditViewModel
 import com.abouttime.blindcafe.presentation.edit.profile.image.ProfileImageEditViewModel
 import com.abouttime.blindcafe.presentation.edit.profile.info.ProfileEditViewModel
 import com.abouttime.blindcafe.presentation.main.my_page.setting.SettingViewModel
@@ -117,6 +116,5 @@ internal val viewModelModule = module {
     viewModel { ProfileEditViewModel(get(), get()) }
     viewModel { ProfileImageEditViewModel(get(), get(), get())}
     viewModel { InterestEditViewModel() }
-    viewModel { InterestSubEditViewModel(get(), get()) }
 
 }

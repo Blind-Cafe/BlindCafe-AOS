@@ -2,6 +2,7 @@ package com.abouttime.blindcafe.presentation.onboarding.partner_gender
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.base.BaseFragment
 import com.abouttime.blindcafe.databinding.FragmentPartnerGenderBinding
@@ -18,6 +19,12 @@ class PartnerGenderFragment : BaseFragment<PartnerGenderViewModel>(R.layout.frag
         binding = fragmentInterestSubBinding
         binding?.lifecycleOwner = this
         binding?.viewModel = viewModel
+
+        fragmentInterestSubBinding.tvTemp.setOnClickListener {
+            findNavController().navigate(
+                PartnerGenderFragmentDirections.actionPartnerGenderFragmentToPhoneNumberFragment()
+            )
+        }
 
 
     }

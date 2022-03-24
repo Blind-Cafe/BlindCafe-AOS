@@ -16,20 +16,14 @@ class InterestEditViewModel: BaseViewModel() {
             val i2 = selectedItemIdx[1]
             val i3 = selectedItemIdx[2]
             selectedItemIdx.clear()
-            moveToInterestSubEditFragment(i1, i2, i3)
+            // TODO 관심사 수정
 
         } else {
             showToast(R.string.profile_setting_toast_select_interest)
         }
     }
 
-    private fun moveToInterestSubEditFragment(i1: Int, i2: Int, i3: Int) {
-        moveToDirections(InterestEditFragmentDirections.actionInterestEditFragmentToInterestSubEditFragment(
-            mainInterest1 = i1+1,
-            mainInterest2 = i2+1,
-            mainInterest3 = i3+1
-        ))
-    }
+
 
     fun onClickBackButton() {
         popDirections()

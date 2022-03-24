@@ -514,13 +514,6 @@
         android:label="InterestEditFragment"
         tools:layout="@layout/fragment_interest_edit">
 
-        <action
-            android:id="@+id/action_interestEditFragment_to_interestSubEditFragment"
-            app:destination="@id/interestSubEditFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/dormancyFragment"
@@ -532,24 +525,7 @@
         android:name="com.abouttime.blindcafe.presentation.edit.profile.image.ProfileImageEditFragment"
         android:label="ProfileImageEditFragment"
         tools:layout="@layout/fragment_profile_image_edit" />
-    <fragment
-        android:id="@+id/interestSubEditFragment"
-        android:name="com.abouttime.blindcafe.presentation.edit.interest.sub.InterestSubEditFragment"
-        android:label="InterestSubEditFragment"
-        tools:layout="@layout/fragment_interest_sub_edit">
 
-        <argument
-            android:name="mainInterest1"
-            app:argType="integer" />
-        <argument
-            android:name="mainInterest2"
-            app:argType="integer" />
-        <argument
-            android:name="mainInterest3"
-            app:argType="integer" />
-
-
-    </fragment>
     <fragment
         android:id="@+id/policyFragment"
         android:name="com.abouttime.blindcafe.presentation.login.policy.PolicyFragment"

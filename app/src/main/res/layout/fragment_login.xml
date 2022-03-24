@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.abouttime.blindcafe.presentation.onboarding.login.LoginViewModel" />
+            type="com.abouttime.blindcafe.presentation.login.LoginViewModel" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
