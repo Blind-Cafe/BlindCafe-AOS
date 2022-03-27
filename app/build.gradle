@@ -51,10 +51,6 @@ android {
         dataBinding true
     }
 
-    viewBinding {
-        enabled = true
-    }
-
     lintOptions {
         checkReleaseBuilds false
         // Or, if you prefer, you can continue to check for errors in release builds,
@@ -115,8 +111,8 @@ dependencies {
     implementation 'jp.wasabeef:glide-transformations:4.0.0'
 
     // Groupie
-    implementation "com.github.lisawray.groupie:groupie:2.9.0"
-    implementation "com.github.lisawray.groupie:groupie-viewbinding:2.9.0"
+    implementation "com.github.lisawray.groupie:groupie:2.10.0"
+    implementation "com.github.lisawray.groupie:groupie-viewbinding:2.10.0"
     implementation "com.github.lisawray.groupie:groupie-databinding:2.9.0"
 
 

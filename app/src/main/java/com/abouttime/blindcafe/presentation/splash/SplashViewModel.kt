@@ -31,7 +31,7 @@ class SplashViewModel: BaseViewModel() {
         moveToDirections(SplashFragmentDirections.actionSplashFragmentToRuleFragment())
     }
     private fun moveToNicknameFragment() {
-        moveToDirections(SplashFragmentDirections.actionSplashFragmentToEssentialFirstFragment())
+        moveToDirections(SplashFragmentDirections.actionSplashFragmentToNicknameFragment())
     }
     private fun moveToMainFragment() {
         moveToDirections(SplashFragmentDirections.actionSplashFragmentToMainFragment())

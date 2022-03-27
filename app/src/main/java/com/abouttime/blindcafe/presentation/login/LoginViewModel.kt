@@ -75,10 +75,10 @@ class LoginViewModel(
                             moveToMainFragment()
                         }
                         "991" -> { // 회원가입
-                            moveToAgreementFragment()
+                            moveToNicknameFragment()
                         }
                         "992" -> { // 회원가입 (필수정보 미입력)
-                            moveToAgreementFragment()
+                            moveToNicknameFragment()
                         }
                         else -> {
 
@@ -109,8 +109,8 @@ class LoginViewModel(
         moveToTermFragment()
     }
 
-    private fun moveToAgreementFragment() {
-        moveToDirections(LoginFragmentDirections.actionLoginFragmentToAgreementFragment())
+    private fun moveToNicknameFragment() {
+        moveToDirections(LoginFragmentDirections.actionLoginFragmentToNicknameFragment())
     }
     private fun moveToMainFragment() {
         moveToDirections(LoginFragmentDirections.actionLoginFragmentToMainFragment())
