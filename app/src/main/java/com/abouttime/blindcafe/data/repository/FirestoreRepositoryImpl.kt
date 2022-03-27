@@ -31,7 +31,8 @@ class FirestoreRepositoryImpl(
             .await()
     }
 
-    @ExperimentalCoroutinesApi
+
+    @OptIn(ExperimentalCoroutinesApi::class)
     override suspend fun subscribeMessages(roomId: String): Flow<Resource<List<Message>>> =
         callbackFlow {
             val time = Timestamp.now()
