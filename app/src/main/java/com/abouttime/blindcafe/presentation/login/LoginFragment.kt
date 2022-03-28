@@ -34,22 +34,15 @@ class LoginFragment : BaseFragment<LoginViewModel>(R.layout.fragment_login) {
         binding?.viewModel = viewModel
 
 
-
         initKakaoLoginButton(fragmentLoginBinding)
-        initCrashlyticsTestButton(fragmentLoginBinding)
     }
 
     private fun initKakaoLoginButton(fragmentLoginBinding: FragmentLoginBinding) {
         fragmentLoginBinding.btKakaoLogin.setOnClickListener {
             loginWithKakao()
         }
+    }
 
-    }
-    private fun initCrashlyticsTestButton(fragmentLoginBinding: FragmentLoginBinding) {
-        fragmentLoginBinding.btCrashlyticsTest.setOnClickListener {
-            throw RuntimeException("Test Crash")
-        }
-    }
 
     private fun loginWithKakao() = lifecycleScope.launch(Dispatchers.Main) {
 
