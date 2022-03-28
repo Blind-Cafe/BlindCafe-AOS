@@ -31,7 +31,6 @@ class NavHostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_BlindCafe)
 
-        window.addFlags(WindowManager.LayoutParams.FLAG_SECURE)
         binding = ActivityNavHostBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

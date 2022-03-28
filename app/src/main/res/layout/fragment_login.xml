@@ -90,6 +90,16 @@
         app:layout_constraintStart_toEndOf="@id/tv_description_3"
         app:layout_constraintTop_toTopOf="@id/tv_description_1" />
 
+    <Button
+        android:id="@+id/bt_crashlytics_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test Crash"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
