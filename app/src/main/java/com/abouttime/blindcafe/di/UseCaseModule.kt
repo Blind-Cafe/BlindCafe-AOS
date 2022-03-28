@@ -40,8 +40,7 @@ internal val useCaseModule = module {
     factory { DownloadAudioUrlUseCase(get()) }
     factory { DownloadImageUrlUseCase(get()) }
 
-    /** fcm **/
-    factory { PostFcmUseCase(get()) }
+
 
 
     /** home **/
