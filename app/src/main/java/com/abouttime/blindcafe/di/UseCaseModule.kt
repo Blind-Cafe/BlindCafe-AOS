@@ -1,6 +1,5 @@
 package com.abouttime.blindcafe.di
 
-import com.abouttime.blindcafe.domain.use_case.firebase.*
 import com.abouttime.blindcafe.domain.use_case.server.*
 import org.koin.dsl.module
 
@@ -25,23 +24,6 @@ internal val useCaseModule = module {
     factory { DeleteProfileImageUseCase(get()) }
     factory { PostProfileForOpenUseCase(get()) }
     factory { GetMatchingProfileUseCase(get()) }
-
-    /** gallery **/
-
-
-    /** fire store **/
-    factory { SendMessageUseCase(get()) }
-    factory { SubscribeMessageUseCase(get()) }
-    factory { ReceiveMessagesUseCase(get()) }
-
-    /** firebase storage **/
-    factory { UploadAudioUseCase(get()) }
-    factory { UploadImageUseCase(get()) }
-    factory { DownloadAudioUrlUseCase(get()) }
-    factory { DownloadImageUrlUseCase(get()) }
-
-
-
 
     /** home **/
     factory { GetHomeInfoUseCase(get()) }

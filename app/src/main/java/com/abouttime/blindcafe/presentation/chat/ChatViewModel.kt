@@ -1,15 +1,12 @@
 package com.abouttime.blindcafe.presentation.chat
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
-import com.abouttime.blindcafe.common.constants.LogTag.CHATTING_TAG
-import com.abouttime.blindcafe.common.constants.PreferenceKey.LAST_READ_MESSAGE
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NICKNAME
 import com.abouttime.blindcafe.common.constants.PreferenceKey.USER_ID
 import com.abouttime.blindcafe.common.util.SingleLiveData
@@ -17,26 +14,15 @@ import com.abouttime.blindcafe.data.server.dto.matching.send.PostMessageDto
 import com.abouttime.blindcafe.data.server.dto.matching.topic.GetTopicDto
 import com.abouttime.blindcafe.domain.model.ChatRoom
 import com.abouttime.blindcafe.domain.model.Message
-import com.abouttime.blindcafe.domain.use_case.firebase.*
 import com.abouttime.blindcafe.domain.use_case.server.GetTopicUseCase
 import com.abouttime.blindcafe.domain.use_case.server.PostEnteringLogUseCase
 import com.abouttime.blindcafe.presentation.chat.audio.RecorderState
 import com.google.firebase.Timestamp
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.*
 
 class ChatViewModel(
-    private val receiveMessagesUseCase: ReceiveMessagesUseCase,
-    private val subscribeMessageUseCase: SubscribeMessageUseCase,
-    private val uploadImageUseCase: UploadImageUseCase,
-    private val uploadAudioUseCase: UploadAudioUseCase,
-    private val downloadImageUrlUseCase: DownloadImageUrlUseCase,
-    private val downloadAudioUrlUseCase: DownloadAudioUrlUseCase,
     private val getTopicUseCase: GetTopicUseCase,
     private val postEnteringLogUseCase: PostEnteringLogUseCase,
 ) : BaseViewModel() {
@@ -86,144 +72,21 @@ class ChatViewModel(
 
 
     /** use cases - read **/
-    fun receivePagedMessages(roomId: String, lastTime: Timestamp) {
-        receiveMessagesUseCase(roomId, lastTime).onEach { result ->
-            when (result) {
-                is Resource.Loading -> {
-                    showLoading()
-                }
-                is Resource.Success -> {
-                    result.data?.let { list ->
-                        Log.e("isScroll", "$list 도착!!")
-                        _receivedPageMessage.postValue(list)
-                    }
-                    dismissLoading()
-                }
-                is Resource.Error -> {
-                    dismissLoading()
-                }
-            }
-        }.launchIn(viewModelScope)
+    fun receivePagedMessages(roomId: String, lastTime: Timestamp) {}
 
-    }
+    fun subscribeMessages(roomId: String) {}
 
-    fun subscribeMessages(roomId: String) = viewModelScope.launch(Dispatchers.IO) {
-        subscribeMessageUseCase(roomId).collect { result ->
-            when (result) {
-                is Resource.Loading -> {
+    fun downloadImageUrl(message: Message, callback: (uri: Uri?) -> Unit) {}
 
-                }
-                is Resource.Success -> {
-                    if (result.data?.isEmpty()?.not() == true) {
-                        saveStringData(
-                            Pair(
-                                LAST_READ_MESSAGE,
-                                result.data[0].timestamp?.seconds.toString()
-                            )
-                        )
-                        _receivedNewMessage.postValue(result.data!!)
-                    }
-
-
-                }
-                is Resource.Error -> {
-
-                }
-            }
-        }
-    }
-
-    fun downloadImageUrl(message: Message, callback: (uri: Uri?) -> Unit) =
-        viewModelScope.launch(Dispatchers.IO) {
-            downloadImageUrlUseCase(message).collect { result ->
-                when (result) {
-                    is Resource.Loading -> {
-                        showLoading()
-                    }
-                    is Resource.Success -> {
-
-                        withContext(Dispatchers.Main) {
-                            callback(result.data)
-                        }
-                        dismissLoading()
-                    }
-                    is Resource.Error -> {
-                        dismissLoading()
-                    }
-                }
-            }
-
-        }
-
-    fun downloadAudioUrl(message: Message, callback: (uri: Uri?) -> Unit) =
-        viewModelScope.launch(Dispatchers.IO) {
-            downloadAudioUrlUseCase(message).collect { result ->
-                when (result) {
-                    is Resource.Loading -> {
-                        showLoading()
-                    }
-                    is Resource.Success -> {
-                        withContext(Dispatchers.Main) {
-                            callback(result.data)
-                        }
-                        dismissLoading()
-                    }
-                    is Resource.Error -> {
-                        dismissLoading()
-                    }
-                }
-            }
-        }
+    fun downloadAudioUrl(message: Message, callback: (uri: Uri?) -> Unit) {}
 
 
     /** use cases - write **/
-    fun postMessage(postMessageDto: PostMessageDto, matchingId: Int) {
+    fun postMessage(postMessageDto: PostMessageDto, matchingId: Int) {}
 
-    }
+    fun uploadImage(message: Message, uri: Uri) {}
 
-    fun uploadImage(message: Message, uri: Uri) = viewModelScope.launch(Dispatchers.IO) {
-        uploadImageUseCase(message, uri).collect { result ->
-            when (result) {
-                is Resource.Success -> {
-                    matchingId?.let { id ->
-                        postMessage(
-                            postMessageDto = PostMessageDto(
-                                contents = message.contents,
-                                type = message.type
-                            ),
-                            matchingId = id
-                        )
-                    }
-
-                }
-                is Resource.Error -> {
-                    Log.e(CHATTING_TAG, result.message ?: "error")
-                }
-            }
-        }
-    }
-
-    fun uploadAudio(message: Message, uri: Uri) = viewModelScope.launch(Dispatchers.IO) {
-        uploadAudioUseCase(message, uri).collect { result ->
-            when (result) {
-                is Resource.Success -> {
-                    matchingId?.let { id ->
-                        postMessage(
-                            postMessageDto = PostMessageDto(
-                                contents = message.contents,
-                                type = message.type
-                            ),
-                            matchingId = id
-                        )
-                    }
-                }
-                is Resource.Error -> {
-                    Log.e(CHATTING_TAG, result.message ?: "error")
-                }
-            }
-        }
-
-    }
+    fun uploadAudio(message: Message, uri: Uri) {}
 
 
     fun getTopic() {
@@ -269,7 +132,6 @@ class ChatViewModel(
 
     /** update button **/
     fun updateSendButton() {
-
         _isSendButtonEnabled.value = !messageEditText.value?.trim().isNullOrEmpty()
     }
 

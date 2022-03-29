@@ -18,7 +18,6 @@ internal val remoteModule = module {
 
     factory { provideKakaoLoginApi(get()) }
     factory { provideUserInfoApi(get()) }
-    factory { provideFcmApi(get()) }
     factory { provideHomeApi(get()) }
     factory { provideMatchingApi(get()) }
     factory { provideInterestApi(get()) }
@@ -57,9 +56,6 @@ internal fun provideKakaoLoginApi(retrofit: Retrofit): LoginApi =
 
 internal fun provideUserInfoApi(retrofit: Retrofit): UserInfoApi =
     retrofit.create(UserInfoApi::class.java)
-
-internal fun provideFcmApi(retrofit: Retrofit): FcmApi =
-        retrofit.create(FcmApi::class.java)
 
 internal fun provideHomeApi(retrofit: Retrofit): HomeApi =
     retrofit.create(HomeApi::class.java)
