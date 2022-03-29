@@ -56,7 +56,5 @@ class MatchingRepositoryImpl(
         matchingApi.postEnteringLog(matchingId)
     }
 
-    override suspend fun postMessage(postMessageDto: PostMessageDto, matchingId: Int) {
-        matchingApi.postMessage(postMessageDto = postMessageDto, matchingId = matchingId)
-    }
+
 }

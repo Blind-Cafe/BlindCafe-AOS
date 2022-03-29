@@ -75,11 +75,4 @@ interface MatchingApi {
         @Path("matchingId") matchingId: Int
     )
 
-    @POST(POST_MESSAGE_URL)
-    suspend fun postMessage(
-        @Path("matchingId") matchingId: Int,
-        @Body postMessageDto: PostMessageDto
-    )
-
-
 }

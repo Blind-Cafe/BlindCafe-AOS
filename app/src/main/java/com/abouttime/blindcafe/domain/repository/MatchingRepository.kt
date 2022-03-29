@@ -20,5 +20,4 @@ interface MatchingRepository {
     suspend fun postAcceptMatching(matchingId: Int): PostAcceptMatchingDto?
     suspend fun deleteDismissMatching(matchingId: Int, reason: Int)
     suspend fun postEnteringLog(matchingId: Int)
-    suspend fun postMessage(postMessageDto: PostMessageDto, matchingId: Int)
 }

@@ -20,7 +20,6 @@ import com.abouttime.blindcafe.domain.model.Message
 import com.abouttime.blindcafe.domain.use_case.firebase.*
 import com.abouttime.blindcafe.domain.use_case.server.GetTopicUseCase
 import com.abouttime.blindcafe.domain.use_case.server.PostEnteringLogUseCase
-import com.abouttime.blindcafe.domain.use_case.server.PostMessageUseCase
 import com.abouttime.blindcafe.presentation.chat.audio.RecorderState
 import com.google.firebase.Timestamp
 import kotlinx.coroutines.Dispatchers
@@ -40,7 +39,6 @@ class ChatViewModel(
     private val downloadAudioUrlUseCase: DownloadAudioUrlUseCase,
     private val getTopicUseCase: GetTopicUseCase,
     private val postEnteringLogUseCase: PostEnteringLogUseCase,
-    private val postMessageUseCase: PostMessageUseCase,
 ) : BaseViewModel() {
 
     private val _isSendButtonEnabled = MutableLiveData(false)
@@ -85,7 +83,6 @@ class ChatViewModel(
     val sendFirstIn1Minute = LinkedList<Boolean>()
     val messages = LinkedList<Message>()
     val receiveLastIn1Minute = mutableListOf<Boolean>()
-
 
 
     /** use cases - read **/
@@ -181,28 +178,7 @@ class ChatViewModel(
 
     /** use cases - write **/
     fun postMessage(postMessageDto: PostMessageDto, matchingId: Int) {
-        postMessageUseCase(postMessageDto = postMessageDto, matchingId = matchingId)
-            .onEach { result ->
-                when (result) {
-                    is Resource.Loading -> {
-                    }
-                    is Resource.Success -> {
-                    }
-                    is Resource.Error -> {
-                        when(result.message) {
-                            "1008", "1030" -> {
-                                showToast(R.string.toast_gone)
-                            }
-                            "1150" -> {
-                                showToast(R.string.toast_not_appropriate_message)
-                            }
-                            else -> {
-                                showToast(R.string.toast_check_internet)
-                            }
-                        }
-                    }
-                }
-            }.launchIn(viewModelScope)
+
     }
 
     fun uploadImage(message: Message, uri: Uri) = viewModelScope.launch(Dispatchers.IO) {
