@@ -8,19 +8,15 @@ import com.abouttime.blindcafe.common.constants.PreferenceKey.MATCHING_SEX
 import com.abouttime.blindcafe.common.constants.PreferenceKey.NICKNAME
 
 class NicknameViewModel: BaseViewModel() {
+
     private val _nickNameText = MutableLiveData<String>()
     val nickNameText: MutableLiveData<String> get() = _nickNameText
-
-
-    private val _selectedSex = MutableLiveData(0)
-    val selectedSex: LiveData<Int> get() = _selectedSex
 
     private val _enableNextButton = MutableLiveData(false)
     val enableNextButton: LiveData<Boolean> get() = _enableNextButton
 
     init {
-        _selectedSex.value = 0
-        _enableNextButton.value = false
+
         _enableNextButton.value = false
     }
 

@@ -15,10 +15,6 @@ class PhoneNumberFragment: BaseFragment<PhoneNumberViewModel>(R.layout.fragment_
         super.onViewCreated(view, savedInstanceState)
         val fragmentPhoneNumberBinding = FragmentPhoneNumberBinding.bind(view)
         binding = fragmentPhoneNumberBinding
-        fragmentPhoneNumberBinding.tvTemp.setOnClickListener {
-            findNavController().navigate(
-                PhoneNumberFragmentDirections.actionPhoneNumberFragmentToInterestFragment()
-            )
-        }
+
     }
 }

@@ -20,40 +20,7 @@ class NicknameFragment :
         binding?.lifecycleOwner = this
         binding?.viewModel = viewModel
 
-
-        observeData(fragmentNicknameBinding)
         initAgeEditText(fragmentNicknameBinding)
-
-    }
-
-    private fun observeData(fragmentNicknameBinding: FragmentNicknameBinding) = with(fragmentNicknameBinding) {
-        val sexDisabledColor = getColorByResId(R.color.disabled)
-        val sexEnabledColor = getColorByResId(R.color.sex_enabled)
-        viewModel?.selectedSex?.observe(viewLifecycleOwner) { selectedSex ->
-            when(selectedSex) {
-                1 -> {
-                    ivFemale.setColorFilter(sexEnabledColor)
-                    ivMale.setColorFilter(sexDisabledColor)
-                    ivBisexual.setColorFilter(sexDisabledColor)
-                }
-                2 -> {
-                    ivFemale.setColorFilter(sexDisabledColor)
-                    ivMale.setColorFilter(sexEnabledColor)
-                    ivBisexual.setColorFilter(sexDisabledColor)
-                }
-                3 -> {
-                    ivFemale.setColorFilter(sexDisabledColor)
-                    ivMale.setColorFilter(sexDisabledColor)
-                    ivBisexual.setColorFilter(sexEnabledColor)
-                }
-                else -> {
-                    ivFemale.setColorFilter(sexDisabledColor)
-                    ivMale.setColorFilter(sexDisabledColor)
-                    ivBisexual.setColorFilter(sexDisabledColor)
-                }
-            }
-
-        }
     }
 
 

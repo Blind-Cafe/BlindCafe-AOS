@@ -19,14 +19,6 @@ class PartnerGenderFragment : BaseFragment<PartnerGenderViewModel>(R.layout.frag
         binding = fragmentInterestSubBinding
         binding?.lifecycleOwner = this
         binding?.viewModel = viewModel
-
-        fragmentInterestSubBinding.tvTemp.setOnClickListener {
-            findNavController().navigate(
-                PartnerGenderFragmentDirections.actionPartnerGenderFragmentToPhoneNumberFragment()
-            )
-        }
-
-
     }
 
 }

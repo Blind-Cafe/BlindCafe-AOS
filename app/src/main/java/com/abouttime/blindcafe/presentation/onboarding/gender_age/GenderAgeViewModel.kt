@@ -28,12 +28,6 @@ class GenderAgeViewModel: BaseViewModel() {
         _enableNextButton.value = false
     }
 
-    fun updateToFirst() {
-
-    }
-
-
-
     fun checkInputAll() {
         if (isAgeEmpty() || !isCorrectAge() || !isSexSelected()) {
             _enableNextButton.value = false
@@ -101,12 +95,6 @@ class GenderAgeViewModel: BaseViewModel() {
     }
     fun isAgeEmpty(): Boolean = ageText.value.isNullOrEmpty()
     fun isSexSelected(): Boolean = _selectedSex.value != 0
-
-
-
-
-
-
 
 
 }
