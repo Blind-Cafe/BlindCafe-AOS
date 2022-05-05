@@ -199,11 +199,15 @@
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/rv_item_location_sub.xml" value="0.3411458333333333" />
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/layout/toast.xml" value="0.33" />
         <entry key="..\:/Users/user/Documents/BlindCafe-AOS/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3411458333333333" />
+        <entry key="app/src/main/res/drawable/bg_rounding_25dp.xml" value="0.2075" />
+        <entry key="app/src/main/res/drawable/bg_rounding_3dp.xml" value="0.3245" />
+        <entry key="app/src/main/res/drawable/ic_cursor.xml" value="0.3245" />
+        <entry key="app/src/main/res/layout/fragment_nickname.xml" value="0.18795289855072464" />
       </map>
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="13" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

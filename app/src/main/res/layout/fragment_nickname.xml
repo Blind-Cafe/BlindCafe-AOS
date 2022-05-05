@@ -27,9 +27,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:onClick="@{() -> viewModel.onClickBackButton()}"
             android:layout_marginTop="@dimen/default_top_margin"
             android:background="@color/transparent"
+            android:onClick="@{() -> viewModel.onClickBackButton()}"
             android:src="@drawable/bt_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -48,208 +48,109 @@
             app:layout_constraintStart_toEndOf="@id/ib_back"
             app:layout_constraintTop_toTopOf="@id/ib_back" />
 
-
-        <ImageView
-            android:id="@+id/iv_barista"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tv_nickname_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/bg_barista"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:text="@string/profile_setting_nickname"
+            android:textColor="@color/white"
+            android:textSize="21sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ib_back" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_essential_profile_input"
+        <TextView
+            android:id="@+id/tv_nickname_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:text="수정이 불가능하니 신중하게 입력해주세요."
+            android:textColor="#bdbdbd"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="@id/tv_nickname_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_nickname_title" />
+
+        <TextView
+            android:id="@+id/tv_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:text="닉네임"
+            android:textColor="#f3f3f3"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@id/tv_nickname_subtitle"
+            app:layout_constraintTop_toBottomOf="@id/tv_nickname_subtitle" />
+
+
+        <EditText
+            android:id="@+id/et_nickname"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="16dp"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:hint="닉네임을 입력해주세요 :)"
+            android:inputType="text"
+            android:maxLength="9"
+            android:paddingVertical="8dp"
+            android:text="@={viewModel.nickNameText}"
+            android:textCursorDrawable="@drawable/ic_cursor"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_nickname" />
+
+        <TextView
+            android:id="@+id/tv_alert_nickname_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:text="@string/profile_setting_nickname_rule_1"
+            android:textColor="@color/main"
+            android:textSize="@dimen/font_size_11"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@id/et_nickname"
+            app:layout_constraintTop_toBottomOf="@id/et_nickname"
+            tools:visibility="visible" />
+
+
+        <TextView
+            android:id="@+id/tv_alert_nickname_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/spoqa_han_sans_neo_regular"
+            android:text="@string/profile_setting_nickname_rule_2"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_11"
+            android:visibility="visible"
+            app:layout_constraintStart_toEndOf="@id/tv_alert_nickname_1"
+            app:layout_constraintTop_toBottomOf="@id/et_nickname"
+            tools:visibility="visible" />
+
+
+        <TextView
+            android:id="@+id/tv_next"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginHorizontal="16dp"
-            android:background="@color/gray_900"
-            android:paddingHorizontal="20dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/bg_rounding_25dp"
+            android:backgroundTint="@{viewModel.enableNextButton ? @color/enabled : @color/steel}"
+            android:foreground="?selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:onClick="@{()->viewModel.onClickNextButton()}"
+            android:text="@string/profile_setting_next"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="326:48"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_barista">
+            app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_step1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                android:text="@string/profile_setting_step_1"
-                android:textSize="@dimen/font_size_13"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_age"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                android:text="@string/profile_setting_nickname"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_size_15"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_step1" />
-
-
-            <EditText
-                android:id="@+id/et_nickname"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="7dp"
-                android:background="@drawable/et_bg_rounding_with_default_stroke"
-                android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                android:inputType="text"
-                android:maxLength="9"
-                android:padding="8dp"
-                android:textSize="@dimen/font_size_13"
-                android:text="@={viewModel.nickNameText}"
-                android:textCursorDrawable="@drawable/ic_cursor"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_age" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_alert_nickname_1"
-                android:layout_marginTop="4dp"
-                android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                android:text="@string/profile_setting_nickname_rule_1"
-                android:textColor="@color/main"
-                android:textSize="@dimen/font_size_11"
-                android:visibility="visible"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/et_nickname"
-                tools:visibility="visible"/>
-
-
-            <TextView
-                android:id="@+id/tv_alert_nickname_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                android:text="@string/profile_setting_nickname_rule_2"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_size_11"
-                android:visibility="visible"
-                app:layout_constraintStart_toEndOf="@id/tv_alert_nickname_1"
-                app:layout_constraintTop_toBottomOf="@id/et_nickname"
-                tools:visibility="visible" />
-
-            <TextView
-                android:id="@+id/tv_sex"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="45dp"
-                android:fontFamily="@font/spoqa_han_sans_neo_regular"
-                android:text="@string/profile_setting_matching_sex"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_size_15"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_alert_nickname_2" />
-
-            <FrameLayout
-                android:id="@+id/fl_female_container"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="10dp"
-                android:onClick="@{()->viewModel.onClickFemaleButton()}"
-                android:background="@drawable/bg_rounding_3dp"
-                android:backgroundTint="@{viewModel.selectedSex == 1 ? @color/sex_container_enabled : @color/sex_container_disabled}"
-                tools:backgroundTint="@color/sex_container_disabled"
-                app:layout_constraintBottom_toTopOf="@id/tv_next"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toStartOf="@id/fl_male_container"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_sex"
-                app:layout_constraintVertical_bias="0">
-
-                <ImageView
-                    android:id="@+id/iv_female"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/bt_female_small"
-                    app:tint="@color/disabled" />
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/fl_male_container"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginEnd="10dp"
-                android:onClick="@{()->viewModel.onClickMaleButton()}"
-                android:background="@drawable/bg_rounding_3dp"
-                android:backgroundTint="@{viewModel.selectedSex == 2 ? @color/sex_container_enabled : @color/sex_container_disabled}"
-                tools:backgroundTint="@color/sex_container_disabled"
-                app:layout_constraintBottom_toBottomOf="@+id/fl_female_container"
-                app:layout_constraintEnd_toStartOf="@id/fl_bisexual_container"
-                app:layout_constraintStart_toEndOf="@+id/fl_female_container"
-                app:layout_constraintTop_toTopOf="@id/fl_female_container">
-
-                <ImageView
-                    android:id="@+id/iv_male"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/bt_male_small"
-                    app:tint="@color/disabled"
-                    />
-
-            </FrameLayout>
-
-
-            <FrameLayout
-                android:id="@+id/fl_bisexual_container"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:onClick="@{()->viewModel.onClickBisexualButton()}"
-                android:background="@drawable/bg_rounding_3dp"
-                android:backgroundTint="@{viewModel.selectedSex == 3 ? @color/sex_container_enabled : @color/sex_container_disabled}"
-                tools:backgroundTint="@color/sex_container_disabled"
-                app:layout_constraintBottom_toBottomOf="@id/fl_male_container"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/fl_male_container"
-                app:layout_constraintTop_toTopOf="@id/fl_male_container">
-
-                <ImageView
-                    android:id="@+id/iv_bisexual"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/bt_bisexual_small"
-                    app:tint="@color/disabled"
-                     />
-
-
-            </FrameLayout>
-
-
-            <TextView
-                android:id="@+id/tv_next"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginBottom="32dp"
-                android:textSize="@dimen/font_size_15"
-                android:background="@drawable/bg_rounding_3dp"
-                android:backgroundTint="@{viewModel.enableNextButton ? @color/enabled : @color/steel}"
-                android:gravity="center"
-                android:onClick="@{()->viewModel.onClickNextButton()}"
-                android:text="@string/profile_setting_next"
-                android:foreground="?selectableItemBackgroundBorderless"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="288:48"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
