@@ -47,7 +47,6 @@ class GenderAgeFragment :
         }
     }
 
-
     private fun initAgeEditText(fragmentGenderAgeBinding: FragmentGenderAgeBinding) {
         val ageEditText = fragmentGenderAgeBinding.etAge
         val alertAgeTextView = fragmentGenderAgeBinding.tvAlertAge
@@ -68,10 +67,10 @@ class GenderAgeFragment :
             }
             viewModel.checkInputAll()
         }
-
-
     }
 
-
-
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
+    }
 }

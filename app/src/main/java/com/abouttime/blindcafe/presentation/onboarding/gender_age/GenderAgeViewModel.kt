@@ -83,8 +83,8 @@ class GenderAgeViewModel: BaseViewModel() {
             return false
         }
     }
-    fun isAgeEmpty(): Boolean = ageText.value.isNullOrEmpty()
-    fun isSexSelected(): Boolean = _selectedSex.value != 0
+    private fun isAgeEmpty(): Boolean = ageText.value.isNullOrEmpty()
+    private fun isSexSelected(): Boolean = _selectedSex.value != 0
 
 
 }
