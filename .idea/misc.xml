@@ -204,6 +204,7 @@
         <entry key="app/src/main/res/drawable/ic_cursor.xml" value="0.3245" />
         <entry key="app/src/main/res/layout/fragment_account_delete_complete.xml" value="0.20833333333333334" />
         <entry key="app/src/main/res/layout/fragment_exit.xml" value="0.20833333333333334" />
+        <entry key="app/src/main/res/layout/fragment_gender_age.xml" value="0.2513586956521739" />
         <entry key="app/src/main/res/layout/fragment_nickname.xml" value="0.18795289855072464" />
         <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.20833333333333334" />
         <entry key="app/src/main/res/layout/rv_chat_item_send_text.xml" value="0.20833333333333334" />

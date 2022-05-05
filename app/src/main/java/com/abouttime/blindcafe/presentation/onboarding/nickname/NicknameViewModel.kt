@@ -40,6 +40,7 @@ class NicknameViewModel: BaseViewModel() {
     fun checkInputAll() {
         if (!isCorrectNickname()) {
             _enableNextButton.value = false
+            showToast(R.string.profile_setting_toast_nickname_constraint)
             return
         }
         _enableNextButton.value = true

@@ -89,6 +89,7 @@
     <string name="profile_setting_toast_input_number">나이로는 숫자만 입력해주세요.</string>
     <string name="profile_setting_toast_input_sex">성별을 먼저 선택해주세요</string>
     <string name="profile_setting_toast_input_nickname">닉네임을 먼저 설정해주세요</string>
+    <string name="profile_setting_toast_nickname_constraint">닉네임은 10자 미만으로 입력해주세요.</string>
     <string name="profile_setting_toast_select_interest">3가지의 관심사를 선택해주세요.</string>
     <string name="profile_setting_toast_select_sub_interest">1개 이상을 선택해주세요</string>
 
