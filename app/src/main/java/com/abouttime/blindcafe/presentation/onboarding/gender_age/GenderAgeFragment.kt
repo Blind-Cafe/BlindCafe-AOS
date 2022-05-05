@@ -54,24 +54,16 @@ class GenderAgeFragment :
 
         ageEditText.setOnFocusChangeListener { view, isFocused ->
             ageEditText.isCursorVisible = isFocused
-            if (isFocused) {
-                view.setBackgroundResource(R.drawable.et_bg_rouding_with_green_stroke)
-            } else {
-                view.setBackgroundResource(R.drawable.et_bg_rounding_with_default_stroke)
-            }
         }
 
         viewModel.ageText.observe(viewLifecycleOwner) { input ->
             if (input.length < 2) return@observe
 
             if (viewModel.isCorrectAge()) {
-                ageEditText.setBackgroundResource(R.drawable.et_bg_rouding_with_green_stroke)
                 hideKeyboard()
                 ageEditText.clearFocus()
                 alertAgeTextView.isGone = true
             } else {
-                showToast(R.string.profile_setting_toast_input_correct_age)
-                ageEditText.setBackgroundResource(R.drawable.et_bg_rouding_with_red_stroke)
                 alertAgeTextView.isGone = false
             }
             viewModel.checkInputAll()

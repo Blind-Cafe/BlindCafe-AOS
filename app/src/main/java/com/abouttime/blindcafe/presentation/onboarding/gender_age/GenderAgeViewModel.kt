@@ -9,18 +9,14 @@ import com.abouttime.blindcafe.common.constants.PreferenceKey.SEX
 import java.lang.Exception
 
 class GenderAgeViewModel: BaseViewModel() {
-
     private val _ageText = MutableLiveData<String>()
     val ageText: MutableLiveData<String> get() = _ageText
-
 
     private val _selectedSex = MutableLiveData(0)
     val selectedSex: LiveData<Int> get() = _selectedSex
 
     private val _enableNextButton = MutableLiveData(false)
     val enableNextButton: LiveData<Boolean> get() = _enableNextButton
-
-
 
     init {
         _ageText.value = ""
@@ -35,9 +31,6 @@ class GenderAgeViewModel: BaseViewModel() {
         }
         _enableNextButton.value = true
     }
-
-
-   // onClick---
 
     fun onClickFemaleButton() {
         _selectedSex.value = 1
@@ -71,14 +64,11 @@ class GenderAgeViewModel: BaseViewModel() {
         saveStringData(Pair(SEX, sex))
 
         moveToDirections(GenderAgeFragmentDirections.actionGenderAgeFragmentToPartnerGenderFragment())
-
     }
 
     fun onClickBackButton() {
         popDirections()
     }
-
-    // boolean ---
 
     fun isCorrectAge(): Boolean {
         try {
