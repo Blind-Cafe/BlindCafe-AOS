@@ -30,7 +30,6 @@ class BlindCafeApplication: Application() {
             modules(repositoryModule)
             modules(useCaseModule)
             modules(sharedPreferencesModule)
-            modules(firebaseModule)
             modules(backgroundModule)
         }
     }

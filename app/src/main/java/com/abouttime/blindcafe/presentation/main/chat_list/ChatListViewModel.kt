@@ -7,29 +7,20 @@ import androidx.lifecycle.viewModelScope
 import com.abouttime.blindcafe.R
 import com.abouttime.blindcafe.common.Resource
 import com.abouttime.blindcafe.common.base.BaseViewModel
-import com.abouttime.blindcafe.common.constants.LogTag
 import com.abouttime.blindcafe.common.constants.LogTag.RETROFIT_TAG
 import com.abouttime.blindcafe.data.server.dto.matching.Matching
 import com.abouttime.blindcafe.domain.model.ChatRoom
-import com.abouttime.blindcafe.domain.model.Message
-import com.abouttime.blindcafe.domain.use_case.firebase.SubscribeMessageUseCase
 import com.abouttime.blindcafe.domain.use_case.server.GetChatRoomInfoUseCase
 import com.abouttime.blindcafe.domain.use_case.server.GetChatRoomsUseCase
-import com.abouttime.blindcafe.presentation.main.MainFragment
 import com.abouttime.blindcafe.presentation.main.MainFragmentDirections
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+
 
 class ChatListViewModel(
     private val getChatRoomsUseCase: GetChatRoomsUseCase,
     private val getChatRoomInfoUseCase: GetChatRoomInfoUseCase,
-    private val subscribeMessageUseCase: SubscribeMessageUseCase
-): BaseViewModel() {
-
+) : BaseViewModel() {
 
 
     private val _chatRooms = MutableLiveData<List<Matching>>()
@@ -42,7 +33,7 @@ class ChatListViewModel(
 
     fun getChatRooms() {
         getChatRoomsUseCase().onEach { result ->
-            when(result) {
+            when (result) {
                 is Resource.Loading -> {
                     showLoading()
                 }
@@ -63,7 +54,6 @@ class ChatListViewModel(
                     dismissLoading()
                 }
             }
-
 
 
         }.launchIn(viewModelScope)
@@ -94,30 +84,13 @@ class ChatListViewModel(
         }.launchIn(viewModelScope)
     }
 
-    fun subscribeLastMessage(matchingId: Int, callback: (Message) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
-        subscribeMessageUseCase(matchingId.toString()).collect { result ->
-            when (result) {
-                is Resource.Loading -> {
-                }
-                is Resource.Success -> {
-                    if (!result.data.isNullOrEmpty()) {
-                        withContext(Dispatchers.Main) {
-                            callback(result.data[0])
-                        }
-                    }
-                }
-                is Resource.Error -> {
-                }
-            }
-
-        }
-    }
-
     private fun moveToChatFragment(chatRoom: ChatRoom, partnerId: Int) {
-        moveToDirections(MainFragmentDirections.actionMainFragmentToChatFragment(
-            chatRoomInfo = chatRoom,
-            partnerId = partnerId
-        ))
+        moveToDirections(
+            MainFragmentDirections.actionMainFragmentToChatFragment(
+                chatRoomInfo = chatRoom,
+                partnerId = partnerId
+            )
+        )
 
     }
 }
