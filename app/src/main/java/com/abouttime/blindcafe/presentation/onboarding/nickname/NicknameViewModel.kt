@@ -16,52 +16,20 @@ class NicknameViewModel: BaseViewModel() {
     val enableNextButton: LiveData<Boolean> get() = _enableNextButton
 
     init {
-
         _enableNextButton.value = false
     }
 
 
 
     /** onClick **/
-    fun onClickFemaleButton() {
-        _selectedSex.value = 1
-        checkInputAll()
-    }
-    fun onClickMaleButton() {
-        _selectedSex.value = 2
-        checkInputAll()
-    }
-    fun onClickBisexualButton() {
-        _selectedSex.value = 3
-        checkInputAll()
-    }
     fun onClickNextButton() {
         if (isNickNameEmpty()) {
             showToast(R.string.profile_setting_toast_input_nickname)
             return
         }
-        if (!isCorrectNickname()) {
-            showToast(R.string.profile_setting_toast_input_again_nickname)
-            return
-        }
-        if (!isSexSelected()) {
-            showToast(R.string.profile_setting_toast_input_sex)
-            return
-        }
-        val sex = if (_selectedSex.value == 1) {
-            "F"
-        } else if (_selectedSex.value == 2) {
-            "M"
-        } else {
-            "N"
-        }
 
         saveStringData(Pair(NICKNAME, _nickNameText.value ?: " "))
-        saveStringData(Pair(MATCHING_SEX, sex))
-
-
         moveToDirections(NicknameFragmentDirections.actionNicknameFragmentToGenderAgeFragment())
-
     }
 
     fun onClickBackButton() {
@@ -70,7 +38,7 @@ class NicknameViewModel: BaseViewModel() {
 
     /** check **/
     fun checkInputAll() {
-        if (!isCorrectNickname() || !isSexSelected()) {
+        if (!isCorrectNickname()) {
             _enableNextButton.value = false
             return
         }
@@ -80,9 +48,6 @@ class NicknameViewModel: BaseViewModel() {
 
     /** boolean **/
     fun isNickNameEmpty(): Boolean = _nickNameText.value.isNullOrEmpty()
-    fun isCorrectNickname(): Boolean = _nickNameText.value?.length in 1..9
-    fun isSexSelected(): Boolean = (_selectedSex.value ?: 0) != 0
-
-
+    fun isCorrectNickname(): Boolean = _nickNameText.value?.length in 1..10
 
 }

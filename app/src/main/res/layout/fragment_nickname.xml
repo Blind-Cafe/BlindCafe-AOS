@@ -94,7 +94,7 @@
             android:fontFamily="@font/spoqa_han_sans_neo_regular"
             android:hint="닉네임을 입력해주세요 :)"
             android:inputType="text"
-            android:maxLength="9"
+            android:maxLength="10"
             android:paddingVertical="8dp"
             android:text="@={viewModel.nickNameText}"
             android:textCursorDrawable="@drawable/ic_cursor"

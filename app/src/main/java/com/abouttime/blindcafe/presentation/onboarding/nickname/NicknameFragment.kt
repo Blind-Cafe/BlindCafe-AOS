@@ -20,41 +20,29 @@ class NicknameFragment :
         binding?.lifecycleOwner = this
         binding?.viewModel = viewModel
 
-        initAgeEditText(fragmentNicknameBinding)
+        initNicknameEditText(fragmentNicknameBinding)
     }
 
 
-    private fun initAgeEditText(fragmentNicknameBinding: FragmentNicknameBinding) {
+    private fun initNicknameEditText(fragmentNicknameBinding: FragmentNicknameBinding) {
         val nicknameEditText = fragmentNicknameBinding.etNickname
         val alertNicknameText1 = fragmentNicknameBinding.tvAlertNickname1
         val alertNicknameText2 = fragmentNicknameBinding.tvAlertNickname2
 
         nicknameEditText.setOnFocusChangeListener { view, isFocused ->
             nicknameEditText.isCursorVisible = isFocused
-            if (isFocused) {
-                view.setBackgroundResource(R.drawable.et_bg_rouding_with_green_stroke)
-            } else {
-                view.setBackgroundResource(R.drawable.et_bg_rounding_with_default_stroke)
-            }
         }
 
         viewModel.nickNameText.observe(viewLifecycleOwner) {
             if (viewModel.isCorrectNickname()) {
-                nicknameEditText.setBackgroundResource(R.drawable.et_bg_rouding_with_green_stroke)
                 alertNicknameText1.setTextColor(getColorByResId(R.color.main))
                 alertNicknameText2.setTextColor(getColorByResId(R.color.white))
             } else {
-                nicknameEditText.setBackgroundResource(R.drawable.et_bg_rouding_with_red_stroke)
                 alertNicknameText1.setTextColor(getColorByResId(R.color.alert_red))
                 alertNicknameText2.setTextColor(getColorByResId(R.color.alert_red))
-
-                showToast(R.string.profile_setting_toast_input_again_nickname)
             }
-
             viewModel.checkInputAll()
         }
-
-
     }
 
 
