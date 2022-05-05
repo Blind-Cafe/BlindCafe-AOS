@@ -117,7 +117,6 @@
             app:layout_constraintTop_toBottomOf="@id/et_nickname"
             tools:visibility="visible" />
 
-
         <TextView
             android:id="@+id/tv_alert_nickname_2"
             android:layout_width="wrap_content"
@@ -131,7 +130,6 @@
             app:layout_constraintStart_toEndOf="@id/tv_alert_nickname_1"
             app:layout_constraintTop_toBottomOf="@id/et_nickname"
             tools:visibility="visible" />
-
 
         <TextView
             android:id="@+id/tv_next"
@@ -150,8 +148,5 @@
             app:layout_constraintDimensionRatio="326:48"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

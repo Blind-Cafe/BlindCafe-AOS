@@ -43,7 +43,6 @@ class GenderAgeFragment :
                     ivMale.setColorFilter(sexDisabledColor)
                 }
             }
-
         }
     }
 

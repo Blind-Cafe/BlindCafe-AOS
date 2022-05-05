@@ -22,7 +22,6 @@
         android:layout_height="match_parent"
         android:background="@color/black">
 
-
         <ImageButton
             android:id="@+id/ib_back"
             android:layout_width="wrap_content"
@@ -147,15 +146,12 @@
             android:background="@drawable/bg_rounding_3dp"
             android:backgroundTint="@{viewModel.selectedSex == 1 ? @color/sex_container_enabled : @color/sex_container_disabled}"
             android:onClick="@{() -> viewModel.onClickFemaleButton()}"
-            app:layout_constraintBottom_toTopOf="@+id/tv_alert_age_sex"
             app:layout_constraintDimensionRatio="158:93"
             app:layout_constraintEnd_toStartOf="@id/fl_male_container"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_sex"
             app:layout_constraintVertical_bias="0"
             tools:backgroundTint="@color/sex_container_disabled">
-
-
             <ImageView
                 android:id="@+id/iv_female"
                 android:layout_width="wrap_content"
@@ -180,7 +176,6 @@
             app:layout_constraintStart_toEndOf="@+id/fl_female_container"
             app:layout_constraintTop_toTopOf="@id/fl_female_container"
             tools:backgroundTint="@color/sex_container_disabled">
-
             <ImageView
                 android:id="@+id/iv_male"
                 android:layout_width="wrap_content"
@@ -189,7 +184,6 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/bt_male"
                 app:tint="@color/disabled" />
-
         </FrameLayout>
 
         <TextView
@@ -209,7 +203,5 @@
             app:layout_constraintDimensionRatio="326:48"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

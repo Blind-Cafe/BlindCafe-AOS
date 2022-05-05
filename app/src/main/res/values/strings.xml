@@ -83,6 +83,7 @@
     <string name="profile_setting_interest_title">3개의 관심사를 골라주세요</string>
     <string name="profile_setting_interest_sub_title">꼼꼼하게 체크할 수록 나와 잘 맞는 상대를 만날 수 있습니다.</string>
     <string name="interest_toast_up_to_3">최대 3개까지만 선택 가능합니다</string>
+    <string name="profile_setting_partner_sex">대화상대 성별을\n선택해주세요.</string>
 
     <string name="profile_setting_toast_input_correct_age">미성년자는 사용이 불가능합니다.</string>
     <string name="profile_setting_toast_input_age">나이를 먼저 입력해주세요</string>
